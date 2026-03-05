@@ -1,74 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary to Text Converter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        textarea {
-            width: 80%;
-            height: 100px;
-            margin: 10px 0;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #output {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Binary to Text Converter Online — Binary, Decimal &amp; Hex | ClickSolveTools</title>
+  <meta name="description" content="Convert between binary, text, decimal, and hexadecimal. Space-separated binary output with swap button for instant bidirectional conversion.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/binary-text-converter">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>0️⃣</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Binary to Text Converter Online — Binary, Decimal &amp; Hex | ClickSolveTools">
+  <meta property="og:description" content="Convert between binary, text, decimal, and hexadecimal. Space-separated binary output with swap button for instant bidirectional conversion.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/binary-text-converter">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Binary to Text Converter Online | ClickSolveTools">
+  <meta name="twitter:description" content="Convert between binary, text, decimal, and hexadecimal instantly in your browser.">
+
+  <!-- GA4 with Consent Mode v2 (all denied by default) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Binary & Text Converter",
+    "url": "https://clicksolvetools.com/tools/binary-text-converter",
+    "description": "Convert between binary, text, decimal, and hexadecimal. Space-separated binary output with swap button for instant bidirectional conversion.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mono { font-family: 'Courier New', Consolas, monospace; }
+    .tab-active { background-color: #38bdf8; color: #0f172a; font-weight: 600; }
+    .tab-inactive { background-color: #334155; color: #94a3b8; }
+    .tab-inactive:hover { background-color: #475569; color: #f1f5f9; }
+    textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(56,189,248,0.4); }
+  </style>
 </head>
-<body>
-    <h1>Binary to Text Converter</h1>
-    <textarea id="binaryInput" placeholder="Enter binary (e.g., 01001000 01100101 01101100 01101100 01101111)"></textarea>
-    <br>
-    <label for="encoding" style="font-size: 18px; font-weight: bold; margin-top: 20px; display: block;">Select Encoding:</label>
-    <select id="encoding" style="font-size: 18px; padding: 10px; margin: 10px 0;">
-        <option value="utf-8">UTF-8</option>
-        <option value="ascii">ASCII</option>
-    </select>
-    <br>
-    <button onclick="convertBinaryToText()">Convert</button>
-    <p id="output"></p>
-    
-    <script>
-        function convertBinaryToText() {
-            const encoding = document.getElementById("encoding").value;
-            const binaryInput = document.getElementById("binaryInput").value.trim();
-            if (!binaryInput) {
-                document.getElementById("output").innerText = "Please enter binary code.";
-                return;
-            }
-            
-            try {
-                let text = binaryInput.split(/\s+/)
-                    .map(bin => {
-                        if (!/^[01]{8}$/.test(bin)) throw new Error("Invalid binary format");
-                        return String.fromCharCode(parseInt(bin, 2));
-                    })
-                    .join("");
-                
-                // ASCII only allows characters in the range 0-127
-                if (encoding === "ascii") {
-                    text = text.split('').map(char => {
-                        return char.charCodeAt(0) < 128 ? char : '?'; // Replace non-ASCII characters with '?'
-                    }).join('');
-                }
-                
-                document.getElementById("output").innerText = "Converted Text: " + text;
-            } catch (e) {
-                document.getElementById("output").innerText = "Invalid binary input. Ensure you use 8-bit binary codes separated by spaces.";
-            }
+
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+
+  <div id="nav-container"></div>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+    <article>
+
+      <!-- Widget -->
+      <section class="mb-12">
+        <!-- Mode Tabs -->
+        <div class="flex gap-2 mb-5 flex-wrap" id="mode-tabs">
+          <button data-mode="text" class="tab-active px-4 py-2 rounded-lg text-sm transition-colors">Binary &harr; Text</button>
+          <button data-mode="decimal" class="tab-inactive px-4 py-2 rounded-lg text-sm transition-colors">Binary &harr; Decimal</button>
+          <button data-mode="hex" class="tab-inactive px-4 py-2 rounded-lg text-sm transition-colors">Binary &harr; Hex</button>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 items-stretch">
+          <!-- Left Panel -->
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <label id="left-label" class="text-sm font-semibold text-[#94a3b8]">Text</label>
+              <button id="copy-left" class="text-xs text-[#38bdf8] hover:text-[#7dd3fc] transition-colors hidden">Copy</button>
+            </div>
+            <textarea
+              id="left-input"
+              class="flex-1 min-h-[180px] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-sm resize-y placeholder-[#64748b] mono"
+              placeholder="Type or paste text here…"
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <!-- Swap Button -->
+          <div class="flex md:flex-col items-center justify-center gap-2 py-2 md:py-0">
+            <button
+              id="swap-btn"
+              class="w-10 h-10 rounded-full bg-[#334155] hover:bg-[#475569] text-[#38bdf8] flex items-center justify-center text-lg transition-colors"
+              title="Swap input and output"
+            >&harr;</button>
+          </div>
+
+          <!-- Right Panel -->
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <label id="right-label" class="text-sm font-semibold text-[#94a3b8]">Binary</label>
+              <button id="copy-right" class="text-xs text-[#38bdf8] hover:text-[#7dd3fc] transition-colors">Copy</button>
+            </div>
+            <textarea
+              id="right-input"
+              class="flex-1 min-h-[180px] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-sm resize-y placeholder-[#64748b] mono"
+              placeholder="Binary output appears here…"
+              spellcheck="false"
+              readonly
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Options row -->
+        <div class="flex items-center gap-4 mt-4 flex-wrap">
+          <label class="flex items-center gap-2 text-sm text-[#94a3b8] cursor-pointer select-none">
+            <input type="checkbox" id="space-toggle" checked class="accent-[#38bdf8] w-4 h-4">
+            Space-separated bytes
+          </label>
+          <div id="error-msg" class="text-red-400 text-sm ml-auto hidden"></div>
+        </div>
+      </section>
+
+      <!-- SEO Content -->
+      <section class="prose prose-invert max-w-none">
+        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-4">Understanding Binary: How Computers Represent Text and Numbers</h2>
+
+        <div class="text-[#cbd5e1] leading-relaxed space-y-4 text-[15px]">
+          <p>
+            At the most fundamental level, every piece of data inside a computer is stored as a sequence of ones and zeros. This numbering system is called <strong>binary</strong> (base-2), and it exists because the electronic circuits at the heart of every processor can reliably distinguish between only two voltage states: on and off. A single binary digit — called a <strong>bit</strong> — is the smallest unit of information a computer can handle. Group eight bits together and you get a <strong>byte</strong>, which can represent 256 distinct values (0&ndash;255). Bytes are the building blocks for everything from plain text and pixel colors to network packets and cryptographic keys.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">ASCII and UTF-8: Turning Bytes into Characters</h3>
+          <p>
+            Humans need a way to map numbers to letters, and that is exactly what character encoding provides. <strong>ASCII</strong> (American Standard Code for Information Interchange) was one of the earliest encoding standards, assigning the numbers 0&ndash;127 to English letters, digits, punctuation marks, and control characters. The uppercase letter "A," for example, is decimal 65, which in binary is <code class="mono bg-[#1e293b] px-1 rounded">01000001</code>. Because ASCII uses only seven bits, it cannot represent non-English alphabets. <strong>UTF-8</strong> solves this limitation by using one to four bytes per character, covering every script in the Unicode standard while remaining backward-compatible with ASCII. When you type a message in this converter, each character is encoded using its UTF-8 byte values, and each byte is then expressed as an eight-bit binary string.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">How Binary Maps to Text</h3>
+          <p>
+            The conversion process is straightforward. Take the word "Hi": the letter "H" is UTF-8 byte 72, which converts to <code class="mono bg-[#1e293b] px-1 rounded">01001000</code>. The letter "i" is byte 105, which converts to <code class="mono bg-[#1e293b] px-1 rounded">01101001</code>. Concatenate the two bytes, separate them with a space for readability, and you have the binary representation: <code class="mono bg-[#1e293b] px-1 rounded">01001000 01101001</code>. Converting back works in reverse — split the binary string on spaces, parse each group of eight bits into a decimal number, and look up the character for that code point.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Hexadecimal: Shorthand for Binary</h3>
+          <p>
+            Reading long strings of ones and zeros is tedious even for experienced developers. <strong>Hexadecimal</strong> (base-16) offers a more compact notation by using the digits 0&ndash;9 and the letters A&ndash;F. Each hex digit maps to exactly four bits, so a single byte can always be expressed as two hex digits. The binary byte <code class="mono bg-[#1e293b] px-1 rounded">11111111</code> becomes <code class="mono bg-[#1e293b] px-1 rounded">FF</code> in hex and 255 in decimal. You will encounter hexadecimal constantly in web development (CSS color codes like <code class="mono bg-[#1e293b] px-1 rounded">#38BDF8</code>), memory addresses, MAC addresses, and debugging output.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Common Use Cases</h3>
+          <p>
+            Binary-to-text conversion is useful in a surprising number of scenarios. <strong>Programmers</strong> inspect binary data when working with file formats, bit flags, network protocols, and bitwise operations. <strong>Network engineers</strong> analyze packet captures and subnet masks that are naturally expressed in binary. <strong>Students and educators</strong> use converters to learn how number systems relate to each other and to demystify how computers store information. <strong>Data analysts</strong> encounter hexadecimal hashes, encoded payloads, and binary log entries that need translation. Whether you are debugging a WebSocket frame, verifying a checksum, or simply curious about what your name looks like in binary, an instant, bidirectional converter saves time and eliminates manual calculation errors.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+
+          <p><strong>Why do computers use binary?</strong><br>
+            Transistors — the microscopic switches inside processors — have two reliable states: on (1) and off (0). Binary aligns perfectly with this two-state design, making hardware simple, fast, and resistant to electrical noise. Higher bases would require circuits to distinguish between more voltage levels, increasing error rates and manufacturing complexity.
+          </p>
+
+          <p><strong>How many bits are in a byte?</strong><br>
+            A byte consists of <strong>8 bits</strong>. This gives a byte 2<sup>8</sup> = 256 possible values (0 through 255). Historically the byte was not always eight bits, but the eight-bit byte became the universal standard and is the foundation for virtually all modern computing.
+          </p>
+
+          <p><strong>What is hexadecimal, and why is it used alongside binary?</strong><br>
+            Hexadecimal is a base-16 number system. Because 16 is a power of 2 (2<sup>4</sup>), each hex digit maps neatly to four binary digits. This makes hex a convenient shorthand: the eight-bit binary value <code class="mono bg-[#1e293b] px-1 rounded">10110110</code> is just <code class="mono bg-[#1e293b] px-1 rounded">B6</code> in hex. Developers prefer hex for memory dumps, color codes, and any context where raw binary would be unwieldy.
+          </p>
+
+          <p>
+            This converter runs entirely in your browser — no data is transmitted to any server. It is free to use with no sign-up required. Type or paste your input, select a conversion mode, and get results in real time.
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('binary-text-converter');
+  </script>
+
+  <script>
+  (function () {
+    const $ = (s) => document.querySelector(s);
+    const leftInput  = $('#left-input');
+    const rightInput = $('#right-input');
+    const leftLabel  = $('#left-label');
+    const rightLabel = $('#right-label');
+    const copyLeft   = $('#copy-left');
+    const copyRight  = $('#copy-right');
+    const swapBtn    = $('#swap-btn');
+    const spaceToggle = $('#space-toggle');
+    const errorMsg   = $('#error-msg');
+    const modeTabs   = document.querySelectorAll('#mode-tabs button');
+
+    let mode = 'text';
+    let direction = 'forward'; // forward = left-to-right, reverse = right-to-left
+
+    const labels = {
+      text:    { left: 'Text',    right: 'Binary',  leftPh: 'Type or paste text here…',        rightPh: 'Binary output appears here…' },
+      decimal: { left: 'Decimal', right: 'Binary',  leftPh: 'Enter decimal numbers (e.g. 72 105)…', rightPh: 'Binary output appears here…' },
+      hex:     { left: 'Hex',     right: 'Binary',  leftPh: 'Enter hex (e.g. 48 69)…',         rightPh: 'Binary output appears here…' }
+    };
+
+    function setMode(m) {
+      mode = m;
+      direction = 'forward';
+      modeTabs.forEach(t => {
+        t.classList.toggle('tab-active', t.dataset.mode === m);
+        t.classList.toggle('tab-inactive', t.dataset.mode !== m);
+      });
+      updateLabels();
+      leftInput.value = '';
+      rightInput.value = '';
+      rightInput.readOnly = true;
+      leftInput.readOnly = false;
+      copyLeft.classList.add('hidden');
+      copyRight.classList.remove('hidden');
+      clearError();
+    }
+
+    function updateLabels() {
+      const l = direction === 'forward' ? labels[mode] : { left: 'Binary', right: labels[mode].left, leftPh: 'Enter binary (e.g. 01001000 01101001)…', rightPh: labels[mode].leftPh };
+      leftLabel.textContent = l.left;
+      rightLabel.textContent = l.right;
+      leftInput.placeholder = l.leftPh;
+      rightInput.placeholder = l.rightPh;
+    }
+
+    function clearError() {
+      errorMsg.textContent = '';
+      errorMsg.classList.add('hidden');
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    // --- Encoding helpers ---
+    function textToBytes(str) {
+      return Array.from(new TextEncoder().encode(str));
+    }
+
+    function bytesToText(bytes) {
+      return new TextDecoder('utf-8', { fatal: true }).decode(new Uint8Array(bytes));
+    }
+
+    function byteToBin(b) {
+      return b.toString(2).padStart(8, '0');
+    }
+
+    function formatBin(binArr) {
+      return spaceToggle.checked ? binArr.join(' ') : binArr.join('');
+    }
+
+    function parseBinString(str) {
+      const trimmed = str.trim();
+      if (!trimmed) return [];
+      let chunks;
+      if (trimmed.includes(' ')) {
+        chunks = trimmed.split(/\s+/);
+      } else {
+        if (trimmed.length % 8 !== 0) throw new Error('Binary length must be a multiple of 8 when not space-separated.');
+        chunks = trimmed.match(/.{8}/g);
+      }
+      return chunks.map(c => {
+        if (!/^[01]{1,8}$/.test(c)) throw new Error(`Invalid binary group: "${c}". Use 8-bit binary groups.`);
+        return parseInt(c, 2);
+      });
+    }
+
+    // --- Conversion logic ---
+    function convertForward(input) {
+      clearError();
+      if (!input.trim()) { rightInput.value = ''; return; }
+
+      try {
+        if (mode === 'text') {
+          const bytes = textToBytes(input);
+          rightInput.value = formatBin(bytes.map(byteToBin));
+        } else if (mode === 'decimal') {
+          const nums = input.trim().split(/[\s,]+/).map(n => {
+            const v = parseInt(n, 10);
+            if (isNaN(v) || v < 0 || v > 255) throw new Error(`Invalid byte value: "${n}". Must be 0–255.`);
+            return v;
+          });
+          rightInput.value = formatBin(nums.map(byteToBin));
+        } else if (mode === 'hex') {
+          const hexParts = input.trim().split(/[\s,]+/).map(h => {
+            if (!/^[0-9a-fA-F]{1,2}$/.test(h)) throw new Error(`Invalid hex: "${h}". Use 1–2 hex digits per byte.`);
+            return parseInt(h, 16);
+          });
+          rightInput.value = formatBin(hexParts.map(byteToBin));
         }
-    </script>
+      } catch (e) {
+        showError(e.message);
+        rightInput.value = '';
+      }
+    }
+
+    function convertReverse(input) {
+      clearError();
+      if (!input.trim()) { rightInput.value = ''; return; }
+
+      try {
+        const bytes = parseBinString(input);
+        if (mode === 'text') {
+          rightInput.value = bytesToText(bytes);
+        } else if (mode === 'decimal') {
+          rightInput.value = bytes.join(' ');
+        } else if (mode === 'hex') {
+          rightInput.value = bytes.map(b => b.toString(16).padStart(2, '0').toUpperCase()).join(' ');
+        }
+      } catch (e) {
+        showError(e.message);
+        rightInput.value = '';
+      }
+    }
+
+    function runConversion() {
+      const input = leftInput.value;
+      if (direction === 'forward') convertForward(input);
+      else convertReverse(input);
+    }
+
+    // --- Events ---
+    leftInput.addEventListener('input', runConversion);
+    spaceToggle.addEventListener('change', runConversion);
+
+    modeTabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+    swapBtn.addEventListener('click', () => {
+      const prevLeft = leftInput.value;
+      const prevRight = rightInput.value;
+
+      direction = direction === 'forward' ? 'reverse' : 'forward';
+
+      leftInput.value = prevRight;
+      rightInput.value = prevLeft;
+
+      copyLeft.classList.toggle('hidden', direction === 'forward');
+      copyRight.classList.toggle('hidden', direction === 'reverse');
+
+      leftInput.readOnly = false;
+      rightInput.readOnly = true;
+
+      updateLabels();
+      clearError();
+      runConversion();
+    });
+
+    function copyToClipboard(text, btn) {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('text-emerald-400');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('text-emerald-400'); }, 1500);
+      });
+    }
+
+    copyRight.addEventListener('click', () => copyToClipboard(rightInput.value, copyRight));
+    copyLeft.addEventListener('click', () => copyToClipboard(leftInput.value, copyLeft));
+
+  })();
+  </script>
+
 </body>
 </html>

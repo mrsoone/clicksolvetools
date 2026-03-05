@@ -3,142 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy to Read Difference Checker</title>
+    <title>Free Diff Checker Online — Compare Text Side by Side | ClickSolveTools</title>
+    <meta name="description" content="Compare two blocks of text side by side and see every difference highlighted. Supports line-by-line and word-by-word comparison modes.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/diff-checker">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+    <meta property="og:title" content="Free Diff Checker Online — Compare Text Side by Side | ClickSolveTools">
+    <meta property="og:description" content="Compare two blocks of text side by side and see every difference highlighted. Supports line-by-line and word-by-word comparison modes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/diff-checker">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Diff Checker Online — Compare Text Side by Side | ClickSolveTools">
+    <meta name="twitter:description" content="Compare two blocks of text side by side and see every difference highlighted. Supports line-by-line and word-by-word comparison modes.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Diff Checker — Compare Text Side by Side",
+      "url": "https://clicksolvetools.com/tools/diff-checker",
+      "description": "Compare two blocks of text side by side and see every difference highlighted. Supports line-by-line and word-by-word comparison modes.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GA4 placeholder — Consent Mode v2: all denied by default -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .text-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .text-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 45%;
-        }
-        textarea {
-            width: 100%;
-            height: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        button {
-            font-size: 18px;
-            padding: 12px 24px;
-            margin: 15px;
-            cursor: pointer;
-        }
-        .differences {
-            margin-top: 20px;
-            text-align: left;
-            white-space: pre-wrap;
+        .line-num {
+            color: #475569;
+            user-select: none;
+            text-align: right;
+            min-width: 2.5rem;
+            padding-right: .75rem;
             display: inline-block;
-            width: 90%;
-            border: 1px solid #000;
-            padding: 15px;
-            background-color: #f8f8f8;
+            font-variant-numeric: tabular-nums;
         }
-        .added {
-            background-color: #d4fcbc;
-            padding: 5px;
-            font-weight: bold;
-        }
-        .removed {
-            background-color: #ffcccc;
-            padding: 5px;
-            font-weight: bold;
-        }
-        .same {
-            background-color: #ffffff;
-            padding: 5px;
-        }
-        .duplicate {
-            background-color: #ffff99;
-            padding: 5px;
-            font-weight: bold;
-        }
-        .section {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 2px solid black;
-            background-color: #e0e0e0;
-        }
+        .diff-add  { background: rgba(16,185,129,.15); }
+        .diff-del  { background: rgba(239,68,68,.15); }
+        .diff-word-add { background: rgba(16,185,129,.35); border-radius: 2px; }
+        .diff-word-del { background: rgba(239,68,68,.35); border-radius: 2px; text-decoration: line-through; }
+        textarea { tab-size: 4; }
     </style>
 </head>
-<body>
-    <h2>Easy to Read Difference Checker</h2>
-    <p>Enter two versions of text and click "Compare" to see changes clearly.</p>
-    <div class="text-container">
-        <div class="text-box">
-            <label for="text1">Box 1 (Original Text)</label>
-            <textarea id="text1" placeholder="Enter original text..."></textarea>
-        </div>
-        <div class="text-box">
-            <label for="text2">Box 2 (Modified Text)</label>
-            <textarea id="text2" placeholder="Enter modified text..."></textarea>
-        </div>
-    </div>
-    <br>
-    <button onclick="compareText()">Compare</button>
-    <div class="differences" id="diffOutput">Differences will appear here.</div>
+
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">Diff Checker</h1>
+                <p class="text-[#94a3b8] text-lg">Compare two blocks of text side by side and see every difference highlighted</p>
+            </div>
+
+            <!-- Input panels -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                <!-- Original -->
+                <div class="flex flex-col">
+                    <label for="original" class="text-sm font-medium text-[#94a3b8] mb-2">Original Text</label>
+                    <div class="relative flex bg-[#1e293b] border border-[#334155] rounded-lg overflow-hidden focus-within:border-[#38bdf8] focus-within:ring-1 focus-within:ring-[#38bdf8] transition-colors">
+                        <div id="line-nums-left" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#475569] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
+                        <textarea
+                            id="original"
+                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none placeholder-[#475569] leading-[1.625rem]"
+                            placeholder="Paste original text here..."
+                            spellcheck="false"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Modified -->
+                <div class="flex flex-col">
+                    <label for="modified" class="text-sm font-medium text-[#94a3b8] mb-2">Modified Text</label>
+                    <div class="relative flex bg-[#1e293b] border border-[#334155] rounded-lg overflow-hidden focus-within:border-[#38bdf8] focus-within:ring-1 focus-within:ring-[#38bdf8] transition-colors">
+                        <div id="line-nums-right" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#475569] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
+                        <textarea
+                            id="modified"
+                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none placeholder-[#475569] leading-[1.625rem]"
+                            placeholder="Paste modified text here..."
+                            spellcheck="false"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+                <button id="btn-compare" class="px-5 py-2.5 bg-[#38bdf8] text-[#0f172a] font-semibold rounded-lg hover:bg-[#7dd3fc] active:scale-95 transition-all duration-150 text-sm">
+                    Compare
+                </button>
+                <button id="btn-swap" class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm">
+                    Swap ⇄
+                </button>
+                <button id="btn-clear" class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-500/40 active:scale-95 transition-all duration-150 text-sm">
+                    Clear Both
+                </button>
+
+                <div class="ml-auto flex items-center gap-2">
+                    <span class="text-xs text-[#94a3b8]">Mode:</span>
+                    <button id="btn-mode-line" class="px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150">Line</button>
+                    <button id="btn-mode-word" class="px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150">Word</button>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div id="diff-summary" class="hidden mb-4 flex flex-wrap gap-4 text-sm font-medium">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500/40 inline-block"></span><span id="stat-add" class="text-emerald-400">0 additions</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-red-500/40 inline-block"></span><span id="stat-del" class="text-red-400">0 deletions</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-[#334155] inline-block"></span><span id="stat-same" class="text-[#94a3b8]">0 unchanged</span></span>
+            </div>
+
+            <!-- Diff output -->
+            <div id="diff-output" class="bg-[#1e293b] border border-[#334155] rounded-lg font-mono text-sm overflow-x-auto mb-12 hidden">
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is a Diff Checker and Why Is It Useful?</h2>
+
+                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+                    <p>A diff checker is a tool that compares two blocks of text and highlights every difference between them. The word "diff" comes from the Unix <code class="text-[#7dd3fc]">diff</code> command, which has been a staple of software development since the early 1970s. At its core, the algorithm finds the <strong class="text-[#f1f5f9]">longest common subsequence</strong> (LCS) shared by both inputs and then marks everything outside that subsequence as either an addition or a deletion. The result is a clear, color-coded view of exactly what changed, what was added, and what was removed.</p>
+
+                    <p>This tool performs the comparison entirely in your browser using a classic LCS-based diff algorithm — no external libraries, no server round-trips, no data leaving your machine. You paste an original text on the left, a modified version on the right, and click <strong class="text-[#f1f5f9]">Compare</strong>. Additions appear in green, deletions appear in red, and unchanged lines are displayed normally. A summary counter at the top tells you at a glance how many additions, deletions, and unchanged lines exist.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Line-by-Line vs. Word-by-Word Comparison</h3>
+                    <p>The default <strong class="text-[#f1f5f9]">line-by-line mode</strong> treats each line as a single unit. If any part of a line changed, the entire line is flagged — this is the same granularity used by Git and most version-control systems, and it works well for structured content like source code, configuration files, and Markdown documents. When you need finer detail, switch to <strong class="text-[#f1f5f9]">word-by-word mode</strong>. In this mode, the diff algorithm runs on individual words within each changed line, so you can pinpoint the exact phrase or variable name that was edited. Word-level diffing is especially helpful for prose, legal documents, and translation review where changes tend to be small edits inside longer paragraphs.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#f1f5f9]">Code review</strong> — Compare two versions of a function or module to understand what a colleague changed before approving a pull request.</li>
+                        <li><strong class="text-[#f1f5f9]">Document revision</strong> — Writers and editors can paste two drafts of an article, contract, or report to quickly identify every edit that was made between revisions.</li>
+                        <li><strong class="text-[#f1f5f9]">Configuration comparison</strong> — System administrators often need to compare <code class="text-[#94a3b8]">nginx.conf</code>, <code class="text-[#94a3b8]">.env</code>, or Kubernetes YAML files across environments. A diff checker instantly reveals the differences that could cause deployment failures.</li>
+                        <li><strong class="text-[#f1f5f9]">Merge conflicts</strong> — When Git cannot automatically merge two branches, it presents conflicting sections. Pasting both versions into a diff checker makes it easier to decide which changes to keep.</li>
+                        <li><strong class="text-[#f1f5f9]">Data validation</strong> — Compare exported CSV or JSON outputs before and after a database migration to verify that no records were lost or corrupted.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#f1f5f9]">How does the diff algorithm work?</strong><br>
+                    The tool uses a longest-common-subsequence (LCS) approach. It builds a matrix comparing every line (or word) in the original text against every line (or word) in the modified text, finds the longest sequence they share in the same order, and then classifies lines outside that sequence as additions or deletions. This is the same foundational technique behind <code class="text-[#7dd3fc]">git diff</code> and the Unix <code class="text-[#7dd3fc]">diff</code> utility.</p>
+
+                    <p><strong class="text-[#f1f5f9]">What is a merge conflict?</strong><br>
+                    A merge conflict occurs when two branches in a version-control system modify the same section of a file in incompatible ways. The system cannot automatically decide which change to keep, so it marks the region and asks the developer to resolve it manually. Using a diff checker to view both sides of the conflict makes resolution faster and less error-prone.</p>
+
+                    <p><strong class="text-[#f1f5f9]">Can I compare files?</strong><br>
+                    This tool works with text you paste directly into the browser. To compare files, simply open each file in a text editor, copy the contents, and paste them into the Original and Modified panels. Because everything runs client-side, your file contents are never uploaded anywhere.</p>
+
+                    <p><strong class="text-[#f1f5f9]">Is there a size limit?</strong><br>
+                    The tool runs entirely in your browser, so the practical limit depends on your device's available memory. It handles thousands of lines without issue on modern hardware. For extremely large files (tens of thousands of lines), performance may vary by browser.</p>
+
+                    <p>This diff checker is completely <strong class="text-[#f1f5f9]">free</strong> and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No data is sent to any server — your text never leaves your machine. Use it whenever you need a fast, private way to compare text.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('diff-checker');
+    </script>
 
     <script>
-        function compareText() {
-            let text1 = document.getElementById("text1").value;
-            let text2 = document.getElementById("text2").value;
-            let diffOutput = document.getElementById("diffOutput");
+        const originalEl  = document.getElementById('original');
+        const modifiedEl  = document.getElementById('modified');
+        const lineNumsL   = document.getElementById('line-nums-left');
+        const lineNumsR   = document.getElementById('line-nums-right');
+        const btnCompare  = document.getElementById('btn-compare');
+        const btnSwap     = document.getElementById('btn-swap');
+        const btnClear    = document.getElementById('btn-clear');
+        const btnModeLine = document.getElementById('btn-mode-line');
+        const btnModeWord = document.getElementById('btn-mode-word');
+        const diffOutput  = document.getElementById('diff-output');
+        const diffSummary = document.getElementById('diff-summary');
+        const statAdd     = document.getElementById('stat-add');
+        const statDel     = document.getElementById('stat-del');
+        const statSame    = document.getElementById('stat-same');
 
-            let diff = generateDiff(text1, text2);
-            diffOutput.innerHTML = diff || "No differences found.";
+        let mode = 'line';
+
+        /* ── Line numbers ── */
+        function updateLineNums(textarea, container) {
+            const count = textarea.value.split('\n').length;
+            container.innerHTML = Array.from({length: count}, (_, i) => i + 1).join('<br>');
+        }
+        originalEl.addEventListener('input', () => updateLineNums(originalEl, lineNumsL));
+        modifiedEl.addEventListener('input', () => updateLineNums(modifiedEl, lineNumsR));
+        originalEl.addEventListener('scroll', () => { lineNumsL.scrollTop = originalEl.scrollTop; });
+        modifiedEl.addEventListener('scroll', () => { lineNumsR.scrollTop = modifiedEl.scrollTop; });
+
+        /* ── LCS diff (works on arrays of tokens) ── */
+        function lcs(a, b) {
+            const m = a.length, n = b.length;
+            const dp = Array.from({length: m + 1}, () => new Uint16Array(n + 1));
+            for (let i = 1; i <= m; i++)
+                for (let j = 1; j <= n; j++)
+                    dp[i][j] = a[i - 1] === b[j - 1]
+                        ? dp[i - 1][j - 1] + 1
+                        : Math.max(dp[i - 1][j], dp[i][j - 1]);
+
+            const result = [];
+            let i = m, j = n;
+            while (i > 0 && j > 0) {
+                if (a[i - 1] === b[j - 1]) {
+                    result.unshift({type: 'equal', value: a[i - 1]});
+                    i--; j--;
+                } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+                    result.unshift({type: 'del', value: a[i - 1]});
+                    i--;
+                } else {
+                    result.unshift({type: 'add', value: b[j - 1]});
+                    j--;
+                }
+            }
+            while (i > 0) { result.unshift({type: 'del', value: a[--i]}); }
+            while (j > 0) { result.unshift({type: 'add', value: b[--j]}); }
+            return result;
         }
 
-        function generateDiff(text1, text2) {
-            let lines1 = text1.split('\n');
-            let lines2 = text2.split('\n');
-            let removedText = "<div class='section'><strong>Removed from Box 1:</strong><br>";
-            let addedText = "<div class='section'><strong>Added in Box 2:</strong><br>";
-            let unchangedText = "<div class='section'><strong>Unchanged (Same Line in Both Boxes):</strong><br>";
-            let duplicateText = "<div class='section'><strong>Duplicates (Found on Different Lines):</strong><br>";
+        function esc(s) {
+            return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        }
 
-            let seenDuplicates = new Set();
-
-            for (let i = 0; i < Math.max(lines1.length, lines2.length); i++) {
-                let line1 = lines1[i] || "";
-                let line2 = lines2[i] || "";
-
-                if (line1 === line2) {
-                    unchangedText += `<div class='same'>✔ ${line1}</div>`;
+        /* ── Word-level diff for a changed line pair ── */
+        function wordDiff(oldLine, newLine) {
+            const splitWords = s => s.match(/\S+|\s+/g) || [];
+            const ops = lcs(splitWords(oldLine), splitWords(newLine));
+            let oldHtml = '', newHtml = '';
+            for (const op of ops) {
+                if (op.type === 'equal') {
+                    oldHtml += esc(op.value);
+                    newHtml += esc(op.value);
+                } else if (op.type === 'del') {
+                    oldHtml += '<span class="diff-word-del">' + esc(op.value) + '</span>';
                 } else {
-                    if (lines1.includes(line2) && !seenDuplicates.has(line2)) {
-                        duplicateText += `<div class='duplicate'>🔁 ${line2}</div>`;
-                        seenDuplicates.add(line2);
-                    }
-                    if (lines2.includes(line1) && !seenDuplicates.has(line1)) {
-                        duplicateText += `<div class='duplicate'>🔁 ${line1}</div>`;
-                        seenDuplicates.add(line1);
-                    }
-                    if (line1 && !lines2.includes(line1)) {
-                        removedText += `<div class='removed'>❌ ${line1}</div>`;
-                    }
-                    if (line2 && !lines1.includes(line2)) {
-                        addedText += `<div class='added'>✅ ${line2}</div>`;
+                    newHtml += '<span class="diff-word-add">' + esc(op.value) + '</span>';
+                }
+            }
+            return {oldHtml, newHtml};
+        }
+
+        /* ── Render diff ── */
+        function compare() {
+            const aLines = originalEl.value.split('\n');
+            const bLines = modifiedEl.value.split('\n');
+            const ops = lcs(aLines, bLines);
+
+            let adds = 0, dels = 0, same = 0;
+            let rows = '';
+            let leftNum = 0, rightNum = 0;
+
+            for (const op of ops) {
+                if (op.type === 'equal') {
+                    leftNum++; rightNum++; same++;
+                    rows += '<div class="flex">'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
+                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all">' + esc(op.value) + '</span>'
+                        + '</div>';
+                } else if (op.type === 'del') {
+                    leftNum++; dels++;
+                    const content = mode === 'word' ? op.value : op.value;
+                    rows += '<div class="flex diff-del">'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + esc(op.value) + '</span>'
+                        + '</div>';
+                } else {
+                    rightNum++; adds++;
+                    rows += '<div class="flex diff-add">'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                        + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
+                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + esc(op.value) + '</span>'
+                        + '</div>';
+                }
+            }
+
+            if (mode === 'word') {
+                rows = '';
+                leftNum = 0; rightNum = 0;
+                adds = 0; dels = 0; same = 0;
+                let i = 0;
+                while (i < ops.length) {
+                    const op = ops[i];
+                    if (op.type === 'equal') {
+                        leftNum++; rightNum++; same++;
+                        rows += '<div class="flex">'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all">' + esc(op.value) + '</span>'
+                            + '</div>';
+                        i++;
+                    } else if (op.type === 'del' && i + 1 < ops.length && ops[i + 1].type === 'add') {
+                        leftNum++; rightNum++; dels++; adds++;
+                        const wd = wordDiff(op.value, ops[i + 1].value);
+                        rows += '<div class="flex diff-del">'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + wd.oldHtml + '</span>'
+                            + '</div>';
+                        rows += '<div class="flex diff-add">'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + wd.newHtml + '</span>'
+                            + '</div>';
+                        i += 2;
+                    } else if (op.type === 'del') {
+                        leftNum++; dels++;
+                        rows += '<div class="flex diff-del">'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + esc(op.value) + '</span>'
+                            + '</div>';
+                        i++;
+                    } else {
+                        rightNum++; adds++;
+                        rows += '<div class="flex diff-add">'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
+                            + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + esc(op.value) + '</span>'
+                            + '</div>';
+                        i++;
                     }
                 }
             }
 
-            removedText += "</div>";
-            addedText += "</div>";
-            unchangedText += "</div>";
-            duplicateText += "</div>";
+            diffOutput.innerHTML = '<div class="py-2 text-xs leading-[1.625rem]">' + rows + '</div>';
+            diffOutput.classList.remove('hidden');
 
-            return removedText + addedText + unchangedText + duplicateText;
+            statAdd.textContent  = adds + ' addition'  + (adds !== 1 ? 's' : '');
+            statDel.textContent  = dels + ' deletion'  + (dels !== 1 ? 's' : '');
+            statSame.textContent = same + ' unchanged';
+            diffSummary.classList.remove('hidden');
         }
+
+        /* ── Controls ── */
+        btnCompare.addEventListener('click', compare);
+
+        btnSwap.addEventListener('click', () => {
+            const tmp = originalEl.value;
+            originalEl.value = modifiedEl.value;
+            modifiedEl.value = tmp;
+            updateLineNums(originalEl, lineNumsL);
+            updateLineNums(modifiedEl, lineNumsR);
+        });
+
+        btnClear.addEventListener('click', () => {
+            originalEl.value = '';
+            modifiedEl.value = '';
+            updateLineNums(originalEl, lineNumsL);
+            updateLineNums(modifiedEl, lineNumsR);
+            diffOutput.innerHTML = '';
+            diffOutput.classList.add('hidden');
+            diffSummary.classList.add('hidden');
+        });
+
+        function setMode(m) {
+            mode = m;
+            if (m === 'line') {
+                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150';
+                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150';
+            } else {
+                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150';
+                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150';
+            }
+            if (!diffOutput.classList.contains('hidden')) compare();
+        }
+        btnModeLine.addEventListener('click', () => setMode('line'));
+        btnModeWord.addEventListener('click', () => setMode('word'));
     </script>
 </body>
 </html>

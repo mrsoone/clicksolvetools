@@ -3,54 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word & Character Counter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin: auto;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            resize: none;
-        }
-        .info {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Word & Character Counter</h2>
-        <textarea id="textInput" placeholder="Type or paste your text here..." oninput="countWordsAndChars()"></textarea>
-        <p class="info">Words: <span id="wordCount">0</span></p>
-        <p class="info">Characters: <span id="charCount">0</span></p>
-    </div>
+    <title>Free Word &amp; Character Counter Online — Reading Time &amp; Keyword Density | ClickSolveTools</title>
+    <meta name="description" content="Count words, characters, sentences, and paragraphs in real time. See reading time, speaking time, and keyword density for any text.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/word-counter">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>" type="image/svg+xml">
+
+    <meta property="og:title" content="Free Word & Character Counter Online — Reading Time & Keyword Density | ClickSolveTools">
+    <meta property="og:description" content="Count words, characters, sentences, and paragraphs in real time. See reading time, speaking time, and keyword density for any text.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/word-counter">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Word & Character Counter Online — Reading Time & Keyword Density | ClickSolveTools">
+    <meta name="twitter:description" content="Count words, characters, sentences, and paragraphs in real time. See reading time, speaking time, and keyword density for any text.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Word & Character Counter",
+      "url": "https://clicksolvetools.com/tools/word-counter",
+      "description": "Count words, characters, sentences, and paragraphs in real time. See reading time, speaking time, and keyword density for any text.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GA4 placeholder with Consent Mode v2 (all denied by default) -->
     <script>
-        function countWordsAndChars() {
-            let text = document.getElementById("textInput").value;
-            let charCount = text.length;
-            let wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
-            
-            document.getElementById("wordCount").textContent = wordCount;
-            document.getElementById("charCount").textContent = charCount;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">Word &amp; Character Counter</h1>
+                <p class="text-[#94a3b8] text-lg">Count words, characters, sentences, paragraphs — plus reading time and keyword density</p>
+            </div>
+
+            <!-- Widget -->
+            <div class="mb-6">
+                <label for="text-input" class="text-sm font-medium text-[#94a3b8] mb-2 block">Your Text</label>
+                <textarea
+                    id="text-input"
+                    class="w-full bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-base leading-relaxed resize-y focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors placeholder-[#475569]"
+                    style="min-height:300px"
+                    placeholder="Type or paste your text here..."
+                    spellcheck="false"
+                ></textarea>
+            </div>
+
+            <!-- Stats Grid -->
+            <div id="stats-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 mb-8">
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-words" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Words</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-chars" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Characters</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-chars-no-space" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Chars (no spaces)</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-sentences" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Sentences</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-paragraphs" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Paragraphs</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-reading" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0s</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Reading Time</div>
+                </div>
+                <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-center">
+                    <div id="stat-speaking" class="text-2xl sm:text-3xl font-bold text-[#38bdf8]">0s</div>
+                    <div class="text-xs sm:text-sm text-[#94a3b8] mt-1">Speaking Time</div>
+                </div>
+            </div>
+
+            <!-- Keyword Density -->
+            <div id="keyword-section" class="mb-12">
+                <h2 class="text-lg font-semibold text-[#f1f5f9] mb-3">Top 10 Keyword Density</h2>
+                <div id="keyword-list" class="bg-[#1e293b] border border-[#334155] rounded-lg overflow-hidden">
+                    <p class="text-[#475569] italic p-4 text-sm">Start typing to see keyword density&hellip;</p>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">Why Word Count Matters and How to Use This Tool</h2>
+
+                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+                    <p>Whether you are writing a blog post, crafting an essay, composing an email, or optimizing content for search engines, knowing your exact word count is essential. Different platforms and contexts have specific length expectations — Google tends to reward long-form content above 1,500 words for competitive keywords, academic essays have strict word limits, and social media platforms like Twitter (X) cap posts at 280 characters. A reliable word counter takes the guesswork out of hitting those targets.</p>
+
+                    <p>This free word counter tool analyzes your text in real time the moment you type or paste it. There is no button to press — every keystroke instantly updates your word count, character count (with and without spaces), sentence count, paragraph count, estimated reading time, and estimated speaking time. The tool runs entirely in your browser, so your text never leaves your device.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How Reading and Speaking Time Are Calculated</h3>
+                    <p>Reading time is based on the average adult silent reading speed of approximately <strong class="text-[#f1f5f9]">238 words per minute</strong>, a figure drawn from research published in the Journal of Memory and Language. Speaking time uses a pace of roughly <strong class="text-[#f1f5f9]">150 words per minute</strong>, which reflects a comfortable, conversational speaking rate commonly used for presentations and speeches. The tool divides your total word count by these rates and displays the result in minutes and seconds.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Understanding Keyword Density</h3>
+                    <p>Keyword density measures how frequently a specific word appears relative to the total word count. It is a foundational concept in SEO — if a word appears too infrequently, search engines may not associate your page with that topic; if it appears too often, it can signal keyword stuffing and hurt rankings. This tool displays the top 10 most frequent words along with their counts and density percentages. Common stop words like "the," "is," "and," and "a" are filtered out so you see only meaningful keywords. A healthy keyword density for a primary term typically falls between 1% and 3%.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Use Cases</h3>
+                    <p>This tool serves a wide range of writers and professionals:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#f1f5f9]">Blog posts and articles</strong> — Track length against SEO best practices. Most top-ranking blog posts sit between 1,500 and 2,500 words.</li>
+                        <li><strong class="text-[#f1f5f9]">Academic writing</strong> — Meet strict word limits for essays, dissertations, and research papers without manually counting.</li>
+                        <li><strong class="text-[#f1f5f9]">Social media</strong> — Confirm your post fits within character limits before pasting it into Twitter, LinkedIn, or Instagram.</li>
+                        <li><strong class="text-[#f1f5f9]">Emails and cover letters</strong> — Keep professional communications concise. A cover letter should typically stay between 250 and 400 words.</li>
+                        <li><strong class="text-[#f1f5f9]">SEO optimization</strong> — Monitor keyword density to balance relevance with readability and avoid over-optimization.</li>
+                        <li><strong class="text-[#f1f5f9]">Speeches and presentations</strong> — Estimate speaking time so you can rehearse to fit your allotted slot exactly.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#f1f5f9]">How many words is a page?</strong><br>
+                    A standard page of text — single-spaced, 12-point font, one-inch margins — contains approximately 500 words. Double-spaced, that drops to roughly 250 words per page. These are estimates; the exact count depends on font choice, margin size, and formatting.</p>
+
+                    <p><strong class="text-[#f1f5f9]">What's a good reading time for a blog post?</strong><br>
+                    Research from Medium and other platforms suggests that the ideal reading time for maximum engagement is around <strong class="text-[#f1f5f9]">7 minutes</strong>, which translates to roughly 1,600 words. However, the best length ultimately depends on the depth of the topic and the audience's expectations.</p>
+
+                    <p><strong class="text-[#f1f5f9]">How is reading time calculated?</strong><br>
+                    This tool divides the total word count by 238 (the average adult reading speed in words per minute). For example, a 1,000-word article would take approximately 4 minutes and 12 seconds to read. Speaking time uses the same approach but divides by 150 words per minute.</p>
+
+                    <p>This word counter is completely <strong class="text-[#f1f5f9]">free</strong>, requires no sign-up, and works <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No text is stored or transmitted — your content stays private on your device. Use it whenever you need fast, accurate text analytics.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('word-counter');
+    </script>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const statWords = document.getElementById('stat-words');
+        const statChars = document.getElementById('stat-chars');
+        const statCharsNoSpace = document.getElementById('stat-chars-no-space');
+        const statSentences = document.getElementById('stat-sentences');
+        const statParagraphs = document.getElementById('stat-paragraphs');
+        const statReading = document.getElementById('stat-reading');
+        const statSpeaking = document.getElementById('stat-speaking');
+        const keywordList = document.getElementById('keyword-list');
+
+        const READING_WPM = 238;
+        const SPEAKING_WPM = 150;
+
+        const STOP_WORDS = new Set([
+            'a','an','the','and','or','but','if','in','on','at','to','for','of','with',
+            'by','from','as','is','was','are','were','be','been','being','have','has',
+            'had','do','does','did','will','would','shall','should','may','might','must',
+            'can','could','that','which','who','whom','this','these','those','it','its',
+            'i','me','my','we','our','you','your','he','him','his','she','her','they',
+            'them','their','what','when','where','how','not','no','nor','so','than',
+            'too','very','just','about','above','after','again','all','also','am','any',
+            'because','before','between','both','each','few','get','got','here','into',
+            'more','most','new','now','only','other','out','over','own','same','some',
+            'still','such','take','then','there','through','under','up','us','while'
+        ]);
+
+        function formatTime(minutes) {
+            if (minutes < 1/60) return '0s';
+            const m = Math.floor(minutes);
+            const s = Math.round((minutes - m) * 60);
+            if (m === 0) return s + 's';
+            if (s === 0) return m + 'min';
+            return m + 'min ' + s + 's';
         }
+
+        function analyze() {
+            const text = textInput.value;
+            const trimmed = text.trim();
+
+            const words = trimmed === '' ? [] : trimmed.split(/\s+/);
+            const wordCount = words.length;
+            const charCount = text.length;
+            const charNoSpaceCount = text.replace(/\s/g, '').length;
+            const sentences = trimmed === '' ? 0 : (trimmed.match(/[.!?]+(?=\s|$)/g) || []).length || (trimmed.length > 0 && wordCount > 0 ? 1 : 0);
+            const paragraphs = trimmed === '' ? 0 : trimmed.split(/\n\s*\n/).filter(p => p.trim().length > 0).length || (trimmed.length > 0 ? 1 : 0);
+
+            const readingMin = wordCount / READING_WPM;
+            const speakingMin = wordCount / SPEAKING_WPM;
+
+            statWords.textContent = wordCount.toLocaleString();
+            statChars.textContent = charCount.toLocaleString();
+            statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
+            statSentences.textContent = sentences.toLocaleString();
+            statParagraphs.textContent = paragraphs.toLocaleString();
+            statReading.textContent = formatTime(readingMin);
+            statSpeaking.textContent = formatTime(speakingMin);
+
+            buildKeywordDensity(words, wordCount);
+        }
+
+        function buildKeywordDensity(words, totalWords) {
+            if (totalWords === 0) {
+                keywordList.innerHTML = '<p class="text-[#475569] italic p-4 text-sm">Start typing to see keyword density&hellip;</p>';
+                return;
+            }
+
+            const freq = {};
+            for (const w of words) {
+                const lower = w.toLowerCase().replace(/[^a-z0-9'-]/g, '');
+                if (lower.length < 2 || STOP_WORDS.has(lower)) continue;
+                freq[lower] = (freq[lower] || 0) + 1;
+            }
+
+            const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+            if (sorted.length === 0) {
+                keywordList.innerHTML = '<p class="text-[#475569] italic p-4 text-sm">No meaningful keywords found yet&hellip;</p>';
+                return;
+            }
+
+            const rows = sorted.map(([word, count], i) => {
+                const density = ((count / totalWords) * 100).toFixed(1);
+                const barWidth = (count / sorted[0][1]) * 100;
+                const bg = i % 2 === 0 ? 'bg-[#1e293b]' : 'bg-[#162032]';
+                return `
+                    <div class="${bg} flex items-center px-4 py-2.5 gap-4">
+                        <span class="text-[#f1f5f9] font-medium w-32 sm:w-40 truncate">${word}</span>
+                        <div class="flex-1 bg-[#0f172a] rounded-full h-2 overflow-hidden">
+                            <div class="bg-[#38bdf8] h-2 rounded-full" style="width:${barWidth}%"></div>
+                        </div>
+                        <span class="text-[#94a3b8] text-sm w-10 text-right">${count}</span>
+                        <span class="text-[#64748b] text-sm w-14 text-right">${density}%</span>
+                    </div>`;
+            }).join('');
+
+            keywordList.innerHTML = `
+                <div class="flex items-center px-4 py-2 border-b border-[#334155] text-xs text-[#64748b] uppercase tracking-wider">
+                    <span class="w-32 sm:w-40">Keyword</span>
+                    <span class="flex-1">Frequency</span>
+                    <span class="w-10 text-right">Count</span>
+                    <span class="w-14 text-right">Density</span>
+                </div>
+                ${rows}`;
+        }
+
+        textInput.addEventListener('input', analyze);
+        analyze();
     </script>
 </body>
 </html>

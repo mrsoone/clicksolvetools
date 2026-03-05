@@ -3,121 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Converter</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #74ebd5, #acb6e5);
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            max-width: 900px;
-            background: white;
-            padding: 70px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-        select, input, button {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 26px;
-        }
-        button {
-            background: #4CAF50;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #45a049;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 2.2em;
-            font-weight: bold;
-            color: #444;
-        }
-    </style>
+    <title>Free Unit Converter Online — Length, Weight, Temperature &amp; More | ClickSolveTools</title>
+    <meta name="description" content="Convert between hundreds of units across length, weight, temperature, volume, speed, and more. Real-time results with conversion formulas shown.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/unit-converter">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Unit Converter Online — Length, Weight, Temperature & More">
+    <meta property="og:description" content="Convert between hundreds of units across length, weight, temperature, volume, speed, and more. Real-time results with conversion formulas shown.">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/unit-converter">
+    <meta property="og:site_name" content="ClickSolveTools">
+    <meta property="og:image" content="https://clicksolvetools.com/images/og-unit-converter.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Unit Converter Online — Length, Weight, Temperature & More">
+    <meta name="twitter:description" content="Convert between hundreds of units across length, weight, temperature, volume, speed, and more. Real-time results with conversion formulas shown.">
+
+    <!-- GA4 Placeholder -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Unit Converter",
+      "url": "https://clicksolvetools.com/tools/unit-converter",
+      "description": "Convert between hundreds of units across length, weight, temperature, volume, speed, and more. Real-time results with conversion formulas shown.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <h2>Unit Converter</h2>
-        <input type="number" id="inputValue" placeholder="Enter value" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 22px; box-sizing: border-box;">
-        <select id="unitType">
-            <option value="length">Length</option>
-            <option value="weight">Weight</option>
-            <option value="temperature">Temperature</option>
-        </select>
-        <select id="fromUnit"></select>
-        <select id="toUnit"></select>
-        <button onclick="convertUnit()">Convert</button>
-        <div class="result" id="result"></div>
-    </div>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+
+    <div id="nav-container"></div>
+
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
+        <article>
+            <!-- Widget -->
+            <section id="converter-widget" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 sm:p-8 mb-12">
+
+                <!-- Category Tabs -->
+                <div id="category-tabs" class="flex flex-wrap gap-2 mb-8" role="tablist"></div>
+
+                <!-- Converter Body -->
+                <div class="space-y-6">
+                    <!-- Input Value -->
+                    <div>
+                        <label for="input-value" class="block text-sm font-medium text-[#94a3b8] mb-2">Value</label>
+                        <input
+                            id="input-value"
+                            type="number"
+                            inputmode="decimal"
+                            value="1"
+                            class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-lg text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors"
+                            placeholder="Enter a value"
+                        >
+                    </div>
+
+                    <!-- From / Swap / To -->
+                    <div class="grid grid-cols-[1fr_auto_1fr] gap-3 items-end">
+                        <div>
+                            <label for="from-unit" class="block text-sm font-medium text-[#94a3b8] mb-2">From</label>
+                            <select id="from-unit" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors appearance-none cursor-pointer"></select>
+                        </div>
+                        <button id="swap-btn" type="button" title="Swap units" class="mb-0.5 w-10 h-10 flex items-center justify-center rounded-full bg-[#334155] hover:bg-[#38bdf8] hover:text-[#0f172a] text-[#94a3b8] transition-colors text-xl font-bold flex-shrink-0">↔</button>
+                        <div>
+                            <label for="to-unit" class="block text-sm font-medium text-[#94a3b8] mb-2">To</label>
+                            <select id="to-unit" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors appearance-none cursor-pointer"></select>
+                        </div>
+                    </div>
+
+                    <!-- Result -->
+                    <div id="result-area" class="bg-[#0f172a] border border-[#334155] rounded-lg p-5 text-center">
+                        <div id="result-value" class="text-3xl sm:text-4xl font-bold text-[#38bdf8] mb-2 break-all">—</div>
+                        <div id="result-formula" class="text-sm text-[#94a3b8]"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEO Content -->
+            <section class="prose prose-invert max-w-none mb-12 space-y-6 text-[#cbd5e1] leading-relaxed">
+                <h2 class="text-2xl font-bold text-[#f1f5f9]">How to Convert Between Measurement Units</h2>
+
+                <p>Unit conversion is one of the most common tasks in everyday life, from estimating distances while traveling abroad to adjusting ingredient quantities in the kitchen. Whether you are a student solving physics problems, an engineer designing components for an international client, or a home cook following a recipe written in metric units, accurate conversions save time and prevent costly mistakes. This free unit converter handles eight major categories — length, weight, temperature, volume, speed, area, time, and digital data — giving you instant, reliable answers without any downloads or signups.</p>
+
+                <h3 class="text-xl font-semibold text-[#f1f5f9]">How This Tool Works</h3>
+                <p>Simply choose a category, enter a value, and select the "from" and "to" units. The result updates in real time as you type — no need to click a convert button. Below every result, the tool displays the exact conversion formula so you can verify the math or use it in your own calculations. All processing runs entirely in your browser; nothing is sent to a server, which means it works offline once the page loads and your data stays completely private.</p>
+
+                <h3 class="text-xl font-semibold text-[#f1f5f9]">Metric vs. Imperial: Why Both Systems Exist</h3>
+                <p>The metric system (SI), built on powers of ten, is the international standard used by virtually every country. The imperial system — miles, pounds, Fahrenheit — remains common in the United States and a handful of other nations. Because global commerce, travel, and science require both systems to coexist, quick and accurate cross-system conversion is an essential skill. This tool bridges that gap instantly: type a distance in miles and see kilometers, enter a weight in pounds and get kilograms, or convert Fahrenheit to Celsius in a single step.</p>
+
+                <h3 class="text-xl font-semibold text-[#f1f5f9]">Common Conversion Formulas</h3>
+                <ul class="list-disc list-inside space-y-1 text-[#cbd5e1]">
+                    <li><strong class="text-[#f1f5f9]">Miles to Kilometers:</strong> multiply by 1.60934 (1 mile ≈ 1.609 km)</li>
+                    <li><strong class="text-[#f1f5f9]">Pounds to Kilograms:</strong> multiply by 0.453592 (1 lb ≈ 0.454 kg)</li>
+                    <li><strong class="text-[#f1f5f9]">Fahrenheit to Celsius:</strong> subtract 32, then multiply by 5/9 — for example, 72 °F = (72 − 32) × 5/9 ≈ 22.2 °C</li>
+                    <li><strong class="text-[#f1f5f9]">Gallons to Liters:</strong> multiply by 3.78541 (1 US gallon ≈ 3.785 L)</li>
+                    <li><strong class="text-[#f1f5f9]">Inches to Centimeters:</strong> multiply by 2.54 (exactly)</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-[#f1f5f9]">Use Cases</h3>
+                <p><strong class="text-[#f1f5f9]">Travel:</strong> Quickly convert speed limits (mph ↔ km/h), distances, and temperatures when visiting a country that uses a different measurement system. <strong class="text-[#f1f5f9]">Cooking:</strong> Scale recipes that use cups and ounces into milliliters and grams, or vice versa. <strong class="text-[#f1f5f9]">Science &amp; Engineering:</strong> Convert between SI and imperial units for lab reports, simulations, and manufacturing specs. <strong class="text-[#f1f5f9]">IT &amp; Data:</strong> Figure out how many gigabytes are in a terabyte or how many megabytes a file uses — useful for storage planning, bandwidth calculations, and data transfer estimates.</p>
+
+                <h3 class="text-xl font-semibold text-[#f1f5f9]">Frequently Asked Questions</h3>
+
+                <div class="space-y-4">
+                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">How many kilometers are in a mile?</summary>
+                        <p class="px-5 pb-4 text-[#94a3b8]">One mile equals approximately 1.60934 kilometers. So 5 miles is about 8.047 km, and a marathon (26.2 miles) is roughly 42.2 km.</p>
+                    </details>
+                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">What is the formula for Celsius to Fahrenheit?</summary>
+                        <p class="px-5 pb-4 text-[#94a3b8]">Multiply the Celsius temperature by 9/5 (or 1.8), then add 32. For example, 100 °C × 1.8 + 32 = 212 °F. To go the other way, subtract 32 and multiply by 5/9.</p>
+                    </details>
+                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">How many ounces are in a pound?</summary>
+                        <p class="px-5 pb-4 text-[#94a3b8]">There are exactly 16 ounces (oz) in one pound (lb). This applies to avoirdupois ounces, which are the standard for everyday weight measurement in the US and UK.</p>
+                    </details>
+                </div>
+
+                <p>This unit converter is completely free, works in any modern browser, and requires no installation. Bookmark it for quick access whenever you need fast, accurate conversions across the metric and imperial systems.</p>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('unit-converter');
+    </script>
+
     <script>
-        const unitOptions = {
-            length: { "Meters": 1, "Kilometers": 0.001, "Miles": 0.000621371, "Feet": 3.28084, "Inches": 39.3701, "Centimeters": 100, "Millimeters": 1000 },
-            weight: { "Grams": 1, "Kilograms": 0.001, "Pounds": 0.00220462, "Ounces": 0.035274 },
-            temperature: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" }
+    (function () {
+        const UNITS = {
+            Length: {
+                mm:      { factor: 0.001,     label: 'Millimeters (mm)' },
+                cm:      { factor: 0.01,      label: 'Centimeters (cm)' },
+                m:       { factor: 1,         label: 'Meters (m)' },
+                km:      { factor: 1000,      label: 'Kilometers (km)' },
+                in:      { factor: 0.0254,    label: 'Inches (in)' },
+                ft:      { factor: 0.3048,    label: 'Feet (ft)' },
+                yd:      { factor: 0.9144,    label: 'Yards (yd)' },
+                mi:      { factor: 1609.344,  label: 'Miles (mi)' }
+            },
+            Weight: {
+                mg:      { factor: 0.000001,       label: 'Milligrams (mg)' },
+                g:       { factor: 0.001,          label: 'Grams (g)' },
+                kg:      { factor: 1,              label: 'Kilograms (kg)' },
+                oz:      { factor: 0.028349523125, label: 'Ounces (oz)' },
+                lb:      { factor: 0.45359237,     label: 'Pounds (lb)' },
+                st:      { factor: 6.35029318,     label: 'Stone (st)' },
+                tmet:    { factor: 1000,            label: 'Ton — metric (t)' },
+                tus:     { factor: 907.18474,       label: 'Ton — US (ton)' }
+            },
+            Temperature: {
+                C: { label: 'Celsius (°C)' },
+                F: { label: 'Fahrenheit (°F)' },
+                K: { label: 'Kelvin (K)' }
+            },
+            Volume: {
+                ml:     { factor: 0.001,         label: 'Milliliters (mL)' },
+                L:      { factor: 1,             label: 'Liters (L)' },
+                floz:   { factor: 0.0295735296,  label: 'Fluid Ounces (fl oz)' },
+                cup:    { factor: 0.2365882365,  label: 'Cups (cup)' },
+                pt:     { factor: 0.473176473,   label: 'Pints (pt)' },
+                qt:     { factor: 0.946352946,   label: 'Quarts (qt)' },
+                gal:    { factor: 3.785411784,   label: 'Gallons (gal)' }
+            },
+            Speed: {
+                'ms':   { factor: 1,             label: 'Meters/second (m/s)' },
+                'kmh':  { factor: 0.27777777778, label: 'Kilometers/hour (km/h)' },
+                'mph':  { factor: 0.44704,       label: 'Miles/hour (mph)' },
+                'kn':   { factor: 0.51444444444, label: 'Knots (kn)' }
+            },
+            Area: {
+                sqcm:   { factor: 0.0001,        label: 'Square Centimeters (cm²)' },
+                sqm:    { factor: 1,             label: 'Square Meters (m²)' },
+                sqkm:   { factor: 1e6,           label: 'Square Kilometers (km²)' },
+                sqin:   { factor: 0.00064516,    label: 'Square Inches (in²)' },
+                sqft:   { factor: 0.09290304,    label: 'Square Feet (ft²)' },
+                sqyd:   { factor: 0.83612736,    label: 'Square Yards (yd²)' },
+                acre:   { factor: 4046.8564224,  label: 'Acres (ac)' },
+                ha:     { factor: 10000,         label: 'Hectares (ha)' }
+            },
+            Time: {
+                ms:     { factor: 0.001,         label: 'Milliseconds (ms)' },
+                s:      { factor: 1,             label: 'Seconds (s)' },
+                min:    { factor: 60,            label: 'Minutes (min)' },
+                hr:     { factor: 3600,          label: 'Hours (hr)' },
+                day:    { factor: 86400,         label: 'Days (d)' },
+                wk:     { factor: 604800,        label: 'Weeks (wk)' },
+                mo:     { factor: 2629746,       label: 'Months (mo)' },
+                yr:     { factor: 31556952,      label: 'Years (yr)' }
+            },
+            Data: {
+                B:      { factor: 1,             label: 'Bytes (B)' },
+                KB:     { factor: 1024,          label: 'Kilobytes (KB)' },
+                MB:     { factor: 1048576,       label: 'Megabytes (MB)' },
+                GB:     { factor: 1073741824,    label: 'Gigabytes (GB)' },
+                TB:     { factor: 1099511627776, label: 'Terabytes (TB)' },
+                PB:     { factor: 1125899906842624, label: 'Petabytes (PB)' }
+            }
         };
 
-        function populateUnits() {
-            const unitType = document.getElementById("unitType").value;
-            const fromUnit = document.getElementById("fromUnit");
-            const toUnit = document.getElementById("toUnit");
-            
-            fromUnit.innerHTML = toUnit.innerHTML = "";
-            Object.keys(unitOptions[unitType]).forEach(unit => {
-                let option1 = new Option(unit, unit);
-                let option2 = new Option(unit, unit);
-                fromUnit.add(option1);
-                toUnit.add(option2);
-            });
+        const categories = Object.keys(UNITS);
+        let activeCategory = categories[0];
+
+        const tabsEl     = document.getElementById('category-tabs');
+        const inputEl    = document.getElementById('input-value');
+        const fromEl     = document.getElementById('from-unit');
+        const toEl       = document.getElementById('to-unit');
+        const swapBtn    = document.getElementById('swap-btn');
+        const resultVal  = document.getElementById('result-value');
+        const resultForm = document.getElementById('result-formula');
+
+        function renderTabs() {
+            tabsEl.innerHTML = categories.map(cat =>
+                `<button
+                    type="button"
+                    role="tab"
+                    aria-selected="${cat === activeCategory}"
+                    data-cat="${cat}"
+                    class="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+                        cat === activeCategory
+                            ? 'bg-[#38bdf8] text-[#0f172a]'
+                            : 'bg-[#334155] text-[#94a3b8] hover:bg-[#475569] hover:text-[#f1f5f9]'
+                    }"
+                >${cat}</button>`
+            ).join('');
         }
 
-        function convertUnit() {
-            const unitType = document.getElementById("unitType").value;
-            const fromUnit = document.getElementById("fromUnit").value;
-            const toUnit = document.getElementById("toUnit").value;
-            let value = parseFloat(document.getElementById("inputValue").value);
+        function populateSelects() {
+            const units = UNITS[activeCategory];
+            const keys = Object.keys(units);
+            const options = keys.map(k => `<option value="${k}">${units[k].label}</option>`).join('');
+            fromEl.innerHTML = options;
+            toEl.innerHTML = options;
+            if (keys.length > 1) toEl.selectedIndex = 1;
+        }
+
+        function formatNumber(n) {
+            if (n === 0) return '0';
+            const abs = Math.abs(n);
+            if (abs >= 1e15 || (abs > 0 && abs < 1e-6)) return n.toPrecision(8);
+            if (Number.isInteger(n) && abs < 1e15) return n.toLocaleString('en-US');
+            const fixed = abs >= 100 ? 2 : abs >= 1 ? 4 : 8;
+            const str = n.toFixed(fixed);
+            return parseFloat(str).toLocaleString('en-US', { maximumFractionDigits: fixed });
+        }
+
+        function convertTemp(value, from, to) {
+            if (from === to) return value;
+            let celsius;
+            if (from === 'C') celsius = value;
+            else if (from === 'F') celsius = (value - 32) * 5 / 9;
+            else celsius = value - 273.15;
+
+            if (to === 'C') return celsius;
+            if (to === 'F') return celsius * 9 / 5 + 32;
+            return celsius + 273.15;
+        }
+
+        function tempFormula(from, to) {
+            if (from === to) return '';
+            const map = {
+                'C-F': '°F = °C × 9/5 + 32',
+                'C-K': 'K = °C + 273.15',
+                'F-C': '°C = (°F − 32) × 5/9',
+                'F-K': 'K = (°F − 32) × 5/9 + 273.15',
+                'K-C': '°C = K − 273.15',
+                'K-F': '°F = (K − 273.15) × 9/5 + 32'
+            };
+            return map[`${from}-${to}`] || '';
+        }
+
+        function convert() {
+            const value = parseFloat(inputEl.value);
             if (isNaN(value)) {
-                document.getElementById("result").textContent = "Please enter a valid number";
+                resultVal.textContent = '—';
+                resultForm.textContent = '';
                 return;
             }
-            
+
+            const from = fromEl.value;
+            const to = toEl.value;
+            const units = UNITS[activeCategory];
+
             let result;
-            if (unitType === "temperature") {
-                if (fromUnit === toUnit) result = value;
-                else if (fromUnit === "Celsius" && toUnit === "Fahrenheit") result = (value * 9/5) + 32;
-                else if (fromUnit === "Celsius" && toUnit === "Kelvin") result = value + 273.15;
-                else if (fromUnit === "Fahrenheit" && toUnit === "Celsius") result = (value - 32) * 5/9;
-                else if (fromUnit === "Fahrenheit" && toUnit === "Kelvin") result = (value - 32) * 5/9 + 273.15;
-                else if (fromUnit === "Kelvin" && toUnit === "Celsius") result = value - 273.15;
-                else if (fromUnit === "Kelvin" && toUnit === "Fahrenheit") result = (value - 273.15) * 9/5 + 32;
+            let formula;
+
+            if (activeCategory === 'Temperature') {
+                result = convertTemp(value, from, to);
+                formula = tempFormula(from, to);
             } else {
-                result = value * (unitOptions[unitType][toUnit] / unitOptions[unitType][fromUnit]);
+                const fromFactor = units[from].factor;
+                const toFactor = units[to].factor;
+                result = value * fromFactor / toFactor;
+                const ratio = fromFactor / toFactor;
+                const fromLabel = units[from].label.split('(')[0].trim();
+                const toLabel = units[to].label.split('(')[0].trim();
+                formula = `1 ${fromLabel} = ${formatNumber(ratio)} ${toLabel}`;
             }
-            
-            document.getElementById("result").textContent = `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+
+            resultVal.textContent = formatNumber(result);
+            resultForm.textContent = formula;
         }
-        
-        document.getElementById("unitType").addEventListener("change", populateUnits);
-        populateUnits();
+
+        tabsEl.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-cat]');
+            if (!btn) return;
+            activeCategory = btn.dataset.cat;
+            renderTabs();
+            populateSelects();
+            convert();
+        });
+
+        swapBtn.addEventListener('click', () => {
+            const tmp = fromEl.value;
+            fromEl.value = toEl.value;
+            toEl.value = tmp;
+            convert();
+        });
+
+        inputEl.addEventListener('input', convert);
+        fromEl.addEventListener('change', convert);
+        toEl.addEventListener('change', convert);
+
+        renderTabs();
+        populateSelects();
+        convert();
+    })();
     </script>
 </body>
 </html>

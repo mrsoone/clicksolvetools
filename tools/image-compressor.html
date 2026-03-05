@@ -1,644 +1,387 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <
-meta charset="UTF-8">
-    <meta name="viewpor
-t" content="width=device-width, initial-scale
-=1.0">
-    <title>Image Compressor</title>
-  
-  <script src="https://cdn.tailwindcss.com"><
-/script>
-    <link href="https://fonts.google
-apis.com/css2?family=Inter:wght@400;500;600;7
-00&display=swap" rel="stylesheet">
-    <style
->
-        body {
-            font-family: 'In
-ter', sans-serif;
-            background-colo
-r: #f3f4f6; /* Tailwind gray-100 */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools</title>
+  <meta name="description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/image-compressor">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
 
-        .container {
-            max-width: 
-800px;
-            margin: 2rem auto;
-       
-     padding: 2rem;
-            background-co
-lor: white;
-            border-radius: 0.5rem
-; /* Tailwind rounded-lg */
-            box-s
-hadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0
- 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwin
-d shadow-xl */
-        }
-        .file-input-
-label {
-            display: inline-block;
-  
-          padding: 0.75rem 1.5rem;
-          
-  background-color: #4f46e5; /* Tailwind indi
-go-600 */
-            color: white;
-         
-   border-radius: 0.375rem; /* Tailwind round
-ed-md */
-            cursor: pointer;
-       
-     transition: background-color 0.3s ease;
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools">
+  <meta property="og:description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/image-compressor">
+  <meta property="og:site_name" content="ClickSolveTools">
 
-        }
-        .file-input-label:hover {
- 
-           background-color: #4338ca; /* Tail
-wind indigo-700 */
-        }
-        .btn {
- 
-           padding: 0.75rem 1.5rem;
-         
-   border-radius: 0.375rem; /* Tailwind round
-ed-md */
-            font-weight: 500; /* Tai
-lwind font-medium */
-            transition: 
-background-color 0.3s ease;
-        }
-       
- .btn-primary {
-            background-color:
- #10b981; /* Tailwind emerald-500 */
-        
-    color: white;
-        }
-        .btn-prim
-ary:hover {
-            background-color: #05
-9669; /* Tailwind emerald-600 */
-        }
-  
-      .btn-secondary {
-            background
--color: #6b7280; /* Tailwind gray-500 */
-    
-        color: white;
-        }
-        .btn-
-secondary:hover {
-            background-colo
-r: #4b5563; /* Tailwind gray-600 */
-        }
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools">
+  <meta name="twitter:description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
 
-        .image-preview {
-            max-wid
-th: 100%;
-            max-height: 300px;
-    
-        margin-top: 1rem;
-            border-
-radius: 0.375rem; /* Tailwind rounded-md */
- 
-           border: 1px solid #e5e7eb; /* Tail
-wind gray-200 */
-        }
-        .info-box 
-{
-            padding: 0.75rem;
-            m
-argin-top: 1rem;
-            border-radius: 0
-.375rem; /* Tailwind rounded-md */
-          
-  background-color: #eff6ff; /* Tailwind blue
--50 */
-            color: #1e40af; /* Tailwin
-d blue-800 */
-            border: 1px solid #
-bfdbfe; /* Tailwind blue-200 */
-        }
-   
-     .error-box {
-            padding: 0.75re
-m;
-            margin-top: 1rem;
-            
-border-radius: 0.375rem; /* Tailwind rounded-
-md */
-            background-color: #fee2e2; 
-/* Tailwind red-50 */
-            color: #991
-b1b; /* Tailwind red-800 */
-            borde
-r: 1px solid #fecaca; /* Tailwind red-200 */
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        }
-        /* Custom message box for a
-lerts */
-        .custom-message-box {
-      
-      position: fixed;
-            top: 20px;
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
 
-            left: 50%;
-            transform
-: translateX(-50%);
-            padding: 1rem
- 1.5rem;
-            background-color: #4f46e
-5; /* Tailwind indigo-600 */
-            colo
-r: white;
-            border-radius: 0.375rem
-; /* Tailwind rounded-md */
-            box-s
-hadow: 0 4px 6px rgba(0,0,0,0.1);
-           
- z-index: 1000;
-            display: none; /*
- Hidden by default */
-            font-size: 
-0.875rem; /* Tailwind text-sm */
-        }
-  
-  </style>
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Compressor",
+    "url": "https://clicksolvetools.com/tools/image-compressor",
+    "description": "Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
 </head>
-<body>
-    <div class="con
-tainer">
-        <h1 class="text-3xl font-bol
-d text-center text-gray-800 mb-8">Image Compr
-essor</h1>
 
-        <div id="messageBox" clas
-s="custom-message-box"></div>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
 
-        <div c
-lass="mb-6">
-            <label for="imageUpl
-oad" class="block text-sm font-medium text-gr
-ay-700 mb-2">Upload Image:</label>
-          
-  <input type="file" id="imageUpload" accept=
-"image/jpeg, image/png, image/webp" class="bl
-ock w-full text-sm text-gray-500
-            
-    file:mr-4 file:py-2 file:px-4
-           
-     file:rounded-md file:border-0
-          
-      file:text-sm file:font-semibold
-       
-         file:bg-indigo-50 file:text-indigo-7
-00
-                hover:file:bg-indigo-100
- 
-           "/>
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-[#1e293b] border border-[#334155] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#475569] rounded-xl p-10 text-center cursor-pointer hover:border-[#38bdf8] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" class="hidden">
+          <div id="drop-label">
+            <svg class="mx-auto mb-3 w-10 h-10 text-[#475569]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-[#94a3b8] text-base mb-1">Drop image here or click to browse</p>
+            <p class="text-[#475569] text-sm">Supports JPEG, PNG, WebP</p>
+          </div>
         </div>
 
-        <div c
-lass="mb-6">
-            <label for="qualityS
-lider" class="block text-sm font-medium text-
-gray-700">Compression Quality: <span id="qual
-ityValue" class="font-semibold">0.7</span></l
-abel>
-            <input type="range" id="qua
-litySlider" min="0.1" max="1" step="0.05" val
-ue="0.7" class="w-full h-2 bg-gray-200 rounde
-d-lg appearance-none cursor-pointer dark:bg-g
-ray-700 mt-1">
+        <!-- Original info (hidden until upload) -->
+        <div id="original-info" class="hidden mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium text-[#94a3b8]">Uploaded image</h3>
+            <button id="clear-btn" class="text-xs text-red-400 hover:text-red-300 transition-colors">Remove image</button>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 items-start">
+            <div class="w-full sm:w-1/3 flex justify-center">
+              <img id="preview-img" class="max-h-40 rounded-lg border border-[#334155] object-contain" alt="Original preview">
+            </div>
+            <div class="w-full sm:w-2/3 space-y-1.5">
+              <p class="text-sm text-[#94a3b8]">File name: <span id="orig-name" class="text-[#f1f5f9] font-semibold"></span></p>
+              <p class="text-sm text-[#94a3b8]">Dimensions: <span id="orig-dims" class="text-[#f1f5f9] font-semibold"></span></p>
+              <p class="text-sm text-[#94a3b8]">File size: <span id="orig-size" class="text-[#f1f5f9] font-semibold"></span></p>
+            </div>
+          </div>
         </div>
-        
-      
-  <div class="mb-6">
-            <label for="
-outputFormat" class="block text-sm font-mediu
-m text-gray-700">Output Format:</label>
-     
-       <select id="outputFormat" class="mt-1 
-block w-full py-2 px-3 border border-gray-300
- bg-white rounded-md shadow-sm focus:outline-
-none focus:ring-indigo-500 focus:border-indig
-o-500 sm:text-sm">
-                <option va
-lue="image/jpeg">JPEG</option>
-              
-  <option value="image/png">PNG (Lossless, mi
-ght be larger)</option>
-                <opti
-on value="image/webp">WebP (Good quality & co
-mpression)</option>
+
+        <!-- Controls (hidden until upload) -->
+        <div id="controls" class="hidden space-y-6">
+
+          <!-- Format selector -->
+          <div>
+            <label for="format-select" class="block text-sm font-medium text-[#94a3b8] mb-2">Output format</label>
+            <select id="format-select" class="w-full sm:w-56 px-4 py-2.5 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base appearance-none cursor-pointer">
+              <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
             </select>
-   
-     </div>
+          </div>
 
-        <div class="mb-6">
-     
-       <label for="maxWidthInput" class="bloc
-k text-sm font-medium text-gray-700">Max Widt
-h (pixels, optional):</label>
-            <in
-put type="number" id="maxWidthInput" placehol
-der="e.g., 1920" class="mt-1 block w-full py-
-2 px-3 border border-gray-300 bg-white rounde
-d-md shadow-sm focus:outline-none focus:ring-
-indigo-500 focus:border-indigo-500 sm:text-sm
-">
+          <!-- Quality slider -->
+          <div>
+            <label for="quality-slider" class="block text-sm font-medium text-[#94a3b8] mb-2">Quality: <span id="quality-val" class="text-[#f1f5f9]">80</span>%</label>
+            <input type="range" id="quality-slider" min="1" max="100" step="1" value="80" class="w-full accent-[#38bdf8] mt-1">
+          </div>
+
+          <!-- Side-by-side preview -->
+          <div id="compare-section" class="pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Original -->
+              <div>
+                <h3 class="text-sm font-medium text-[#94a3b8] mb-2">Original</h3>
+                <div class="bg-[#0f172a] border border-[#334155] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
+                  <img id="compare-original" class="max-h-56 rounded object-contain" alt="Original">
+                </div>
+                <p class="text-xs text-[#64748b] mt-2">Size: <span id="compare-orig-size" class="text-[#94a3b8]"></span></p>
+              </div>
+              <!-- Compressed -->
+              <div>
+                <h3 class="text-sm font-medium text-[#94a3b8] mb-2">Compressed</h3>
+                <div class="bg-[#0f172a] border border-[#334155] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
+                  <img id="compare-compressed" class="max-h-56 rounded object-contain" alt="Compressed">
+                </div>
+                <p class="text-xs text-[#64748b] mt-2">Size: <span id="compressed-size" class="text-[#94a3b8]"></span> &nbsp; <span id="reduction-badge" class="hidden text-xs font-semibold text-emerald-400"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download button -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button id="download-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#38bdf8] text-[#0f172a] font-semibold text-sm hover:bg-[#7dd3fc] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Compressed Image
+            </button>
+          </div>
         </div>
 
+      </section>
 
-        <div class="text-
-center mb-6">
-            <button id="compres
-sBtn" class="btn btn-primary" disabled>Compre
-ss Image</button>
-        </div>
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How Image Compression Works and Why File Size Matters</h2>
 
-        <di
-v class="grid grid-cols-1 md:grid-cols-2 gap-
-6">
+        <div class="space-y-6 text-[#94a3b8] leading-relaxed">
+          <p>Every image you encounter on the web, in an email inbox, or on a social media feed has been compressed in some way. Image compression is the process of reducing the number of bytes an image file occupies while attempting to retain as much visual quality as possible. Smaller files load faster, consume less bandwidth, and take up less storage — all of which matter whether you are optimizing a website, sending attachments, or managing a photo library. This free image compressor lets you drag and drop any JPEG or WebP image, adjust quality with a slider, see a real-time side-by-side comparison of the original and compressed versions, and download the result in seconds — entirely inside your browser.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Lossy vs. Lossless Compression</h3>
+          <p>Compression algorithms fall into two broad categories. <strong class="text-[#f1f5f9]">Lossless compression</strong> reduces file size without discarding any image data — the decompressed file is pixel-for-pixel identical to the original. PNG and GIF use lossless compression, making them ideal for graphics, screenshots, and images with large areas of flat color. <strong class="text-[#f1f5f9]">Lossy compression</strong> achieves much greater size reductions by permanently removing visual information that the human eye is unlikely to notice. JPEG and WebP are the two most widely used lossy formats on the web. The quality slider in a lossy compressor controls how aggressively data is discarded: lower quality means smaller files but more visible artifacts; higher quality preserves detail at the cost of a larger file.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How JPEG Compression Works</h3>
+          <p>JPEG compression works in several stages. First, the image is converted from RGB to YCbCr color space, separating brightness (luminance) from color (chrominance). Human vision is more sensitive to brightness variations than to color, so chrominance channels are subsampled — typically at half resolution in each direction. Next, the image is divided into 8×8 pixel blocks, and each block undergoes a Discrete Cosine Transform (DCT) that converts spatial pixel data into frequency coefficients. A quantization step then rounds these coefficients based on the selected quality level; lower quality means more aggressive rounding, which zeroes out high-frequency detail and yields smaller files. Finally, the quantized coefficients are entropy-coded (Huffman or arithmetic coding) to produce the compressed byte stream. The quality slider you see in this tool maps directly to how coarse the quantization tables are.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How WebP Compression Works</h3>
+          <p>WebP, developed by Google, uses prediction-based coding derived from the VP8 video codec for lossy mode and a separate algorithm for lossless mode. In lossy WebP, each macroblock is predicted from already-decoded neighboring blocks, and only the prediction residuals are transformed, quantized, and entropy-coded. This approach tends to produce files 25–35% smaller than JPEG at equivalent perceptual quality. WebP also supports transparency (alpha channel) in both lossy and lossless modes, making it a versatile replacement for both JPEG and PNG in many web scenarios. All modern browsers — Chrome, Firefox, Safari, and Edge — support WebP.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Quality vs. File Size: Finding the Sweet Spot</h3>
+          <p>There is no single "best" quality setting — the right value depends on the content and context. Photographs with lots of fine detail and gradients tolerate more compression before artifacts become visible, while images with sharp text, hard edges, or flat colors show artifacts sooner. As a general guideline, JPEG quality between 70 and 85 delivers a strong balance: file size drops significantly compared to 100%, while visual differences are barely perceptible. For WebP, the equivalent range is roughly 75–90. Use the side-by-side preview in this tool to compare the original and compressed outputs at different quality levels until you find the threshold where the compressed version is visually indistinguishable from the original.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">When and Why to Compress Images</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#f1f5f9]">Web performance</strong> — Images often account for the largest share of page weight. Compressing them improves load times, reduces Largest Contentful Paint (LCP), and positively affects Core Web Vitals scores and search rankings.</li>
+            <li><strong class="text-[#f1f5f9]">Email attachments</strong> — Many email providers cap attachment sizes at 10–25 MB. Compressing photos before attaching them keeps messages under the limit and speeds delivery.</li>
+            <li><strong class="text-[#f1f5f9]">Social media uploads</strong> — Platforms like Instagram and Facebook re-compress uploaded images with their own algorithms, which can amplify existing artifacts. Starting with a reasonably compressed, clean source file minimizes double-compression degradation.</li>
+            <li><strong class="text-[#f1f5f9]">Storage optimization</strong> — If you archive thousands of photos, even a moderate 40–60% size reduction frees gigabytes of cloud or local storage.</li>
+            <li><strong class="text-[#f1f5f9]">Faster sharing</strong> — Smaller files upload and download faster over mobile networks, messaging apps, and file-sharing services.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
             <div>
-                <h2 cla
-ss="text-xl font-semibold text-gray-700 mb-2"
->Original Image</h2>
-                <img id=
-"originalPreview" src="#" alt="Original Image
- Preview" class="image-preview hidden">
-     
-           <div id="originalInfo" class="info
--box hidden"></div>
+              <h4 class="font-medium text-[#f1f5f9]">Does compression reduce image quality?</h4>
+              <p>Lossy compression does remove some visual data, but at moderate quality settings (70–85% for JPEG, 75–90% for WebP) the difference is nearly imperceptible to the human eye. Use the side-by-side preview in this tool to verify that the compressed output meets your visual standards before downloading.</p>
             </div>
-      
-      <div>
-                <h2 class="text-x
-l font-semibold text-gray-700 mb-2">Compresse
-d Image</h2>
-                <img id="compres
-sedPreview" src="#" alt="Compressed Image Pre
-view" class="image-preview hidden">
-         
-       <div id="compressedInfo" class="info-b
-ox hidden"></div>
-                <a id="down
-loadLink" href="#" download="compressed_image
-.jpg" class="btn btn-secondary mt-4 hidden w-
-full text-center">Download Compressed Image</
-a>
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">What's the best quality setting?</h4>
+              <p>For most photographs, JPEG quality of 75–80 or WebP quality of 80–85 provides an excellent balance of visual clarity and file size reduction. Images with fine text or sharp edges benefit from slightly higher settings, while images destined for thumbnails or low-resolution contexts can be compressed more aggressively.</p>
             </div>
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">JPEG vs. WebP — which should I choose for compression?</h4>
+              <p>If your target audience uses modern browsers (released after 2020), WebP almost always wins: it produces smaller files at the same visual quality. Choose JPEG when you need universal compatibility with older software, email clients, or systems that do not support WebP.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#f1f5f9]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+
+          <p>This image compressor is completely <strong class="text-[#f1f5f9]">free</strong>, requires no sign-up, and works <strong class="text-[#f1f5f9]">entirely in your browser</strong>. Adjust quality, compare side by side, and download your compressed image — your files stay private on your device at all times.</p>
         </div>
-    </di
-v>
+      </section>
 
-    <script>
-        // DOM Elements
-    
-    const imageUpload = document.getElementBy
-Id('imageUpload');
-        const qualitySlide
-r = document.getElementById('qualitySlider');
+    </article>
+  </main>
 
-        const qualityValue = document.getEle
-mentById('qualityValue');
-        const outpu
-tFormatSelect = document.getElementById('outp
-utFormat');
-        const maxWidthInput = doc
-ument.getElementById('maxWidthInput');
-      
-  const compressBtn = document.getElementById
-('compressBtn');
-        const originalPrevie
-w = document.getElementById('originalPreview'
-);
-        const originalInfo = document.getE
-lementById('originalInfo');
-        const com
-pressedPreview = document.getElementById('com
-pressedPreview');
-        const compressedInf
-o = document.getElementById('compressedInfo')
-;
-        const downloadLink = document.getEl
-ementById('downloadLink');
-        const mess
-ageBox = document.getElementById('messageBox'
-);
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
 
-        let originalFile = null; // To st
-ore the uploaded file object
+  <!-- Footer -->
+  <div id="footer-container"></div>
 
-        // Func
-tion to show a message
-        function showM
-essage(message, isError = false) {
-          
-  messageBox.textContent = message;
-         
-   messageBox.className = 'custom-message-box
-'; // Reset classes
-            if (isError) 
-{
-                messageBox.classList.add('b
-g-red-500'); // Tailwind red-500 for error
-  
-          } else {
-                messageBox
-.classList.add('bg-indigo-600'); // Tailwind 
-indigo-600 for success/info
-            }
-   
-         messageBox.style.display = 'block';
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('image-compressor');
+  </script>
 
-            setTimeout(() => {
-              
-  messageBox.style.display = 'none';
-        
-    }, 3000); // Message disappears after 3 s
-econds
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropZone         = document.getElementById('drop-zone');
+    const fileInput        = document.getElementById('file-input');
+    const originalInfo     = document.getElementById('original-info');
+    const previewImg       = document.getElementById('preview-img');
+    const origDims         = document.getElementById('orig-dims');
+    const origSize         = document.getElementById('orig-size');
+    const origName         = document.getElementById('orig-name');
+    const clearBtn         = document.getElementById('clear-btn');
+    const controls         = document.getElementById('controls');
+    const formatSelect     = document.getElementById('format-select');
+    const qualitySlider    = document.getElementById('quality-slider');
+    const qualityVal       = document.getElementById('quality-val');
+    const compareOriginal  = document.getElementById('compare-original');
+    const compareCompressed = document.getElementById('compare-compressed');
+    const compareOrigSize  = document.getElementById('compare-orig-size');
+    const compressedSize   = document.getElementById('compressed-size');
+    const reductionBadge   = document.getElementById('reduction-badge');
+    const downloadBtn      = document.getElementById('download-btn');
+    const compareSection   = document.getElementById('compare-section');
+
+    let sourceImg   = null;
+    let sourceFile  = null;
+    let currentBlob = null;
+    let debounceTimer = null;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function compress() {
+      if (!sourceImg) return;
+
+      const fmt     = formatSelect.value;
+      const quality = parseInt(qualitySlider.value) / 100;
+
+      const canvas = document.createElement('canvas');
+      canvas.width  = sourceImg.naturalWidth;
+      canvas.height = sourceImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+
+      if (fmt === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      ctx.drawImage(sourceImg, 0, 0);
+
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        currentBlob = blob;
+
+        if (compareCompressed._objUrl) URL.revokeObjectURL(compareCompressed._objUrl);
+        const url = URL.createObjectURL(blob);
+        compareCompressed._objUrl = url;
+        compareCompressed.src = url;
+
+        compressedSize.textContent = formatBytes(blob.size);
+        const pct = sourceFile ? ((1 - blob.size / sourceFile.size) * 100) : 0;
+        if (pct > 0) {
+          reductionBadge.textContent = '↓ ' + pct.toFixed(1) + '% smaller';
+          reductionBadge.classList.remove('hidden');
+        } else {
+          reductionBadge.textContent = '↑ ' + Math.abs(pct).toFixed(1) + '% larger';
+          reductionBadge.classList.remove('hidden');
+          reductionBadge.classList.remove('text-emerald-400');
+          reductionBadge.classList.add('text-amber-400');
         }
-
-        // Helper function 
-to format file size
-        function formatFi
-leSize(bytes) {
-            if (bytes === 0) 
-return '0 Bytes';
-            const k = 1024;
-
-            const mb = bytes / (k * k); // S
-ize in MB
-            
-            if (mb >= 
-1) {
-                return mb.toFixed(2) + '
- MB';
-            } else {
-                co
-nst kb = bytes / k; // Size in KB
-           
-     return kb.toFixed(2) + ' KB';
-          
-  }
+        if (pct > 0) {
+          reductionBadge.classList.remove('text-amber-400');
+          reductionBadge.classList.add('text-emerald-400');
         }
+        downloadBtn.disabled = false;
+      }, fmt, quality);
+    }
 
-        // Update quality valu
-e display
-        qualitySlider.addEventListe
-ner('input', () => {
-            qualityValue
-.textContent = qualitySlider.value;
-        }
-);
+    function debounceCompress() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(compress, 150);
+    }
 
-        // Handle file upload
-        ima
-geUpload.addEventListener('change', (event) =
-> {
-            const file = event.target.fil
-es[0];
-            if (file) {
-              
-  originalFile = file; // Store the file
-    
-            // Validate file type
-           
-     if (!['image/jpeg', 'image/png', 'image/
-webp'].includes(file.type)) {
-               
-     showMessage('Invalid file type. Please u
-pload a JPG, PNG, or WEBP image.', true);
-   
-                 imageUpload.value = ''; // R
-eset file input
-                    compressB
-tn.disabled = true;
-                    retur
-n;
-                }
+    function loadImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      sourceFile = file;
 
-                // Disp
-lay original image preview
-                co
-nst reader = new FileReader();
-              
-  reader.onload = (e) => {
-                  
-  originalPreview.src = e.target.result;
-    
-                originalPreview.classList.rem
-ove('hidden');
-                }
-            
-    reader.readAsDataURL(file);
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        sourceImg = img;
 
-            
-    // Display original image info
-          
-      originalInfo.innerHTML = `
-            
-        <strong>Name:</strong> ${file.name}<b
-r>
-                    <strong>Size:</strong>
- ${formatFileSize(file.size)}<br> 
-          
-          <strong>Type:</strong> ${file.type}
+        previewImg.src = url;
+        compareOriginal.src = url;
+        origName.textContent = file.name;
+        origDims.textContent = img.naturalWidth + ' × ' + img.naturalHeight + ' px';
+        origSize.textContent = formatBytes(file.size);
+        compareOrigSize.textContent = formatBytes(file.size);
 
-                `;
-                originalI
-nfo.classList.remove('hidden');
-             
-   compressBtn.disabled = false;
+        dropZone.classList.add('hidden');
+        originalInfo.classList.remove('hidden');
+        controls.classList.remove('hidden');
 
-           
-     // Reset compressed section
-            
-    compressedPreview.classList.add('hidden')
-;
-                compressedInfo.classList.ad
-d('hidden');
-                downloadLink.cla
-ssList.add('hidden');
-            } else {
-  
-              compressBtn.disabled = true;
-  
-              originalFile = null;
-          
-  }
-        });
+        compress();
+      };
+      img.onerror = () => URL.revokeObjectURL(url);
+      img.src = url;
+    }
 
-        // Handle compressio
-n
-        compressBtn.addEventListener('click
-', () => {
-            if (!originalFile) {
- 
-               showMessage('Please upload an 
-image first.', true);
-                return;
+    function reset() {
+      sourceImg   = null;
+      sourceFile  = null;
+      currentBlob = null;
+      fileInput.value = '';
+      dropZone.classList.remove('hidden');
+      originalInfo.classList.add('hidden');
+      controls.classList.add('hidden');
+      downloadBtn.disabled = true;
+      reductionBadge.classList.add('hidden');
+      compressedSize.textContent = '';
+      if (compareCompressed._objUrl) {
+        URL.revokeObjectURL(compareCompressed._objUrl);
+        compareCompressed._objUrl = null;
+      }
+    }
 
-            }
+    // Drag & drop
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#38bdf8]', 'bg-[#38bdf8]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#38bdf8]', 'bg-[#38bdf8]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#38bdf8]', 'bg-[#38bdf8]/5');
+      const file = e.dataTransfer.files[0];
+      if (file) loadImage(file);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadImage(fileInput.files[0]); });
+    clearBtn.addEventListener('click', reset);
 
-            const quality = p
-arseFloat(qualitySlider.value);
-            c
-onst outputFormat = outputFormatSelect.value;
+    // Quality slider — live update
+    qualitySlider.addEventListener('input', () => {
+      qualityVal.textContent = qualitySlider.value;
+      debounceCompress();
+    });
 
-            const maxWidth = parseInt(maxWid
-thInput.value) || null; // Get max width, or 
-null if not set/invalid
+    // Format change — recompress
+    formatSelect.addEventListener('change', compress);
 
-            showMess
-age('Compressing image...', false);
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!currentBlob) return;
+      const ext = formatSelect.value.split('/')[1];
+      const baseName = sourceFile ? sourceFile.name.substring(0, sourceFile.name.lastIndexOf('.')) || sourceFile.name : 'image';
+      const a = document.createElement('a');
+      a.download = baseName + '-compressed.' + ext;
+      a.href = URL.createObjectURL(currentBlob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  });
+  </script>
 
-        
-    const reader = new FileReader();
-        
-    reader.onload = (event) => {
-            
-    const img = new Image();
-                
-img.onload = () => {
-                    cons
-t canvas = document.createElement('canvas');
-
-                    const ctx = canvas.getCon
-text('2d');
-
-                    let targetWi
-dth = img.width;
-                    let targ
-etHeight = img.height;
-
-                    /
-/ Resize if maxWidth is specified and image i
-s wider
-                    if (maxWidth && i
-mg.width > maxWidth) {
-                      
-  targetWidth = maxWidth;
-                   
-     targetHeight = (img.height * maxWidth) /
- img.width;
-                    }
-           
-         
-                    canvas.width = 
-targetWidth;
-                    canvas.heigh
-t = targetHeight;
-
-                    // Dra
-w image to canvas (this performs the resize)
-
-                    ctx.drawImage(img, 0, 0, 
-targetWidth, targetHeight);
-
-                
-    // Get compressed image data from canvas
-
-                    canvas.toBlob((blob) => {
-
-                        if (blob) {
-        
-                    const compressedUrl = URL
-.createObjectURL(blob);
-                     
-       compressedPreview.src = compressedUrl;
-
-                            compressedPrevie
-w.classList.remove('hidden');
-
-              
-              // Display compressed image inf
-o
-                            compressedInfo.
-innerHTML = `
-                               
- <strong>Size:</strong> ${formatFileSize(blob
-.size)}<br>
-                                <
-strong>Type:</strong> ${blob.type}<br>
-      
-                          <strong>Savings:</s
-trong> ${originalFile.size > 0 ? (((originalF
-ile.size - blob.size) / originalFile.size) * 
-100).toFixed(1) + '%' : 'N/A'}
-              
-              `;
-                            
-compressedInfo.classList.remove('hidden');
-
- 
-                           // Setup download 
-link
-                            // Generate 
-a filename based on original name and new for
-mat
-                            const origina
-lNameWithoutExtension = originalFile.name.sub
-string(0, originalFile.name.lastIndexOf('.'))
- || originalFile.name;
-                      
-      const newExtension = outputFormat.split
-('/')[1];
-                            const f
-ileName = `compressed_${originalNameWithoutEx
-tension}.${newExtension}`;
-                  
-          
-                            downlo
-adLink.href = compressedUrl;
-                
-            downloadLink.download = fileName;
-
-                            downloadLink.cla
-ssList.remove('hidden');
-                    
-        showMessage('Compression successful!'
-, false);
-                        } else {
-  
-                          showMessage('Error 
-during compression. The format might not be s
-upported well by the browser for canvas.toBlo
-b. Try JPEG or WebP.', true);
-               
-         }
-                    }, outputForma
-t, quality); // Pass outputFormat and quality
- here
-                };
-                img.
-onerror = () => {
-                    showMes
-sage('Could not load image for compression.',
- true);
-                };
-                im
-g.src = event.target.result; // This is the b
-ase64 data URL of the original image
-        
-    };
-            reader.onerror = () => {
- 
-                showMessage('Error reading fi
-le.', true);
-            }
-            reader
-.readAsDataURL(originalFile); // Read the ori
-ginal file again to get its data
-        });
-
-
-    </script>
 </body>
 </html>
-
-

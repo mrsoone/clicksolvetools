@@ -3,84 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Formatter & Validator</title>
+    <title>Free JSON Formatter Online — Validate &amp; Beautify JSON | ClickSolveTools</title>
+    <meta name="description" content="Format, validate, and beautify JSON with syntax highlighting and error detection. Paste your JSON and instantly see if it's valid with line numbers and minify option.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/json-formatter">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Free JSON Formatter Online — Validate & Beautify JSON | ClickSolveTools">
+    <meta property="og:description" content="Format, validate, and beautify JSON with syntax highlighting and error detection. Paste your JSON and instantly see if it's valid with line numbers and minify option.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/json-formatter">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free JSON Formatter Online — Validate & Beautify JSON | ClickSolveTools">
+    <meta name="twitter:description" content="Format, validate, and beautify JSON with syntax highlighting and error detection. Paste your JSON and instantly see if it's valid with line numbers and minify option.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON Formatter & Validator",
+      "url": "https://clicksolvetools.com/tools/json-formatter",
+      "description": "Format, validate, and beautify JSON with syntax highlighting and error detection. Paste your JSON and instantly see if it's valid with line numbers and minify option.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GA4 placeholder -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            margin: auto;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            font-size: 14px;
-            font-family: monospace;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background: #2196F3;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1976D2;
-        }
-        .output {
-            margin-top: 20px;
-            text-align: left;
-            white-space: pre-wrap;
-            background: #eee;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            overflow-x: auto;
-        }
-        .error {
-            color: red;
-            font-weight: bold;
+        .json-key { color: #7dd3fc; }
+        .json-string { color: #4ade80; }
+        .json-number { color: #fb923c; }
+        .json-boolean { color: #c084fc; }
+        .json-null { color: #f87171; }
+        .json-brace { color: #94a3b8; }
+        .line-number {
+            color: #475569;
+            user-select: none;
+            text-align: right;
+            min-width: 2.5rem;
+            padding-right: 1rem;
+            display: inline-block;
         }
     </style>
 </head>
-<body>
-    <h1>JSON Formatter & Validator</h1>
-    <div class="container">
-        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
-        <br>
-        <button onclick="formatJSON()">Format & Validate</button>
-        <div id="jsonOutput" class="output"></div>
-    </div>
-    
+
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">JSON Formatter &amp; Validator</h1>
+                <p class="text-[#94a3b8] text-lg">Paste your JSON to format, validate, and beautify with syntax highlighting</p>
+            </div>
+
+            <!-- Widget -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+                <!-- Input Panel -->
+                <div class="flex flex-col">
+                    <label for="json-input" class="text-sm font-medium text-[#94a3b8] mb-2">Input</label>
+                    <textarea
+                        id="json-input"
+                        class="w-full h-80 lg:h-[28rem] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors placeholder-[#475569]"
+                        placeholder="Paste your JSON here..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <!-- Output Panel -->
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-[#94a3b8] mb-2">Output</label>
+                    <div
+                        id="json-output"
+                        class="w-full h-80 lg:h-[28rem] bg-[#1e293b] border border-[#334155] rounded-lg p-4 font-mono text-sm overflow-auto"
+                    >
+                        <span class="text-[#475569] italic">Paste your JSON above to get started</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error display -->
+            <div id="error-display" class="hidden mb-6 bg-red-900/30 border border-red-500/40 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                    <span class="text-red-400 text-lg leading-none mt-0.5">&#10007;</span>
+                    <div>
+                        <p class="text-red-300 font-semibold text-sm">Invalid JSON</p>
+                        <p id="error-message" class="text-red-400 text-sm mt-1 font-mono"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success display -->
+            <div id="success-display" class="hidden mb-6 bg-emerald-900/30 border border-emerald-500/40 rounded-lg p-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-400 text-lg leading-none">&#10003;</span>
+                    <p class="text-emerald-300 font-semibold text-sm">Valid JSON</p>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-3 mb-12">
+                <button
+                    id="btn-format"
+                    class="px-5 py-2.5 bg-[#38bdf8] text-[#0f172a] font-semibold rounded-lg hover:bg-[#7dd3fc] active:scale-95 transition-all duration-150 text-sm"
+                >
+                    Format &amp; Validate
+                </button>
+                <button
+                    id="btn-minify"
+                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                >
+                    Minify
+                </button>
+                <button
+                    id="btn-copy"
+                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                >
+                    Copy
+                </button>
+                <button
+                    id="btn-sample"
+                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                >
+                    Load Sample
+                </button>
+                <button
+                    id="btn-clear"
+                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-500/40 active:scale-95 transition-all duration-150 text-sm"
+                >
+                    Clear
+                </button>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is JSON and Why Does Formatting Matter?</h2>
+
+                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+                    <p>JSON, or JavaScript Object Notation, is a lightweight data interchange format that has become the universal language of data on the web. Originally derived from JavaScript, JSON is now language-independent and supported by virtually every programming language, database, and API in existence. Its simple structure of key-value pairs and ordered lists makes it easy for humans to read and write, and straightforward for machines to parse and generate.</p>
+
+                    <p>However, when JSON arrives in a single compressed line — as it often does from API responses, log files, or minified configuration files — reading it becomes nearly impossible. A missing bracket, an extra comma, or mismatched quotes can break an entire application, and tracking down these errors in unformatted JSON is like searching for a needle in a haystack. That's exactly where a JSON formatter comes in.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How to Use This Tool</h3>
+                    <p>Using this JSON formatter is straightforward. Paste your raw JSON into the input panel on the left, then click <strong class="text-[#f1f5f9]">Format &amp; Validate</strong>. The tool instantly parses your JSON, checks it for errors, and displays a beautifully indented version with full syntax highlighting. Keys are shown in sky blue, strings in green, numbers in orange, booleans in purple, and null values in red — making the structure immediately scannable.</p>
+
+                    <p>If you need the opposite — compressing formatted JSON into a single line for storage or transmission — click <strong class="text-[#f1f5f9]">Minify</strong>. The <strong class="text-[#f1f5f9]">Copy</strong> button puts the formatted or minified result onto your clipboard, and <strong class="text-[#f1f5f9]">Load Sample</strong> gives you a quick example to experiment with. Line numbers are displayed alongside each line of output, making it easy to reference specific parts of large JSON documents.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">What Valid JSON Looks Like</h3>
+                    <p>Valid JSON must follow strict syntax rules. Data is represented as key-value pairs inside curly braces for objects, or as ordered values inside square brackets for arrays. Keys must always be double-quoted strings. Values can be strings (double-quoted), numbers, booleans (<code class="text-[#c084fc]">true</code> or <code class="text-[#c084fc]">false</code>), <code class="text-[#f87171]">null</code>, objects, or arrays. Trailing commas after the last element, single quotes, and unquoted keys are common mistakes that make JSON invalid.</p>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common JSON Errors</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#f1f5f9]">Trailing commas</strong> — A comma after the last item in an object or array is not permitted in JSON, even though JavaScript allows it.</li>
+                        <li><strong class="text-[#f1f5f9]">Single quotes</strong> — JSON requires double quotes around keys and string values. Single quotes will cause a parse error.</li>
+                        <li><strong class="text-[#f1f5f9]">Unquoted keys</strong> — Every key must be wrapped in double quotes: <code class="text-[#7dd3fc]">"name"</code>, not <code class="text-red-400">name</code>.</li>
+                        <li><strong class="text-[#f1f5f9]">Missing brackets or braces</strong> — Every opening <code class="text-[#94a3b8]">{</code> or <code class="text-[#94a3b8]">[</code> must have a corresponding closing bracket.</li>
+                        <li><strong class="text-[#f1f5f9]">Comments</strong> — JSON does not support comments. Use JSONC or JSON5 variants if you need them.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Use Cases</h3>
+                    <p>Developers, testers, and data engineers use JSON formatters daily across many scenarios:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#f1f5f9]">API debugging</strong> — Inspect raw API responses to verify data structure, field names, and nesting before writing parsing code.</li>
+                        <li><strong class="text-[#f1f5f9]">Configuration files</strong> — Clean up and validate <code class="text-[#94a3b8]">package.json</code>, <code class="text-[#94a3b8]">tsconfig.json</code>, and other config files that power modern development workflows.</li>
+                        <li><strong class="text-[#f1f5f9]">Data exchange</strong> — Format JSON payloads before sharing them with teammates, pasting into documentation, or storing in version control.</li>
+                        <li><strong class="text-[#f1f5f9]">Database records</strong> — Examine JSON columns from NoSQL databases like MongoDB or Postgres JSONB fields in a readable format.</li>
+                        <li><strong class="text-[#f1f5f9]">Log analysis</strong> — Structure-log lines from applications often arrive as single-line JSON — formatting them reveals the full picture instantly.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#f1f5f9]">What does JSON stand for?</strong><br>
+                    JSON stands for JavaScript Object Notation. Despite the name, it is a language-independent format used across Python, Java, C#, Go, Ruby, PHP, and virtually every other modern language.</p>
+
+                    <p><strong class="text-[#f1f5f9]">How do I fix invalid JSON?</strong><br>
+                    Paste your JSON into this tool and click Format &amp; Validate. The error message will indicate the approximate position of the issue — for example, "Unexpected token at position 142." Look near that character position for missing quotes, extra commas, or unmatched brackets. Fix the issue and validate again until the tool confirms your JSON is valid.</p>
+
+                    <p><strong class="text-[#f1f5f9]">What's the difference between JSON and XML?</strong><br>
+                    Both JSON and XML are data interchange formats, but JSON is more concise and easier to parse programmatically. XML uses opening and closing tags which add significant overhead, while JSON relies on lightweight braces and brackets. Most modern REST APIs have adopted JSON as the default format due to its smaller payload size and native compatibility with JavaScript.</p>
+
+                    <p>This tool is completely <strong class="text-[#f1f5f9]">free</strong> and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No data is sent to any server — your JSON never leaves your machine. Use it as often as you need for formatting, validating, and debugging JSON data.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('json-formatter');
+    </script>
+
     <script>
+        const input = document.getElementById('json-input');
+        const output = document.getElementById('json-output');
+        const errorDisplay = document.getElementById('error-display');
+        const errorMessage = document.getElementById('error-message');
+        const successDisplay = document.getElementById('success-display');
+        const btnFormat = document.getElementById('btn-format');
+        const btnMinify = document.getElementById('btn-minify');
+        const btnCopy = document.getElementById('btn-copy');
+        const btnSample = document.getElementById('btn-sample');
+        const btnClear = document.getElementById('btn-clear');
+
+        let lastFormattedOutput = '';
+
+        const SAMPLE_JSON = JSON.stringify({
+            "name": "ClickSolveTools",
+            "version": "1.0.0",
+            "description": "A collection of free browser-based developer tools",
+            "features": ["JSON Formatter", "Diff Checker", "Regex Tester"],
+            "config": {
+                "theme": "dark",
+                "analytics": true,
+                "maxUploadSize": 10485760,
+                "supportedFormats": null
+            },
+            "stats": {
+                "toolCount": 85,
+                "categories": 10,
+                "isOpenSource": false
+            }
+        }, null, 2);
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function syntaxHighlight(json) {
+            const escaped = escapeHtml(json);
+            return escaped.replace(
+                /("(?:\\.|[^"\\])*")\s*:/g,
+                '<span class="json-key">$1</span>:'
+            ).replace(
+                /:\s*("(?:\\.|[^"\\])*")/g,
+                function(match, p1) {
+                    return ': <span class="json-string">' + p1 + '</span>';
+                }
+            ).replace(
+                /:\s*(-?\d+\.?\d*(?:[eE][+-]?\d+)?)/g,
+                ': <span class="json-number">$1</span>'
+            ).replace(
+                /:\s*(true|false)/g,
+                ': <span class="json-boolean">$1</span>'
+            ).replace(
+                /:\s*(null)/g,
+                ': <span class="json-null">$1</span>'
+            ).replace(
+                /("(?:\\.|[^"\\])*")(?=\s*[,\]\n\r])/g,
+                function(match, p1, offset, string) {
+                    const before = string.substring(Math.max(0, offset - 5), offset);
+                    if (before.includes(':')) return match;
+                    return '<span class="json-string">' + p1 + '</span>';
+                }
+            ).replace(
+                /([{}[\]])/g,
+                '<span class="json-brace">$1</span>'
+            );
+        }
+
+        function addLineNumbers(html) {
+            const lines = html.split('\n');
+            return lines.map((line, i) => {
+                const num = i + 1;
+                return '<span class="line-number">' + num + '</span>' + line;
+            }).join('\n');
+        }
+
+        function hideMessages() {
+            errorDisplay.classList.add('hidden');
+            successDisplay.classList.add('hidden');
+        }
+
+        function showError(msg) {
+            hideMessages();
+            errorMessage.textContent = msg;
+            errorDisplay.classList.remove('hidden');
+        }
+
+        function showSuccess() {
+            hideMessages();
+            successDisplay.classList.remove('hidden');
+        }
+
+        function parseErrorPosition(errorMsg) {
+            const posMatch = errorMsg.match(/position\s+(\d+)/i);
+            if (posMatch) {
+                const pos = parseInt(posMatch[1], 10);
+                const raw = input.value;
+                let line = 1;
+                let col = 1;
+                for (let i = 0; i < pos && i < raw.length; i++) {
+                    if (raw[i] === '\n') { line++; col = 1; }
+                    else { col++; }
+                }
+                return errorMsg + ' (approximately line ' + line + ', column ' + col + ')';
+            }
+            return errorMsg;
+        }
+
         function formatJSON() {
-            const input = document.getElementById("jsonInput").value;
-            const output = document.getElementById("jsonOutput");
+            const raw = input.value.trim();
+            if (!raw) {
+                hideMessages();
+                output.innerHTML = '<span class="text-[#475569] italic">Paste your JSON above to get started</span>';
+                lastFormattedOutput = '';
+                return;
+            }
+
             try {
-                const parsed = JSON.parse(input);
-                const formatted = JSON.stringify(parsed, null, 4);
-                output.innerHTML = `<pre style='white-space: pre-wrap;'>\${formatted}</pre>`;
-                output.classList.remove("error");
-            } catch (error) {
-                output.innerHTML = `<p class='error'>Invalid JSON: ${error.message}</p>`;
-                output.classList.add("error");
+                const parsed = JSON.parse(raw);
+                const formatted = JSON.stringify(parsed, null, 2);
+                lastFormattedOutput = formatted;
+                const highlighted = syntaxHighlight(formatted);
+                const withLineNumbers = addLineNumbers(highlighted);
+                output.innerHTML = '<pre class="whitespace-pre-wrap break-words leading-6">' + withLineNumbers + '</pre>';
+                showSuccess();
+            } catch (e) {
+                const enhanced = parseErrorPosition(e.message);
+                showError(enhanced);
+                lastFormattedOutput = '';
             }
         }
+
+        function minifyJSON() {
+            const raw = input.value.trim();
+            if (!raw) {
+                hideMessages();
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(raw);
+                const minified = JSON.stringify(parsed);
+                lastFormattedOutput = minified;
+                output.innerHTML = '<pre class="whitespace-pre-wrap break-all leading-6 text-[#f1f5f9]">' + escapeHtml(minified) + '</pre>';
+                showSuccess();
+            } catch (e) {
+                const enhanced = parseErrorPosition(e.message);
+                showError(enhanced);
+                lastFormattedOutput = '';
+            }
+        }
+
+        function copyOutput() {
+            if (!lastFormattedOutput) return;
+            navigator.clipboard.writeText(lastFormattedOutput).then(() => {
+                const original = btnCopy.textContent;
+                btnCopy.textContent = 'Copied!';
+                btnCopy.classList.add('bg-emerald-600', 'border-emerald-500', 'text-white');
+                btnCopy.classList.remove('bg-[#1e293b]', 'border-[#334155]', 'text-[#f1f5f9]');
+                setTimeout(() => {
+                    btnCopy.textContent = original;
+                    btnCopy.classList.remove('bg-emerald-600', 'border-emerald-500', 'text-white');
+                    btnCopy.classList.add('bg-[#1e293b]', 'border-[#334155]', 'text-[#f1f5f9]');
+                }, 2000);
+            });
+        }
+
+        function loadSample() {
+            input.value = SAMPLE_JSON;
+            formatJSON();
+        }
+
+        function clearAll() {
+            input.value = '';
+            output.innerHTML = '<span class="text-[#475569] italic">Paste your JSON above to get started</span>';
+            lastFormattedOutput = '';
+            hideMessages();
+        }
+
+        btnFormat.addEventListener('click', formatJSON);
+        btnMinify.addEventListener('click', minifyJSON);
+        btnCopy.addEventListener('click', copyOutput);
+        btnSample.addEventListener('click', loadSample);
+        btnClear.addEventListener('click', clearAll);
     </script>
 </body>
 </html>

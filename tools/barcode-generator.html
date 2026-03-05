@@ -1,83 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barcode Generator</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            margin: auto;
-        }
-        input {
-            padding: 10px;
-            width: 80%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background: #2196F3;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1976D2;
-        }
-        .output {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Barcode Generator Online — Code 128, EAN-13, UPC &amp; More | ClickSolveTools</title>
+  <meta name="description" content="Generate barcodes in Code 128, Code 39, EAN-13, UPC-A, and ITF-14 formats. Customize size and download as PNG or SVG for print or digital use.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/barcode-generator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Barcode Generator Online — Code 128, EAN-13, UPC & More | ClickSolveTools">
+  <meta property="og:description" content="Generate barcodes in Code 128, Code 39, EAN-13, UPC-A, and ITF-14 formats. Customize size and download as PNG or SVG for print or digital use.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/barcode-generator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
+
+  <!-- JsBarcode -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Barcode Generator",
+    "url": "https://clicksolvetools.com/tools/barcode-generator",
+    "description": "Generate barcodes in Code 128, Code 39, EAN-13, UPC-A, and ITF-14 formats. Customize size and download as PNG or SVG for print or digital use.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
 </head>
-<body>
-    <h1>Barcode Generator</h1>
-    <div class="container">
-        <input type="text" id="barcodeInput" placeholder="Enter text for barcode">
-        <br>
-        <button onclick="generateBarcode()">Generate Barcode</button>
-        <div class="output">
-            <svg id="barcode"></svg>
+
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-3xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section class="bg-[#1e293b] border border-[#334155] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Input -->
+        <div class="mb-5">
+          <label for="barcode-input" class="block text-sm font-medium text-[#94a3b8] mb-2">Enter barcode data</label>
+          <input
+            type="text"
+            id="barcode-input"
+            placeholder="ABC-12345"
+            autocomplete="off"
+            class="w-full px-4 py-3 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] placeholder-[#475569] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base"
+          >
         </div>
-    </div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function generateBarcode() {
-                let text = document.getElementById("barcodeInput").value;
-                if (text.trim() === "") {
-                    alert("Please enter a valid input.");
-                    return;
-                }
-                if (typeof JsBarcode !== "undefined") {
-                    JsBarcode("#barcode", text, {
-                        format: "CODE128",
-                        displayValue: true,
-                        fontSize: 18
-                    });
-                } else {
-                    alert("Barcode generation library failed to load.");
-                }
-            }
-            
-            window.generateBarcode = generateBarcode;
+
+        <!-- Format selector -->
+        <div class="mb-5">
+          <label for="barcode-format" class="block text-sm font-medium text-[#94a3b8] mb-2">Barcode format</label>
+          <select
+            id="barcode-format"
+            class="w-full px-4 py-3 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base appearance-none cursor-pointer"
+          >
+            <option value="CODE128">Code 128</option>
+            <option value="CODE39">Code 39</option>
+            <option value="EAN13">EAN-13</option>
+            <option value="UPC">UPC-A</option>
+            <option value="ITF14">ITF-14</option>
+          </select>
+        </div>
+
+        <!-- Customization -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-5">
+          <div>
+            <label for="bar-width" class="block text-sm font-medium text-[#94a3b8] mb-2">Bar width: <span id="bar-width-val" class="text-[#f1f5f9]">2</span></label>
+            <input type="range" id="bar-width" min="1" max="4" step="1" value="2" class="w-full accent-[#38bdf8]">
+          </div>
+          <div>
+            <label for="bar-height" class="block text-sm font-medium text-[#94a3b8] mb-2">Height: <span id="bar-height-val" class="text-[#f1f5f9]">100</span>px</label>
+            <input type="range" id="bar-height" min="50" max="200" step="10" value="100" class="w-full accent-[#38bdf8]">
+          </div>
+          <div>
+            <label for="font-size" class="block text-sm font-medium text-[#94a3b8] mb-2">Font size: <span id="font-size-val" class="text-[#f1f5f9]">16</span>px</label>
+            <input type="range" id="font-size" min="10" max="24" step="1" value="16" class="w-full accent-[#38bdf8]">
+          </div>
+        </div>
+
+        <!-- Show text toggle -->
+        <div class="mb-6 flex items-center gap-3">
+          <button
+            type="button"
+            id="show-text-toggle"
+            role="switch"
+            aria-checked="true"
+            class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-[#38bdf8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:ring-offset-2 focus:ring-offset-[#1e293b]"
+          >
+            <span class="pointer-events-none inline-block h-5 w-5 translate-x-5 rounded-full bg-white shadow ring-0 transition-transform"></span>
+          </button>
+          <label for="show-text-toggle" class="text-sm font-medium text-[#94a3b8] cursor-pointer select-none">Show text below barcode</label>
+        </div>
+
+        <!-- Error message -->
+        <p id="barcode-error" class="text-red-400 text-sm mb-3 hidden"></p>
+
+        <!-- Barcode preview -->
+        <div class="flex flex-col items-center">
+          <div id="barcode-preview" class="bg-white rounded-xl p-6 min-w-[200px] min-h-[120px] flex items-center justify-center mb-4">
+            <p id="barcode-placeholder" class="text-[#94a3b8] text-sm text-center select-none">Enter data above to generate a barcode</p>
+            <svg id="barcode-svg" class="hidden"></svg>
+          </div>
+
+          <!-- Download buttons -->
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="download-png"
+              disabled
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#38bdf8] text-[#0f172a] font-semibold text-sm hover:bg-[#7dd3fc] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download PNG
+            </button>
+            <button
+              id="download-svg"
+              disabled
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-transparent border border-[#38bdf8] text-[#38bdf8] font-semibold text-sm hover:bg-[#38bdf8]/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download SVG
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Are Barcodes and How Do Different Formats Work?</h2>
+
+        <div class="space-y-6 text-[#94a3b8] leading-relaxed">
+          <p>Barcodes are machine-readable representations of data that use patterns of parallel lines (bars) and spaces of varying widths to encode numbers, letters, and special characters. The concept dates back to 1952, when Norman Joseph Woodland and Bernard Silver patented the first barcode design — a set of concentric circles inspired by Morse code. It took another two decades before laser scanners made barcodes practical for everyday commerce, and in 1974 a pack of Wrigley's chewing gum became the first product scanned at a checkout counter using a Universal Product Code (UPC). Today, barcodes remain the backbone of global supply chains, retail operations, and asset tracking systems, with billions scanned every single day.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">1D Barcodes vs. 2D Barcodes</h3>
+          <p>All the formats supported by this tool are <strong class="text-[#f1f5f9]">one-dimensional (1D) barcodes</strong>, sometimes called linear barcodes. They encode data in a single horizontal row of bars and spaces. A scanner reads them by measuring the relative widths of those bars. Two-dimensional (2D) barcodes — such as QR codes and Data Matrix — store data in both horizontal and vertical dimensions, which allows them to hold far more information in a smaller space. While 2D codes are growing in popularity, 1D barcodes remain the industry standard for product identification, shipping labels, and inventory management because of their simplicity, proven reliability, and universal scanner compatibility.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Understanding Each Barcode Format</h3>
+          <ul class="list-disc list-inside space-y-3 ml-1">
+            <li><strong class="text-[#f1f5f9]">Code 128</strong> — A high-density alphanumeric symbology that can encode all 128 ASCII characters. It is the most versatile format and is widely used for shipping labels (GS1-128), packaging, and general-purpose identification. If you are unsure which format to choose, Code 128 is usually the safest bet.</li>
+            <li><strong class="text-[#f1f5f9]">Code 39</strong> — One of the earliest alphanumeric barcode standards, Code 39 supports uppercase letters A–Z, digits 0–9, and a handful of special characters (-, ., $, /, +, %, and space). It is commonly used in the automotive industry, defense logistics (LOGMARS), and healthcare. Code 39 barcodes are wider than Code 128 for the same data, so they need more label space.</li>
+            <li><strong class="text-[#f1f5f9]">EAN-13</strong> — The European Article Number is the global standard for retail product identification. Every EAN-13 barcode contains exactly 13 digits: a country prefix, a manufacturer code, a product code, and a check digit. If you enter 12 digits, the check digit is calculated automatically. You will find EAN-13 on virtually every consumer product sold outside North America.</li>
+            <li><strong class="text-[#f1f5f9]">UPC-A</strong> — The Universal Product Code is the North American equivalent of EAN-13 and encodes exactly 12 digits (11 data digits plus a check digit). UPC-A is a subset of EAN-13 with a leading zero, so every UPC-A barcode can also be represented as an EAN-13. It is the standard for retail products in the United States and Canada.</li>
+            <li><strong class="text-[#f1f5f9]">ITF-14</strong> — Interleaved Two of Five 14 is designed for outer shipping cartons and cases rather than individual retail items. It encodes exactly 14 digits and features thick bearer bars on all four sides to protect against misreads during high-speed conveyor scanning. ITF-14 is used extensively in warehouse and logistics environments.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How This Tool Works</h3>
+          <p>This barcode generator runs entirely in your browser using <strong class="text-[#f1f5f9]">JsBarcode</strong>, an open-source JavaScript library. When you type data into the input field, the tool validates it against the selected format's rules — for example, verifying that EAN-13 input contains exactly 12 or 13 digits — and renders a live SVG preview in real time. You can fine-tune the bar width, overall height, font size, and whether to display human-readable text beneath the bars. When you are satisfied, click <strong class="text-[#f1f5f9]">Download PNG</strong> for a raster image suitable for web use, or <strong class="text-[#f1f5f9]">Download SVG</strong> for a resolution-independent vector file ideal for professional printing. No data ever leaves your device.</p>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Common Use Cases</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#f1f5f9]">Inventory management</strong> — Label stock items with Code 128 or Code 39 barcodes for fast warehouse scanning.</li>
+            <li><strong class="text-[#f1f5f9]">Retail product labeling</strong> — Print EAN-13 or UPC-A barcodes for point-of-sale checkout.</li>
+            <li><strong class="text-[#f1f5f9]">Shipping &amp; logistics</strong> — Use ITF-14 on outer cartons and Code 128 on individual parcels.</li>
+            <li><strong class="text-[#f1f5f9]">Asset tracking</strong> — Assign unique barcode labels to equipment, tools, or IT hardware.</li>
+            <li><strong class="text-[#f1f5f9]">Library systems</strong> — Code 39 is a long-standing choice for book and media identification.</li>
+            <li><strong class="text-[#f1f5f9]">Event badges &amp; tickets</strong> — Generate scannable barcodes for attendee check-in.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">What barcode format should I use?</h4>
+              <p>It depends on your use case. For general-purpose labeling that includes letters and numbers, <strong class="text-[#f1f5f9]">Code 128</strong> is the most compact and versatile choice. For retail products, use <strong class="text-[#f1f5f9]">EAN-13</strong> (international) or <strong class="text-[#f1f5f9]">UPC-A</strong> (United States and Canada). For industrial or defense applications, <strong class="text-[#f1f5f9]">Code 39</strong> is widely adopted. For shipping cartons, <strong class="text-[#f1f5f9]">ITF-14</strong> is the standard.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">What is the difference between EAN and UPC?</h4>
+              <p>EAN-13 and UPC-A are closely related. UPC-A uses 12 digits and is the retail standard in North America. EAN-13 uses 13 digits and is the standard everywhere else. Every UPC-A code can be expressed as an EAN-13 by prepending a leading zero. Most modern scanners can read both formats interchangeably.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">Can I scan barcodes generated by this tool?</h4>
+              <p>Yes. The barcodes produced here follow official symbology specifications and can be read by any standard barcode scanner — handheld laser scanners, camera-based smartphone apps, and industrial conveyor scanners alike. For best results, print at 300 DPI or higher and ensure adequate contrast between the bars and background.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#f1f5f9]">Is this tool free?</h4>
+              <p>Completely. This barcode generator is free, requires no account, and adds no watermarks. Everything runs client-side in JavaScript, so your data never leaves your browser.</p>
+            </div>
+          </div>
+
+          <p>Whether you are printing labels for a small business, generating barcodes for a logistics operation, or building a prototype that requires scannable codes, this free, browser-based barcode generator has you covered — five industry-standard formats, real-time preview, full customization, and instant PNG and SVG downloads, all without leaving your browser.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('barcode-generator');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input       = document.getElementById('barcode-input');
+    const format      = document.getElementById('barcode-format');
+    const barWidthEl  = document.getElementById('bar-width');
+    const barHeightEl = document.getElementById('bar-height');
+    const fontSizeEl  = document.getElementById('font-size');
+    const barWidthVal = document.getElementById('bar-width-val');
+    const barHeightVal= document.getElementById('bar-height-val');
+    const fontSizeVal = document.getElementById('font-size-val');
+    const toggleBtn   = document.getElementById('show-text-toggle');
+    const toggleDot   = toggleBtn.querySelector('span');
+    const errorEl     = document.getElementById('barcode-error');
+    const placeholder = document.getElementById('barcode-placeholder');
+    const svgEl       = document.getElementById('barcode-svg');
+    const pngBtn      = document.getElementById('download-png');
+    const svgBtn      = document.getElementById('download-svg');
+
+    let showText   = true;
+    let debounceId = null;
+
+    const formatPlaceholders = {
+      CODE128: 'ABC-12345',
+      CODE39:  'HELLO 2025',
+      EAN13:   '590123412345',
+      UPC:     '01234567890',
+      ITF14:   '01234567890123'
+    };
+
+    const formatValidation = {
+      EAN13: { pattern: /^\d{12,13}$/, message: 'EAN-13 requires exactly 12 or 13 digits' },
+      UPC:   { pattern: /^\d{11,12}$/, message: 'UPC-A requires exactly 11 or 12 digits' },
+      ITF14: { pattern: /^\d{13,14}$/, message: 'ITF-14 requires exactly 13 or 14 digits' }
+    };
+
+    toggleBtn.addEventListener('click', () => {
+      showText = !showText;
+      toggleBtn.setAttribute('aria-checked', showText);
+      if (showText) {
+        toggleBtn.classList.add('bg-[#38bdf8]');
+        toggleBtn.classList.remove('bg-[#475569]');
+        toggleDot.classList.add('translate-x-5');
+        toggleDot.classList.remove('translate-x-0');
+      } else {
+        toggleBtn.classList.remove('bg-[#38bdf8]');
+        toggleBtn.classList.add('bg-[#475569]');
+        toggleDot.classList.remove('translate-x-5');
+        toggleDot.classList.add('translate-x-0');
+      }
+      generateBarcode();
+    });
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorEl.textContent = '';
+      errorEl.classList.add('hidden');
+    }
+
+    function setButtons(enabled) {
+      pngBtn.disabled = !enabled;
+      svgBtn.disabled = !enabled;
+    }
+
+    function validate(value, fmt) {
+      if (!value) return null;
+      const rule = formatValidation[fmt];
+      if (rule && !rule.pattern.test(value)) return rule.message;
+      return null;
+    }
+
+    function generateBarcode() {
+      const value = input.value.trim();
+      const fmt   = format.value;
+      hideError();
+
+      if (!value) {
+        placeholder.classList.remove('hidden');
+        svgEl.classList.add('hidden');
+        setButtons(false);
+        return;
+      }
+
+      const validationError = validate(value, fmt);
+      if (validationError) {
+        showError(validationError);
+        placeholder.classList.remove('hidden');
+        svgEl.classList.add('hidden');
+        setButtons(false);
+        return;
+      }
+
+      try {
+        JsBarcode(svgEl, value, {
+          format:      fmt,
+          width:       parseInt(barWidthEl.value, 10),
+          height:      parseInt(barHeightEl.value, 10),
+          fontSize:    parseInt(fontSizeEl.value, 10),
+          displayValue: showText,
+          background:  '#ffffff',
+          lineColor:   '#000000',
+          margin:      10,
+          font:        'monospace'
         });
-    </script>
+        placeholder.classList.add('hidden');
+        svgEl.classList.remove('hidden');
+        setButtons(true);
+      } catch (e) {
+        showError('Invalid input for the selected barcode format. Please check your data.');
+        placeholder.classList.remove('hidden');
+        svgEl.classList.add('hidden');
+        setButtons(false);
+      }
+    }
+
+    function scheduleGenerate() {
+      clearTimeout(debounceId);
+      debounceId = setTimeout(generateBarcode, 250);
+    }
+
+    input.addEventListener('input', scheduleGenerate);
+    format.addEventListener('change', () => {
+      input.placeholder = formatPlaceholders[format.value] || '';
+      generateBarcode();
+    });
+    barWidthEl.addEventListener('input', () => { barWidthVal.textContent = barWidthEl.value; generateBarcode(); });
+    barHeightEl.addEventListener('input', () => { barHeightVal.textContent = barHeightEl.value; generateBarcode(); });
+    fontSizeEl.addEventListener('input', () => { fontSizeVal.textContent = fontSizeEl.value; generateBarcode(); });
+
+    pngBtn.addEventListener('click', () => {
+      const svgData = new XMLSerializer().serializeToString(svgEl);
+      const canvas  = document.createElement('canvas');
+      const ctx     = canvas.getContext('2d');
+      const img     = new Image();
+
+      img.onload = () => {
+        const scale = 2;
+        canvas.width  = img.naturalWidth * scale;
+        canvas.height = img.naturalHeight * scale;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const link   = document.createElement('a');
+        link.download = 'barcode.png';
+        link.href     = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    });
+
+    svgBtn.addEventListener('click', () => {
+      const svgData = new XMLSerializer().serializeToString(svgEl);
+      const blob    = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url     = URL.createObjectURL(blob);
+      const link    = document.createElement('a');
+      link.download  = 'barcode.svg';
+      link.href      = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  });
+  </script>
+
 </body>
 </html>

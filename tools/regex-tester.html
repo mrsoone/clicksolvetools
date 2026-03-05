@@ -1,577 +1,412 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <
-meta charset="UTF-8">
-    <meta name="viewpor
-t" content="width=device-width, initial-scale
-=1.0">
-    <title>Regex Tester</title>
-    <s
-tyle>
-        /* Global styles from the previ
-ous example */
-        body {
-            fon
-t-family: -apple-system, BlinkMacSystemFont, 
-"Segoe UI", Roboto, Helvetica, Arial, sans-se
-rif, "Apple Color Emoji", "Segoe UI Emoji", "
-Segoe UI Symbol";
-            background-colo
-r: #f4f7f6;
-            color: #333;
-        
-    margin: 0;
-            padding: 20px;
-   
-         display: flex;
-            justify-c
-ontent: center;
-            align-items: flex
--start; /* Align to top */
-            min-he
-ight: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools</title>
+  <meta name="description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices. Includes preset patterns and a cheat sheet." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://clicksolvetools.com/tools/regex-tester" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
 
-        /* Main conta
-iner style */
-        .tester-container {
-   
-         background-color: #ffffff;
-         
-   padding: 30px;
-            border-radius: 
-8px;
-            box-shadow: 0 4px 15px rgba(
-0, 0, 0, 0.1);
-            border: 1px solid 
-#e0e0e0; /* The grey border */
-            wi
-dth: 100%;
-            max-width: 800px; /* R
-egex testers often benefit from more width */
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools" />
+  <meta property="og:description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices. Includes preset patterns and a cheat sheet." />
+  <meta property="og:url" content="https://clicksolvetools.com/tools/regex-tester" />
+  <meta property="og:site_name" content="ClickSolveTools" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools" />
+  <meta name="twitter:description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices." />
 
-            text-align: left; /* Default tex
-t align for content */
-        }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Regex Tester",
+    "url": "https://clicksolvetools.com/tools/regex-tester",
+    "description": "Test regular expressions in real time with match highlighting, capture groups, and match indices.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
 
-        .te
-ster-container h2 {
-            color: #2c3e5
-0;
-            margin-top: 0;
-            mar
-gin-bottom: 30px;
-            font-size: 1.8e
-m; /* Slightly adjusted for h2 */
-           
- text-align: center;
-        }
+  <!-- Google Analytics 4 — Consent Mode v2 (all denied by default) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 
-        /* La
-bel styling */
-        .tester-container labe
-l {
-            display: block;
-            m
-argin-bottom: 8px;
-            font-weight: b
-old;
-            color: #555;
-        }
-
-    
-    /* Textarea styling */
-        .tester-co
-ntainer textarea {
-            width: 100%;
- 
-           padding: 12px;
-            margin-
-bottom: 15px;
-            border: 1px solid #
-ccc;
-            border-radius: 4px;
-        
-    box-sizing: border-box;
-            font-
-family: monospace; /* Keep monospace for code
-/regex */
-            font-size: 14px; /* Kee
-p slightly smaller for code */
-            re
-size: vertical;
-            line-height: 1.4;
-
-        }
-
-        .tester-container #regex-
-pattern {
-            min-height: 60px; /* Ad
-justed height */
-        }
-
-        .tester-c
-ontainer #test-string {
-            min-heigh
-t: 120px; /* Adjusted height */
-        }
-
-  
-      /* Flags section styling */
-        .te
-ster-container .regex-flags {
-            mar
-gin-bottom: 20px; /* Increased spacing */
-   
-         padding: 10px;
-            backgroun
-d-color: #fdfdfd;
-            border: 1px sol
-id #eee;
-            border-radius: 4px;
-    
-        display: flex;
-            flex-wrap:
- wrap; /* Allow wrapping on small screens */
-
-            gap: 15px;
-            align-item
-s: center;
-        }
-
-         /* Override bl
-ock display for flag labels */
-         .test
-er-container .regex-flags > label:first-of-ty
-pe {
-             display: block; /* Make "Fl
-ags:" label block */
-             width: 100%
-; /* Take full width */
-             margin-b
-ottom: 5px; /* Add space below */
-         }
-
-
-         .tester-container .regex-flags labe
-l {
-             display: inline-flex; /* Kee
-p checkbox labels inline */
-             alig
-n-items: center;
-             font-weight: no
-rmal; /* Normal weight for options */
-       
-      margin-bottom: 0; /* Reset bottom margi
-n */
-             cursor: pointer;
-          
-   color: #333; /* Slightly darker text for o
-ptions */
-         }
-
-         .tester-contai
-ner .regex-flags input[type="checkbox"] {
-   
-          margin-right: 6px;
-             /* 
-Consider custom checkbox styling for more fla
-ir if desired */
-         }
-
-        /* Outpu
-t area styling */
-        .tester-container #
-output {
-            background-color: #e9ece
-f; /* Match output style */
-            borde
-r: 1px solid #d6dadf; /* Slightly darker bord
-er */
-            padding: 12px;
-            
-min-height: 120px;
-            white-space: p
-re-wrap; /* Preserve whitespace and wrap line
-s */
-            word-wrap: break-word; /* Br
-eak long words */
-            font-family: mo
-nospace;
-            font-size: 14px;
-       
-     border-radius: 4px;
-            line-hei
-ght: 1.5; /* Improve readability */
-         
-   margin-top: 5px; /* Space between label an
-d output */
-            color: #495057; /* Ma
-tch output text color */
-        }
-
-        /
-* Error message styling */
-        .tester-co
-ntainer #error-message {
-            margin-t
-op: 10px;
-            padding: 8px 12px;
-    
-        border-radius: 4px;
-            font-
-size: 0.9em;
-            min-height: 1.2em;
- 
-           line-height: 1.4;
-            colo
-r: #721c24; /* Error text color */
-          
-  background-color: #f8d7da; /* Light red bac
-kground */
-            border: 1px solid #f5c
-6cb; /* Error border color */
-            /* 
-Initially hidden if empty */
-             dis
-play: none;
-        }
-         /* Show error 
-message only when it has content */
-         
-.tester-container #error-message:not(:empty) 
-{
-             display: block;
-         }
-
-
- 
-       /* Highlight styling (kept similar, en
-sure good contrast) */
-        .tester-contai
-ner .highlight {
-            background-color
-: #fad6a5; /* Slightly stronger highlight */
-
-            border-radius: 3px;
-            p
-adding: 0.1em 0.2em;
-            font-weight:
- bold;
-            color: #333; /* Ensure tex
-t is readable on highlight */
-            box
--shadow: 0 0 0 1px #f3c58f; /* Optional subtl
-e border */
-        }
-
-        /* Optional: A
-dd some spacing between sections */
-        .
-tester-container > div:not(:last-of-type) {
- 
-            margin-bottom: 20px;
-        }
-  
-       .tester-container > div:last-of-type l
-abel { /* Reduce margin above output/error */
-
-            margin-bottom: 5px;
-         }
-
-
-    </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .highlight-match { background: rgba(56,189,248,.2); border-radius: 2px; }
+    .highlight-match:nth-child(even of .highlight-match) { background: rgba(250,204,21,.25); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .mirror-box { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
+  </style>
 </head>
-<body>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+  <div id="nav-container"></div>
 
-<main class="tes
-ter-container"> <!-- Use main and the contain
-er class -->
-    <h2>Regex Tester</h2>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <article class="max-w-6xl mx-auto px-4 py-8">
 
-    <
-div>
-        <label for="regex-pattern">Regul
-ar Expression:</label>
-        <textarea id="
-regex-pattern" rows="2" placeholder="/your-pa
-ttern/i"></textarea> <!-- Adjusted rows -->
- 
-   </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Regex Tester</h1>
+      <p class="text-gray-400 mb-8">Test regular expressions in real time with instant match highlighting, capture groups, and index positions.</p>
 
-    <div class="regex-flags">
-    
-    <label>Flags:</label> <!-- Make this a bl
-ock label -->
-        <label for="flag-g">
-  
-          <input type="checkbox" id="flag-g" 
-value="g" checked> Global (g)
-        </label
->
-        <label for="flag-i">
-            <i
-nput type="checkbox" id="flag-i" value="i"> C
-ase-Insensitive (i)
-        </label>
-        
-<label for="flag-m">
-            <input type=
-"checkbox" id="flag-m" value="m"> Multiline (
-m)
-        </label>
-        <!-- Add more fla
-gs if needed (s, u, y) -->
+      <!-- WIDGET -->
+      <div class="bg-[#1e293b] border border-[#334155] rounded-2xl p-4 sm:p-6 space-y-5 mb-12">
+
+        <!-- Pattern -->
+        <div>
+          <label for="pattern" class="block text-sm font-medium text-gray-300 mb-1">Regular Expression</label>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-500 text-lg select-none">/</span>
+            <input id="pattern" type="text" spellcheck="false" autocomplete="off"
+              class="mono flex-1 bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-base text-sky-300 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+              placeholder="e.g. \\b\\w+@\\w+\\.\\w+\\b" />
+            <span class="text-gray-500 text-lg select-none">/</span>
+            <span id="flagDisplay" class="text-gray-400 text-base mono min-w-[2ch]">g</span>
+          </div>
+          <p id="regexError" class="text-red-400 text-sm mt-1 hidden"></p>
+        </div>
+
+        <!-- Flags -->
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <label class="inline-flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="flag-cb accent-sky-500" value="g" checked /><span>g</span><span class="text-gray-500">global</span></label>
+          <label class="inline-flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="flag-cb accent-sky-500" value="i" /><span>i</span><span class="text-gray-500">case insensitive</span></label>
+          <label class="inline-flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="flag-cb accent-sky-500" value="m" /><span>m</span><span class="text-gray-500">multiline</span></label>
+          <label class="inline-flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="flag-cb accent-sky-500" value="s" /><span>s</span><span class="text-gray-500">dotAll</span></label>
+          <label class="inline-flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="flag-cb accent-sky-500" value="u" /><span>u</span><span class="text-gray-500">unicode</span></label>
+        </div>
+
+        <!-- Preset buttons -->
+        <div>
+          <span class="text-xs text-gray-500 uppercase tracking-wider mr-2">Presets:</span>
+          <div class="inline-flex flex-wrap gap-2 mt-1">
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="[\\w.-]+@[\\w-]+\\.[\\w.]{2,}" data-flags="gi" data-sample="Contact us at support@example.com or sales@clicksolve.io for help.">Email</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]+" data-flags="gi" data-sample="Visit https://clicksolvetools.com or http://example.org/path?q=1&r=2 for details.">URL</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}" data-flags="g" data-sample="Call us at +1 (555) 123-4567 or 44-20-7946-0958.">Phone Number</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])" data-flags="g" data-sample="Events: 2026-03-05, 2025-12-31, 2024-01-15.">Date (YYYY-MM-DD)</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)" data-flags="g" data-sample="Server IPs: 192.168.1.1, 10.0.0.255, 172.16.254.3.">IP Address</button>
+          </div>
+        </div>
+
+        <!-- Test String -->
+        <div>
+          <label for="testString" class="block text-sm font-medium text-gray-300 mb-1">Test String</label>
+          <textarea id="testString" rows="8" spellcheck="false"
+            class="mono w-full bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition resize-y"
+            style="min-height:200px"
+            placeholder="Type or paste the text you want to test against…"></textarea>
+        </div>
+
+        <!-- Highlighted Output -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Match Highlighting</label>
+          <div id="highlightOutput" class="mono mirror-box bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-gray-200 min-h-[120px] max-h-[400px] overflow-auto">
+            <span class="text-gray-600 italic">Matches will appear here…</span>
+          </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Results</label>
+          <div id="results" class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-sm space-y-2 max-h-[300px] overflow-auto">
+            <p class="text-gray-500 italic">No matches yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHEAT SHEET (collapsible) -->
+      <details class="bg-[#1e293b] border border-[#334155] rounded-2xl mb-12 group">
+        <summary class="cursor-pointer px-4 sm:px-6 py-4 text-lg font-semibold text-white select-none flex items-center justify-between">
+          Regex Cheat Sheet
+          <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-4 sm:px-6 pb-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+          <!-- Character Classes -->
+          <div>
+            <h3 class="font-semibold text-sky-400 mb-2">Character Classes</h3>
+            <table class="w-full text-left">
+              <tbody class="divide-y divide-[#334155]">
+                <tr><td class="mono py-1 pr-3 text-sky-300">.</td><td class="text-gray-400">Any character (except newline)</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\d</td><td class="text-gray-400">Digit [0-9]</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\D</td><td class="text-gray-400">Non-digit</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\w</td><td class="text-gray-400">Word char [A-Za-z0-9_]</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\W</td><td class="text-gray-400">Non-word char</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\s</td><td class="text-gray-400">Whitespace</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\S</td><td class="text-gray-400">Non-whitespace</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">[abc]</td><td class="text-gray-400">Any of a, b, or c</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">[^abc]</td><td class="text-gray-400">Not a, b, or c</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">[a-z]</td><td class="text-gray-400">Range a to z</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Quantifiers -->
+          <div>
+            <h3 class="font-semibold text-sky-400 mb-2">Quantifiers</h3>
+            <table class="w-full text-left">
+              <tbody class="divide-y divide-[#334155]">
+                <tr><td class="mono py-1 pr-3 text-sky-300">*</td><td class="text-gray-400">0 or more</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">+</td><td class="text-gray-400">1 or more</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">?</td><td class="text-gray-400">0 or 1</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">{n}</td><td class="text-gray-400">Exactly n</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">{n,}</td><td class="text-gray-400">n or more</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">{n,m}</td><td class="text-gray-400">Between n and m</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">*?</td><td class="text-gray-400">Lazy 0 or more</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">+?</td><td class="text-gray-400">Lazy 1 or more</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Anchors & Groups -->
+          <div>
+            <h3 class="font-semibold text-sky-400 mb-2">Anchors</h3>
+            <table class="w-full text-left mb-4">
+              <tbody class="divide-y divide-[#334155]">
+                <tr><td class="mono py-1 pr-3 text-sky-300">^</td><td class="text-gray-400">Start of string / line</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">$</td><td class="text-gray-400">End of string / line</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\b</td><td class="text-gray-400">Word boundary</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">\B</td><td class="text-gray-400">Non-word boundary</td></tr>
+              </tbody>
+            </table>
+            <h3 class="font-semibold text-sky-400 mb-2">Groups & Lookaround</h3>
+            <table class="w-full text-left">
+              <tbody class="divide-y divide-[#334155]">
+                <tr><td class="mono py-1 pr-3 text-sky-300">(abc)</td><td class="text-gray-400">Capturing group</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">(?:abc)</td><td class="text-gray-400">Non-capturing group</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">(?=abc)</td><td class="text-gray-400">Positive lookahead</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">(?!abc)</td><td class="text-gray-400">Negative lookahead</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">(?&lt;=abc)</td><td class="text-gray-400">Positive lookbehind</td></tr>
+                <tr><td class="mono py-1 pr-3 text-sky-300">(?&lt;!abc)</td><td class="text-gray-400">Negative lookbehind</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- SEO CONTENT -->
+      <section class="prose prose-invert max-w-none mb-12">
+        <h2 class="text-2xl font-bold text-white mb-4">What Are Regular Expressions and How Do They Work?</h2>
+
+        <p>Regular expressions — commonly abbreviated as <strong>regex</strong> or <strong>regexp</strong> — are sequences of characters that define search patterns. Originally rooted in formal language theory developed by mathematician Stephen Cole Kleene in the 1950s, regex has become one of the most versatile and widely used tools in modern software development. Every major programming language, from JavaScript and Python to Java and Go, ships with built-in regex support, and virtually every text editor offers regex-based search and replace.</p>
+
+        <p>At its core, a regular expression is a miniature domain-specific language for describing text patterns. Instead of searching for a fixed string like <code>"hello"</code>, you can write a pattern such as <code>\b[A-Za-z]+\b</code> to match every word in a document, or <code>\d{4}-\d{2}-\d{2}</code> to find dates in ISO 8601 format. This flexibility makes regex invaluable for tasks that involve structured or semi-structured text.</p>
+
+        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Basic Syntax Building Blocks</h3>
+
+        <p><strong>Character classes</strong> let you match categories of characters. <code>\d</code> matches any digit, <code>\w</code> matches word characters (letters, digits, and underscores), and <code>\s</code> matches whitespace. You can also define custom sets with square brackets: <code>[aeiou]</code> matches any vowel, while <code>[^0-9]</code> matches anything that is not a digit.</p>
+
+        <p><strong>Quantifiers</strong> control how many times a token must appear. The asterisk <code>*</code> means "zero or more," the plus sign <code>+</code> means "one or more," and the question mark <code>?</code> means "zero or one." Curly braces give precise control: <code>{3}</code> means exactly three, <code>{2,5}</code> means between two and five. Appending <code>?</code> to any quantifier makes it lazy, matching as few characters as possible instead of as many.</p>
+
+        <p><strong>Anchors</strong> pin your match to a position rather than consuming characters. The caret <code>^</code> asserts the start of a line (when the multiline flag is set), while <code>$</code> asserts the end. The word-boundary anchor <code>\b</code> ensures a match occurs at the edge of a word, which is essential for avoiding partial matches — for example, matching <code>cat</code> without also matching <code>concatenate</code>.</p>
+
+        <p><strong>Groups and capturing</strong> are what make regex truly powerful for extraction. Wrapping part of a pattern in parentheses <code>(…)</code> creates a capturing group whose matched text you can reference later. Named groups like <code>(?&lt;year&gt;\d{4})</code> add readability. Non-capturing groups <code>(?:…)</code> let you apply quantifiers to sub-patterns without storing the match. Lookaheads <code>(?=…)</code> and lookbehinds <code>(?&lt;=…)</code> assert that a pattern exists before or after the current position without including it in the match, enabling sophisticated contextual searches.</p>
+
+        <h3 class="text-xl font-semibold text-white mt-6 mb-3">How This Tool Works</h3>
+
+        <p>This free online regex tester executes your pattern against the test string entirely in your browser using JavaScript's native <code>RegExp</code> engine — nothing is sent to a server. As you type, the tool compiles the regex, iterates through all matches, and renders highlighted results in real time. Each match is displayed with its full text, character index in the original string, and any captured groups. If your pattern contains a syntax error, you will see a clear red-bordered warning instead of a cryptic console error.</p>
+
+        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Common Patterns</h3>
+
+        <p>Some patterns appear in nearly every developer's toolkit. Email validation (simplified: <code>[\w.-]+@[\w-]+\.[\w.]{2,}</code>), URL detection, phone number extraction, date parsing, and IP address matching are so common that we have included one-click preset buttons above. These presets load both the pattern and a sample test string so you can see matches immediately and tweak them to your needs.</p>
+
+        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Use Cases for Regular Expressions</h3>
+
+        <p><strong>Form validation:</strong> Regex is the backbone of client-side and server-side input validation. Whether you are checking that an email address is well-formed or that a password meets complexity requirements, a carefully crafted pattern can enforce rules in a single line of code.</p>
+
+        <p><strong>Data extraction:</strong> Need to pull prices from a web page, extract timestamps from log files, or harvest links from HTML? Regex captures let you zero in on the data you care about and ignore the rest.</p>
+
+        <p><strong>Search and replace:</strong> Every code editor's find-and-replace dialog supports regex. Renaming variables across a codebase, reformatting dates, or normalizing whitespace is fast and precise with pattern-based replacement.</p>
+
+        <p><strong>Log parsing:</strong> System administrators and DevOps engineers rely on regex to filter and analyze massive log files. Tools like <code>grep</code>, <code>awk</code>, and <code>sed</code> are built around regex, and modern observability platforms use regex patterns for log-based alerting.</p>
+
+        <p><strong>Web scraping:</strong> While dedicated HTML parsers are preferred for complex pages, regex remains a pragmatic choice for extracting simple patterns from API responses, CSV exports, or plaintext feeds.</p>
+
+        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Frequently Asked Questions</h3>
+
+        <p><strong>What does the <code>g</code> flag do?</strong> The global flag tells the regex engine to find <em>all</em> matches in the string instead of stopping after the first one. Without <code>g</code>, methods like <code>String.prototype.match()</code> return only the first match along with its capture groups.</p>
+
+        <p><strong>How do capture groups work?</strong> Anything enclosed in parentheses <code>(…)</code> forms a capture group. After a match, you can access each group by its index (starting at 1) or by name if you used <code>(?&lt;name&gt;…)</code>. Captures are essential for extracting sub-parts of a match — for example, pulling the domain from an email address.</p>
+
+        <p><strong>What's the difference between <code>*</code> and <code>+</code>?</strong> Both are quantifiers, but <code>*</code> matches <em>zero or more</em> occurrences of the preceding token, while <code>+</code> requires <em>at least one</em>. This distinction matters: the pattern <code>a*</code> will match an empty string, whereas <code>a+</code> will not.</p>
+
+        <p>This regex tester is completely free and runs entirely in your browser — no sign-up, no data collection, no server round-trips. Bookmark it, share it with your team, and make regex a little less intimidating.</p>
+      </section>
+
+      <!-- RELATED TOOLS -->
+      <section class="mb-12">
+        <h2 class="text-xl font-bold text-white mb-4">Related Tools</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="/tools/json-formatter" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+            <h3 class="font-semibold text-white mb-1">JSON Formatter</h3>
+            <p class="text-sm text-gray-400">Pretty-print and validate JSON data instantly.</p>
+          </a>
+          <a href="/tools/base64-encoder" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+            <h3 class="font-semibold text-white mb-1">Base64 Encoder / Decoder</h3>
+            <p class="text-sm text-gray-400">Encode and decode Base64 strings online.</p>
+          </a>
+          <a href="/tools/text-diff" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+            <h3 class="font-semibold text-white mb-1">Text Diff Checker</h3>
+            <p class="text-sm text-gray-400">Compare two blocks of text side by side.</p>
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#334155]">
+    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-2">
+      <span>&copy; 2026 ClickSolveTools. All rights reserved.</span>
+      <div class="flex gap-4">
+        <a href="/privacy" class="hover:text-gray-300 transition">Privacy</a>
+        <a href="/terms" class="hover:text-gray-300 transition">Terms</a>
+        <a href="/contact" class="hover:text-gray-300 transition">Contact</a>
+      </div>
     </div>
+  </footer>
 
-    <d
-iv>
-        <label for="test-string">Test Str
-ing:</label>
-        <textarea id="test-strin
-g" rows="7" placeholder="Enter the text to te
-st your regex against..."></textarea> <!-- Ad
-justed rows -->
-    </div>
+  <script>
+  (function () {
+    const patternInput = document.getElementById('pattern');
+    const testString   = document.getElementById('testString');
+    const flagDisplay  = document.getElementById('flagDisplay');
+    const highlightOut = document.getElementById('highlightOutput');
+    const resultsPanel = document.getElementById('results');
+    const regexError   = document.getElementById('regexError');
+    const flagCbs      = document.querySelectorAll('.flag-cb');
+    const presetBtns   = document.querySelectorAll('.preset-btn');
 
-    <div>
-       
- <label for="output">Result (Matches Highligh
-ted):</label>
-        <div id="output"></div>
- <!-- Results will appear here -->
-        <d
-iv id="error-message"></div> <!-- Errors will
- appear here -->
-    </div>
-</main>
-
-<script>
-
-    // Get references to DOM elements
-    co
-nst regexInput = document.getElementById('reg
-ex-pattern');
-    const testStringInput = doc
-ument.getElementById('test-string');
-    cons
-t outputDiv = document.getElementById('output
-');
-    const errorMessageDiv = document.getE
-lementById('error-message');
-    const flagG 
-= document.getElementById('flag-g');
-    cons
-t flagI = document.getElementById('flag-i');
-
-    const flagM = document.getElementById('fl
-ag-m');
-
-    // Function to escape HTML speci
-al characters to prevent XSS and rendering is
-sues
-    function escapeHTML(str) {
-        /
-/ Simple escape function, consider a more rob
-ust library for production
-        return str
-.replace(/[&<>'"]/g,
-          tag => ({
-    
-          '&': '&', // Use proper entities
-  
-            '<': '<',
-              '>': '>',
-
-              "'": ''', // Use entity code
- 
-             '"': '"'
-          }[tag] || tag
-)
-        );
+    function getFlags() {
+      return Array.from(flagCbs).filter(cb => cb.checked).map(cb => cb.value).join('');
     }
 
-    // Function to update
- the output based on regex and test string
-  
-  function updateOutput() {
-        const pat
-tern = regexInput.value;
-        const testSt
-ring = testStringInput.value;
-        let fla
-gs = '';
-
-        if (flagG.checked) flags +=
- 'g';
-        if (flagI.checked) flags += 'i'
-;
-        if (flagM.checked) flags += 'm';
-  
-      // Add other flags here if implemented
-
-
-        // Clear previous results and errors
-
-        outputDiv.innerHTML = escapeHTML(tes
-tString); // Show plain text initially
-      
-  errorMessageDiv.textContent = ''; // Clear 
-error message content
-        errorMessageDiv
-.style.display = 'none'; // Hide error div
-
- 
-       if (!pattern) {
-            // No patt
-ern entered, show plain text and return
-     
-        outputDiv.innerHTML = escapeHTML(test
-String);
-            return;
-        }
-
-     
-   try {
-            // Create the RegExp obj
-ect
-            const regex = new RegExp(patt
-ern, flags);
-
-            if (!testString) {
-
-                // No test string, clear outp
-ut
-                outputDiv.innerHTML = '';
-
-                return;
-            }
-
-      
-      let resultHTML = '';
-            let la
-stIndex = 0;
-            let match;
-         
-   let matchFound = false;
-
-            // Us
-e exec() in a loop if global flag is set
-    
-        if (flags.includes('g')) {
-          
-      // Reset lastIndex explicitly for globa
-l searches on new input
-                regex
-.lastIndex = 0;
-                while ((match
- = regex.exec(testString)) !== null) {
-      
-              matchFound = true;
-            
-        // Add text before the match (escaped
-)
-                    resultHTML += escapeHTM
-L(testString.substring(lastIndex, match.index
-));
-                    // Add the highlighte
-d match (escaped)
-                    resultH
-TML += `<span class="highlight">${escapeHTML(
-match[0])}</span>`;
-                    lastI
-ndex = regex.lastIndex;
-
-                    
-// Handle potential infinite loop with zero-l
-ength matches in global search
-              
-      if (match.index === regex.lastIndex) {
-
-                        regex.lastIndex++;
-  
-                  }
-                }
-       
-     } else {
-                // If not globa
-l, find only the first match
-                
-match = regex.exec(testString);
-             
-   if (match) {
-                    matchFoun
-d = true;
-                    // Add text bef
-ore the match (escaped)
-                    r
-esultHTML += escapeHTML(testString.substring(
-0, match.index));
-                    // Add 
-the highlighted match (escaped)
-             
-       resultHTML += `<span class="highlight"
->${escapeHTML(match[0])}</span>`;
-           
-         lastIndex = match.index + match[0].l
-ength;
-                }
-            }
-
-     
-       // Add any remaining text after the la
-st match (escaped)
-            resultHTML += 
-escapeHTML(testString.substring(lastIndex));
-
-
-            // Update the output div
-       
-     outputDiv.innerHTML = resultHTML; // Alw
-ays update with processed string (highlighted
- or not)
-
-
-        } catch (error) {
-        
-    // Display regex syntax errors
-          
-  errorMessageDiv.textContent = `Regex Error:
- ${error.message}`;
-            errorMessageD
-iv.style.display = 'block'; // Show error div
-
-            outputDiv.innerHTML = escapeHTML
-(testString); // Show original text on error
-
-        }
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    // Event Listeners for r
-eal-time updates
-    regexInput.addEventListe
-ner('input', updateOutput);
-    testStringInp
-ut.addEventListener('input', updateOutput);
- 
-   flagG.addEventListener('change', updateOut
-put);
-    flagI.addEventListener('change', up
-dateOutput);
-    flagM.addEventListener('chan
-ge', updateOutput);
-    // Add listeners for 
-other flags if implemented
+    function run() {
+      const src   = patternInput.value;
+      const text  = testString.value;
+      const flags = getFlags();
 
-    // Initial ca
-ll to display correctly on load
-    updateOut
-put();
+      flagDisplay.textContent = flags || '—';
 
-</script>
+      if (!src || !text) {
+        regexError.classList.add('hidden');
+        patternInput.classList.remove('!border-red-500');
+        highlightOut.innerHTML = '<span class="text-gray-600 italic">Matches will appear here…</span>';
+        resultsPanel.innerHTML = '<p class="text-gray-500 italic">No matches yet.</p>';
+        return;
+      }
 
+      let regex;
+      try {
+        regex = new RegExp(src, flags);
+        regexError.classList.add('hidden');
+        patternInput.classList.remove('!border-red-500');
+      } catch (e) {
+        regexError.textContent = e.message.replace(/^Invalid regular expression: /, '');
+        regexError.classList.remove('hidden');
+        patternInput.classList.add('!border-red-500');
+        highlightOut.innerHTML = escapeHtml(text);
+        resultsPanel.innerHTML = '<p class="text-red-400">Invalid regular expression</p>';
+        return;
+      }
+
+      const matches = [];
+      let m;
+
+      if (flags.includes('g')) {
+        while ((m = regex.exec(text)) !== null) {
+          matches.push({ full: m[0], index: m.index, groups: m.slice(1) });
+          if (m[0].length === 0) regex.lastIndex++;
+        }
+      } else {
+        m = regex.exec(text);
+        if (m) matches.push({ full: m[0], index: m.index, groups: m.slice(1) });
+      }
+
+      // Build highlighted output
+      let html = '';
+      let last = 0;
+      for (const mt of matches) {
+        html += escapeHtml(text.slice(last, mt.index));
+        html += '<mark class="highlight-match">' + escapeHtml(mt.full) + '</mark>';
+        last = mt.index + mt.full.length;
+      }
+      html += escapeHtml(text.slice(last));
+      highlightOut.innerHTML = html || '<span class="text-gray-600 italic">Matches will appear here…</span>';
+
+      // Build results list
+      if (matches.length === 0) {
+        resultsPanel.innerHTML = '<p class="text-gray-500 italic">No matches found.</p>';
+        return;
+      }
+
+      let rHtml = '<p class="font-semibold text-sky-400 mb-2">' + matches.length + ' match' + (matches.length !== 1 ? 'es' : '') + ' found</p>';
+      rHtml += '<ol class="list-decimal list-inside space-y-2">';
+      for (let i = 0; i < matches.length; i++) {
+        const mt = matches[i];
+        rHtml += '<li class="bg-[#1e293b] rounded px-3 py-2">';
+        rHtml += '<span class="mono text-sky-300">"' + escapeHtml(mt.full) + '"</span>';
+        rHtml += ' <span class="text-gray-500 text-xs">index ' + mt.index + '–' + (mt.index + mt.full.length - 1) + '</span>';
+        if (mt.groups.length > 0) {
+          rHtml += '<div class="mt-1 ml-4 text-xs text-gray-400">';
+          for (let g = 0; g < mt.groups.length; g++) {
+            const val = mt.groups[g];
+            rHtml += '<div>Group ' + (g + 1) + ': <span class="mono text-yellow-300">' + (val !== undefined ? '"' + escapeHtml(val) + '"' : 'undefined') + '</span></div>';
+          }
+          rHtml += '</div>';
+        }
+        rHtml += '</li>';
+      }
+      rHtml += '</ol>';
+      resultsPanel.innerHTML = rHtml;
+    }
+
+    patternInput.addEventListener('input', run);
+    testString.addEventListener('input', run);
+    flagCbs.forEach(cb => cb.addEventListener('change', run));
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        patternInput.value = btn.dataset.pattern;
+        testString.value   = btn.dataset.sample;
+
+        const presetFlags = btn.dataset.flags || 'g';
+        flagCbs.forEach(cb => {
+          cb.checked = presetFlags.includes(cb.value);
+        });
+
+        run();
+      });
+    });
+  })();
+  </script>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('regex-tester');
+  </script>
 </body>
 </html>
-
-

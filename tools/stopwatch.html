@@ -1,88 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stopwatch</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .stopwatch-container {
-            display: inline-block;
-            padding: 20px;
-            border: 3px solid black; /* Black border around the stopwatch */
-            border-radius: 10px;
-        }
-        .stopwatch {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        button {
-            font-size: 1em;
-            margin: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            border: 2px solid black; /* Black border around buttons */
-            border-radius: 5px;
-            color: white;
-        }
-        .start {
-            background-color: green;
-        }
-        .stop {
-            background-color: red;
-        }
-        .reset {
-            background-color: blue;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Stopwatch — Lap Timer &amp; Keyboard Shortcuts | ClickSolveTools</title>
+  <meta name="description" content="Precise stopwatch with lap timing, split tracking, and keyboard shortcuts. Large bold display optimized for desktop and mobile use.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/stopwatch">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Online Stopwatch — Lap Timer &amp; Keyboard Shortcuts | ClickSolveTools">
+  <meta property="og:description" content="Precise stopwatch with lap timing, split tracking, and keyboard shortcuts. Large bold display optimized for desktop and mobile use.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/stopwatch">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch","url":"https://clicksolvetools.com/tools/stopwatch","description":"Precise stopwatch with lap timing, split tracking, and keyboard shortcuts. Large bold display optimized for desktop and mobile use.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body>
-    <div class="stopwatch-container">
-        <div class="stopwatch">00:00:00</div>
-        <button class="start" onclick="startTimer()">Start</button>
-        <button class="stop" onclick="stopTimer()">Stop</button>
-        <button class="reset" onclick="resetTimer()">Reset</button>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 sm:p-10">
+        <!-- Time Display -->
+        <div id="display" class="text-center font-mono text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-[#f1f5f9] select-none py-6 sm:py-10" aria-live="off">
+          00:00<span class="text-[#64748b]">.00</span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-center gap-3 sm:gap-4 flex-wrap">
+          <button id="btn-start" class="sw-btn bg-[#22c55e] hover:bg-[#16a34a] active:bg-[#15803d] text-[#0f172a]">
+            Start<kbd class="sw-kbd">Space</kbd>
+          </button>
+          <button id="btn-lap" class="sw-btn bg-[#3b82f6] hover:bg-[#2563eb] active:bg-[#1d4ed8] text-white opacity-50 pointer-events-none">
+            Lap<kbd class="sw-kbd">L</kbd>
+          </button>
+          <button id="btn-reset" class="sw-btn bg-[#334155] hover:bg-[#475569] active:bg-[#64748b] text-[#f1f5f9]">
+            Reset<kbd class="sw-kbd">R</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lap Table -->
+      <div id="lap-wrapper" class="hidden">
+        <div class="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden">
+          <div class="overflow-y-auto max-h-[360px]" id="lap-scroll">
+            <table class="w-full text-sm">
+              <thead class="sticky top-0 bg-[#1e293b] z-10">
+                <tr class="text-[#94a3b8] text-xs border-b border-[#334155]">
+                  <th class="px-4 py-3 text-left font-medium">#</th>
+                  <th class="px-4 py-3 text-right font-medium">Lap Time</th>
+                  <th class="px-4 py-3 text-right font-medium">Total Time</th>
+                </tr>
+              </thead>
+              <tbody id="lap-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
-    
-    <script>
-        let timer;
-        let elapsedTime = 0;
-        let running = false;
+  </main>
 
-        function startTimer() {
-            if (!running) {
-                running = true;
-                let startTime = Date.now() - elapsedTime;
-                timer = setInterval(() => {
-                    elapsedTime = Date.now() - startTime;
-                    document.querySelector('.stopwatch').innerText = formatTime(elapsedTime);
-                }, 100);
-            }
-        }
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Use a Stopwatch for Timing and Lap Tracking</h2>
+    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+      <p>A stopwatch measures the amount of time that elapses between a start point and a stop point. Unlike a countdown timer, which ticks down from a set duration, a stopwatch counts up from zero, making it ideal for any situation where you need to know how long something takes. Whether you are timing a sprint, monitoring cooking intervals, or tracking how long a presentation runs, a stopwatch is one of the simplest and most universally useful timing tools available.</p>
 
-        function stopTimer() {
-            running = false;
-            clearInterval(timer);
-        }
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Lap Time vs. Split Time</h3>
+      <p>Two related but different measurements come up whenever you time multiple segments of an activity. A <strong class="text-[#f1f5f9]">lap time</strong> is the duration of a single segment — the time between the previous lap mark (or the start) and the current lap mark. A <strong class="text-[#f1f5f9]">split time</strong> (also called total time or cumulative time) is the total elapsed time from the very beginning up to the current lap mark. For example, if a runner completes three laps of a track in 60 seconds, 65 seconds, and 58 seconds, the lap times are 1:00, 1:05, and 0:58, while the split times are 1:00, 2:05, and 3:03. Both numbers are valuable: lap times help you see pacing consistency, while split times tell you overall progress.</p>
 
-        function resetTimer() {
-            running = false;
-            clearInterval(timer);
-            elapsedTime = 0;
-            document.querySelector('.stopwatch').innerText = "00:00:00";
-        }
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How This Tool Works</h3>
+      <p>This stopwatch runs entirely in your browser and updates the display every 10 milliseconds for a smooth, real-time readout. Press <strong class="text-[#f1f5f9]">Start</strong> to begin counting. The display shows minutes, seconds, and hundredths of a second in <strong class="text-[#f1f5f9]">MM:SS.ms</strong> format. Press the same button again (now labeled Stop) to pause the timer. You can resume from where you left off or press <strong class="text-[#f1f5f9]">Reset</strong> to return to zero. While the stopwatch is running, press <strong class="text-[#f1f5f9]">Lap</strong> to record a lap. Each entry in the lap table shows the lap number, the time for that individual lap, and the cumulative total time at the point the lap was recorded.</p>
 
-        function formatTime(ms) {
-            let totalSeconds = Math.floor(ms / 1000);
-            let minutes = Math.floor(totalSeconds / 60);
-            let seconds = totalSeconds % 60;
-            let milliseconds = Math.floor((ms % 1000) / 10);
-            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(2, '0')}`;
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Keyboard Shortcuts</h3>
+      <p>For fast, hands-free control, the stopwatch responds to keyboard input. Press <strong class="text-[#f1f5f9]">Space</strong> to start or stop the timer, <strong class="text-[#f1f5f9]">L</strong> to record a lap, and <strong class="text-[#f1f5f9]">R</strong> to reset. These shortcuts are particularly useful on desktop, where clicking buttons during a fast-paced activity can be cumbersome. The shortcut keys are shown directly on each button so you never have to memorize them.</p>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">Sports timing</strong> — Track running splits, swimming intervals, cycling laps, or circuit-training rest periods. Coaches and athletes use lap data to identify pacing trends and improve performance over time.</li>
+        <li><strong class="text-[#f1f5f9]">Cooking</strong> — Time how long a steak sears on each side, monitor a boiling phase, or track the proofing time for bread dough. A stopwatch avoids the risk of setting the wrong countdown duration.</li>
+        <li><strong class="text-[#f1f5f9]">Presentations and speeches</strong> — Rehearse a talk and record laps at each section break to see which parts run long and where to cut content.</li>
+        <li><strong class="text-[#f1f5f9]">Studying with Pomodoro</strong> — While a countdown timer is the traditional Pomodoro tool, a stopwatch lets you see exactly how long you studied without the pressure of a ticking clock, and lap marks can separate study blocks.</li>
+        <li><strong class="text-[#f1f5f9]">Scientific experiments</strong> — Record reaction times, observation intervals, or process durations in a lab setting where precise timing matters.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#f1f5f9]">What is the difference between lap time and split time?</strong></p>
+      <p>Lap time measures the duration of a single segment — the interval between the previous lap mark and the current one. Split time (shown as "Total Time" in the lap table) is the cumulative elapsed time from the very start. If you record three laps, the split time for the third lap equals the sum of all three lap times.</p>
+
+      <p><strong class="text-[#f1f5f9]">How accurate is a browser-based stopwatch?</strong></p>
+      <p>Modern browsers use high-resolution timers that are accurate to within a few milliseconds under normal conditions. This is more than sufficient for sports timing, cooking, studying, and most everyday tasks. For official competition timing that requires certified hardware, a dedicated chronograph is recommended, but for practice, training, and daily use a browser stopwatch is an excellent tool.</p>
+
+      <p><strong class="text-[#f1f5f9]">Can I use keyboard shortcuts on mobile?</strong></p>
+      <p>Keyboard shortcuts require a physical or Bluetooth keyboard. On touchscreen devices, use the on-screen buttons, which are designed with large touch targets for easy tapping even during fast-paced activities.</p>
+
+      <p>This stopwatch is completely free, runs entirely in your browser, and does not send any data to a server. Bookmark this page and use it whenever you need quick, reliable timing with lap tracking and keyboard control.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .sw-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      min-width: 5.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background-color 150ms, transform 80ms;
+      user-select: none;
+    }
+    .sw-btn:active { transform: scale(0.96); }
+
+    .sw-kbd {
+      display: inline-block;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      background: rgba(0,0,0,0.15);
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.25rem;
+      font-family: inherit;
+    }
+
+    #lap-table tr { border-top: 1px solid #334155; }
+    #lap-table td { padding: 0.5rem 1rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    #lap-table td:first-child { text-align: left; color: #94a3b8; }
+    #lap-table td:not(:first-child) { text-align: right; }
+    #lap-table tr.lap-best td:nth-child(2) { color: #22c55e; }
+    #lap-table tr.lap-worst td:nth-child(2) { color: #ef4444; }
+
+    #lap-scroll::-webkit-scrollbar { width: 6px; }
+    #lap-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    #lap-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const display = $('display');
+    const btnStart = $('btn-start');
+    const btnLap = $('btn-lap');
+    const btnReset = $('btn-reset');
+    const lapWrapper = $('lap-wrapper');
+    const lapTable = $('lap-table');
+    const lapScroll = $('lap-scroll');
+
+    let running = false;
+    let startTime = 0;
+    let elapsed = 0;
+    let rafId = null;
+    let laps = [];
+    let lastLapTime = 0;
+
+    function formatTime(ms) {
+      const totalMs = Math.floor(ms);
+      const mins = Math.floor(totalMs / 60000);
+      const secs = Math.floor((totalMs % 60000) / 1000);
+      const cs = Math.floor((totalMs % 1000) / 10);
+      return {
+        main: String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0'),
+        frac: '.' + String(cs).padStart(2, '0')
+      };
+    }
+
+    function formatFlat(ms) {
+      const t = formatTime(ms);
+      return t.main + t.frac;
+    }
+
+    function updateDisplay() {
+      const now = performance.now();
+      const total = elapsed + (now - startTime);
+      const t = formatTime(total);
+      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+    }
+
+    function tick() {
+      updateDisplay();
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      startTime = performance.now();
+      tick();
+      btnStart.textContent = '';
+      btnStart.innerHTML = 'Stop<kbd class="sw-kbd">Space</kbd>';
+      btnStart.classList.remove('bg-[#22c55e]', 'hover:bg-[#16a34a]', 'active:bg-[#15803d]');
+      btnStart.classList.add('bg-[#ef4444]', 'hover:bg-[#dc2626]', 'active:bg-[#b91c1c]');
+      btnLap.classList.remove('opacity-50', 'pointer-events-none');
+    }
+
+    function stop() {
+      if (!running) return;
+      running = false;
+      elapsed += performance.now() - startTime;
+      cancelAnimationFrame(rafId);
+      updateDisplayStatic();
+      btnStart.innerHTML = 'Start<kbd class="sw-kbd">Space</kbd>';
+      btnStart.classList.remove('bg-[#ef4444]', 'hover:bg-[#dc2626]', 'active:bg-[#b91c1c]');
+      btnStart.classList.add('bg-[#22c55e]', 'hover:bg-[#16a34a]', 'active:bg-[#15803d]');
+    }
+
+    function updateDisplayStatic() {
+      const t = formatTime(elapsed);
+      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+    }
+
+    function reset() {
+      const wasRunning = running;
+      if (wasRunning) stop();
+      elapsed = 0;
+      lastLapTime = 0;
+      laps = [];
+      const t = formatTime(0);
+      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+      lapTable.innerHTML = '';
+      lapWrapper.classList.add('hidden');
+      btnLap.classList.add('opacity-50', 'pointer-events-none');
+    }
+
+    function lap() {
+      if (!running) return;
+      const now = performance.now();
+      const totalElapsed = elapsed + (now - startTime);
+      const lapTime = totalElapsed - lastLapTime;
+      lastLapTime = totalElapsed;
+      laps.push({ lapTime, totalElapsed });
+      renderLaps();
+      lapWrapper.classList.remove('hidden');
+    }
+
+    function renderLaps() {
+      if (laps.length === 0) return;
+
+      let bestIdx = 0;
+      let worstIdx = 0;
+      for (let i = 1; i < laps.length; i++) {
+        if (laps[i].lapTime < laps[bestIdx].lapTime) bestIdx = i;
+        if (laps[i].lapTime > laps[worstIdx].lapTime) worstIdx = i;
+      }
+
+      const rows = [];
+      for (let i = laps.length - 1; i >= 0; i--) {
+        let cls = '';
+        if (laps.length > 2) {
+          if (i === bestIdx) cls = 'lap-best';
+          else if (i === worstIdx) cls = 'lap-worst';
         }
-    </script>
+        rows.push(
+          '<tr class="' + cls + '">' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td>' + formatFlat(laps[i].lapTime) + '</td>' +
+            '<td>' + formatFlat(laps[i].totalElapsed) + '</td>' +
+          '</tr>'
+        );
+      }
+      lapTable.innerHTML = rows.join('');
+      lapScroll.scrollTop = 0;
+    }
+
+    btnStart.addEventListener('click', () => { running ? stop() : start(); });
+    btnLap.addEventListener('click', lap);
+    btnReset.addEventListener('click', reset);
+
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); running ? stop() : start(); }
+      else if (e.key === 'l' || e.key === 'L') { e.preventDefault(); lap(); }
+      else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); reset(); }
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('stopwatch');
+  </script>
 </body>
 </html>

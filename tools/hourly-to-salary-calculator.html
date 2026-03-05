@@ -1,285 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title might not be used in embed, but good practice -->
-    <title>Salary & Hourly Converter</title>
-    <style>
-        /* Removed body styles as they don't apply in embed */
-        .tdc-converter-embed-wrapper { /* Added a wrapper ID for potential future scoping */
-             font-family: 'Arial', sans-serif; /* Keep font style */
-             margin: 0; /* Reset margin just in case */
-             padding: 0; /* Reset padding */
-        }
-
-        .container {
-            background: white;
-            max-width: 420px;
-            width: 90%; /* Make it responsive within the embed area */
-            margin: 20px auto; /* Add some margin top/bottom and center horizontally */
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Slightly softer shadow for embed */
-            text-align: center;
-            /* Explicitly define all borders to ensure top/bottom render */
-            border-top: 2px solid #ddd;
-            border-bottom: 2px solid #ddd;
-            border-left: 2px solid #ddd;
-            border-right: 2px solid #ddd;
-            box-sizing: border-box;
-        }
-        h2 {
-            color: #2C3E50;
-            margin-top: 0; /* Adjust margin for container padding */
-            margin-bottom: 20px; /* Increased spacing slightly */
-        }
-        .toggle-btn {
-            display: flex;
-            justify-content: space-between;
-            background: #ecf0f1;
-            padding: 5px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-bottom: 20px; /* Added spacing */
-        }
-        .toggle-btn div {
-            flex: 1;
-            padding: 10px;
-            border-radius: 20px;
-            transition: background-color 0.3s, color 0.3s; /* Smoother transition */
-            font-size: 0.9em; /* Slightly smaller text */
-        }
-        .active {
-            background: #3498db;
-            color: white;
-            font-weight: bold;
-        }
-        label {
-            display: block;
-            margin-top: 20px; /* Increased spacing */
-            margin-bottom: 5px; /* Added spacing */
-            font-weight: bold;
-            color: #333;
-            text-align: left; /* Align labels left */
-        }
-        input, select {
-            width: 100%;
-            padding: 10px 12px; /* Adjusted padding */
-            margin-top: 5px;
-            border: 1px solid #ccc; /* Slightly thinner border */
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-             box-sizing: border-box; /* Include padding/border in width */
-        }
-        input:focus, select:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Subtle focus glow */
-        }
-        #customHours {
-             margin-top: 10px; /* Add space above custom input */
-        }
-        .result {
-            margin-top: 25px; /* Increased spacing */
-            padding: 15px; /* Added padding */
-            background-color: #f0f9ff; /* Light blue background */
-            border-radius: 8px;
-            border: 1px solid #d6e9f8; /* Light blue border */
-            font-size: 18px; /* Slightly smaller result text */
-            font-weight: 500; /* Medium weight */
-            color: #2C3E50; /* Darker blue color */
-            line-height: 1.6; /* Improved readability */
-            text-align: left; /* Align result text left */
-        }
-         .result strong { /* Style the labels within the result */
-            color: #34495e; /* Slightly different color for labels */
-            margin-right: 5px;
-            display: inline-block; /* Ensures proper spacing */
-            min-width: 80px; /* Align values */
-         }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Hourly to Salary Calculator Online — Convert Wages Instantly | ClickSolveTools</title>
+  <meta name="description" content="Convert hourly wages to annual salary and vice versa. See daily, weekly, biweekly, and monthly breakdowns instantly.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/hourly-to-salary-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Hourly to Salary Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Convert hourly wages to annual salary and vice versa. See daily, weekly, biweekly, and monthly breakdowns instantly.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/hourly-to-salary-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hourly to Salary Calculator","url":"https://clicksolvetools.com/tools/hourly-to-salary-calculator","description":"Convert hourly wages to annual salary and vice versa. See daily, weekly, biweekly, and monthly breakdowns instantly.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body> <!-- Body tag is necessary for structure, but its styles are removed -->
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+  <div id="nav-container"></div>
 
-    <div class="tdc-converter-embed-wrapper"> <!-- Wrapper for scoping -->
-        <div class="container">
-            <h2>Salary ↔ Hourly Converter</h2>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
 
-            <div class="toggle-btn">
-                <div id="toSalary" class="active" onclick="switchMode('salary')">Hourly → Salary</div>
-                <div id="toHourly" onclick="switchMode('hourly')">Salary → Hourly</div>
-            </div>
+      <!-- Mode Toggle -->
+      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-1.5 flex">
+        <button id="tab-hourly" class="hs-tab hs-tab-active flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Hourly → Salary</button>
+        <button id="tab-salary" class="hs-tab flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Salary → Hourly</button>
+      </div>
 
-            <label id="inputLabel" for="inputValue">Hourly Wage ($)</label> <!-- Added 'for' attribute -->
-            <input type="number" id="inputValue" placeholder="Enter amount" min="0">
+      <!-- Input Card -->
+      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-5">
 
-            <label for="workHours">Hours per Week</label>
-            <select id="workHours">
-                <option value="40">40 (Standard Full-Time)</option>
-                <option value="35">35</option>
-                <option value="30">30</option>
-                <option value="25">25</option>
-                <option value="20">20 (Part-Time)</option>
-                <option value="custom">Custom</option>
-            </select>
-            <input type="number" id="customHours" placeholder="Enter custom hours" min="1" max="168" style="display:none;">
-
-            <label for="workDays">Days per Week</label> <!-- Days per week isn't used in calculation, consider removing if unwanted -->
-            <select id="workDays">
-                <option value="5">5 (Standard Workweek)</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
-
-            <div class="result" id="resultText">Your calculation will appear here.</div>
+        <!-- Amount Input -->
+        <div>
+          <label id="amount-label" for="amount" class="block text-sm font-medium text-[#94a3b8] mb-1">Hourly Wage</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+            <input id="amount" type="text" inputmode="decimal" placeholder="25.00" class="hs-input pl-7 w-full">
+          </div>
         </div>
+
+        <!-- Hours Per Week -->
+        <div>
+          <label class="block text-sm font-medium text-[#94a3b8] mb-1">Hours Per Week</label>
+          <div class="flex gap-1.5 mb-2 flex-wrap" id="hour-presets">
+            <button data-hours="20" class="hour-btn">20</button>
+            <button data-hours="25" class="hour-btn">25</button>
+            <button data-hours="30" class="hour-btn">30</button>
+            <button data-hours="35" class="hour-btn">35</button>
+            <button data-hours="40" class="hour-btn hour-active">40</button>
+            <button data-hours="custom" class="hour-btn">Custom</button>
+          </div>
+          <input id="custom-hours" type="number" min="1" max="168" placeholder="Enter hours" class="hs-input w-full hidden">
+        </div>
+
+        <!-- Weeks Per Year -->
+        <div>
+          <label for="weeks" class="block text-sm font-medium text-[#94a3b8] mb-1">Weeks Per Year</label>
+          <input id="weeks" type="number" min="1" max="52" value="52" class="hs-input w-full">
+        </div>
+      </div>
+
+      <!-- Results Table -->
+      <div id="results-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden hidden">
+        <div class="px-6 pt-5 pb-3">
+          <h3 class="text-sm font-semibold text-[#94a3b8] uppercase tracking-wider" id="results-heading">Income Breakdown</h3>
+        </div>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-t border-[#334155] text-[#64748b] text-xs">
+              <th class="px-6 py-3 text-left font-medium">Period</th>
+              <th class="px-6 py-3 text-right font-medium">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="results-body" class="text-[#f1f5f9]"></tbody>
+        </table>
+      </div>
+
     </div>
+  </main>
 
-    <script>
-        // Ensure script runs after DOM is loaded, good practice for embed
-        document.addEventListener('DOMContentLoaded', function() {
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Convert Between Hourly Wages and Annual Salary</h2>
+    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+      <p>Whether you are evaluating a job offer, setting freelance rates, or simply trying to understand what your time is worth, converting between an hourly wage and an annual salary is one of the most practical calculations in personal finance. This tool handles the math instantly so you can focus on the decision rather than the arithmetic.</p>
 
-            // Cache DOM elements
-            const toSalaryBtn = document.getElementById('toSalary');
-            const toHourlyBtn = document.getElementById('toHourly');
-            const inputLabel = document.getElementById('inputLabel');
-            const resultText = document.getElementById('resultText');
-            const inputValue = document.getElementById('inputValue');
-            const workHoursSelect = document.getElementById('workHours');
-            const customHoursInput = document.getElementById('customHours');
-            const workDaysSelect = document.getElementById('workDays'); // Still getting element even if unused in calculation
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">The Core Formula</h3>
+      <p>The standard conversion relies on three numbers: your hourly rate, the number of hours you work each week, and the number of weeks you work each year. The formula is straightforward:</p>
+      <p class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 font-mono text-[#38bdf8] text-center">Annual Salary = Hourly Rate × Hours per Week × Weeks per Year</p>
+      <p>For a typical full-time employee working <strong class="text-[#f1f5f9]">40 hours per week</strong> for <strong class="text-[#f1f5f9]">52 weeks per year</strong>, that works out to 2,080 working hours annually. Multiply your hourly rate by 2,080 and you have your gross annual salary. To go the other direction — from salary to hourly — simply divide the annual salary by the total hours worked per year.</p>
 
-            let mode = 'salary'; // Default mode
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Factors That Affect the Conversion</h3>
+      <p>The formula above gives you a clean gross figure, but real-world compensation is rarely that simple. Several factors can make the effective value of an hourly wage or salary higher or lower than the raw number suggests:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">Paid time off (PTO)</strong> — Salaried employees often receive paid vacation, sick days, and holidays. If you take two weeks of paid vacation, you are still earning for 52 weeks while only working 50. An hourly worker who takes two weeks off unpaid effectively works fewer weeks, reducing annual income.</li>
+        <li><strong class="text-[#f1f5f9]">Benefits</strong> — Employer-provided health insurance, retirement contributions, and other perks add significant value on top of base salary. When comparing a salaried position with benefits to an hourly or freelance role without them, factor in the cost of purchasing those benefits independently.</li>
+        <li><strong class="text-[#f1f5f9]">Overtime</strong> — Many hourly workers earn time-and-a-half (1.5× their regular rate) for hours beyond 40 per week. Overtime pay can substantially increase actual annual earnings compared to the base rate calculation.</li>
+        <li><strong class="text-[#f1f5f9]">Taxes</strong> — Your tax bracket, filing status, and deductions all affect take-home pay. Two jobs with the same gross salary can produce different net incomes depending on your tax situation.</li>
+      </ul>
 
-            // --- Switch Mode Function ---
-            window.switchMode = function(newMode) { // Attach to window to make onclick work globally
-                if (mode === newMode) return; // Do nothing if mode is already set
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">Job comparison</strong> — You receive one offer quoting an hourly rate and another quoting an annual salary. Converting both to the same basis lets you compare them fairly, especially after accounting for hours and benefits.</li>
+        <li><strong class="text-[#f1f5f9]">Freelance and contract pricing</strong> — Freelancers need to set hourly rates that cover not only equivalent salary but also self-employment taxes, insurance, and unpaid downtime. Start with your target annual income and work backward to find the hourly rate you need to charge.</li>
+        <li><strong class="text-[#f1f5f9]">Monthly budgeting</strong> — Knowing your monthly and biweekly income helps you set up a realistic household budget, plan savings contributions, and manage recurring expenses.</li>
+        <li><strong class="text-[#f1f5f9]">Salary negotiation</strong> — Understanding the hourly equivalent of a salary offer — or the annual value of an hourly rate — gives you concrete numbers to bring to a negotiation conversation.</li>
+      </ul>
 
-                mode = newMode;
-                toSalaryBtn.classList.toggle('active', mode === 'salary');
-                toHourlyBtn.classList.toggle('active', mode === 'hourly');
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                if (mode === 'salary') {
-                    inputLabel.textContent = 'Hourly Wage ($)';
-                    resultText.innerHTML = 'Your salary calculation will appear here.'; // Use innerHTML consistently
-                    inputValue.placeholder = 'e.g., 25.50';
-                } else {
-                    inputLabel.textContent = 'Annual Salary ($)';
-                    resultText.innerHTML = 'Your hourly rate will appear here.'; // Use innerHTML consistently
-                    inputValue.placeholder = 'e.g., 53040';
-                }
-                clearInputAndResult(); // Clear fields when switching modes
-                // calculate(); // Calculate immediately if input has value? Optional.
-            }
+      <p><strong class="text-[#f1f5f9]">How much is $20 per hour annually?</strong></p>
+      <p>At 40 hours per week for 52 weeks, $20 per hour equals $41,600 per year before taxes. If you work fewer weeks due to unpaid time off, multiply $20 by your actual hours per week and actual weeks worked to get a more accurate figure.</p>
 
-             // --- Show/Hide Custom Hours ---
-             workHoursSelect.addEventListener('change', function() {
-                 const isCustom = this.value === 'custom';
-                 customHoursInput.style.display = isCustom ? 'block' : 'none';
-                 if (isCustom) {
-                     customHoursInput.focus(); // Focus custom input when shown
-                     customHoursInput.value = ''; // Clear custom input when shown initially
-                     resultText.innerHTML = 'Enter custom hours.'; // Prompt user
-                 } else {
-                      calculate(); // Recalculate if a standard option is chosen
-                 }
-             });
+      <p><strong class="text-[#f1f5f9]">How do I calculate my hourly rate from a salary?</strong></p>
+      <p>Divide your annual salary by the number of weeks you work per year, then divide that result by the number of hours you work per week. For example, a $60,000 salary at 40 hours per week for 52 weeks equals $60,000 ÷ 2,080 = approximately $28.85 per hour.</p>
 
+      <p><strong class="text-[#f1f5f9]">What about overtime — does this calculator account for it?</strong></p>
+      <p>This calculator computes gross pay at a straight hourly rate. Overtime premiums (typically 1.5× or 2× your base rate for hours beyond 40 per week) depend on your employer, your employment classification, and local labor laws. To estimate overtime earnings, calculate your base salary using this tool and then add overtime pay separately.</p>
 
-            // --- Calculation Function ---
-             function calculate() {
-                let inputVal = parseFloat(inputValue.value);
-                let hoursSelection = workHoursSelect.value;
-                // let workDays = parseInt(workDaysSelect.value); // WorkDays value is not used in standard salary calculations
+      <p><strong class="text-[#f1f5f9]">Should I adjust weeks per year for unpaid time off?</strong></p>
+      <p>Yes. If you are an hourly worker or contractor who does not receive paid vacation, reduce the weeks-per-year value to reflect the weeks you actually work. For example, if you take three weeks off unpaid, set weeks per year to 49 for a more accurate annual estimate.</p>
 
-                let hoursPerWeek;
-                if (hoursSelection === 'custom') {
-                    hoursPerWeek = parseFloat(customHoursInput.value);
-                     if (isNaN(hoursPerWeek) || hoursPerWeek <= 0) {
-                        resultText.textContent = 'Please enter valid custom hours.';
-                         return; // Stop if custom hours invalid
-                     }
-                } else {
-                    hoursPerWeek = parseInt(hoursSelection);
-                }
+      <div class="mt-8 p-4 bg-[#0f172a] border border-[#334155] rounded-lg text-sm text-[#64748b]">
+        <strong class="text-[#94a3b8]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial, tax, or legal advice. Actual take-home pay depends on taxes, deductions, benefits, and other factors specific to your situation. Consult a qualified financial professional before making decisions based on these figures.
+      </div>
 
-                // Check for valid input value
-                if (isNaN(inputVal) || inputVal < 0) {
-                     // Only show error if hours are valid, otherwise hour error takes precedence
-                     if (!isNaN(hoursPerWeek) && hoursPerWeek > 0) {
-                         resultText.innerHTML = `Please enter a valid ${mode === 'salary' ? 'hourly wage' : 'annual salary'}.`;
-                     } else if (hoursSelection !== 'custom') {
-                         // If hours are not custom and somehow invalid (shouldn't happen with select)
-                          resultText.innerHTML = 'Please select valid hours per week.';
-                     }
-                     // If custom hours are invalid, that message is already shown
-                     return; // Stop calculation
-                }
+      <p>This hourly-to-salary calculator is completely free, runs entirely in your browser, and sends no data to any server. Bookmark this page and return whenever you need a quick wage conversion, income breakdown, or starting point for budgeting and negotiation.</p>
+    </div>
+  </article>
 
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
 
-                // Perform calculation based on mode
-                 const weeksPerYear = 52; // Standard assumption
+  <style>
+    .hs-input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #f1f5f9;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms;
+    }
+    .hs-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+    }
+    .hs-input::placeholder { color: #475569; }
 
-                 try { // Add try...catch for robustness against edge cases
-                     if (mode === 'salary') {
-                         const weekly = inputVal * hoursPerWeek;
-                         const biWeekly = weekly * 2;
-                         const monthly = (inputVal * hoursPerWeek * weeksPerYear) / 12; // More accurate monthly avg
-                         const yearly = inputVal * hoursPerWeek * weeksPerYear;
+    .hour-btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .hour-btn:hover { border-color: #38bdf8; color: #f1f5f9; }
+    .hour-active {
+      background: #38bdf8 !important;
+      color: #0f172a !important;
+      border-color: #38bdf8 !important;
+    }
 
-                         // Use Intl.NumberFormat for better currency formatting
-                         const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    .hs-tab {
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .hs-tab:hover { color: #f1f5f9; }
+    .hs-tab-active {
+      background: #38bdf8 !important;
+      color: #0f172a !important;
+    }
 
-                         resultText.innerHTML = `
-                             <strong>Yearly:</strong> ${formatter.format(yearly)} <br>
-                             <strong>Monthly:</strong> ${formatter.format(monthly)} <br>
-                             <strong>Bi-Weekly:</strong> ${formatter.format(biWeekly)} <br>
-                             <strong>Weekly:</strong> ${formatter.format(weekly)}
-                         `;
-                     } else { // mode === 'hourly'
-                         if (hoursPerWeek <= 0) { // Avoid division by zero
-                              resultText.innerHTML = 'Hours per week must be greater than zero.';
-                              return;
-                          }
-                         const hourlyRate = inputVal / (hoursPerWeek * weeksPerYear);
-                         const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    #results-body tr { border-top: 1px solid #334155; }
+    #results-body td { padding: 0.625rem 1.5rem; }
+    #results-body td:first-child { text-align: left; color: #94a3b8; }
+    #results-body td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+    #results-body tr.hs-highlight td { color: #38bdf8; }
+  </style>
 
-                         resultText.innerHTML = `<strong>Hourly Rate:</strong> ${formatter.format(hourlyRate)}`;
-                     }
-                 } catch (error) {
-                     console.error("Calculation Error:", error);
-                     resultText.innerHTML = "An error occurred during calculation.";
-                 }
-             }
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-             // --- Helper to clear input/result ---
-             function clearInputAndResult() {
-                 inputValue.value = '';
-                 if (workHoursSelect.value === 'custom') {
-                     customHoursInput.value = '';
-                 }
-                  // Reset result text based on current mode
-                  resultText.innerHTML = mode === 'salary'
-                      ? 'Your salary calculation will appear here.'
-                      : 'Your hourly rate will appear here.';
-             }
+    const amountInput = $('amount');
+    const amountLabel = $('amount-label');
+    const weeksInput = $('weeks');
+    const customHours = $('custom-hours');
+    const resultsPanel = $('results-panel');
+    const resultsBody = $('results-body');
+    const resultsHeading = $('results-heading');
+    const tabHourly = $('tab-hourly');
+    const tabSalary = $('tab-salary');
 
-            // --- Add Event Listeners ---
-            inputValue.addEventListener('input', calculate);
-            // workHoursSelect listener is already setup for custom display logic + calculation
-             customHoursInput.addEventListener('input', calculate);
-             // workDaysSelect.addEventListener('change', calculate); // Add back if needed
+    let mode = 'hourly';
+    let hoursPerWeek = 40;
 
+    function setMode(m) {
+      mode = m;
+      tabHourly.classList.toggle('hs-tab-active', mode === 'hourly');
+      tabSalary.classList.toggle('hs-tab-active', mode === 'salary');
+      if (mode === 'hourly') {
+        amountLabel.textContent = 'Hourly Wage';
+        amountInput.placeholder = '25.00';
+        resultsHeading.textContent = 'Income Breakdown';
+      } else {
+        amountLabel.textContent = 'Annual Salary';
+        amountInput.placeholder = '52,000';
+        resultsHeading.textContent = 'Rate Breakdown';
+      }
+      calculate();
+    }
 
-            // Initial setup call if needed, e.g. to set initial result text correctly
-            switchMode('salary'); // Set initial state explicitly
+    tabHourly.addEventListener('click', () => setMode('hourly'));
+    tabSalary.addEventListener('click', () => setMode('salary'));
 
+    // Hours preset buttons
+    $('hour-presets').addEventListener('click', e => {
+      const btn = e.target.closest('.hour-btn');
+      if (!btn) return;
+      document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('hour-active'));
+      btn.classList.add('hour-active');
+      const val = btn.dataset.hours;
+      if (val === 'custom') {
+        customHours.classList.remove('hidden');
+        customHours.focus();
+      } else {
+        customHours.classList.add('hidden');
+        hoursPerWeek = parseFloat(val);
+        calculate();
+      }
+    });
 
-        }); // End DOMContentLoaded
-    </script>
+    customHours.addEventListener('input', () => {
+      const v = parseFloat(customHours.value);
+      if (v > 0 && v <= 168) { hoursPerWeek = v; calculate(); }
+    });
 
+    function parseAmount(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatAmountInput() {
+      const raw = amountInput.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const parts = raw.split('.');
+      if (parts.length > 2) return;
+      const intPart = parts[0];
+      const decPart = parts[1];
+      const intFormatted = new Intl.NumberFormat('en-US').format(parseInt(intPart) || 0);
+      const cursor = amountInput.selectionStart;
+      const oldLen = amountInput.value.length;
+      amountInput.value = decPart !== undefined ? intFormatted + '.' + decPart : intFormatted;
+      const diff = amountInput.value.length - oldLen;
+      amountInput.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    amountInput.addEventListener('input', () => {
+      formatAmountInput();
+      calculate();
+    });
+
+    weeksInput.addEventListener('input', calculate);
+
+    function calculate() {
+      const val = parseAmount(amountInput);
+      const weeks = parseInt(weeksInput.value) || 52;
+
+      if (val <= 0 || hoursPerWeek <= 0 || weeks <= 0) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const totalHoursPerYear = hoursPerWeek * weeks;
+      let hourly, daily, weekly, biweekly, monthly, annual;
+
+      if (mode === 'hourly') {
+        hourly = val;
+        annual = hourly * totalHoursPerYear;
+      } else {
+        annual = val;
+        hourly = annual / totalHoursPerYear;
+      }
+
+      daily = hourly * (hoursPerWeek / (weeks > 0 ? Math.min(weeks, 52) : 52) * 52 / 260.71);
+      daily = hourly * hoursPerWeek / 5;
+      weekly = hourly * hoursPerWeek;
+      biweekly = weekly * 2;
+      monthly = annual / 12;
+
+      const rows = [
+        { label: 'Hourly',   value: hourly,   highlight: mode === 'salary' },
+        { label: 'Daily',    value: daily,     highlight: false },
+        { label: 'Weekly',   value: weekly,    highlight: false },
+        { label: 'Biweekly', value: biweekly,  highlight: false },
+        { label: 'Monthly',  value: monthly,   highlight: false },
+        { label: 'Annual',   value: annual,    highlight: mode === 'hourly' },
+      ];
+
+      resultsBody.innerHTML = rows.map(r =>
+        `<tr${r.highlight ? ' class="hs-highlight"' : ''}>
+          <td>${r.label}</td>
+          <td>${fmt.format(r.value)}</td>
+        </tr>`
+      ).join('');
+
+      resultsPanel.classList.remove('hidden');
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('hourly-to-salary-calculator');
+  </script>
 </body>
 </html>

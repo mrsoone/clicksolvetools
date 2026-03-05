@@ -1,313 +1,526 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator</title>
-    <style>
-        /* Base Styles - Adapted from the approved converter */
-        .mc-embed-wrapper { /* Wrapper ID for scoping */
-             font-family: 'Arial', sans-serif;
-             margin: 0;
-             padding: 0;
-        }
-
-        .container {
-            background: white;
-            max-width: 450px; /* Keep width */
-            width: 90%;
-            margin: 20px auto;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            /* Explicit borders */
-            border-top: 2px solid #ddd;
-            border-bottom: 2px solid #ddd;
-            border-left: 2px solid #ddd;
-            border-right: 2px solid #ddd;
-            box-sizing: border-box;
-        }
-        h2 {
-            color: #2C3E50;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-
-        /* Form Styling */
-        label {
-            display: block;
-            margin-top: 18px;
-            margin-bottom: 6px;
-            font-weight: bold;
-            color: #333;
-            text-align: left;
-            font-size: 0.95em;
-        }
-        input[type="number"], select {
-            width: 100%;
-            padding: 11px 13px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            box-sizing: border-box;
-            background-color: #fdfdfd;
-        }
-
-        /* Input Focus Style */
-        input[type="number"]:focus, select:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        /* Placeholder Style */
-         input[type="number"]::placeholder {
-             color: #aaa;
-             font-size: 0.95em;
-         }
-
-        /* Custom Term Input Style */
-        #customTerm {
-             margin-top: 10px;
-        }
-
-        /* Result Area Styling */
-        .result {
-            margin-top: 30px;
-            padding: 18px;
-            background-color: #eaf6ff;
-            border-radius: 8px;
-            border: 1px solid #cce7ff;
-            font-size: 17px;
-            font-weight: 500;
-            color: #1c4a70;
-            line-height: 1.7;
-            text-align: left;
-        }
-         .result strong { /* Labels within the result */
-            color: #0f2a40;
-            margin-right: 8px;
-            display: inline-block;
-            /* Adjusted min-width for longer labels */
-            min-width: 180px;
-            font-weight: 600;
-         }
-         .result .total-payment { /* Highlight total payment */
-             margin-top: 10px;
-             padding-top: 10px;
-             border-top: 1px dashed #b8d9f3;
-             font-size: 1.1em;
-             font-weight: bold;
-             color: #0056b3;
-         }
-          .result .total-payment strong {
-              color: #0056b3;
-               /* Ensure alignment */
-               min-width: 180px;
-          }
-
-         /* Error Message Style */
-         .result.error {
-             background-color: #fff0f0;
-             border-color: #f7cccc;
-             color: #d9534f;
-             font-weight: bold;
-             text-align: center;
-         }
-
-        /* Responsive adjustments */
-         @media (max-width: 480px) {
-             .container {
-                 padding: 20px;
-             }
-             h2 {
-                 font-size: 1.4em;
-             }
-             label {
-                 margin-top: 15px;
-             }
-             .result {
-                 padding: 15px;
-                 font-size: 16px;
-             }
-              .result strong {
-                 /* Adjust min-width for smaller screens if needed*/
-                 min-width: 150px;
-             }
-              .result .total-payment strong {
-                 min-width: 150px;
-             }
-         }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Mortgage Calculator Online — Monthly Payment &amp; Amortization | ClickSolveTools</title>
+  <meta name="description" content="Estimate monthly mortgage payments, total interest, and amortization schedule. Compare loan terms and see how extra payments save money.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/mortgage-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Mortgage Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Estimate monthly mortgage payments, total interest, and amortization schedule. Compare loan terms and see how extra payments save money.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/mortgage-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mortgage Calculator","url":"https://clicksolvetools.com/tools/mortgage-calculator","description":"Estimate monthly mortgage payments, total interest, and amortization schedule. Compare loan terms and see how extra payments save money.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+  <div id="nav-container"></div>
 
-    <div class="mc-embed-wrapper">
-        <div class="container">
-            <h2>Mortgage Calculator</h2>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
 
-            <label for="loanAmount">Loan Amount ($)</label>
-            <input type="number" id="loanAmount" placeholder="e.g., 300000" min="0">
+      <!-- Input Form -->
+      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
 
-            <label for="interestRate">Interest Rate (%)</label>
-            <input type="number" id="interestRate" placeholder="e.g., 6.5" step="0.01" min="0">
+          <!-- Home Price -->
+          <div class="sm:col-span-2">
+            <label for="home-price" class="block text-sm font-medium text-[#94a3b8] mb-1">Home Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+              <input id="home-price" type="text" inputmode="decimal" placeholder="350,000" class="mc-input pl-7 w-full">
+            </div>
+          </div>
 
-            <label for="loanTerm">Loan Term (Years)</label>
-            <select id="loanTerm">
-                <option value="30">30 Years</option>
-                <option value="20">20 Years</option>
-                <option value="15">15 Years</option>
-                <option value="10">10 Years</option>
-                <option value="custom">Custom</option>
-            </select>
-            <input type="number" id="customTerm" placeholder="Enter custom years" min="1" max="50" style="display:none;">
+          <!-- Down Payment -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-[#94a3b8] mb-1">Down Payment</label>
+            <div class="flex gap-2">
+              <div class="relative flex-1">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                <input id="down-dollar" type="text" inputmode="decimal" placeholder="70,000" class="mc-input pl-7 w-full">
+              </div>
+              <div class="relative w-28">
+                <input id="down-pct" type="text" inputmode="decimal" placeholder="20" class="mc-input pr-7 w-full text-right">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748b]">%</span>
+              </div>
+            </div>
+          </div>
 
-            <label for="propertyTax">Annual Property Tax ($)</label>
-            <input type="number" id="propertyTax" placeholder="Optional, e.g., 4500" min="0">
+          <!-- Loan Term -->
+          <div>
+            <label class="block text-sm font-medium text-[#94a3b8] mb-1">Loan Term</label>
+            <div class="flex gap-1 mb-2" id="term-presets">
+              <button data-term="15" class="term-btn">15 yr</button>
+              <button data-term="20" class="term-btn">20 yr</button>
+              <button data-term="30" class="term-btn term-active">30 yr</button>
+              <button data-term="custom" class="term-btn">Custom</button>
+            </div>
+            <input id="custom-term" type="number" min="1" max="50" placeholder="Years" class="mc-input w-full hidden">
+          </div>
 
-            <label for="homeInsurance">Annual Homeowners Insurance ($)</label> <!-- Added Insurance -->
-            <input type="number" id="homeInsurance" placeholder="Optional, e.g., 1500" min="0">
+          <!-- Interest Rate -->
+          <div>
+            <label for="rate" class="block text-sm font-medium text-[#94a3b8] mb-1">Interest Rate</label>
+            <div class="relative">
+              <input id="rate" type="text" inputmode="decimal" placeholder="6.5" class="mc-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748b]">%</span>
+            </div>
+          </div>
 
-            <label for="pmi">Annual PMI ($)</label>
-            <input type="number" id="pmi" placeholder="Optional, e.g., 1200" min="0">
+          <!-- Optional Fields Divider -->
+          <div class="sm:col-span-2 pt-2">
+            <button id="optional-toggle" class="text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors flex items-center gap-2">
+              <svg id="optional-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              Taxes, Insurance &amp; HOA
+            </button>
+          </div>
 
-            <label for="hoaFees">Monthly HOA Fees ($)</label> <!-- Added HOA -->
-            <input type="number" id="hoaFees" placeholder="Optional, e.g., 150" min="0">
-
-            <div class="result" id="resultText">Enter your loan details above.</div>
+          <div id="optional-fields" class="sm:col-span-2 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+              <div>
+                <label for="property-tax" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual Property Tax</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <input id="property-tax" type="text" inputmode="decimal" placeholder="4,200" class="mc-input pl-7 w-full">
+                </div>
+              </div>
+              <div>
+                <label for="insurance" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual Home Insurance</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <input id="insurance" type="text" inputmode="decimal" placeholder="1,500" class="mc-input pl-7 w-full">
+                </div>
+              </div>
+              <div>
+                <label for="pmi" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual PMI</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <input id="pmi" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
+                </div>
+              </div>
+              <div>
+                <label for="hoa" class="block text-sm font-medium text-[#94a3b8] mb-1">Monthly HOA</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <input id="hoa" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+          <div>
+            <div class="text-xs text-[#94a3b8]">Principal &amp; Interest</div>
+            <div id="out-pi" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#94a3b8]">Property Tax</div>
+            <div id="out-tax" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#94a3b8]">Home Insurance</div>
+            <div id="out-ins" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#94a3b8]">PMI</div>
+            <div id="out-pmi" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#94a3b8]">HOA</div>
+            <div id="out-hoa" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+          </div>
+        </div>
+        <div class="border-t border-[#334155] pt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          <div>
+            <div class="text-xs text-[#94a3b8]">Total Monthly Payment</div>
+            <div id="out-total" class="text-3xl font-bold text-[#38bdf8]">—</div>
+          </div>
+          <div class="text-sm text-[#94a3b8] text-right">
+            <span>Total Interest: </span><span id="out-total-interest" class="text-[#f1f5f9] font-medium">—</span><br>
+            <span>Total Cost: </span><span id="out-total-cost" class="text-[#f1f5f9] font-medium">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Payment -->
+      <div id="extra-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#f1f5f9] mb-3">Extra Monthly Payment</h3>
+        <div class="flex gap-4 items-end">
+          <div class="flex-1">
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+              <input id="extra-payment" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
+            </div>
+          </div>
+          <div class="text-sm text-right min-w-[180px]">
+            <div class="text-[#94a3b8]">New payoff: <span id="extra-payoff" class="text-[#f1f5f9] font-medium">—</span></div>
+            <div class="text-[#94a3b8]">Interest saved: <span id="extra-saved" class="text-[#22c55e] font-medium">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amortization Schedule -->
+      <div id="amort-wrapper" class="hidden">
+        <button id="amort-toggle" class="w-full bg-[#1e293b] border border-[#334155] rounded-xl px-6 py-4 text-left text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="amort-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Amortization Schedule
+          </span>
+          <span id="amort-months" class="text-xs text-[#64748b]"></span>
+        </button>
+        <div id="amort-body" class="hidden bg-[#1e293b] border border-t-0 border-[#334155] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-[#1e293b]">
+              <tr class="text-[#94a3b8] text-xs">
+                <th class="px-4 py-3 text-left font-medium">Month</th>
+                <th class="px-4 py-3 text-right font-medium">Payment</th>
+                <th class="px-4 py-3 text-right font-medium">Principal</th>
+                <th class="px-4 py-3 text-right font-medium">Interest</th>
+                <th class="px-4 py-3 text-right font-medium">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amort-table" class="text-[#f1f5f9]"></tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How Mortgage Payments Work and What Affects Your Monthly Cost</h2>
+    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+      <p>A mortgage is a loan used to purchase real estate, where the property itself serves as collateral. Most homebuyers do not pay the full purchase price upfront. Instead, they make a down payment and borrow the remainder from a lender, then repay that balance plus interest over a fixed number of years. Understanding how mortgage payments are calculated helps you budget accurately, compare loan offers, and make informed decisions about one of the largest financial commitments most people ever take on.</p>
 
-            // Cache DOM elements
-            const loanAmountInput = document.getElementById('loanAmount');
-            const interestRateInput = document.getElementById('interestRate');
-            const loanTermSelect = document.getElementById('loanTerm');
-            const customTermInput = document.getElementById('customTerm');
-            const propertyTaxInput = document.getElementById('propertyTax');
-            const homeInsuranceInput = document.getElementById('homeInsurance'); // Added
-            const pmiInput = document.getElementById('pmi');
-            const hoaFeesInput = document.getElementById('hoaFees'); // Added
-            const resultText = document.getElementById('resultText');
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">The Amortization Formula</h3>
+      <p>Lenders use a standard amortization formula to determine your fixed monthly principal and interest payment. The formula is:</p>
+      <p class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 font-mono text-[#38bdf8] text-center">M = P × [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> − 1]</p>
+      <p>In this formula, <strong class="text-[#f1f5f9]">M</strong> is the monthly payment, <strong class="text-[#f1f5f9]">P</strong> is the loan principal (home price minus down payment), <strong class="text-[#f1f5f9]">r</strong> is the monthly interest rate (annual rate divided by 12), and <strong class="text-[#f1f5f9]">n</strong> is the total number of monthly payments (loan term in years multiplied by 12). Early in the loan, most of each payment goes toward interest. Over time the balance shrinks and more of each payment is applied to principal. The amortization schedule this calculator generates shows that shift month by month.</p>
 
-            // --- Attach Event Listeners ---
-             // Add new inputs to the list
-            const inputs = [loanAmountInput, interestRateInput, loanTermSelect, customTermInput, propertyTaxInput, homeInsuranceInput, pmiInput, hoaFeesInput];
-            inputs.forEach(input => {
-                input.addEventListener('input', calculateMortgage);
-                 if (input.tagName === 'SELECT') {
-                    input.removeEventListener('input', calculateMortgage);
-                    input.addEventListener('change', calculateMortgage);
-                 }
-            });
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">What Affects Your Monthly Payment</h3>
+      <p>Several factors determine how much you pay each month:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">Loan principal</strong> — The amount you actually borrow. A larger down payment reduces the principal and lowers your monthly cost.</li>
+        <li><strong class="text-[#f1f5f9]">Interest rate</strong> — Even a small difference in rate has a large impact over 15 or 30 years. Shopping around for the best rate can save tens of thousands of dollars.</li>
+        <li><strong class="text-[#f1f5f9]">Loan term</strong> — A shorter term means higher monthly payments but significantly less total interest paid over the life of the loan.</li>
+        <li><strong class="text-[#f1f5f9]">Property taxes</strong> — Assessed annually by your local government and typically collected monthly through an escrow account managed by your lender.</li>
+        <li><strong class="text-[#f1f5f9]">Homeowners insurance</strong> — Required by lenders to protect against loss from fire, storms, theft, and other covered events. Premiums vary by location and coverage level.</li>
+        <li><strong class="text-[#f1f5f9]">Private mortgage insurance (PMI)</strong> — Usually required when your down payment is less than 20% of the home's value. PMI protects the lender if you default, and it is typically removed once you reach 20% equity.</li>
+        <li><strong class="text-[#f1f5f9]">HOA fees</strong> — If you buy a home in a community with a homeowners association, monthly dues cover shared amenities and maintenance.</li>
+      </ul>
 
-            // Listener to show/hide custom term input
-            loanTermSelect.addEventListener('change', function() {
-                const isCustom = this.value === 'custom';
-                customTermInput.style.display = isCustom ? 'block' : 'none';
-                if (isCustom) {
-                    customTermInput.value = '';
-                    customTermInput.focus();
-                    resultText.textContent = 'Enter custom loan term in years.';
-                    resultText.classList.remove('error');
-                } else {
-                    calculateMortgage();
-                }
-            });
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How Extra Payments Reduce Total Interest</h3>
+      <p>Making additional payments each month — even small ones — applies directly to the loan principal. Because interest is calculated on the remaining balance, reducing that balance faster means you pay less interest over the life of the loan and can pay off your mortgage years ahead of schedule. Use the extra payment section above to see exactly how much time and money you can save.</p>
 
-            // --- Calculation Function ---
-            function calculateMortgage() {
-                // Get and parse values
-                const P = parseFloat(loanAmountInput.value) || 0;
-                const annualRate = parseFloat(interestRateInput.value) || 0;
-                const termSelection = loanTermSelect.value;
-                const annualTax = parseFloat(propertyTaxInput.value) || 0;
-                const annualInsurance = parseFloat(homeInsuranceInput.value) || 0; // Added
-                const annualPmi = parseFloat(pmiInput.value) || 0;
-                const monthlyHoa = parseFloat(hoaFeesInput.value) || 0; // Added (already monthly)
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">First-time home buying</strong> — Estimate what you can afford before you start shopping, so you set realistic expectations with your real estate agent.</li>
+        <li><strong class="text-[#f1f5f9]">Refinancing</strong> — Compare your current payment to what a new rate or term would cost. Factor in closing costs to see if refinancing makes sense.</li>
+        <li><strong class="text-[#f1f5f9]">Comparing loan offers</strong> — Plug in different rates and terms side by side to see which lender or loan product gives you the best deal.</li>
+        <li><strong class="text-[#f1f5f9]">Monthly budgeting</strong> — Know your total housing cost, including taxes, insurance, and HOA, so you can plan the rest of your budget around it.</li>
+      </ul>
 
-                let termYears;
-                if (termSelection === 'custom') {
-                    termYears = parseFloat(customTermInput.value) || 0;
-                     if (termYears <= 0 || termYears > 50) {
-                        showError('Please enter a valid custom term (1-50 years).');
-                         return;
-                     }
-                } else {
-                    termYears = parseInt(termSelection);
-                }
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                // --- Input Validation ---
-                if (P <= 0) { showError('Please enter a valid Loan Amount.'); return; }
-                if (annualRate < 0) { showError('Please enter a valid Interest Rate.'); return; }
-                if (termYears <= 0) { showError('Please select or enter a valid Loan Term.'); return; }
-                 // Optional fields validation (ensure non-negative)
-                 if (annualTax < 0) { showError('Annual Property Tax cannot be negative.'); return; }
-                 if (annualInsurance < 0) { showError('Annual Homeowners Insurance cannot be negative.'); return; }
-                 if (annualPmi < 0) { showError('Annual PMI cannot be negative.'); return; }
-                 if (monthlyHoa < 0) { showError('Monthly HOA Fees cannot be negative.'); return; }
+      <p><strong class="text-[#f1f5f9]">How much house can I afford?</strong></p>
+      <p>A common guideline is that your total monthly housing cost — mortgage payment, taxes, insurance, and HOA — should not exceed 28% of your gross monthly income. Some lenders allow up to 36% of gross income for all debt payments combined. Use this calculator to work backward: start with a comfortable monthly payment and adjust the home price until the numbers fit your budget.</p>
 
+      <p><strong class="text-[#f1f5f9]">What is the difference between a 15-year and a 30-year mortgage?</strong></p>
+      <p>A 15-year mortgage has higher monthly payments but a lower interest rate, and you pay far less total interest. A 30-year mortgage offers lower monthly payments, giving you more cash flow flexibility, but you pay more in interest over the life of the loan. The right choice depends on your income stability, other financial goals, and how quickly you want to build equity.</p>
 
-                // --- Calculations ---
-                const i = annualRate / 100 / 12;
-                const n = termYears * 12;
+      <p><strong class="text-[#f1f5f9]">How does PMI work?</strong></p>
+      <p>Private mortgage insurance is typically required when your down payment is below 20% of the home's purchase price. PMI is an annual premium, often between 0.5% and 1% of the original loan amount, divided into monthly payments and added to your mortgage bill. Once your loan-to-value ratio reaches 80% — through payments or appreciation — you can request that your lender remove PMI. Some loans automatically cancel it at 78% LTV.</p>
 
-                let M; // Monthly Principal & Interest
-                if (i === 0) { M = P / n; }
-                else {
-                     const numerator = P * i * Math.pow(1 + i, n);
-                     const denominator = Math.pow(1 + i, n) - 1;
-                     M = numerator / denominator;
-                 }
+      <div class="mt-8 p-4 bg-[#0f172a] border border-[#334155] rounded-lg text-sm text-[#64748b]">
+        <strong class="text-[#94a3b8]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Consult a qualified financial advisor for decisions about your specific situation. Results may vary based on factors not included in this calculator.
+      </div>
 
-                 if (!isFinite(M)) {
-                     showError('Calculation resulted in an invalid number. Check inputs.');
-                     return;
-                 }
+      <p>This mortgage calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to estimate payments, compare loan scenarios, or plan your home-buying budget.</p>
+    </div>
+  </article>
 
-                const monthlyTax = annualTax / 12;
-                const monthlyInsurance = annualInsurance / 12; // Calculate monthly insurance
-                const monthlyPmi = annualPmi / 12;
-                // monthlyHoa is already monthly
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
 
-                const totalMonthlyPayment = M + monthlyTax + monthlyInsurance + monthlyPmi + monthlyHoa; // Add new components
+  <style>
+    .mc-input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #f1f5f9;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms;
+    }
+    .mc-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+    }
+    .mc-input::placeholder { color: #475569; }
 
-                // --- Display Results ---
-                displayResults(M, monthlyTax, monthlyInsurance, monthlyPmi, monthlyHoa, totalMonthlyPayment); // Pass new values
-            }
+    .term-btn {
+      flex: 1;
+      padding: 0.375rem 0;
+      border-radius: 0.375rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .term-btn:hover { border-color: #38bdf8; color: #f1f5f9; }
+    .term-active {
+      background: #38bdf8 !important;
+      color: #0f172a !important;
+      border-color: #38bdf8 !important;
+    }
 
-            // --- Helper to Display Results ---
-            // Updated function signature and content
-            function displayResults(pAndI, tax, insurance, pmi, hoa, total) {
-                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    #amort-table tr { border-top: 1px solid #334155; }
+    #amort-table td { padding: 0.5rem 1rem; white-space: nowrap; }
+    #amort-table td:first-child { text-align: left; }
+    #amort-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
 
-                resultText.innerHTML = `
-                    <strong>Principal & Interest:</strong> ${formatter.format(pAndI)} <br>
-                    <strong>Property Tax (Monthly):</strong> ${formatter.format(tax)} <br>
-                    <strong>Home Insurance (Monthly):</strong> ${formatter.format(insurance)} <br>
-                    <strong>PMI (Monthly):</strong> ${formatter.format(pmi)} <br>
-                    <strong>HOA Fees (Monthly):</strong> ${formatter.format(hoa)} <br>
-                    <div class="total-payment">
-                        <strong>Total Monthly Payment:</strong> ${formatter.format(total)}
-                    </div>
-                `;
-                resultText.classList.remove('error');
-            }
+    #amort-body::-webkit-scrollbar { width: 6px; }
+    #amort-body::-webkit-scrollbar-track { background: #1e293b; }
+    #amort-body::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
 
-             // --- Helper to Show Error Messages ---
-            function showError(message) {
-                 resultText.textContent = message;
-                 resultText.classList.add('error');
-             }
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const fmt2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-        }); // End DOMContentLoaded
-    </script>
+    const $ = id => document.getElementById(id);
 
+    const homePrice = $('home-price');
+    const downDollar = $('down-dollar');
+    const downPct = $('down-pct');
+    const rate = $('rate');
+    const customTerm = $('custom-term');
+    const propertyTax = $('property-tax');
+    const insurance = $('insurance');
+    const pmi = $('pmi');
+    const hoa = $('hoa');
+    const extraPayment = $('extra-payment');
+
+    let termYears = 30;
+    let lastDownEdit = 'dollar';
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    // Term preset buttons
+    $('term-presets').addEventListener('click', e => {
+      const btn = e.target.closest('.term-btn');
+      if (!btn) return;
+      document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('term-active'));
+      btn.classList.add('term-active');
+      const val = btn.dataset.term;
+      if (val === 'custom') {
+        customTerm.classList.remove('hidden');
+        customTerm.focus();
+      } else {
+        customTerm.classList.add('hidden');
+        termYears = parseInt(val);
+        calculate();
+      }
+    });
+
+    customTerm.addEventListener('input', () => {
+      const v = parseInt(customTerm.value);
+      if (v > 0 && v <= 50) { termYears = v; calculate(); }
+    });
+
+    // Optional fields toggle
+    $('optional-toggle').addEventListener('click', () => {
+      const fields = $('optional-fields');
+      const open = !fields.classList.contains('hidden');
+      fields.classList.toggle('hidden');
+      $('optional-chevron').style.transform = open ? '' : 'rotate(90deg)';
+    });
+
+    // Amortization toggle
+    $('amort-toggle').addEventListener('click', () => {
+      const body = $('amort-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('amort-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('amort-toggle').classList.add('rounded-b-none');
+      else $('amort-toggle').classList.remove('rounded-b-none');
+    });
+
+    // Down payment sync
+    downDollar.addEventListener('input', () => {
+      lastDownEdit = 'dollar';
+      formatInput(downDollar);
+      syncDownPct();
+      calculate();
+    });
+    downPct.addEventListener('input', () => {
+      lastDownEdit = 'pct';
+      syncDownDollar();
+      calculate();
+    });
+
+    function syncDownPct() {
+      const hp = parseNum(homePrice);
+      const dd = parseNum(downDollar);
+      if (hp > 0) downPct.value = ((dd / hp) * 100).toFixed(1).replace(/\.0$/, '');
+    }
+
+    function syncDownDollar() {
+      const hp = parseNum(homePrice);
+      const pct = parseFloat(downPct.value) || 0;
+      const val = Math.round(hp * pct / 100);
+      downDollar.value = val > 0 ? new Intl.NumberFormat('en-US').format(val) : '';
+    }
+
+    homePrice.addEventListener('input', () => {
+      formatInput(homePrice);
+      if (lastDownEdit === 'pct') syncDownDollar();
+      else syncDownPct();
+      calculate();
+    });
+
+    [rate, propertyTax, insurance, pmi, hoa, extraPayment].forEach(el => {
+      el.addEventListener('input', () => {
+        if (el !== rate && el !== extraPayment) formatInput(el);
+        calculate();
+      });
+    });
+
+    function calculate() {
+      const hp = parseNum(homePrice);
+      const dd = parseNum(downDollar);
+      const principal = hp - dd;
+      const annualRate = parseFloat(rate.value) || 0;
+      const n = termYears * 12;
+
+      if (principal <= 0 || annualRate < 0 || n <= 0) {
+        $('results-panel').classList.add('hidden');
+        $('extra-panel').classList.add('hidden');
+        $('amort-wrapper').classList.add('hidden');
+        return;
+      }
+
+      const r = annualRate / 100 / 12;
+      let monthlyPI;
+      if (r === 0) {
+        monthlyPI = principal / n;
+      } else {
+        monthlyPI = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      }
+
+      if (!isFinite(monthlyPI)) return;
+
+      const monthlyTax = parseNum(propertyTax) / 12;
+      const monthlyIns = parseNum(insurance) / 12;
+      const monthlyPMI = parseNum(pmi) / 12;
+      const monthlyHOA = parseNum(hoa);
+      const total = monthlyPI + monthlyTax + monthlyIns + monthlyPMI + monthlyHOA;
+      const totalInterestNoExtra = (monthlyPI * n) - principal;
+
+      $('out-pi').textContent = fmt2.format(monthlyPI);
+      $('out-tax').textContent = fmt2.format(monthlyTax);
+      $('out-ins').textContent = fmt2.format(monthlyIns);
+      $('out-pmi').textContent = fmt2.format(monthlyPMI);
+      $('out-hoa').textContent = fmt2.format(monthlyHOA);
+      $('out-total').textContent = fmt.format(total);
+      $('out-total-interest').textContent = fmt.format(totalInterestNoExtra);
+      $('out-total-cost').textContent = fmt.format(monthlyPI * n + (monthlyTax + monthlyIns + monthlyPMI + monthlyHOA) * n);
+
+      $('results-panel').classList.remove('hidden');
+      $('extra-panel').classList.remove('hidden');
+      $('amort-wrapper').classList.remove('hidden');
+
+      buildAmortization(principal, r, n, monthlyPI);
+      calcExtra(principal, r, n, monthlyPI, totalInterestNoExtra);
+    }
+
+    function calcExtra(principal, r, n, basePayment, baseInterest) {
+      const extra = parseNum(extraPayment);
+      if (extra <= 0) {
+        $('extra-payoff').textContent = '—';
+        $('extra-saved').textContent = '—';
+        return;
+      }
+
+      let balance = principal;
+      let totalInterest = 0;
+      let months = 0;
+
+      while (balance > 0.01 && months < n * 2) {
+        months++;
+        const interestPart = balance * r;
+        totalInterest += interestPart;
+        const principalPart = basePayment - interestPart + extra;
+        balance = Math.max(0, balance - principalPart);
+      }
+
+      const years = Math.floor(months / 12);
+      const remainMonths = months % 12;
+      const timeStr = years > 0 ? `${years}y ${remainMonths}m` : `${remainMonths}m`;
+      const saved = baseInterest - totalInterest;
+
+      $('extra-payoff').textContent = timeStr;
+      $('extra-saved').textContent = saved > 0 ? fmt.format(saved) : '$0';
+    }
+
+    function buildAmortization(principal, r, n, monthlyPI) {
+      let balance = principal;
+      const rows = [];
+
+      for (let m = 1; m <= n; m++) {
+        const interest = balance * r;
+        let principalPart = monthlyPI - interest;
+        if (principalPart > balance) principalPart = balance;
+        balance = Math.max(0, balance - principalPart);
+        rows.push(`<tr>
+          <td>${m}</td>
+          <td>${fmt2.format(monthlyPI)}</td>
+          <td>${fmt2.format(principalPart)}</td>
+          <td>${fmt2.format(interest)}</td>
+          <td>${fmt2.format(balance)}</td>
+        </tr>`);
+      }
+
+      $('amort-table').innerHTML = rows.join('');
+      $('amort-months').textContent = `${n} payments`;
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('mortgage-calculator');
+  </script>
 </body>
 </html>

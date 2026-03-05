@@ -1,76 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Randomizer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background: #f4f4f4;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        input {
-            padding: 10px;
-            width: 80px;
-            font-size: 16px;
-            text-align: center;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            margin: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            background: #2a9d8f;
-            color: white;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        button:hover {
-            background: #21867a;
-        }
-        #result {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Random Number Generator Online — Cryptographically Secure | ClickSolveTools</title>
+  <meta name="description" content="Generate cryptographically secure random numbers within any range. Supports bulk generation, dice rolling, and duplicate-free number sets.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/number-randomizer">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Random Number Generator Online | ClickSolveTools">
+  <meta property="og:description" content="Generate cryptographically secure random numbers within any range. Supports bulk generation, dice rolling, and duplicate-free number sets.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/number-randomizer">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Random Number Generator","url":"https://clicksolvetools.com/tools/number-randomizer","description":"Generate cryptographically secure random numbers within any range. Supports bulk generation, dice rolling, and duplicate-free number sets.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body>
-    <div class="container">
-        <h1>Number Randomizer</h1>
-        <p>Enter a range and get a random number:</p>
-        <input type="number" id="minValue" placeholder="Min">
-        <input type="number" id="maxValue" placeholder="Max">
-        <br>
-        <button onclick="generateRandomNumber()">Generate</button>
-        <p id="result">Click the button to get a number!</p>
-    </div>
+<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+  <div id="nav-container"></div>
 
-    <script>
-        function generateRandomNumber() {
-            let min = parseInt(document.getElementById("minValue").value);
-            let max = parseInt(document.getElementById("maxValue").value);
-            
-            if (isNaN(min) || isNaN(max) || min >= max) {
-                document.getElementById("result").textContent = "Please enter a valid range!";
-                return;
-            }
-            
-            let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-            document.getElementById("result").textContent = "Random Number: " + randomNumber;
-        }
-    </script>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Mode Tabs -->
+      <div class="flex gap-1 bg-[#1e293b] border border-[#334155] rounded-xl p-1.5">
+        <button id="tab-number" class="tab-btn tab-active flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Number Generator</button>
+        <button id="tab-dice" class="tab-btn flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Dice Roller</button>
+      </div>
+
+      <!-- Number Generator Panel -->
+      <div id="panel-number">
+        <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-5">
+
+          <!-- Min / Max -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="nr-min" class="block text-sm font-medium text-[#94a3b8] mb-1">Minimum</label>
+              <input id="nr-min" type="number" value="1" class="nr-input w-full">
+            </div>
+            <div>
+              <label for="nr-max" class="block text-sm font-medium text-[#94a3b8] mb-1">Maximum</label>
+              <input id="nr-max" type="number" value="100" class="nr-input w-full">
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div>
+            <label for="nr-qty" class="block text-sm font-medium text-[#94a3b8] mb-1">How many numbers</label>
+            <input id="nr-qty" type="number" min="1" max="100" value="1" class="nr-input w-32">
+          </div>
+
+          <!-- Options -->
+          <div class="flex flex-wrap gap-x-6 gap-y-3">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input id="nr-unique" type="checkbox" class="nr-check">
+              <span class="text-sm text-[#94a3b8]">No duplicates</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input id="nr-sort" type="checkbox" class="nr-check">
+              <span class="text-sm text-[#94a3b8]">Sort results</span>
+            </label>
+          </div>
+
+          <!-- Generate Button -->
+          <button id="nr-generate" class="w-full py-3 rounded-lg bg-[#38bdf8] text-[#0f172a] font-bold text-base hover:bg-[#7dd3fc] active:scale-[0.98] transition-all">Generate</button>
+
+          <!-- Error -->
+          <p id="nr-error" class="text-red-400 text-sm hidden"></p>
+        </div>
+
+        <!-- Result -->
+        <div id="nr-result-box" class="mt-6 bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
+          <div id="nr-result" class="text-center font-bold text-[#38bdf8] leading-relaxed break-words"></div>
+          <button id="nr-copy" class="mt-4 mx-auto flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:text-[#f1f5f9] hover:border-[#38bdf8] transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span id="nr-copy-label">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dice Roller Panel -->
+      <div id="panel-dice" class="hidden">
+        <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-5">
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="dice-count" class="block text-sm font-medium text-[#94a3b8] mb-1">Number of dice</label>
+              <select id="dice-count" class="nr-input w-full">
+                <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+              </select>
+            </div>
+            <div>
+              <label for="dice-sides" class="block text-sm font-medium text-[#94a3b8] mb-1">Sides per die</label>
+              <select id="dice-sides" class="nr-input w-full">
+                <option value="4">d4</option><option value="6" selected>d6</option><option value="8">d8</option><option value="10">d10</option><option value="12">d12</option><option value="20">d20</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="dice-roll" class="w-full py-3 rounded-lg bg-[#38bdf8] text-[#0f172a] font-bold text-base hover:bg-[#7dd3fc] active:scale-[0.98] transition-all">Roll Dice</button>
+        </div>
+
+        <!-- Dice Result -->
+        <div id="dice-result-box" class="mt-6 bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
+          <div id="dice-visual" class="flex flex-wrap justify-center gap-3 mb-4"></div>
+          <div class="text-center">
+            <span class="text-sm text-[#94a3b8]">Total</span>
+            <div id="dice-total" class="text-4xl font-bold text-[#38bdf8]"></div>
+          </div>
+          <button id="dice-copy" class="mt-4 mx-auto flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:text-[#f1f5f9] hover:border-[#38bdf8] transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span id="dice-copy-label">Copy</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How Random Number Generators Work</h2>
+    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+      <p>Randomness is a deceptively complex idea in computing. A computer is a deterministic machine — given the same inputs, it will always produce the same outputs. So how does it generate numbers that appear to have no pattern at all? The answer lies in algorithms specifically designed to simulate unpredictability, and the distinction between how those algorithms work has real consequences for security, fairness, and scientific validity.</p>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Pseudorandom vs. Cryptographically Secure Randomness</h3>
+      <p>Most programming languages include a basic random number function. In JavaScript, that function is <strong class="text-[#f1f5f9]">Math.random()</strong>. It uses a pseudorandom number generator (PRNG) — an algorithm that starts from an internal seed value and produces a long sequence of numbers that look random but are entirely determined by that seed. If you know the seed and the algorithm, you can predict every number in the sequence. For casual use like shuffling a playlist this is perfectly fine, but it is dangerously inadequate for anything involving security, gambling fairness, or cryptographic operations.</p>
+      <p>This tool uses <strong class="text-[#f1f5f9]">crypto.getRandomValues()</strong>, a Web Cryptography API provided by your browser. Instead of a simple algorithm, it draws entropy from hardware-level sources — mouse movements, CPU timing jitter, thermal noise from your device's components, and other unpredictable physical phenomena collected by your operating system's entropy pool. The result is a cryptographically secure pseudorandom number generator (CSPRNG) whose output is computationally infeasible to predict, even with knowledge of prior outputs.</p>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Why the Difference Matters</h3>
+      <p>Consider generating a one-time password or selecting a winner from a pool of contest entrants. If Math.random() is used, a sufficiently motivated attacker could reverse-engineer the PRNG state and predict future values. With crypto.getRandomValues(), this is not feasible. The security guarantees of a CSPRNG are what make it suitable for generating encryption keys, session tokens, and any value where predictability equals vulnerability.</p>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases for Random Number Generation</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#f1f5f9]">Games and tabletop RPGs</strong> — Simulating dice rolls, drawing cards, or generating random encounters. The dice roller mode in this tool supports standard polyhedral dice used in systems like Dungeons &amp; Dragons (d4, d6, d8, d10, d12, d20).</li>
+        <li><strong class="text-[#f1f5f9]">Statistics and sampling</strong> — Selecting a random subset from a population for surveys, A/B tests, or academic research. The no-duplicates option ensures each selected value is unique, which is essential for unbiased sampling.</li>
+        <li><strong class="text-[#f1f5f9]">Lotteries and raffles</strong> — Picking winners fairly from a numbered list of participants. Cryptographic randomness ensures no participant has a statistical edge.</li>
+        <li><strong class="text-[#f1f5f9]">Password and token generation</strong> — Creating unpredictable numeric codes for PINs, verification codes, or authentication tokens where security is critical.</li>
+        <li><strong class="text-[#f1f5f9]">Simulations and modeling</strong> — Monte Carlo methods, risk analysis, and other computational techniques that depend on large sets of random inputs to approximate complex systems.</li>
+        <li><strong class="text-[#f1f5f9]">Education</strong> — Teaching probability, statistics, and computer science concepts with hands-on generation of random data sets.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#f1f5f9]">Is Math.random() truly random?</strong></p>
+      <p>No. Math.random() is pseudorandom. It produces numbers that appear random but are generated by a deterministic algorithm. The sequence is entirely reproducible if the internal state is known. It is adequate for non-security tasks like animations or casual games, but should never be used where unpredictability is a requirement.</p>
+
+      <p><strong class="text-[#f1f5f9]">What is cryptographic randomness?</strong></p>
+      <p>Cryptographic randomness refers to output from a generator that is computationally infeasible to predict, even for an attacker who has observed previous outputs. Browsers implement this through the Web Cryptography API, which gathers entropy from your operating system's hardware-based sources. This level of randomness is required for generating encryption keys, secure tokens, and any value where predictability would create a vulnerability.</p>
+
+      <p><strong class="text-[#f1f5f9]">Can random numbers repeat?</strong></p>
+      <p>Yes, by default. If you generate numbers within a range, any number in that range can appear more than once — just like rolling a die can produce the same face multiple times. This is expected behavior for independent random events. If your use case requires unique values (such as selecting lottery numbers or sampling without replacement), enable the "No duplicates" option. Note that generating unique numbers requires the range to be at least as large as the quantity requested.</p>
+
+      <p><strong class="text-[#f1f5f9]">Is this tool safe for security-sensitive use?</strong></p>
+      <p>This tool uses the same cryptographic primitive (crypto.getRandomValues) that browsers use internally for TLS, WebAuthn, and other security features. However, the generated numbers are displayed on screen and may be visible to screen-capture software or browser extensions. For generating secrets that must remain confidential, use a dedicated password manager or key-generation utility in a controlled environment.</p>
+
+      <p>This random number generator is completely free, runs entirely in your browser, and sends no data to any server. Bookmark this page for quick access whenever you need secure random numbers, dice rolls, or duplicate-free number sets.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .nr-input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #f1f5f9;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms;
+    }
+    .nr-input:focus { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56,189,248,0.15); }
+    .nr-input::placeholder { color: #475569; }
+    select.nr-input { cursor: pointer; }
+    select.nr-input option { background: #0f172a; color: #f1f5f9; }
+
+    .nr-check {
+      appearance: none;
+      width: 1.125rem; height: 1.125rem;
+      border: 1px solid #334155;
+      border-radius: 0.25rem;
+      background: #0f172a;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color 150ms, background 150ms;
+    }
+    .nr-check:checked { background: #38bdf8; border-color: #38bdf8; }
+    .nr-check:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px; top: 2px;
+      width: 5px; height: 9px;
+      border: solid #0f172a;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .tab-btn { background: transparent; color: #94a3b8; border: none; cursor: pointer; }
+    .tab-btn:hover { color: #f1f5f9; }
+    .tab-active { background: #38bdf8 !important; color: #0f172a !important; }
+
+    @keyframes pop-in {
+      0%   { transform: scale(0.6); opacity: 0; }
+      60%  { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .animate-pop { animation: pop-in 0.35s ease-out; }
+
+    .die-face {
+      width: 3.25rem; height: 3.25rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.25rem;
+      color: #f1f5f9;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { opacity: 1; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    /* --- Crypto helper: uniform random integer in [min, max] inclusive --- */
+    function secureRandInt(min, max) {
+      const range = max - min + 1;
+      if (range <= 0) return min;
+      const bitsNeeded = Math.ceil(Math.log2(range)) || 1;
+      const bytesNeeded = Math.ceil(bitsNeeded / 8);
+      const mask = (1 << bitsNeeded) - 1;
+      const buf = new Uint8Array(bytesNeeded);
+      while (true) {
+        crypto.getRandomValues(buf);
+        let val = 0;
+        for (let i = 0; i < bytesNeeded; i++) val = (val << 8) | buf[i];
+        val &= mask;
+        if (val < range) return min + val;
+      }
+    }
+
+    /* --- Tabs --- */
+    const tabs = ['number', 'dice'];
+    tabs.forEach(t => {
+      $('tab-' + t).addEventListener('click', () => {
+        tabs.forEach(x => {
+          $('tab-' + x).classList.toggle('tab-active', x === t);
+          $('panel-' + x).classList.toggle('hidden', x !== t);
+        });
+      });
+    });
+
+    /* ---------- Number Generator ---------- */
+    $('nr-generate').addEventListener('click', generateNumbers);
+
+    function generateNumbers() {
+      const min = parseInt($('nr-min').value);
+      const max = parseInt($('nr-max').value);
+      const qty = Math.min(100, Math.max(1, parseInt($('nr-qty').value) || 1));
+      const unique = $('nr-unique').checked;
+      const sorted = $('nr-sort').checked;
+      const errEl = $('nr-error');
+      errEl.classList.add('hidden');
+
+      if (isNaN(min) || isNaN(max)) return showErr('Enter valid minimum and maximum values.');
+      if (min > max) return showErr('Minimum must be less than or equal to maximum.');
+      if (unique && (max - min + 1) < qty)
+        return showErr(`Range only contains ${max - min + 1} unique values but you requested ${qty}.`);
+
+      let results;
+      if (unique) {
+        const set = new Set();
+        while (set.size < qty) set.add(secureRandInt(min, max));
+        results = [...set];
+      } else {
+        results = Array.from({ length: qty }, () => secureRandInt(min, max));
+      }
+
+      if (sorted) results.sort((a, b) => a - b);
+
+      const box = $('nr-result-box');
+      const display = $('nr-result');
+
+      const baseClass = 'text-center font-bold text-[#38bdf8] leading-relaxed break-words';
+      display.className = baseClass + (qty === 1 ? ' text-5xl sm:text-6xl' : ' text-xl sm:text-2xl');
+      display.textContent = qty === 1 ? results[0] : results.join(', ');
+
+      void display.offsetWidth;
+      display.classList.add('animate-pop');
+
+      box.classList.remove('hidden');
+      $('nr-copy-label').textContent = 'Copy';
+    }
+
+    function showErr(msg) {
+      const el = $('nr-error');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    /* Copy numbers */
+    $('nr-copy').addEventListener('click', () => {
+      const text = $('nr-result').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        $('nr-copy-label').textContent = 'Copied!';
+        setTimeout(() => $('nr-copy-label').textContent = 'Copy', 1500);
+      });
+    });
+
+    /* ---------- Dice Roller ---------- */
+    $('dice-roll').addEventListener('click', rollDice);
+
+    function rollDice() {
+      const count = parseInt($('dice-count').value);
+      const sides = parseInt($('dice-sides').value);
+      const results = Array.from({ length: count }, () => secureRandInt(1, sides));
+      const total = results.reduce((s, v) => s + v, 0);
+
+      const visual = $('dice-visual');
+      visual.innerHTML = results.map(v => `<div class="die-face animate-pop">${v}</div>`).join('');
+
+      const totalEl = $('dice-total');
+      totalEl.textContent = total;
+      totalEl.classList.remove('animate-pop');
+      void totalEl.offsetWidth;
+      totalEl.classList.add('animate-pop');
+
+      $('dice-result-box').classList.remove('hidden');
+      $('dice-copy-label').textContent = 'Copy';
+    }
+
+    /* Copy dice */
+    $('dice-copy').addEventListener('click', () => {
+      const faces = [...$('dice-visual').querySelectorAll('.die-face')].map(d => d.textContent);
+      const total = $('dice-total').textContent;
+      const text = faces.join(', ') + ' (Total: ' + total + ')';
+      navigator.clipboard.writeText(text).then(() => {
+        $('dice-copy-label').textContent = 'Copied!';
+        setTimeout(() => $('dice-copy-label').textContent = 'Copy', 1500);
+      });
+    });
+
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('number-randomizer');
+  </script>
 </body>
 </html>
