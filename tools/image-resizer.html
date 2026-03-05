@@ -57,7 +57,7 @@
   </script>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
   <!-- Nav -->
   <div id="nav-container"></div>
@@ -67,18 +67,18 @@
     <article>
 
       <!-- Widget -->
-      <section id="widget" class="bg-[#1e293b] border border-[#334155] rounded-2xl p-6 sm:p-8 mb-12">
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
 
         <!-- Upload zone -->
         <div
           id="drop-zone"
-          class="border-2 border-dashed border-[#475569] rounded-xl p-10 text-center cursor-pointer hover:border-[#38bdf8] transition-colors mb-6"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
         >
           <input type="file" id="file-input" accept="image/*" class="hidden">
           <div id="drop-label">
-            <svg class="mx-auto mb-3 w-10 h-10 text-[#475569]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-            <p class="text-[#94a3b8] text-base mb-1">Drop image here or click to browse</p>
-            <p class="text-[#475569] text-sm">Supports JPEG, PNG, WebP, GIF, BMP, SVG</p>
+            <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-[#475569] text-base mb-1">Drop image here or click to browse</p>
+            <p class="text-[#64748b] text-sm">Supports JPEG, PNG, WebP, GIF, BMP, SVG</p>
           </div>
         </div>
 
@@ -86,13 +86,13 @@
         <div id="original-info" class="hidden mb-6">
           <div class="flex flex-col sm:flex-row gap-6 items-start">
             <div class="w-full sm:w-1/2 flex justify-center">
-              <img id="preview-img" class="max-h-56 rounded-lg border border-[#334155] object-contain" alt="Original preview">
+              <img id="preview-img" class="max-h-56 rounded-lg border border-[#e2e8f0] object-contain" alt="Original preview">
             </div>
             <div class="w-full sm:w-1/2 space-y-2">
-              <p class="text-sm text-[#94a3b8]">Original dimensions: <span id="orig-dims" class="text-[#f1f5f9] font-semibold"></span></p>
-              <p class="text-sm text-[#94a3b8]">File size: <span id="orig-size" class="text-[#f1f5f9] font-semibold"></span></p>
-              <p class="text-sm text-[#94a3b8]">File name: <span id="orig-name" class="text-[#f1f5f9] font-semibold"></span></p>
-              <button id="clear-btn" class="mt-2 text-xs text-red-400 hover:text-red-300 transition-colors">Remove image</button>
+              <p class="text-sm text-[#475569]">Original dimensions: <span id="orig-dims" class="text-[#1e293b] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">File size: <span id="orig-size" class="text-[#1e293b] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">File name: <span id="orig-name" class="text-[#1e293b] font-semibold"></span></p>
+              <button id="clear-btn" class="mt-2 text-xs text-red-400 hover:text-red-600 transition-colors">Remove image</button>
             </div>
           </div>
         </div>
@@ -102,55 +102,55 @@
 
           <!-- Dimensions -->
           <div>
-            <label class="block text-sm font-medium text-[#94a3b8] mb-3">Output dimensions (px)</label>
+            <label class="block text-sm font-medium text-[#475569] mb-3">Output dimensions (px)</label>
             <div class="flex items-center gap-3">
               <div class="flex-1">
-                <label for="width-input" class="text-xs text-[#64748b]">Width</label>
-                <input type="number" id="width-input" min="1" max="10000" class="w-full mt-1 px-4 py-2.5 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base">
+                <label for="width-input" class="text-xs text-[#94a3b8]">Width</label>
+                <input type="number" id="width-input" min="1" max="10000" class="w-full mt-1 px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base">
               </div>
-              <button id="lock-btn" class="mt-5 w-10 h-10 flex items-center justify-center rounded-lg bg-[#0f172a] border border-[#334155] text-xl hover:border-[#38bdf8] transition-colors" title="Toggle aspect ratio lock">🔒</button>
+              <button id="lock-btn" class="mt-5 w-10 h-10 flex items-center justify-center rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-xl hover:border-[#2563eb] transition-colors" title="Toggle aspect ratio lock">🔒</button>
               <div class="flex-1">
-                <label for="height-input" class="text-xs text-[#64748b]">Height</label>
-                <input type="number" id="height-input" min="1" max="10000" class="w-full mt-1 px-4 py-2.5 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base">
+                <label for="height-input" class="text-xs text-[#94a3b8]">Height</label>
+                <input type="number" id="height-input" min="1" max="10000" class="w-full mt-1 px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base">
               </div>
             </div>
           </div>
 
           <!-- Social media presets -->
           <div>
-            <label class="block text-sm font-medium text-[#94a3b8] mb-3">Social media presets</label>
+            <label class="block text-sm font-medium text-[#475569] mb-3">Social media presets</label>
             <div class="flex flex-wrap gap-2">
-              <button data-w="1080" data-h="1080" class="preset-btn px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:border-[#38bdf8] hover:text-[#f1f5f9] transition-colors">Instagram <span class="text-[#475569]">1080×1080</span></button>
-              <button data-w="1200" data-h="675" class="preset-btn px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:border-[#38bdf8] hover:text-[#f1f5f9] transition-colors">Twitter <span class="text-[#475569]">1200×675</span></button>
-              <button data-w="1200" data-h="630" class="preset-btn px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:border-[#38bdf8] hover:text-[#f1f5f9] transition-colors">Facebook <span class="text-[#475569]">1200×630</span></button>
-              <button data-w="1200" data-h="627" class="preset-btn px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:border-[#38bdf8] hover:text-[#f1f5f9] transition-colors">LinkedIn <span class="text-[#475569]">1200×627</span></button>
-              <button data-w="1280" data-h="720" class="preset-btn px-4 py-2 rounded-lg bg-[#0f172a] border border-[#334155] text-sm text-[#94a3b8] hover:border-[#38bdf8] hover:text-[#f1f5f9] transition-colors">YouTube <span class="text-[#475569]">1280×720</span></button>
+              <button data-w="1080" data-h="1080" class="preset-btn px-4 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#475569] hover:border-[#2563eb] hover:text-[#1e293b] transition-colors">Instagram <span class="text-[#64748b]">1080×1080</span></button>
+              <button data-w="1200" data-h="675" class="preset-btn px-4 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#475569] hover:border-[#2563eb] hover:text-[#1e293b] transition-colors">Twitter <span class="text-[#64748b]">1200×675</span></button>
+              <button data-w="1200" data-h="630" class="preset-btn px-4 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#475569] hover:border-[#2563eb] hover:text-[#1e293b] transition-colors">Facebook <span class="text-[#64748b]">1200×630</span></button>
+              <button data-w="1200" data-h="627" class="preset-btn px-4 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#475569] hover:border-[#2563eb] hover:text-[#1e293b] transition-colors">LinkedIn <span class="text-[#64748b]">1200×627</span></button>
+              <button data-w="1280" data-h="720" class="preset-btn px-4 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#475569] hover:border-[#2563eb] hover:text-[#1e293b] transition-colors">YouTube <span class="text-[#64748b]">1280×720</span></button>
             </div>
           </div>
 
           <!-- Format & Quality -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label for="format-select" class="block text-sm font-medium text-[#94a3b8] mb-2">Output format</label>
-              <select id="format-select" class="w-full px-4 py-2.5 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base appearance-none cursor-pointer">
+              <label for="format-select" class="block text-sm font-medium text-[#475569] mb-2">Output format</label>
+              <select id="format-select" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
                 <option value="image/png">PNG</option>
                 <option value="image/jpeg">JPEG</option>
                 <option value="image/webp">WebP</option>
               </select>
             </div>
             <div id="quality-group">
-              <label for="quality-slider" class="block text-sm font-medium text-[#94a3b8] mb-2">Quality: <span id="quality-val" class="text-[#f1f5f9]">90</span>%</label>
-              <input type="range" id="quality-slider" min="10" max="100" step="1" value="90" class="w-full accent-[#38bdf8] mt-2">
+              <label for="quality-slider" class="block text-sm font-medium text-[#475569] mb-2">Quality: <span id="quality-val" class="text-[#1e293b]">90</span>%</label>
+              <input type="range" id="quality-slider" min="10" max="100" step="1" value="90" class="w-full accent-[#2563eb] mt-2">
             </div>
           </div>
 
           <!-- Action buttons -->
           <div class="flex flex-wrap gap-3 pt-2">
-            <button id="resize-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#38bdf8] text-[#0f172a] font-semibold text-sm hover:bg-[#7dd3fc] transition-colors">
+            <button id="resize-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-[#0f172a] font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"/></svg>
               Resize
             </button>
-            <button id="download-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-transparent border border-[#38bdf8] text-[#38bdf8] font-semibold text-sm hover:bg-[#38bdf8]/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+            <button id="download-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-transparent border border-[#2563eb] text-[#2563eb] font-semibold text-sm hover:bg-[#2563eb]/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
               Download
             </button>
@@ -158,15 +158,15 @@
         </div>
 
         <!-- Resized output (hidden until resize) -->
-        <div id="output-section" class="hidden mt-8 pt-6 border-t border-[#334155]">
-          <h3 class="text-sm font-medium text-[#94a3b8] mb-3">Resized preview</h3>
+        <div id="output-section" class="hidden mt-8 pt-6 border-t border-[#e2e8f0]">
+          <h3 class="text-sm font-medium text-[#475569] mb-3">Resized preview</h3>
           <div class="flex flex-col sm:flex-row gap-6 items-start">
             <div class="w-full sm:w-1/2 flex justify-center">
-              <canvas id="output-canvas" class="max-h-56 rounded-lg border border-[#334155] object-contain"></canvas>
+              <canvas id="output-canvas" class="max-h-56 rounded-lg border border-[#e2e8f0] object-contain"></canvas>
             </div>
             <div class="w-full sm:w-1/2 space-y-2">
-              <p class="text-sm text-[#94a3b8]">New dimensions: <span id="new-dims" class="text-[#f1f5f9] font-semibold"></span></p>
-              <p class="text-sm text-[#94a3b8]">Estimated file size: <span id="new-size" class="text-[#f1f5f9] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">New dimensions: <span id="new-dims" class="text-[#1e293b] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">Estimated file size: <span id="new-size" class="text-[#1e293b] font-semibold"></span></p>
             </div>
           </div>
         </div>
@@ -175,59 +175,59 @@
 
       <!-- SEO Content -->
       <section class="max-w-3xl mx-auto px-0">
-        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Resize Images for Web, Social Media, and Print</h2>
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Resize Images for Web, Social Media, and Print</h2>
 
-        <div class="space-y-6 text-[#94a3b8] leading-relaxed">
+        <div class="space-y-6 text-[#475569] leading-relaxed">
           <p>Every platform on the internet has its own image dimension requirements. Upload a photo that is too large and it gets cropped awkwardly; too small and it appears pixelated. Whether you are preparing a product image for your online store, a header graphic for a blog post, or a profile picture for a social account, getting the dimensions right is the first step toward a polished, professional result. This free image resizer lets you set exact pixel dimensions or pick from popular social media presets and produce a correctly sized image in seconds — all without leaving your browser.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Why Image Dimensions Matter</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why Image Dimensions Matter</h3>
           <p>Image dimensions directly affect how your content is displayed across devices and platforms. A banner uploaded at the wrong aspect ratio will be stretched or letter-boxed, reducing visual quality and hurting user engagement. Oversized images also increase page load times — Google's Core Web Vitals specifically penalize pages where large, unoptimized images delay the Largest Contentful Paint (LCP). Conversely, undersized images that get stretched to fill a container look blurry, especially on high-density (Retina) displays. Resizing images to the exact dimensions each context demands is a simple step that improves both aesthetics and performance.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Resolution vs. File Size</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Resolution vs. File Size</h3>
           <p>Resolution refers to the total number of pixels in an image (width × height), while file size is the amount of storage that image consumes in bytes. A 4000×3000 photo from a modern smartphone can easily weigh 5–10 MB. Resizing it down to 1200×900 for a blog post dramatically cuts both the pixel count and the resulting file size, often by 80% or more. Smaller file sizes mean faster page loads, lower bandwidth costs, and a better experience for users on mobile networks. This tool lets you see the estimated output size before you download, so you can dial in the perfect balance between quality and weight.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How This Tool Works</h3>
-          <p>Upload or drag and drop any image into the tool. The original dimensions and file size are displayed immediately. Enter a custom width and height, or click one of the social media preset buttons to auto-fill the fields. The aspect-ratio lock (enabled by default) ensures that changing one dimension proportionally adjusts the other, preventing distortion. Choose an output format — PNG for lossless quality, JPEG for photographs where smaller size matters, or WebP for the best compression-to-quality ratio on modern browsers. For JPEG and WebP, adjust the quality slider between 10% and 100% to control the trade-off between visual fidelity and file size. Click <strong class="text-[#f1f5f9]">Resize</strong> to see a preview with the new dimensions and estimated file size, then <strong class="text-[#f1f5f9]">Download</strong> to save the result. <strong class="text-[#f1f5f9]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How This Tool Works</h3>
+          <p>Upload or drag and drop any image into the tool. The original dimensions and file size are displayed immediately. Enter a custom width and height, or click one of the social media preset buttons to auto-fill the fields. The aspect-ratio lock (enabled by default) ensures that changing one dimension proportionally adjusts the other, preventing distortion. Choose an output format — PNG for lossless quality, JPEG for photographs where smaller size matters, or WebP for the best compression-to-quality ratio on modern browsers. For JPEG and WebP, adjust the quality slider between 10% and 100% to control the trade-off between visual fidelity and file size. Click <strong class="text-[#1e293b]">Resize</strong> to see a preview with the new dimensions and estimated file size, then <strong class="text-[#1e293b]">Download</strong> to save the result. <strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Social Media Image Size Requirements</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Social Media Image Size Requirements</h3>
           <ul class="list-disc list-inside space-y-2 ml-1">
-            <li><strong class="text-[#f1f5f9]">Instagram post</strong> — 1080×1080 px (square). Stories and reels use 1080×1920.</li>
-            <li><strong class="text-[#f1f5f9]">Twitter / X post</strong> — 1200×675 px (16:9 landscape). Profile photos are 400×400.</li>
-            <li><strong class="text-[#f1f5f9]">Facebook shared link</strong> — 1200×630 px. Cover photos are 820×312 on desktop.</li>
-            <li><strong class="text-[#f1f5f9]">LinkedIn post</strong> — 1200×627 px. Company banners use 1128×191.</li>
-            <li><strong class="text-[#f1f5f9]">YouTube thumbnail</strong> — 1280×720 px (16:9, minimum 640 px wide).</li>
+            <li><strong class="text-[#1e293b]">Instagram post</strong> — 1080×1080 px (square). Stories and reels use 1080×1920.</li>
+            <li><strong class="text-[#1e293b]">Twitter / X post</strong> — 1200×675 px (16:9 landscape). Profile photos are 400×400.</li>
+            <li><strong class="text-[#1e293b]">Facebook shared link</strong> — 1200×630 px. Cover photos are 820×312 on desktop.</li>
+            <li><strong class="text-[#1e293b]">LinkedIn post</strong> — 1200×627 px. Company banners use 1128×191.</li>
+            <li><strong class="text-[#1e293b]">YouTube thumbnail</strong> — 1280×720 px (16:9, minimum 640 px wide).</li>
           </ul>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Image Formats Explained: PNG vs. JPEG vs. WebP</h3>
-          <p><strong class="text-[#f1f5f9]">PNG</strong> uses lossless compression, meaning no visual data is discarded. It supports transparency and is ideal for logos, icons, screenshots, and graphics with sharp edges or text. The trade-off is larger file sizes compared to lossy formats. <strong class="text-[#f1f5f9]">JPEG</strong> uses lossy compression that removes visual details the human eye is less likely to notice. It excels at photographs and complex images where small artifacts are acceptable in exchange for dramatically smaller files. <strong class="text-[#f1f5f9]">WebP</strong>, developed by Google, supports both lossy and lossless compression and typically produces files 25–35% smaller than JPEG at equivalent visual quality. It also supports transparency. WebP is supported by all modern browsers and is the recommended format for web optimization when broad compatibility is not a concern.</p>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Image Formats Explained: PNG vs. JPEG vs. WebP</h3>
+          <p><strong class="text-[#1e293b]">PNG</strong> uses lossless compression, meaning no visual data is discarded. It supports transparency and is ideal for logos, icons, screenshots, and graphics with sharp edges or text. The trade-off is larger file sizes compared to lossy formats. <strong class="text-[#1e293b]">JPEG</strong> uses lossy compression that removes visual details the human eye is less likely to notice. It excels at photographs and complex images where small artifacts are acceptable in exchange for dramatically smaller files. <strong class="text-[#1e293b]">WebP</strong>, developed by Google, supports both lossy and lossless compression and typically produces files 25–35% smaller than JPEG at equivalent visual quality. It also supports transparency. WebP is supported by all modern browsers and is the recommended format for web optimization when broad compatibility is not a concern.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Common Use Cases</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases</h3>
           <ul class="list-disc list-inside space-y-1.5 ml-1">
-            <li><strong class="text-[#f1f5f9]">Social media</strong> — Resize photos to platform-specific dimensions to avoid cropping or quality loss.</li>
-            <li><strong class="text-[#f1f5f9]">Email marketing</strong> — Keep hero images under 600 px wide and below 200 KB for fast rendering in email clients.</li>
-            <li><strong class="text-[#f1f5f9]">Web optimization</strong> — Reduce oversized camera photos to the exact display size needed, cutting page weight and improving Core Web Vitals.</li>
-            <li><strong class="text-[#f1f5f9]">E-commerce</strong> — Standardize product images to consistent dimensions for clean, uniform catalog grids.</li>
-            <li><strong class="text-[#f1f5f9]">Printing</strong> — Scale images to the correct pixel dimensions for your target print size at 300 DPI.</li>
+            <li><strong class="text-[#1e293b]">Social media</strong> — Resize photos to platform-specific dimensions to avoid cropping or quality loss.</li>
+            <li><strong class="text-[#1e293b]">Email marketing</strong> — Keep hero images under 600 px wide and below 200 KB for fast rendering in email clients.</li>
+            <li><strong class="text-[#1e293b]">Web optimization</strong> — Reduce oversized camera photos to the exact display size needed, cutting page weight and improving Core Web Vitals.</li>
+            <li><strong class="text-[#1e293b]">E-commerce</strong> — Standardize product images to consistent dimensions for clean, uniform catalog grids.</li>
+            <li><strong class="text-[#1e293b]">Printing</strong> — Scale images to the correct pixel dimensions for your target print size at 300 DPI.</li>
           </ul>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
 
           <div class="space-y-4">
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">What size should my profile picture be?</h4>
+              <h4 class="font-medium text-[#1e293b]">What size should my profile picture be?</h4>
               <p>Most platforms recommend a square image between 400×400 and 1000×1000 pixels. Instagram uses 320×320 for display but stores 1080×1080. LinkedIn and Twitter display at around 400×400. Uploading at 1000×1000 gives every platform enough data to crop and display cleanly.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Does resizing reduce quality?</h4>
+              <h4 class="font-medium text-[#1e293b]">Does resizing reduce quality?</h4>
               <p>Scaling an image down (reducing dimensions) generally preserves quality well because you are discarding pixels the display doesn't need. Scaling up (enlarging) stretches existing pixel data and can produce a blurry or pixelated result. For best results, start with the highest-resolution source you have and resize downward. Choosing a lossy format like JPEG or WebP at a lower quality setting will also reduce visual fidelity, but the quality slider in this tool lets you find the right balance.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">What's the best format for web?</h4>
-              <p>For photographs and complex images, <strong class="text-[#f1f5f9]">WebP</strong> offers the best file-size-to-quality ratio and is supported by all major browsers. Use <strong class="text-[#f1f5f9]">PNG</strong> when you need transparency or pixel-perfect sharpness (logos, icons, text overlays). Use <strong class="text-[#f1f5f9]">JPEG</strong> when you need broad compatibility with older systems or email clients that may not support WebP.</p>
+              <h4 class="font-medium text-[#1e293b]">What's the best format for web?</h4>
+              <p>For photographs and complex images, <strong class="text-[#1e293b]">WebP</strong> offers the best file-size-to-quality ratio and is supported by all major browsers. Use <strong class="text-[#1e293b]">PNG</strong> when you need transparency or pixel-perfect sharpness (logos, icons, text overlays). Use <strong class="text-[#1e293b]">JPEG</strong> when you need broad compatibility with older systems or email clients that may not support WebP.</p>
             </div>
           </div>
 
-          <p>This image resizer is completely <strong class="text-[#f1f5f9]">free</strong>, requires no sign-up, and works <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No images are stored, transmitted, or processed on any server — your files stay private on your device. Resize with confidence any time you need pixel-perfect images for the web, social media, or print.</p>
+          <p>This image resizer is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. No images are stored, transmitted, or processed on any server — your files stay private on your device. Resize with confidence any time you need pixel-perfect images for the web, social media, or print.</p>
         </div>
       </section>
 
@@ -333,11 +333,11 @@
 
     // Drag & drop
     dropZone.addEventListener('click', () => fileInput.click());
-    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#38bdf8]', 'bg-[#38bdf8]/5'); });
-    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#38bdf8]', 'bg-[#38bdf8]/5'); });
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
     dropZone.addEventListener('drop', e => {
       e.preventDefault();
-      dropZone.classList.remove('border-[#38bdf8]', 'bg-[#38bdf8]/5');
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
       const file = e.dataTransfer.files[0];
       if (file) loadImage(file);
     });
@@ -377,8 +377,8 @@
         if (aspectLocked) {
           aspectRatio = w / h;
         }
-        presetBtns.forEach(b => b.classList.remove('border-[#38bdf8]', 'text-[#f1f5f9]'));
-        btn.classList.add('border-[#38bdf8]', 'text-[#f1f5f9]');
+        presetBtns.forEach(b => b.classList.remove('border-[#2563eb]', 'text-[#1e293b]'));
+        btn.classList.add('border-[#2563eb]', 'text-[#1e293b]');
       });
     });
 

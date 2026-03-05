@@ -61,34 +61,34 @@
     </script>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
     <div id="nav-container"></div>
 
     <main class="max-w-5xl mx-auto px-4 py-8">
         <article>
             <div class="mb-8 text-center">
-                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">Lorem Ipsum Generator</h1>
-                <p class="text-[#94a3b8] text-lg">Generate placeholder text by paragraphs, sentences, or word count</p>
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Lorem Ipsum Generator</h1>
+                <p class="text-[#475569] text-lg">Generate placeholder text by paragraphs, sentences, or word count</p>
             </div>
 
             <!-- Widget -->
-            <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 mb-8">
+            <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 mb-8">
 
                 <!-- Mode Selection -->
                 <fieldset class="mb-5">
-                    <legend class="text-sm font-medium text-[#94a3b8] mb-3">Mode</legend>
-                    <div class="inline-flex rounded-lg overflow-hidden border border-[#334155]">
+                    <legend class="text-sm font-medium text-[#475569] mb-3">Mode</legend>
+                    <div class="inline-flex rounded-lg overflow-hidden border border-[#e2e8f0]">
                         <label class="mode-label cursor-pointer">
                             <input type="radio" name="mode" value="paragraphs" checked class="sr-only peer">
-                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#0f172a] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors select-none">Paragraphs</span>
+                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#f8fafc] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] text-[#475569] hover:text-[#1e293b] transition-colors select-none">Paragraphs</span>
                         </label>
-                        <label class="mode-label cursor-pointer border-l border-[#334155]">
+                        <label class="mode-label cursor-pointer border-l border-[#e2e8f0]">
                             <input type="radio" name="mode" value="sentences" class="sr-only peer">
-                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#0f172a] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors select-none">Sentences</span>
+                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#f8fafc] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] text-[#475569] hover:text-[#1e293b] transition-colors select-none">Sentences</span>
                         </label>
-                        <label class="mode-label cursor-pointer border-l border-[#334155]">
+                        <label class="mode-label cursor-pointer border-l border-[#e2e8f0]">
                             <input type="radio" name="mode" value="words" class="sr-only peer">
-                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#0f172a] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors select-none">Words</span>
+                            <span class="block px-5 py-2.5 text-sm font-medium bg-[#f8fafc] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] text-[#475569] hover:text-[#1e293b] transition-colors select-none">Words</span>
                         </label>
                     </div>
                 </fieldset>
@@ -96,26 +96,26 @@
                 <!-- Count Input -->
                 <div class="flex flex-wrap items-center gap-4 mb-5">
                     <div>
-                        <label for="count-input" class="text-sm font-medium text-[#94a3b8] mb-1 block" id="count-label">Number of paragraphs</label>
+                        <label for="count-input" class="text-sm font-medium text-[#475569] mb-1 block" id="count-label">Number of paragraphs</label>
                         <input
                             type="number"
                             id="count-input"
                             value="5"
                             min="1"
                             max="20"
-                            class="w-28 bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2 text-[#f1f5f9] text-center focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors"
+                            class="w-28 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2 text-[#1e293b] text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors"
                         >
                     </div>
                 </div>
 
                 <!-- Checkboxes -->
                 <div class="flex flex-wrap gap-x-6 gap-y-3 mb-6">
-                    <label class="flex items-center gap-2 cursor-pointer text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors select-none">
-                        <input type="checkbox" id="start-classic" checked class="w-4 h-4 rounded border-[#334155] bg-[#0f172a] text-[#38bdf8] focus:ring-[#38bdf8] focus:ring-offset-0 accent-[#38bdf8]">
+                    <label class="flex items-center gap-2 cursor-pointer text-sm text-[#475569] hover:text-[#1e293b] transition-colors select-none">
+                        <input type="checkbox" id="start-classic" checked class="w-4 h-4 rounded border-[#e2e8f0] bg-[#f8fafc] text-[#2563eb] focus:ring-[#2563eb] focus:ring-offset-0 accent-[#2563eb]">
                         Start with "Lorem ipsum dolor sit amet…"
                     </label>
-                    <label class="flex items-center gap-2 cursor-pointer text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors select-none">
-                        <input type="checkbox" id="wrap-p-tags" class="w-4 h-4 rounded border-[#334155] bg-[#0f172a] text-[#38bdf8] focus:ring-[#38bdf8] focus:ring-offset-0 accent-[#38bdf8]">
+                    <label class="flex items-center gap-2 cursor-pointer text-sm text-[#475569] hover:text-[#1e293b] transition-colors select-none">
+                        <input type="checkbox" id="wrap-p-tags" class="w-4 h-4 rounded border-[#e2e8f0] bg-[#f8fafc] text-[#2563eb] focus:ring-[#2563eb] focus:ring-offset-0 accent-[#2563eb]">
                         Wrap in &lt;p&gt; tags
                     </label>
                 </div>
@@ -123,24 +123,24 @@
                 <!-- Generate Button -->
                 <button
                     id="generate-btn"
-                    class="bg-[#38bdf8] hover:bg-[#7dd3fc] text-[#0f172a] font-semibold px-6 py-2.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#38bdf8] focus:ring-offset-2 focus:ring-offset-[#1e293b]"
+                    class="bg-[#2563eb] hover:bg-[#3b82f6] text-[#0f172a] font-semibold px-6 py-2.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:ring-offset-2 focus:ring-offset-[#1e293b]"
                 >Generate</button>
             </div>
 
             <!-- Output -->
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-2">
-                    <label for="output" class="text-sm font-medium text-[#94a3b8]">Generated Text</label>
+                    <label for="output" class="text-sm font-medium text-[#475569]">Generated Text</label>
                     <button
                         id="copy-btn"
-                        class="text-sm font-medium text-[#38bdf8] hover:text-[#7dd3fc] transition-colors focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+                        class="text-sm font-medium text-[#2563eb] hover:text-[#3b82f6] transition-colors focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
                         disabled
                     >Copy</button>
                 </div>
                 <textarea
                     id="output"
                     readonly
-                    class="w-full bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-base leading-relaxed resize-y focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors placeholder-[#475569]"
+                    class="w-full bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-base leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8]"
                     style="min-height:280px"
                     placeholder="Click Generate to create Lorem Ipsum text…"
                     spellcheck="false"
@@ -150,46 +150,46 @@
 
             <!-- SEO Content -->
             <section class="max-w-3xl mx-auto mt-16">
-                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is Lorem Ipsum and Why Do Designers Use Placeholder Text?</h2>
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is Lorem Ipsum and Why Do Designers Use Placeholder Text?</h2>
 
-                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
-                    <p>Lorem Ipsum is the printing and typesetting industry's standard dummy text. Its roots stretch back over two thousand years to a work by the Roman philosopher <strong class="text-[#f1f5f9]">Marcus Tullius Cicero</strong>. Around 45 BC, Cicero wrote <em>De Finibus Bonorum et Malorum</em> ("On the Ends of Good and Evil"), a treatise on ethics that explored competing theories of pleasure and pain. Sections 1.10.32 and 1.10.33 of that work contain the passages from which Lorem Ipsum is derived. The now-famous opening line — <em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit"</em> — is actually a scrambled excerpt from Cicero's original Latin. An unknown typesetter in the 1500s took portions of the text, shuffled words and letters, and created a galley of type that has survived virtually unchanged for five centuries.</p>
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>Lorem Ipsum is the printing and typesetting industry's standard dummy text. Its roots stretch back over two thousand years to a work by the Roman philosopher <strong class="text-[#1e293b]">Marcus Tullius Cicero</strong>. Around 45 BC, Cicero wrote <em>De Finibus Bonorum et Malorum</em> ("On the Ends of Good and Evil"), a treatise on ethics that explored competing theories of pleasure and pain. Sections 1.10.32 and 1.10.33 of that work contain the passages from which Lorem Ipsum is derived. The now-famous opening line — <em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit"</em> — is actually a scrambled excerpt from Cicero's original Latin. An unknown typesetter in the 1500s took portions of the text, shuffled words and letters, and created a galley of type that has survived virtually unchanged for five centuries.</p>
 
-                    <p>The passage gained renewed life in the 1960s when Letraset, a company that produced rub-on lettering sheets, included Lorem Ipsum passages in its catalogue of typefaces. Designers adopted it as a standard filler because the text <strong class="text-[#f1f5f9]">looks like natural language without carrying distracting meaning</strong>. When viewers see readable English in a mockup, their attention drifts toward the content and away from the layout, typography, and spacing that the designer actually wants reviewed. Placeholder Latin solves that problem — it gives blocks of text a realistic visual weight and rhythm without triggering the reading reflex.</p>
+                    <p>The passage gained renewed life in the 1960s when Letraset, a company that produced rub-on lettering sheets, included Lorem Ipsum passages in its catalogue of typefaces. Designers adopted it as a standard filler because the text <strong class="text-[#1e293b]">looks like natural language without carrying distracting meaning</strong>. When viewers see readable English in a mockup, their attention drifts toward the content and away from the layout, typography, and spacing that the designer actually wants reviewed. Placeholder Latin solves that problem — it gives blocks of text a realistic visual weight and rhythm without triggering the reading reflex.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Why Placeholder Text Matters in Design</h3>
-                    <p>Using dummy text during the design phase prevents <strong class="text-[#f1f5f9]">reading bias</strong>. Stakeholders reviewing a layout are free to evaluate the visual hierarchy, font pairings, whitespace, and color palette without being sidetracked by actual copy. This separation between content creation and visual design is a cornerstone of professional workflows in web design, print publishing, and app development. Once the layout is approved, real copy is dropped in — and the design adjusts naturally because it was built around realistic text volumes.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Placeholder Text Matters in Design</h3>
+                    <p>Using dummy text during the design phase prevents <strong class="text-[#1e293b]">reading bias</strong>. Stakeholders reviewing a layout are free to evaluate the visual hierarchy, font pairings, whitespace, and color palette without being sidetracked by actual copy. This separation between content creation and visual design is a cornerstone of professional workflows in web design, print publishing, and app development. Once the layout is approved, real copy is dropped in — and the design adjusts naturally because it was built around realistic text volumes.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How This Generator Works</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Generator Works</h3>
                     <p>This tool builds Lorem Ipsum output from a bank of over 60 classical Latin words drawn from Cicero's original passage. You can generate text in three modes:</p>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">Paragraphs (1–20)</strong> — Each paragraph contains between four and eight sentences of varying length for a natural, organic feel.</li>
-                        <li><strong class="text-[#f1f5f9]">Sentences (1–100)</strong> — Individual sentences are assembled word-by-word with randomized length, punctuated with commas and periods to mimic real prose rhythm.</li>
-                        <li><strong class="text-[#f1f5f9]">Words (1–5,000)</strong> — A raw word stream lets you fill any container to a precise count, useful for testing text truncation or overflow behavior.</li>
+                        <li><strong class="text-[#1e293b]">Paragraphs (1–20)</strong> — Each paragraph contains between four and eight sentences of varying length for a natural, organic feel.</li>
+                        <li><strong class="text-[#1e293b]">Sentences (1–100)</strong> — Individual sentences are assembled word-by-word with randomized length, punctuated with commas and periods to mimic real prose rhythm.</li>
+                        <li><strong class="text-[#1e293b]">Words (1–5,000)</strong> — A raw word stream lets you fill any container to a precise count, useful for testing text truncation or overflow behavior.</li>
                     </ul>
                     <p>The <em>"Start with Lorem ipsum dolor sit amet…"</em> option ensures the output begins with the iconic opening phrase — a convention most designers expect. The <em>"Wrap in &lt;p&gt; tags"</em> checkbox surrounds each paragraph in HTML tags so you can paste directly into a web page, CMS editor, or email template without additional markup.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">Web design mockups</strong> — Fill hero sections, card grids, and blog layouts with realistic text volumes before the copywriter delivers final content.</li>
-                        <li><strong class="text-[#f1f5f9]">Presentation templates</strong> — Populate slides with placeholder body copy to demonstrate font choices and spacing to clients.</li>
-                        <li><strong class="text-[#f1f5f9]">Print layouts</strong> — Set columns in InDesign or Illustrator with accurate word counts to verify line breaks, orphans, and widows.</li>
-                        <li><strong class="text-[#f1f5f9]">Email templates</strong> — Test responsive email layouts with varying amounts of text to ensure they render correctly across clients.</li>
-                        <li><strong class="text-[#f1f5f9]">Software development</strong> — Seed databases, test text-rendering components, or stress-test UI elements with large blocks of text.</li>
+                        <li><strong class="text-[#1e293b]">Web design mockups</strong> — Fill hero sections, card grids, and blog layouts with realistic text volumes before the copywriter delivers final content.</li>
+                        <li><strong class="text-[#1e293b]">Presentation templates</strong> — Populate slides with placeholder body copy to demonstrate font choices and spacing to clients.</li>
+                        <li><strong class="text-[#1e293b]">Print layouts</strong> — Set columns in InDesign or Illustrator with accurate word counts to verify line breaks, orphans, and widows.</li>
+                        <li><strong class="text-[#1e293b]">Email templates</strong> — Test responsive email layouts with varying amounts of text to ensure they render correctly across clients.</li>
+                        <li><strong class="text-[#1e293b]">Software development</strong> — Seed databases, test text-rendering components, or stress-test UI elements with large blocks of text.</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                    <p><strong class="text-[#f1f5f9]">What does Lorem Ipsum actually mean?</strong><br>
+                    <p><strong class="text-[#1e293b]">What does Lorem Ipsum actually mean?</strong><br>
                     The words are fragments of Latin, but the scrambled text does not form coherent sentences in any language. "Lorem" itself is not a real Latin word — it is a truncated form of "dolorem," meaning "pain." The full phrase "Lorem ipsum dolor sit amet" roughly maps to "pain itself let it be pleasurable," though the sentence is intentionally broken and meaningless. This is by design: the text is supposed to be visually convincing without communicating real information.</p>
 
-                    <p><strong class="text-[#f1f5f9]">Is Lorem Ipsum real Latin?</strong><br>
+                    <p><strong class="text-[#1e293b]">Is Lorem Ipsum real Latin?</strong><br>
                     Partially. The individual words are genuine Latin vocabulary pulled from Cicero's <em>De Finibus</em>, but they have been rearranged, truncated, and mixed with invented forms. A Latin scholar reading Lorem Ipsum would recognize most words but find the grammar nonsensical. Richard McClintock, a Latin professor at Hampden-Sydney College, is credited with tracing the text back to its Ciceronian source in the 1980s.</p>
 
-                    <p><strong class="text-[#f1f5f9]">What are alternatives to Lorem Ipsum?</strong><br>
+                    <p><strong class="text-[#1e293b]">What are alternatives to Lorem Ipsum?</strong><br>
                     Several playful alternatives exist: <em>Hipster Ipsum</em> uses trendy buzzwords, <em>Bacon Ipsum</em> substitutes meat-related terms, <em>Cupcake Ipsum</em> is filled with dessert vocabulary, and <em>Corporate Ipsum</em> parodies business jargon. For serious projects, some designers prefer using draft copy or representative real-world content to get a more accurate sense of how the final product will look. The right choice depends on the audience and formality of the project.</p>
 
-                    <p>This Lorem Ipsum generator is completely <strong class="text-[#f1f5f9]">free</strong>, requires no sign-up, and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No text is stored or transmitted — generate as much placeholder text as you need, instantly.</p>
+                    <p>This Lorem Ipsum generator is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. No text is stored or transmitted — generate as much placeholder text as you need, instantly.</p>
                 </div>
             </section>
         </article>

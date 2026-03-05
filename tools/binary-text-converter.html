@@ -58,14 +58,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .mono { font-family: 'Courier New', Consolas, monospace; }
-    .tab-active { background-color: #38bdf8; color: #0f172a; font-weight: 600; }
+    .tab-active { background-color: #2563eb; color: #0f172a; font-weight: 600; }
     .tab-inactive { background-color: #334155; color: #94a3b8; }
     .tab-inactive:hover { background-color: #475569; color: #f1f5f9; }
     textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(56,189,248,0.4); }
   </style>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
   <div id="nav-container"></div>
 
@@ -85,12 +85,12 @@
           <!-- Left Panel -->
           <div class="flex-1 flex flex-col">
             <div class="flex items-center justify-between mb-2">
-              <label id="left-label" class="text-sm font-semibold text-[#94a3b8]">Text</label>
-              <button id="copy-left" class="text-xs text-[#38bdf8] hover:text-[#7dd3fc] transition-colors hidden">Copy</button>
+              <label id="left-label" class="text-sm font-semibold text-[#475569]">Text</label>
+              <button id="copy-left" class="text-xs text-[#2563eb] hover:text-[#3b82f6] transition-colors hidden">Copy</button>
             </div>
             <textarea
               id="left-input"
-              class="flex-1 min-h-[180px] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-sm resize-y placeholder-[#64748b] mono"
+              class="flex-1 min-h-[180px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
               placeholder="Type or paste text here…"
               spellcheck="false"
             ></textarea>
@@ -100,7 +100,7 @@
           <div class="flex md:flex-col items-center justify-center gap-2 py-2 md:py-0">
             <button
               id="swap-btn"
-              class="w-10 h-10 rounded-full bg-[#334155] hover:bg-[#475569] text-[#38bdf8] flex items-center justify-center text-lg transition-colors"
+              class="w-10 h-10 rounded-full bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#2563eb] flex items-center justify-center text-lg transition-colors"
               title="Swap input and output"
             >&harr;</button>
           </div>
@@ -108,12 +108,12 @@
           <!-- Right Panel -->
           <div class="flex-1 flex flex-col">
             <div class="flex items-center justify-between mb-2">
-              <label id="right-label" class="text-sm font-semibold text-[#94a3b8]">Binary</label>
-              <button id="copy-right" class="text-xs text-[#38bdf8] hover:text-[#7dd3fc] transition-colors">Copy</button>
+              <label id="right-label" class="text-sm font-semibold text-[#475569]">Binary</label>
+              <button id="copy-right" class="text-xs text-[#2563eb] hover:text-[#3b82f6] transition-colors">Copy</button>
             </div>
             <textarea
               id="right-input"
-              class="flex-1 min-h-[180px] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] text-sm resize-y placeholder-[#64748b] mono"
+              class="flex-1 min-h-[180px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
               placeholder="Binary output appears here…"
               spellcheck="false"
               readonly
@@ -123,8 +123,8 @@
 
         <!-- Options row -->
         <div class="flex items-center gap-4 mt-4 flex-wrap">
-          <label class="flex items-center gap-2 text-sm text-[#94a3b8] cursor-pointer select-none">
-            <input type="checkbox" id="space-toggle" checked class="accent-[#38bdf8] w-4 h-4">
+          <label class="flex items-center gap-2 text-sm text-[#475569] cursor-pointer select-none">
+            <input type="checkbox" id="space-toggle" checked class="accent-[#2563eb] w-4 h-4">
             Space-separated bytes
           </label>
           <div id="error-msg" class="text-red-400 text-sm ml-auto hidden"></div>
@@ -132,35 +132,35 @@
       </section>
 
       <!-- SEO Content -->
-      <section class="prose prose-invert max-w-none">
-        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-4">Understanding Binary: How Computers Represent Text and Numbers</h2>
+      <section class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-4">Understanding Binary: How Computers Represent Text and Numbers</h2>
 
-        <div class="text-[#cbd5e1] leading-relaxed space-y-4 text-[15px]">
+        <div class="text-[#475569] leading-relaxed space-y-4 text-[15px]">
           <p>
             At the most fundamental level, every piece of data inside a computer is stored as a sequence of ones and zeros. This numbering system is called <strong>binary</strong> (base-2), and it exists because the electronic circuits at the heart of every processor can reliably distinguish between only two voltage states: on and off. A single binary digit — called a <strong>bit</strong> — is the smallest unit of information a computer can handle. Group eight bits together and you get a <strong>byte</strong>, which can represent 256 distinct values (0&ndash;255). Bytes are the building blocks for everything from plain text and pixel colors to network packets and cryptographic keys.
           </p>
 
-          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">ASCII and UTF-8: Turning Bytes into Characters</h3>
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">ASCII and UTF-8: Turning Bytes into Characters</h3>
           <p>
-            Humans need a way to map numbers to letters, and that is exactly what character encoding provides. <strong>ASCII</strong> (American Standard Code for Information Interchange) was one of the earliest encoding standards, assigning the numbers 0&ndash;127 to English letters, digits, punctuation marks, and control characters. The uppercase letter "A," for example, is decimal 65, which in binary is <code class="mono bg-[#1e293b] px-1 rounded">01000001</code>. Because ASCII uses only seven bits, it cannot represent non-English alphabets. <strong>UTF-8</strong> solves this limitation by using one to four bytes per character, covering every script in the Unicode standard while remaining backward-compatible with ASCII. When you type a message in this converter, each character is encoded using its UTF-8 byte values, and each byte is then expressed as an eight-bit binary string.
+            Humans need a way to map numbers to letters, and that is exactly what character encoding provides. <strong>ASCII</strong> (American Standard Code for Information Interchange) was one of the earliest encoding standards, assigning the numbers 0&ndash;127 to English letters, digits, punctuation marks, and control characters. The uppercase letter "A," for example, is decimal 65, which in binary is <code class="mono bg-white px-1 rounded">01000001</code>. Because ASCII uses only seven bits, it cannot represent non-English alphabets. <strong>UTF-8</strong> solves this limitation by using one to four bytes per character, covering every script in the Unicode standard while remaining backward-compatible with ASCII. When you type a message in this converter, each character is encoded using its UTF-8 byte values, and each byte is then expressed as an eight-bit binary string.
           </p>
 
-          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">How Binary Maps to Text</h3>
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">How Binary Maps to Text</h3>
           <p>
-            The conversion process is straightforward. Take the word "Hi": the letter "H" is UTF-8 byte 72, which converts to <code class="mono bg-[#1e293b] px-1 rounded">01001000</code>. The letter "i" is byte 105, which converts to <code class="mono bg-[#1e293b] px-1 rounded">01101001</code>. Concatenate the two bytes, separate them with a space for readability, and you have the binary representation: <code class="mono bg-[#1e293b] px-1 rounded">01001000 01101001</code>. Converting back works in reverse — split the binary string on spaces, parse each group of eight bits into a decimal number, and look up the character for that code point.
+            The conversion process is straightforward. Take the word "Hi": the letter "H" is UTF-8 byte 72, which converts to <code class="mono bg-white px-1 rounded">01001000</code>. The letter "i" is byte 105, which converts to <code class="mono bg-white px-1 rounded">01101001</code>. Concatenate the two bytes, separate them with a space for readability, and you have the binary representation: <code class="mono bg-white px-1 rounded">01001000 01101001</code>. Converting back works in reverse — split the binary string on spaces, parse each group of eight bits into a decimal number, and look up the character for that code point.
           </p>
 
-          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Hexadecimal: Shorthand for Binary</h3>
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Hexadecimal: Shorthand for Binary</h3>
           <p>
-            Reading long strings of ones and zeros is tedious even for experienced developers. <strong>Hexadecimal</strong> (base-16) offers a more compact notation by using the digits 0&ndash;9 and the letters A&ndash;F. Each hex digit maps to exactly four bits, so a single byte can always be expressed as two hex digits. The binary byte <code class="mono bg-[#1e293b] px-1 rounded">11111111</code> becomes <code class="mono bg-[#1e293b] px-1 rounded">FF</code> in hex and 255 in decimal. You will encounter hexadecimal constantly in web development (CSS color codes like <code class="mono bg-[#1e293b] px-1 rounded">#38BDF8</code>), memory addresses, MAC addresses, and debugging output.
+            Reading long strings of ones and zeros is tedious even for experienced developers. <strong>Hexadecimal</strong> (base-16) offers a more compact notation by using the digits 0&ndash;9 and the letters A&ndash;F. Each hex digit maps to exactly four bits, so a single byte can always be expressed as two hex digits. The binary byte <code class="mono bg-white px-1 rounded">11111111</code> becomes <code class="mono bg-white px-1 rounded">FF</code> in hex and 255 in decimal. You will encounter hexadecimal constantly in web development (CSS color codes like <code class="mono bg-white px-1 rounded">#38BDF8</code>), memory addresses, MAC addresses, and debugging output.
           </p>
 
-          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Common Use Cases</h3>
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Common Use Cases</h3>
           <p>
             Binary-to-text conversion is useful in a surprising number of scenarios. <strong>Programmers</strong> inspect binary data when working with file formats, bit flags, network protocols, and bitwise operations. <strong>Network engineers</strong> analyze packet captures and subnet masks that are naturally expressed in binary. <strong>Students and educators</strong> use converters to learn how number systems relate to each other and to demystify how computers store information. <strong>Data analysts</strong> encounter hexadecimal hashes, encoded payloads, and binary log entries that need translation. Whether you are debugging a WebSocket frame, verifying a checksum, or simply curious about what your name looks like in binary, an instant, bidirectional converter saves time and eliminates manual calculation errors.
           </p>
 
-          <h3 class="text-xl font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
 
           <p><strong>Why do computers use binary?</strong><br>
             Transistors — the microscopic switches inside processors — have two reliable states: on (1) and off (0). Binary aligns perfectly with this two-state design, making hardware simple, fast, and resistant to electrical noise. Higher bases would require circuits to distinguish between more voltage levels, increasing error rates and manufacturing complexity.
@@ -171,7 +171,7 @@
           </p>
 
           <p><strong>What is hexadecimal, and why is it used alongside binary?</strong><br>
-            Hexadecimal is a base-16 number system. Because 16 is a power of 2 (2<sup>4</sup>), each hex digit maps neatly to four binary digits. This makes hex a convenient shorthand: the eight-bit binary value <code class="mono bg-[#1e293b] px-1 rounded">10110110</code> is just <code class="mono bg-[#1e293b] px-1 rounded">B6</code> in hex. Developers prefer hex for memory dumps, color codes, and any context where raw binary would be unwieldy.
+            Hexadecimal is a base-16 number system. Because 16 is a power of 2 (2<sup>4</sup>), each hex digit maps neatly to four binary digits. This makes hex a convenient shorthand: the eight-bit binary value <code class="mono bg-white px-1 rounded">10110110</code> is just <code class="mono bg-white px-1 rounded">B6</code> in hex. Developers prefer hex for memory dumps, color codes, and any context where raw binary would be unwieldy.
           </p>
 
           <p>

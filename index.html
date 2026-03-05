@@ -55,72 +55,75 @@
 
   <style>
     .tool-card { transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
-    .tool-card:hover { transform: translateY(-2px); }
+    .tool-card:hover { transform: translateY(-3px); }
     .fade-in { animation: fadeIn 400ms ease both; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .coming-soon-badge { background: linear-gradient(135deg, #334155, #1e293b); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-gradient { background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 40%, #faf5ff 100%); }
+    .accent-text { background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   </style>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
 
   <!-- ─── Navigation ─── -->
-  <nav class="sticky top-0 z-50 bg-[#0f172a]/95 backdrop-blur-md border-b border-[#334155]">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
     <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 group">
         <span class="text-xl">🛠️</span>
-        <span class="text-[#f1f5f9] font-bold text-lg group-hover:text-[#38bdf8] transition-colors">ClickSolveTools</span>
+        <span class="text-[#1e293b] font-bold text-lg group-hover:text-[#2563eb] transition-colors">ClickSolveTools</span>
       </a>
       <div class="flex items-center gap-4 text-sm">
-        <a href="/about" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors hidden sm:inline">About</a>
-        <a href="/privacy" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors hidden sm:inline">Privacy</a>
+        <a href="/about" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">About</a>
+        <a href="/privacy" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">Privacy</a>
       </div>
     </div>
   </nav>
 
   <!-- ─── Hero Section ─── -->
-  <header class="max-w-7xl mx-auto px-4 pt-16 pb-10 text-center">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
-      <span class="text-[#f1f5f9]">Free Online Tools</span><br>
-      <span class="text-[#38bdf8]">That Respect Your Privacy</span>
-    </h1>
-    <p class="text-[#94a3b8] text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-      85 browser-based tools for finance, development, text, images, and more.
-      No signup. No uploads. Everything runs locally on your device.
-    </p>
+  <header class="hero-gradient">
+    <div class="max-w-7xl mx-auto px-4 pt-20 pb-14 text-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-5">
+        <span class="text-[#1e293b]">Free Online Tools</span><br>
+        <span class="accent-text">That Respect Your Privacy</span>
+      </h1>
+      <p class="text-[#475569] text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        85 browser-based tools for finance, development, text, images, and more.
+        No signup. No uploads. Everything runs locally on your device.
+      </p>
 
-    <!-- Search -->
-    <div class="max-w-xl mx-auto relative">
-      <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-        <svg class="w-5 h-5 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
+      <!-- Search -->
+      <div class="max-w-xl mx-auto relative">
+        <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-[#94a3b8]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
+        </div>
+        <input
+          id="search"
+          type="text"
+          placeholder="Search 85 tools… (e.g. mortgage, JSON, QR code)"
+          autocomplete="off"
+          class="w-full pl-12 pr-4 py-3.5 bg-white border border-[#e2e8f0] rounded-xl text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 shadow-sm transition-all text-base"
+        >
       </div>
-      <input
-        id="search"
-        type="text"
-        placeholder="Search 85 tools… (e.g. mortgage, JSON, QR code)"
-        autocomplete="off"
-        class="w-full pl-12 pr-4 py-3.5 bg-[#1e293b] border border-[#334155] rounded-xl text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-all text-base"
-      >
     </div>
   </header>
 
   <!-- ─── Main Content ─── -->
-  <main class="max-w-7xl mx-auto px-4 pb-16">
+  <main class="max-w-7xl mx-auto px-4 pb-16 -mt-2">
 
     <!-- Category Filter Pills -->
-    <div id="category-filters" class="flex flex-wrap gap-2 mb-8 justify-center" role="tablist">
+    <div id="category-filters" class="flex flex-wrap gap-2 mb-8 justify-center pt-6" role="tablist">
       <button
         data-category="all"
         role="tab"
         aria-selected="true"
-        class="cat-pill active px-4 py-2 rounded-full text-sm font-medium transition-colors bg-[#38bdf8] text-[#0f172a]"
+        class="cat-pill active px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#2563eb] text-white shadow-sm shadow-[#2563eb]/20"
       >All (85)</button>
     </div>
 
     <!-- Tool Count / Active Filter Info -->
     <div class="flex items-center justify-between mb-6">
-      <p id="result-count" class="text-[#64748b] text-sm">Showing 85 tools</p>
-      <button id="clear-filters" class="text-[#38bdf8] text-sm font-medium hover:text-[#7dd3fc] transition-colors hidden">Clear filters</button>
+      <p id="result-count" class="text-[#94a3b8] text-sm">Showing 85 tools</p>
+      <button id="clear-filters" class="text-[#2563eb] text-sm font-medium hover:text-[#1d4ed8] transition-colors hidden">Clear filters</button>
     </div>
 
     <!-- Tool Grid -->
@@ -129,72 +132,78 @@
     <!-- No Results -->
     <div id="no-results" class="hidden text-center py-20">
       <div class="text-5xl mb-4">🔍</div>
-      <p class="text-[#94a3b8] text-lg mb-2">No tools found</p>
-      <p class="text-[#64748b] text-sm">Try a different search term or clear your filters</p>
+      <p class="text-[#475569] text-lg mb-2">No tools found</p>
+      <p class="text-[#94a3b8] text-sm">Try a different search term or clear your filters</p>
     </div>
   </main>
 
   <!-- ─── SEO Content ─── -->
-  <article class="max-w-3xl mx-auto px-4 py-16 border-t border-[#1e293b]">
-    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">Free Browser-Based Tools — No Signup, No Uploads, No Tracking</h2>
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Free Browser-Based Tools — No Signup, No Uploads, No Tracking</h2>
 
-    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
-      <p>ClickSolveTools is a growing collection of 85 free online tools that run entirely in your web browser. From financial calculators and developer utilities to image editors and text analyzers, every tool on this site processes your data locally — nothing is ever uploaded to a server. Your files, text, and calculations stay on your device, period.</p>
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>ClickSolveTools is a growing collection of 85 free online tools that run entirely in your web browser. From financial calculators and developer utilities to image editors and text analyzers, every tool on this site processes your data locally — nothing is ever uploaded to a server. Your files, text, and calculations stay on your device, period.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">What Makes ClickSolveTools Different</h3>
-      <p>Most online tool sites require accounts, bombard you with ads, or silently upload your data to their servers. ClickSolveTools takes a different approach: every tool uses client-side JavaScript to handle processing, which means your browser does all the work. Whether you're formatting a JSON payload, compressing an image, or calculating a mortgage amortization schedule, nothing leaves your machine. We don't run a backend, we don't store your inputs, and we don't require signups or email addresses.</p>
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Makes ClickSolveTools Different</h3>
+        <p>Most online tool sites require accounts, bombard you with ads, or silently upload your data to their servers. ClickSolveTools takes a different approach: every tool uses client-side JavaScript to handle processing, which means your browser does all the work. Whether you're formatting a JSON payload, compressing an image, or calculating a mortgage amortization schedule, nothing leaves your machine. We don't run a backend, we don't store your inputs, and we don't require signups or email addresses.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Tools for Every Need</h3>
-      <p>The collection spans 10 categories covering the most common tasks people search for online:</p>
-      <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">💰 Finance (15 tools)</strong> — Mortgage, loan, compound interest, tip, investment, and retirement calculators for personal finance planning.</li>
-        <li><strong class="text-[#f1f5f9]">💻 Developer (10 tools)</strong> — JSON formatter, regex tester, diff checker, JWT decoder, hash generator, and more for day-to-day coding tasks.</li>
-        <li><strong class="text-[#f1f5f9]">📝 Text (5 tools)</strong> — Word counter, case converter, Lorem Ipsum generator, duplicate remover, and word frequency analysis.</li>
-        <li><strong class="text-[#f1f5f9]">🔄 Converters (10 tools)</strong> — Unit, timestamp, binary, Base64, color, number base, CSV/JSON, image format, audio format, and text-to-speech converters.</li>
-        <li><strong class="text-[#f1f5f9]">⚡ Generators (7 tools)</strong> — QR codes, barcodes, passwords, UUIDs, CSS gradients, box shadows, and meta tags.</li>
-        <li><strong class="text-[#f1f5f9]">🔢 Math (6 tools)</strong> — Scientific calculator, percentage, GPA, fraction, standard deviation, and aspect ratio calculators.</li>
-        <li><strong class="text-[#f1f5f9]">❤️ Health (6 tools)</strong> — BMI, calorie/TDEE, body fat, macro, pregnancy due date, and ideal weight calculators.</li>
-        <li><strong class="text-[#f1f5f9]">📄 Documents (9 tools)</strong> — PDF merger, splitter, text extractor, watermark adder, image-to-PDF, DOCX converter, invoice generator, and more.</li>
-        <li><strong class="text-[#f1f5f9]">🖼️ Image (5 tools)</strong> — Image resizer, compressor, cropper, color adjuster, and image-to-Base64 encoder.</li>
-        <li><strong class="text-[#f1f5f9]">🛠️ Utilities (12 tools)</strong> — Stopwatch, screen ruler, random number generator, age calculator, Pomodoro timer, typing test, audio recorder, and more.</li>
-      </ul>
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tools for Every Need</h3>
+        <p>The collection spans 10 categories covering the most common tasks people search for online:</p>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong class="text-[#1e293b]">💰 Finance (15 tools)</strong> — Mortgage, loan, compound interest, tip, investment, and retirement calculators for personal finance planning.</li>
+          <li><strong class="text-[#1e293b]">💻 Developer (10 tools)</strong> — JSON formatter, regex tester, diff checker, JWT decoder, hash generator, and more for day-to-day coding tasks.</li>
+          <li><strong class="text-[#1e293b]">📝 Text (5 tools)</strong> — Word counter, case converter, Lorem Ipsum generator, duplicate remover, and word frequency analysis.</li>
+          <li><strong class="text-[#1e293b]">🔄 Converters (10 tools)</strong> — Unit, timestamp, binary, Base64, color, number base, CSV/JSON, image format, audio format, and text-to-speech converters.</li>
+          <li><strong class="text-[#1e293b]">⚡ Generators (7 tools)</strong> — QR codes, barcodes, passwords, UUIDs, CSS gradients, box shadows, and meta tags.</li>
+          <li><strong class="text-[#1e293b]">🔢 Math (6 tools)</strong> — Scientific calculator, percentage, GPA, fraction, standard deviation, and aspect ratio calculators.</li>
+          <li><strong class="text-[#1e293b]">❤️ Health (6 tools)</strong> — BMI, calorie/TDEE, body fat, macro, pregnancy due date, and ideal weight calculators.</li>
+          <li><strong class="text-[#1e293b]">📄 Documents (9 tools)</strong> — PDF merger, splitter, text extractor, watermark adder, image-to-PDF, DOCX converter, invoice generator, and more.</li>
+          <li><strong class="text-[#1e293b]">🖼️ Image (5 tools)</strong> — Image resizer, compressor, cropper, color adjuster, and image-to-Base64 encoder.</li>
+          <li><strong class="text-[#1e293b]">🛠️ Utilities (12 tools)</strong> — Stopwatch, screen ruler, random number generator, age calculator, Pomodoro timer, typing test, audio recorder, and more.</li>
+        </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How It Works</h3>
-      <p>Each tool lives on its own dedicated page with a clean URL like <code class="text-[#38bdf8]">/tools/json-formatter</code>. You can bookmark any tool directly, share the link, or come back to this page and search by name, keyword, or category. The search bar above filters all 85 tools in real time as you type — no page reloads, no waiting. Tools that are live link directly to their page; tools still in development are clearly marked "Coming Soon."</p>
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How It Works</h3>
+        <p>Each tool lives on its own dedicated page with a clean URL like <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/tools/json-formatter</code>. You can bookmark any tool directly, share the link, or come back to this page and search by name, keyword, or category. The search bar above filters all 85 tools in real time as you type — no page reloads, no waiting. Tools that are live link directly to their page; tools still in development are clearly marked "Coming Soon."</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Built for Speed and Privacy</h3>
-      <p>ClickSolveTools is a static site hosted on Cloudflare Pages, which means pages load fast from edge servers around the world. There's no server-side rendering, no database queries, and no API calls — just HTML, CSS, and JavaScript delivered directly to your browser. The entire site works with JavaScript enabled in any modern browser (Chrome, Firefox, Safari, Edge). Some tools even work offline once the page has loaded.</p>
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Built for Speed and Privacy</h3>
+        <p>ClickSolveTools is a static site hosted on Cloudflare Pages, which means pages load fast from edge servers around the world. There's no server-side rendering, no database queries, and no API calls — just HTML, CSS, and JavaScript delivered directly to your browser. The entire site works with JavaScript enabled in any modern browser (Chrome, Firefox, Safari, Edge). Some tools even work offline once the page has loaded.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
-      <p><strong class="text-[#f1f5f9]">Are these tools really free?</strong><br>
-      Yes, every tool on ClickSolveTools is completely free to use. There are no premium tiers, no usage limits, and no hidden paywalls.</p>
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">Are these tools really free?</strong><br>
+        Yes, every tool on ClickSolveTools is completely free to use. There are no premium tiers, no usage limits, and no hidden paywalls.</p>
 
-      <p><strong class="text-[#f1f5f9]">Is my data safe?</strong><br>
-      Absolutely. All processing happens in your browser using JavaScript. Your data — whether it's a JSON file, an image, or financial inputs — never leaves your device. We don't have a backend server that could store or intercept your data even if we wanted to.</p>
+        <p><strong class="text-[#1e293b]">Is my data safe?</strong><br>
+        Absolutely. All processing happens in your browser using JavaScript. Your data — whether it's a JSON file, an image, or financial inputs — never leaves your device. We don't have a backend server that could store or intercept your data even if we wanted to.</p>
 
-      <p><strong class="text-[#f1f5f9]">Do I need to create an account?</strong><br>
-      No. There is no signup, no login, and no email required. Just open a tool and use it immediately.</p>
+        <p><strong class="text-[#1e293b]">Do I need to create an account?</strong><br>
+        No. There is no signup, no login, and no email required. Just open a tool and use it immediately.</p>
 
-      <p><strong class="text-[#f1f5f9]">Can I use these tools on mobile?</strong><br>
-      Yes. Every tool is designed to be responsive and works on smartphones, tablets, and desktop browsers. Some tools that involve file uploads or large visual elements work best on a larger screen, but all core functionality is available on mobile.</p>
+        <p><strong class="text-[#1e293b]">Can I use these tools on mobile?</strong><br>
+        Yes. Every tool is designed to be responsive and works on smartphones, tablets, and desktop browsers. Some tools that involve file uploads or large visual elements work best on a larger screen, but all core functionality is available on mobile.</p>
 
-      <p>Whether you need a quick calculation, a file conversion, or a developer utility, ClickSolveTools has you covered — free, private, and instant. Bookmark this page and come back whenever you need a reliable online tool.</p>
+        <p>Whether you need a quick calculation, a file conversion, or a developer utility, ClickSolveTools has you covered — free, private, and instant. Bookmark this page and come back whenever you need a reliable online tool.</p>
+      </div>
     </div>
   </article>
 
   <!-- ─── Footer ─── -->
-  <footer class="border-t border-[#334155]">
-    <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+  <footer class="bg-[#1e293b]">
+    <div class="max-w-7xl mx-auto px-4 py-10 text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <span class="text-xl">🛠️</span>
+        <span class="text-white font-bold text-lg">ClickSolveTools</span>
+      </div>
       <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
-      <p class="text-[#64748b] text-xs mb-4">All tools run entirely in your browser. No data is sent to any server.</p>
+      <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
       <div class="flex items-center justify-center gap-4 text-xs">
-        <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Sitemap</a>
-        <span class="text-[#334155]">|</span>
-        <a href="/about" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">About</a>
-        <span class="text-[#334155]">|</span>
-        <a href="/privacy" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Privacy</a>
-        <span class="text-[#334155]">|</span>
-        <a href="/licenses" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Licenses</a>
+        <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/about" class="text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/privacy" class="text-[#94a3b8] hover:text-white transition-colors">Privacy</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/licenses" class="text-[#94a3b8] hover:text-white transition-colors">Licenses</a>
       </div>
     </div>
   </footer>
@@ -212,7 +221,6 @@
 
     let activeCategory = 'all';
 
-    // Build category pills
     const categoryCounts = {};
     tools.forEach(t => { categoryCounts[t.category] = (categoryCounts[t.category] || 0) + 1; });
 
@@ -221,7 +229,7 @@
       btn.dataset.category = cat.name;
       btn.role = 'tab';
       btn.ariaSelected = 'false';
-      btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-colors bg-[#334155] text-[#94a3b8] hover:bg-[#475569] hover:text-[#f1f5f9]';
+      btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b]';
       btn.textContent = `${cat.icon} ${cat.name} (${categoryCounts[cat.name] || 0})`;
       filterBar.appendChild(btn);
     });
@@ -232,9 +240,9 @@
         const isCurrent = btn.dataset.category === cat;
         btn.ariaSelected = isCurrent ? 'true' : 'false';
         if (isCurrent) {
-          btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-colors bg-[#38bdf8] text-[#0f172a]';
+          btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#2563eb] text-white shadow-sm shadow-[#2563eb]/20';
         } else {
-          btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-colors bg-[#334155] text-[#94a3b8] hover:bg-[#475569] hover:text-[#f1f5f9]';
+          btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b]';
         }
       });
       clearFiltersBtn.classList.toggle('hidden', cat === 'all' && searchInput.value === '');
@@ -288,26 +296,26 @@
         const isBuilt = tool.built;
         const href = isBuilt ? `/tools/${tool.slug}` : '#';
         const cursor = isBuilt ? '' : 'cursor-default';
-        const opacity = isBuilt ? '' : 'opacity-60';
-        const hoverBorder = isBuilt ? 'hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/5' : '';
+        const opacity = isBuilt ? '' : 'opacity-50';
+        const hoverEffect = isBuilt ? 'hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10' : '';
         const badge = isBuilt
           ? ''
-          : '<span class="coming-soon-badge text-[10px] font-semibold uppercase tracking-wider text-[#94a3b8] px-2 py-0.5 rounded-full border border-[#475569]">Coming Soon</span>';
+          : '<span class="text-[10px] font-semibold uppercase tracking-wider text-[#94a3b8] px-2 py-0.5 rounded-full border border-[#e2e8f0] bg-[#f8fafc]">Coming Soon</span>';
         const onClick = isBuilt ? '' : 'onclick="event.preventDefault()"';
 
         return `
           <a href="${href}" ${onClick}
-             class="tool-card fade-in block bg-[#1e293b] border border-[#334155] rounded-xl p-5 ${hoverBorder} ${cursor} ${opacity} transition-all duration-200"
+             class="tool-card fade-in block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm ${hoverEffect} ${cursor} ${opacity}"
              style="animation-delay: ${Math.min(i * 30, 600)}ms"
           >
             <div class="flex items-start justify-between mb-3">
               <span class="text-2xl leading-none">${tool.icon}</span>
               ${badge}
             </div>
-            <h2 class="font-semibold text-[#f1f5f9] text-sm mb-1.5">${tool.name}</h2>
-            <p class="text-[#94a3b8] text-xs leading-relaxed line-clamp-2">${tool.description}</p>
-            <div class="mt-3 flex items-center gap-2">
-              <span class="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#334155] text-[#64748b]">${tool.category}</span>
+            <h2 class="font-semibold text-[#1e293b] text-sm mb-1.5">${tool.name}</h2>
+            <p class="text-[#64748b] text-xs leading-relaxed line-clamp-2">${tool.description}</p>
+            <div class="mt-3">
+              <span class="text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#f1f5f9] text-[#94a3b8]">${tool.category}</span>
             </div>
           </a>
         `;

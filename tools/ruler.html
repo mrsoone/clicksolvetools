@@ -60,7 +60,7 @@
   </style>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
   <!-- Nav -->
   <div id="nav-container"></div>
@@ -70,30 +70,30 @@
     <article>
 
       <!-- Widget -->
-      <section class="bg-[#1e293b] border border-[#334155] rounded-2xl p-6 sm:p-8 mb-12">
+      <section class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
 
         <!-- Controls -->
         <div class="flex flex-wrap items-center gap-4 mb-5">
           <!-- Unit toggle -->
-          <div class="flex bg-[#0f172a] rounded-lg border border-[#334155] overflow-hidden">
-            <button id="btn-inches" class="px-5 py-2.5 text-sm font-semibold transition-colors bg-[#38bdf8] text-[#0f172a]">Inches</button>
-            <button id="btn-cm" class="px-5 py-2.5 text-sm font-semibold transition-colors text-[#94a3b8] hover:text-[#f1f5f9]">Centimeters</button>
+          <div class="flex bg-[#f8fafc] rounded-lg border border-[#e2e8f0] overflow-hidden">
+            <button id="btn-inches" class="px-5 py-2.5 text-sm font-semibold transition-colors bg-[#2563eb] text-[#0f172a]">Inches</button>
+            <button id="btn-cm" class="px-5 py-2.5 text-sm font-semibold transition-colors text-[#475569] hover:text-[#1e293b]">Centimeters</button>
           </div>
 
           <!-- Calibrate button -->
-          <button id="btn-calibrate" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-transparent border border-[#38bdf8] text-[#38bdf8] font-semibold text-sm hover:bg-[#38bdf8]/10 transition-colors">
+          <button id="btn-calibrate" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-transparent border border-[#2563eb] text-[#2563eb] font-semibold text-sm hover:bg-[#2563eb]/10 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
             Calibrate
           </button>
         </div>
 
         <!-- Scale readout -->
-        <p id="scale-readout" class="text-sm text-[#94a3b8] mb-4">Current scale: <span id="ppi-value" class="text-[#f1f5f9] font-semibold">96</span> pixels per inch</p>
+        <p id="scale-readout" class="text-sm text-[#475569] mb-4">Current scale: <span id="ppi-value" class="text-[#1e293b] font-semibold">96</span> pixels per inch</p>
 
         <!-- Calibration panel (hidden by default) -->
-        <div id="calibration-panel" class="hidden bg-[#0f172a] border border-[#334155] rounded-xl p-5 mb-5">
-          <h3 class="text-[#f1f5f9] font-semibold text-sm mb-2">Calibrate Your Screen</h3>
-          <p class="text-[#94a3b8] text-sm mb-4">Place a standard credit card (3.375 inches / 85.6 mm wide) flat against your screen. Drag the slider until the highlighted bar below matches the card's width exactly.</p>
+        <div id="calibration-panel" class="hidden bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 mb-5">
+          <h3 class="text-[#1e293b] font-semibold text-sm mb-2">Calibrate Your Screen</h3>
+          <p class="text-[#475569] text-sm mb-4">Place a standard credit card (3.375 inches / 85.6 mm wide) flat against your screen. Drag the slider until the highlighted bar below matches the card's width exactly.</p>
 
           <!-- Credit card reference bar -->
           <div class="mb-4">
@@ -103,19 +103,19 @@
           </div>
 
           <div class="flex items-center gap-4">
-            <label for="ppi-slider" class="text-sm text-[#94a3b8] whitespace-nowrap">PPI:</label>
-            <input type="range" id="ppi-slider" min="48" max="300" value="96" step="1" class="flex-1 accent-[#38bdf8]">
-            <span id="ppi-slider-val" class="text-[#f1f5f9] font-semibold text-sm min-w-[3rem] text-right">96</span>
+            <label for="ppi-slider" class="text-sm text-[#475569] whitespace-nowrap">PPI:</label>
+            <input type="range" id="ppi-slider" min="48" max="300" value="96" step="1" class="flex-1 accent-[#2563eb]">
+            <span id="ppi-slider-val" class="text-[#1e293b] font-semibold text-sm min-w-[3rem] text-right">96</span>
           </div>
 
           <div class="flex gap-3 mt-4">
-            <button id="btn-apply-cal" class="px-5 py-2 rounded-lg bg-[#38bdf8] text-[#0f172a] font-semibold text-sm hover:bg-[#7dd3fc] transition-colors">Apply</button>
-            <button id="btn-cancel-cal" class="px-5 py-2 rounded-lg bg-transparent border border-[#475569] text-[#94a3b8] font-semibold text-sm hover:text-[#f1f5f9] hover:border-[#94a3b8] transition-colors">Cancel</button>
+            <button id="btn-apply-cal" class="px-5 py-2 rounded-lg bg-[#2563eb] text-[#0f172a] font-semibold text-sm hover:bg-[#3b82f6] transition-colors">Apply</button>
+            <button id="btn-cancel-cal" class="px-5 py-2 rounded-lg bg-transparent border border-[#cbd5e1] text-[#475569] font-semibold text-sm hover:text-[#1e293b] hover:border-[#94a3b8] transition-colors">Cancel</button>
           </div>
         </div>
 
         <!-- Ruler area -->
-        <div class="ruler-scroll overflow-x-auto rounded-xl border border-[#334155]">
+        <div class="ruler-scroll overflow-x-auto rounded-xl border border-[#e2e8f0]">
           <canvas id="ruler-canvas" class="block"></canvas>
         </div>
 
@@ -123,49 +123,49 @@
 
       <!-- SEO Content -->
       <section class="max-w-3xl mx-auto px-0">
-        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Measure Things on Your Screen</h2>
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Measure Things on Your Screen</h2>
 
-        <div class="space-y-6 text-[#94a3b8] leading-relaxed">
+        <div class="space-y-6 text-[#475569] leading-relaxed">
           <p>Whether you are a designer checking the physical size of a UI element, a student measuring a diagram, or someone who simply needs a quick ruler and does not have one nearby, an on-screen ruler can be remarkably useful. This free tool turns your monitor, laptop display, or tablet into a calibrated measuring device that shows both inches and centimeters — no downloads, no sign-ups, and no ads required.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Why Screen Rulers Matter</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why Screen Rulers Matter</h3>
           <p>Physical rulers are great when you have one on hand, but digital work increasingly happens in contexts where quick measurements are needed and a physical tool is not available. A screen ruler lets you hold up a printed business card, a photograph, a piece of hardware, or a component and read its dimensions in real time. It is also useful for checking whether print-ready designs appear at the correct size before committing to paper and ink.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Understanding DPI and PPI</h3>
-          <p><strong class="text-[#f1f5f9]">DPI</strong> (dots per inch) and <strong class="text-[#f1f5f9]">PPI</strong> (pixels per inch) describe how many individual dots or pixels fit into one linear inch of a display or printout. Most operating systems assume a default value of 96 PPI, but the actual physical pixel density of your screen depends on its resolution and physical size. A 27-inch 4K monitor has roughly 163 PPI, while a 13-inch laptop at 1920×1080 is closer to 166 PPI. Because the operating system's assumed value rarely matches reality, an uncalibrated screen ruler will be inaccurate — sometimes by a wide margin.</p>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Understanding DPI and PPI</h3>
+          <p><strong class="text-[#1e293b]">DPI</strong> (dots per inch) and <strong class="text-[#1e293b]">PPI</strong> (pixels per inch) describe how many individual dots or pixels fit into one linear inch of a display or printout. Most operating systems assume a default value of 96 PPI, but the actual physical pixel density of your screen depends on its resolution and physical size. A 27-inch 4K monitor has roughly 163 PPI, while a 13-inch laptop at 1920×1080 is closer to 166 PPI. Because the operating system's assumed value rarely matches reality, an uncalibrated screen ruler will be inaccurate — sometimes by a wide margin.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Why Calibration Is Important</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why Calibration Is Important</h3>
           <p>Calibration bridges the gap between what the operating system thinks a pixel represents and what it actually measures on your specific screen. This ruler includes a simple calibration step: place a standard credit card (3.375 inches or 85.6 mm wide — an ISO standard dimension shared by virtually all bank cards, ID cards, and loyalty cards) flat against the display and drag a slider until the on-screen reference bar matches the card exactly. Once calibrated, every inch and centimeter on the ruler corresponds to true physical dimensions on your screen. Calibration is stored in your browser, so you only need to do it once per device.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How This Tool Works</h3>
-          <p>The ruler is rendered on an HTML5 <strong class="text-[#f1f5f9]">canvas</strong> element using your calibrated PPI value. When set to inches, it draws whole-inch labels, half-inch marks, quarter-inch marks, and eighth-inch tick marks — the same gradations found on a standard physical ruler. When set to centimeters, it draws labeled whole-centimeter marks and millimeter ticks. The ruler extends at least 10 inches (25 cm) and can be scrolled horizontally if it extends beyond your viewport. Everything runs entirely in your browser with no server communication.</p>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How This Tool Works</h3>
+          <p>The ruler is rendered on an HTML5 <strong class="text-[#1e293b]">canvas</strong> element using your calibrated PPI value. When set to inches, it draws whole-inch labels, half-inch marks, quarter-inch marks, and eighth-inch tick marks — the same gradations found on a standard physical ruler. When set to centimeters, it draws labeled whole-centimeter marks and millimeter ticks. The ruler extends at least 10 inches (25 cm) and can be scrolled horizontally if it extends beyond your viewport. Everything runs entirely in your browser with no server communication.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Common Use Cases</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases</h3>
           <ul class="list-disc list-inside space-y-1.5 ml-1">
-            <li><strong class="text-[#f1f5f9]">UI and graphic design</strong> — Verify that icons, buttons, and images meet physical size specifications before production.</li>
-            <li><strong class="text-[#f1f5f9]">Print preparation</strong> — Confirm that a design looks correct at its intended print dimensions on screen before sending it to the printer.</li>
-            <li><strong class="text-[#f1f5f9]">Quick measurements</strong> — Measure small objects like screws, coins, jewelry, or electronic components without reaching for a physical ruler.</li>
-            <li><strong class="text-[#f1f5f9]">Education</strong> — Teach students about the metric and imperial measurement systems, unit conversions, and the concept of screen resolution.</li>
-            <li><strong class="text-[#f1f5f9]">Remote collaboration</strong> — Share calibrated measurements with colleagues who need to verify physical sizes during video calls or screen-sharing sessions.</li>
+            <li><strong class="text-[#1e293b]">UI and graphic design</strong> — Verify that icons, buttons, and images meet physical size specifications before production.</li>
+            <li><strong class="text-[#1e293b]">Print preparation</strong> — Confirm that a design looks correct at its intended print dimensions on screen before sending it to the printer.</li>
+            <li><strong class="text-[#1e293b]">Quick measurements</strong> — Measure small objects like screws, coins, jewelry, or electronic components without reaching for a physical ruler.</li>
+            <li><strong class="text-[#1e293b]">Education</strong> — Teach students about the metric and imperial measurement systems, unit conversions, and the concept of screen resolution.</li>
+            <li><strong class="text-[#1e293b]">Remote collaboration</strong> — Share calibrated measurements with colleagues who need to verify physical sizes during video calls or screen-sharing sessions.</li>
           </ul>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
 
           <div class="space-y-4">
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">How accurate is an online ruler?</h4>
+              <h4 class="font-medium text-[#1e293b]">How accurate is an online ruler?</h4>
               <p>Accuracy depends entirely on calibration. Without calibration, an on-screen ruler may be off by 10–30 % because operating systems assume a default PPI that rarely matches the actual physical pixel density of your monitor. After calibrating with a credit card or other known-width object, the ruler is typically accurate to within one or two millimeters — more than sufficient for everyday measurements. For sub-millimeter precision, a dedicated physical measuring tool is recommended.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Why do screen rulers need calibration?</h4>
+              <h4 class="font-medium text-[#1e293b]">Why do screen rulers need calibration?</h4>
               <p>Every display has a different combination of resolution and physical size, which means the number of pixels per physical inch varies from screen to screen. A CSS "inch" is defined as exactly 96 pixels regardless of actual hardware, so browsers have no built-in way to know the true physical size of a pixel. Calibration lets the ruler compensate for this discrepancy by measuring a known physical object and adjusting the scale accordingly.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">What is PPI?</h4>
-              <p>PPI stands for <strong class="text-[#f1f5f9]">pixels per inch</strong>. It describes the pixel density of a display — how many individual pixels are packed into one linear inch of screen real estate. Higher PPI means sharper images and text. Common PPI values range from about 90 (older desktop monitors) to over 400 (high-end smartphones). Knowing your screen's true PPI is essential for any tool that needs to display real-world measurements accurately.</p>
+              <h4 class="font-medium text-[#1e293b]">What is PPI?</h4>
+              <p>PPI stands for <strong class="text-[#1e293b]">pixels per inch</strong>. It describes the pixel density of a display — how many individual pixels are packed into one linear inch of screen real estate. Higher PPI means sharper images and text. Common PPI values range from about 90 (older desktop monitors) to over 400 (high-end smartphones). Knowing your screen's true PPI is essential for any tool that needs to display real-world measurements accurately.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Do I need to recalibrate on a different monitor?</h4>
+              <h4 class="font-medium text-[#1e293b]">Do I need to recalibrate on a different monitor?</h4>
               <p>Yes. Each monitor has its own PPI, so calibration values are specific to a particular display. If you move your laptop to an external monitor or use a different device, recalibrate the ruler for accurate results. The calibration value is saved in your browser's local storage, so it persists between visits on the same device.</p>
             </div>
           </div>
@@ -349,11 +349,11 @@
     function setUnit(u) {
       unit = u;
       if (u === 'inches') {
-        btnInches.className = 'px-5 py-2.5 text-sm font-semibold transition-colors bg-[#38bdf8] text-[#0f172a]';
-        btnCm.className     = 'px-5 py-2.5 text-sm font-semibold transition-colors text-[#94a3b8] hover:text-[#f1f5f9]';
+        btnInches.className = 'px-5 py-2.5 text-sm font-semibold transition-colors bg-[#2563eb] text-[#0f172a]';
+        btnCm.className     = 'px-5 py-2.5 text-sm font-semibold transition-colors text-[#475569] hover:text-[#1e293b]';
       } else {
-        btnCm.className     = 'px-5 py-2.5 text-sm font-semibold transition-colors bg-[#38bdf8] text-[#0f172a]';
-        btnInches.className = 'px-5 py-2.5 text-sm font-semibold transition-colors text-[#94a3b8] hover:text-[#f1f5f9]';
+        btnCm.className     = 'px-5 py-2.5 text-sm font-semibold transition-colors bg-[#2563eb] text-[#0f172a]';
+        btnInches.className = 'px-5 py-2.5 text-sm font-semibold transition-colors text-[#475569] hover:text-[#1e293b]';
       }
       drawRuler();
     }

@@ -5,16 +5,16 @@ export function renderNav(toolName, toolIcon) {
   if (!container) return;
 
   const nav = document.createElement('nav');
-  nav.className = 'fixed top-0 left-0 right-0 z-50 bg-[#0f172a] border-b border-[#334155]';
+  nav.className = 'fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm';
   nav.innerHTML = `
     <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 text-[#38bdf8] hover:text-[#7dd3fc] transition-colors text-sm font-medium">
+      <a href="/" class="flex items-center gap-2 text-[#2563eb] hover:text-[#1d4ed8] transition-colors text-sm font-medium">
         <span>←</span>
         <span>All Tools</span>
       </a>
       <div class="flex items-center gap-2">
         <span class="text-lg">${toolIcon}</span>
-        <h1 class="text-[#f1f5f9] font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">${toolName}</h1>
+        <h1 class="text-[#1e293b] font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">${toolName}</h1>
       </div>
       <div class="w-[72px]"></div>
     </div>
@@ -31,18 +31,22 @@ export function renderFooter() {
   if (!container) return;
 
   container.innerHTML = `
-    <footer class="border-t border-[#334155] mt-16">
-      <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+    <footer class="bg-[#1e293b] mt-16">
+      <div class="max-w-7xl mx-auto px-4 py-10 text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-xl">🛠️</span>
+          <span class="text-white font-bold text-lg">ClickSolveTools</span>
+        </div>
         <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
-        <p class="text-[#64748b] text-xs mb-4">All tools run entirely in your browser. No data is sent to any server.</p>
+        <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
         <div class="flex items-center justify-center gap-4 text-xs">
-          <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Sitemap</a>
-          <span class="text-[#334155]">|</span>
-          <a href="/about" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">About</a>
-          <span class="text-[#334155]">|</span>
-          <a href="/privacy" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Privacy</a>
-          <span class="text-[#334155]">|</span>
-          <a href="/licenses" class="text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Licenses</a>
+          <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
+          <span class="text-[#475569]">|</span>
+          <a href="/about" class="text-[#94a3b8] hover:text-white transition-colors">About</a>
+          <span class="text-[#475569]">|</span>
+          <a href="/privacy" class="text-[#94a3b8] hover:text-white transition-colors">Privacy</a>
+          <span class="text-[#475569]">|</span>
+          <a href="/licenses" class="text-[#94a3b8] hover:text-white transition-colors">Licenses</a>
         </div>
       </div>
     </footer>
@@ -64,13 +68,13 @@ export function renderRelatedTools(currentSlug, category) {
 
   container.innerHTML = `
     <section class="max-w-5xl mx-auto px-4 py-12">
-      <h2 class="text-xl font-bold text-[#f1f5f9] mb-6">Related ${catIcon} ${category} Tools</h2>
+      <h2 class="text-xl font-bold text-[#1e293b] mb-6">Related ${catIcon} ${category} Tools</h2>
       <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         ${related.map(t => `
-          <a href="/tools/${t.slug}" class="block bg-[#1e293b] border border-[#334155] rounded-lg p-4 hover:border-[#38bdf8] hover:shadow-lg hover:shadow-[#38bdf8]/5 transition-all duration-200 hover:-translate-y-0.5">
+          <a href="/tools/${t.slug}" class="block bg-white border border-[#e2e8f0] rounded-lg p-4 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all duration-200 hover:-translate-y-0.5">
             <div class="text-2xl mb-2">${t.icon}</div>
-            <div class="font-semibold text-[#f1f5f9] text-sm mb-1">${t.name}</div>
-            <div class="text-[#94a3b8] text-xs leading-relaxed line-clamp-2">${t.description}</div>
+            <div class="font-semibold text-[#1e293b] text-sm mb-1">${t.name}</div>
+            <div class="text-[#64748b] text-xs leading-relaxed line-clamp-2">${t.description}</div>
           </a>
         `).join('')}
       </div>

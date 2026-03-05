@@ -59,7 +59,7 @@
     .mirror-box { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
   </style>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
 
   <main class="max-w-6xl mx-auto px-4 py-8">
@@ -69,7 +69,7 @@
       <p class="text-gray-400 mb-8">Test regular expressions in real time with instant match highlighting, capture groups, and index positions.</p>
 
       <!-- WIDGET -->
-      <div class="bg-[#1e293b] border border-[#334155] rounded-2xl p-4 sm:p-6 space-y-5 mb-12">
+      <div class="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 space-y-5 mb-12">
 
         <!-- Pattern -->
         <div>
@@ -77,7 +77,7 @@
           <div class="flex items-center gap-2">
             <span class="text-gray-500 text-lg select-none">/</span>
             <input id="pattern" type="text" spellcheck="false" autocomplete="off"
-              class="mono flex-1 bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-base text-sky-300 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+              class="mono flex-1 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2.5 text-base text-sky-300 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
               placeholder="e.g. \\b\\w+@\\w+\\.\\w+\\b" />
             <span class="text-gray-500 text-lg select-none">/</span>
             <span id="flagDisplay" class="text-gray-400 text-base mono min-w-[2ch]">g</span>
@@ -98,11 +98,11 @@
         <div>
           <span class="text-xs text-gray-500 uppercase tracking-wider mr-2">Presets:</span>
           <div class="inline-flex flex-wrap gap-2 mt-1">
-            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="[\\w.-]+@[\\w-]+\\.[\\w.]{2,}" data-flags="gi" data-sample="Contact us at support@example.com or sales@clicksolve.io for help.">Email</button>
-            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]+" data-flags="gi" data-sample="Visit https://clicksolvetools.com or http://example.org/path?q=1&r=2 for details.">URL</button>
-            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}" data-flags="g" data-sample="Call us at +1 (555) 123-4567 or 44-20-7946-0958.">Phone Number</button>
-            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])" data-flags="g" data-sample="Events: 2026-03-05, 2025-12-31, 2024-01-15.">Date (YYYY-MM-DD)</button>
-            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#334155] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)" data-flags="g" data-sample="Server IPs: 192.168.1.1, 10.0.0.255, 172.16.254.3.">IP Address</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#e2e8f0] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="[\\w.-]+@[\\w-]+\\.[\\w.]{2,}" data-flags="gi" data-sample="Contact us at support@example.com or sales@clicksolve.io for help.">Email</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#e2e8f0] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="https?://[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]+" data-flags="gi" data-sample="Visit https://clicksolvetools.com or http://example.org/path?q=1&r=2 for details.">URL</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#e2e8f0] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}" data-flags="g" data-sample="Call us at +1 (555) 123-4567 or 44-20-7946-0958.">Phone Number</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#e2e8f0] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])" data-flags="g" data-sample="Events: 2026-03-05, 2025-12-31, 2024-01-15.">Date (YYYY-MM-DD)</button>
+            <button class="preset-btn px-3 py-1 text-xs rounded-full border border-[#e2e8f0] hover:border-sky-500 hover:text-sky-300 transition" data-pattern="(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)" data-flags="g" data-sample="Server IPs: 192.168.1.1, 10.0.0.255, 172.16.254.3.">IP Address</button>
           </div>
         </div>
 
@@ -110,7 +110,7 @@
         <div>
           <label for="testString" class="block text-sm font-medium text-gray-300 mb-1">Test String</label>
           <textarea id="testString" rows="8" spellcheck="false"
-            class="mono w-full bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition resize-y"
+            class="mono w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition resize-y"
             style="min-height:200px"
             placeholder="Type or paste the text you want to test against…"></textarea>
         </div>
@@ -118,7 +118,7 @@
         <!-- Highlighted Output -->
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">Match Highlighting</label>
-          <div id="highlightOutput" class="mono mirror-box bg-[#0f172a] border border-[#334155] rounded-lg px-3 py-2.5 text-sm text-gray-200 min-h-[120px] max-h-[400px] overflow-auto">
+          <div id="highlightOutput" class="mono mirror-box bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2.5 text-sm text-gray-200 min-h-[120px] max-h-[400px] overflow-auto">
             <span class="text-gray-600 italic">Matches will appear here…</span>
           </div>
         </div>
@@ -126,14 +126,14 @@
         <!-- Results Panel -->
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-1">Results</label>
-          <div id="results" class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-sm space-y-2 max-h-[300px] overflow-auto">
+          <div id="results" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-sm space-y-2 max-h-[300px] overflow-auto">
             <p class="text-gray-500 italic">No matches yet.</p>
           </div>
         </div>
       </div>
 
       <!-- CHEAT SHEET (collapsible) -->
-      <details class="bg-[#1e293b] border border-[#334155] rounded-2xl mb-12 group">
+      <details class="bg-white border border-[#e2e8f0] rounded-2xl mb-12 group">
         <summary class="cursor-pointer px-4 sm:px-6 py-4 text-lg font-semibold text-white select-none flex items-center justify-between">
           Regex Cheat Sheet
           <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
@@ -200,7 +200,7 @@
       </details>
 
       <!-- SEO CONTENT -->
-      <section class="prose prose-invert max-w-none mb-12">
+      <section class="prose max-w-none mb-12">
         <h2 class="text-2xl font-bold text-white mb-4">What Are Regular Expressions and How Do They Work?</h2>
 
         <p>Regular expressions — commonly abbreviated as <strong>regex</strong> or <strong>regexp</strong> — are sequences of characters that define search patterns. Originally rooted in formal language theory developed by mathematician Stephen Cole Kleene in the 1950s, regex has become one of the most versatile and widely used tools in modern software development. Every major programming language, from JavaScript and Python to Java and Go, ships with built-in regex support, and virtually every text editor offers regex-based search and replace.</p>
@@ -252,15 +252,15 @@
       <section class="mb-12">
         <h2 class="text-xl font-bold text-white mb-4">Related Tools</h2>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <a href="/tools/json-formatter" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+          <a href="/tools/json-formatter" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
             <h3 class="font-semibold text-white mb-1">JSON Formatter</h3>
             <p class="text-sm text-gray-400">Pretty-print and validate JSON data instantly.</p>
           </a>
-          <a href="/tools/base64-encoder" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+          <a href="/tools/base64-encoder" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
             <h3 class="font-semibold text-white mb-1">Base64 Encoder / Decoder</h3>
             <p class="text-sm text-gray-400">Encode and decode Base64 strings online.</p>
           </a>
-          <a href="/tools/text-diff" class="block bg-[#1e293b] border border-[#334155] rounded-xl p-4 hover:border-sky-500 transition">
+          <a href="/tools/text-diff" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
             <h3 class="font-semibold text-white mb-1">Text Diff Checker</h3>
             <p class="text-sm text-gray-400">Compare two blocks of text side by side.</p>
           </a>
@@ -271,7 +271,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-[#334155]">
+  <footer class="border-t border-[#e2e8f0]">
     <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-2">
       <span>&copy; 2026 ClickSolveTools. All rights reserved.</span>
       <div class="flex gap-4">
@@ -364,7 +364,7 @@
       rHtml += '<ol class="list-decimal list-inside space-y-2">';
       for (let i = 0; i < matches.length; i++) {
         const mt = matches[i];
-        rHtml += '<li class="bg-[#1e293b] rounded px-3 py-2">';
+        rHtml += '<li class="bg-white rounded px-3 py-2">';
         rHtml += '<span class="mono text-sky-300">"' + escapeHtml(mt.full) + '"</span>';
         rHtml += ' <span class="text-gray-500 text-xs">index ' + mt.index + '–' + (mt.index + mt.full.length - 1) + '</span>';
         if (mt.groups.length > 0) {

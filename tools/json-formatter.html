@@ -53,7 +53,7 @@
     </script>
 
     <style>
-        .json-key { color: #7dd3fc; }
+        .json-key { color: #3b82f6; }
         .json-string { color: #4ade80; }
         .json-number { color: #fb923c; }
         .json-boolean { color: #c084fc; }
@@ -70,24 +70,24 @@
     </style>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
     <div id="nav-container"></div>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
         <article>
             <div class="mb-8 text-center">
-                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">JSON Formatter &amp; Validator</h1>
-                <p class="text-[#94a3b8] text-lg">Paste your JSON to format, validate, and beautify with syntax highlighting</p>
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">JSON Formatter &amp; Validator</h1>
+                <p class="text-[#475569] text-lg">Paste your JSON to format, validate, and beautify with syntax highlighting</p>
             </div>
 
             <!-- Widget -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
                 <!-- Input Panel -->
                 <div class="flex flex-col">
-                    <label for="json-input" class="text-sm font-medium text-[#94a3b8] mb-2">Input</label>
+                    <label for="json-input" class="text-sm font-medium text-[#475569] mb-2">Input</label>
                     <textarea
                         id="json-input"
-                        class="w-full h-80 lg:h-[28rem] bg-[#1e293b] border border-[#334155] rounded-lg p-4 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors placeholder-[#475569]"
+                        class="w-full h-80 lg:h-[28rem] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] font-mono text-sm resize-none focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8]"
                         placeholder="Paste your JSON here..."
                         spellcheck="false"
                     ></textarea>
@@ -95,32 +95,32 @@
 
                 <!-- Output Panel -->
                 <div class="flex flex-col">
-                    <label class="text-sm font-medium text-[#94a3b8] mb-2">Output</label>
+                    <label class="text-sm font-medium text-[#475569] mb-2">Output</label>
                     <div
                         id="json-output"
-                        class="w-full h-80 lg:h-[28rem] bg-[#1e293b] border border-[#334155] rounded-lg p-4 font-mono text-sm overflow-auto"
+                        class="w-full h-80 lg:h-[28rem] bg-white border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm overflow-auto"
                     >
-                        <span class="text-[#475569] italic">Paste your JSON above to get started</span>
+                        <span class="text-[#64748b] italic">Paste your JSON above to get started</span>
                     </div>
                 </div>
             </div>
 
             <!-- Error display -->
-            <div id="error-display" class="hidden mb-6 bg-red-900/30 border border-red-500/40 rounded-lg p-4">
+            <div id="error-display" class="hidden mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
                 <div class="flex items-start gap-3">
                     <span class="text-red-400 text-lg leading-none mt-0.5">&#10007;</span>
                     <div>
-                        <p class="text-red-300 font-semibold text-sm">Invalid JSON</p>
+                        <p class="text-red-600 font-semibold text-sm">Invalid JSON</p>
                         <p id="error-message" class="text-red-400 text-sm mt-1 font-mono"></p>
                     </div>
                 </div>
             </div>
 
             <!-- Success display -->
-            <div id="success-display" class="hidden mb-6 bg-emerald-900/30 border border-emerald-500/40 rounded-lg p-4">
+            <div id="success-display" class="hidden mb-6 bg-emerald-50 border border-emerald-200 rounded-lg p-4">
                 <div class="flex items-center gap-3">
                     <span class="text-emerald-400 text-lg leading-none">&#10003;</span>
-                    <p class="text-emerald-300 font-semibold text-sm">Valid JSON</p>
+                    <p class="text-emerald-600 font-semibold text-sm">Valid JSON</p>
                 </div>
             </div>
 
@@ -128,31 +128,31 @@
             <div class="flex flex-wrap gap-3 mb-12">
                 <button
                     id="btn-format"
-                    class="px-5 py-2.5 bg-[#38bdf8] text-[#0f172a] font-semibold rounded-lg hover:bg-[#7dd3fc] active:scale-95 transition-all duration-150 text-sm"
+                    class="px-5 py-2.5 bg-[#2563eb] text-[#0f172a] font-semibold rounded-lg hover:bg-[#3b82f6] active:scale-95 transition-all duration-150 text-sm"
                 >
                     Format &amp; Validate
                 </button>
                 <button
                     id="btn-minify"
-                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                    class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all duration-150 text-sm"
                 >
                     Minify
                 </button>
                 <button
                     id="btn-copy"
-                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                    class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all duration-150 text-sm"
                 >
                     Copy
                 </button>
                 <button
                     id="btn-sample"
-                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm"
+                    class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all duration-150 text-sm"
                 >
                     Load Sample
                 </button>
                 <button
                     id="btn-clear"
-                    class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-500/40 active:scale-95 transition-all duration-150 text-sm"
+                    class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-200 active:scale-95 transition-all duration-150 text-sm"
                 >
                     Clear
                 </button>
@@ -160,52 +160,52 @@
 
             <!-- SEO Content -->
             <section class="max-w-3xl mx-auto mt-16">
-                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is JSON and Why Does Formatting Matter?</h2>
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is JSON and Why Does Formatting Matter?</h2>
 
-                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+                <div class="space-y-4 text-[#475569] leading-relaxed">
                     <p>JSON, or JavaScript Object Notation, is a lightweight data interchange format that has become the universal language of data on the web. Originally derived from JavaScript, JSON is now language-independent and supported by virtually every programming language, database, and API in existence. Its simple structure of key-value pairs and ordered lists makes it easy for humans to read and write, and straightforward for machines to parse and generate.</p>
 
                     <p>However, when JSON arrives in a single compressed line — as it often does from API responses, log files, or minified configuration files — reading it becomes nearly impossible. A missing bracket, an extra comma, or mismatched quotes can break an entire application, and tracking down these errors in unformatted JSON is like searching for a needle in a haystack. That's exactly where a JSON formatter comes in.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How to Use This Tool</h3>
-                    <p>Using this JSON formatter is straightforward. Paste your raw JSON into the input panel on the left, then click <strong class="text-[#f1f5f9]">Format &amp; Validate</strong>. The tool instantly parses your JSON, checks it for errors, and displays a beautifully indented version with full syntax highlighting. Keys are shown in sky blue, strings in green, numbers in orange, booleans in purple, and null values in red — making the structure immediately scannable.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Use This Tool</h3>
+                    <p>Using this JSON formatter is straightforward. Paste your raw JSON into the input panel on the left, then click <strong class="text-[#1e293b]">Format &amp; Validate</strong>. The tool instantly parses your JSON, checks it for errors, and displays a beautifully indented version with full syntax highlighting. Keys are shown in sky blue, strings in green, numbers in orange, booleans in purple, and null values in red — making the structure immediately scannable.</p>
 
-                    <p>If you need the opposite — compressing formatted JSON into a single line for storage or transmission — click <strong class="text-[#f1f5f9]">Minify</strong>. The <strong class="text-[#f1f5f9]">Copy</strong> button puts the formatted or minified result onto your clipboard, and <strong class="text-[#f1f5f9]">Load Sample</strong> gives you a quick example to experiment with. Line numbers are displayed alongside each line of output, making it easy to reference specific parts of large JSON documents.</p>
+                    <p>If you need the opposite — compressing formatted JSON into a single line for storage or transmission — click <strong class="text-[#1e293b]">Minify</strong>. The <strong class="text-[#1e293b]">Copy</strong> button puts the formatted or minified result onto your clipboard, and <strong class="text-[#1e293b]">Load Sample</strong> gives you a quick example to experiment with. Line numbers are displayed alongside each line of output, making it easy to reference specific parts of large JSON documents.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">What Valid JSON Looks Like</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Valid JSON Looks Like</h3>
                     <p>Valid JSON must follow strict syntax rules. Data is represented as key-value pairs inside curly braces for objects, or as ordered values inside square brackets for arrays. Keys must always be double-quoted strings. Values can be strings (double-quoted), numbers, booleans (<code class="text-[#c084fc]">true</code> or <code class="text-[#c084fc]">false</code>), <code class="text-[#f87171]">null</code>, objects, or arrays. Trailing commas after the last element, single quotes, and unquoted keys are common mistakes that make JSON invalid.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common JSON Errors</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common JSON Errors</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">Trailing commas</strong> — A comma after the last item in an object or array is not permitted in JSON, even though JavaScript allows it.</li>
-                        <li><strong class="text-[#f1f5f9]">Single quotes</strong> — JSON requires double quotes around keys and string values. Single quotes will cause a parse error.</li>
-                        <li><strong class="text-[#f1f5f9]">Unquoted keys</strong> — Every key must be wrapped in double quotes: <code class="text-[#7dd3fc]">"name"</code>, not <code class="text-red-400">name</code>.</li>
-                        <li><strong class="text-[#f1f5f9]">Missing brackets or braces</strong> — Every opening <code class="text-[#94a3b8]">{</code> or <code class="text-[#94a3b8]">[</code> must have a corresponding closing bracket.</li>
-                        <li><strong class="text-[#f1f5f9]">Comments</strong> — JSON does not support comments. Use JSONC or JSON5 variants if you need them.</li>
+                        <li><strong class="text-[#1e293b]">Trailing commas</strong> — A comma after the last item in an object or array is not permitted in JSON, even though JavaScript allows it.</li>
+                        <li><strong class="text-[#1e293b]">Single quotes</strong> — JSON requires double quotes around keys and string values. Single quotes will cause a parse error.</li>
+                        <li><strong class="text-[#1e293b]">Unquoted keys</strong> — Every key must be wrapped in double quotes: <code class="text-[#3b82f6]">"name"</code>, not <code class="text-red-400">name</code>.</li>
+                        <li><strong class="text-[#1e293b]">Missing brackets or braces</strong> — Every opening <code class="text-[#475569]">{</code> or <code class="text-[#475569]">[</code> must have a corresponding closing bracket.</li>
+                        <li><strong class="text-[#1e293b]">Comments</strong> — JSON does not support comments. Use JSONC or JSON5 variants if you need them.</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Use Cases</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Use Cases</h3>
                     <p>Developers, testers, and data engineers use JSON formatters daily across many scenarios:</p>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">API debugging</strong> — Inspect raw API responses to verify data structure, field names, and nesting before writing parsing code.</li>
-                        <li><strong class="text-[#f1f5f9]">Configuration files</strong> — Clean up and validate <code class="text-[#94a3b8]">package.json</code>, <code class="text-[#94a3b8]">tsconfig.json</code>, and other config files that power modern development workflows.</li>
-                        <li><strong class="text-[#f1f5f9]">Data exchange</strong> — Format JSON payloads before sharing them with teammates, pasting into documentation, or storing in version control.</li>
-                        <li><strong class="text-[#f1f5f9]">Database records</strong> — Examine JSON columns from NoSQL databases like MongoDB or Postgres JSONB fields in a readable format.</li>
-                        <li><strong class="text-[#f1f5f9]">Log analysis</strong> — Structure-log lines from applications often arrive as single-line JSON — formatting them reveals the full picture instantly.</li>
+                        <li><strong class="text-[#1e293b]">API debugging</strong> — Inspect raw API responses to verify data structure, field names, and nesting before writing parsing code.</li>
+                        <li><strong class="text-[#1e293b]">Configuration files</strong> — Clean up and validate <code class="text-[#475569]">package.json</code>, <code class="text-[#475569]">tsconfig.json</code>, and other config files that power modern development workflows.</li>
+                        <li><strong class="text-[#1e293b]">Data exchange</strong> — Format JSON payloads before sharing them with teammates, pasting into documentation, or storing in version control.</li>
+                        <li><strong class="text-[#1e293b]">Database records</strong> — Examine JSON columns from NoSQL databases like MongoDB or Postgres JSONB fields in a readable format.</li>
+                        <li><strong class="text-[#1e293b]">Log analysis</strong> — Structure-log lines from applications often arrive as single-line JSON — formatting them reveals the full picture instantly.</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                    <p><strong class="text-[#f1f5f9]">What does JSON stand for?</strong><br>
+                    <p><strong class="text-[#1e293b]">What does JSON stand for?</strong><br>
                     JSON stands for JavaScript Object Notation. Despite the name, it is a language-independent format used across Python, Java, C#, Go, Ruby, PHP, and virtually every other modern language.</p>
 
-                    <p><strong class="text-[#f1f5f9]">How do I fix invalid JSON?</strong><br>
+                    <p><strong class="text-[#1e293b]">How do I fix invalid JSON?</strong><br>
                     Paste your JSON into this tool and click Format &amp; Validate. The error message will indicate the approximate position of the issue — for example, "Unexpected token at position 142." Look near that character position for missing quotes, extra commas, or unmatched brackets. Fix the issue and validate again until the tool confirms your JSON is valid.</p>
 
-                    <p><strong class="text-[#f1f5f9]">What's the difference between JSON and XML?</strong><br>
+                    <p><strong class="text-[#1e293b]">What's the difference between JSON and XML?</strong><br>
                     Both JSON and XML are data interchange formats, but JSON is more concise and easier to parse programmatically. XML uses opening and closing tags which add significant overhead, while JSON relies on lightweight braces and brackets. Most modern REST APIs have adopted JSON as the default format due to its smaller payload size and native compatibility with JavaScript.</p>
 
-                    <p>This tool is completely <strong class="text-[#f1f5f9]">free</strong> and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No data is sent to any server — your JSON never leaves your machine. Use it as often as you need for formatting, validating, and debugging JSON data.</p>
+                    <p>This tool is completely <strong class="text-[#1e293b]">free</strong> and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. No data is sent to any server — your JSON never leaves your machine. Use it as often as you need for formatting, validating, and debugging JSON data.</p>
                 </div>
             </section>
         </article>
@@ -331,7 +331,7 @@
             const raw = input.value.trim();
             if (!raw) {
                 hideMessages();
-                output.innerHTML = '<span class="text-[#475569] italic">Paste your JSON above to get started</span>';
+                output.innerHTML = '<span class="text-[#64748b] italic">Paste your JSON above to get started</span>';
                 lastFormattedOutput = '';
                 return;
             }
@@ -362,7 +362,7 @@
                 const parsed = JSON.parse(raw);
                 const minified = JSON.stringify(parsed);
                 lastFormattedOutput = minified;
-                output.innerHTML = '<pre class="whitespace-pre-wrap break-all leading-6 text-[#f1f5f9]">' + escapeHtml(minified) + '</pre>';
+                output.innerHTML = '<pre class="whitespace-pre-wrap break-all leading-6 text-[#1e293b]">' + escapeHtml(minified) + '</pre>';
                 showSuccess();
             } catch (e) {
                 const enhanced = parseErrorPosition(e.message);
@@ -377,11 +377,11 @@
                 const original = btnCopy.textContent;
                 btnCopy.textContent = 'Copied!';
                 btnCopy.classList.add('bg-emerald-600', 'border-emerald-500', 'text-white');
-                btnCopy.classList.remove('bg-[#1e293b]', 'border-[#334155]', 'text-[#f1f5f9]');
+                btnCopy.classList.remove('bg-white', 'border-[#e2e8f0]', 'text-[#1e293b]');
                 setTimeout(() => {
                     btnCopy.textContent = original;
                     btnCopy.classList.remove('bg-emerald-600', 'border-emerald-500', 'text-white');
-                    btnCopy.classList.add('bg-[#1e293b]', 'border-[#334155]', 'text-[#f1f5f9]');
+                    btnCopy.classList.add('bg-white', 'border-[#e2e8f0]', 'text-[#1e293b]');
                 }, 2000);
             });
         }
@@ -393,7 +393,7 @@
 
         function clearAll() {
             input.value = '';
-            output.innerHTML = '<span class="text-[#475569] italic">Paste your JSON above to get started</span>';
+            output.innerHTML = '<span class="text-[#64748b] italic">Paste your JSON above to get started</span>';
             lastFormattedOutput = '';
             hideMessages();
         }

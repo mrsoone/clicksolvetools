@@ -1,0 +1,25 @@
+# www to non-www (Cloudflare Pages handles this via custom domain, but belt-and-suspenders)
+https://www.clicksolvetools.com/* https://clicksolvetools.com/:splat 301
+
+# Legacy sitemap redirect
+/sitemap.html /sitemap.xml 301
+
+# Legacy tool.html redirects (old query-param pattern → clean URLs)
+/tool.html?tool=calculator /tools/calculator 301
+/tool.html?tool=json-formatter /tools/json-formatter 301
+/tool.html?tool=qr-code-generator /tools/qr-code-generator 301
+/tool.html?tool=unit-converter /tools/unit-converter 301
+/tool.html?tool=timestamp-converter /tools/timestamp-converter 301
+/tool.html?tool=word-counter /tools/word-counter 301
+/tool.html?tool=binary-text-converter /tools/binary-text-converter 301
+/tool.html?tool=barcode-generator /tools/barcode-generator 301
+/tool.html?tool=diff-checker /tools/diff-checker 301
+/tool.html?tool=ruler /tools/ruler 301
+/tool.html?tool=image-resizer /tools/image-resizer 301
+/tool.html?tool=mortgage-calculator /tools/mortgage-calculator 301
+/tool.html?tool=hourly-to-salary-calculator /tools/hourly-to-salary-calculator 301
+/tool.html?tool=number-randomizer /tools/number-randomizer 301
+/tool.html?tool=stopwatch /tools/stopwatch 301
+/tool.html?tool=regex-tester /tools/regex-tester 301
+/tool.html?tool=lorem-ipsum-generator /tools/lorem-ipsum-generator 301
+/tool.html?tool=image-compressor /tools/image-compressor 301

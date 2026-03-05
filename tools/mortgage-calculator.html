@@ -18,43 +18,43 @@
   <meta property="og:site_name" content="ClickSolveTools">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mortgage Calculator","url":"https://clicksolvetools.com/tools/mortgage-calculator","description":"Estimate monthly mortgage payments, total interest, and amortization schedule. Compare loan terms and see how extra payments save money.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
 
       <!-- Input Form -->
-      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
 
           <!-- Home Price -->
           <div class="sm:col-span-2">
-            <label for="home-price" class="block text-sm font-medium text-[#94a3b8] mb-1">Home Price</label>
+            <label for="home-price" class="block text-sm font-medium text-[#475569] mb-1">Home Price</label>
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
               <input id="home-price" type="text" inputmode="decimal" placeholder="350,000" class="mc-input pl-7 w-full">
             </div>
           </div>
 
           <!-- Down Payment -->
           <div class="sm:col-span-2">
-            <label class="block text-sm font-medium text-[#94a3b8] mb-1">Down Payment</label>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Down Payment</label>
             <div class="flex gap-2">
               <div class="relative flex-1">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
                 <input id="down-dollar" type="text" inputmode="decimal" placeholder="70,000" class="mc-input pl-7 w-full">
               </div>
               <div class="relative w-28">
                 <input id="down-pct" type="text" inputmode="decimal" placeholder="20" class="mc-input pr-7 w-full text-right">
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748b]">%</span>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
               </div>
             </div>
           </div>
 
           <!-- Loan Term -->
           <div>
-            <label class="block text-sm font-medium text-[#94a3b8] mb-1">Loan Term</label>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Loan Term</label>
             <div class="flex gap-1 mb-2" id="term-presets">
               <button data-term="15" class="term-btn">15 yr</button>
               <button data-term="20" class="term-btn">20 yr</button>
@@ -66,16 +66,16 @@
 
           <!-- Interest Rate -->
           <div>
-            <label for="rate" class="block text-sm font-medium text-[#94a3b8] mb-1">Interest Rate</label>
+            <label for="rate" class="block text-sm font-medium text-[#475569] mb-1">Interest Rate</label>
             <div class="relative">
               <input id="rate" type="text" inputmode="decimal" placeholder="6.5" class="mc-input pr-7 w-full">
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748b]">%</span>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
             </div>
           </div>
 
           <!-- Optional Fields Divider -->
           <div class="sm:col-span-2 pt-2">
-            <button id="optional-toggle" class="text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors flex items-center gap-2">
+            <button id="optional-toggle" class="text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center gap-2">
               <svg id="optional-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               Taxes, Insurance &amp; HOA
             </button>
@@ -84,30 +84,30 @@
           <div id="optional-fields" class="sm:col-span-2 hidden">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
               <div>
-                <label for="property-tax" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual Property Tax</label>
+                <label for="property-tax" class="block text-sm font-medium text-[#475569] mb-1">Annual Property Tax</label>
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
                   <input id="property-tax" type="text" inputmode="decimal" placeholder="4,200" class="mc-input pl-7 w-full">
                 </div>
               </div>
               <div>
-                <label for="insurance" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual Home Insurance</label>
+                <label for="insurance" class="block text-sm font-medium text-[#475569] mb-1">Annual Home Insurance</label>
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
                   <input id="insurance" type="text" inputmode="decimal" placeholder="1,500" class="mc-input pl-7 w-full">
                 </div>
               </div>
               <div>
-                <label for="pmi" class="block text-sm font-medium text-[#94a3b8] mb-1">Annual PMI</label>
+                <label for="pmi" class="block text-sm font-medium text-[#475569] mb-1">Annual PMI</label>
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
                   <input id="pmi" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
                 </div>
               </div>
               <div>
-                <label for="hoa" class="block text-sm font-medium text-[#94a3b8] mb-1">Monthly HOA</label>
+                <label for="hoa" class="block text-sm font-medium text-[#475569] mb-1">Monthly HOA</label>
                 <div class="relative">
-                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
                   <input id="hoa" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
                 </div>
               </div>
@@ -117,71 +117,71 @@
       </div>
 
       <!-- Results -->
-      <div id="results-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
           <div>
-            <div class="text-xs text-[#94a3b8]">Principal &amp; Interest</div>
-            <div id="out-pi" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+            <div class="text-xs text-[#475569]">Principal &amp; Interest</div>
+            <div id="out-pi" class="text-lg font-semibold text-[#1e293b]">—</div>
           </div>
           <div>
-            <div class="text-xs text-[#94a3b8]">Property Tax</div>
-            <div id="out-tax" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+            <div class="text-xs text-[#475569]">Property Tax</div>
+            <div id="out-tax" class="text-lg font-semibold text-[#1e293b]">—</div>
           </div>
           <div>
-            <div class="text-xs text-[#94a3b8]">Home Insurance</div>
-            <div id="out-ins" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+            <div class="text-xs text-[#475569]">Home Insurance</div>
+            <div id="out-ins" class="text-lg font-semibold text-[#1e293b]">—</div>
           </div>
           <div>
-            <div class="text-xs text-[#94a3b8]">PMI</div>
-            <div id="out-pmi" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+            <div class="text-xs text-[#475569]">PMI</div>
+            <div id="out-pmi" class="text-lg font-semibold text-[#1e293b]">—</div>
           </div>
           <div>
-            <div class="text-xs text-[#94a3b8]">HOA</div>
-            <div id="out-hoa" class="text-lg font-semibold text-[#f1f5f9]">—</div>
+            <div class="text-xs text-[#475569]">HOA</div>
+            <div id="out-hoa" class="text-lg font-semibold text-[#1e293b]">—</div>
           </div>
         </div>
-        <div class="border-t border-[#334155] pt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+        <div class="border-t border-[#e2e8f0] pt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
           <div>
-            <div class="text-xs text-[#94a3b8]">Total Monthly Payment</div>
-            <div id="out-total" class="text-3xl font-bold text-[#38bdf8]">—</div>
+            <div class="text-xs text-[#475569]">Total Monthly Payment</div>
+            <div id="out-total" class="text-3xl font-bold text-[#2563eb]">—</div>
           </div>
-          <div class="text-sm text-[#94a3b8] text-right">
-            <span>Total Interest: </span><span id="out-total-interest" class="text-[#f1f5f9] font-medium">—</span><br>
-            <span>Total Cost: </span><span id="out-total-cost" class="text-[#f1f5f9] font-medium">—</span>
+          <div class="text-sm text-[#475569] text-right">
+            <span>Total Interest: </span><span id="out-total-interest" class="text-[#1e293b] font-medium">—</span><br>
+            <span>Total Cost: </span><span id="out-total-cost" class="text-[#1e293b] font-medium">—</span>
           </div>
         </div>
       </div>
 
       <!-- Extra Payment -->
-      <div id="extra-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#f1f5f9] mb-3">Extra Monthly Payment</h3>
+      <div id="extra-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Extra Monthly Payment</h3>
         <div class="flex gap-4 items-end">
           <div class="flex-1">
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
               <input id="extra-payment" type="text" inputmode="decimal" placeholder="0" class="mc-input pl-7 w-full">
             </div>
           </div>
           <div class="text-sm text-right min-w-[180px]">
-            <div class="text-[#94a3b8]">New payoff: <span id="extra-payoff" class="text-[#f1f5f9] font-medium">—</span></div>
-            <div class="text-[#94a3b8]">Interest saved: <span id="extra-saved" class="text-[#22c55e] font-medium">—</span></div>
+            <div class="text-[#475569]">New payoff: <span id="extra-payoff" class="text-[#1e293b] font-medium">—</span></div>
+            <div class="text-[#475569]">Interest saved: <span id="extra-saved" class="text-[#22c55e] font-medium">—</span></div>
           </div>
         </div>
       </div>
 
       <!-- Amortization Schedule -->
       <div id="amort-wrapper" class="hidden">
-        <button id="amort-toggle" class="w-full bg-[#1e293b] border border-[#334155] rounded-xl px-6 py-4 text-left text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors flex items-center justify-between">
+        <button id="amort-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
           <span class="flex items-center gap-2">
             <svg id="amort-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             Amortization Schedule
           </span>
-          <span id="amort-months" class="text-xs text-[#64748b]"></span>
+          <span id="amort-months" class="text-xs text-[#94a3b8]"></span>
         </button>
-        <div id="amort-body" class="hidden bg-[#1e293b] border border-t-0 border-[#334155] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+        <div id="amort-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
           <table class="w-full text-sm">
-            <thead class="sticky top-0 bg-[#1e293b]">
-              <tr class="text-[#94a3b8] text-xs">
+            <thead class="sticky top-0 bg-white">
+              <tr class="text-[#475569] text-xs">
                 <th class="px-4 py-3 text-left font-medium">Month</th>
                 <th class="px-4 py-3 text-right font-medium">Payment</th>
                 <th class="px-4 py-3 text-right font-medium">Principal</th>
@@ -189,7 +189,7 @@
                 <th class="px-4 py-3 text-right font-medium">Balance</th>
               </tr>
             </thead>
-            <tbody id="amort-table" class="text-[#f1f5f9]"></tbody>
+            <tbody id="amort-table" class="text-[#1e293b]"></tbody>
           </table>
         </div>
       </div>
@@ -198,51 +198,51 @@
   </main>
 
   <article class="max-w-3xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How Mortgage Payments Work and What Affects Your Monthly Cost</h2>
-    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Mortgage Payments Work and What Affects Your Monthly Cost</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
       <p>A mortgage is a loan used to purchase real estate, where the property itself serves as collateral. Most homebuyers do not pay the full purchase price upfront. Instead, they make a down payment and borrow the remainder from a lender, then repay that balance plus interest over a fixed number of years. Understanding how mortgage payments are calculated helps you budget accurately, compare loan offers, and make informed decisions about one of the largest financial commitments most people ever take on.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">The Amortization Formula</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Amortization Formula</h3>
       <p>Lenders use a standard amortization formula to determine your fixed monthly principal and interest payment. The formula is:</p>
-      <p class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 font-mono text-[#38bdf8] text-center">M = P × [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> − 1]</p>
-      <p>In this formula, <strong class="text-[#f1f5f9]">M</strong> is the monthly payment, <strong class="text-[#f1f5f9]">P</strong> is the loan principal (home price minus down payment), <strong class="text-[#f1f5f9]">r</strong> is the monthly interest rate (annual rate divided by 12), and <strong class="text-[#f1f5f9]">n</strong> is the total number of monthly payments (loan term in years multiplied by 12). Early in the loan, most of each payment goes toward interest. Over time the balance shrinks and more of each payment is applied to principal. The amortization schedule this calculator generates shows that shift month by month.</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">M = P × [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> − 1]</p>
+      <p>In this formula, <strong class="text-[#1e293b]">M</strong> is the monthly payment, <strong class="text-[#1e293b]">P</strong> is the loan principal (home price minus down payment), <strong class="text-[#1e293b]">r</strong> is the monthly interest rate (annual rate divided by 12), and <strong class="text-[#1e293b]">n</strong> is the total number of monthly payments (loan term in years multiplied by 12). Early in the loan, most of each payment goes toward interest. Over time the balance shrinks and more of each payment is applied to principal. The amortization schedule this calculator generates shows that shift month by month.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">What Affects Your Monthly Payment</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Affects Your Monthly Payment</h3>
       <p>Several factors determine how much you pay each month:</p>
       <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">Loan principal</strong> — The amount you actually borrow. A larger down payment reduces the principal and lowers your monthly cost.</li>
-        <li><strong class="text-[#f1f5f9]">Interest rate</strong> — Even a small difference in rate has a large impact over 15 or 30 years. Shopping around for the best rate can save tens of thousands of dollars.</li>
-        <li><strong class="text-[#f1f5f9]">Loan term</strong> — A shorter term means higher monthly payments but significantly less total interest paid over the life of the loan.</li>
-        <li><strong class="text-[#f1f5f9]">Property taxes</strong> — Assessed annually by your local government and typically collected monthly through an escrow account managed by your lender.</li>
-        <li><strong class="text-[#f1f5f9]">Homeowners insurance</strong> — Required by lenders to protect against loss from fire, storms, theft, and other covered events. Premiums vary by location and coverage level.</li>
-        <li><strong class="text-[#f1f5f9]">Private mortgage insurance (PMI)</strong> — Usually required when your down payment is less than 20% of the home's value. PMI protects the lender if you default, and it is typically removed once you reach 20% equity.</li>
-        <li><strong class="text-[#f1f5f9]">HOA fees</strong> — If you buy a home in a community with a homeowners association, monthly dues cover shared amenities and maintenance.</li>
+        <li><strong class="text-[#1e293b]">Loan principal</strong> — The amount you actually borrow. A larger down payment reduces the principal and lowers your monthly cost.</li>
+        <li><strong class="text-[#1e293b]">Interest rate</strong> — Even a small difference in rate has a large impact over 15 or 30 years. Shopping around for the best rate can save tens of thousands of dollars.</li>
+        <li><strong class="text-[#1e293b]">Loan term</strong> — A shorter term means higher monthly payments but significantly less total interest paid over the life of the loan.</li>
+        <li><strong class="text-[#1e293b]">Property taxes</strong> — Assessed annually by your local government and typically collected monthly through an escrow account managed by your lender.</li>
+        <li><strong class="text-[#1e293b]">Homeowners insurance</strong> — Required by lenders to protect against loss from fire, storms, theft, and other covered events. Premiums vary by location and coverage level.</li>
+        <li><strong class="text-[#1e293b]">Private mortgage insurance (PMI)</strong> — Usually required when your down payment is less than 20% of the home's value. PMI protects the lender if you default, and it is typically removed once you reach 20% equity.</li>
+        <li><strong class="text-[#1e293b]">HOA fees</strong> — If you buy a home in a community with a homeowners association, monthly dues cover shared amenities and maintenance.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How Extra Payments Reduce Total Interest</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Extra Payments Reduce Total Interest</h3>
       <p>Making additional payments each month — even small ones — applies directly to the loan principal. Because interest is calculated on the remaining balance, reducing that balance faster means you pay less interest over the life of the loan and can pay off your mortgage years ahead of schedule. Use the extra payment section above to see exactly how much time and money you can save.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
       <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">First-time home buying</strong> — Estimate what you can afford before you start shopping, so you set realistic expectations with your real estate agent.</li>
-        <li><strong class="text-[#f1f5f9]">Refinancing</strong> — Compare your current payment to what a new rate or term would cost. Factor in closing costs to see if refinancing makes sense.</li>
-        <li><strong class="text-[#f1f5f9]">Comparing loan offers</strong> — Plug in different rates and terms side by side to see which lender or loan product gives you the best deal.</li>
-        <li><strong class="text-[#f1f5f9]">Monthly budgeting</strong> — Know your total housing cost, including taxes, insurance, and HOA, so you can plan the rest of your budget around it.</li>
+        <li><strong class="text-[#1e293b]">First-time home buying</strong> — Estimate what you can afford before you start shopping, so you set realistic expectations with your real estate agent.</li>
+        <li><strong class="text-[#1e293b]">Refinancing</strong> — Compare your current payment to what a new rate or term would cost. Factor in closing costs to see if refinancing makes sense.</li>
+        <li><strong class="text-[#1e293b]">Comparing loan offers</strong> — Plug in different rates and terms side by side to see which lender or loan product gives you the best deal.</li>
+        <li><strong class="text-[#1e293b]">Monthly budgeting</strong> — Know your total housing cost, including taxes, insurance, and HOA, so you can plan the rest of your budget around it.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-      <p><strong class="text-[#f1f5f9]">How much house can I afford?</strong></p>
+      <p><strong class="text-[#1e293b]">How much house can I afford?</strong></p>
       <p>A common guideline is that your total monthly housing cost — mortgage payment, taxes, insurance, and HOA — should not exceed 28% of your gross monthly income. Some lenders allow up to 36% of gross income for all debt payments combined. Use this calculator to work backward: start with a comfortable monthly payment and adjust the home price until the numbers fit your budget.</p>
 
-      <p><strong class="text-[#f1f5f9]">What is the difference between a 15-year and a 30-year mortgage?</strong></p>
+      <p><strong class="text-[#1e293b]">What is the difference between a 15-year and a 30-year mortgage?</strong></p>
       <p>A 15-year mortgage has higher monthly payments but a lower interest rate, and you pay far less total interest. A 30-year mortgage offers lower monthly payments, giving you more cash flow flexibility, but you pay more in interest over the life of the loan. The right choice depends on your income stability, other financial goals, and how quickly you want to build equity.</p>
 
-      <p><strong class="text-[#f1f5f9]">How does PMI work?</strong></p>
+      <p><strong class="text-[#1e293b]">How does PMI work?</strong></p>
       <p>Private mortgage insurance is typically required when your down payment is below 20% of the home's purchase price. PMI is an annual premium, often between 0.5% and 1% of the original loan amount, divided into monthly payments and added to your mortgage bill. Once your loan-to-value ratio reaches 80% — through payments or appreciation — you can request that your lender remove PMI. Some loans automatically cancel it at 78% LTV.</p>
 
-      <div class="mt-8 p-4 bg-[#0f172a] border border-[#334155] rounded-lg text-sm text-[#64748b]">
-        <strong class="text-[#94a3b8]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Consult a qualified financial advisor for decisions about your specific situation. Results may vary based on factors not included in this calculator.
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Consult a qualified financial advisor for decisions about your specific situation. Results may vary based on factors not included in this calculator.
       </div>
 
       <p>This mortgage calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to estimate payments, compare loan scenarios, or plan your home-buying budget.</p>
@@ -264,7 +264,7 @@
       transition: border-color 150ms;
     }
     .mc-input:focus {
-      border-color: #38bdf8;
+      border-color: #2563eb;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
     }
     .mc-input::placeholder { color: #475569; }
@@ -281,11 +281,11 @@
       cursor: pointer;
       transition: all 150ms;
     }
-    .term-btn:hover { border-color: #38bdf8; color: #f1f5f9; }
+    .term-btn:hover { border-color: #2563eb; color: #f1f5f9; }
     .term-active {
-      background: #38bdf8 !important;
+      background: #2563eb !important;
       color: #0f172a !important;
-      border-color: #38bdf8 !important;
+      border-color: #2563eb !important;
     }
 
     #amort-table tr { border-top: 1px solid #334155; }

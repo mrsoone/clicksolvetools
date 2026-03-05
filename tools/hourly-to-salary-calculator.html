@@ -18,33 +18,33 @@
   <meta property="og:site_name" content="ClickSolveTools">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hourly to Salary Calculator","url":"https://clicksolvetools.com/tools/hourly-to-salary-calculator","description":"Convert hourly wages to annual salary and vice versa. See daily, weekly, biweekly, and monthly breakdowns instantly.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
 
       <!-- Mode Toggle -->
-      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-1.5 flex">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-1.5 flex">
         <button id="tab-hourly" class="hs-tab hs-tab-active flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Hourly → Salary</button>
         <button id="tab-salary" class="hs-tab flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Salary → Hourly</button>
       </div>
 
       <!-- Input Card -->
-      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 space-y-5">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-5">
 
         <!-- Amount Input -->
         <div>
-          <label id="amount-label" for="amount" class="block text-sm font-medium text-[#94a3b8] mb-1">Hourly Wage</label>
+          <label id="amount-label" for="amount" class="block text-sm font-medium text-[#475569] mb-1">Hourly Wage</label>
           <div class="relative">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748b]">$</span>
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
             <input id="amount" type="text" inputmode="decimal" placeholder="25.00" class="hs-input pl-7 w-full">
           </div>
         </div>
 
         <!-- Hours Per Week -->
         <div>
-          <label class="block text-sm font-medium text-[#94a3b8] mb-1">Hours Per Week</label>
+          <label class="block text-sm font-medium text-[#475569] mb-1">Hours Per Week</label>
           <div class="flex gap-1.5 mb-2 flex-wrap" id="hour-presets">
             <button data-hours="20" class="hour-btn">20</button>
             <button data-hours="25" class="hour-btn">25</button>
@@ -58,24 +58,24 @@
 
         <!-- Weeks Per Year -->
         <div>
-          <label for="weeks" class="block text-sm font-medium text-[#94a3b8] mb-1">Weeks Per Year</label>
+          <label for="weeks" class="block text-sm font-medium text-[#475569] mb-1">Weeks Per Year</label>
           <input id="weeks" type="number" min="1" max="52" value="52" class="hs-input w-full">
         </div>
       </div>
 
       <!-- Results Table -->
-      <div id="results-panel" class="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden hidden">
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden hidden">
         <div class="px-6 pt-5 pb-3">
-          <h3 class="text-sm font-semibold text-[#94a3b8] uppercase tracking-wider" id="results-heading">Income Breakdown</h3>
+          <h3 class="text-sm font-semibold text-[#475569] uppercase tracking-wider" id="results-heading">Income Breakdown</h3>
         </div>
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-t border-[#334155] text-[#64748b] text-xs">
+            <tr class="border-t border-[#e2e8f0] text-[#94a3b8] text-xs">
               <th class="px-6 py-3 text-left font-medium">Period</th>
               <th class="px-6 py-3 text-right font-medium">Amount</th>
             </tr>
           </thead>
-          <tbody id="results-body" class="text-[#f1f5f9]"></tbody>
+          <tbody id="results-body" class="text-[#1e293b]"></tbody>
         </table>
       </div>
 
@@ -83,48 +83,48 @@
   </main>
 
   <article class="max-w-3xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Convert Between Hourly Wages and Annual Salary</h2>
-    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Convert Between Hourly Wages and Annual Salary</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
       <p>Whether you are evaluating a job offer, setting freelance rates, or simply trying to understand what your time is worth, converting between an hourly wage and an annual salary is one of the most practical calculations in personal finance. This tool handles the math instantly so you can focus on the decision rather than the arithmetic.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">The Core Formula</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Core Formula</h3>
       <p>The standard conversion relies on three numbers: your hourly rate, the number of hours you work each week, and the number of weeks you work each year. The formula is straightforward:</p>
-      <p class="bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 font-mono text-[#38bdf8] text-center">Annual Salary = Hourly Rate × Hours per Week × Weeks per Year</p>
-      <p>For a typical full-time employee working <strong class="text-[#f1f5f9]">40 hours per week</strong> for <strong class="text-[#f1f5f9]">52 weeks per year</strong>, that works out to 2,080 working hours annually. Multiply your hourly rate by 2,080 and you have your gross annual salary. To go the other direction — from salary to hourly — simply divide the annual salary by the total hours worked per year.</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Annual Salary = Hourly Rate × Hours per Week × Weeks per Year</p>
+      <p>For a typical full-time employee working <strong class="text-[#1e293b]">40 hours per week</strong> for <strong class="text-[#1e293b]">52 weeks per year</strong>, that works out to 2,080 working hours annually. Multiply your hourly rate by 2,080 and you have your gross annual salary. To go the other direction — from salary to hourly — simply divide the annual salary by the total hours worked per year.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Factors That Affect the Conversion</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Factors That Affect the Conversion</h3>
       <p>The formula above gives you a clean gross figure, but real-world compensation is rarely that simple. Several factors can make the effective value of an hourly wage or salary higher or lower than the raw number suggests:</p>
       <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">Paid time off (PTO)</strong> — Salaried employees often receive paid vacation, sick days, and holidays. If you take two weeks of paid vacation, you are still earning for 52 weeks while only working 50. An hourly worker who takes two weeks off unpaid effectively works fewer weeks, reducing annual income.</li>
-        <li><strong class="text-[#f1f5f9]">Benefits</strong> — Employer-provided health insurance, retirement contributions, and other perks add significant value on top of base salary. When comparing a salaried position with benefits to an hourly or freelance role without them, factor in the cost of purchasing those benefits independently.</li>
-        <li><strong class="text-[#f1f5f9]">Overtime</strong> — Many hourly workers earn time-and-a-half (1.5× their regular rate) for hours beyond 40 per week. Overtime pay can substantially increase actual annual earnings compared to the base rate calculation.</li>
-        <li><strong class="text-[#f1f5f9]">Taxes</strong> — Your tax bracket, filing status, and deductions all affect take-home pay. Two jobs with the same gross salary can produce different net incomes depending on your tax situation.</li>
+        <li><strong class="text-[#1e293b]">Paid time off (PTO)</strong> — Salaried employees often receive paid vacation, sick days, and holidays. If you take two weeks of paid vacation, you are still earning for 52 weeks while only working 50. An hourly worker who takes two weeks off unpaid effectively works fewer weeks, reducing annual income.</li>
+        <li><strong class="text-[#1e293b]">Benefits</strong> — Employer-provided health insurance, retirement contributions, and other perks add significant value on top of base salary. When comparing a salaried position with benefits to an hourly or freelance role without them, factor in the cost of purchasing those benefits independently.</li>
+        <li><strong class="text-[#1e293b]">Overtime</strong> — Many hourly workers earn time-and-a-half (1.5× their regular rate) for hours beyond 40 per week. Overtime pay can substantially increase actual annual earnings compared to the base rate calculation.</li>
+        <li><strong class="text-[#1e293b]">Taxes</strong> — Your tax bracket, filing status, and deductions all affect take-home pay. Two jobs with the same gross salary can produce different net incomes depending on your tax situation.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
       <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">Job comparison</strong> — You receive one offer quoting an hourly rate and another quoting an annual salary. Converting both to the same basis lets you compare them fairly, especially after accounting for hours and benefits.</li>
-        <li><strong class="text-[#f1f5f9]">Freelance and contract pricing</strong> — Freelancers need to set hourly rates that cover not only equivalent salary but also self-employment taxes, insurance, and unpaid downtime. Start with your target annual income and work backward to find the hourly rate you need to charge.</li>
-        <li><strong class="text-[#f1f5f9]">Monthly budgeting</strong> — Knowing your monthly and biweekly income helps you set up a realistic household budget, plan savings contributions, and manage recurring expenses.</li>
-        <li><strong class="text-[#f1f5f9]">Salary negotiation</strong> — Understanding the hourly equivalent of a salary offer — or the annual value of an hourly rate — gives you concrete numbers to bring to a negotiation conversation.</li>
+        <li><strong class="text-[#1e293b]">Job comparison</strong> — You receive one offer quoting an hourly rate and another quoting an annual salary. Converting both to the same basis lets you compare them fairly, especially after accounting for hours and benefits.</li>
+        <li><strong class="text-[#1e293b]">Freelance and contract pricing</strong> — Freelancers need to set hourly rates that cover not only equivalent salary but also self-employment taxes, insurance, and unpaid downtime. Start with your target annual income and work backward to find the hourly rate you need to charge.</li>
+        <li><strong class="text-[#1e293b]">Monthly budgeting</strong> — Knowing your monthly and biweekly income helps you set up a realistic household budget, plan savings contributions, and manage recurring expenses.</li>
+        <li><strong class="text-[#1e293b]">Salary negotiation</strong> — Understanding the hourly equivalent of a salary offer — or the annual value of an hourly rate — gives you concrete numbers to bring to a negotiation conversation.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-      <p><strong class="text-[#f1f5f9]">How much is $20 per hour annually?</strong></p>
+      <p><strong class="text-[#1e293b]">How much is $20 per hour annually?</strong></p>
       <p>At 40 hours per week for 52 weeks, $20 per hour equals $41,600 per year before taxes. If you work fewer weeks due to unpaid time off, multiply $20 by your actual hours per week and actual weeks worked to get a more accurate figure.</p>
 
-      <p><strong class="text-[#f1f5f9]">How do I calculate my hourly rate from a salary?</strong></p>
+      <p><strong class="text-[#1e293b]">How do I calculate my hourly rate from a salary?</strong></p>
       <p>Divide your annual salary by the number of weeks you work per year, then divide that result by the number of hours you work per week. For example, a $60,000 salary at 40 hours per week for 52 weeks equals $60,000 ÷ 2,080 = approximately $28.85 per hour.</p>
 
-      <p><strong class="text-[#f1f5f9]">What about overtime — does this calculator account for it?</strong></p>
+      <p><strong class="text-[#1e293b]">What about overtime — does this calculator account for it?</strong></p>
       <p>This calculator computes gross pay at a straight hourly rate. Overtime premiums (typically 1.5× or 2× your base rate for hours beyond 40 per week) depend on your employer, your employment classification, and local labor laws. To estimate overtime earnings, calculate your base salary using this tool and then add overtime pay separately.</p>
 
-      <p><strong class="text-[#f1f5f9]">Should I adjust weeks per year for unpaid time off?</strong></p>
+      <p><strong class="text-[#1e293b]">Should I adjust weeks per year for unpaid time off?</strong></p>
       <p>Yes. If you are an hourly worker or contractor who does not receive paid vacation, reduce the weeks-per-year value to reflect the weeks you actually work. For example, if you take three weeks off unpaid, set weeks per year to 49 for a more accurate annual estimate.</p>
 
-      <div class="mt-8 p-4 bg-[#0f172a] border border-[#334155] rounded-lg text-sm text-[#64748b]">
-        <strong class="text-[#94a3b8]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial, tax, or legal advice. Actual take-home pay depends on taxes, deductions, benefits, and other factors specific to your situation. Consult a qualified financial professional before making decisions based on these figures.
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial, tax, or legal advice. Actual take-home pay depends on taxes, deductions, benefits, and other factors specific to your situation. Consult a qualified financial professional before making decisions based on these figures.
       </div>
 
       <p>This hourly-to-salary calculator is completely free, runs entirely in your browser, and sends no data to any server. Bookmark this page and return whenever you need a quick wage conversion, income breakdown, or starting point for budgeting and negotiation.</p>
@@ -146,7 +146,7 @@
       transition: border-color 150ms;
     }
     .hs-input:focus {
-      border-color: #38bdf8;
+      border-color: #2563eb;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
     }
     .hs-input::placeholder { color: #475569; }
@@ -162,11 +162,11 @@
       cursor: pointer;
       transition: all 150ms;
     }
-    .hour-btn:hover { border-color: #38bdf8; color: #f1f5f9; }
+    .hour-btn:hover { border-color: #2563eb; color: #f1f5f9; }
     .hour-active {
-      background: #38bdf8 !important;
+      background: #2563eb !important;
       color: #0f172a !important;
-      border-color: #38bdf8 !important;
+      border-color: #2563eb !important;
     }
 
     .hs-tab {
@@ -177,7 +177,7 @@
     }
     .hs-tab:hover { color: #f1f5f9; }
     .hs-tab-active {
-      background: #38bdf8 !important;
+      background: #2563eb !important;
       color: #0f172a !important;
     }
 
@@ -185,7 +185,7 @@
     #results-body td { padding: 0.625rem 1.5rem; }
     #results-body td:first-child { text-align: left; color: #94a3b8; }
     #results-body td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
-    #results-body tr.hs-highlight td { color: #38bdf8; }
+    #results-body tr.hs-highlight td { color: #2563eb; }
   </style>
 
   <script>

@@ -18,16 +18,16 @@
   <meta property="og:site_name" content="ClickSolveTools">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Stopwatch","url":"https://clicksolvetools.com/tools/stopwatch","description":"Precise stopwatch with lap timing, split tracking, and keyboard shortcuts. Large bold display optimized for desktop and mobile use.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
 
-      <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 sm:p-10">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-10">
         <!-- Time Display -->
-        <div id="display" class="text-center font-mono text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-[#f1f5f9] select-none py-6 sm:py-10" aria-live="off">
-          00:00<span class="text-[#64748b]">.00</span>
+        <div id="display" class="text-center font-mono text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-[#1e293b] select-none py-6 sm:py-10" aria-live="off">
+          00:00<span class="text-[#94a3b8]">.00</span>
         </div>
 
         <!-- Buttons -->
@@ -38,7 +38,7 @@
           <button id="btn-lap" class="sw-btn bg-[#3b82f6] hover:bg-[#2563eb] active:bg-[#1d4ed8] text-white opacity-50 pointer-events-none">
             Lap<kbd class="sw-kbd">L</kbd>
           </button>
-          <button id="btn-reset" class="sw-btn bg-[#334155] hover:bg-[#475569] active:bg-[#64748b] text-[#f1f5f9]">
+          <button id="btn-reset" class="sw-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] active:bg-[#64748b] text-[#1e293b]">
             Reset<kbd class="sw-kbd">R</kbd>
           </button>
         </div>
@@ -46,11 +46,11 @@
 
       <!-- Lap Table -->
       <div id="lap-wrapper" class="hidden">
-        <div class="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
           <div class="overflow-y-auto max-h-[360px]" id="lap-scroll">
             <table class="w-full text-sm">
-              <thead class="sticky top-0 bg-[#1e293b] z-10">
-                <tr class="text-[#94a3b8] text-xs border-b border-[#334155]">
+              <thead class="sticky top-0 bg-white z-10">
+                <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
                   <th class="px-4 py-3 text-left font-medium">#</th>
                   <th class="px-4 py-3 text-right font-medium">Lap Time</th>
                   <th class="px-4 py-3 text-right font-medium">Total Time</th>
@@ -66,37 +66,37 @@
   </main>
 
   <article class="max-w-3xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">How to Use a Stopwatch for Timing and Lap Tracking</h2>
-    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Use a Stopwatch for Timing and Lap Tracking</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
       <p>A stopwatch measures the amount of time that elapses between a start point and a stop point. Unlike a countdown timer, which ticks down from a set duration, a stopwatch counts up from zero, making it ideal for any situation where you need to know how long something takes. Whether you are timing a sprint, monitoring cooking intervals, or tracking how long a presentation runs, a stopwatch is one of the simplest and most universally useful timing tools available.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Lap Time vs. Split Time</h3>
-      <p>Two related but different measurements come up whenever you time multiple segments of an activity. A <strong class="text-[#f1f5f9]">lap time</strong> is the duration of a single segment — the time between the previous lap mark (or the start) and the current lap mark. A <strong class="text-[#f1f5f9]">split time</strong> (also called total time or cumulative time) is the total elapsed time from the very beginning up to the current lap mark. For example, if a runner completes three laps of a track in 60 seconds, 65 seconds, and 58 seconds, the lap times are 1:00, 1:05, and 0:58, while the split times are 1:00, 2:05, and 3:03. Both numbers are valuable: lap times help you see pacing consistency, while split times tell you overall progress.</p>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Lap Time vs. Split Time</h3>
+      <p>Two related but different measurements come up whenever you time multiple segments of an activity. A <strong class="text-[#1e293b]">lap time</strong> is the duration of a single segment — the time between the previous lap mark (or the start) and the current lap mark. A <strong class="text-[#1e293b]">split time</strong> (also called total time or cumulative time) is the total elapsed time from the very beginning up to the current lap mark. For example, if a runner completes three laps of a track in 60 seconds, 65 seconds, and 58 seconds, the lap times are 1:00, 1:05, and 0:58, while the split times are 1:00, 2:05, and 3:03. Both numbers are valuable: lap times help you see pacing consistency, while split times tell you overall progress.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How This Tool Works</h3>
-      <p>This stopwatch runs entirely in your browser and updates the display every 10 milliseconds for a smooth, real-time readout. Press <strong class="text-[#f1f5f9]">Start</strong> to begin counting. The display shows minutes, seconds, and hundredths of a second in <strong class="text-[#f1f5f9]">MM:SS.ms</strong> format. Press the same button again (now labeled Stop) to pause the timer. You can resume from where you left off or press <strong class="text-[#f1f5f9]">Reset</strong> to return to zero. While the stopwatch is running, press <strong class="text-[#f1f5f9]">Lap</strong> to record a lap. Each entry in the lap table shows the lap number, the time for that individual lap, and the cumulative total time at the point the lap was recorded.</p>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Tool Works</h3>
+      <p>This stopwatch runs entirely in your browser and updates the display every 10 milliseconds for a smooth, real-time readout. Press <strong class="text-[#1e293b]">Start</strong> to begin counting. The display shows minutes, seconds, and hundredths of a second in <strong class="text-[#1e293b]">MM:SS.ms</strong> format. Press the same button again (now labeled Stop) to pause the timer. You can resume from where you left off or press <strong class="text-[#1e293b]">Reset</strong> to return to zero. While the stopwatch is running, press <strong class="text-[#1e293b]">Lap</strong> to record a lap. Each entry in the lap table shows the lap number, the time for that individual lap, and the cumulative total time at the point the lap was recorded.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Keyboard Shortcuts</h3>
-      <p>For fast, hands-free control, the stopwatch responds to keyboard input. Press <strong class="text-[#f1f5f9]">Space</strong> to start or stop the timer, <strong class="text-[#f1f5f9]">L</strong> to record a lap, and <strong class="text-[#f1f5f9]">R</strong> to reset. These shortcuts are particularly useful on desktop, where clicking buttons during a fast-paced activity can be cumbersome. The shortcut keys are shown directly on each button so you never have to memorize them.</p>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Keyboard Shortcuts</h3>
+      <p>For fast, hands-free control, the stopwatch responds to keyboard input. Press <strong class="text-[#1e293b]">Space</strong> to start or stop the timer, <strong class="text-[#1e293b]">L</strong> to record a lap, and <strong class="text-[#1e293b]">R</strong> to reset. These shortcuts are particularly useful on desktop, where clicking buttons during a fast-paced activity can be cumbersome. The shortcut keys are shown directly on each button so you never have to memorize them.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
       <ul class="list-disc list-inside space-y-2">
-        <li><strong class="text-[#f1f5f9]">Sports timing</strong> — Track running splits, swimming intervals, cycling laps, or circuit-training rest periods. Coaches and athletes use lap data to identify pacing trends and improve performance over time.</li>
-        <li><strong class="text-[#f1f5f9]">Cooking</strong> — Time how long a steak sears on each side, monitor a boiling phase, or track the proofing time for bread dough. A stopwatch avoids the risk of setting the wrong countdown duration.</li>
-        <li><strong class="text-[#f1f5f9]">Presentations and speeches</strong> — Rehearse a talk and record laps at each section break to see which parts run long and where to cut content.</li>
-        <li><strong class="text-[#f1f5f9]">Studying with Pomodoro</strong> — While a countdown timer is the traditional Pomodoro tool, a stopwatch lets you see exactly how long you studied without the pressure of a ticking clock, and lap marks can separate study blocks.</li>
-        <li><strong class="text-[#f1f5f9]">Scientific experiments</strong> — Record reaction times, observation intervals, or process durations in a lab setting where precise timing matters.</li>
+        <li><strong class="text-[#1e293b]">Sports timing</strong> — Track running splits, swimming intervals, cycling laps, or circuit-training rest periods. Coaches and athletes use lap data to identify pacing trends and improve performance over time.</li>
+        <li><strong class="text-[#1e293b]">Cooking</strong> — Time how long a steak sears on each side, monitor a boiling phase, or track the proofing time for bread dough. A stopwatch avoids the risk of setting the wrong countdown duration.</li>
+        <li><strong class="text-[#1e293b]">Presentations and speeches</strong> — Rehearse a talk and record laps at each section break to see which parts run long and where to cut content.</li>
+        <li><strong class="text-[#1e293b]">Studying with Pomodoro</strong> — While a countdown timer is the traditional Pomodoro tool, a stopwatch lets you see exactly how long you studied without the pressure of a ticking clock, and lap marks can separate study blocks.</li>
+        <li><strong class="text-[#1e293b]">Scientific experiments</strong> — Record reaction times, observation intervals, or process durations in a lab setting where precise timing matters.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-      <p><strong class="text-[#f1f5f9]">What is the difference between lap time and split time?</strong></p>
+      <p><strong class="text-[#1e293b]">What is the difference between lap time and split time?</strong></p>
       <p>Lap time measures the duration of a single segment — the interval between the previous lap mark and the current one. Split time (shown as "Total Time" in the lap table) is the cumulative elapsed time from the very start. If you record three laps, the split time for the third lap equals the sum of all three lap times.</p>
 
-      <p><strong class="text-[#f1f5f9]">How accurate is a browser-based stopwatch?</strong></p>
+      <p><strong class="text-[#1e293b]">How accurate is a browser-based stopwatch?</strong></p>
       <p>Modern browsers use high-resolution timers that are accurate to within a few milliseconds under normal conditions. This is more than sufficient for sports timing, cooking, studying, and most everyday tasks. For official competition timing that requires certified hardware, a dedicated chronograph is recommended, but for practice, training, and daily use a browser stopwatch is an excellent tool.</p>
 
-      <p><strong class="text-[#f1f5f9]">Can I use keyboard shortcuts on mobile?</strong></p>
+      <p><strong class="text-[#1e293b]">Can I use keyboard shortcuts on mobile?</strong></p>
       <p>Keyboard shortcuts require a physical or Bluetooth keyboard. On touchscreen devices, use the on-screen buttons, which are designed with large touch targets for easy tapping even during fast-paced activities.</p>
 
       <p>This stopwatch is completely free, runs entirely in your browser, and does not send any data to a server. Bookmark this page and use it whenever you need quick, reliable timing with lap tracking and keyboard control.</p>
@@ -187,7 +187,7 @@
       const now = performance.now();
       const total = elapsed + (now - startTime);
       const t = formatTime(total);
-      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+      display.innerHTML = t.main + '<span class="text-[#94a3b8]">' + t.frac + '</span>';
     }
 
     function tick() {
@@ -220,7 +220,7 @@
 
     function updateDisplayStatic() {
       const t = formatTime(elapsed);
-      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+      display.innerHTML = t.main + '<span class="text-[#94a3b8]">' + t.frac + '</span>';
     }
 
     function reset() {
@@ -230,7 +230,7 @@
       lastLapTime = 0;
       laps = [];
       const t = formatTime(0);
-      display.innerHTML = t.main + '<span class="text-[#64748b]">' + t.frac + '</span>';
+      display.innerHTML = t.main + '<span class="text-[#94a3b8]">' + t.frac + '</span>';
       lapTable.innerHTML = '';
       lapWrapper.classList.add('hidden');
       btnLap.classList.add('opacity-50', 'pointer-events-none');

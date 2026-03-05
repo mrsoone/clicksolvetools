@@ -47,14 +47,14 @@
     }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
     <div id="nav-container"></div>
 
     <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
         <article>
             <!-- Widget -->
-            <section id="converter-widget" class="bg-[#1e293b] border border-[#334155] rounded-xl p-6 sm:p-8 mb-12">
+            <section id="converter-widget" class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8 mb-12">
 
                 <!-- Category Tabs -->
                 <div id="category-tabs" class="flex flex-wrap gap-2 mb-8" role="tablist"></div>
@@ -63,13 +63,13 @@
                 <div class="space-y-6">
                     <!-- Input Value -->
                     <div>
-                        <label for="input-value" class="block text-sm font-medium text-[#94a3b8] mb-2">Value</label>
+                        <label for="input-value" class="block text-sm font-medium text-[#475569] mb-2">Value</label>
                         <input
                             id="input-value"
                             type="number"
                             inputmode="decimal"
                             value="1"
-                            class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-lg text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors"
+                            class="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors"
                             placeholder="Enter a value"
                         >
                     </div>
@@ -77,62 +77,62 @@
                     <!-- From / Swap / To -->
                     <div class="grid grid-cols-[1fr_auto_1fr] gap-3 items-end">
                         <div>
-                            <label for="from-unit" class="block text-sm font-medium text-[#94a3b8] mb-2">From</label>
-                            <select id="from-unit" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors appearance-none cursor-pointer"></select>
+                            <label for="from-unit" class="block text-sm font-medium text-[#475569] mb-2">From</label>
+                            <select id="from-unit" class="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors appearance-none cursor-pointer"></select>
                         </div>
-                        <button id="swap-btn" type="button" title="Swap units" class="mb-0.5 w-10 h-10 flex items-center justify-center rounded-full bg-[#334155] hover:bg-[#38bdf8] hover:text-[#0f172a] text-[#94a3b8] transition-colors text-xl font-bold flex-shrink-0">↔</button>
+                        <button id="swap-btn" type="button" title="Swap units" class="mb-0.5 w-10 h-10 flex items-center justify-center rounded-full bg-[#f1f5f9] hover:bg-[#2563eb] hover:text-[#0f172a] text-[#475569] transition-colors text-xl font-bold flex-shrink-0">↔</button>
                         <div>
-                            <label for="to-unit" class="block text-sm font-medium text-[#94a3b8] mb-2">To</label>
-                            <select id="to-unit" class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors appearance-none cursor-pointer"></select>
+                            <label for="to-unit" class="block text-sm font-medium text-[#475569] mb-2">To</label>
+                            <select id="to-unit" class="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors appearance-none cursor-pointer"></select>
                         </div>
                     </div>
 
                     <!-- Result -->
-                    <div id="result-area" class="bg-[#0f172a] border border-[#334155] rounded-lg p-5 text-center">
-                        <div id="result-value" class="text-3xl sm:text-4xl font-bold text-[#38bdf8] mb-2 break-all">—</div>
-                        <div id="result-formula" class="text-sm text-[#94a3b8]"></div>
+                    <div id="result-area" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-5 text-center">
+                        <div id="result-value" class="text-3xl sm:text-4xl font-bold text-[#2563eb] mb-2 break-all">—</div>
+                        <div id="result-formula" class="text-sm text-[#475569]"></div>
                     </div>
                 </div>
             </section>
 
             <!-- SEO Content -->
-            <section class="prose prose-invert max-w-none mb-12 space-y-6 text-[#cbd5e1] leading-relaxed">
-                <h2 class="text-2xl font-bold text-[#f1f5f9]">How to Convert Between Measurement Units</h2>
+            <section class="prose max-w-none mb-12 space-y-6 text-[#475569] leading-relaxed">
+                <h2 class="text-2xl font-bold text-[#1e293b]">How to Convert Between Measurement Units</h2>
 
                 <p>Unit conversion is one of the most common tasks in everyday life, from estimating distances while traveling abroad to adjusting ingredient quantities in the kitchen. Whether you are a student solving physics problems, an engineer designing components for an international client, or a home cook following a recipe written in metric units, accurate conversions save time and prevent costly mistakes. This free unit converter handles eight major categories — length, weight, temperature, volume, speed, area, time, and digital data — giving you instant, reliable answers without any downloads or signups.</p>
 
-                <h3 class="text-xl font-semibold text-[#f1f5f9]">How This Tool Works</h3>
+                <h3 class="text-xl font-semibold text-[#1e293b]">How This Tool Works</h3>
                 <p>Simply choose a category, enter a value, and select the "from" and "to" units. The result updates in real time as you type — no need to click a convert button. Below every result, the tool displays the exact conversion formula so you can verify the math or use it in your own calculations. All processing runs entirely in your browser; nothing is sent to a server, which means it works offline once the page loads and your data stays completely private.</p>
 
-                <h3 class="text-xl font-semibold text-[#f1f5f9]">Metric vs. Imperial: Why Both Systems Exist</h3>
+                <h3 class="text-xl font-semibold text-[#1e293b]">Metric vs. Imperial: Why Both Systems Exist</h3>
                 <p>The metric system (SI), built on powers of ten, is the international standard used by virtually every country. The imperial system — miles, pounds, Fahrenheit — remains common in the United States and a handful of other nations. Because global commerce, travel, and science require both systems to coexist, quick and accurate cross-system conversion is an essential skill. This tool bridges that gap instantly: type a distance in miles and see kilometers, enter a weight in pounds and get kilograms, or convert Fahrenheit to Celsius in a single step.</p>
 
-                <h3 class="text-xl font-semibold text-[#f1f5f9]">Common Conversion Formulas</h3>
-                <ul class="list-disc list-inside space-y-1 text-[#cbd5e1]">
-                    <li><strong class="text-[#f1f5f9]">Miles to Kilometers:</strong> multiply by 1.60934 (1 mile ≈ 1.609 km)</li>
-                    <li><strong class="text-[#f1f5f9]">Pounds to Kilograms:</strong> multiply by 0.453592 (1 lb ≈ 0.454 kg)</li>
-                    <li><strong class="text-[#f1f5f9]">Fahrenheit to Celsius:</strong> subtract 32, then multiply by 5/9 — for example, 72 °F = (72 − 32) × 5/9 ≈ 22.2 °C</li>
-                    <li><strong class="text-[#f1f5f9]">Gallons to Liters:</strong> multiply by 3.78541 (1 US gallon ≈ 3.785 L)</li>
-                    <li><strong class="text-[#f1f5f9]">Inches to Centimeters:</strong> multiply by 2.54 (exactly)</li>
+                <h3 class="text-xl font-semibold text-[#1e293b]">Common Conversion Formulas</h3>
+                <ul class="list-disc list-inside space-y-1 text-[#475569]">
+                    <li><strong class="text-[#1e293b]">Miles to Kilometers:</strong> multiply by 1.60934 (1 mile ≈ 1.609 km)</li>
+                    <li><strong class="text-[#1e293b]">Pounds to Kilograms:</strong> multiply by 0.453592 (1 lb ≈ 0.454 kg)</li>
+                    <li><strong class="text-[#1e293b]">Fahrenheit to Celsius:</strong> subtract 32, then multiply by 5/9 — for example, 72 °F = (72 − 32) × 5/9 ≈ 22.2 °C</li>
+                    <li><strong class="text-[#1e293b]">Gallons to Liters:</strong> multiply by 3.78541 (1 US gallon ≈ 3.785 L)</li>
+                    <li><strong class="text-[#1e293b]">Inches to Centimeters:</strong> multiply by 2.54 (exactly)</li>
                 </ul>
 
-                <h3 class="text-xl font-semibold text-[#f1f5f9]">Use Cases</h3>
-                <p><strong class="text-[#f1f5f9]">Travel:</strong> Quickly convert speed limits (mph ↔ km/h), distances, and temperatures when visiting a country that uses a different measurement system. <strong class="text-[#f1f5f9]">Cooking:</strong> Scale recipes that use cups and ounces into milliliters and grams, or vice versa. <strong class="text-[#f1f5f9]">Science &amp; Engineering:</strong> Convert between SI and imperial units for lab reports, simulations, and manufacturing specs. <strong class="text-[#f1f5f9]">IT &amp; Data:</strong> Figure out how many gigabytes are in a terabyte or how many megabytes a file uses — useful for storage planning, bandwidth calculations, and data transfer estimates.</p>
+                <h3 class="text-xl font-semibold text-[#1e293b]">Use Cases</h3>
+                <p><strong class="text-[#1e293b]">Travel:</strong> Quickly convert speed limits (mph ↔ km/h), distances, and temperatures when visiting a country that uses a different measurement system. <strong class="text-[#1e293b]">Cooking:</strong> Scale recipes that use cups and ounces into milliliters and grams, or vice versa. <strong class="text-[#1e293b]">Science &amp; Engineering:</strong> Convert between SI and imperial units for lab reports, simulations, and manufacturing specs. <strong class="text-[#1e293b]">IT &amp; Data:</strong> Figure out how many gigabytes are in a terabyte or how many megabytes a file uses — useful for storage planning, bandwidth calculations, and data transfer estimates.</p>
 
-                <h3 class="text-xl font-semibold text-[#f1f5f9]">Frequently Asked Questions</h3>
+                <h3 class="text-xl font-semibold text-[#1e293b]">Frequently Asked Questions</h3>
 
                 <div class="space-y-4">
-                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
-                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">How many kilometers are in a mile?</summary>
-                        <p class="px-5 pb-4 text-[#94a3b8]">One mile equals approximately 1.60934 kilometers. So 5 miles is about 8.047 km, and a marathon (26.2 miles) is roughly 42.2 km.</p>
+                    <details class="group bg-white border border-[#e2e8f0] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#1e293b] select-none">How many kilometers are in a mile?</summary>
+                        <p class="px-5 pb-4 text-[#475569]">One mile equals approximately 1.60934 kilometers. So 5 miles is about 8.047 km, and a marathon (26.2 miles) is roughly 42.2 km.</p>
                     </details>
-                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
-                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">What is the formula for Celsius to Fahrenheit?</summary>
-                        <p class="px-5 pb-4 text-[#94a3b8]">Multiply the Celsius temperature by 9/5 (or 1.8), then add 32. For example, 100 °C × 1.8 + 32 = 212 °F. To go the other way, subtract 32 and multiply by 5/9.</p>
+                    <details class="group bg-white border border-[#e2e8f0] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#1e293b] select-none">What is the formula for Celsius to Fahrenheit?</summary>
+                        <p class="px-5 pb-4 text-[#475569]">Multiply the Celsius temperature by 9/5 (or 1.8), then add 32. For example, 100 °C × 1.8 + 32 = 212 °F. To go the other way, subtract 32 and multiply by 5/9.</p>
                     </details>
-                    <details class="group bg-[#1e293b] border border-[#334155] rounded-lg">
-                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#f1f5f9] select-none">How many ounces are in a pound?</summary>
-                        <p class="px-5 pb-4 text-[#94a3b8]">There are exactly 16 ounces (oz) in one pound (lb). This applies to avoirdupois ounces, which are the standard for everyday weight measurement in the US and UK.</p>
+                    <details class="group bg-white border border-[#e2e8f0] rounded-lg">
+                        <summary class="cursor-pointer px-5 py-3 font-semibold text-[#1e293b] select-none">How many ounces are in a pound?</summary>
+                        <p class="px-5 pb-4 text-[#475569]">There are exactly 16 ounces (oz) in one pound (lb). This applies to avoirdupois ounces, which are the standard for everyday weight measurement in the US and UK.</p>
                     </details>
                 </div>
 
@@ -242,8 +242,8 @@
                     data-cat="${cat}"
                     class="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
                         cat === activeCategory
-                            ? 'bg-[#38bdf8] text-[#0f172a]'
-                            : 'bg-[#334155] text-[#94a3b8] hover:bg-[#475569] hover:text-[#f1f5f9]'
+                            ? 'bg-[#2563eb] text-[#0f172a]'
+                            : 'bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b]'
                     }"
                 >${cat}</button>`
             ).join('');

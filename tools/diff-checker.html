@@ -76,26 +76,26 @@
     </style>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
     <div id="nav-container"></div>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
         <article>
             <div class="mb-8 text-center">
-                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">Diff Checker</h1>
-                <p class="text-[#94a3b8] text-lg">Compare two blocks of text side by side and see every difference highlighted</p>
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Diff Checker</h1>
+                <p class="text-[#475569] text-lg">Compare two blocks of text side by side and see every difference highlighted</p>
             </div>
 
             <!-- Input panels -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                 <!-- Original -->
                 <div class="flex flex-col">
-                    <label for="original" class="text-sm font-medium text-[#94a3b8] mb-2">Original Text</label>
-                    <div class="relative flex bg-[#1e293b] border border-[#334155] rounded-lg overflow-hidden focus-within:border-[#38bdf8] focus-within:ring-1 focus-within:ring-[#38bdf8] transition-colors">
-                        <div id="line-nums-left" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#475569] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
+                    <label for="original" class="text-sm font-medium text-[#475569] mb-2">Original Text</label>
+                    <div class="relative flex bg-white border border-[#e2e8f0] rounded-lg overflow-hidden focus-within:border-[#2563eb] focus-within:ring-1 focus-within:ring-[#2563eb] transition-colors">
+                        <div id="line-nums-left" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#64748b] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
                         <textarea
                             id="original"
-                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none placeholder-[#475569] leading-[1.625rem]"
+                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#1e293b] font-mono text-sm resize-none focus:outline-none placeholder-[#94a3b8] leading-[1.625rem]"
                             placeholder="Paste original text here..."
                             spellcheck="false"
                         ></textarea>
@@ -104,12 +104,12 @@
 
                 <!-- Modified -->
                 <div class="flex flex-col">
-                    <label for="modified" class="text-sm font-medium text-[#94a3b8] mb-2">Modified Text</label>
-                    <div class="relative flex bg-[#1e293b] border border-[#334155] rounded-lg overflow-hidden focus-within:border-[#38bdf8] focus-within:ring-1 focus-within:ring-[#38bdf8] transition-colors">
-                        <div id="line-nums-right" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#475569] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
+                    <label for="modified" class="text-sm font-medium text-[#475569] mb-2">Modified Text</label>
+                    <div class="relative flex bg-white border border-[#e2e8f0] rounded-lg overflow-hidden focus-within:border-[#2563eb] focus-within:ring-1 focus-within:ring-[#2563eb] transition-colors">
+                        <div id="line-nums-right" class="py-4 pl-2 pr-0 text-xs font-mono leading-[1.625rem] text-[#64748b] select-none text-right min-w-[2.5rem] flex-shrink-0 overflow-hidden">1</div>
                         <textarea
                             id="modified"
-                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#f1f5f9] font-mono text-sm resize-none focus:outline-none placeholder-[#475569] leading-[1.625rem]"
+                            class="w-full h-72 lg:h-80 bg-transparent p-4 pl-2 text-[#1e293b] font-mono text-sm resize-none focus:outline-none placeholder-[#94a3b8] leading-[1.625rem]"
                             placeholder="Paste modified text here..."
                             spellcheck="false"
                         ></textarea>
@@ -119,20 +119,20 @@
 
             <!-- Controls -->
             <div class="flex flex-wrap items-center gap-3 mb-6">
-                <button id="btn-compare" class="px-5 py-2.5 bg-[#38bdf8] text-[#0f172a] font-semibold rounded-lg hover:bg-[#7dd3fc] active:scale-95 transition-all duration-150 text-sm">
+                <button id="btn-compare" class="px-5 py-2.5 bg-[#2563eb] text-[#0f172a] font-semibold rounded-lg hover:bg-[#3b82f6] active:scale-95 transition-all duration-150 text-sm">
                     Compare
                 </button>
-                <button id="btn-swap" class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-[#f1f5f9] font-medium rounded-lg hover:bg-[#334155] hover:border-[#475569] active:scale-95 transition-all duration-150 text-sm">
+                <button id="btn-swap" class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all duration-150 text-sm">
                     Swap ⇄
                 </button>
-                <button id="btn-clear" class="px-5 py-2.5 bg-[#1e293b] border border-[#334155] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-500/40 active:scale-95 transition-all duration-150 text-sm">
+                <button id="btn-clear" class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-red-400 font-medium rounded-lg hover:bg-red-500/10 hover:border-red-200 active:scale-95 transition-all duration-150 text-sm">
                     Clear Both
                 </button>
 
                 <div class="ml-auto flex items-center gap-2">
-                    <span class="text-xs text-[#94a3b8]">Mode:</span>
-                    <button id="btn-mode-line" class="px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150">Line</button>
-                    <button id="btn-mode-word" class="px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150">Word</button>
+                    <span class="text-xs text-[#475569]">Mode:</span>
+                    <button id="btn-mode-line" class="px-3 py-1.5 text-xs rounded-md font-medium bg-[#2563eb] text-[#0f172a] transition-all duration-150">Line</button>
+                    <button id="btn-mode-word" class="px-3 py-1.5 text-xs rounded-md font-medium bg-white border border-[#e2e8f0] text-[#475569] hover:bg-[#e2e8f0] transition-all duration-150">Word</button>
                 </div>
             </div>
 
@@ -140,49 +140,49 @@
             <div id="diff-summary" class="hidden mb-4 flex flex-wrap gap-4 text-sm font-medium">
                 <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500/40 inline-block"></span><span id="stat-add" class="text-emerald-400">0 additions</span></span>
                 <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-red-500/40 inline-block"></span><span id="stat-del" class="text-red-400">0 deletions</span></span>
-                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-[#334155] inline-block"></span><span id="stat-same" class="text-[#94a3b8]">0 unchanged</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-[#f1f5f9] inline-block"></span><span id="stat-same" class="text-[#475569]">0 unchanged</span></span>
             </div>
 
             <!-- Diff output -->
-            <div id="diff-output" class="bg-[#1e293b] border border-[#334155] rounded-lg font-mono text-sm overflow-x-auto mb-12 hidden">
+            <div id="diff-output" class="bg-white border border-[#e2e8f0] rounded-lg font-mono text-sm overflow-x-auto mb-12 hidden">
             </div>
 
             <!-- SEO Content -->
             <section class="max-w-3xl mx-auto mt-16">
-                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is a Diff Checker and Why Is It Useful?</h2>
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is a Diff Checker and Why Is It Useful?</h2>
 
-                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
-                    <p>A diff checker is a tool that compares two blocks of text and highlights every difference between them. The word "diff" comes from the Unix <code class="text-[#7dd3fc]">diff</code> command, which has been a staple of software development since the early 1970s. At its core, the algorithm finds the <strong class="text-[#f1f5f9]">longest common subsequence</strong> (LCS) shared by both inputs and then marks everything outside that subsequence as either an addition or a deletion. The result is a clear, color-coded view of exactly what changed, what was added, and what was removed.</p>
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>A diff checker is a tool that compares two blocks of text and highlights every difference between them. The word "diff" comes from the Unix <code class="text-[#3b82f6]">diff</code> command, which has been a staple of software development since the early 1970s. At its core, the algorithm finds the <strong class="text-[#1e293b]">longest common subsequence</strong> (LCS) shared by both inputs and then marks everything outside that subsequence as either an addition or a deletion. The result is a clear, color-coded view of exactly what changed, what was added, and what was removed.</p>
 
-                    <p>This tool performs the comparison entirely in your browser using a classic LCS-based diff algorithm — no external libraries, no server round-trips, no data leaving your machine. You paste an original text on the left, a modified version on the right, and click <strong class="text-[#f1f5f9]">Compare</strong>. Additions appear in green, deletions appear in red, and unchanged lines are displayed normally. A summary counter at the top tells you at a glance how many additions, deletions, and unchanged lines exist.</p>
+                    <p>This tool performs the comparison entirely in your browser using a classic LCS-based diff algorithm — no external libraries, no server round-trips, no data leaving your machine. You paste an original text on the left, a modified version on the right, and click <strong class="text-[#1e293b]">Compare</strong>. Additions appear in green, deletions appear in red, and unchanged lines are displayed normally. A summary counter at the top tells you at a glance how many additions, deletions, and unchanged lines exist.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Line-by-Line vs. Word-by-Word Comparison</h3>
-                    <p>The default <strong class="text-[#f1f5f9]">line-by-line mode</strong> treats each line as a single unit. If any part of a line changed, the entire line is flagged — this is the same granularity used by Git and most version-control systems, and it works well for structured content like source code, configuration files, and Markdown documents. When you need finer detail, switch to <strong class="text-[#f1f5f9]">word-by-word mode</strong>. In this mode, the diff algorithm runs on individual words within each changed line, so you can pinpoint the exact phrase or variable name that was edited. Word-level diffing is especially helpful for prose, legal documents, and translation review where changes tend to be small edits inside longer paragraphs.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Line-by-Line vs. Word-by-Word Comparison</h3>
+                    <p>The default <strong class="text-[#1e293b]">line-by-line mode</strong> treats each line as a single unit. If any part of a line changed, the entire line is flagged — this is the same granularity used by Git and most version-control systems, and it works well for structured content like source code, configuration files, and Markdown documents. When you need finer detail, switch to <strong class="text-[#1e293b]">word-by-word mode</strong>. In this mode, the diff algorithm runs on individual words within each changed line, so you can pinpoint the exact phrase or variable name that was edited. Word-level diffing is especially helpful for prose, legal documents, and translation review where changes tend to be small edits inside longer paragraphs.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">Code review</strong> — Compare two versions of a function or module to understand what a colleague changed before approving a pull request.</li>
-                        <li><strong class="text-[#f1f5f9]">Document revision</strong> — Writers and editors can paste two drafts of an article, contract, or report to quickly identify every edit that was made between revisions.</li>
-                        <li><strong class="text-[#f1f5f9]">Configuration comparison</strong> — System administrators often need to compare <code class="text-[#94a3b8]">nginx.conf</code>, <code class="text-[#94a3b8]">.env</code>, or Kubernetes YAML files across environments. A diff checker instantly reveals the differences that could cause deployment failures.</li>
-                        <li><strong class="text-[#f1f5f9]">Merge conflicts</strong> — When Git cannot automatically merge two branches, it presents conflicting sections. Pasting both versions into a diff checker makes it easier to decide which changes to keep.</li>
-                        <li><strong class="text-[#f1f5f9]">Data validation</strong> — Compare exported CSV or JSON outputs before and after a database migration to verify that no records were lost or corrupted.</li>
+                        <li><strong class="text-[#1e293b]">Code review</strong> — Compare two versions of a function or module to understand what a colleague changed before approving a pull request.</li>
+                        <li><strong class="text-[#1e293b]">Document revision</strong> — Writers and editors can paste two drafts of an article, contract, or report to quickly identify every edit that was made between revisions.</li>
+                        <li><strong class="text-[#1e293b]">Configuration comparison</strong> — System administrators often need to compare <code class="text-[#475569]">nginx.conf</code>, <code class="text-[#475569]">.env</code>, or Kubernetes YAML files across environments. A diff checker instantly reveals the differences that could cause deployment failures.</li>
+                        <li><strong class="text-[#1e293b]">Merge conflicts</strong> — When Git cannot automatically merge two branches, it presents conflicting sections. Pasting both versions into a diff checker makes it easier to decide which changes to keep.</li>
+                        <li><strong class="text-[#1e293b]">Data validation</strong> — Compare exported CSV or JSON outputs before and after a database migration to verify that no records were lost or corrupted.</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                    <p><strong class="text-[#f1f5f9]">How does the diff algorithm work?</strong><br>
-                    The tool uses a longest-common-subsequence (LCS) approach. It builds a matrix comparing every line (or word) in the original text against every line (or word) in the modified text, finds the longest sequence they share in the same order, and then classifies lines outside that sequence as additions or deletions. This is the same foundational technique behind <code class="text-[#7dd3fc]">git diff</code> and the Unix <code class="text-[#7dd3fc]">diff</code> utility.</p>
+                    <p><strong class="text-[#1e293b]">How does the diff algorithm work?</strong><br>
+                    The tool uses a longest-common-subsequence (LCS) approach. It builds a matrix comparing every line (or word) in the original text against every line (or word) in the modified text, finds the longest sequence they share in the same order, and then classifies lines outside that sequence as additions or deletions. This is the same foundational technique behind <code class="text-[#3b82f6]">git diff</code> and the Unix <code class="text-[#3b82f6]">diff</code> utility.</p>
 
-                    <p><strong class="text-[#f1f5f9]">What is a merge conflict?</strong><br>
+                    <p><strong class="text-[#1e293b]">What is a merge conflict?</strong><br>
                     A merge conflict occurs when two branches in a version-control system modify the same section of a file in incompatible ways. The system cannot automatically decide which change to keep, so it marks the region and asks the developer to resolve it manually. Using a diff checker to view both sides of the conflict makes resolution faster and less error-prone.</p>
 
-                    <p><strong class="text-[#f1f5f9]">Can I compare files?</strong><br>
+                    <p><strong class="text-[#1e293b]">Can I compare files?</strong><br>
                     This tool works with text you paste directly into the browser. To compare files, simply open each file in a text editor, copy the contents, and paste them into the Original and Modified panels. Because everything runs client-side, your file contents are never uploaded anywhere.</p>
 
-                    <p><strong class="text-[#f1f5f9]">Is there a size limit?</strong><br>
+                    <p><strong class="text-[#1e293b]">Is there a size limit?</strong><br>
                     The tool runs entirely in your browser, so the practical limit depends on your device's available memory. It handles thousands of lines without issue on modern hardware. For extremely large files (tens of thousands of lines), performance may vary by browser.</p>
 
-                    <p>This diff checker is completely <strong class="text-[#f1f5f9]">free</strong> and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No data is sent to any server — your text never leaves your machine. Use it whenever you need a fast, private way to compare text.</p>
+                    <p>This diff checker is completely <strong class="text-[#1e293b]">free</strong> and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. No data is sent to any server — your text never leaves your machine. Use it whenever you need a fast, private way to compare text.</p>
                 </div>
             </section>
         </article>
@@ -299,14 +299,14 @@
                     rows += '<div class="flex diff-del">'
                         + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
                         + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
-                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + esc(op.value) + '</span>'
+                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-600">- ' + esc(op.value) + '</span>'
                         + '</div>';
                 } else {
                     rightNum++; adds++;
                     rows += '<div class="flex diff-add">'
                         + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
                         + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
-                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + esc(op.value) + '</span>'
+                        + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-600">+ ' + esc(op.value) + '</span>'
                         + '</div>';
                 }
             }
@@ -332,12 +332,12 @@
                         rows += '<div class="flex diff-del">'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
-                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + wd.oldHtml + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-600">- ' + wd.oldHtml + '</span>'
                             + '</div>';
                         rows += '<div class="flex diff-add">'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
-                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + wd.newHtml + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-600">+ ' + wd.newHtml + '</span>'
                             + '</div>';
                         i += 2;
                     } else if (op.type === 'del') {
@@ -345,7 +345,7 @@
                         rows += '<div class="flex diff-del">'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0">' + leftNum + '</span>'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
-                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-300">- ' + esc(op.value) + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-red-600">- ' + esc(op.value) + '</span>'
                             + '</div>';
                         i++;
                     } else {
@@ -353,7 +353,7 @@
                         rows += '<div class="flex diff-add">'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0"></span>'
                             + '<span class="line-num w-12 text-right pr-3 shrink-0">' + rightNum + '</span>'
-                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-300">+ ' + esc(op.value) + '</span>'
+                            + '<span class="flex-1 px-3 whitespace-pre-wrap break-all text-emerald-600">+ ' + esc(op.value) + '</span>'
                             + '</div>';
                         i++;
                     }
@@ -393,11 +393,11 @@
         function setMode(m) {
             mode = m;
             if (m === 'line') {
-                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150';
-                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150';
+                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#2563eb] text-[#0f172a] transition-all duration-150';
+                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-white border border-[#e2e8f0] text-[#475569] hover:bg-[#e2e8f0] transition-all duration-150';
             } else {
-                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#38bdf8] text-[#0f172a] transition-all duration-150';
-                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#1e293b] border border-[#334155] text-[#94a3b8] hover:bg-[#334155] transition-all duration-150';
+                btnModeWord.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-[#2563eb] text-[#0f172a] transition-all duration-150';
+                btnModeLine.className = 'px-3 py-1.5 text-xs rounded-md font-medium bg-white border border-[#e2e8f0] text-[#475569] hover:bg-[#e2e8f0] transition-all duration-150';
             }
             if (!diffOutput.classList.contains('hidden')) compare();
         }

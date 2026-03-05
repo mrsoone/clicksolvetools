@@ -46,7 +46,7 @@
   </script>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen flex flex-col">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
   <!-- Nav -->
   <div id="nav-container"></div>
@@ -56,35 +56,35 @@
     <article>
 
       <!-- Widget -->
-      <section class="bg-[#1e293b] border border-[#334155] rounded-2xl p-6 sm:p-8 mb-12">
+      <section class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
 
         <!-- Input -->
         <div class="mb-5">
-          <label for="qr-input" class="block text-sm font-medium text-[#94a3b8] mb-2">Enter text or URL</label>
+          <label for="qr-input" class="block text-sm font-medium text-[#475569] mb-2">Enter text or URL</label>
           <input
             type="text"
             id="qr-input"
             placeholder="https://example.com"
             autocomplete="off"
-            class="w-full px-4 py-3 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] placeholder-[#475569] focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors text-base"
+            class="w-full px-4 py-3 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base"
           >
         </div>
 
         <!-- Size selector -->
         <div class="mb-5">
-          <label class="block text-sm font-medium text-[#94a3b8] mb-2">Size</label>
-          <div class="inline-flex rounded-lg border border-[#334155] overflow-hidden">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Size</label>
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] overflow-hidden">
             <label class="size-option">
               <input type="radio" name="qr-size" value="128" class="sr-only peer">
-              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#0f172a] text-[#94a3b8] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#f1f5f9]">Small</span>
+              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#f8fafc] text-[#475569] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#1e293b]">Small</span>
             </label>
-            <label class="size-option border-l border-[#334155]">
+            <label class="size-option border-l border-[#e2e8f0]">
               <input type="radio" name="qr-size" value="256" class="sr-only peer" checked>
-              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#0f172a] text-[#94a3b8] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#f1f5f9]">Medium</span>
+              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#f8fafc] text-[#475569] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#1e293b]">Medium</span>
             </label>
-            <label class="size-option border-l border-[#334155]">
+            <label class="size-option border-l border-[#e2e8f0]">
               <input type="radio" name="qr-size" value="512" class="sr-only peer">
-              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#0f172a] text-[#94a3b8] peer-checked:bg-[#38bdf8] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#f1f5f9]">Large</span>
+              <span class="block px-4 py-2 text-sm cursor-pointer bg-[#f8fafc] text-[#475569] peer-checked:bg-[#2563eb] peer-checked:text-[#0f172a] peer-checked:font-semibold transition-colors hover:text-[#1e293b]">Large</span>
             </label>
           </div>
         </div>
@@ -92,17 +92,17 @@
         <!-- Color pickers -->
         <div class="flex flex-wrap gap-6 mb-6">
           <div>
-            <label for="fg-color" class="block text-sm font-medium text-[#94a3b8] mb-2">Foreground</label>
+            <label for="fg-color" class="block text-sm font-medium text-[#475569] mb-2">Foreground</label>
             <div class="flex items-center gap-2">
-              <input type="color" id="fg-color" value="#000000" class="w-10 h-10 rounded cursor-pointer border border-[#334155] bg-transparent">
-              <span id="fg-hex" class="text-xs text-[#64748b] font-mono">#000000</span>
+              <input type="color" id="fg-color" value="#000000" class="w-10 h-10 rounded cursor-pointer border border-[#e2e8f0] bg-transparent">
+              <span id="fg-hex" class="text-xs text-[#94a3b8] font-mono">#000000</span>
             </div>
           </div>
           <div>
-            <label for="bg-color" class="block text-sm font-medium text-[#94a3b8] mb-2">Background</label>
+            <label for="bg-color" class="block text-sm font-medium text-[#475569] mb-2">Background</label>
             <div class="flex items-center gap-2">
-              <input type="color" id="bg-color" value="#FFFFFF" class="w-10 h-10 rounded cursor-pointer border border-[#334155] bg-transparent">
-              <span id="bg-hex" class="text-xs text-[#64748b] font-mono">#FFFFFF</span>
+              <input type="color" id="bg-color" value="#FFFFFF" class="w-10 h-10 rounded cursor-pointer border border-[#e2e8f0] bg-transparent">
+              <span id="bg-hex" class="text-xs text-[#94a3b8] font-mono">#FFFFFF</span>
             </div>
           </div>
         </div>
@@ -110,13 +110,13 @@
         <!-- QR preview area -->
         <div class="flex flex-col items-center">
           <div id="qr-preview" class="bg-white rounded-xl p-6 min-w-[180px] min-h-[180px] flex items-center justify-center mb-4">
-            <p id="qr-placeholder" class="text-[#94a3b8] text-sm text-center select-none">Enter text above to generate a QR code</p>
+            <p id="qr-placeholder" class="text-[#475569] text-sm text-center select-none">Enter text above to generate a QR code</p>
           </div>
           <p id="qr-error" class="text-red-400 text-sm mb-3 hidden"></p>
           <button
             id="download-btn"
             disabled
-            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#38bdf8] text-[#0f172a] font-semibold text-sm hover:bg-[#7dd3fc] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2563eb] text-[#0f172a] font-semibold text-sm hover:bg-[#3b82f6] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
             Download PNG
@@ -127,44 +127,44 @@
 
       <!-- SEO Content -->
       <section class="max-w-3xl mx-auto px-0">
-        <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is a QR Code and How Does It Work?</h2>
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is a QR Code and How Does It Work?</h2>
 
-        <div class="space-y-6 text-[#94a3b8] leading-relaxed">
+        <div class="space-y-6 text-[#475569] leading-relaxed">
           <p>A QR code (Quick Response code) is a two-dimensional barcode that stores information in a grid of black and white squares. Originally invented in 1994 by Denso Wave for tracking automotive parts, QR codes have since become one of the most widely recognized machine-readable formats in the world. Unlike traditional one-dimensional barcodes that hold only a few dozen characters, QR codes can encode thousands of characters of text, making them ideal for URLs, contact details, Wi-Fi credentials, and much more.</p>
 
-          <p>This free QR code generator runs entirely in your browser. Simply type or paste any text or URL into the input field above, choose your preferred size, pick custom foreground and background colors, and a QR code is generated in real time. There is nothing to install, no account to create, and no data ever leaves your device. When you are satisfied with the result, click <strong class="text-[#f1f5f9]">Download PNG</strong> to save a high-quality image file you can print, share, or embed anywhere.</p>
+          <p>This free QR code generator runs entirely in your browser. Simply type or paste any text or URL into the input field above, choose your preferred size, pick custom foreground and background colors, and a QR code is generated in real time. There is nothing to install, no account to create, and no data ever leaves your device. When you are satisfied with the result, click <strong class="text-[#1e293b]">Download PNG</strong> to save a high-quality image file you can print, share, or embed anywhere.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">How a QR Code Is Structured</h3>
-          <p>Every QR code is built from several key components. The three large squares in the corners are <strong class="text-[#f1f5f9]">finder patterns</strong>; they allow any scanner to instantly detect the code and determine its orientation, even when the image is rotated or skewed. Smaller squares called <strong class="text-[#f1f5f9]">alignment patterns</strong> help correct for distortion when the code is printed on a curved surface or photographed at an angle. Between these patterns sits the <strong class="text-[#f1f5f9]">data region</strong>, a matrix of modules (the individual black-and-white squares) that encodes your information using Reed-Solomon error correction. Surrounding everything is the <strong class="text-[#f1f5f9]">quiet zone</strong>, a mandatory margin of blank space that ensures scanners can distinguish the code from its background.</p>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How a QR Code Is Structured</h3>
+          <p>Every QR code is built from several key components. The three large squares in the corners are <strong class="text-[#1e293b]">finder patterns</strong>; they allow any scanner to instantly detect the code and determine its orientation, even when the image is rotated or skewed. Smaller squares called <strong class="text-[#1e293b]">alignment patterns</strong> help correct for distortion when the code is printed on a curved surface or photographed at an angle. Between these patterns sits the <strong class="text-[#1e293b]">data region</strong>, a matrix of modules (the individual black-and-white squares) that encodes your information using Reed-Solomon error correction. Surrounding everything is the <strong class="text-[#1e293b]">quiet zone</strong>, a mandatory margin of blank space that ensures scanners can distinguish the code from its background.</p>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Popular Use Cases for QR Codes</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Popular Use Cases for QR Codes</h3>
           <ul class="list-disc list-inside space-y-1.5 ml-1">
-            <li><strong class="text-[#f1f5f9]">Website URLs</strong> — Link to a landing page, portfolio, or online store without requiring users to type a long address.</li>
-            <li><strong class="text-[#f1f5f9]">Wi-Fi sharing</strong> — Encode your network name and password so guests can connect with a single scan.</li>
-            <li><strong class="text-[#f1f5f9]">Digital business cards (vCards)</strong> — Share your name, phone number, email, and company info instantly.</li>
-            <li><strong class="text-[#f1f5f9]">Mobile payments</strong> — Services like Venmo, PayPal, and many point-of-sale systems use QR codes for fast, contactless transactions.</li>
-            <li><strong class="text-[#f1f5f9]">Restaurant menus</strong> — Replace physical menus with a scannable code that links to an always-up-to-date online menu.</li>
-            <li><strong class="text-[#f1f5f9]">Event tickets &amp; boarding passes</strong> — Airlines and venues embed scannable codes for paperless entry.</li>
-            <li><strong class="text-[#f1f5f9]">Product packaging</strong> — Link to manuals, nutritional info, or warranty registration from a printed label.</li>
+            <li><strong class="text-[#1e293b]">Website URLs</strong> — Link to a landing page, portfolio, or online store without requiring users to type a long address.</li>
+            <li><strong class="text-[#1e293b]">Wi-Fi sharing</strong> — Encode your network name and password so guests can connect with a single scan.</li>
+            <li><strong class="text-[#1e293b]">Digital business cards (vCards)</strong> — Share your name, phone number, email, and company info instantly.</li>
+            <li><strong class="text-[#1e293b]">Mobile payments</strong> — Services like Venmo, PayPal, and many point-of-sale systems use QR codes for fast, contactless transactions.</li>
+            <li><strong class="text-[#1e293b]">Restaurant menus</strong> — Replace physical menus with a scannable code that links to an always-up-to-date online menu.</li>
+            <li><strong class="text-[#1e293b]">Event tickets &amp; boarding passes</strong> — Airlines and venues embed scannable codes for paperless entry.</li>
+            <li><strong class="text-[#1e293b]">Product packaging</strong> — Link to manuals, nutritional info, or warranty registration from a printed label.</li>
           </ul>
 
-          <h3 class="text-lg font-semibold text-[#f1f5f9] pt-2">Frequently Asked Questions</h3>
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
 
           <div class="space-y-4">
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">How much data can a QR code hold?</h4>
+              <h4 class="font-medium text-[#1e293b]">How much data can a QR code hold?</h4>
               <p>A single QR code can store up to 7,089 numeric characters, 4,296 alphanumeric characters, or 2,953 bytes of binary data. In practice, shorter content produces a simpler, more reliable code. For best scanning results, keep your payload under a few hundred characters.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Do QR codes expire?</h4>
+              <h4 class="font-medium text-[#1e293b]">Do QR codes expire?</h4>
               <p>Static QR codes — the kind this tool generates — never expire. The data is encoded directly in the pattern of squares, so the code will remain scannable as long as the image is intact. Dynamic QR codes, which redirect through a third-party server, can expire if the hosting service shuts down or the link is deactivated.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Can I customize QR code colors?</h4>
+              <h4 class="font-medium text-[#1e293b]">Can I customize QR code colors?</h4>
               <p>Yes. Use the foreground and background color pickers above to match your brand or design. Just make sure there is enough contrast between the two colors; most scanners need a clearly visible difference to read the code reliably. As a rule of thumb, keep the foreground darker than the background.</p>
             </div>
             <div>
-              <h4 class="font-medium text-[#f1f5f9]">Is this tool really free?</h4>
+              <h4 class="font-medium text-[#1e293b]">Is this tool really free?</h4>
               <p>Absolutely. This QR code generator is 100% free, requires no sign-up, and places no watermarks on your downloads. Because the code runs entirely in your browser using JavaScript, your data stays private and never touches a remote server.</p>
             </div>
           </div>

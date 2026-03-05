@@ -61,32 +61,32 @@
     </script>
 </head>
 
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
     <div id="nav-container"></div>
 
     <main class="max-w-5xl mx-auto px-4 py-8">
         <article>
             <div class="mb-8 text-center">
-                <h1 class="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-2">Unix Timestamp Converter</h1>
-                <p class="text-[#94a3b8] text-lg">Convert between Unix timestamps and human-readable dates instantly</p>
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Unix Timestamp Converter</h1>
+                <p class="text-[#475569] text-lg">Convert between Unix timestamps and human-readable dates instantly</p>
             </div>
 
             <!-- Timezone & Current Time Banner -->
-            <div class="bg-[#1e293b] border border-[#334155] rounded-lg p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
-                <div class="text-sm text-[#94a3b8]">
-                    Your timezone: <span id="tz-name" class="text-[#f1f5f9] font-medium"></span>
-                    <span class="ml-2 text-[#475569]">|</span>
-                    <span class="ml-2">UTC offset: <span id="tz-offset" class="text-[#f1f5f9] font-medium"></span></span>
+            <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div class="text-sm text-[#475569]">
+                    Your timezone: <span id="tz-name" class="text-[#1e293b] font-medium"></span>
+                    <span class="ml-2 text-[#64748b]">|</span>
+                    <span class="ml-2">UTC offset: <span id="tz-offset" class="text-[#1e293b] font-medium"></span></span>
                 </div>
-                <div class="text-sm font-mono text-[#38bdf8]" id="live-clock"></div>
+                <div class="text-sm font-mono text-[#2563eb]" id="live-clock"></div>
             </div>
 
             <!-- Unit Toggle -->
             <div class="flex items-center gap-3 mb-6">
-                <span class="text-sm text-[#94a3b8]">Unit:</span>
-                <div class="inline-flex rounded-lg overflow-hidden border border-[#334155]">
-                    <button id="unit-sec" class="px-4 py-2 text-sm font-medium bg-[#38bdf8] text-[#0f172a] transition-colors">Seconds</button>
-                    <button id="unit-ms" class="px-4 py-2 text-sm font-medium bg-[#1e293b] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors">Milliseconds</button>
+                <span class="text-sm text-[#475569]">Unit:</span>
+                <div class="inline-flex rounded-lg overflow-hidden border border-[#e2e8f0]">
+                    <button id="unit-sec" class="px-4 py-2 text-sm font-medium bg-[#2563eb] text-[#0f172a] transition-colors">Seconds</button>
+                    <button id="unit-ms" class="px-4 py-2 text-sm font-medium bg-white text-[#475569] hover:text-[#1e293b] transition-colors">Milliseconds</button>
                 </div>
             </div>
 
@@ -94,132 +94,132 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
 
                 <!-- Panel 1: Timestamp → Date -->
-                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6">
-                    <h2 class="text-lg font-semibold text-[#f1f5f9] mb-4">Timestamp → Date</h2>
-                    <label for="ts-input" class="block text-sm font-medium text-[#94a3b8] mb-2">Unix Timestamp</label>
+                <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+                    <h2 class="text-lg font-semibold text-[#1e293b] mb-4">Timestamp → Date</h2>
+                    <label for="ts-input" class="block text-sm font-medium text-[#475569] mb-2">Unix Timestamp</label>
                     <div class="flex gap-2 mb-4">
                         <input
                             id="ts-input"
                             type="text"
                             inputmode="numeric"
-                            class="flex-1 bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] font-mono text-base focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors placeholder-[#475569]"
+                            class="flex-1 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-[#1e293b] font-mono text-base focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8]"
                             placeholder="e.g. 1700000000"
                             autocomplete="off"
                         >
                         <button
                             id="btn-now"
-                            class="px-4 py-3 bg-[#38bdf8] text-[#0f172a] font-semibold rounded-lg hover:bg-[#7dd3fc] active:scale-95 transition-all duration-150 text-sm whitespace-nowrap"
+                            class="px-4 py-3 bg-[#2563eb] text-[#0f172a] font-semibold rounded-lg hover:bg-[#3b82f6] active:scale-95 transition-all duration-150 text-sm whitespace-nowrap"
                         >Now</button>
                     </div>
 
                     <!-- Results -->
                     <div id="ts-results" class="space-y-3 hidden">
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide">ISO 8601</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide">ISO 8601</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-iso" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#7dd3fc] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-iso">Copy</button>
+                                <code id="res-iso" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#3b82f6] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-iso">Copy</button>
                             </div>
                         </div>
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide">RFC 2822</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide">RFC 2822</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-rfc" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#7dd3fc] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-rfc">Copy</button>
+                                <code id="res-rfc" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#3b82f6] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-rfc">Copy</button>
                             </div>
                         </div>
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide">Local String</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide">Local String</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-local" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#7dd3fc] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-local">Copy</button>
+                                <code id="res-local" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#3b82f6] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-local">Copy</button>
                             </div>
                         </div>
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide">UTC String</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide">UTC String</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-utc" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#7dd3fc] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-utc">Copy</button>
+                                <code id="res-utc" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#3b82f6] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-utc">Copy</button>
                             </div>
                         </div>
                     </div>
                     <p id="ts-error" class="text-red-400 text-sm mt-3 hidden"></p>
-                    <p id="ts-placeholder" class="text-[#475569] text-sm italic mt-4">Enter a timestamp or click "Now" to get started</p>
+                    <p id="ts-placeholder" class="text-[#64748b] text-sm italic mt-4">Enter a timestamp or click "Now" to get started</p>
                 </div>
 
                 <!-- Panel 2: Date → Timestamp -->
-                <div class="bg-[#1e293b] border border-[#334155] rounded-xl p-6">
-                    <h2 class="text-lg font-semibold text-[#f1f5f9] mb-4">Date → Timestamp</h2>
-                    <label for="date-input" class="block text-sm font-medium text-[#94a3b8] mb-2">Date &amp; Time</label>
+                <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+                    <h2 class="text-lg font-semibold text-[#1e293b] mb-4">Date → Timestamp</h2>
+                    <label for="date-input" class="block text-sm font-medium text-[#475569] mb-2">Date &amp; Time</label>
                     <input
                         id="date-input"
                         type="datetime-local"
                         step="1"
-                        class="w-full bg-[#0f172a] border border-[#334155] rounded-lg px-4 py-3 text-[#f1f5f9] font-mono text-base focus:outline-none focus:border-[#38bdf8] focus:ring-1 focus:ring-[#38bdf8] transition-colors mb-4"
+                        class="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 text-[#1e293b] font-mono text-base focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors mb-4"
                     >
 
                     <div id="date-results" class="space-y-3 hidden">
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide" id="date-res-unit-label">Unix Timestamp (seconds)</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide" id="date-res-unit-label">Unix Timestamp (seconds)</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-ts" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#38bdf8] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-ts">Copy</button>
+                                <code id="res-ts" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#2563eb] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-ts">Copy</button>
                             </div>
                         </div>
                         <div class="result-row">
-                            <span class="text-xs text-[#64748b] uppercase tracking-wide">ISO 8601</span>
+                            <span class="text-xs text-[#94a3b8] uppercase tracking-wide">ISO 8601</span>
                             <div class="flex items-center gap-2 mt-1">
-                                <code id="res-d-iso" class="flex-1 bg-[#0f172a] rounded px-3 py-2 text-sm font-mono text-[#7dd3fc] break-all"></code>
-                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#334155] text-[#94a3b8] rounded hover:bg-[#475569] hover:text-[#f1f5f9] active:scale-95 transition-all" data-target="res-d-iso">Copy</button>
+                                <code id="res-d-iso" class="flex-1 bg-[#f8fafc] rounded px-3 py-2 text-sm font-mono text-[#3b82f6] break-all"></code>
+                                <button class="copy-btn shrink-0 px-3 py-2 text-xs bg-[#f1f5f9] text-[#475569] rounded hover:bg-[#e2e8f0] hover:text-[#1e293b] active:scale-95 transition-all" data-target="res-d-iso">Copy</button>
                             </div>
                         </div>
                     </div>
-                    <p id="date-placeholder" class="text-[#475569] text-sm italic mt-4">Pick a date and time above</p>
+                    <p id="date-placeholder" class="text-[#64748b] text-sm italic mt-4">Pick a date and time above</p>
                 </div>
             </div>
 
             <!-- SEO Content -->
             <section class="max-w-3xl mx-auto mt-16">
-                <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is a Unix Timestamp and How Does It Work?</h2>
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is a Unix Timestamp and How Does It Work?</h2>
 
-                <div class="space-y-4 text-[#94a3b8] leading-relaxed">
-                    <p>A Unix timestamp — also known as epoch time or POSIX time — is a way of representing a specific moment in time as a single number. It counts the number of seconds that have elapsed since <strong class="text-[#f1f5f9]">January 1, 1970, 00:00:00 UTC</strong>, a reference point known as the Unix epoch. For example, the timestamp <code class="text-[#7dd3fc]">1700000000</code> corresponds to November 14, 2023 at 22:13:20 UTC. Because it is a simple integer with no timezone ambiguity, Unix time has become the de facto standard for storing, transmitting, and comparing points in time across virtually every programming language, operating system, and database in use today.</p>
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>A Unix timestamp — also known as epoch time or POSIX time — is a way of representing a specific moment in time as a single number. It counts the number of seconds that have elapsed since <strong class="text-[#1e293b]">January 1, 1970, 00:00:00 UTC</strong>, a reference point known as the Unix epoch. For example, the timestamp <code class="text-[#3b82f6]">1700000000</code> corresponds to November 14, 2023 at 22:13:20 UTC. Because it is a simple integer with no timezone ambiguity, Unix time has become the de facto standard for storing, transmitting, and comparing points in time across virtually every programming language, operating system, and database in use today.</p>
 
-                    <p>The concept was introduced with the original Unix operating system in the early 1970s. Its elegance lies in its simplicity: a single number is far easier for computers to sort, compare, and perform arithmetic on than a formatted date string like <code class="text-[#7dd3fc]">"Nov 14, 2023 10:13 PM"</code>. Whether you're scheduling a cron job, logging an event, or calculating the duration between two moments, timestamps make the math trivial — simply subtract one from the other to get the difference in seconds.</p>
+                    <p>The concept was introduced with the original Unix operating system in the early 1970s. Its elegance lies in its simplicity: a single number is far easier for computers to sort, compare, and perform arithmetic on than a formatted date string like <code class="text-[#3b82f6]">"Nov 14, 2023 10:13 PM"</code>. Whether you're scheduling a cron job, logging an event, or calculating the duration between two moments, timestamps make the math trivial — simply subtract one from the other to get the difference in seconds.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">The Year 2038 Problem (Y2K38)</h3>
-                    <p>Many older systems store Unix timestamps as a <strong class="text-[#f1f5f9]">signed 32-bit integer</strong>, which can represent values up to 2,147,483,647. That ceiling corresponds to <strong class="text-[#f1f5f9]">January 19, 2038 at 03:14:07 UTC</strong>. One second later, the counter overflows and wraps around to a large negative number, interpreted as December 13, 1901. This is analogous to the Y2K bug and is often called the <strong class="text-[#f1f5f9]">Y2K38 problem</strong>. Modern systems have largely migrated to 64-bit integers, which extend the range far beyond the projected lifespan of the Sun, but legacy embedded devices and older codebases may still be vulnerable.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Year 2038 Problem (Y2K38)</h3>
+                    <p>Many older systems store Unix timestamps as a <strong class="text-[#1e293b]">signed 32-bit integer</strong>, which can represent values up to 2,147,483,647. That ceiling corresponds to <strong class="text-[#1e293b]">January 19, 2038 at 03:14:07 UTC</strong>. One second later, the counter overflows and wraps around to a large negative number, interpreted as December 13, 1901. This is analogous to the Y2K bug and is often called the <strong class="text-[#1e293b]">Y2K38 problem</strong>. Modern systems have largely migrated to 64-bit integers, which extend the range far beyond the projected lifespan of the Sun, but legacy embedded devices and older codebases may still be vulnerable.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Why Developers Use Unix Timestamps</h3>
-                    <p>Timestamps solve several problems simultaneously. They are <strong class="text-[#f1f5f9]">timezone-agnostic</strong> — the same integer means the same instant everywhere on Earth. They are compact, requiring only four to eight bytes of storage. They are universally sortable without locale-aware parsing. And they interoperate seamlessly across languages: a timestamp generated in Python can be read without conversion in JavaScript, Go, Rust, or any other language.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Developers Use Unix Timestamps</h3>
+                    <p>Timestamps solve several problems simultaneously. They are <strong class="text-[#1e293b]">timezone-agnostic</strong> — the same integer means the same instant everywhere on Earth. They are compact, requiring only four to eight bytes of storage. They are universally sortable without locale-aware parsing. And they interoperate seamlessly across languages: a timestamp generated in Python can be read without conversion in JavaScript, Go, Rust, or any other language.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How to Use This Tool</h3>
-                    <p>This converter offers <strong class="text-[#f1f5f9]">two-way conversion</strong>. In the left panel, enter a Unix timestamp and see it converted instantly into ISO 8601, RFC 2822, your local date string, and a UTC string. In the right panel, pick a date and time from the calendar picker and get the corresponding Unix timestamp. Use the <strong class="text-[#f1f5f9]">seconds/milliseconds toggle</strong> at the top to switch between the two most common precisions — seconds (standard Unix time) and milliseconds (used by JavaScript's <code class="text-[#7dd3fc]">Date.now()</code> and many APIs). Click <strong class="text-[#f1f5f9]">Now</strong> to instantly fill the current timestamp. Every result has a <strong class="text-[#f1f5f9]">Copy</strong> button for quick clipboard access.</p>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Use This Tool</h3>
+                    <p>This converter offers <strong class="text-[#1e293b]">two-way conversion</strong>. In the left panel, enter a Unix timestamp and see it converted instantly into ISO 8601, RFC 2822, your local date string, and a UTC string. In the right panel, pick a date and time from the calendar picker and get the corresponding Unix timestamp. Use the <strong class="text-[#1e293b]">seconds/milliseconds toggle</strong> at the top to switch between the two most common precisions — seconds (standard Unix time) and milliseconds (used by JavaScript's <code class="text-[#3b82f6]">Date.now()</code> and many APIs). Click <strong class="text-[#1e293b]">Now</strong> to instantly fill the current timestamp. Every result has a <strong class="text-[#1e293b]">Copy</strong> button for quick clipboard access.</p>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong class="text-[#f1f5f9]">API debugging</strong> — Decode timestamps in JSON responses to verify that dates are correct before writing parsing logic.</li>
-                        <li><strong class="text-[#f1f5f9]">Log analysis</strong> — Server and application logs often record events as epoch time. Convert them to human-readable dates to correlate with incident timelines.</li>
-                        <li><strong class="text-[#f1f5f9]">Database queries</strong> — Many databases store created-at and updated-at columns as integer timestamps. Convert values when writing or reading SQL queries.</li>
-                        <li><strong class="text-[#f1f5f9]">Scheduling &amp; cron jobs</strong> — Calculate future timestamps for delayed tasks, TTL expirations, or cache invalidation windows.</li>
-                        <li><strong class="text-[#f1f5f9]">Cross-timezone coordination</strong> — Share a single epoch value with collaborators in different timezones and let each person convert it locally.</li>
+                        <li><strong class="text-[#1e293b]">API debugging</strong> — Decode timestamps in JSON responses to verify that dates are correct before writing parsing logic.</li>
+                        <li><strong class="text-[#1e293b]">Log analysis</strong> — Server and application logs often record events as epoch time. Convert them to human-readable dates to correlate with incident timelines.</li>
+                        <li><strong class="text-[#1e293b]">Database queries</strong> — Many databases store created-at and updated-at columns as integer timestamps. Convert values when writing or reading SQL queries.</li>
+                        <li><strong class="text-[#1e293b]">Scheduling &amp; cron jobs</strong> — Calculate future timestamps for delayed tasks, TTL expirations, or cache invalidation windows.</li>
+                        <li><strong class="text-[#1e293b]">Cross-timezone coordination</strong> — Share a single epoch value with collaborators in different timezones and let each person convert it locally.</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
-                    <p><strong class="text-[#f1f5f9]">What is epoch time?</strong><br>
+                    <p><strong class="text-[#1e293b]">What is epoch time?</strong><br>
                     Epoch time is another name for Unix time. It refers to the number of seconds (or milliseconds) since the Unix epoch — midnight on January 1, 1970, UTC. The terms "epoch time," "Unix timestamp," and "POSIX time" are interchangeable.</p>
 
-                    <p><strong class="text-[#f1f5f9]">What happens in 2038?</strong><br>
+                    <p><strong class="text-[#1e293b]">What happens in 2038?</strong><br>
                     Systems that store Unix timestamps as signed 32-bit integers will overflow on January 19, 2038 at 03:14:07 UTC. After that moment the timestamp wraps to a negative value representing 1901. Most modern platforms have already switched to 64-bit timestamps, but embedded devices and legacy software may be affected and require patching before that date.</p>
 
-                    <p><strong class="text-[#f1f5f9]">How do I get the current Unix timestamp in JavaScript?</strong><br>
-                    Use <code class="text-[#7dd3fc]">Math.floor(Date.now() / 1000)</code> for seconds, or <code class="text-[#7dd3fc]">Date.now()</code> directly for milliseconds.</p>
+                    <p><strong class="text-[#1e293b]">How do I get the current Unix timestamp in JavaScript?</strong><br>
+                    Use <code class="text-[#3b82f6]">Math.floor(Date.now() / 1000)</code> for seconds, or <code class="text-[#3b82f6]">Date.now()</code> directly for milliseconds.</p>
 
-                    <p><strong class="text-[#f1f5f9]">How do I get the current Unix timestamp in Python?</strong><br>
-                    Use <code class="text-[#7dd3fc]">import time; int(time.time())</code> for seconds, or <code class="text-[#7dd3fc]">int(time.time() * 1000)</code> for milliseconds.</p>
+                    <p><strong class="text-[#1e293b]">How do I get the current Unix timestamp in Python?</strong><br>
+                    Use <code class="text-[#3b82f6]">import time; int(time.time())</code> for seconds, or <code class="text-[#3b82f6]">int(time.time() * 1000)</code> for milliseconds.</p>
 
-                    <p>This tool is completely <strong class="text-[#f1f5f9]">free</strong> and runs <strong class="text-[#f1f5f9]">entirely in your browser</strong>. No data is sent to any server — your timestamps and dates never leave your machine. Use it whenever you need a quick, reliable conversion between epoch time and human-readable dates.</p>
+                    <p>This tool is completely <strong class="text-[#1e293b]">free</strong> and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. No data is sent to any server — your timestamps and dates never leave your machine. Use it whenever you need a quick, reliable conversion between epoch time and human-readable dates.</p>
                 </div>
             </section>
         </article>
@@ -280,11 +280,11 @@
             function setUnit(ms) {
                 useMs = ms;
                 unitSec.className = ms
-                    ? 'px-4 py-2 text-sm font-medium bg-[#1e293b] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors'
-                    : 'px-4 py-2 text-sm font-medium bg-[#38bdf8] text-[#0f172a] transition-colors';
+                    ? 'px-4 py-2 text-sm font-medium bg-white text-[#475569] hover:text-[#1e293b] transition-colors'
+                    : 'px-4 py-2 text-sm font-medium bg-[#2563eb] text-[#0f172a] transition-colors';
                 unitMs.className = ms
-                    ? 'px-4 py-2 text-sm font-medium bg-[#38bdf8] text-[#0f172a] transition-colors'
-                    : 'px-4 py-2 text-sm font-medium bg-[#1e293b] text-[#94a3b8] hover:text-[#f1f5f9] transition-colors';
+                    ? 'px-4 py-2 text-sm font-medium bg-[#2563eb] text-[#0f172a] transition-colors'
+                    : 'px-4 py-2 text-sm font-medium bg-white text-[#475569] hover:text-[#1e293b] transition-colors';
                 unitLabel.textContent = ms ? 'Unix Timestamp (milliseconds)' : 'Unix Timestamp (seconds)';
                 convertTimestamp();
                 convertDate();
@@ -380,11 +380,11 @@
                         const original = btn.textContent;
                         btn.textContent = 'Copied!';
                         btn.classList.add('bg-emerald-600', 'text-white');
-                        btn.classList.remove('bg-[#334155]', 'text-[#94a3b8]');
+                        btn.classList.remove('bg-[#f1f5f9]', 'text-[#475569]');
                         setTimeout(function () {
                             btn.textContent = original;
                             btn.classList.remove('bg-emerald-600', 'text-white');
-                            btn.classList.add('bg-[#334155]', 'text-[#94a3b8]');
+                            btn.classList.add('bg-[#f1f5f9]', 'text-[#475569]');
                         }, 2000);
                     });
                 });

@@ -20,16 +20,16 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculator","url":"https://clicksolvetools.com/tools/calculator","description":"Free online scientific calculator with keyboard support and calculation history.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
 </head>
-<body class="bg-[#0f172a] text-[#f1f5f9] min-h-screen">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-md mx-auto">
       <!-- Display -->
-      <div class="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden mb-4">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden mb-4">
         <div class="p-4 min-h-[100px] flex flex-col justify-end items-end">
-          <div id="expression" class="w-full text-right text-[#94a3b8] text-sm font-mono break-all min-h-[1.25rem]"></div>
-          <div id="display" class="w-full text-right text-[#f1f5f9] text-3xl sm:text-4xl font-mono mt-1 break-all">0</div>
+          <div id="expression" class="w-full text-right text-[#475569] text-sm font-mono break-all min-h-[1.25rem]"></div>
+          <div id="display" class="w-full text-right text-[#1e293b] text-3xl sm:text-4xl font-mono mt-1 break-all">0</div>
         </div>
       </div>
 
@@ -85,49 +85,49 @@
 
       <!-- History -->
       <div class="mt-6">
-        <button id="history-toggle" class="w-full text-left text-sm text-[#94a3b8] hover:text-[#f1f5f9] transition-colors duration-150 flex items-center gap-2 py-2">
+        <button id="history-toggle" class="w-full text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors duration-150 flex items-center gap-2 py-2">
           <svg id="history-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           Calculation History
-          <span id="history-count" class="text-xs text-[#64748b]">(0)</span>
+          <span id="history-count" class="text-xs text-[#94a3b8]">(0)</span>
         </button>
         <div id="history-panel" class="hidden">
           <div id="history-list" class="space-y-1 mt-2"></div>
-          <button id="history-clear" class="hidden mt-3 text-xs text-[#64748b] hover:text-[#f87171] transition-colors duration-150">Clear history</button>
+          <button id="history-clear" class="hidden mt-3 text-xs text-[#94a3b8] hover:text-[#f87171] transition-colors duration-150">Clear history</button>
         </div>
       </div>
     </div>
   </main>
 
   <article class="max-w-3xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold text-[#f1f5f9] mb-6">What Is a Scientific Calculator and How Does It Work?</h2>
-    <div class="space-y-4 text-[#94a3b8] leading-relaxed">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is a Scientific Calculator and How Does It Work?</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
       <p>A scientific calculator is a tool that goes beyond basic addition, subtraction, multiplication, and division. It supports advanced mathematical operations such as trigonometric functions, logarithms, exponents, square roots, and factorials. Students, engineers, scientists, financial analysts, and anyone who works with numbers regularly use scientific calculators to solve problems quickly and accurately. This free online calculator runs entirely in your browser, requires no downloads or signups, and provides instant results for both everyday arithmetic and complex expressions.</p>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">How to Use This Calculator</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Use This Calculator</h3>
       <p>Getting started is straightforward. The large display at the top shows your current expression on the first line and the computed result on the second. You can build expressions by clicking the on-screen buttons or by typing directly on your keyboard.</p>
       <ul class="list-disc list-inside space-y-2">
         <li><strong>Enter numbers and operators</strong> — Click the number buttons (0–9) and operator buttons (+, −, ×, ÷) to build an expression. You can also type them on your keyboard.</li>
-        <li><strong>Use parentheses for grouping</strong> — Click the <strong>(</strong> and <strong>)</strong> buttons to control evaluation order, for example <code class="text-[#38bdf8]">(2 + 3) * 4</code>.</li>
+        <li><strong>Use parentheses for grouping</strong> — Click the <strong>(</strong> and <strong>)</strong> buttons to control evaluation order, for example <code class="text-[#2563eb]">(2 + 3) * 4</code>.</li>
         <li><strong>Apply scientific functions</strong> — Click <strong>sin</strong>, <strong>cos</strong>, <strong>tan</strong>, <strong>log</strong>, <strong>ln</strong>, or <strong>√</strong> to insert a function. Then type the argument and close the parenthesis.</li>
         <li><strong>Calculate</strong> — Press the <strong>=</strong> button or hit <strong>Enter</strong> on your keyboard to evaluate the expression.</li>
         <li><strong>Clear</strong> — Press <strong>AC</strong> (or Escape) to reset everything, or <strong>CE</strong> (or Backspace) to delete the last character.</li>
         <li><strong>Review history</strong> — Expand the "Calculation History" section below the calculator to see your last 10 calculations. Click any past result to load it back into the display.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Understanding Calculator Functions</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding Calculator Functions</h3>
       <p>Each scientific function on the calculator serves a specific mathematical purpose:</p>
       <ul class="list-disc list-inside space-y-2">
         <li><strong>sin, cos, tan</strong> — Trigonometric functions that compute the sine, cosine, and tangent of an angle given in radians. These are essential in physics, engineering, and geometry for working with angles and periodic phenomena.</li>
-        <li><strong>log</strong> — The base-10 logarithm. If <code class="text-[#38bdf8]">log(1000)</code> equals 3, that means 10 raised to the power of 3 equals 1000. Widely used in science and data analysis to handle quantities that span many orders of magnitude.</li>
+        <li><strong>log</strong> — The base-10 logarithm. If <code class="text-[#2563eb]">log(1000)</code> equals 3, that means 10 raised to the power of 3 equals 1000. Widely used in science and data analysis to handle quantities that span many orders of magnitude.</li>
         <li><strong>ln</strong> — The natural logarithm (base <em>e</em> ≈ 2.718). It appears throughout calculus, compound interest formulas, and exponential growth models.</li>
-        <li><strong>√ (square root)</strong> — Returns the principal square root of a number. For example, <code class="text-[#38bdf8]">sqrt(144)</code> returns 12.</li>
-        <li><strong>x<sup>y</sup> (power)</strong> — Raises a number to an exponent. Type <code class="text-[#38bdf8]">2^10</code> to get 1024.</li>
-        <li><strong>x! (factorial)</strong> — Computes the product of all positive integers up to that number. <code class="text-[#38bdf8]">5!</code> equals 120. Factorials are central to combinatorics and probability.</li>
+        <li><strong>√ (square root)</strong> — Returns the principal square root of a number. For example, <code class="text-[#2563eb]">sqrt(144)</code> returns 12.</li>
+        <li><strong>x<sup>y</sup> (power)</strong> — Raises a number to an exponent. Type <code class="text-[#2563eb]">2^10</code> to get 1024.</li>
+        <li><strong>x! (factorial)</strong> — Computes the product of all positive integers up to that number. <code class="text-[#2563eb]">5!</code> equals 120. Factorials are central to combinatorics and probability.</li>
         <li><strong>π and e</strong> — Mathematical constants. Pi (≈ 3.14159) is the ratio of a circle's circumference to its diameter. Euler's number <em>e</em> (≈ 2.71828) is the base of the natural logarithm.</li>
-        <li><strong>% (percentage)</strong> — Appends <code class="text-[#38bdf8]">/100</code> to the current expression so you can quickly convert a number to its decimal form or calculate percentages inline.</li>
+        <li><strong>% (percentage)</strong> — Appends <code class="text-[#2563eb]">/100</code> to the current expression so you can quickly convert a number to its decimal form or calculate percentages inline.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Common Use Cases</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
       <ul class="list-disc list-inside space-y-2">
         <li><strong>Homework and studying</strong> — Quickly verify algebra, trigonometry, and calculus homework answers without hunting for a physical calculator.</li>
         <li><strong>Financial calculations</strong> — Figure out loan interest, tip percentages, profit margins, or monthly budget splits using basic and percentage operations.</li>
@@ -136,10 +136,10 @@
         <li><strong>Programming and data work</strong> — Quickly test mathematical expressions, verify algorithmic outputs, or compute values needed for configuration and calibration.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold text-[#f1f5f9] mt-8 mb-3">Frequently Asked Questions</h3>
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
 
       <p><strong>How do I calculate a percentage of a number?</strong></p>
-      <p>To find a percentage of a value, multiply the value by the percentage and press the <strong>%</strong> button. For example, to find 15% of 200, type <code class="text-[#38bdf8]">200 * 15</code> then press <strong>%</strong> and <strong>=</strong>. The calculator converts 15 to 0.15 and multiplies, giving you 30. You can also type the expression directly: <code class="text-[#38bdf8]">200 * 15 / 100</code>.</p>
+      <p>To find a percentage of a value, multiply the value by the percentage and press the <strong>%</strong> button. For example, to find 15% of 200, type <code class="text-[#2563eb]">200 * 15</code> then press <strong>%</strong> and <strong>=</strong>. The calculator converts 15 to 0.15 and multiplies, giving you 30. You can also type the expression directly: <code class="text-[#2563eb]">200 * 15 / 100</code>.</p>
 
       <p><strong>What is the order of operations and does this calculator follow it?</strong></p>
       <p>The order of operations — often remembered as PEMDAS (Parentheses, Exponents, Multiplication/Division, Addition/Subtraction) — dictates which parts of an expression are evaluated first. Yes, this calculator fully respects the standard order of operations. It is powered by the math.js library, which parses and evaluates expressions the same way a textbook would. Parentheses always take the highest priority, so use them to override default precedence when needed.</p>
@@ -172,9 +172,9 @@
     .calc-btn:active { transform: scale(0.95); }
     .btn-num { background: #334155; color: #f1f5f9; }
     .btn-num:hover { background: #475569; }
-    .btn-op { background: #38bdf8; color: #0f172a; }
-    .btn-op:hover { background: #7dd3fc; }
-    .btn-func { background: #1e3a5f; color: #7dd3fc; }
+    .btn-op { background: #2563eb; color: #0f172a; }
+    .btn-op:hover { background: #3b82f6; }
+    .btn-func { background: #1e3a5f; color: #3b82f6; }
     .btn-func:hover { background: #1e4d7b; }
     .btn-clear { background: #ef4444; color: #fff; }
     .btn-clear:hover { background: #f87171; }
@@ -283,15 +283,15 @@
       function renderHistory() {
         historyCount.textContent = `(${history.length})`;
         if (history.length === 0) {
-          historyList.innerHTML = '<p class="text-[#64748b] text-sm">No calculations yet.</p>';
+          historyList.innerHTML = '<p class="text-[#94a3b8] text-sm">No calculations yet.</p>';
           historyClear.classList.add('hidden');
           return;
         }
         historyClear.classList.remove('hidden');
         historyList.innerHTML = history.map((h, i) => `
-          <button class="w-full text-left px-3 py-2 rounded-lg bg-[#1e293b] border border-[#334155] hover:border-[#38bdf8] transition-colors duration-150 group" data-idx="${i}">
-            <div class="text-xs text-[#64748b] font-mono">${h.expr}</div>
-            <div class="text-sm text-[#f1f5f9] font-mono font-semibold">= ${h.result}</div>
+          <button class="w-full text-left px-3 py-2 rounded-lg bg-white border border-[#e2e8f0] hover:border-[#2563eb] transition-colors duration-150 group" data-idx="${i}">
+            <div class="text-xs text-[#94a3b8] font-mono">${h.expr}</div>
+            <div class="text-sm text-[#1e293b] font-mono font-semibold">= ${h.result}</div>
           </button>
         `).join('');
 
