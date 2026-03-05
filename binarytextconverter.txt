@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary to Text Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #output {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary to Text Converter</h1>
+    <textarea id="binaryInput" placeholder="Enter binary (e.g., 01001000 01100101 01101100 01101100 01101111)"></textarea>
+    <br>
+    <label for="encoding" style="font-size: 18px; font-weight: bold; margin-top: 20px; display: block;">Select Encoding:</label>
+    <select id="encoding" style="font-size: 18px; padding: 10px; margin: 10px 0;">
+        <option value="utf-8">UTF-8</option>
+        <option value="ascii">ASCII</option>
+    </select>
+    <br>
+    <button onclick="convertBinaryToText()">Convert</button>
+    <p id="output"></p>
+    
+    <script>
+        function convertBinaryToText() {
+            const encoding = document.getElementById("encoding").value;
+            const binaryInput = document.getElementById("binaryInput").value.trim();
+            if (!binaryInput) {
+                document.getElementById("output").innerText = "Please enter binary code.";
+                return;
+            }
+            
+            try {
+                let text = binaryInput.split(/\s+/)
+                    .map(bin => {
+                        if (!/^[01]{8}$/.test(bin)) throw new Error("Invalid binary format");
+                        return String.fromCharCode(parseInt(bin, 2));
+                    })
+                    .join("");
+                
+                // ASCII only allows characters in the range 0-127
+                if (encoding === "ascii") {
+                    text = text.split('').map(char => {
+                        return char.charCodeAt(0) < 128 ? char : '?'; // Replace non-ASCII characters with '?'
+                    }).join('');
+                }
+                
+                document.getElementById("output").innerText = "Converted Text: " + text;
+            } catch (e) {
+                document.getElementById("output").innerText = "Invalid binary input. Ensure you use 8-bit binary codes separated by spaces.";
+            }
+        }
+    </script>
+</body>
+</html>

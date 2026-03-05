@@ -1,0 +1,245 @@
+<!-- Start: Optimized Embeddable Bomb Finder Game v7 (Reverted to v5 Sizing) -->
+<div id="minesweeper-instance-wrapper">
+    <style>
+        /* --- Scoped Base Styles --- */
+        #minesweeper-instance-wrapper {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #212529; box-sizing: border-box; text-align: center; width: 100%;
+            max-width: 100%; overflow-x: hidden; padding: 5px; display: flex;
+            flex-direction: column; align-items: center;
+        }
+        #minesweeper-instance-wrapper * { box-sizing: border-box; }
+        #minesweeper-instance-wrapper h1 {
+             font-size: clamp(22px, 5vw, 30px); color: #343a40; margin-bottom: 10px;
+             font-weight: 600; width: 100%; text-align: center;
+         }
+
+        .msweep-game-container {
+            background-color: #fff;
+            /* --- REVERTED PADDING to v5 --- */
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 8px; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6; width: 100%; max-width: 100%;
+            margin-top: 5px; margin-bottom: 10px; position: relative; overflow: hidden;
+        }
+
+        /* --- Header / Controls --- */
+        .msweep-header {
+            display: flex; justify-content: space-around; align-items: center;
+            margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #cccccc;
+            flex-wrap: wrap; gap: clamp(6px, 1.5vw, 8px);
+        }
+        .msweep-info, .msweep-difficulty select, .msweep-controls button {
+             font-size: clamp(11px, 2.2vw, 14px); font-weight: 500; padding: 6px 9px;
+             border-radius: 5px; background-color: #f8f9fa; border: 1px solid #ced4da;
+             text-align: center; white-space: nowrap; flex-shrink: 0;
+        }
+        .msweep-difficulty select {
+             cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+             background-repeat: no-repeat; background-position: right 0.5em top 50%;
+             background-size: 0.65em auto; padding-right: 1.6em; max-width: 150px;
+        }
+        .msweep-difficulty select:focus-visible { outline: 2px solid #0d6efd; outline-offset: 1px; }
+        .msweep-controls { display: flex; gap: 6px; }
+        .msweep-controls button { cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.05s ease; }
+        .msweep-controls button:active { transform: scale(0.95); }
+        #msweep-reset-btn { background-color: #ffc107; border-color: #ffbb00; color: #343a40; }
+        #msweep-reset-btn:hover { background-color: #e0a800; }
+        #msweep-flag-btn { background-color: #6c757d; border-color: #5a6268; color: white; }
+        #msweep-flag-btn.active { background-color: #dc3545; border-color: #c82333; }
+        #msweep-flag-btn:hover { background-color: #5a6268; }
+        #msweep-flag-btn.active:hover { background-color: #c82333; }
+
+        /* --- Game Board --- */
+        .msweep-board {
+            display: grid; background-color: #cccccc; border: 1px solid #cccccc;
+            margin: 0 auto; width: fit-content; height: fit-content;
+            touch-action: none; max-width: 100%; overflow: hidden;
+        }
+        .msweep-cell {
+            background-color: #f0f0f0; border: 1px solid #fff; border-bottom-color: #bbb;
+            border-right-color: #bbb; display: flex; justify-content: center;
+            align-items: center; font-weight: bold; cursor: pointer; user-select: none;
+            transition: background-color 0.1s ease-in-out; overflow: hidden; text-overflow: clip;
+        }
+
+        /* ... (rest of cell, number, overlay styles identical) ... */
+         .msweep-cell:not(.revealed):not(.flagged):hover { background-color: #e6e6e6; } .msweep-cell.revealed { background-color: #e0e0e0; border: 1px solid #cccccc; cursor: default; } .msweep-cell.flagged::before { content: '🚩'; color: #dc3545; } .msweep-cell.mine::before { content: '💣'; } .msweep-cell.mine.exploded { background-color: #ffcccc; } .msweep-cell.wrong-flag::before { content: '❌'; color: #721c24; } .msweep-cell.revealed[data-adjacent="1"] { color: #0d6efd; } .msweep-cell.revealed[data-adjacent="2"] { color: #198754; } .msweep-cell.revealed[data-adjacent="3"] { color: #dc3545; } .msweep-cell.revealed[data-adjacent="4"] { color: #0dcaf0; } .msweep-cell.revealed[data-adjacent="5"] { color: #fd7e14; } .msweep-cell.revealed[data-adjacent="6"] { color: #6f42c1; } .msweep-cell.revealed[data-adjacent="7"] { color: #d63384; } .msweep-cell.revealed[data-adjacent="8"] { color: #6c757d; } .msweep-overlay { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(248, 249, 250, 0.92); flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 10; padding: 10px; opacity: 0; transition: opacity 0.25s ease-in-out; } .msweep-overlay.visible { display: flex; opacity: 1; } .msweep-overlay-content { background-color: white; padding: clamp(15px, 4vw, 25px) clamp(20px, 5vw, 35px); border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); border: 1px solid #ccc; max-width: 90%; transform: scale(0.95); opacity: 0; transition: transform 0.2s ease-out, opacity 0.2s ease-out; } .msweep-overlay.visible .msweep-overlay-content { transform: scale(1); opacity: 1; } .msweep-overlay h2 { margin-top: 0; margin-bottom: 10px; font-size: clamp(18px, 4vw, 24px); } .msweep-overlay p { font-size: clamp(15px, 3.5vw, 18px); margin-bottom: 20px; } .msweep-overlay button { font-size: clamp(15px, 3.5vw, 18px); padding: 9px 22px; cursor: pointer; border: none; border-radius: 6px; background-color: #0d6efd; color: white; transition: background-color 0.2s ease, transform 0.05s ease; } .msweep-overlay button:hover { background-color: #0b5ed7; } .msweep-overlay button:active { transform: scale(0.96); }
+
+    </style>
+
+    <h1>Bomb Finder</h1>
+
+    <div class="msweep-game-container">
+        <div class="msweep-header">
+            <!-- Header Content -->
+            <div class="msweep-difficulty">
+                 <select id="msweep-difficulty-select">
+                     <option value="easy">Easy (9x9, 10 bombs)</option>
+                     <option value="medium">Medium (16x16, 40 bombs)</option>
+                     <option value="hard">Hard (16x30, 99 bombs)</option>
+                 </select>
+             </div>
+             <div class="msweep-info" id="msweep-bomb-count">Bombs: 0</div>
+             <div class="msweep-info" id="msweep-timer">Time: 0s</div>
+             <div class="msweep-controls">
+                 <button id="msweep-flag-btn" title="Toggle Flag Mode (F)">🚩 Mode</button>
+                 <button id="msweep-reset-btn" title="New Game (R)">Reset</button>
+             </div>
+        </div>
+
+        <div class="msweep-board" id="msweep-board"></div>
+
+        <div class="msweep-overlay" id="msweep-overlay">
+             <div class="msweep-overlay-content">
+                 <h2 id="msweep-overlay-title">Game Over!</h2>
+                 <p id="msweep-overlay-message">You hit a bomb!</p>
+                 <button id="msweep-overlay-reset-btn">Play Again</button>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        (function() { // IIFE for scope
+
+            // --- DOM Elements ---
+            const wrapper = document.getElementById('minesweeper-instance-wrapper');
+            const gameContainer = wrapper.querySelector('.msweep-game-container');
+            const boardElement = wrapper.querySelector('#msweep-board');
+            const bombCountElement = wrapper.querySelector('#msweep-bomb-count');
+            const timerElement = wrapper.querySelector('#msweep-timer');
+            const difficultySelect = wrapper.querySelector('#msweep-difficulty-select');
+            const flagBtn = wrapper.querySelector('#msweep-flag-btn');
+            const resetBtn = wrapper.querySelector('#msweep-reset-btn');
+            const overlay = wrapper.querySelector('#msweep-overlay');
+            const overlayTitle = wrapper.querySelector('#msweep-overlay-title');
+            const overlayMessage = wrapper.querySelector('#msweep-overlay-message');
+            const overlayResetBtn = wrapper.querySelector('#msweep-overlay-reset-btn');
+
+             if (!boardElement || !difficultySelect || !bombCountElement) {
+                 console.error("Bomb Finder Embed Error: Could not find core elements.");
+                 if (wrapper) wrapper.innerHTML = "<p style='color: red; text-align: center;'>Error loading Bomb Finder.</p>";
+                 return;
+             }
+
+            // --- Game Settings ---
+            const DIFFICULTIES = {
+                 easy: { rows: 9, cols: 9, bombs: 10 },
+                 medium: { rows: 16, cols: 16, bombs: 40 },
+                 hard: { rows: 16, cols: 30, bombs: 99 }
+            };
+            const MAX_CELL_SIZE_PX = 36;
+            const MIN_CELL_SIZE_PX = 16;
+            const BOARD_BORDER_AND_GAP = 2;
+            const EMBED_SAFETY_MARGIN_PX = 8; // <<<--- REVERTED Safety Margin to 8 ---<<<
+
+            // --- Game State ---
+            // ... (state variables same) ...
+            let currentDifficulty = 'easy'; let rows = 0; cols = 0; let bombCount = 0;
+            let grid = []; let flagsPlaced = 0; let revealedCount = 0;
+            let gameOver = false; let gameWon = false; let firstClick = true;
+            let flagMode = false; let timerInterval = null;
+            let startTime = 0; let timeElapsed = 0;
+            let calculatedCellSize = 30;
+
+            // --- Helper Functions ---
+            const isValid = (r, c) => r >= 0 && r < rows && c >= 0 && c < cols;
+            const getCellElement = (r, c) => boardElement.children[r * cols + c];
+
+            // --- Dynamic Sizing (Reverted available width calculation base) ---
+            function calculateAndSetSizes() {
+                 // Using wrapper.clientWidth like v5
+                 const containerPadding = parseFloat(getComputedStyle(gameContainer).paddingLeft) + parseFloat(getComputedStyle(gameContainer).paddingRight);
+                 const availableWidth = wrapper.clientWidth - containerPadding - BOARD_BORDER_AND_GAP;
+                 const effectiveWidth = availableWidth - EMBED_SAFETY_MARGIN_PX; // Apply margin
+
+                 if (effectiveWidth <= 0) {
+                     calculatedCellSize = MIN_CELL_SIZE_PX;
+                 } else {
+                     const totalGapWidth = Math.max(0, cols - 1);
+                     let targetCellSize = Math.floor((effectiveWidth - totalGapWidth) / cols);
+                     calculatedCellSize = Math.max(MIN_CELL_SIZE_PX, Math.min(targetCellSize, MAX_CELL_SIZE_PX));
+                 }
+
+                 const finalBoardWidth = cols * calculatedCellSize + Math.max(0, cols - 1);
+                 const finalBoardHeight = rows * calculatedCellSize + Math.max(0, rows - 1);
+
+                 boardElement.style.width = `${finalBoardWidth}px`;
+                 boardElement.style.height = `${finalBoardHeight}px`;
+                 boardElement.style.gridTemplateColumns = `repeat(${cols}, ${calculatedCellSize}px)`;
+                 boardElement.style.gridTemplateRows = `repeat(${rows}, ${calculatedCellSize}px)`;
+                 boardElement.style.gap = `1px`;
+
+                 // Resize existing cells
+                 const cellSize = calculatedCellSize;
+                 const fontSize = Math.max(10, Math.floor(cellSize * 0.55));
+                 const cellElements = boardElement.children;
+                 for(let i = 0; i < cellElements.length; i++){
+                     const cell = cellElements[i];
+                     cell.style.width = `${cellSize}px`;
+                     cell.style.height = `${cellSize}px`;
+                     cell.style.fontSize = `${fontSize}px`;
+                     cell.style.lineHeight = `${cellSize}px`;
+                 }
+                 // console.log(`Safety Margin: ${EMBED_SAFETY_MARGIN_PX}px. Final cell size: ${calculatedCellSize}px.`);
+             }
+
+            // --- Game Initialization (createGridData, placeBombs, calculateAdjacentBombs, createGridDOM) ---
+            // ... (Identical logic) ...
+            function createGridData(){grid=Array.from({length:rows},()=>Array.from({length:cols},()=>({isBomb:!1,isRevealed:!1,isFlagged:!1,adjacentBombs:0})))};function placeBombs(e,l){let t=bombCount,a=1,o=0;for(;t>0&&o<rows*cols*10;){const s=Math.floor(Math.random()*rows),d=Math.floor(Math.random()*cols),i=Math.abs(s-e)<=a&&Math.abs(d-l)<=a;isValid(s,d)&&!grid[s][d].isBomb&&!i&&(grid[s][d].isBomb=!0,t--),o++}t>0&&console.warn("Could not place all bombs.")};function calculateAdjacentBombs(){for(let e=0;e<rows;e++)for(let l=0;l<cols;l++){if(grid[e][l].isBomb)continue;let t=0;for(let a=-1;a<=1;a++)for(let o=-1;o<=1;o++){if(0===a&&0===o)continue;const s=e+a,d=l+o;isValid(s,d)&&grid[s][d].isBomb&&t++}grid[e][l].adjacentBombs=t}};function createGridDOM(){boardElement.innerHTML="",calculateAndSetSizes();const e=calculatedCellSize,l=Math.max(10,Math.floor(.55*e)),t=document.createDocumentFragment();for(let a=0;a<rows;a++)for(let o=0;o<cols;o++){const s=document.createElement("div");s.className="msweep-cell",s.dataset.row=a,s.dataset.col=o,s.style.width=`${e}px`,s.style.height=`${e}px`,s.style.fontSize=`${l}px`,s.style.lineHeight=`${e}px`,t.appendChild(s)}boardElement.appendChild(t)};
+
+            // --- Game Logic (revealCell, toggleFlag, checkWinCondition, attemptChordReveal, triggerGameOver) ---
+            // ... (Identical logic) ...
+            function revealCell(e,l,t=!1){if(!isValid(e,l)||grid[e][l].isRevealed||grid[e][l].isFlagged&&!t||gameOver)return;const a=grid[e][l],o=getCellElement(e,l);if(!o)return;if(t&&a.isFlagged&&!a.isBomb)return o.classList.add("revealed","wrong-flag"),o.classList.remove("flagged"),void triggerGameOver(!1);if(a.isFlagged)return;a.isRevealed=!0,revealedCount++,o.classList.add("revealed"),a.isBomb?(o.classList.add("mine","exploded"),triggerGameOver(!1)):(a.adjacentBombs>0?(o.textContent=a.adjacentBombs,o.dataset.adjacent=a.adjacentBombs):(()=>{for(let t=-1;t<=1;t++)for(let a=-1;a<=1;a++){if(0===t&&0===a)continue;const o=e+t,s=l+a;isValid(o,s)&&!grid[o][s].isRevealed&&!grid[o][s].isFlagged&&revealCell(o,s)}})(),gameOver||checkWinCondition())};function toggleFlag(e,l){if(!isValid(e,l)||grid[e][l].isRevealed||gameOver)return;const t=grid[e][l],a=getCellElement(e,l);a&&(t.isFlagged=!t.isFlagged,a.classList.toggle("flagged",t.isFlagged),flagsPlaced+=t.isFlagged?1:-1,updateBombCountDisplay())};function checkWinCondition(){const e=(rows*cols)-bombCount;revealedCount===e&&triggerGameOver(!0)};function attemptChordReveal(e,l){if(!isValid(e,l)||!grid[e][l].isRevealed||0===grid[e][l].adjacentBombs||gameOver)return;let t=0;for(let a=-1;a<=1;a++)for(let o=-1;o<=1;o++){if(0===a&&0===o)continue;const s=e+a,d=l+o;isValid(s,d)&&grid[s][d].isFlagged&&t++}if(t===grid[e][l].adjacentBombs)for(let t=-1;t<=1;t++)for(let a=-1;a<=1;a++){if(0===t&&0===a)continue;const o=e+t,s=l+a;revealCell(o,s,!0)}};function triggerGameOver(e){if(gameOver)return;gameOver=!0,gameWon=e,clearInterval(timerInterval),timerInterval=null;for(let l=0;l<rows;l++)for(let t=0;t<cols;t++){const a=grid[l][t],o=getCellElement(l,t);o&&(o.style.transition="none",a.isBomb&&!a.isFlagged&&!e?o.classList.add("revealed","mine"):!a.isBomb&&a.isFlagged&&o.classList.add("revealed","wrong-flag"))}overlayTitle.textContent=e?"🎉 You Won! 🎉":"💥 Game Over! 💥",overlayMessage.textContent=e?`Cleared in ${timeElapsed} seconds!`:"You hit a bomb!",overlay.classList.add("visible")};
+
+            // --- UI Updates ---
+            const updateBombCountDisplay = () => { bombCountElement.textContent = `Bombs: ${Math.max(0, bombCount - flagsPlaced)}`; };
+            const updateTimer = () => { timeElapsed = Math.floor((Date.now() - startTime) / 1000); timerElement.textContent = `Time: ${timeElapsed}s`; };
+
+            // --- Event Handlers ---
+            function handleBoardInteraction(event) { /* ... (same) ... */
+                event.preventDefault(); if (gameOver) return; const cellElement = event.target.closest('.msweep-cell'); if (!cellElement) return; const r = parseInt(cellElement.dataset.row); const c = parseInt(cellElement.dataset.col); if (!isValid(r, c)) return; const isRightClick = event.type === 'contextmenu'; if (firstClick) { if (isRightClick) { if (!grid[r][c].isRevealed) toggleFlag(r, c); return; } if (grid[r][c].isFlagged) return; startTime = Date.now(); timerInterval = setInterval(updateTimer, 1000); placeBombs(r, c); calculateAdjacentBombs(); firstClick = false; } if (isRightClick || flagMode) { toggleFlag(r, c); } else if (!grid[r][c].isFlagged) { if (grid[r][c].isRevealed) { attemptChordReveal(r, c); } else { revealCell(r, c); } }
+            }
+            function handleDifficultyChange() { currentDifficulty = difficultySelect.value; startGame(); }
+            function handleFlagToggle() { flagMode = !flagMode; flagBtn.classList.toggle('active', flagMode); flagBtn.title = flagMode ? "Toggle Reveal Mode (F)" : "Toggle Flag Mode (F)"; boardElement.style.cursor = flagMode ? 'cell' : 'pointer'; }
+            function handleKeyPress(event) { if (event.key === 'f' || event.key === 'F') handleFlagToggle(); else if (event.key === 'r' || event.key === 'R') startGame(); }
+            let resizeTimeout; function handleResize() { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(() => { console.log("Resize detected - Redrawing grid"); createGridDOM(); }, 300); }
+
+            // --- Game Start/Reset ---
+            function startGame() {
+                console.log(`Starting Bomb Finder: ${currentDifficulty}`);
+                const settings = DIFFICULTIES[currentDifficulty];
+                rows = settings.rows; cols = settings.cols; bombCount = settings.bombs;
+                flagsPlaced = 0; revealedCount = 0; gameOver = false; gameWon = false;
+                firstClick = true; flagMode = false; timeElapsed = 0;
+                clearInterval(timerInterval); timerInterval = null;
+                timerElement.textContent = 'Time: 0s'; updateBombCountDisplay();
+                flagBtn.classList.remove('active'); boardElement.style.cursor = 'pointer';
+                overlay.classList.remove('visible');
+                createGridData();
+                createGridDOM();
+            }
+
+            // --- Initialization ---
+            function initializeGame() {
+                boardElement.addEventListener('click', handleBoardInteraction);
+                boardElement.addEventListener('contextmenu', handleBoardInteraction);
+                gameContainer.addEventListener('contextmenu', (e) => e.preventDefault());
+                difficultySelect.addEventListener('change', handleDifficultyChange);
+                flagBtn.addEventListener('click', handleFlagToggle);
+                resetBtn.addEventListener('click', startGame);
+                overlayResetBtn.addEventListener('click', startGame);
+                document.addEventListener('keydown', handleKeyPress);
+                window.addEventListener('resize', handleResize);
+                // Delay initialization slightly - keep from v6
+                setTimeout(startGame, 50);
+            }
+
+            if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initializeGame); }
+            else { initializeGame(); } // Run initialize which includes the timeout
+
+        })(); // End IIFE
+    </script>
+
+</div>
+<!-- End: Optimized Embeddable Bomb Finder Game v7 (Reverted to v5 Sizing) -->

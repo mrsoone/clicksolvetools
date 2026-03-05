@@ -1,0 +1,592 @@
+﻿<!-- Start: Embeddable Multi-Country Shoe Siz
+e Converter -->
+<div id="shoe-converter-insta
+nce-wrapper">
+    <style>
+        /* --- Scop
+ed Base Styles --- */
+        #shoe-converter
+-instance-wrapper {
+            font-family: 
+system-ui, -apple-system, BlinkMacSystemFont,
+ "Segoe UI", Roboto, Helvetica, Arial, sans-s
+erif, "Apple Color Emoji", "Segoe UI Emoji", 
+"Segoe UI Symbol";
+            color: #212529
+; box-sizing: border-box; text-align: center;
+ width: 100%;
+            max-width: 100%; ov
+erflow-x: hidden; padding: 5px; display: flex
+;
+            flex-direction: column; align-i
+tems: center;
+        }
+        #shoe-convert
+er-instance-wrapper * { box-sizing: border-bo
+x; }
+        #shoe-converter-instance-wrapper
+ h1 {
+             font-size: clamp(20px, 4.5
+vw, 28px); /* Adjusted size */
+             c
+olor: #343a40; margin-bottom: 15px; font-weig
+ht: 600;
+             width: 100%; text-align
+: center;
+         }
+
+        /* --- Containe
+r Styling --- */
+        .ssc-converter-conta
+iner {
+            background: white; max-wid
+th: 420px; /* Slightly wider */ width: 95%;
+ 
+           margin: 10px auto; padding: 25px; 
+border-radius: 12px;
+            box-shadow: 
+0 6px 18px rgba(0, 0, 0, 0.12); text-align: c
+enter;
+            border: 1px solid #dee2e6;
+ box-sizing: border-box;
+        }
+        .s
+sc-converter-container h2 {
+            color
+: #2C3E50; margin-top: 0; margin-bottom: 25px
+;
+            font-size: clamp(18px, 4.5vw, 2
+2px);
+        }
+
+        /* --- Form Styling 
+--- */
+        .ssc-input-group { margin-bott
+om: 20px; text-align: left; }
+        .ssc-in
+put-group label {
+            display: block;
+ margin-bottom: 8px; font-weight: 600;
+      
+      color: #495057; font-size: 0.95em;
+    
+    }
+        .ssc-input-group input[type="nu
+mber"], .ssc-input-group select {
+           
+ width: 100%; padding: 11px 14px; margin-top:
+ 4px;
+            border: 1px solid #ced4da; 
+border-radius: 8px; font-size: 16px;
+        
+    transition: border-color 0.2s ease, box-s
+hadow 0.2s ease; background-color: #fdfdfd;
+ 
+       }
+         .ssc-input-group input[type
+=number]::-webkit-inner-spin-button,
+        
+ .ssc-input-group input[type=number]::-webkit
+-outer-spin-button { -webkit-appearance: none
+; margin: 0; }
+         .ssc-input-group inpu
+t[type=number] { -moz-appearance: textfield; 
+}
+        .ssc-input-group input[type="number
+"]:focus, .ssc-input-group select:focus {
+   
+         border-color: #86b7fe; outline: 0;
+ 
+           box-shadow: 0 0 0 0.25rem rgba(13,
+ 110, 253, 0.25);
+        }
+        .ssc-inpu
+t-group select {
+             cursor: pointer
+; appearance: none;
+             background-i
+mage: url("data:image/svg+xml,%3Csvg xmlns='h
+ttp://www.w3.org/2000/svg' viewBox='0 0 16 16
+'%3E%3Cpath fill='none' stroke='%23343a40' st
+roke-linecap='round' stroke-linejoin='round' 
+stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%
+3E");
+             background-repeat: no-repe
+at; background-position: right 0.75rem center
+;
+             background-size: 16px 12px; pa
+dding-right: 2.5rem;
+        }
+        .ssc-i
+nput-group input[type="number"]::placeholder 
+{ color: #adb5bd; font-size: 0.95em; }
+
+     
+   /* --- Result Area Styling --- */
+        
+.ssc-result-area {
+            margin-top: 25
+px; padding: 18px; background-color: #f8f9fa;
+
+            border-radius: 8px; border: 1px 
+solid #dee2e6; font-size: 15px; /* Slightly s
+maller */
+            font-weight: 500; color
+: #343a40; line-height: 1.8; text-align: left
+;
+            min-height: 120px; /* More spac
+e for results */
+        }
+         .ssc-resu
+lt-area p {
+             margin: 4px 0; /* Ti
+ghter spacing */ display: flex; justify-conte
+nt: space-between;
+             border-bottom
+: 1px dashed #e9ecef; padding-bottom: 4px;
+  
+           align-items: center; /* Align item
+s vertically */
+         }
+         .ssc-resu
+lt-area p:last-child { border-bottom: none; }
+
+         .ssc-result-area strong { color: #4
+95057; margin-right: 10px; font-weight: 600; 
+flex-shrink: 0;} /* Prevent label shrinking *
+/
+         .ssc-result-area span { font-weigh
+t: 600; color: #0d6efd; text-align: right;} /
+* Align value right */
+         .ssc-result-a
+rea .ssc-placeholder, .ssc-result-area .ssc-e
+rror {
+             font-style: italic; color
+: #6c757d; text-align: center; display: block
+;
+             border-bottom: none; padding-t
+op: 10px; /* Add some space */
+         }
+   
+      .ssc-result-area .ssc-error { color: #d
+c3545; font-weight: bold; }
+
+         /* Disc
+laimer Styling */
+         .ssc-disclaimer {
+
+            font-size: 12px;
+            colo
+r: #6c757d;
+            margin-top: 15px;
+   
+         text-align: center;
+            max-
+width: 420px; /* Match container */
+         
+   width: 95%;
+            margin-left: auto;
+
+            margin-right: auto;
+         }
+
+
+        /* Responsive adjustments */
+        
+ @media (max-width: 480px) {
+             .ss
+c-converter-container { padding: 20px; }
+    
+         .ssc-input-group label { font-size: 
+0.9em; }
+             .ssc-input-group input[
+type="number"], .ssc-input-group select { fon
+t-size: 15px; padding: 10px 12px; }
+         
+    .ssc-result-area { font-size: 14px; paddi
+ng: 15px; min-height: 100px;}
+             /*
+ Keep label/value side-by-side for clarity if
+ possible */
+             /*.ssc-result-area 
+p { flex-direction: column; align-items: flex
+-start; }
+             .ssc-result-area stron
+g { margin-bottom: 2px; }*/
+         }
+
+    <
+/style>
+
+    <h1>Shoe Size Converter</h1>
+
+  
+  <div class="ssc-converter-container">
+     
+   <h2>Convert Sizes</h2>
+
+        <div class
+="ssc-input-group">
+            <label for="s
+sc-size-input">Enter Size:</label>
+          
+  <input type="number" id="ssc-size-input" pl
+aceholder="e.g., 9.5" step="0.5" min="0"> <!-
+- Allow 0 for CM/KR -->
+        </div>
+
+     
+   <div class="ssc-input-group">
+            
+<label for="ssc-system-select">Original Syste
+m:</label>
+            <select id="ssc-system
+-select">
+                <option value="usm"
+>US / CA Men</option>
+                <option
+ value="usw">US / CA Women</option>
+         
+       <option value="uk">UK</option>
+       
+         <option value="eu">EU</option>
+     
+           <option value="cm">CM / JP / CN</o
+ption>
+                <option value="mx">MX<
+/option>
+                <option value="au_m"
+>AU Men</option>
+                <option valu
+e="au_w">AU Women</option>
+                <o
+ption value="kr">KR (mm)</option>
+           
+ </select>
+        </div>
+
+        <div class
+="ssc-result-area" id="ssc-result-area">
+    
+        <div class="ssc-placeholder">Converte
+d sizes will appear here.</div>
+        </div
+>
+    </div>
+
+    <!-- Disclaimer Text -->
+  
+  <p class="ssc-disclaimer">
+        Note: Sh
+oe sizes can vary significantly between manuf
+acturers and styles. This chart provides a ge
+neral estimate based on common standards. Alw
+ays try shoes on for the best fit.
+    </p>
+
+
+
+    <script>
+        (function() { // IIFE f
+or scope
+
+            // --- DOM Elements ---
+
+            const wrapper = document.getElem
+entById('shoe-converter-instance-wrapper');
+ 
+           const sizeInput = wrapper.querySel
+ector('#ssc-size-input');
+            const s
+ystemSelect = wrapper.querySelector('#ssc-sys
+tem-select');
+            const resultArea = 
+wrapper.querySelector('#ssc-result-area');
+
+ 
+           if (!sizeInput || !systemSelect ||
+ !resultArea) {
+                console.error
+("Shoe Size Converter Embed Error: Could not 
+find core elements.");
+                if(wra
+pper) wrapper.innerHTML = "<p style='color: r
+ed; text-align: center;'>Error loading conver
+ter.</p>";
+                return;
+          
+  }
+
+            // --- Expanded Shoe Size Co
+nversion Chart ---
+            // Data includ
+es AU (Men/Women), MX, KR (mm)
+            //
+ Note: MX and AU conversions can be particula
+rly variable. KR is usually mm = cm * 10.
+   
+         const sizeChart = [
+                
+{ usm: 6,    usw: 7.5,  uk: 5.5,  eu: 38.5, c
+m: 24,   mx: 5.5,  au_m: 5.5, au_w: 7.5, kr: 
+240 },
+                { usm: 6.5,  usw: 8,  
+  uk: 6,    eu: 39,   cm: 24.5, mx: 6,    au_
+m: 6,   au_w: 8,   kr: 245 },
+               
+ { usm: 7,    usw: 8.5,  uk: 6.5,  eu: 40,   
+cm: 25,   mx: 6.5,  au_m: 6.5, au_w: 8.5, kr:
+ 250 },
+                { usm: 7.5,  usw: 9, 
+   uk: 7,    eu: 40.5, cm: 25.5, mx: 7,    au
+_m: 7,   au_w: 9,   kr: 255 },
+              
+  { usm: 8,    usw: 9.5,  uk: 7.5,  eu: 41,  
+ cm: 26,   mx: 7.5,  au_m: 7.5, au_w: 9.5, kr
+: 260 },
+                { usm: 8.5,  usw: 10
+,   uk: 8,    eu: 42,   cm: 26.5, mx: 8,    a
+u_m: 8,   au_w: 10,  kr: 265 },
+             
+   { usm: 9,    usw: 10.5, uk: 8.5,  eu: 42.5
+, cm: 27,   mx: 8.5,  au_m: 8.5, au_w: 10.5,k
+r: 270 },
+                { usm: 9.5,  usw: 1
+1,   uk: 9,    eu: 43,   cm: 27.5, mx: 9,    
+au_m: 9,   au_w: 11,  kr: 275 },
+            
+    { usm: 10,   usw: 11.5, uk: 9.5,  eu: 44,
+   cm: 28,   mx: 9.5,  au_m: 9.5, au_w: 11.5,
+kr: 280 },
+                { usm: 10.5, usw: 
+12,   uk: 10,   eu: 44.5, cm: 28.5, mx: 10,  
+ au_m: 10,  au_w: 12,  kr: 285 },
+           
+     { usm: 11,   usw: 12.5, uk: 10.5, eu: 45
+,   cm: 29,   mx: 10.5, au_m: 10.5,au_w: 12.5
+,kr: 290 },
+                { usm: 11.5, usw:
+ 13,   uk: 11,   eu: 45.5, cm: 29.5, mx: 11, 
+  au_m: 11,  au_w: 13,  kr: 295 },
+          
+      { usm: 12,   usw: 13.5, uk: 11.5, eu: 4
+6,   cm: 30,   mx: 11.5, au_m: 11.5,au_w: 13.
+5,kr: 300 },
+                { usm: 12.5, usw
+: 14,   uk: 12,   eu: 46.5, cm: 30.5, mx: 12,
+   au_m: 12,  au_w: 14,  kr: 305 },
+         
+       { usm: 13,   usw: 14.5, uk: 12.5, eu: 
+47,   cm: 31,   mx: 12.5, au_m: 12.5,au_w: 14
+.5,kr: 310 },
+                { usm: 13.5, us
+w: 15,   uk: 13,   eu: 47.5, cm: 31.5, mx: 13
+,   au_m: 13,  au_w: 15,  kr: 315 },
+        
+        { usm: 14,   usw: 15.5, uk: 13.5, eu:
+ 48,   cm: 32,   mx: 13.5, au_m: 13.5,au_w: 1
+5.5,kr: 320 },
+                // Add more si
+zes as needed above and below
+            ];
+
+
+            // --- Updated System Labels ---
+
+            const systemLabels = {
+         
+       usm: "US / CA Men",
+                us
+w: "US / CA Women",
+                uk: "UK",
+
+                eu: "EU",
+                cm
+: "CM / JP / CN", // Grouped CM-based systems
+
+                mx: "MX",
+                au
+_m: "AU Men",
+                au_w: "AU Women
+",
+                kr: "KR (mm)"
+            
+};
+
+            // --- Conversion Logic ---
+ 
+           function convertAndDisplaySizes() 
+{
+                const inputSizeStr = sizeIn
+put.value;
+                const sourceSystem
+ = systemSelect.value;
+                result
+Area.innerHTML = ''; // Clear previous
+
+     
+           if (inputSizeStr.trim() === '') {
+
+                    resultArea.innerHTML = '<
+div class="ssc-placeholder">Enter a size to c
+onvert.</div>';
+                    return;
+ 
+               }
+
+                const input
+Size = parseFloat(inputSizeStr);
+
+           
+     // Allow 0 only for CM/KR systems, other
+wise must be positive
+                if (isN
+aN(inputSize) || inputSize < 0 || (inputSize 
+=== 0 && sourceSystem !== 'cm' && sourceSyste
+m !== 'kr') ) {
+                    resultAre
+a.innerHTML = '<div class="ssc-error">Please 
+enter a valid positive size.</div>';
+        
+            return;
+                }
+
+      
+          let foundMatch = null;
+            
+    const tolerance = 0.05; // Slightly incre
+ased tolerance for CM/MX potentially
+
+       
+         // Find the closest match - more rob
+ust than exact match for varied charts
+      
+          let closestMatch = null;
+          
+      let smallestDifference = Infinity;
+
+   
+             for (const row of sizeChart) {
+ 
+                   if (row.hasOwnProperty(sou
+rceSystem) && row[sourceSystem] !== null && r
+ow[sourceSystem] !== undefined) {
+           
+              const difference = Math.abs(row
+[sourceSystem] - inputSize);
+                
+         if (difference < smallestDifference)
+ {
+                             smallestDiffe
+rence = difference;
+                         
+    closestMatch = row;
+                     
+    }
+                         // If exact or
+ very close match found, use it immediately
+ 
+                        if (difference < tole
+rance) {
+                              foundM
+atch = row;
+                              bre
+ak;
+                          }
+             
+       }
+                }
+                 /
+/ If no exact match, use the closest one foun
+d if it's reasonably close
+                 i
+f (!foundMatch && smallestDifference < 0.3) {
+ // Adjust threshold as needed
+              
+        console.log("Using closest match with
+ difference:", smallestDifference);
+         
+             foundMatch = closestMatch;
+     
+             }
+
+
+                if (foundMat
+ch) {
+                    let outputHtml = ''
+;
+                    for (const systemKey in
+ systemLabels) {
+                        if (
+systemKey === sourceSystem) continue; // Skip
+ original system
+
+                        if 
+(foundMatch.hasOwnProperty(systemKey) && foun
+dMatch[systemKey] !== null && foundMatch[syst
+emKey] !== undefined) {
+                     
+       outputHtml += `<p><strong>${systemLabe
+ls[systemKey]}:</strong> <span>${foundMatch[s
+ystemKey]}</span></p>`;
+                     
+   } else {
+                            // Th
+is case means the chart row is incomplete for
+ this system
+                             out
+putHtml += `<p><strong>${systemLabels[systemK
+ey]}:</strong> <span>--</span></p>`;
+        
+                }
+                    }
+     
+               resultArea.innerHTML = outputH
+tml;
+                } else {
+               
+     resultArea.innerHTML = '<div class="ssc-
+placeholder">Size not found or outside common
+ range.</div>';
+                }
+           
+ }
+
+            // --- Event Listeners ---
+  
+          sizeInput.addEventListener('input',
+ convertAndDisplaySizes);
+            systemS
+elect.addEventListener('change', convertAndDi
+splaySizes);
+
+            // --- Initializati
+on ---
+            function initializeConvert
+er() {
+                resultArea.innerHTML =
+ '<div class="ssc-placeholder">Converted size
+s will appear here.</div>';
+            }
+
+  
+           if (document.readyState === 'loadi
+ng') {
+                 document.addEventList
+ener('DOMContentLoaded', initializeConverter)
+;
+             } else {
+                 init
+ializeConverter();
+             }
+
+        })
+(); // End IIFE
+    </script>
+
+</div>
+<!-- En
+d: Embeddable Multi-Country Shoe Size Convert
+er -->
+
+

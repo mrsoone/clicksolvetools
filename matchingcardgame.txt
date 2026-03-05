@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Matching Memory Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #282c34;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 24px;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 320px;
+        }
+        .card {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            border-radius: 10px;
+            user-select: none;
+        }
+        .card.flipped {
+            background: #ffcc00;
+        }
+        button {
+            background: #ffcc00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:active {
+            background: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <h1>🃏 Card Matching Memory Game 🃏</h1>
+    <div class="game-board" id="game-board"></div>
+    <p id="result">Find all the matching pairs!</p>
+    <button onclick="resetGame()">Restart Game</button>
+    
+    <script>
+        const symbols = ["🍎", "🍎", "🍌", "🍌", "🍒", "🍒", "🍇", "🍇", "🥑", "🥑", "🍉", "🍉", "🍍", "🍍", "🥕", "🥕"];
+        let shuffledSymbols = shuffle(symbols);
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let matchedPairs = 0;
+
+        function shuffle(array) {
+            return array.sort(() => 0.5 - Math.random());
+        }
+
+        function createBoard() {
+            const gameBoard = document.getElementById("game-board");
+            gameBoard.innerHTML = "";
+            shuffledSymbols.forEach((symbol, index) => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.dataset.symbol = symbol;
+                card.dataset.index = index;
+                card.addEventListener("click", flipCard);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (lockBoard || this.classList.contains("flipped")) return;
+            
+            this.innerText = this.dataset.symbol;
+            this.classList.add("flipped");
+            
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+            
+            secondCard = this;
+            lockBoard = true;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+                matchedPairs++;
+                resetTurn();
+                if (matchedPairs === symbols.length / 2) {
+                    document.getElementById("result").innerText = "🎉 You matched all pairs! 🎉";
+                }
+            } else {
+                setTimeout(() => {
+                    firstCard.innerText = "";
+                    secondCard.innerText = "";
+                    firstCard.classList.remove("flipped");
+                    secondCard.classList.remove("flipped");
+                    resetTurn();
+                }, 800);
+            }
+        }
+
+        function resetTurn() {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
+
+        function resetGame() {
+            matchedPairs = 0;
+            shuffledSymbols = shuffle(symbols);
+            createBoard();
+            document.getElementById("result").innerText = "Find all the matching pairs!";
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

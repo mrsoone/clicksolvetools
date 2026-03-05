@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClickSolveTools</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <div id="app"></div>
+
+  <script type="module">
+    import { tools } from "./data/tools.js";
+
+    const app = document.getElementById("app");
+
+    app.innerHTML = `
+      <main class="max-w-7xl mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6">ClickSolveTools</h1>
+
+        <input
+          id="search"
+          type="text"
+          placeholder="Search tools..."
+          class="w-full mb-6 p-3 border rounded"
+        />
+
+        <div
+          id="grid"
+          class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        ></div>
+      </main>
+    `;
+
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+
+    function render(list) {
+      grid.innerHTML = list
+        .map(
+          (tool) => `
+            <a href="tool.html?tool=${tool.slug}" class="block p-4 border rounded hover:shadow">
+              <div class="text-xl mb-2">${tool.name}</div>
+              <div class="text-sm text-gray-600">${tool.description}</div>
+            </a>
+          `
+        )
+        .join("");
+    }
+
+    render(tools);
+
+    search.addEventListener("input", () => {
+      const q = search.value.toLowerCase();
+      render(
+        tools.filter(
+          (t) =>
+            t.name.toLowerCase().includes(q) ||
+            t.description.toLowerCase().includes(q)
+        )
+      );
+    });
+  </script>
+</body>
+</html>

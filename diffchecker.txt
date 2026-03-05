@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy to Read Difference Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .text-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .text-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px 24px;
+            margin: 15px;
+            cursor: pointer;
+        }
+        .differences {
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+            display: inline-block;
+            width: 90%;
+            border: 1px solid #000;
+            padding: 15px;
+            background-color: #f8f8f8;
+        }
+        .added {
+            background-color: #d4fcbc;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .removed {
+            background-color: #ffcccc;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .same {
+            background-color: #ffffff;
+            padding: 5px;
+        }
+        .duplicate {
+            background-color: #ffff99;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px solid black;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Easy to Read Difference Checker</h2>
+    <p>Enter two versions of text and click "Compare" to see changes clearly.</p>
+    <div class="text-container">
+        <div class="text-box">
+            <label for="text1">Box 1 (Original Text)</label>
+            <textarea id="text1" placeholder="Enter original text..."></textarea>
+        </div>
+        <div class="text-box">
+            <label for="text2">Box 2 (Modified Text)</label>
+            <textarea id="text2" placeholder="Enter modified text..."></textarea>
+        </div>
+    </div>
+    <br>
+    <button onclick="compareText()">Compare</button>
+    <div class="differences" id="diffOutput">Differences will appear here.</div>
+
+    <script>
+        function compareText() {
+            let text1 = document.getElementById("text1").value;
+            let text2 = document.getElementById("text2").value;
+            let diffOutput = document.getElementById("diffOutput");
+
+            let diff = generateDiff(text1, text2);
+            diffOutput.innerHTML = diff || "No differences found.";
+        }
+
+        function generateDiff(text1, text2) {
+            let lines1 = text1.split('\n');
+            let lines2 = text2.split('\n');
+            let removedText = "<div class='section'><strong>Removed from Box 1:</strong><br>";
+            let addedText = "<div class='section'><strong>Added in Box 2:</strong><br>";
+            let unchangedText = "<div class='section'><strong>Unchanged (Same Line in Both Boxes):</strong><br>";
+            let duplicateText = "<div class='section'><strong>Duplicates (Found on Different Lines):</strong><br>";
+
+            let seenDuplicates = new Set();
+
+            for (let i = 0; i < Math.max(lines1.length, lines2.length); i++) {
+                let line1 = lines1[i] || "";
+                let line2 = lines2[i] || "";
+
+                if (line1 === line2) {
+                    unchangedText += `<div class='same'>✔ ${line1}</div>`;
+                } else {
+                    if (lines1.includes(line2) && !seenDuplicates.has(line2)) {
+                        duplicateText += `<div class='duplicate'>🔁 ${line2}</div>`;
+                        seenDuplicates.add(line2);
+                    }
+                    if (lines2.includes(line1) && !seenDuplicates.has(line1)) {
+                        duplicateText += `<div class='duplicate'>🔁 ${line1}</div>`;
+                        seenDuplicates.add(line1);
+                    }
+                    if (line1 && !lines2.includes(line1)) {
+                        removedText += `<div class='removed'>❌ ${line1}</div>`;
+                    }
+                    if (line2 && !lines1.includes(line2)) {
+                        addedText += `<div class='added'>✅ ${line2}</div>`;
+                    }
+                }
+            }
+
+            removedText += "</div>";
+            addedText += "</div>";
+            unchangedText += "</div>";
+            duplicateText += "</div>";
+
+            return removedText + addedText + unchangedText + duplicateText;
+        }
+    </script>
+</body>
+</html>

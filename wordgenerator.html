@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Word Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background: #2a9d8f;
+            color: white;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #21867a;
+        }
+        #wordDisplay {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #definition {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Word Generator</h1>
+        <button id="generateBtn">Generate Word</button>
+        <p id="wordDisplay">Click the button to get a word!</p>
+        <p id="definition"></p>
+    </div>
+
+    <script>
+        const words = ["meteor", "ballad", "adventure", "mosaic", "paragon", "blizzard", "storm", "orchid", "tempest", "echo", "universe", "quasar", "northstar", "comet", "sorcery", "apex", "boulder", "willow", "jungle", "tidal", "cipher", "constellation", "tranquil", "whisper", "epic", "november", "velocity", "wanderer", "mariner", "stellar", "spellbound", "harmony", "illusion", "veil", "verdant", "incantation", "emerald", "forbidden", "raven", "celestial", "windchime", "pinnacle", "fathom", "morning", "fog", "vortex", "radiance", "voyager", "specter", "prism", "labyrinth", "twilight", "jade", "oasis", "flame", "island", "shard", "mystic", "meadow", "runestone", "refuge", "paradigm", "zephyr", "shadow", "hurricane", "resonance", "serene", "sapphire", "luminous", "nomad", "pirate", "garnet", "cascade", "basilisk", "lagoon", "oracle", "glisten", "glacier", "artifact", "harbor", "talisman", "beacon", "crescendo", "gorge", "flourish", "cathedral", "majestic", "monolith", "destiny", "dome", "nocturnal", "crimson", "mirage", "sunflower", "thunder", "summit", "tidal", "serenity", "granduer", "overcast", "moonbeam", "obsidian", "fable", "breeze", "utopia", "alchemy", "phantom", "treasure", "zodiac", "iridescent", "gale", "wanderlust", "effervescent", "cyclone", "canyon", "aurora", "folklore", "fjord", "desert", "infinity", "epoch", "fortune", "dusk", "eclipse", "twilight", "omen", "mystic", "plume", "midnight", "silhouette", "firefly", "luminescent", "daybreak", "reverie", "lullaby", "ember", "parchment", "rift", "ominous", "lantern", "quartz", "harbinger", "meadow", "essence", "sanctuary", "arcane", "frost", "tempest", "effervescence", "astral", "cosmos", "aether", "relic", "starfall", "crescent", "haven", "serendipity", "elegy", "exuberance", "mystique", "tranquility", "sylvan", "lucid", "whimsical", "nocturne", "solstice", "mirth", "aurora", "elixir", "pinnacle", "chime", "verve", "starry", "arcadia", "overture", "glade", "ethereal", "serenade", "wayfarer", "paradise", "serenity", "quintessence", "haven", "utopian", "luminous", "sanctified", "glimmer", "radiant", "wistful", "veiled", "evanescence", "transcendent", "resplendent", "enchanting", "charisma", "elation", "solace", "arcadian", "auroral", "zeitgeist", "illustrious", "stellar", "moonlit", "rhapsody", "panacea", "wonderment", "enigma", "quintessential", "idyllic", "starlit", "ephemeral", "translucent", "moonstone", "quixotic", "halcyon", "cynosure", "felicity", "enlightenment", "radiant", "incandescent", "elegance", "whimsical", "fascination", "zenith", "astronomy", "transcendence", "epiphany", "divination", "hypnotic", "miraculous", "majestic", "idyllic", "breathtaking", "sacred", "symphony", "exquisite", "euphoria", "harmonious", "rejuvenation", "sublime", "splendor", "flawless", "stunning", "captivating", "bewitching", "phantasmal", "heavenly", "delightful", "divine", "spectacular", "stupendous", "aesthetic", "mellifluous", "grandiose", "poetic", "serene", "bucolic", "exuberant", "sacrosanct", "sumptuous", "incomparable", "exhilarating", "exultant", "rhapsodic", "ebullient", "prodigious", "paradisiacal", "effulgent", "stupendous", "magnificent", "ravishing", "resplendent", "sublime", "wondrous"];
+        
+        let usedWords = new Set();
+        
+        function generateWord() {
+            let availableWords = words.filter(word => !usedWords.has(word));
+            if (availableWords.length === 0) usedWords.clear();
+            let word = availableWords[Math.floor(Math.random() * availableWords.length)];
+            usedWords.add(word);
+            document.getElementById("wordDisplay").textContent = word;
+        }
+        
+        document.getElementById("generateBtn").addEventListener("click", generateWord);
+            async function fetchDefinition(word) {
+            try {
+                let response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                let data = await response.json();
+                if (data[0] && data[0].meanings) {
+                    document.getElementById("definition").textContent = `Definition: ${data[0].meanings[0].definitions[0].definition}`;
+                } else {
+                    document.getElementById("definition").textContent = "Definition not found.";
+                }
+            } catch (error) {
+                document.getElementById("definition").textContent = "Error fetching definition.";
+            }
+        }
+
+        function generateWord() {
+            let availableWords = words.filter(word => !usedWords.has(word));
+            if (availableWords.length === 0) usedWords.clear();
+            let word = availableWords[Math.floor(Math.random() * availableWords.length)];
+            usedWords.add(word);
+            document.getElementById("wordDisplay").textContent = word;
+            fetchDefinition(word);
+        }
+
+        document.getElementById("generateBtn").addEventListener("click", generateWord);
+    </script>
+</body>
+</html>
+

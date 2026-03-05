@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>The Jumping Rabbit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #87CEEB;
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: #add8e6;
+            display: block;
+            margin: auto;
+            border: 2px solid black;
+        }
+        #message, #scoreDisplay {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        @media (max-width: 768px) {
+            #message, #scoreDisplay {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🐇 The Jumping Rabbit 🐇</h1>
+    <div id="message">Tap Anywhere to Start</div>
+    <div id="scoreDisplay">Score: 0</div>
+    <canvas id="gameCanvas"></canvas>
+    
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function resizeCanvas() {
+            canvas.width = Math.min(window.innerWidth * 0.9, 600);
+            canvas.height = Math.min(window.innerHeight * 0.85, 700);
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        const messageDisplay = document.getElementById("message");
+        const scoreDisplay = document.getElementById("scoreDisplay");
+
+        let rabbit = { 
+            x: 50, 
+            y: canvas.height / 2 - 15, 
+            width: 30, 
+            height: 30, 
+            velocity: 0, 
+            gravity: 0.4, 
+            lift: -7, 
+            frozen: true 
+        };
+
+        let carrots = [];
+        let carrotWidth = 50;
+        let score = 0;
+        let gameRunning = false;
+        let gameOverState = false;
+
+        function drawRabbit() {
+            ctx.font = "30px Arial";
+            ctx.fillText("🐰", rabbit.x, rabbit.y + 25);
+        }
+
+        function updateRabbit() {
+            if (rabbit.frozen) return;
+            rabbit.velocity += rabbit.gravity;
+            rabbit.y += rabbit.velocity;
+            if (rabbit.y + rabbit.height > canvas.height) gameOver();
+            if (rabbit.y < 0) rabbit.y = 0;
+        }
+
+        function drawCarrots() {
+            carrots.forEach(carrot => {
+                for (let y = 0; y < carrot.topHeight; y += 30) {
+                    ctx.fillText("🥕", carrot.x, y + 25);
+                }
+                for (let y = carrot.topHeight + carrot.gap; y < canvas.height; y += 30) {
+                    ctx.fillText("🥕", carrot.x, y + 25);
+                }
+            });
+        }
+
+        function updateCarrots() {
+            carrots.forEach(carrot => {
+                carrot.x -= 2 + Math.min(score / 100, 3);
+                if (!carrot.passed && carrot.x + carrotWidth < rabbit.x) {
+                    carrot.passed = true;
+                    score += 10;
+                    scoreDisplay.innerText = "Score: " + score;
+                }
+                if (checkCollision(carrot)) gameOver();
+            });
+            carrots = carrots.filter(carrot => carrot.x + carrotWidth > 0);
+        }
+
+        function checkCollision(carrot) {
+            return (
+                rabbit.x < carrot.x + carrotWidth &&
+                rabbit.x + rabbit.width > carrot.x &&
+                (rabbit.y < carrot.topHeight || rabbit.y + rabbit.height > carrot.topHeight + carrot.gap)
+            );
+        }
+
+        function addCarrot() {
+            let topHeight = Math.floor(Math.random() * (canvas.height / 2));
+            let gapSize = Math.max(180 - Math.floor(score / 5) * 5, 140);
+            
+            carrots.push({
+                x: canvas.width, 
+                topHeight: topHeight, 
+                gap: gapSize, 
+                width: carrotWidth, 
+                passed: false
+            });
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            gameOverState = true;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "red";
+            ctx.fillText("Game Over!", canvas.width / 2 - 80, canvas.height / 2 - 50);
+            ctx.fillStyle = "black";
+            ctx.fillText("Score: " + score, canvas.width / 2 - 50, canvas.height / 2);
+            messageDisplay.innerText = "Tap to Start Again";
+            messageDisplay.style.display = "block";
+        }
+
+        function startGame() {
+            if (gameOverState) {
+                resetGame();
+            }
+            rabbit.frozen = false;
+            gameRunning = true;
+            messageDisplay.style.display = "none";
+            gameLoop();
+        }
+
+        function resetGame() {
+            rabbit.y = canvas.height / 2 - 15;
+            rabbit.velocity = 0;
+            carrots = [];
+            gameOverState = false;
+            score = 0;
+            scoreDisplay.innerText = "Score: 0";
+        }
+
+        function jump() {
+            if (!gameRunning) {
+                startGame();
+            } else {
+                rabbit.velocity = rabbit.lift;
+            }
+        }
+
+        canvas.addEventListener("click", jump);
+        document.addEventListener("keydown", jump);
+        document.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            jump();
+        });
+
+        setInterval(addCarrot, 2000);
+
+        function gameLoop() {
+            if (!gameRunning) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            updateRabbit();
+            updateCarrots();
+            drawRabbit();
+            drawCarrots();
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
+</body>
+</html>

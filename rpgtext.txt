@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <
+meta charset="UTF-8">
+    <meta name="viewpor
+t" content="width=device-width, initial-scale
+=1.0">
+    <title>Basic Text RPG</title>
+</he
+ad>
+<body>
+    <h1>Basic Text RPG</h1>
+    <d
+iv id="output"></div>
+    <input type="text" 
+id="input">
+    <script>
+        const output
+ = document.getElementById("output");
+       
+ const input = document.getElementById("input
+");
+
+        function handleInput(event) {
+  
+          if (event.key === "Enter") {
+      
+          output.innerHTML += input.value + "
+<br>";
+                input.value = "";
+    
+        }
+        }
+
+        input.addEventLi
+stener("keydown", handleInput);
+
+        outp
+ut.innerHTML = "Welcome!";
+    </script>
+</bo
+dy>
+</html>
+
+

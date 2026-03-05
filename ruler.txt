@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-Inch Ruler</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px; padding-bottom: 50px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+        }
+        #ruler {
+            width: calc(1in * 12); /* Ensures true 12-inch scale */
+            height: 1.5in;
+            background: #f8e08e;
+            border: 3px solid #333;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            margin: 20px 0 20px 20px;
+            position: relative;
+        }
+        .tick {
+            position: absolute;
+            width: 2px;
+            background: black;
+        }
+        .tick-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            transform: translateX(-50%);
+            margin-top: 30px;
+        }
+        .cm-label {
+            position: absolute;
+            font-size: 12px;
+            font-weight: bold;
+            transform: translateX(-50%);
+            margin-top: 50px;
+            color: #1976d2;
+        }
+        .mm-tick {
+            position: absolute;
+            width: 1px;
+            height: 10px;
+            background: red;
+        }
+        .mm-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: bold;
+            color: red;
+            transform: translateX(-50%);
+            margin-top: 65px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>12-Inch Ruler</h1>
+        <p>Ensure your screen's display scaling is set to 100% for proper measurement.</p>
+        <div id="ruler"><div style='margin-top: 0px; text-align: center;'>
+            <span style='color: black; font-weight: bold;'>■ Inches</span> &nbsp; 
+            <span style='color: #1976d2; font-weight: bold;'>■ Centimeters</span> &nbsp; 
+            <span style='color: red; font-weight: bold;'>■ Millimeters</span>
+        </div>
+    </div>
+    
+    <script>
+        function createRuler() {
+            const ruler = document.getElementById("ruler");
+            
+            for (let i = 0; i <= 12; i++) {
+                let tick = document.createElement("div");
+                tick.className = "tick";
+                tick.style.height = i % 2 === 0 ? "30px" : "20px";
+                tick.style.left = (i / 12) * 100 + "%";
+                ruler.appendChild(tick);
+                
+                let label = document.createElement("div");
+                label.className = "tick-label";
+                label.style.left = (i / 12) * 100 + "%";
+                label.innerText = i;
+                ruler.appendChild(label);
+            }
+            
+            for (let i = 0; i <= 30; i++) {
+                let cmTick = document.createElement("div");
+                cmTick.className = "tick";
+                cmTick.style.height = i % 5 === 0 ? "25px" : "15px";
+                cmTick.style.left = (i / 30) * 100 + "%";
+                cmTick.style.background = "#1976d2";
+                ruler.appendChild(cmTick);
+                
+                if (i % 5 === 0) {
+                    let cmLabel = document.createElement("div");
+                    cmLabel.className = "cm-label";
+                    cmLabel.style.left = (i / 30) * 100 + "%";
+                    cmLabel.innerText = i;
+                    ruler.appendChild(cmLabel);
+                }
+            }
+            
+            for (let i = 0; i <= 300; i++) {
+                let mmTick = document.createElement("div");
+                mmTick.className = "mm-tick";
+                mmTick.style.left = (i / 300) * 100 + "%";
+                ruler.appendChild(mmTick);
+                
+                if (i % 10 === 0) {
+                    let mmLabel = document.createElement("div");
+                    mmLabel.className = "mm-label";
+                    mmLabel.style.left = (i / 300) * 100 + "%";
+                    mmLabel.innerText = i;
+                    ruler.appendChild(mmLabel);
+                }
+            }
+        }
+        createRuler();
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix Timestamp Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Unix Timestamp Converter</h2>
+    
+    <div>
+        <h3>Convert Timestamp to Date</h3>
+        <input type="number" id="timestampInput" placeholder="Enter Unix timestamp">
+        <button onclick="convertToDate()">Convert</button>
+        <p id="dateOutput"></p>
+    </div>
+
+    <div>
+        <h3>Convert Date to Timestamp</h3>
+        <input type="datetime-local" id="dateInput">
+        <button onclick="convertToTimestamp()">Convert</button>
+        <p id="timestampOutput"></p>
+    </div>
+
+    <script>
+        function convertToDate() {
+            const timestamp = document.getElementById('timestampInput').value;
+            if (!timestamp) return;
+            const date = new Date(timestamp * 1000);
+            document.getElementById('dateOutput').innerText = `Date: ${date.toUTCString()}`;
+        }
+
+        function convertToTimestamp() {
+            const dateInput = document.getElementById('dateInput').value;
+            if (!dateInput) return;
+            const timestamp = Math.floor(new Date(dateInput).getTime() / 1000);
+            document.getElementById('timestampOutput').innerText = `Timestamp: ${timestamp}`;
+        }
+    </script>
+</body>
+</html>

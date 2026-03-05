@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background: #2196F3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Barcode Generator</h1>
+    <div class="container">
+        <input type="text" id="barcodeInput" placeholder="Enter text for barcode">
+        <br>
+        <button onclick="generateBarcode()">Generate Barcode</button>
+        <div class="output">
+            <svg id="barcode"></svg>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function generateBarcode() {
+                let text = document.getElementById("barcodeInput").value;
+                if (text.trim() === "") {
+                    alert("Please enter a valid input.");
+                    return;
+                }
+                if (typeof JsBarcode !== "undefined") {
+                    JsBarcode("#barcode", text, {
+                        format: "CODE128",
+                        displayValue: true,
+                        fontSize: 18
+                    });
+                } else {
+                    alert("Barcode generation library failed to load.");
+                }
+            }
+            
+            window.generateBarcode = generateBarcode;
+        });
+    </script>
+</body>
+</html>

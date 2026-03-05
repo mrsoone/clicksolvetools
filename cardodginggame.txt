@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Crucial for mobile responsiveness and scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Car Dodger</title>
+    <style>
+        :root {
+            --game-width: 85vmin; /* Responsive width */
+            --game-height: 80vh; /* Responsive height */
+            --max-game-width: 500px; /* Max size on large screens */
+            --max-game-height: 700px;
+
+            --car-width-ratio: 0.1; /* Car width as fraction of game width */
+            --car-height-ratio: 0.15; /* Car height as fraction of game height */
+
+            --road-line-width: calc(var(--game-width) * 0.015);
+            --road-color: #6c757d;
+            --line-color: #f8f9fa;
+            --player-color: #007bff; /* Just example colors */
+            --obstacle-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #282c34;
+            color: white;
+            margin: 0; /* Remove default margin */
+            padding: 10px 0;
+            overflow: hidden; /* Prevent scrollbars */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center content vertically */
+            min-height: 100vh; /* Ensure body takes full height */
+            touch-action: manipulation; /* Prevent unintended zooming/panning on touch */
+        }
+
+        h1 {
+            font-size: clamp(24px, 5vw, 36px); /* Responsive font size */
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: clamp(14px, 2.5vw, 18px);
+            margin: 5px 0;
+        }
+
+        .game-container {
+            position: relative; /* Crucial for absolute positioning of children */
+            width: var(--game-width);
+            height: var(--game-height);
+            max-width: var(--max-game-width);
+            max-height: var(--max-game-height);
+            margin: 15px auto;
+            background-color: var(--road-color);
+            overflow: hidden;
+            border: clamp(3px, 1vmin, 5px) solid white;
+            cursor: pointer; /* Indicate interactivity */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Road Lines using Pseudo-elements */
+        .game-container::before,
+        .game-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: var(--road-line-width);
+            height: 100%;
+            background-color: var(--line-color);
+            /* Dashed lines simulation */
+            background-image: linear-gradient(var(--line-color) 70%, transparent 70%);
+            background-size: var(--road-line-width) 40px; /* Adjust dash size */
+            animation: moveLines 5s linear infinite;
+        }
+
+        .game-container::before {
+            left: 33.33%;
+            transform: translateX(-50%);
+        }
+
+        .game-container::after {
+            left: 66.66%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes moveLines {
+            from { background-position-y: 0; }
+            to { background-position-y: -40px; } /* Should match background-size */
+        }
+
+
+        .game-object { /* Base class for player and obstacles */
+            position: absolute;
+            width: calc(var(--game-width) * var(--car-width-ratio));
+            height: calc(var(--game-height) * var(--car-height-ratio));
+            max-width: 60px; /* Max pixel size */
+            max-height: 90px; /* Max pixel size */
+            font-size: clamp(30px, 8vmin, 50px); /* Responsive emoji size */
+            line-height: 1.1; /* Adjust based on emoji aspect ratio */
+            text-align: center;
+            /* Will use transform for positioning */
+            will-change: transform; /* Hint for browser optimization */
+        }
+
+        .player-car {
+            /* Positioning set by JS */
+            bottom: 10px;
+             /* background-color: var(--player-color); */ /* Uncomment for debugging bounding box */
+        }
+
+        .obstacle {
+            /* Positioning set by JS */
+            top: 0; /* Start position adjusted by transform */
+             /* background-color: var(--obstacle-color); */ /* Uncomment for debugging bounding box */
+        }
+
+        .explosion {
+            position: absolute;
+            font-size: clamp(40px, 10vmin, 60px);
+            text-align: center;
+            animation: explode 0.4s ease-out forwards; /* Ensure stays hidden */
+            pointer-events: none; /* Don't interfere with clicks */
+             z-index: 10;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* Game Over Screen */
+        #game-over-screen {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(40, 44, 52, 0.85); /* Semi-transparent overlay */
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            font-size: clamp(20px, 5vw, 30px);
+        }
+        #game-over-screen h2 {
+            margin-bottom: 15px;
+             color: #ff4d4d;
+             text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+         #final-score {
+             margin-bottom: 25px;
+             font-weight: bold;
+         }
+
+        .new-game-btn {
+            font-size: clamp(16px, 4vw, 22px);
+            padding: 12px 25px;
+            background: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .new-game-btn:hover {
+             background: #45a049;
+         }
+    </style>
+</head>
+<body>
+    <h1>🚗 Car Dodger 🏁</h1>
+    <p id="instructions">Use ← → keys or Tap Left/Right side to move!</p>
+
+    <!-- Game Area -->
+    <div class="game-container" id="game-container">
+        <div id="player-car" class="game-object player-car">🚗</div>
+        <!-- Obstacles added dynamically -->
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen">
+             <h2>Game Over!</h2>
+             <div id="final-score">Final Score: 0</div>
+             <button id="new-game-btn" class="new-game-btn">Play Again?</button>
+        </div>
+    </div>
+
+    <p id="score" style="font-size: clamp(18px, 4vw, 24px); margin-top: 10px;">Score: 0</p>
+
+    <script>
+        // --- DOM Elements ---
+        const gameContainer = document.getElementById('game-container');
+        const playerCarElement = document.getElementById('player-car');
+        const scoreDisplay = document.getElementById('score');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const finalScoreDisplay = document.getElementById('final-score');
+        const newGameBtn = document.getElementById('new-game-btn');
+        const instructions = document.getElementById('instructions');
+
+        // --- Game Configuration ---
+        const OBSTACLE_TYPES = ["🚙", "🏍️", "🚌", "🚚", "🏎️"];
+        const PLAYER_MOVE_SPEED = 0.08; // Fraction of game width per move increment
+        const INITIAL_OBSTACLE_SPEED = 0.2; // Units per second (relative to game height)
+        const OBSTACLE_SPEED_INCREASE = 0.005; // Speed increase per score point
+        const INITIAL_SPAWN_INTERVAL = 1300; // Milliseconds
+        const MIN_SPAWN_INTERVAL = 500; // Minimum spawn time
+        const SPAWN_RATE_INCREASE = 10; // Milliseconds reduction per score point
+        const PLAYER_BOTTOM_MARGIN = 10; // Px from bottom
+        const COLLISION_PADDING = 0.15; // % padding for collision box (makes it slightly smaller than visual)
+
+        // --- Game State Variables ---
+        let score = 0;
+        let playerLane = 2; // 0=leftmost, 4=rightmost (5 lanes total conceptually)
+        let targetPlayerX = 0; // Target X position for smooth movement
+        let currentObstacleSpeed = INITIAL_OBSTACLE_SPEED;
+        let currentSpawnInterval = INITIAL_SPAWN_INTERVAL;
+        let obstacles = []; // Array to hold { element: DOMElement, y: number } objects
+        let gameOver = false;
+        let lastTimestamp = 0;
+        let timeSinceLastSpawn = 0;
+        let animationFrameId = null;
+        let gameWidth = 0;
+        let gameHeight = 0;
+        let carWidth = 0;
+        let carHeight = 0;
+        let laneWidth = 0;
+        let lanePositions = [];
+
+        // --- Helper Functions ---
+        function pxToNumber(pxString) {
+            return parseFloat(pxString) || 0;
+        }
+
+        function updateGameDimensions() {
+            const rect = gameContainer.getBoundingClientRect();
+            gameWidth = rect.width;
+            gameHeight = rect.height;
+            // Calculate dynamic sizes based on container
+            carWidth = gameWidth * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--car-width-ratio'));
+            carHeight = gameHeight * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--car-height-ratio'));
+             // Ensure max sizes are respected
+             const maxCarWidth = pxToNumber(getComputedStyle(playerCarElement).maxWidth);
+             const maxCarHeight = pxToNumber(getComputedStyle(playerCarElement).maxHeight);
+             carWidth = Math.min(carWidth, maxCarWidth);
+             carHeight = Math.min(carHeight, maxCarHeight);
+
+             // Update CSS Variables if needed dynamically (or rely on initial CSS calc)
+             // playerCarElement.style.width = `${carWidth}px`;
+             // playerCarElement.style.height = `${carHeight}px`;
+
+
+            laneWidth = gameWidth / 5; // Assuming 5 lanes
+            lanePositions = Array.from({ length: 5 }, (_, i) => (i * laneWidth) + (laneWidth / 2) - (carWidth / 2));
+
+             // Set initial player position
+             targetPlayerX = lanePositions[playerLane];
+             playerCarElement.style.transform = `translateX(${targetPlayerX}px)`;
+             playerCarElement.style.bottom = `${PLAYER_BOTTOM_MARGIN}px`; // Set bottom margin once
+
+            console.log(`Game Dimensions Updated: ${gameWidth}x${gameHeight}, Car: ${carWidth}x${carHeight}`);
+        }
+
+
+        function getRandomLaneIndex() {
+            return Math.floor(Math.random() * lanePositions.length);
+        }
+
+        // --- Input Handling ---
+        function movePlayer(direction) { // direction is -1 for left, 1 for right
+            if (gameOver) return;
+            let newLane = playerLane + direction;
+            // Clamp lane index between 0 and 4
+            newLane = Math.max(0, Math.min(4, newLane));
+            if (newLane !== playerLane) {
+                playerLane = newLane;
+                targetPlayerX = lanePositions[playerLane]; // Set target, movement happens in game loop
+            }
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === "ArrowLeft") {
+                movePlayer(-1);
+            } else if (event.key === "ArrowRight") {
+                movePlayer(1);
+            } else if (event.key === " " && gameOver) { // Space to restart
+                resetGame();
+            }
+        }
+
+        function handleTouch(event) {
+            if (gameOver) return;
+            // Prevent scrolling/zooming
+            event.preventDefault();
+            const touchX = event.touches[0].clientX;
+            const gameRect = gameContainer.getBoundingClientRect();
+            const touchXRelative = touchX - gameRect.left;
+
+            if (touchXRelative < gameWidth / 2) {
+                movePlayer(-1); // Touched left half
+            } else {
+                movePlayer(1); // Touched right half
+            }
+        }
+
+        // --- Game Logic ---
+        function createObstacle() {
+            const element = document.createElement("div");
+            element.classList.add("game-object", "obstacle");
+            element.innerText = OBSTACLE_TYPES[Math.floor(Math.random() * OBSTACLE_TYPES.length)];
+
+            const laneIndex = getRandomLaneIndex();
+            const startX = lanePositions[laneIndex];
+            const startY = -carHeight; // Start just above the screen
+
+            element.style.transform = `translate(${startX}px, ${startY}px)`;
+
+            gameContainer.appendChild(element);
+            obstacles.push({ element, x: startX, y: startY, lane: laneIndex });
+        }
+
+        function updateObstacles(deltaTime) {
+             const speedPxPerMs = currentObstacleSpeed * gameHeight / 1000; // Convert relative speed to px/ms
+
+             obstacles.forEach((obstacle, index) => {
+                obstacle.y += speedPxPerMs * deltaTime;
+                obstacle.element.style.transform = `translate(${obstacle.x}px, ${obstacle.y}px)`;
+
+                // Remove obstacle if it goes off screen
+                if (obstacle.y > gameHeight) {
+                    gameContainer.removeChild(obstacle.element);
+                    obstacles.splice(index, 1);
+                    incrementScore();
+                }
+            });
+        }
+
+         function updatePlayer(deltaTime) {
+            // Smoothly move player towards target X
+            const currentX = parseFloat(playerCarElement.style.transform.match(/translateX\(([-0-9.]+)/)?.[1]) || targetPlayerX;
+            const dx = targetPlayerX - currentX;
+
+            // Adjust movement speed based on distance to target for a smoother feel
+             const moveAmount = dx * 0.2; // Move 20% of the distance each frame
+
+             // Prevent overshooting
+            const newX = Math.abs(dx) < 1 ? targetPlayerX : currentX + moveAmount;
+
+            playerCarElement.style.transform = `translateX(${newX}px)`;
+         }
+
+
+        function checkCollisions() {
+            const playerY = gameHeight - carHeight - PLAYER_BOTTOM_MARGIN; // Player's effective Y
+            const playerX = parseFloat(playerCarElement.style.transform.match(/translateX\(([-0-9.]+)/)?.[1]) || targetPlayerX;
+
+            // Simplified collision boxes (adjust padding as needed)
+            const playerLeft = playerX + carWidth * COLLISION_PADDING;
+            const playerRight = playerX + carWidth * (1 - COLLISION_PADDING);
+            const playerTop = playerY + carHeight * COLLISION_PADDING;
+            const playerBottom = playerY + carHeight * (1 - COLLISION_PADDING);
+
+
+            for (const obstacle of obstacles) {
+                const obsLeft = obstacle.x + carWidth * COLLISION_PADDING;
+                const obsRight = obstacle.x + carWidth * (1 - COLLISION_PADDING);
+                const obsTop = obstacle.y + carHeight * COLLISION_PADDING;
+                const obsBottom = obstacle.y + carHeight * (1 - COLLISION_PADDING);
+
+                // Basic AABB collision check
+                if (
+                    playerLeft < obsRight &&
+                    playerRight > obsLeft &&
+                    playerTop < obsBottom &&
+                    playerBottom > obsTop
+                ) {
+                     // Collision detected!
+                     showExplosion(playerX + carWidth / 2, playerY + carHeight / 2);
+                     triggerGameOver();
+                     return; // Exit check early
+                }
+            }
+        }
+
+        function showExplosion(x, y) {
+            const explosion = document.createElement("div");
+            explosion.classList.add("explosion");
+            explosion.innerText = "💥";
+            // Position relative to the container, centered on collision point
+            explosion.style.left = `${x - carWidth * 0.5}px`; // Adjust based on explosion font size
+            explosion.style.top = `${y - carHeight * 0.5}px`; // Adjust based on explosion font size
+
+            gameContainer.appendChild(explosion);
+            setTimeout(() => {
+                if (explosion.parentElement === gameContainer) {
+                    gameContainer.removeChild(explosion);
+                }
+            }, 400); // Match animation duration
+        }
+
+        function incrementScore() {
+            score++;
+            scoreDisplay.innerText = "Score: " + score;
+            // Increase difficulty
+            currentObstacleSpeed += OBSTACLE_SPEED_INCREASE;
+            currentSpawnInterval = Math.max(MIN_SPAWN_INTERVAL, currentSpawnInterval - SPAWN_RATE_INCREASE);
+        }
+
+        function triggerGameOver() {
+            if (gameOver) return; // Prevent multiple triggers
+            gameOver = true;
+            cancelAnimationFrame(animationFrameId); // Stop the game loop
+            console.log("Game Over! Final Score:", score);
+
+            // Display game over screen
+            finalScoreDisplay.innerText = "Final Score: " + score;
+            gameOverScreen.style.display = "flex"; // Show the screen
+
+            // Optional: Add a slight delay before showing button focus if needed
+            setTimeout(() => newGameBtn.focus(), 100);
+             instructions.style.display = 'none'; // Hide instructions
+        }
+
+        // --- Game Loop ---
+        function gameLoop(timestamp) {
+            if (gameOver) return;
+
+            const deltaTime = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+            timeSinceLastSpawn += deltaTime;
+
+            // Update game elements
+             updatePlayer(deltaTime); // Handle player movement smoothing
+            updateObstacles(deltaTime);
+
+            // Spawn new obstacles
+            if (timeSinceLastSpawn > currentSpawnInterval) {
+                createObstacle();
+                timeSinceLastSpawn = 0; // Reset spawn timer
+            }
+
+            // Check for collisions
+            checkCollisions();
+
+            // Request the next frame
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        // --- Game Initialization and Reset ---
+        function resetGame() {
+            console.log("Resetting game...");
+            // Reset state variables
+            score = 0;
+            playerLane = 2; // Center lane
+            obstacles.forEach(obstacle => gameContainer.removeChild(obstacle.element));
+            obstacles = [];
+            currentObstacleSpeed = INITIAL_OBSTACLE_SPEED;
+            currentSpawnInterval = INITIAL_SPAWN_INTERVAL;
+            gameOver = false;
+            timeSinceLastSpawn = 0;
+            lastTimestamp = performance.now(); // Reset timestamp base
+
+            // Reset UI
+            scoreDisplay.innerText = "Score: 0";
+            gameOverScreen.style.display = "none"; // Hide game over screen
+             instructions.style.display = 'block'; // Show instructions
+
+            // Recalculate dimensions and reposition player
+            updateGameDimensions();
+
+
+            // Cancel any existing animation frame just in case
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            // Start the game loop again
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function setupEventListeners() {
+             document.addEventListener("keydown", handleKeyDown);
+             // Use touchstart for mobile responsiveness - prevents delay
+             gameContainer.addEventListener("touchstart", handleTouch, { passive: false }); // passive:false to allow preventDefault
+             newGameBtn.addEventListener("click", resetGame);
+              // Update dimensions on resize/orientation change
+             window.addEventListener('resize', updateGameDimensions);
+             window.addEventListener('orientationchange', updateGameDimensions);
+        }
+
+        // --- Start Game ---
+        function startGame() {
+            console.log("Starting game...");
+             setupEventListeners();
+             resetGame(); // Initial setup and start
+        }
+
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', startGame);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title might not be used in embed, but good practice -->
+    <title>Salary & Hourly Converter</title>
+    <style>
+        /* Removed body styles as they don't apply in embed */
+        .tdc-converter-embed-wrapper { /* Added a wrapper ID for potential future scoping */
+             font-family: 'Arial', sans-serif; /* Keep font style */
+             margin: 0; /* Reset margin just in case */
+             padding: 0; /* Reset padding */
+        }
+
+        .container {
+            background: white;
+            max-width: 420px;
+            width: 90%; /* Make it responsive within the embed area */
+            margin: 20px auto; /* Add some margin top/bottom and center horizontally */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Slightly softer shadow for embed */
+            text-align: center;
+            /* Explicitly define all borders to ensure top/bottom render */
+            border-top: 2px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            border-left: 2px solid #ddd;
+            border-right: 2px solid #ddd;
+            box-sizing: border-box;
+        }
+        h2 {
+            color: #2C3E50;
+            margin-top: 0; /* Adjust margin for container padding */
+            margin-bottom: 20px; /* Increased spacing slightly */
+        }
+        .toggle-btn {
+            display: flex;
+            justify-content: space-between;
+            background: #ecf0f1;
+            padding: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Added spacing */
+        }
+        .toggle-btn div {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s; /* Smoother transition */
+            font-size: 0.9em; /* Slightly smaller text */
+        }
+        .active {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-top: 20px; /* Increased spacing */
+            margin-bottom: 5px; /* Added spacing */
+            font-weight: bold;
+            color: #333;
+            text-align: left; /* Align labels left */
+        }
+        input, select {
+            width: 100%;
+            padding: 10px 12px; /* Adjusted padding */
+            margin-top: 5px;
+            border: 1px solid #ccc; /* Slightly thinner border */
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+             box-sizing: border-box; /* Include padding/border in width */
+        }
+        input:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); /* Subtle focus glow */
+        }
+        #customHours {
+             margin-top: 10px; /* Add space above custom input */
+        }
+        .result {
+            margin-top: 25px; /* Increased spacing */
+            padding: 15px; /* Added padding */
+            background-color: #f0f9ff; /* Light blue background */
+            border-radius: 8px;
+            border: 1px solid #d6e9f8; /* Light blue border */
+            font-size: 18px; /* Slightly smaller result text */
+            font-weight: 500; /* Medium weight */
+            color: #2C3E50; /* Darker blue color */
+            line-height: 1.6; /* Improved readability */
+            text-align: left; /* Align result text left */
+        }
+         .result strong { /* Style the labels within the result */
+            color: #34495e; /* Slightly different color for labels */
+            margin-right: 5px;
+            display: inline-block; /* Ensures proper spacing */
+            min-width: 80px; /* Align values */
+         }
+
+    </style>
+</head>
+<body> <!-- Body tag is necessary for structure, but its styles are removed -->
+
+    <div class="tdc-converter-embed-wrapper"> <!-- Wrapper for scoping -->
+        <div class="container">
+            <h2>Salary ↔ Hourly Converter</h2>
+
+            <div class="toggle-btn">
+                <div id="toSalary" class="active" onclick="switchMode('salary')">Hourly → Salary</div>
+                <div id="toHourly" onclick="switchMode('hourly')">Salary → Hourly</div>
+            </div>
+
+            <label id="inputLabel" for="inputValue">Hourly Wage ($)</label> <!-- Added 'for' attribute -->
+            <input type="number" id="inputValue" placeholder="Enter amount" min="0">
+
+            <label for="workHours">Hours per Week</label>
+            <select id="workHours">
+                <option value="40">40 (Standard Full-Time)</option>
+                <option value="35">35</option>
+                <option value="30">30</option>
+                <option value="25">25</option>
+                <option value="20">20 (Part-Time)</option>
+                <option value="custom">Custom</option>
+            </select>
+            <input type="number" id="customHours" placeholder="Enter custom hours" min="1" max="168" style="display:none;">
+
+            <label for="workDays">Days per Week</label> <!-- Days per week isn't used in calculation, consider removing if unwanted -->
+            <select id="workDays">
+                <option value="5">5 (Standard Workweek)</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+
+            <div class="result" id="resultText">Your calculation will appear here.</div>
+        </div>
+    </div>
+
+    <script>
+        // Ensure script runs after DOM is loaded, good practice for embed
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Cache DOM elements
+            const toSalaryBtn = document.getElementById('toSalary');
+            const toHourlyBtn = document.getElementById('toHourly');
+            const inputLabel = document.getElementById('inputLabel');
+            const resultText = document.getElementById('resultText');
+            const inputValue = document.getElementById('inputValue');
+            const workHoursSelect = document.getElementById('workHours');
+            const customHoursInput = document.getElementById('customHours');
+            const workDaysSelect = document.getElementById('workDays'); // Still getting element even if unused in calculation
+
+            let mode = 'salary'; // Default mode
+
+            // --- Switch Mode Function ---
+            window.switchMode = function(newMode) { // Attach to window to make onclick work globally
+                if (mode === newMode) return; // Do nothing if mode is already set
+
+                mode = newMode;
+                toSalaryBtn.classList.toggle('active', mode === 'salary');
+                toHourlyBtn.classList.toggle('active', mode === 'hourly');
+
+                if (mode === 'salary') {
+                    inputLabel.textContent = 'Hourly Wage ($)';
+                    resultText.innerHTML = 'Your salary calculation will appear here.'; // Use innerHTML consistently
+                    inputValue.placeholder = 'e.g., 25.50';
+                } else {
+                    inputLabel.textContent = 'Annual Salary ($)';
+                    resultText.innerHTML = 'Your hourly rate will appear here.'; // Use innerHTML consistently
+                    inputValue.placeholder = 'e.g., 53040';
+                }
+                clearInputAndResult(); // Clear fields when switching modes
+                // calculate(); // Calculate immediately if input has value? Optional.
+            }
+
+             // --- Show/Hide Custom Hours ---
+             workHoursSelect.addEventListener('change', function() {
+                 const isCustom = this.value === 'custom';
+                 customHoursInput.style.display = isCustom ? 'block' : 'none';
+                 if (isCustom) {
+                     customHoursInput.focus(); // Focus custom input when shown
+                     customHoursInput.value = ''; // Clear custom input when shown initially
+                     resultText.innerHTML = 'Enter custom hours.'; // Prompt user
+                 } else {
+                      calculate(); // Recalculate if a standard option is chosen
+                 }
+             });
+
+
+            // --- Calculation Function ---
+             function calculate() {
+                let inputVal = parseFloat(inputValue.value);
+                let hoursSelection = workHoursSelect.value;
+                // let workDays = parseInt(workDaysSelect.value); // WorkDays value is not used in standard salary calculations
+
+                let hoursPerWeek;
+                if (hoursSelection === 'custom') {
+                    hoursPerWeek = parseFloat(customHoursInput.value);
+                     if (isNaN(hoursPerWeek) || hoursPerWeek <= 0) {
+                        resultText.textContent = 'Please enter valid custom hours.';
+                         return; // Stop if custom hours invalid
+                     }
+                } else {
+                    hoursPerWeek = parseInt(hoursSelection);
+                }
+
+                // Check for valid input value
+                if (isNaN(inputVal) || inputVal < 0) {
+                     // Only show error if hours are valid, otherwise hour error takes precedence
+                     if (!isNaN(hoursPerWeek) && hoursPerWeek > 0) {
+                         resultText.innerHTML = `Please enter a valid ${mode === 'salary' ? 'hourly wage' : 'annual salary'}.`;
+                     } else if (hoursSelection !== 'custom') {
+                         // If hours are not custom and somehow invalid (shouldn't happen with select)
+                          resultText.innerHTML = 'Please select valid hours per week.';
+                     }
+                     // If custom hours are invalid, that message is already shown
+                     return; // Stop calculation
+                }
+
+
+                // Perform calculation based on mode
+                 const weeksPerYear = 52; // Standard assumption
+
+                 try { // Add try...catch for robustness against edge cases
+                     if (mode === 'salary') {
+                         const weekly = inputVal * hoursPerWeek;
+                         const biWeekly = weekly * 2;
+                         const monthly = (inputVal * hoursPerWeek * weeksPerYear) / 12; // More accurate monthly avg
+                         const yearly = inputVal * hoursPerWeek * weeksPerYear;
+
+                         // Use Intl.NumberFormat for better currency formatting
+                         const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+                         resultText.innerHTML = `
+                             <strong>Yearly:</strong> ${formatter.format(yearly)} <br>
+                             <strong>Monthly:</strong> ${formatter.format(monthly)} <br>
+                             <strong>Bi-Weekly:</strong> ${formatter.format(biWeekly)} <br>
+                             <strong>Weekly:</strong> ${formatter.format(weekly)}
+                         `;
+                     } else { // mode === 'hourly'
+                         if (hoursPerWeek <= 0) { // Avoid division by zero
+                              resultText.innerHTML = 'Hours per week must be greater than zero.';
+                              return;
+                          }
+                         const hourlyRate = inputVal / (hoursPerWeek * weeksPerYear);
+                         const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                         resultText.innerHTML = `<strong>Hourly Rate:</strong> ${formatter.format(hourlyRate)}`;
+                     }
+                 } catch (error) {
+                     console.error("Calculation Error:", error);
+                     resultText.innerHTML = "An error occurred during calculation.";
+                 }
+             }
+
+             // --- Helper to clear input/result ---
+             function clearInputAndResult() {
+                 inputValue.value = '';
+                 if (workHoursSelect.value === 'custom') {
+                     customHoursInput.value = '';
+                 }
+                  // Reset result text based on current mode
+                  resultText.innerHTML = mode === 'salary'
+                      ? 'Your salary calculation will appear here.'
+                      : 'Your hourly rate will appear here.';
+             }
+
+            // --- Add Event Listeners ---
+            inputValue.addEventListener('input', calculate);
+            // workHoursSelect listener is already setup for custom display logic + calculation
+             customHoursInput.addEventListener('input', calculate);
+             // workDaysSelect.addEventListener('change', calculate); // Add back if needed
+
+
+            // Initial setup call if needed, e.g. to set initial result text correctly
+            switchMode('salary'); // Set initial state explicitly
+
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>

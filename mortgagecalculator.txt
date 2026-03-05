@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator</title>
+    <style>
+        /* Base Styles - Adapted from the approved converter */
+        .mc-embed-wrapper { /* Wrapper ID for scoping */
+             font-family: 'Arial', sans-serif;
+             margin: 0;
+             padding: 0;
+        }
+
+        .container {
+            background: white;
+            max-width: 450px; /* Keep width */
+            width: 90%;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            /* Explicit borders */
+            border-top: 2px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            border-left: 2px solid #ddd;
+            border-right: 2px solid #ddd;
+            box-sizing: border-box;
+        }
+        h2 {
+            color: #2C3E50;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        /* Form Styling */
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+            font-size: 0.95em;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 11px 13px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+        }
+
+        /* Input Focus Style */
+        input[type="number"]:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Placeholder Style */
+         input[type="number"]::placeholder {
+             color: #aaa;
+             font-size: 0.95em;
+         }
+
+        /* Custom Term Input Style */
+        #customTerm {
+             margin-top: 10px;
+        }
+
+        /* Result Area Styling */
+        .result {
+            margin-top: 30px;
+            padding: 18px;
+            background-color: #eaf6ff;
+            border-radius: 8px;
+            border: 1px solid #cce7ff;
+            font-size: 17px;
+            font-weight: 500;
+            color: #1c4a70;
+            line-height: 1.7;
+            text-align: left;
+        }
+         .result strong { /* Labels within the result */
+            color: #0f2a40;
+            margin-right: 8px;
+            display: inline-block;
+            /* Adjusted min-width for longer labels */
+            min-width: 180px;
+            font-weight: 600;
+         }
+         .result .total-payment { /* Highlight total payment */
+             margin-top: 10px;
+             padding-top: 10px;
+             border-top: 1px dashed #b8d9f3;
+             font-size: 1.1em;
+             font-weight: bold;
+             color: #0056b3;
+         }
+          .result .total-payment strong {
+              color: #0056b3;
+               /* Ensure alignment */
+               min-width: 180px;
+          }
+
+         /* Error Message Style */
+         .result.error {
+             background-color: #fff0f0;
+             border-color: #f7cccc;
+             color: #d9534f;
+             font-weight: bold;
+             text-align: center;
+         }
+
+        /* Responsive adjustments */
+         @media (max-width: 480px) {
+             .container {
+                 padding: 20px;
+             }
+             h2 {
+                 font-size: 1.4em;
+             }
+             label {
+                 margin-top: 15px;
+             }
+             .result {
+                 padding: 15px;
+                 font-size: 16px;
+             }
+              .result strong {
+                 /* Adjust min-width for smaller screens if needed*/
+                 min-width: 150px;
+             }
+              .result .total-payment strong {
+                 min-width: 150px;
+             }
+         }
+
+    </style>
+</head>
+<body>
+
+    <div class="mc-embed-wrapper">
+        <div class="container">
+            <h2>Mortgage Calculator</h2>
+
+            <label for="loanAmount">Loan Amount ($)</label>
+            <input type="number" id="loanAmount" placeholder="e.g., 300000" min="0">
+
+            <label for="interestRate">Interest Rate (%)</label>
+            <input type="number" id="interestRate" placeholder="e.g., 6.5" step="0.01" min="0">
+
+            <label for="loanTerm">Loan Term (Years)</label>
+            <select id="loanTerm">
+                <option value="30">30 Years</option>
+                <option value="20">20 Years</option>
+                <option value="15">15 Years</option>
+                <option value="10">10 Years</option>
+                <option value="custom">Custom</option>
+            </select>
+            <input type="number" id="customTerm" placeholder="Enter custom years" min="1" max="50" style="display:none;">
+
+            <label for="propertyTax">Annual Property Tax ($)</label>
+            <input type="number" id="propertyTax" placeholder="Optional, e.g., 4500" min="0">
+
+            <label for="homeInsurance">Annual Homeowners Insurance ($)</label> <!-- Added Insurance -->
+            <input type="number" id="homeInsurance" placeholder="Optional, e.g., 1500" min="0">
+
+            <label for="pmi">Annual PMI ($)</label>
+            <input type="number" id="pmi" placeholder="Optional, e.g., 1200" min="0">
+
+            <label for="hoaFees">Monthly HOA Fees ($)</label> <!-- Added HOA -->
+            <input type="number" id="hoaFees" placeholder="Optional, e.g., 150" min="0">
+
+            <div class="result" id="resultText">Enter your loan details above.</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Cache DOM elements
+            const loanAmountInput = document.getElementById('loanAmount');
+            const interestRateInput = document.getElementById('interestRate');
+            const loanTermSelect = document.getElementById('loanTerm');
+            const customTermInput = document.getElementById('customTerm');
+            const propertyTaxInput = document.getElementById('propertyTax');
+            const homeInsuranceInput = document.getElementById('homeInsurance'); // Added
+            const pmiInput = document.getElementById('pmi');
+            const hoaFeesInput = document.getElementById('hoaFees'); // Added
+            const resultText = document.getElementById('resultText');
+
+            // --- Attach Event Listeners ---
+             // Add new inputs to the list
+            const inputs = [loanAmountInput, interestRateInput, loanTermSelect, customTermInput, propertyTaxInput, homeInsuranceInput, pmiInput, hoaFeesInput];
+            inputs.forEach(input => {
+                input.addEventListener('input', calculateMortgage);
+                 if (input.tagName === 'SELECT') {
+                    input.removeEventListener('input', calculateMortgage);
+                    input.addEventListener('change', calculateMortgage);
+                 }
+            });
+
+            // Listener to show/hide custom term input
+            loanTermSelect.addEventListener('change', function() {
+                const isCustom = this.value === 'custom';
+                customTermInput.style.display = isCustom ? 'block' : 'none';
+                if (isCustom) {
+                    customTermInput.value = '';
+                    customTermInput.focus();
+                    resultText.textContent = 'Enter custom loan term in years.';
+                    resultText.classList.remove('error');
+                } else {
+                    calculateMortgage();
+                }
+            });
+
+            // --- Calculation Function ---
+            function calculateMortgage() {
+                // Get and parse values
+                const P = parseFloat(loanAmountInput.value) || 0;
+                const annualRate = parseFloat(interestRateInput.value) || 0;
+                const termSelection = loanTermSelect.value;
+                const annualTax = parseFloat(propertyTaxInput.value) || 0;
+                const annualInsurance = parseFloat(homeInsuranceInput.value) || 0; // Added
+                const annualPmi = parseFloat(pmiInput.value) || 0;
+                const monthlyHoa = parseFloat(hoaFeesInput.value) || 0; // Added (already monthly)
+
+                let termYears;
+                if (termSelection === 'custom') {
+                    termYears = parseFloat(customTermInput.value) || 0;
+                     if (termYears <= 0 || termYears > 50) {
+                        showError('Please enter a valid custom term (1-50 years).');
+                         return;
+                     }
+                } else {
+                    termYears = parseInt(termSelection);
+                }
+
+                // --- Input Validation ---
+                if (P <= 0) { showError('Please enter a valid Loan Amount.'); return; }
+                if (annualRate < 0) { showError('Please enter a valid Interest Rate.'); return; }
+                if (termYears <= 0) { showError('Please select or enter a valid Loan Term.'); return; }
+                 // Optional fields validation (ensure non-negative)
+                 if (annualTax < 0) { showError('Annual Property Tax cannot be negative.'); return; }
+                 if (annualInsurance < 0) { showError('Annual Homeowners Insurance cannot be negative.'); return; }
+                 if (annualPmi < 0) { showError('Annual PMI cannot be negative.'); return; }
+                 if (monthlyHoa < 0) { showError('Monthly HOA Fees cannot be negative.'); return; }
+
+
+                // --- Calculations ---
+                const i = annualRate / 100 / 12;
+                const n = termYears * 12;
+
+                let M; // Monthly Principal & Interest
+                if (i === 0) { M = P / n; }
+                else {
+                     const numerator = P * i * Math.pow(1 + i, n);
+                     const denominator = Math.pow(1 + i, n) - 1;
+                     M = numerator / denominator;
+                 }
+
+                 if (!isFinite(M)) {
+                     showError('Calculation resulted in an invalid number. Check inputs.');
+                     return;
+                 }
+
+                const monthlyTax = annualTax / 12;
+                const monthlyInsurance = annualInsurance / 12; // Calculate monthly insurance
+                const monthlyPmi = annualPmi / 12;
+                // monthlyHoa is already monthly
+
+                const totalMonthlyPayment = M + monthlyTax + monthlyInsurance + monthlyPmi + monthlyHoa; // Add new components
+
+                // --- Display Results ---
+                displayResults(M, monthlyTax, monthlyInsurance, monthlyPmi, monthlyHoa, totalMonthlyPayment); // Pass new values
+            }
+
+            // --- Helper to Display Results ---
+            // Updated function signature and content
+            function displayResults(pAndI, tax, insurance, pmi, hoa, total) {
+                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+                resultText.innerHTML = `
+                    <strong>Principal & Interest:</strong> ${formatter.format(pAndI)} <br>
+                    <strong>Property Tax (Monthly):</strong> ${formatter.format(tax)} <br>
+                    <strong>Home Insurance (Monthly):</strong> ${formatter.format(insurance)} <br>
+                    <strong>PMI (Monthly):</strong> ${formatter.format(pmi)} <br>
+                    <strong>HOA Fees (Monthly):</strong> ${formatter.format(hoa)} <br>
+                    <div class="total-payment">
+                        <strong>Total Monthly Payment:</strong> ${formatter.format(total)}
+                    </div>
+                `;
+                resultText.classList.remove('error');
+            }
+
+             // --- Helper to Show Error Messages ---
+            function showError(message) {
+                 resultText.textContent = message;
+                 resultText.classList.add('error');
+             }
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>

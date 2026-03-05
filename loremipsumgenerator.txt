@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <
+meta charset="UTF-8">
+    <meta name="viewpor
+t" content="width=device-width, initial-scale
+=1.0">
+    <title>Text Generator</title>
+    
+<style>
+        body {
+            font-famil
+y: 'Segoe UI', Tahoma, Geneva, Verdana, sans-
+serif;
+            background-color: #f0f2f5;
+
+            display: flex;
+            justi
+fy-content: center;
+            align-items: 
+flex-start;
+            min-height: 100vh;
+  
+          margin: 0;
+            padding-top:
+ 20px;
+            padding-bottom: 20px;
+    
+        box-sizing: border-box;
+        }
+
+  
+      .text-generator-container {
+           
+ background-color: #ffffff;
+            paddi
+ng: 25px 30px;
+            border-radius: 8px
+;
+            box-shadow: 0 4px 12px rgba(0, 
+0, 0, 0.1);
+            width: 90%;
+         
+   max-width: 650px; /* Slightly wider for mo
+de buttons */
+            text-align: center;
+
+        }
+
+        .text-generator-container
+ h2 {
+            color: #333;
+            ma
+rgin-top: 0;
+            margin-bottom: 20px;
+
+        }
+
+        .text-generator-container
+ .mode-selector {
+            margin-bottom: 
+20px;
+            display: flex;
+            
+justify-content: center;
+            gap: 10p
+x;
+        }
+
+        .text-generator-contain
+er .mode-button {
+            padding: 8px 15
+px;
+            border: 1px solid #007bff;
+  
+          background-color: #fff;
+           
+ color: #007bff;
+            border-radius: 4
+px;
+            cursor: pointer;
+            
+font-size: 0.9em;
+            transition: bac
+kground-color 0.2s ease, color 0.2s ease;
+   
+     }
+
+        .text-generator-container .mo
+de-button.active {
+            background-col
+or: #007bff;
+            color: white;
+      
+  }
+         .text-generator-container .mode-
+button:hover:not(.active) {
+            backg
+round-color: #e7f3ff;
+        }
+
+
+        .te
+xt-generator-container .controls {
+          
+  margin-bottom: 20px;
+            display: f
+lex;
+            align-items: center;
+       
+     justify-content: center;
+            gap
+: 10px;
+            flex-wrap: wrap;
+        
+}
+
+        .text-generator-container .control
+s label {
+            font-size: 0.95em;
+    
+        color: #555;
+        }
+
+        .text
+-generator-container .controls input[type="nu
+mber"] {
+            padding: 8px 10px;
+     
+       border: 1px solid #ddd;
+            bo
+rder-radius: 4px;
+            width: 60px;
+  
+          text-align: center;
+            fon
+t-size: 0.95em;
+        }
+
+        .text-gene
+rator-container #generateTextBtn,
+        .te
+xt-generator-container #copyTextBtn {
+       
+     padding: 10px 18px;
+            backgrou
+nd-color: #007bff;
+            color: white;
+
+            border: none;
+            border-
+radius: 4px;
+            cursor: pointer;
+   
+         font-size: 0.95em;
+            trans
+ition: background-color 0.2s ease;
+        }
+
+
+        .text-generator-container #generateT
+extBtn:hover,
+        .text-generator-contain
+er #copyTextBtn:hover {
+            backgroun
+d-color: #0056b3;
+        }
+
+        .text-ge
+nerator-container .output-area {
+            
+margin-top: 20px;
+        }
+
+        .text-ge
+nerator-container #textOutput {
+            w
+idth: calc(100% - 22px);
+            padding:
+ 10px;
+            border: 1px solid #ddd;
+  
+          border-radius: 4px;
+            fon
+t-size: 0.9em;
+            line-height: 1.6;
+
+            background-color: #f9f9f9;
+      
+      resize: vertical;
+            min-heigh
+t: 150px;
+            box-sizing: border-box;
+
+        }
+
+        .text-generator-container
+ .copy-feedback {
+            margin-top: 10p
+x;
+            font-size: 0.9em;
+            
+color: green;
+            height: 1.2em;
+    
+    }
+    </style>
+</head>
+<body>
+    <div cl
+ass="text-generator-container">
+        <h2>T
+ext Generator</h2>
+
+        <div class="mode-
+selector">
+            <button class="mode-bu
+tton" id="modeLoremBtn">Lorem Ipsum</button>
+
+            <button class="mode-button active
+" id="modeEnglishBtn">English Sentences</butt
+on>
+        </div>
+
+        <div class="contr
+ols">
+            <label for="numParagraphs">
+Number of Paragraphs:</label>
+            <in
+put type="number" id="numParagraphs" value="3
+" min="1" max="20">
+            <button id="g
+enerateTextBtn">Generate Text</button>
+      
+  </div>
+
+        <div class="output-area">
+ 
+           <textarea id="textOutput" rows="10
+" readonly placeholder="Generated text will a
+ppear here..."></textarea>
+            <butto
+n id="copyTextBtn">Copy to Clipboard</button>
+
+        </div>
+         <p class="copy-feedb
+ack" id="copyTextFeedback"></p>
+    </div>
+
+ 
+   <script>
+        document.addEventListener
+('DOMContentLoaded', () => {
+            cons
+t numParagraphsInput = document.getElementByI
+d('numParagraphs');
+            const generat
+eBtn = document.getElementById('generateTextB
+tn');
+            const textOutputTextarea = 
+document.getElementById('textOutput');
+      
+      const copyBtn = document.getElementById
+('copyTextBtn');
+            const copyFeedba
+ck = document.getElementById('copyTextFeedbac
+k');
+
+            const modeLoremBtn = docume
+nt.getElementById('modeLoremBtn');
+          
+  const modeEnglishBtn = document.getElementB
+yId('modeEnglishBtn');
+
+            let curre
+ntMode = 'english'; // Default mode
+
+        
+    const LOREM_SENTENCES = [
+               
+ "Lorem ipsum dolor sit amet, consectetur adi
+piscing elit.",
+                "Sed do eiusm
+od tempor incididunt ut labore et dolore magn
+a aliqua.",
+                "Ut enim ad minim
+ veniam, quis nostrud exercitation ullamco la
+boris nisi ut aliquip ex ea commodo consequat
+.",
+                "Duis aute irure dolor in
+ reprehenderit in voluptate velit esse cillum
+ dolore eu fugiat nulla pariatur.",
+         
+       "Excepteur sint occaecat cupidatat non
+ proident, sunt in culpa qui officia deserunt
+ mollit anim id est laborum.",
+              
+  "Curabitur pretium tincidunt lacus.", "Null
+a gravida orci a odio.", "Nullam varius, turp
+is et commodo pharetra, est eros bibendum eli
+t, nec luctus magna felis sollicitudin mauris
+.",
+                "Integer in mauris eu nib
+h euismod gravida.", "Duis ac tellus et risus
+ vulputate vehicula.", "Donec lobortis risus 
+a elit."
+            ];
+
+            const EN
+GLISH_SENTENCES = [
+                "The quic
+k brown fox jumps over the lazy dog.", "A jou
+rney of a thousand miles begins with a single
+ step.",
+                "Actions speak loude
+r than words.", "All that glitters is not gol
+d.", "An apple a day keeps the doctor away.",
+
+                "Beauty is in the eye of the
+ beholder.", "The early bird catches the worm
+.", "Every cloud has a silver lining.",
+     
+           "Honesty is the best policy.", "If
+ it ain't broke, don't fix it.", "Laughter is
+ the best medicine.",
+                "Look b
+efore you leap.", "Practice makes perfect.", 
+"The pen is mightier than the sword.",
+      
+          "Two heads are better than one.", "
+Where there's a will, there's a way.", "You c
+an't judge a book by its cover.",
+           
+     "The sun always shines after the rain.",
+ "She sells seashells by the seashore.",
+    
+            "Peter Piper picked a peck of pic
+kled peppers.", "To be or not to be, that is 
+the question.",
+                "All the worl
+d's a stage, and all the men and women merely
+ players.", "It was the best of times, it was
+ the worst of times.",
+                "The o
+nly thing we have to fear is fear itself.", "
+Ask not what your country can do for you – 
+ask what you can do for your country.",
+     
+           "The future belongs to those who b
+elieve in the beauty of their dreams.", "Inno
+vation distinguishes between a leader and a f
+ollower.",
+                "Your time is limi
+ted, so don't waste it living someone else's 
+life.", "The way to get started is to quit ta
+lking and begin doing.",
+                "Suc
+cess is not final, failure is not fatal: It i
+s the courage to continue that counts."
+     
+       ];
+
+            function updateModeBut
+tons() {
+                if (currentMode === 
+'lorem') {
+                    modeLoremBtn.c
+lassList.add('active');
+                    m
+odeEnglishBtn.classList.remove('active');
+   
+             } else {
+                    mod
+eEnglishBtn.classList.add('active');
+        
+            modeLoremBtn.classList.remove('ac
+tive');
+                }
+            }
+
+    
+        modeLoremBtn.addEventListener('click'
+, () => {
+                currentMode = 'lore
+m';
+                updateModeButtons();
+    
+        });
+
+            modeEnglishBtn.addEv
+entListener('click', () => {
+                
+currentMode = 'english';
+                upda
+teModeButtons();
+            });
+
+           
+ function getRandomSentence() {
+             
+   const sentences = currentMode === 'lorem' 
+? LOREM_SENTENCES : ENGLISH_SENTENCES;
+      
+          return sentences[Math.floor(Math.ra
+ndom() * sentences.length)];
+            }
+
+ 
+           function generateParagraph() {
+   
+             const numSentences = Math.floor(
+Math.random() * 4) + 3; // 3 to 6 sentences
+ 
+               let paragraph = "";
+          
+      for (let i = 0; i < numSentences; i++) 
+{
+                    paragraph += getRandomS
+entence() + " ";
+                }
+          
+      return paragraph.trim();
+            }
+
+
+            generateBtn.addEventListener('cl
+ick', () => {
+                const numParagr
+aphs = parseInt(numParagraphsInput.value, 10)
+;
+                if (isNaN(numParagraphs) ||
+ numParagraphs < 1) {
+                    tex
+tOutputTextarea.value = "Please enter a valid
+ number of paragraphs (1 or more).";
+        
+            return;
+                }
+
+      
+          let generatedText = "";
+           
+     for (let i = 0; i < numParagraphs; i++) 
+{
+                    generatedText += genera
+teParagraph();
+                    if (i < nu
+mParagraphs - 1) {
+                        ge
+neratedText += "\n\n";
+                    }
+
+                }
+                textOutputT
+extarea.value = generatedText;
+              
+  copyFeedback.textContent = "";
+            
+});
+
+            copyBtn.addEventListener('cl
+ick', () => {
+                if (textOutputT
+extarea.value) {
+                    navigato
+r.clipboard.writeText(textOutputTextarea.valu
+e)
+                        .then(() => {
+    
+                        copyFeedback.textCont
+ent = "Copied to clipboard!";
+               
+             setTimeout(() => { copyFeedback.
+textContent = ""; }, 2000);
+                 
+       })
+                        .catch(err 
+=> {
+                            console.erro
+r('Failed to copy: ', err);
+                 
+           copyFeedback.textContent = "Failed
+ to copy!";
+                             setT
+imeout(() => { copyFeedback.textContent = "";
+ }, 2000);
+                        });
+      
+          } else {
+                    copyFe
+edback.textContent = "Nothing to copy!";
+    
+                setTimeout(() => { copyFeedba
+ck.textContent = ""; }, 2000);
+              
+  }
+            });
+
+            // Initializ
+e button states
+            updateModeButtons
+();
+        });
+    </script>
+</body>
+</html>
+
+
+
