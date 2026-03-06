@@ -2,12 +2,12 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), geolocation=(), microphone=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://www.google-analytics.com https://pagead2.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://pagead2.googlesyndication.com; frame-src https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; worker-src 'self' blob:;
 
 /tools/audio-recorder
-  Permissions-Policy: camera=(), geolocation=(), microphone=(self)
+  Permissions-Policy: microphone=(self)
 
 /tools/voice-memo-recorder
-  Permissions-Policy: camera=(), geolocation=(), microphone=(self)
+  Permissions-Policy: microphone=(self)
