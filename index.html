@@ -213,6 +213,7 @@
   <!-- ─── App Logic ─── -->
   <script type="module">
     import { tools, categories } from '/data/tools.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
 
     const searchInput    = document.getElementById('search');
     const filterBar      = document.getElementById('category-filters');
