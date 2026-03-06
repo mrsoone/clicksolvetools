@@ -89,20 +89,7 @@
 
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
 
-  <!-- ─── Navigation ─── -->
-  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 group">
-        <span class="text-xl">🛠️</span>
-        <span class="text-[#1e293b] font-bold text-lg group-hover:text-[#2563eb] transition-colors">ClickSolveTools</span>
-      </a>
-      <div class="flex items-center gap-4 text-sm">
-        <a href="/" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">All Tools</a>
-        <a href="/about" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">About</a>
-        <a href="/privacy" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">Privacy</a>
-      </div>
-    </div>
-  </nav>
+  <div id="nav-container"></div>
 
   <!-- ─── Main Content ─── -->
   <main class="flex-1 max-w-4xl mx-auto w-full px-4 py-10">
@@ -264,53 +251,13 @@
     </div>
   </article>
 
-  <!-- ─── Related Tools ─── -->
-  <section class="bg-[#f8fafc] border-t border-[#e2e8f0]">
-    <div class="max-w-4xl mx-auto px-4 py-12">
-      <h2 class="text-xl font-bold text-[#1e293b] mb-6 text-center">Related Tools</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <a href="/tools/percentage-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
-          <span class="text-2xl mb-2 block">📊</span>
-          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Percentage Calculator</h3>
-          <p class="text-[#64748b] text-xs leading-relaxed">Calculate percentages, percent change, and ratios instantly.</p>
-        </a>
-        <a href="/tools/scientific-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
-          <span class="text-2xl mb-2 block">🔢</span>
-          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Scientific Calculator</h3>
-          <p class="text-[#64748b] text-xs leading-relaxed">Full-featured scientific calculator with advanced functions.</p>
-        </a>
-        <a href="/tools/standard-deviation-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
-          <span class="text-2xl mb-2 block">📈</span>
-          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Standard Deviation Calculator</h3>
-          <p class="text-[#64748b] text-xs leading-relaxed">Compute mean, variance, and standard deviation for any data set.</p>
-        </a>
-      </div>
-    </div>
-  </section>
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
 
-  <!-- ─── Footer ─── -->
-  <footer class="bg-[#1e293b]">
-    <div class="max-w-7xl mx-auto px-4 py-10 text-center">
-      <div class="flex items-center justify-center gap-2 mb-4">
-        <span class="text-xl">🛠️</span>
-        <span class="text-white font-bold text-lg">ClickSolveTools</span>
-      </div>
-      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
-      <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
-      <div class="flex items-center justify-center gap-4 text-xs">
-        <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
-        <span class="text-[#475569]">|</span>
-        <a href="/about" class="text-[#94a3b8] hover:text-white transition-colors">About</a>
-        <span class="text-[#475569]">|</span>
-        <a href="/privacy" class="text-[#94a3b8] hover:text-white transition-colors">Privacy</a>
-        <span class="text-[#475569]">|</span>
-        <a href="/licenses" class="text-[#94a3b8] hover:text-white transition-colors">Licenses</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ─── shared.js ─── -->
-  <script src="/shared.js" defer></script>
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('gpa-calculator');
+  </script>
 
   <!-- ─── App Logic ─── -->
   <script>

@@ -164,7 +164,7 @@
         </ul>
 
         <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How It Works</h3>
-        <p>Each tool lives on its own dedicated page with a clean URL like <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/tools/json-formatter</code>. You can bookmark any tool directly, share the link, or come back to this page and search by name, keyword, or category. The search bar above filters all 85 tools in real time as you type — no page reloads, no waiting. Tools that are live link directly to their page; tools still in development are clearly marked "Coming Soon."</p>
+        <p>Each tool lives on its own dedicated page with a clean URL like <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/tools/json-formatter</code>. You can bookmark any tool directly, share the link, or come back to this page and search by name, keyword, or category. The search bar above filters all 85 tools in real time as you type — no page reloads, no waiting. Every tool is live and links directly to its dedicated page.</p>
 
         <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Built for Speed and Privacy</h3>
         <p>ClickSolveTools is a static site hosted on Cloudflare Pages, which means pages load fast from edge servers around the world. There's no server-side rendering, no database queries, and no API calls — just HTML, CSS, and JavaScript delivered directly to your browser. The entire site works with JavaScript enabled in any modern browser (Chrome, Firefox, Safari, Edge). Some tools even work offline once the page has loaded.</p>
@@ -293,24 +293,13 @@
       resultCount.textContent = `Showing ${filtered.length} tool${filtered.length !== 1 ? 's' : ''}${suffix}${searchSuffix}`;
 
       grid.innerHTML = filtered.map((tool, i) => {
-        const isBuilt = tool.built;
-        const href = isBuilt ? `/tools/${tool.slug}` : '#';
-        const cursor = isBuilt ? '' : 'cursor-default';
-        const opacity = isBuilt ? '' : 'opacity-50';
-        const hoverEffect = isBuilt ? 'hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10' : '';
-        const badge = isBuilt
-          ? ''
-          : '<span class="text-[10px] font-semibold uppercase tracking-wider text-[#94a3b8] px-2 py-0.5 rounded-full border border-[#e2e8f0] bg-[#f8fafc]">Coming Soon</span>';
-        const onClick = isBuilt ? '' : 'onclick="event.preventDefault()"';
-
         return `
-          <a href="${href}" ${onClick}
-             class="tool-card fade-in block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm ${hoverEffect} ${cursor} ${opacity}"
+          <a href="/tools/${tool.slug}"
+             class="tool-card fade-in block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all duration-200 hover:-translate-y-0.5"
              style="animation-delay: ${Math.min(i * 30, 600)}ms"
           >
             <div class="flex items-start justify-between mb-3">
               <span class="text-2xl leading-none">${tool.icon}</span>
-              ${badge}
             </div>
             <h2 class="font-semibold text-[#1e293b] text-sm mb-1.5">${tool.name}</h2>
             <p class="text-[#64748b] text-xs leading-relaxed line-clamp-2">${tool.description}</p>
