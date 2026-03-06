@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | ClickSolveTools</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0f172a] text-white min-h-screen">
+
+  <!-- ─── Password Gate Modal ─── -->
+  <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#1e293b] rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
+      <div class="text-center mb-6">
+        <span class="text-4xl block mb-3">🔒</span>
+        <h1 class="text-xl font-bold">Admin Access</h1>
+        <p class="text-[#94a3b8] text-sm mt-1">Enter the admin password to continue</p>
+      </div>
+      <form id="auth-form" class="space-y-4">
+        <input
+          id="auth-input"
+          type="password"
+          placeholder="Enter admin password"
+          autocomplete="off"
+          class="w-full px-4 py-3 bg-[#0f172a] border border-[#334155] rounded-lg text-white placeholder-[#64748b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/30 transition"
+        >
+        <p id="auth-error" class="text-red-400 text-sm hidden">Incorrect password</p>
+        <button type="submit" class="w-full py-3 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold rounded-lg transition">
+          Access Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ─── Dashboard (hidden until auth) ─── -->
+  <div id="dashboard" class="hidden">
+
+    <!-- Header -->
+    <header class="border-b border-[#1e293b] bg-[#0f172a]/80 backdrop-blur-sm sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🛠️</span>
+          <span class="font-bold text-lg">ClickSolveTools Admin</span>
+        </div>
+        <a href="/" class="text-[#94a3b8] hover:text-white text-sm transition-colors">← Back to Site</a>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-14">
+
+      <!-- ─── Section 1: Quick Links ─── -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Quick Links</h2>
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="https://analytics.google.com/" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">📊</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">Google Analytics</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">View traffic, user behavior, and conversion data</p>
+          </a>
+          <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">🔍</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">Google Search Console</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">Monitor search performance and indexing status</p>
+          </a>
+          <a href="https://www.bing.com/webmasters" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">📈</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">Bing Webmaster Tools</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">Track Bing search visibility and crawl health</p>
+          </a>
+          <a href="https://www.google.com/adsense" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">💰</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">Google AdSense</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">Manage ad placements and revenue reports</p>
+          </a>
+          <a href="https://github.com/REPO_PLACEHOLDER" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">🗂️</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">GitHub Repository</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">Source code, issues, and deployment pipeline</p>
+          </a>
+          <a href="https://dash.cloudflare.com/" target="_blank" rel="noopener" class="bg-[#1e293b] border border-[#334155] rounded-xl p-5 hover:border-[#2563eb] transition group">
+            <span class="text-2xl">☁️</span>
+            <h3 class="font-semibold mt-2 group-hover:text-[#60a5fa] transition-colors">Cloudflare Dashboard</h3>
+            <p class="text-[#94a3b8] text-sm mt-1">DNS, CDN caching, security rules, and analytics</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- ─── Section 2: Tool Inventory ─── -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Tool Inventory</h2>
+
+        <!-- Total count -->
+        <div class="mb-8 text-center">
+          <span id="total-count" class="text-6xl font-bold text-[#2563eb]">—</span>
+          <p class="text-[#94a3b8] text-lg mt-1">Total Tools</p>
+        </div>
+
+        <!-- Category breakdown -->
+        <div class="bg-[#1e293b] rounded-xl overflow-hidden mb-8">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-[#334155]">
+                <th class="px-5 py-3 text-sm font-semibold text-[#94a3b8]">Category</th>
+                <th class="px-5 py-3 text-sm font-semibold text-[#94a3b8] text-right">Count</th>
+              </tr>
+            </thead>
+            <tbody id="category-table"></tbody>
+          </table>
+        </div>
+
+        <!-- Full tool list -->
+        <div class="mb-4">
+          <input
+            id="tool-search"
+            type="text"
+            placeholder="Filter tools by name, slug, or category…"
+            autocomplete="off"
+            class="w-full px-4 py-3 bg-[#1e293b] border border-[#334155] rounded-lg text-white placeholder-[#64748b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/30 transition"
+          >
+        </div>
+        <div class="bg-[#1e293b] rounded-xl overflow-hidden overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="bg-[#334155]">
+                <th class="px-4 py-3 font-semibold text-[#94a3b8] w-12">#</th>
+                <th class="px-4 py-3 font-semibold text-[#94a3b8]">Name</th>
+                <th class="px-4 py-3 font-semibold text-[#94a3b8]">Slug</th>
+                <th class="px-4 py-3 font-semibold text-[#94a3b8]">Category</th>
+                <th class="px-4 py-3 font-semibold text-[#94a3b8] text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tool-table"></tbody>
+          </table>
+        </div>
+        <p id="tool-table-count" class="text-[#64748b] text-xs mt-2"></p>
+      </section>
+
+      <!-- ─── Section 3: Site Health Checklist ─── -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Site Health Checklist</h2>
+        <div id="checklist-container" class="space-y-8"></div>
+      </section>
+
+      <!-- ─── Section 4: Quick Edit Links ─── -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Quick Edit Links</h2>
+        <div class="bg-[#1e293b] rounded-xl overflow-hidden overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="bg-[#334155]">
+                <th class="px-5 py-3 font-semibold text-[#94a3b8]">File</th>
+                <th class="px-5 py-3 font-semibold text-[#94a3b8]">Purpose</th>
+                <th class="px-5 py-3 font-semibold text-[#94a3b8] text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="edit-links-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── Section 5: Analytics Embed (Placeholder) ─── -->
+      <section>
+        <h2 class="text-2xl font-bold mb-4">Analytics Overview</h2>
+        <p class="text-sm text-[#94a3b8] mb-4">Create a Looker Studio report from your GA4 data and paste the embed URL below to see live analytics here.</p>
+        <div class="border border-dashed border-[#334155] rounded-lg p-12 text-center text-[#64748b]">
+          <p>📊 Looker Studio embed goes here</p>
+          <p class="text-sm mt-2">Set up at: <a href="https://lookerstudio.google.com/" target="_blank" class="text-[#38bdf8] hover:underline">lookerstudio.google.com</a></p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#1e293b] mt-10">
+      <div class="max-w-7xl mx-auto px-4 py-6 text-center text-[#64748b] text-xs">
+        Admin Dashboard — Not indexed, not public. &copy; 2025 ClickSolveTools.
+      </div>
+    </footer>
+  </div>
+
+  <!-- ─── App Logic ─── -->
+  <script type="module">
+    import { tools, categories } from '/data/tools.js';
+
+    // ── Password Gate ──────────────────────────────────────────────────
+    const PASSWORD_HASH = 'cc0f8d6073e8920e6130ff5a939e74fd519343f405c5327bb3b35be4c1ebc42b';
+
+    async function hashString(str) {
+      const encoded = new TextEncoder().encode(str);
+      const buffer = await crypto.subtle.digest('SHA-256', encoded);
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    const modal = document.getElementById('auth-modal');
+    const dashboard = document.getElementById('dashboard');
+    const authForm = document.getElementById('auth-form');
+    const authInput = document.getElementById('auth-input');
+    const authError = document.getElementById('auth-error');
+
+    function unlock() {
+      modal.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      sessionStorage.setItem('admin_auth', 'true');
+      initDashboard();
+    }
+
+    if (sessionStorage.getItem('admin_auth') === 'true') {
+      unlock();
+    } else {
+      authInput.focus();
+    }
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const hash = await hashString(authInput.value);
+      if (hash === PASSWORD_HASH) {
+        unlock();
+      } else {
+        authError.classList.remove('hidden');
+        authInput.value = '';
+        authInput.focus();
+      }
+    });
+
+    // ── Dashboard Init ─────────────────────────────────────────────────
+    function initDashboard() {
+      renderToolInventory();
+      renderChecklist();
+      renderEditLinks();
+    }
+
+    // ── Tool Inventory ─────────────────────────────────────────────────
+    function renderToolInventory() {
+      document.getElementById('total-count').textContent = tools.length;
+
+      const catCounts = {};
+      tools.forEach(t => { catCounts[t.category] = (catCounts[t.category] || 0) + 1; });
+
+      const catTableBody = document.getElementById('category-table');
+      catTableBody.innerHTML = categories.map(cat => `
+        <tr class="border-t border-[#334155]/50 hover:bg-[#334155]/30 transition-colors">
+          <td class="px-5 py-3">${cat.icon} ${cat.name}</td>
+          <td class="px-5 py-3 text-right font-mono text-[#60a5fa]">${catCounts[cat.name] || 0}</td>
+        </tr>
+      `).join('');
+
+      const searchInput = document.getElementById('tool-search');
+      const tableBody = document.getElementById('tool-table');
+      const tableCount = document.getElementById('tool-table-count');
+
+      function renderTools(query = '') {
+        const q = query.toLowerCase().trim();
+        const filtered = q
+          ? tools.filter(t => t.name.toLowerCase().includes(q) || t.slug.toLowerCase().includes(q) || t.category.toLowerCase().includes(q))
+          : tools;
+
+        tableBody.innerHTML = filtered.map((t, i) => `
+          <tr class="border-t border-[#334155]/50 hover:bg-[#334155]/30 transition-colors">
+            <td class="px-4 py-2.5 text-[#64748b] font-mono">${i + 1}</td>
+            <td class="px-4 py-2.5 font-medium">${t.name}</td>
+            <td class="px-4 py-2.5 text-[#94a3b8] font-mono text-xs">${t.slug}</td>
+            <td class="px-4 py-2.5 text-[#94a3b8]">${t.category}</td>
+            <td class="px-4 py-2.5 text-center">${t.built ? '✅' : '❌'}</td>
+          </tr>
+        `).join('');
+
+        tableCount.textContent = `Showing ${filtered.length} of ${tools.length} tools`;
+      }
+
+      renderTools();
+      searchInput.addEventListener('input', () => renderTools(searchInput.value));
+    }
+
+    // ── Site Health Checklist ───────────────────────────────────────────
+    function renderChecklist() {
+      const groups = [
+        {
+          title: 'SEO',
+          items: [
+            { id: 'seo_gsc_verified',     label: 'Google Search Console verified' },
+            { id: 'seo_sitemap_google',    label: 'Sitemap submitted to Google' },
+            { id: 'seo_sitemap_bing',      label: 'Sitemap submitted to Bing' },
+            { id: 'seo_ga4_id',            label: 'GA4 measurement ID replaced (not placeholder)' },
+            { id: 'seo_robots_txt',        label: 'robots.txt is correct' }
+          ]
+        },
+        {
+          title: 'Monetization',
+          items: [
+            { id: 'mon_adsense_submitted', label: 'AdSense application submitted' },
+            { id: 'mon_adsense_approved',  label: 'AdSense approved' },
+            { id: 'mon_ads_txt',           label: 'ads.txt has real publisher ID' },
+            { id: 'mon_adsense_live',      label: 'AdSense script live' }
+          ]
+        },
+        {
+          title: 'Legal',
+          items: [
+            { id: 'leg_privacy',           label: 'Privacy policy reviewed this quarter' },
+            { id: 'leg_terms',             label: 'Terms of service reviewed this quarter' },
+            { id: 'leg_cookies',           label: 'Cookie policy reviewed this quarter' },
+            { id: 'leg_consent_banner',    label: 'Cookie consent banner tested' },
+            { id: 'leg_finance_disc',      label: 'All financial tool disclaimers present' },
+            { id: 'leg_health_disc',       label: 'All health tool disclaimers present' },
+            { id: 'leg_file_disc',         label: 'All file processing disclaimers present' }
+          ]
+        },
+        {
+          title: 'Technical',
+          items: [
+            { id: 'tech_csp',             label: 'CSP header tested on all tools' },
+            { id: 'tech_https_cdn',        label: 'All external CDN URLs are HTTPS' },
+            { id: 'tech_no_console_err',   label: 'No console errors on homepage' },
+            { id: 'tech_custom_domain',    label: 'Custom domain connected' },
+            { id: 'tech_ssl',              label: 'SSL/HTTPS working' }
+          ]
+        }
+      ];
+
+      let checklist = {};
+      try { checklist = JSON.parse(localStorage.getItem('admin_checklist')) || {}; } catch { checklist = {}; }
+
+      const container = document.getElementById('checklist-container');
+      container.innerHTML = groups.map(group => `
+        <div>
+          <h3 class="text-lg font-semibold text-[#e2e8f0] mb-3">${group.title}</h3>
+          <div class="bg-[#1e293b] rounded-xl p-5 space-y-3">
+            ${group.items.map(item => `
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  data-check-id="${item.id}"
+                  ${checklist[item.id] ? 'checked' : ''}
+                  class="w-4 h-4 rounded border-[#334155] bg-[#0f172a] text-[#2563eb] focus:ring-[#2563eb] focus:ring-offset-0 accent-[#2563eb] cursor-pointer"
+                >
+                <span class="text-sm ${checklist[item.id] ? 'text-[#60a5fa]' : 'text-[#94a3b8]'} group-hover:text-white transition-colors">${item.label}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      container.addEventListener('change', (e) => {
+        if (!e.target.dataset.checkId) return;
+        const id = e.target.dataset.checkId;
+        checklist[id] = e.target.checked;
+        localStorage.setItem('admin_checklist', JSON.stringify(checklist));
+
+        const label = e.target.closest('label').querySelector('span');
+        label.className = `text-sm ${e.target.checked ? 'text-[#60a5fa]' : 'text-[#94a3b8]'} group-hover:text-white transition-colors`;
+      });
+    }
+
+    // ── Quick Edit Links ───────────────────────────────────────────────
+    function renderEditLinks() {
+      const REPO = 'https://github.com/REPO_PLACEHOLDER/edit/main';
+      const files = [
+        { path: 'privacy.html',   purpose: 'Edit Privacy Policy' },
+        { path: 'terms.html',     purpose: 'Edit Terms of Service' },
+        { path: 'cookies.html',   purpose: 'Edit Cookie Policy' },
+        { path: 'about.html',     purpose: 'Edit About Page' },
+        { path: 'data/tools.js',  purpose: 'Edit Tool Catalog' },
+        { path: 'sitemap.xml',    purpose: 'Edit Sitemap' },
+        { path: 'ads.txt',        purpose: 'Edit AdSense Config' },
+        { path: '_headers',       purpose: 'Edit Security Headers' },
+        { path: '_redirects',     purpose: 'Edit Redirects' }
+      ];
+
+      document.getElementById('edit-links-table').innerHTML = files.map(f => `
+        <tr class="border-t border-[#334155]/50 hover:bg-[#334155]/30 transition-colors">
+          <td class="px-5 py-3 font-mono text-xs text-[#94a3b8]">${f.path}</td>
+          <td class="px-5 py-3 text-sm">${f.purpose}</td>
+          <td class="px-5 py-3 text-right">
+            <a href="${REPO}/${f.path}" target="_blank" rel="noopener" class="text-[#2563eb] hover:text-[#60a5fa] text-sm font-medium transition-colors">Edit →</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+  </script>
+
+</body>
+</html>
