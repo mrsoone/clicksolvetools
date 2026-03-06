@@ -138,10 +138,33 @@
         <p id="tool-table-count" class="text-[#64748b] text-xs mt-2"></p>
       </section>
 
-      <!-- ─── Section 3: Site Health Checklist ─── -->
+      <!-- ─── Section 3: Site Health Scanner ─── -->
       <section>
-        <h2 class="text-2xl font-bold mb-6">Site Health Checklist</h2>
-        <div id="checklist-container" class="space-y-8"></div>
+        <h2 class="text-2xl font-bold mb-6">Site Health Scanner</h2>
+
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <button id="scan-btn" class="px-6 py-3 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold rounded-lg transition text-sm cursor-pointer">
+            🔍 Run Health Scan
+          </button>
+          <p id="scan-status" class="text-[#64748b] text-sm"></p>
+        </div>
+
+        <div id="scan-progress" class="hidden mb-6">
+          <div class="flex items-center justify-between mb-2">
+            <p id="scan-progress-text" class="text-[#94a3b8] text-sm">Scanning...</p>
+            <p id="scan-progress-pct" class="text-[#60a5fa] text-sm font-mono">0%</p>
+          </div>
+          <div class="w-full bg-[#334155] rounded-full h-2">
+            <div id="scan-progress-bar" class="bg-[#2563eb] h-2 rounded-full transition-all duration-200" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div id="scan-results" class="hidden space-y-4"></div>
+
+        <div class="mt-10">
+          <h3 class="text-lg font-semibold text-[#e2e8f0] mb-4">External Services (manual)</h3>
+          <div id="manual-checklist-items" class="bg-[#1e293b] rounded-xl p-5 space-y-3"></div>
+        </div>
       </section>
 
       <!-- ─── Section 4: Quick Edit Links ─── -->
@@ -228,7 +251,7 @@
     // ── Dashboard Init ─────────────────────────────────────────────────
     function initDashboard() {
       renderToolInventory();
-      renderChecklist();
+      initScanner();
       renderEditLinks();
     }
 
@@ -274,83 +297,316 @@
       searchInput.addEventListener('input', () => renderTools(searchInput.value));
     }
 
-    // ── Site Health Checklist ───────────────────────────────────────────
-    function renderChecklist() {
-      const groups = [
-        {
-          title: 'SEO',
-          items: [
-            { id: 'seo_gsc_verified',     label: 'Google Search Console verified' },
-            { id: 'seo_sitemap_google',    label: 'Sitemap submitted to Google' },
-            { id: 'seo_sitemap_bing',      label: 'Sitemap submitted to Bing' },
-            { id: 'seo_ga4_id',            label: 'GA4 measurement ID replaced (not placeholder)' },
-            { id: 'seo_robots_txt',        label: 'robots.txt is correct' }
-          ]
-        },
-        {
-          title: 'Monetization',
-          items: [
-            { id: 'mon_adsense_submitted', label: 'AdSense application submitted' },
-            { id: 'mon_adsense_approved',  label: 'AdSense approved' },
-            { id: 'mon_ads_txt',           label: 'ads.txt has real publisher ID' },
-            { id: 'mon_adsense_live',      label: 'AdSense script live' }
-          ]
-        },
-        {
-          title: 'Legal',
-          items: [
-            { id: 'leg_privacy',           label: 'Privacy policy reviewed this quarter' },
-            { id: 'leg_terms',             label: 'Terms of service reviewed this quarter' },
-            { id: 'leg_cookies',           label: 'Cookie policy reviewed this quarter' },
-            { id: 'leg_consent_banner',    label: 'Cookie consent banner tested' },
-            { id: 'leg_finance_disc',      label: 'All financial tool disclaimers present' },
-            { id: 'leg_health_disc',       label: 'All health tool disclaimers present' },
-            { id: 'leg_file_disc',         label: 'All file processing disclaimers present' }
-          ]
-        },
-        {
-          title: 'Technical',
-          items: [
-            { id: 'tech_csp',             label: 'CSP header tested on all tools' },
-            { id: 'tech_https_cdn',        label: 'All external CDN URLs are HTTPS' },
-            { id: 'tech_no_console_err',   label: 'No console errors on homepage' },
-            { id: 'tech_custom_domain',    label: 'Custom domain connected' },
-            { id: 'tech_ssl',              label: 'SSL/HTTPS working' }
-          ]
+    // ── Site Health Scanner ────────────────────────────────────────────
+
+    function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    async function fetchPool(urls, concurrency, onProgress) {
+      const results = new Array(urls.length);
+      let next = 0, done = 0;
+      async function worker() {
+        while (next < urls.length) {
+          const i = next++;
+          try {
+            const r = await fetch(urls[i]);
+            results[i] = { ok: r.ok, status: r.status, html: await r.text() };
+          } catch (e) {
+            results[i] = { ok: false, status: 0, html: '' };
+          }
+          done++;
+          if (onProgress) onProgress(done, urls.length);
         }
+      }
+      await Promise.all(Array.from({ length: Math.min(concurrency, urls.length) }, () => worker()));
+      return results;
+    }
+
+    function initScanner() {
+      document.getElementById('scan-btn').addEventListener('click', runScan);
+      loadCachedScan();
+      renderManualChecklist();
+    }
+
+    function loadCachedScan() {
+      const raw = sessionStorage.getItem('health_scan');
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        const mins = Math.round((Date.now() - data.timestamp) / 60000);
+        document.getElementById('scan-status').textContent = 'Last scan: ' + (mins < 1 ? 'just now' : mins + ' minute' + (mins === 1 ? '' : 's') + ' ago');
+        document.getElementById('scan-btn').textContent = '🔄 Rescan';
+        showResults(data.results);
+      } catch {}
+    }
+
+    async function runScan() {
+      const btn = document.getElementById('scan-btn');
+      const prog = document.getElementById('scan-progress');
+      const pText = document.getElementById('scan-progress-text');
+      const pPct = document.getElementById('scan-progress-pct');
+      const pBar = document.getElementById('scan-progress-bar');
+      const out = document.getElementById('scan-results');
+      const status = document.getElementById('scan-status');
+
+      btn.disabled = true; btn.textContent = '⏳ Scanning...'; btn.classList.add('opacity-60');
+      prog.classList.remove('hidden'); out.classList.add('hidden'); out.innerHTML = '';
+
+      const R = { passes: [], warnings: [], failures: [], details: {} };
+      const built = tools.filter(t => t.built);
+      const totalSteps = built.length + 12;
+
+      function setProg(d, msg) {
+        const p = Math.round((d / totalSteps) * 100);
+        pBar.style.width = p + '%'; pPct.textContent = p + '%'; pText.textContent = msg;
+      }
+
+      // ── Group 1: Tool pages ────────────────────────────────────────
+      const urls = built.map(t => '/tools/' + t.slug);
+      const fetched = await fetchPool(urls, 10, (d) => setProg(d, 'Scanning tools... ' + d + '/' + built.length));
+
+      for (let i = 0; i < built.length; i++) {
+        const t = built[i], f = fetched[i], slug = t.slug, cat = t.category;
+        const ck = [];
+
+        if (!f.ok) {
+          ck.push({ level: 'fail', msg: 'Page returns ' + f.status + ' — page missing' });
+        } else {
+          const doc = new DOMParser().parseFromString(f.html, 'text/html');
+          const html = f.html, lower = html.toLowerCase();
+
+          const titleEl = doc.querySelector('title');
+          const tt = titleEl ? titleEl.textContent.trim() : '';
+          if (!tt) { ck.push({ level: 'fail', msg: 'Missing or empty title' }); }
+          else {
+            ck.push({ level: 'pass', msg: 'Title exists' });
+            ck.push(tt.includes('ClickSolveTools') ? { level: 'pass', msg: 'Title contains site name' } : { level: 'warn', msg: 'Title missing site name' });
+            ck.push(tt.length >= 30 && tt.length <= 65 ? { level: 'pass', msg: 'Title length OK (' + tt.length + ')' } : { level: 'warn', msg: 'Title is ' + tt.length + ' chars (target 30-65)' });
+          }
+
+          const md = doc.querySelector('meta[name="description"]');
+          const dc = md ? (md.getAttribute('content') || '') : '';
+          if (!dc) { ck.push({ level: 'fail', msg: 'Missing meta description' }); }
+          else {
+            ck.push({ level: 'pass', msg: 'Meta description exists' });
+            ck.push(dc.length >= 120 && dc.length <= 165 ? { level: 'pass', msg: 'Description length OK (' + dc.length + ')' } : { level: 'warn', msg: 'Description is ' + dc.length + ' chars (target 120-165)' });
+          }
+
+          const canon = doc.querySelector('link[rel="canonical"]');
+          if (!canon) { ck.push({ level: 'fail', msg: 'Missing canonical URL' }); }
+          else {
+            ck.push({ level: 'pass', msg: 'Canonical URL exists' });
+            ck.push((canon.getAttribute('href') || '').includes('/tools/' + slug) ? { level: 'pass', msg: 'Canonical matches slug' } : { level: 'warn', msg: "Canonical doesn't match slug" });
+          }
+
+          ck.push(doc.querySelector('script[type="application/ld+json"]') ? { level: 'pass', msg: 'JSON-LD present' } : { level: 'fail', msg: 'Missing JSON-LD' });
+          ck.push(doc.querySelector('meta[property="og:title"]') ? { level: 'pass', msg: 'OG title present' } : { level: 'warn', msg: 'Missing OG title' });
+          ck.push(doc.querySelector('meta[property="og:description"]') ? { level: 'pass', msg: 'OG description present' } : { level: 'warn', msg: 'Missing OG description' });
+          ck.push(html.includes('googletagmanager.com') ? { level: 'pass', msg: 'GA4 present' } : { level: 'fail', msg: 'Missing GA4' });
+          ck.push(html.includes('consent.js') ? { level: 'pass', msg: 'Consent module present' } : { level: 'fail', msg: 'Missing consent module' });
+          ck.push(html.includes('shared.js') ? { level: 'pass', msg: 'shared.js present' } : { level: 'fail', msg: 'Missing shared.js' });
+          ck.push(html.includes('initToolPage') ? { level: 'pass', msg: 'initToolPage present' } : { level: 'fail', msg: 'Missing initToolPage()' });
+
+          const article = doc.querySelector('article');
+          if (!article) { ck.push({ level: 'fail', msg: 'Missing SEO content section' }); }
+          else {
+            ck.push({ level: 'pass', msg: 'SEO article exists' });
+            const wc = article.textContent.trim().split(/\s+/).length;
+            ck.push(wc >= 400 ? { level: 'pass', msg: 'SEO content ' + wc + ' words' } : { level: 'warn', msg: 'SEO content only ' + wc + ' words (target 500-800)' });
+            ck.push(article.querySelector('h2') ? { level: 'pass', msg: 'SEO content has H2' } : { level: 'warn', msg: 'SEO content missing H2' });
+          }
+
+          const body = doc.body ? doc.body.textContent.toLowerCase() : '';
+          ck.push(body.includes('faq') || body.includes('frequently asked') ? { level: 'pass', msg: 'FAQ detected' } : { level: 'warn', msg: 'No FAQ detected' });
+          ck.push(doc.getElementById('nav-container') ? { level: 'pass', msg: 'nav-container exists' } : { level: 'warn', msg: 'Missing nav-container' });
+          ck.push(doc.getElementById('footer-container') ? { level: 'pass', msg: 'footer-container exists' } : { level: 'warn', msg: 'Missing footer-container' });
+          ck.push(doc.getElementById('related-tools') ? { level: 'pass', msg: 'related-tools exists' } : { level: 'warn', msg: 'Missing related-tools' });
+          ck.push(html.includes('cdn.tailwindcss.com') ? { level: 'pass', msg: 'Tailwind CDN present' } : { level: 'fail', msg: 'Missing Tailwind' });
+
+          const insecure = html.match(/(?:src|href)="http:\/\/[^"]+"/g);
+          if (insecure && insecure.length) { insecure.forEach(u => ck.push({ level: 'fail', msg: 'Insecure resource: ' + u })); }
+          else { ck.push({ level: 'pass', msg: 'All resources HTTPS' }); }
+
+          const discMap = { Finance: ['not financial advice','informational purposes','consult a qualified'], Health: ['not medical advice','consult a healthcare','healthcare provider'], Documents: ['entirely in your browser','never uploaded','never leaves your device'], Image: ['entirely in your browser','never uploaded','never leaves your device'] };
+          let need = discMap[cat];
+          if (cat === 'Converters' && (slug.includes('audio') || slug.includes('image-format'))) need = discMap.Documents;
+          if (need) { ck.push(need.some(p => lower.includes(p)) ? { level: 'pass', msg: cat + ' disclaimer present' } : { level: 'warn', msg: 'Missing required ' + cat + ' disclaimer' }); }
+        }
+
+        R.details[slug] = ck;
+        ck.forEach(c => {
+          const entry = { level: c.level, msg: slug + ': ' + c.msg };
+          if (c.level === 'pass') R.passes.push(entry);
+          else if (c.level === 'warn') R.warnings.push(entry);
+          else R.failures.push(entry);
+        });
+      }
+
+      // ── Group 2: Infrastructure ────────────────────────────────────
+      const infraPages = [
+        { name: 'Homepage', url: '/' }, { name: 'About', url: '/about' }, { name: 'Privacy', url: '/privacy' },
+        { name: 'Terms', url: '/terms' }, { name: 'Cookies', url: '/cookies' }, { name: 'Licenses', url: '/licenses' },
+        { name: 'sitemap.xml', url: '/sitemap.xml' }, { name: 'robots.txt', url: '/robots.txt' }, { name: 'ads.txt', url: '/ads.txt' }
       ];
+      const infraBodies = {};
+      for (let i = 0; i < infraPages.length; i++) {
+        const pg = infraPages[i];
+        setProg(built.length + i + 1, 'Checking ' + pg.name + '...');
+        try {
+          const r = await fetch(pg.url);
+          infraBodies[pg.name] = await r.text();
+          if (r.ok) { R.passes.push({ level: 'pass', msg: pg.name + ' returns 200' }); }
+          else {
+            const lvl = pg.name === 'ads.txt' ? 'warn' : 'fail';
+            R[lvl === 'warn' ? 'warnings' : 'failures'].push({ level: lvl, msg: pg.name + ' returns ' + r.status });
+          }
+        } catch {
+          infraBodies[pg.name] = '';
+          R.failures.push({ level: 'fail', msg: pg.name + ' — fetch error' });
+        }
+      }
 
-      let checklist = {};
-      try { checklist = JSON.parse(localStorage.getItem('admin_checklist')) || {}; } catch { checklist = {}; }
+      // ── Group 3: Sitemap ↔ tools.js ────────────────────────────────
+      setProg(built.length + 10, 'Cross-referencing sitemap...');
+      try {
+        const smXml = infraBodies['sitemap.xml'] || '';
+        const smDoc = new DOMParser().parseFromString(smXml, 'text/xml');
+        const locs = [...smDoc.querySelectorAll('loc')].map(l => l.textContent);
+        const smSlugs = locs.filter(u => u.includes('/tools/')).map(u => u.split('/tools/')[1].replace(/\/$/, ''));
+        const jsSlugs = built.map(t => t.slug);
 
-      const container = document.getElementById('checklist-container');
-      container.innerHTML = groups.map(group => `
-        <div>
-          <h3 class="text-lg font-semibold text-[#e2e8f0] mb-3">${group.title}</h3>
-          <div class="bg-[#1e293b] rounded-xl p-5 space-y-3">
-            ${group.items.map(item => `
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  data-check-id="${item.id}"
-                  ${checklist[item.id] ? 'checked' : ''}
-                  class="w-4 h-4 rounded border-[#334155] bg-[#0f172a] text-[#2563eb] focus:ring-[#2563eb] focus:ring-offset-0 accent-[#2563eb] cursor-pointer"
-                >
-                <span class="text-sm ${checklist[item.id] ? 'text-[#60a5fa]' : 'text-[#94a3b8]'} group-hover:text-white transition-colors">${item.label}</span>
-              </label>
-            `).join('')}
-          </div>
-        </div>
-      `).join('');
+        const missingSitemap = jsSlugs.filter(s => !smSlugs.includes(s));
+        const extraSitemap = smSlugs.filter(s => !jsSlugs.includes(s));
+        missingSitemap.forEach(s => R.failures.push({ level: 'fail', msg: 'Sitemap: ' + s + ' in tools.js but NOT in sitemap' }));
+        extraSitemap.forEach(s => R.failures.push({ level: 'fail', msg: 'Sitemap: ' + s + ' in sitemap but NOT in tools.js' }));
+        if (!missingSitemap.length && !extraSitemap.length) R.passes.push({ level: 'pass', msg: 'Sitemap: All ' + jsSlugs.length + ' tools match tools.js' });
 
-      container.addEventListener('change', (e) => {
+        // Group 4: Sitemap quality
+        R[locs.every(u => u.startsWith('https://')) ? 'passes' : 'failures'].push({ level: locs.every(u => u.startsWith('https://')) ? 'pass' : 'fail', msg: 'Sitemap: ' + (locs.every(u => u.startsWith('https://')) ? 'All URLs use HTTPS' : 'Some URLs not HTTPS') });
+        R[locs.some(u => u.endsWith('.html')) ? 'warnings' : 'passes'].push({ level: locs.some(u => u.endsWith('.html')) ? 'warn' : 'pass', msg: 'Sitemap: ' + (locs.some(u => u.endsWith('.html')) ? 'Some URLs have .html extension' : 'No .html extensions') });
+        ['about','privacy','terms','cookies','licenses'].forEach(p => {
+          R[locs.some(u => u.includes('/' + p)) ? 'passes' : 'failures'].push({ level: locs.some(u => u.includes('/' + p)) ? 'pass' : 'fail', msg: 'Sitemap: /' + p + (locs.some(u => u.includes('/' + p)) ? ' present' : ' missing') });
+        });
+        R[locs.some(u => u.endsWith('.com/') || u.endsWith('.com')) ? 'passes' : 'failures'].push({ level: locs.some(u => u.endsWith('.com/') || u.endsWith('.com')) ? 'pass' : 'fail', msg: 'Sitemap: Homepage ' + (locs.some(u => u.endsWith('.com/') || u.endsWith('.com')) ? 'present' : 'missing') });
+        const uniq = new Set(locs);
+        R[uniq.size === locs.length ? 'passes' : 'warnings'].push({ level: uniq.size === locs.length ? 'pass' : 'warn', msg: 'Sitemap: ' + (uniq.size === locs.length ? 'No duplicate URLs' : (locs.length - uniq.size) + ' duplicate URLs') });
+        R[locs.some(u => u.includes('/admin')) ? 'failures' : 'passes'].push({ level: locs.some(u => u.includes('/admin')) ? 'fail' : 'pass', msg: 'Sitemap: /admin ' + (locs.some(u => u.includes('/admin')) ? 'found — remove it' : 'NOT in sitemap') });
+      } catch {
+        R.failures.push({ level: 'fail', msg: 'Sitemap: Failed to parse sitemap.xml' });
+      }
+
+      // ── Group 5: robots.txt ────────────────────────────────────────
+      setProg(built.length + 11, 'Checking robots.txt...');
+      const rTxt = infraBodies['robots.txt'] || '';
+      R[rTxt.includes('Sitemap:') ? 'passes' : 'failures'].push({ level: rTxt.includes('Sitemap:') ? 'pass' : 'fail', msg: 'robots.txt: Sitemap directive ' + (rTxt.includes('Sitemap:') ? 'present' : 'missing') });
+      R[rTxt.includes('Disallow: /admin') ? 'passes' : 'failures'].push({ level: rTxt.includes('Disallow: /admin') ? 'pass' : 'fail', msg: 'robots.txt: /admin ' + (rTxt.includes('Disallow: /admin') ? 'disallowed' : 'not disallowed') });
+      R[rTxt.includes('Disallow: /data/') ? 'passes' : 'warnings'].push({ level: rTxt.includes('Disallow: /data/') ? 'pass' : 'warn', msg: 'robots.txt: /data/ ' + (rTxt.includes('Disallow: /data/') ? 'disallowed' : 'not disallowed') });
+      R[rTxt.includes('Disallow: /js/') ? 'passes' : 'warnings'].push({ level: rTxt.includes('Disallow: /js/') ? 'pass' : 'warn', msg: 'robots.txt: /js/ ' + (rTxt.includes('Disallow: /js/') ? 'disallowed' : 'not disallowed') });
+      const blocksRoot = /^Disallow:\s*\/\s*$/m.test(rTxt);
+      const blocksTools = rTxt.includes('Disallow: /tools/');
+      R[(blocksRoot || blocksTools) ? 'failures' : 'passes'].push({ level: (blocksRoot || blocksTools) ? 'fail' : 'pass', msg: 'robots.txt: ' + ((blocksRoot || blocksTools) ? 'Blocking /tools/ or / — fix immediately' : 'Not blocking /tools/ or /') });
+
+      // ── Group 6: Placeholders ──────────────────────────────────────
+      setProg(built.length + 12, 'Checking placeholders...');
+      const hp = infraBodies['Homepage'] || '';
+      R[hp.includes('G-XXXXXXXXXX') ? 'warnings' : 'passes'].push({ level: hp.includes('G-XXXXXXXXXX') ? 'warn' : 'pass', msg: 'Placeholder: GA4 measurement ID ' + (hp.includes('G-XXXXXXXXXX') ? 'is placeholder' : 'replaced') });
+      R[hp.includes('VERIFICATION_CODE_HERE') ? 'warnings' : 'passes'].push({ level: hp.includes('VERIFICATION_CODE_HERE') ? 'warn' : 'pass', msg: 'Placeholder: Search Console verification ' + (hp.includes('VERIFICATION_CODE_HERE') ? 'is placeholder' : 'replaced') });
+      R[hp.includes('BING_VERIFICATION_CODE_HERE') ? 'warnings' : 'passes'].push({ level: hp.includes('BING_VERIFICATION_CODE_HERE') ? 'warn' : 'pass', msg: 'Placeholder: Bing verification ' + (hp.includes('BING_VERIFICATION_CODE_HERE') ? 'is placeholder' : 'replaced') });
+      const adsTxt = infraBodies['ads.txt'] || '';
+      R[adsTxt.includes('pub-XXXXXXXXXXXXXXXX') ? 'warnings' : 'passes'].push({ level: adsTxt.includes('pub-XXXXXXXXXXXXXXXX') ? 'warn' : 'pass', msg: 'Placeholder: AdSense publisher ID ' + (adsTxt.includes('pub-XXXXXXXXXXXXXXXX') ? 'is placeholder' : 'replaced') });
+
+      // ── Done ───────────────────────────────────────────────────────
+      prog.classList.add('hidden');
+      btn.disabled = false; btn.classList.remove('opacity-60'); btn.textContent = '🔄 Rescan';
+      status.textContent = 'Last scan: just now';
+      sessionStorage.setItem('health_scan', JSON.stringify({ results: R, timestamp: Date.now() }));
+      showResults(R);
+    }
+
+    function showResults(R) {
+      const out = document.getElementById('scan-results');
+      out.classList.remove('hidden');
+      const total = R.passes.length + R.warnings.length + R.failures.length;
+      const score = total ? Math.round((R.passes.length / total) * 100) : 0;
+      let sColor, sLabel;
+      if (score >= 95) { sColor = '#22c55e'; sLabel = 'Excellent'; }
+      else if (score >= 85) { sColor = '#eab308'; sLabel = 'Good — some fixes needed'; }
+      else { sColor = '#ef4444'; sLabel = 'Needs attention'; }
+
+      let h = '';
+
+      h += '<div class="flex flex-wrap items-center gap-6 bg-[#1e293b] rounded-xl p-5">';
+      h += '<div class="text-center min-w-[110px]"><div class="text-5xl font-bold" style="color:' + sColor + '">' + score + '%</div><div class="text-sm mt-1" style="color:' + sColor + '">' + sLabel + '</div></div>';
+      h += '<div class="flex-1 flex flex-wrap gap-4 text-sm"><span class="text-green-400">✅ ' + R.passes.length + ' passed</span><span class="text-yellow-400">⚠️ ' + R.warnings.length + ' warnings</span><span class="text-red-400">❌ ' + R.failures.length + ' failures</span></div>';
+      h += '<button id="copy-report-btn" class="px-4 py-2 bg-[#334155] hover:bg-[#475569] text-white rounded-lg text-sm font-medium transition cursor-pointer">📋 Copy Report</button>';
+      h += '</div>';
+
+      if (R.failures.length) {
+        h += '<details open class="bg-[#1e293b] rounded-xl overflow-hidden"><summary class="px-5 py-4 cursor-pointer text-red-400 font-semibold hover:bg-[#334155]/30">❌ Failures (' + R.failures.length + ')</summary><div class="px-5 pb-4 space-y-1">';
+        R.failures.forEach(f => h += '<div class="text-sm text-red-300 font-mono py-1 break-all">❌ ' + esc(f.msg) + '</div>');
+        h += '</div></details>';
+      }
+      if (R.warnings.length) {
+        h += '<details class="bg-[#1e293b] rounded-xl overflow-hidden"><summary class="px-5 py-4 cursor-pointer text-yellow-400 font-semibold hover:bg-[#334155]/30">⚠️ Warnings (' + R.warnings.length + ')</summary><div class="px-5 pb-4 space-y-1">';
+        R.warnings.forEach(w => h += '<div class="text-sm text-yellow-300 font-mono py-1 break-all">⚠️ ' + esc(w.msg) + '</div>');
+        h += '</div></details>';
+      }
+      h += '<details class="bg-[#1e293b] rounded-xl overflow-hidden"><summary class="px-5 py-4 cursor-pointer text-green-400 font-semibold hover:bg-[#334155]/30">✅ Passed (' + R.passes.length + ')</summary><div class="px-5 pb-4 space-y-1">';
+      R.passes.forEach(p => h += '<div class="text-xs text-green-300/60 font-mono py-0.5">✅ ' + esc(p.msg) + '</div>');
+      h += '</div></details>';
+
+      const slugs = Object.keys(R.details || {});
+      if (slugs.length) {
+        h += '<details class="bg-[#1e293b] rounded-xl overflow-hidden"><summary class="px-5 py-4 cursor-pointer text-[#e2e8f0] font-semibold hover:bg-[#334155]/30">🔧 Per-Tool Details (' + slugs.length + ' tools)</summary><div class="px-5 pb-4 space-y-2">';
+        slugs.forEach(slug => {
+          const cks = R.details[slug];
+          const nf = cks.filter(c => c.level === 'fail').length;
+          const nw = cks.filter(c => c.level === 'warn').length;
+          const icon = nf ? '❌' : nw ? '⚠️' : '✅';
+          const badge = nf ? '<span class="text-red-400 text-xs ml-auto">' + nf + ' fail</span>' : nw ? '<span class="text-yellow-400 text-xs ml-auto">' + nw + ' warn</span>' : '<span class="text-green-400 text-xs ml-auto">all pass</span>';
+          h += '<details class="bg-[#0f172a] rounded-lg overflow-hidden"><summary class="px-4 py-2.5 cursor-pointer text-sm font-mono flex items-center gap-3 hover:bg-[#334155]/20">' + icon + ' <span class="text-[#e2e8f0]">' + slug + '</span>' + badge + '</summary><div class="px-4 pb-3 space-y-0.5">';
+          cks.forEach(c => {
+            const em = c.level === 'pass' ? '✅' : c.level === 'warn' ? '⚠️' : '❌';
+            const cl = c.level === 'pass' ? 'text-green-300/60' : c.level === 'warn' ? 'text-yellow-300' : 'text-red-300';
+            h += '<div class="text-xs ' + cl + ' font-mono py-0.5">' + em + ' ' + esc(c.msg) + '</div>';
+          });
+          h += '</div></details>';
+        });
+        h += '</div></details>';
+      }
+
+      out.innerHTML = h;
+
+      document.getElementById('copy-report-btn')?.addEventListener('click', () => {
+        let rpt = 'ClickSolveTools Health Report\nScore: ' + score + '% (' + sLabel + ')\n' + R.passes.length + ' passed | ' + R.warnings.length + ' warnings | ' + R.failures.length + ' failures\n\n';
+        if (R.failures.length) { rpt += 'FAILURES:\n'; R.failures.forEach(f => rpt += '  ❌ ' + f.msg + '\n'); rpt += '\n'; }
+        if (R.warnings.length) { rpt += 'WARNINGS:\n'; R.warnings.forEach(w => rpt += '  ⚠️ ' + w.msg + '\n'); rpt += '\n'; }
+        rpt += 'PASSED: ' + R.passes.length + ' checks\n';
+        navigator.clipboard.writeText(rpt).then(() => {
+          const b = document.getElementById('copy-report-btn'); b.textContent = '✅ Copied!';
+          setTimeout(() => b.textContent = '📋 Copy Report', 2000);
+        });
+      });
+    }
+
+    function renderManualChecklist() {
+      const items = [
+        { id: 'manual_gsc', label: 'Google Search Console verified' },
+        { id: 'manual_sitemap_google', label: 'Sitemap submitted to Google' },
+        { id: 'manual_sitemap_bing', label: 'Sitemap submitted to Bing' },
+        { id: 'manual_adsense_sub', label: 'AdSense application submitted' },
+        { id: 'manual_adsense_ok', label: 'AdSense approved' },
+        { id: 'manual_domain', label: 'Custom domain connected' }
+      ];
+      let cl = {};
+      try { cl = JSON.parse(localStorage.getItem('admin_checklist')) || {}; } catch { cl = {}; }
+      const ctr = document.getElementById('manual-checklist-items');
+      ctr.innerHTML = items.map(it => '<label class="flex items-center gap-3 cursor-pointer group"><input type="checkbox" data-check-id="' + it.id + '"' + (cl[it.id] ? ' checked' : '') + ' class="w-4 h-4 rounded border-[#334155] bg-[#0f172a] accent-[#2563eb] cursor-pointer"><span class="text-sm ' + (cl[it.id] ? 'text-[#60a5fa]' : 'text-[#94a3b8]') + ' group-hover:text-white transition-colors">' + it.label + '</span></label>').join('');
+      ctr.addEventListener('change', (e) => {
         if (!e.target.dataset.checkId) return;
-        const id = e.target.dataset.checkId;
-        checklist[id] = e.target.checked;
-        localStorage.setItem('admin_checklist', JSON.stringify(checklist));
-
-        const label = e.target.closest('label').querySelector('span');
-        label.className = `text-sm ${e.target.checked ? 'text-[#60a5fa]' : 'text-[#94a3b8]'} group-hover:text-white transition-colors`;
+        cl[e.target.dataset.checkId] = e.target.checked;
+        localStorage.setItem('admin_checklist', JSON.stringify(cl));
+        const sp = e.target.closest('label').querySelector('span');
+        sp.className = 'text-sm ' + (e.target.checked ? 'text-[#60a5fa]' : 'text-[#94a3b8]') + ' group-hover:text-white transition-colors';
       });
     }
 
