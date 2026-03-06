@@ -217,6 +217,7 @@
   <script type="module">
     import { tools, categories } from '/data/tools.js';
     import { initConsent } from '/js/consent.js'; initConsent();
+    import { trackSearch, trackCategoryFilter } from '/js/analytics.js';
 
     const searchInput    = document.getElementById('search');
     const filterBar      = document.getElementById('category-filters');
@@ -261,6 +262,7 @@
       const btn = e.target.closest('.cat-pill');
       if (!btn) return;
       setActiveCategory(btn.dataset.category);
+      if (btn.dataset.category !== 'all') trackCategoryFilter(btn.dataset.category);
       render();
     });
 
@@ -320,7 +322,18 @@
       }).join('');
     }
 
-    searchInput.addEventListener('input', render);
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+      render();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        const q = searchInput.value.trim();
+        if (q.length >= 2) {
+          const count = document.querySelectorAll('#tool-grid > a').length;
+          trackSearch(q, count);
+        }
+      }, 800);
+    });
     render();
   </script>
 </body>

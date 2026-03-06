@@ -1,4 +1,5 @@
 import { tools, categories } from '/data/tools.js';
+import { trackToolView } from '/js/analytics.js';
 
 export function renderNav(toolName, toolIcon) {
   const container = document.getElementById('nav-container');
@@ -89,4 +90,5 @@ export function initToolPage(slug) {
   renderNav(tool.name, tool.icon);
   renderRelatedTools(tool.slug, tool.category);
   renderFooter();
+  trackToolView(tool.slug, tool.category);
 }
