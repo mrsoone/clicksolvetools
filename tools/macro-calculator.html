@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Macronutrient Calculator — Daily Macros, Calories &amp; Meal Breakdown | ClickSolveTools</title>
+  <meta name="description" content="Calculate your daily macronutrients for free. Get personalized protein, carbs, and fat targets based on your body, activity level, and goal — with diet presets and per-meal breakdowns.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/macro-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Macronutrient Calculator — Daily Macros &amp; Meal Breakdown | ClickSolveTools">
+  <meta property="og:description" content="Calculate your daily macronutrients for free. Get personalized protein, carbs, and fat targets based on your body, activity level, and goal.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/macro-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Macronutrient Calculator","url":"https://clicksolvetools.com/tools/macro-calculator","description":"Calculate your daily macronutrients for free. Get personalized protein, carbs, and fat targets based on your body, activity level, and goal — with diet presets and per-meal breakdowns.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Unit Toggle + Body Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+
+        <div class="flex justify-center mb-6">
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-imperial" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Imperial</button>
+            <button id="btn-metric" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Metric</button>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Gender</label>
+          <div class="flex gap-3">
+            <button id="gender-male" class="gender-btn flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-all border-[#2563eb] bg-[#eff6ff] text-[#2563eb]">Male</button>
+            <button id="gender-female" class="gender-btn flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]">Female</button>
+          </div>
+        </div>
+
+        <!-- Age -->
+        <div class="mb-4">
+          <label for="age" class="block text-sm font-medium text-[#475569] mb-1">Age</label>
+          <div class="relative">
+            <input id="age" type="number" min="15" max="120" placeholder="25" class="mc-input w-full pr-14">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">years</span>
+          </div>
+        </div>
+
+        <!-- Imperial Height -->
+        <div id="fields-imperial" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+            <div class="flex gap-3">
+              <div class="flex-1 relative">
+                <input id="imp-ft" type="number" min="0" max="9" placeholder="5" class="mc-input w-full pr-9">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">ft</span>
+              </div>
+              <div class="flex-1 relative">
+                <input id="imp-in" type="number" min="0" max="11" step="1" placeholder="7" class="mc-input w-full pr-9">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">in</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="imp-lbs" class="block text-sm font-medium text-[#475569] mb-1">Weight</label>
+            <div class="relative">
+              <input id="imp-lbs" type="number" min="0" step="0.1" placeholder="160" class="mc-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">lbs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Height -->
+        <div id="fields-metric" class="space-y-4 hidden">
+          <div>
+            <label for="met-cm" class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+            <div class="relative">
+              <input id="met-cm" type="number" min="0" step="0.1" placeholder="170" class="mc-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">cm</span>
+            </div>
+          </div>
+          <div>
+            <label for="met-kg" class="block text-sm font-medium text-[#475569] mb-1">Weight</label>
+            <div class="relative">
+              <input id="met-kg" type="number" min="0" step="0.1" placeholder="68" class="mc-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Level -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label for="activity" class="block text-sm font-medium text-[#475569] mb-2">Activity Level</label>
+        <select id="activity" class="mc-input w-full">
+          <option value="1.2">Sedentary (little or no exercise)</option>
+          <option value="1.375">Lightly Active (1–3 days/week)</option>
+          <option value="1.55" selected>Moderately Active (3–5 days/week)</option>
+          <option value="1.725">Very Active (6–7 days/week)</option>
+          <option value="1.9">Extra Active (intense daily / physical job)</option>
+        </select>
+      </div>
+
+      <!-- Goal -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label for="goal" class="block text-sm font-medium text-[#475569] mb-2">Goal</label>
+        <select id="goal" class="mc-input w-full">
+          <option value="0">Maintain Weight</option>
+          <option value="-250">Lose Weight — Mild (−0.5 lb/week)</option>
+          <option value="-500">Lose Weight — Moderate (−1 lb/week)</option>
+          <option value="-1000">Lose Weight — Extreme (−2 lb/week)</option>
+          <option value="250">Gain Weight — Mild (+0.5 lb/week)</option>
+          <option value="500">Gain Weight — Moderate (+1 lb/week)</option>
+        </select>
+      </div>
+
+      <!-- Diet Presets + Custom Ratios -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label class="block text-sm font-medium text-[#475569] mb-3">Diet Type</label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+          <button data-preset="40,30,30" class="preset-btn active-preset px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#2563eb] bg-[#eff6ff] text-[#2563eb]">
+            Balanced<br><span class="font-normal opacity-70">40/30/30</span>
+          </button>
+          <button data-preset="25,40,35" class="preset-btn px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]">
+            Low Carb<br><span class="font-normal opacity-70">25/40/35</span>
+          </button>
+          <button data-preset="5,30,65" class="preset-btn px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]">
+            Keto<br><span class="font-normal opacity-70">5/30/65</span>
+          </button>
+          <button data-preset="30,40,30" class="preset-btn px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]">
+            High Protein<br><span class="font-normal opacity-70">30/40/30</span>
+          </button>
+        </div>
+
+        <!-- Custom Sliders -->
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="font-medium text-[#475569]">Carbs</span>
+              <span id="carb-val" class="font-semibold text-[#2563eb]">40%</span>
+            </div>
+            <input id="carb-slider" type="range" min="0" max="100" value="40" class="mc-range w-full accent-[#2563eb]">
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="font-medium text-[#475569]">Protein</span>
+              <span id="protein-val" class="font-semibold text-[#10b981]">30%</span>
+            </div>
+            <input id="protein-slider" type="range" min="0" max="100" value="30" class="mc-range w-full accent-[#10b981]">
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="font-medium text-[#475569]">Fat</span>
+              <span id="fat-val" class="font-semibold text-[#f59e0b]">30%</span>
+            </div>
+            <input id="fat-slider" type="range" min="0" max="100" value="30" class="mc-range w-full accent-[#f59e0b]">
+          </div>
+          <p id="ratio-warning" class="text-xs text-red-500 hidden">Ratios must sum to 100%. Currently: <span id="ratio-sum">100</span>%</p>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <button id="calc-btn" class="w-full py-3.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-sm transition-colors shadow-sm shadow-[#2563eb]/20">
+        Calculate Macros
+      </button>
+
+      <!-- Results Panel -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+
+        <!-- Daily Calories -->
+        <div class="text-center mb-6">
+          <div class="text-sm text-[#475569] mb-1">Daily Calories</div>
+          <div id="total-cal" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1e293b]">—</div>
+          <div class="text-sm text-[#94a3b8] mt-1">kcal / day</div>
+        </div>
+
+        <!-- Macro Cards + Pie Chart -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+          <!-- Pie Chart -->
+          <div class="flex items-center justify-center">
+            <div class="relative">
+              <div id="pie-chart" class="w-44 h-44 rounded-full" style="background:conic-gradient(#2563eb 0% 40%,#10b981 40% 70%,#f59e0b 70% 100%)"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center">
+                  <span class="text-xs font-semibold text-[#475569]" id="pie-label">Macros</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Macro Cards -->
+          <div class="space-y-3 flex flex-col justify-center">
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-[#eff6ff] border border-[#bfdbfe]">
+              <div class="w-3 h-3 rounded-full bg-[#2563eb] shrink-0"></div>
+              <div class="flex-1">
+                <div class="text-xs text-[#475569]">Carbs</div>
+                <div class="font-bold text-[#1e293b]"><span id="res-carb-g">0</span>g</div>
+              </div>
+              <div class="text-sm text-[#64748b]"><span id="res-carb-cal">0</span> kcal</div>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-[#ecfdf5] border border-[#a7f3d0]">
+              <div class="w-3 h-3 rounded-full bg-[#10b981] shrink-0"></div>
+              <div class="flex-1">
+                <div class="text-xs text-[#475569]">Protein</div>
+                <div class="font-bold text-[#1e293b]"><span id="res-protein-g">0</span>g</div>
+              </div>
+              <div class="text-sm text-[#64748b]"><span id="res-protein-cal">0</span> kcal</div>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-lg bg-[#fffbeb] border border-[#fde68a]">
+              <div class="w-3 h-3 rounded-full bg-[#f59e0b] shrink-0"></div>
+              <div class="flex-1">
+                <div class="text-xs text-[#475569]">Fat</div>
+                <div class="font-bold text-[#1e293b]"><span id="res-fat-g">0</span>g</div>
+              </div>
+              <div class="text-sm text-[#64748b]"><span id="res-fat-cal">0</span> kcal</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal Breakdown -->
+        <div class="border-t border-[#e2e8f0] pt-5">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-semibold text-[#1e293b]">Per-Meal Breakdown</h3>
+            <div class="inline-flex rounded-lg border border-[#e2e8f0] p-0.5 bg-[#f8fafc]">
+              <button id="btn-3meals" class="meal-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-[#2563eb] text-white">3 Meals</button>
+              <button id="btn-5meals" class="meal-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-[#475569] hover:text-[#1e293b]">3 + 2 Snacks</button>
+            </div>
+          </div>
+          <div id="meal-table" class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-[#94a3b8] text-xs uppercase tracking-wider">
+                  <th class="text-left py-2 font-medium">Meal</th>
+                  <th class="text-right py-2 font-medium">Calories</th>
+                  <th class="text-right py-2 font-medium">Carbs</th>
+                  <th class="text-right py-2 font-medium">Protein</th>
+                  <th class="text-right py-2 font-medium">Fat</th>
+                </tr>
+              </thead>
+              <tbody id="meal-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Disclaimer -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <div class="flex gap-3">
+          <div class="text-lg leading-none mt-0.5">⚕️</div>
+          <p class="text-xs text-[#475569] leading-relaxed">
+            <strong class="text-[#1e293b]">Health Disclaimer:</strong> This calculator provides estimates based on the Mifflin-St Jeor equation and general nutritional guidelines. Individual caloric needs vary based on metabolism, medical conditions, and other factors. Consult a registered dietitian or healthcare professional before making significant dietary changes.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Macronutrients: Your Guide to Protein, Carbs, and Fat</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Macronutrients — commonly called "macros" — are the three primary nutrients your body needs in large quantities to function: protein, carbohydrates, and fat. Each one serves a distinct role in energy production, tissue repair, hormone regulation, and overall health. While calories tell you how much energy you're consuming, macros tell you where that energy is coming from, which has a direct impact on body composition, athletic performance, and long-term wellbeing.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Three Macronutrients Explained</h3>
+      <p><strong class="text-[#1e293b]">Protein</strong> (4 calories per gram) is the building block of muscle, skin, enzymes, and hormones. It is essential for recovery after exercise and for maintaining lean body mass during a calorie deficit. Common high-protein foods include chicken breast, eggs, Greek yogurt, fish, tofu, and legumes. Most nutritional guidelines recommend between 0.7 and 1.0 grams of protein per pound of body weight for active individuals.</p>
+      <p><strong class="text-[#1e293b]">Carbohydrates</strong> (4 calories per gram) are the body's preferred source of quick energy. They fuel high-intensity exercise, brain function, and daily activity. Carbs are found in grains, fruits, vegetables, legumes, and dairy. While low-carb diets have gained popularity, carbohydrates are not inherently harmful — the type and quantity matter far more than simply cutting them out.</p>
+      <p><strong class="text-[#1e293b]">Fat</strong> (9 calories per gram) supports cell structure, nutrient absorption (vitamins A, D, E, and K are fat-soluble), and hormone production — particularly testosterone and estrogen. Healthy fat sources include avocados, nuts, seeds, olive oil, and fatty fish. Because fat is calorie-dense, even small changes in fat intake can significantly shift your total calorie count.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Popular Macro Ratios and Diet Types</h3>
+      <p>Different goals call for different macro splits. A <strong class="text-[#1e293b]">balanced diet</strong> (roughly 40% carbs, 30% protein, 30% fat) suits most people aiming to maintain weight or improve general fitness. A <strong class="text-[#1e293b]">low-carb approach</strong> (25% carbs, 40% protein, 35% fat) can help with satiety and blood sugar management. The <strong class="text-[#1e293b]">ketogenic diet</strong> (5% carbs, 30% protein, 65% fat) forces the body into ketosis, using fat as its primary fuel source — often chosen for rapid fat loss or neurological benefits. A <strong class="text-[#1e293b]">high-protein diet</strong> (30% carbs, 40% protein, 30% fat) is popular among athletes and bodybuilders focused on building or preserving muscle.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Calculator Works</h3>
+      <p>This tool uses the Mifflin-St Jeor equation — widely regarded as the most accurate formula for estimating Basal Metabolic Rate (BMR) in healthy adults. It factors in your gender, age, height, and weight to calculate BMR, then multiplies by an activity factor to estimate your Total Daily Energy Expenditure (TDEE). Your selected goal (maintain, lose, or gain weight) adjusts the calorie target up or down, and the macro ratio you choose determines how those calories are distributed among protein, carbohydrates, and fat.</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center text-sm">BMR (male) = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5<br>BMR (female) = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Hitting Your Macros</h3>
+      <p>Tracking macros doesn't require perfection. Start by focusing on protein — it's typically the hardest target to hit consistently. Plan meals around a protein source, add vegetables and a carb source, and include a moderate portion of healthy fat. Meal prepping for three to four days at a time makes it significantly easier to stay on track. Over time, you'll develop an intuitive sense of portion sizes that match your targets.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What macro ratio is best for weight loss?</strong></p>
+      <p>There is no single "best" ratio — consistency and a calorie deficit matter more than the exact split. That said, a higher protein intake (30–40%) helps preserve muscle mass during fat loss and improves satiety, making it easier to stick with a calorie deficit long term.</p>
+
+      <p><strong class="text-[#1e293b]">Do I need to track macros to lose weight?</strong></p>
+      <p>No. A calorie deficit alone drives weight loss regardless of macro distribution. However, tracking macros gives you more control over body composition — helping you lose fat while retaining muscle — and can prevent common pitfalls like undereating protein.</p>
+
+      <p><strong class="text-[#1e293b]">Is the ketogenic diet safe?</strong></p>
+      <p>For most healthy adults, a well-formulated keto diet is considered safe in the short to medium term. However, it can be difficult to sustain and may not suit people with certain medical conditions, including pancreatitis, liver disease, or fat metabolism disorders. Always consult a healthcare provider before starting keto.</p>
+
+      <p><strong class="text-[#1e293b]">How accurate is TDEE estimation?</strong></p>
+      <p>The Mifflin-St Jeor equation is accurate to within about 10% for most people. Factors like genetics, metabolic adaptation, non-exercise activity thermogenesis (NEAT), and hormonal fluctuations can cause real-world energy expenditure to differ from the estimate. Use the calculated number as a starting point and adjust based on results over two to four weeks.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides general estimates for informational purposes only. It is not a substitute for professional medical or nutritional advice. Individual needs vary — consult a registered dietitian or healthcare provider for personalized dietary guidance.
+      </div>
+
+      <p>This macronutrient calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to plan your daily macros anytime — quick, private, and instant.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .mc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .mc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .mc-input::placeholder { color: #94a3b8; }
+    .mc-input::-webkit-inner-spin-button,
+    .mc-input::-webkit-outer-spin-button { opacity: 1; }
+
+    .mc-range {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #e2e8f0;
+      outline: none;
+    }
+    .mc-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+    #carb-slider::-webkit-slider-thumb { background: #2563eb; }
+    #protein-slider::-webkit-slider-thumb { background: #10b981; }
+    #fat-slider::-webkit-slider-thumb { background: #f59e0b; }
+    .mc-range::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+    #carb-slider::-moz-range-thumb { background: #2563eb; }
+    #protein-slider::-moz-range-thumb { background: #10b981; }
+    #fat-slider::-moz-range-thumb { background: #f59e0b; }
+
+    #meal-body tr { border-top: 1px solid #f1f5f9; }
+    #meal-body td { padding: 0.5rem 0; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    let unit = 'imperial';
+    let gender = 'male';
+    let mealMode = 3;
+
+    const btnImp = $('btn-imperial');
+    const btnMet = $('btn-metric');
+    const fieldsImp = $('fields-imperial');
+    const fieldsMet = $('fields-metric');
+    const impFt = $('imp-ft');
+    const impIn = $('imp-in');
+    const impLbs = $('imp-lbs');
+    const metCm = $('met-cm');
+    const metKg = $('met-kg');
+    const ageInput = $('age');
+    const activitySel = $('activity');
+    const goalSel = $('goal');
+    const carbSlider = $('carb-slider');
+    const proteinSlider = $('protein-slider');
+    const fatSlider = $('fat-slider');
+    const carbVal = $('carb-val');
+    const proteinVal = $('protein-val');
+    const fatVal = $('fat-val');
+    const ratioWarning = $('ratio-warning');
+    const ratioSum = $('ratio-sum');
+    const resultsPanel = $('results-panel');
+
+    function setUnitBtn(isImp) {
+      btnImp.className = isImp
+        ? 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm'
+        : 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+      btnMet.className = !isImp
+        ? 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm'
+        : 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+    }
+
+    function setUnit(u) {
+      unit = u;
+      const isImp = u === 'imperial';
+      fieldsImp.classList.toggle('hidden', !isImp);
+      fieldsMet.classList.toggle('hidden', isImp);
+      setUnitBtn(isImp);
+    }
+
+    btnImp.addEventListener('click', () => setUnit('imperial'));
+    btnMet.addEventListener('click', () => setUnit('metric'));
+
+    const genderMale = $('gender-male');
+    const genderFemale = $('gender-female');
+    const activeGenderCls = 'gender-btn flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-all border-[#2563eb] bg-[#eff6ff] text-[#2563eb]';
+    const inactiveGenderCls = 'gender-btn flex-1 py-2.5 rounded-lg text-sm font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]';
+
+    function setGender(g) {
+      gender = g;
+      genderMale.className = g === 'male' ? activeGenderCls : inactiveGenderCls;
+      genderFemale.className = g === 'female' ? activeGenderCls : inactiveGenderCls;
+    }
+    genderMale.addEventListener('click', () => setGender('male'));
+    genderFemale.addEventListener('click', () => setGender('female'));
+
+    // Presets
+    const presetBtns = document.querySelectorAll('.preset-btn');
+    const activePresetCls = 'preset-btn active-preset px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#2563eb] bg-[#eff6ff] text-[#2563eb]';
+    const inactivePresetCls = 'preset-btn px-3 py-2.5 rounded-lg text-xs font-semibold border-2 transition-all border-[#e2e8f0] bg-white text-[#475569] hover:border-[#cbd5e1]';
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [c, p, f] = btn.dataset.preset.split(',').map(Number);
+        carbSlider.value = c;
+        proteinSlider.value = p;
+        fatSlider.value = f;
+        updateSliderLabels();
+        presetBtns.forEach(b => b.className = inactivePresetCls);
+        btn.className = activePresetCls;
+      });
+    });
+
+    function clearPresetHighlight() {
+      presetBtns.forEach(b => b.className = inactivePresetCls);
+    }
+
+    function updateSliderLabels() {
+      const c = parseInt(carbSlider.value);
+      const p = parseInt(proteinSlider.value);
+      const f = parseInt(fatSlider.value);
+      carbVal.textContent = c + '%';
+      proteinVal.textContent = p + '%';
+      fatVal.textContent = f + '%';
+      const sum = c + p + f;
+      ratioSum.textContent = sum;
+      ratioWarning.classList.toggle('hidden', sum === 100);
+    }
+
+    function adjustSliders(changed) {
+      const c = parseInt(carbSlider.value);
+      const p = parseInt(proteinSlider.value);
+      const f = parseInt(fatSlider.value);
+      const sum = c + p + f;
+      if (sum === 100) { updateSliderLabels(); return; }
+
+      const diff = sum - 100;
+      if (changed === 'carb') {
+        const pRatio = p / (p + f || 1);
+        const pAdj = Math.round(diff * pRatio);
+        const fAdj = diff - pAdj;
+        proteinSlider.value = Math.max(0, Math.min(100, p - pAdj));
+        fatSlider.value = Math.max(0, Math.min(100, f - fAdj));
+      } else if (changed === 'protein') {
+        const cRatio = c / (c + f || 1);
+        const cAdj = Math.round(diff * cRatio);
+        const fAdj = diff - cAdj;
+        carbSlider.value = Math.max(0, Math.min(100, c - cAdj));
+        fatSlider.value = Math.max(0, Math.min(100, f - fAdj));
+      } else {
+        const cRatio = c / (c + p || 1);
+        const cAdj = Math.round(diff * cRatio);
+        const pAdj = diff - cAdj;
+        carbSlider.value = Math.max(0, Math.min(100, c - cAdj));
+        proteinSlider.value = Math.max(0, Math.min(100, p - pAdj));
+      }
+      updateSliderLabels();
+    }
+
+    carbSlider.addEventListener('input', () => { clearPresetHighlight(); adjustSliders('carb'); });
+    proteinSlider.addEventListener('input', () => { clearPresetHighlight(); adjustSliders('protein'); });
+    fatSlider.addEventListener('input', () => { clearPresetHighlight(); adjustSliders('fat'); });
+
+    // Meal toggle
+    const btn3 = $('btn-3meals');
+    const btn5 = $('btn-5meals');
+    const activeMealCls = 'meal-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-[#2563eb] text-white';
+    const inactiveMealCls = 'meal-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+
+    btn3.addEventListener('click', () => {
+      mealMode = 3;
+      btn3.className = activeMealCls;
+      btn5.className = inactiveMealCls;
+      if (!resultsPanel.classList.contains('hidden')) renderMeals();
+    });
+    btn5.addEventListener('click', () => {
+      mealMode = 5;
+      btn5.className = activeMealCls;
+      btn3.className = inactiveMealCls;
+      if (!resultsPanel.classList.contains('hidden')) renderMeals();
+    });
+
+    let lastResult = null;
+
+    function getHeightCm() {
+      if (unit === 'imperial') {
+        const ft = parseFloat(impFt.value) || 0;
+        const inches = parseFloat(impIn.value) || 0;
+        return (ft * 12 + inches) * 2.54;
+      }
+      return parseFloat(metCm.value) || 0;
+    }
+
+    function getWeightKg() {
+      if (unit === 'imperial') return (parseFloat(impLbs.value) || 0) * 0.453592;
+      return parseFloat(metKg.value) || 0;
+    }
+
+    function calculate() {
+      const age = parseFloat(ageInput.value) || 0;
+      const heightCm = getHeightCm();
+      const weightKg = getWeightKg();
+
+      if (age <= 0 || heightCm <= 0 || weightKg <= 0) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + (gender === 'male' ? 5 : -161);
+      const activityFactor = parseFloat(activitySel.value);
+      const tdee = bmr * activityFactor;
+      const goalAdj = parseInt(goalSel.value);
+      const totalCal = Math.round(Math.max(1200, tdee + goalAdj));
+
+      const carbPct = parseInt(carbSlider.value);
+      const proteinPct = parseInt(proteinSlider.value);
+      const fatPct = parseInt(fatSlider.value);
+      const pctSum = carbPct + proteinPct + fatPct;
+      if (pctSum !== 100) return;
+
+      const carbCal = Math.round(totalCal * carbPct / 100);
+      const proteinCal = Math.round(totalCal * proteinPct / 100);
+      const fatCal = Math.round(totalCal * fatPct / 100);
+      const carbG = Math.round(carbCal / 4);
+      const proteinG = Math.round(proteinCal / 4);
+      const fatG = Math.round(fatCal / 9);
+
+      lastResult = { totalCal, carbG, proteinG, fatG, carbCal, proteinCal, fatCal, carbPct, proteinPct, fatPct };
+
+      $('total-cal').textContent = totalCal.toLocaleString();
+      $('res-carb-g').textContent = carbG;
+      $('res-carb-cal').textContent = carbCal;
+      $('res-protein-g').textContent = proteinG;
+      $('res-protein-cal').textContent = proteinCal;
+      $('res-fat-g').textContent = fatG;
+      $('res-fat-cal').textContent = fatCal;
+
+      const carbEnd = carbPct;
+      const proteinEnd = carbPct + proteinPct;
+      $('pie-chart').style.background = `conic-gradient(#2563eb 0% ${carbEnd}%, #10b981 ${carbEnd}% ${proteinEnd}%, #f59e0b ${proteinEnd}% 100%)`;
+
+      renderMeals();
+      resultsPanel.classList.remove('hidden');
+    }
+
+    function renderMeals() {
+      if (!lastResult) return;
+      const { totalCal, carbG, proteinG, fatG } = lastResult;
+      const body = $('meal-body');
+
+      let splits;
+      if (mealMode === 3) {
+        splits = [
+          { name: 'Breakfast', pct: 0.30 },
+          { name: 'Lunch', pct: 0.40 },
+          { name: 'Dinner', pct: 0.30 }
+        ];
+      } else {
+        splits = [
+          { name: 'Breakfast', pct: 0.25 },
+          { name: 'Snack 1', pct: 0.10 },
+          { name: 'Lunch', pct: 0.30 },
+          { name: 'Snack 2', pct: 0.10 },
+          { name: 'Dinner', pct: 0.25 }
+        ];
+      }
+
+      body.innerHTML = splits.map(s => `
+        <tr>
+          <td class="text-[#1e293b] font-medium">${s.name}</td>
+          <td class="text-right text-[#475569]">${Math.round(totalCal * s.pct)}</td>
+          <td class="text-right text-[#475569]">${Math.round(carbG * s.pct)}g</td>
+          <td class="text-right text-[#475569]">${Math.round(proteinG * s.pct)}g</td>
+          <td class="text-right text-[#475569]">${Math.round(fatG * s.pct)}g</td>
+        </tr>
+      `).join('');
+    }
+
+    $('calc-btn').addEventListener('click', calculate);
+
+    [impFt, impIn, impLbs, metCm, metKg, ageInput, activitySel, goalSel].forEach(el => {
+      el.addEventListener('input', () => {
+        if (!resultsPanel.classList.contains('hidden')) calculate();
+      });
+      el.addEventListener('change', () => {
+        if (!resultsPanel.classList.contains('hidden')) calculate();
+      });
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('macro-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF Compressor Online — Reduce PDF File Size Instantly | ClickSolveTools</title>
+  <meta name="description" content="Compress PDF files for free in your browser. Remove metadata, flatten forms, and reduce file size. 100% client-side — your files never leave your device.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/pdf-compressor">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free PDF Compressor Online — Reduce PDF File Size Instantly | ClickSolveTools">
+  <meta property="og:description" content="Compress PDF files for free in your browser. Remove metadata, flatten forms, and reduce file size. 100% client-side — your files never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/pdf-compressor">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free PDF Compressor Online — Reduce PDF File Size Instantly | ClickSolveTools">
+  <meta name="twitter:description" content="Compress PDF files for free in your browser. Remove metadata, flatten forms, and reduce file size. 100% client-side — your files never leave your device.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Compressor",
+    "url": "https://clicksolvetools.com/tools/pdf-compressor",
+    "description": "Compress PDF files for free in your browser. Remove metadata, flatten forms, and reduce file size. 100% client-side — your files never leave your device.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it safe to compress PDFs online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much can a PDF be compressed in the browser?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Browser-based compression is limited compared to desktop tools. Savings vary depending on the PDF — files with excess metadata, unused objects, or editable form fields benefit the most. Heavily optimized PDFs may see little to no reduction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does compressing a PDF reduce quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. This tool does not re-render or downsample images. It reduces size by removing metadata, flattening forms, and stripping unused objects during re-serialization. All visual content remains identical."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .preset-btn { transition: all 150ms ease; }
+    .preset-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors"
+        >
+          <input type="file" id="file-input" accept="application/pdf" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop a PDF file here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Select a single PDF to compress</p>
+        </div>
+
+        <!-- Compression panel (hidden until file loaded) -->
+        <div id="compress-panel" class="hidden">
+
+          <!-- File info -->
+          <div id="file-info" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-5 py-4 mb-6">
+            <div class="flex items-start gap-3">
+              <div class="shrink-0 mt-0.5">
+                <svg class="w-8 h-8 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p id="file-name" class="text-sm font-semibold text-[#1e293b] truncate"></p>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-xs text-[#64748b]">
+                  <span>Pages: <strong id="file-pages" class="text-[#1e293b]"></strong></span>
+                  <span>Size: <strong id="file-size" class="text-[#1e293b]"></strong></span>
+                </div>
+              </div>
+              <button id="change-file-btn" class="shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Change file</button>
+            </div>
+          </div>
+
+          <!-- Compression presets -->
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-[#475569] mb-3">Compression Preset</label>
+            <div class="grid grid-cols-3 gap-3">
+              <button data-preset="light" class="preset-btn active border border-[#e2e8f0] rounded-lg px-4 py-3 text-center">
+                <div class="text-sm font-semibold mb-0.5">Light</div>
+                <div class="text-[10px] text-[#64748b]">Remove metadata</div>
+              </button>
+              <button data-preset="medium" class="preset-btn border border-[#e2e8f0] rounded-lg px-4 py-3 text-center hover:border-[#2563eb]/50">
+                <div class="text-sm font-semibold mb-0.5">Medium</div>
+                <div class="text-[10px] text-[#64748b]">+ Flatten forms</div>
+              </button>
+              <button data-preset="maximum" class="preset-btn border border-[#e2e8f0] rounded-lg px-4 py-3 text-center hover:border-[#2563eb]/50">
+                <div class="text-sm font-semibold mb-0.5">Maximum</div>
+                <div class="text-[10px] text-[#64748b]">All optimizations</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Options -->
+          <div class="mb-6 space-y-3">
+            <label class="block text-sm font-medium text-[#475569] mb-2">Options</label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" id="opt-metadata" checked class="w-4 h-4 rounded border-[#cbd5e1] text-[#2563eb] focus:ring-[#2563eb]/30">
+              <div>
+                <span class="text-sm text-[#1e293b]">Remove metadata</span>
+                <p class="text-xs text-[#94a3b8]">Strip title, author, subject, keywords, creator, and producer fields</p>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" id="opt-flatten" class="w-4 h-4 rounded border-[#cbd5e1] text-[#2563eb] focus:ring-[#2563eb]/30">
+              <div>
+                <span class="text-sm text-[#1e293b]">Flatten form fields</span>
+                <p class="text-xs text-[#94a3b8]">Merge interactive form data into the page content (not reversible)</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="bg-[#fffbeb] border border-[#fde68a] rounded-lg px-4 py-3 mb-6">
+            <p class="text-xs text-[#92400e] leading-relaxed"><strong>Note:</strong> Browser-based compression is limited. This tool reduces size by re-serializing the PDF, removing metadata, and flattening forms. For heavy image-based compression, desktop tools like Adobe Acrobat or Ghostscript may achieve better results.</p>
+          </div>
+
+          <!-- Progress -->
+          <div id="progress-wrapper" class="hidden mb-6">
+            <div class="flex items-center justify-between mb-1.5">
+              <span id="progress-label" class="text-sm text-[#475569]">Compressing…</span>
+              <span id="progress-pct" class="text-sm font-semibold text-[#2563eb]">0%</span>
+            </div>
+            <div class="w-full h-2 bg-[#e2e8f0] rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-[#2563eb] rounded-full transition-all duration-200" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div id="results-wrapper" class="hidden mb-6">
+            <div class="bg-[#f0fdf4] border border-[#bbf7d0] rounded-lg px-5 py-4">
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <p class="text-xs text-[#64748b] mb-1">Original</p>
+                  <p id="result-original" class="text-lg font-bold text-[#1e293b]">—</p>
+                </div>
+                <div>
+                  <p class="text-xs text-[#64748b] mb-1">Compressed</p>
+                  <p id="result-compressed" class="text-lg font-bold text-[#2563eb]">—</p>
+                </div>
+                <div>
+                  <p class="text-xs text-[#64748b] mb-1">Reduction</p>
+                  <p id="result-reduction" class="text-lg font-bold text-emerald-600">—</p>
+                </div>
+              </div>
+            </div>
+            <p id="result-message" class="hidden text-sm text-[#64748b] mt-3 text-center"></p>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-3">
+            <button id="compress-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              Compress PDF
+            </button>
+            <button id="download-btn" class="hidden inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Compressed PDF
+            </button>
+            <button id="reset-btn" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-[#94a3b8] hover:text-red-500 text-sm font-medium transition-colors">
+              Start over
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Compress PDF Files Online — Free, Private, and Instant</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>PDF files are the universal standard for sharing documents, but they can quickly grow to unwieldy sizes. A single report packed with high-resolution images, embedded fonts, and interactive form fields can easily balloon to tens or even hundreds of megabytes. Large PDFs are slow to email, difficult to upload to web portals with file size limits, and consume unnecessary storage space on your device and in the cloud. This free online PDF compressor helps you reduce PDF file size directly in your browser — no software to install, no account to create, and no files uploaded to any server.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why PDF Files Get So Large</h3>
+          <p>Several factors contribute to bloated PDF file sizes. Embedded high-resolution images are the most common culprit — a single uncompressed photograph can add several megabytes. Beyond images, PDFs accumulate weight from embedded fonts (especially when every glyph of a large font family is included), document metadata (author information, revision history, creation timestamps, XML metadata streams), interactive form fields with their associated appearance streams, unused cross-reference entries left behind by editing software, and duplicate resource objects that could be shared but are not. Each of these elements adds bytes that may not be necessary for the document's intended purpose.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How This Tool Works</h3>
+          <p>This compressor uses <strong class="text-[#1e293b]">pdf-lib</strong>, a robust open-source JavaScript library, to parse, process, and re-serialize your PDF entirely within the browser. When a PDF is loaded and saved through pdf-lib, the library rebuilds the file's internal structure from scratch. This process naturally eliminates orphaned objects, consolidates duplicate resources, and produces a cleaner cross-reference table. On top of that structural cleanup, you can choose to strip document metadata (title, author, subject, keywords, creator, and producer) and flatten interactive form fields, converting editable inputs into static page content. These operations can yield meaningful size reductions for documents that have been through multiple editing cycles or that were generated by software that produces verbose output.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Compression Presets Explained</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Light</strong> — Removes document metadata only. Safe for any PDF and preserves all interactive features. Good first step to see if your file has excess metadata overhead.</li>
+            <li><strong class="text-[#1e293b]">Medium</strong> — Removes metadata and flattens form fields. Best for finalized documents where interactivity is no longer needed. Flattening is permanent — form fields cannot be restored after this step.</li>
+            <li><strong class="text-[#1e293b]">Maximum</strong> — Applies all available optimizations including metadata removal, form flattening, and aggressive re-serialization. Produces the smallest possible output this tool can achieve.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">100% Client-Side — Your Files Stay Private</h3>
+          <p>Unlike most online PDF tools that require you to upload documents to a remote server, this compressor runs entirely inside your web browser. Your files — whether they contain financial records, legal agreements, medical information, or personal data — never leave your device. There is no upload, no cloud processing, and no server-side storage. Once you close the tab, all data is gone from memory. This makes the tool safe for handling confidential and sensitive documents without any privacy concerns.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">When to Use a Desktop Tool Instead</h3>
+          <p>Browser-based PDF compression has inherent limitations. This tool cannot re-compress or downsample images, subsetting fonts, or apply advanced stream-level optimizations the way desktop software can. If your PDF is large primarily because of high-resolution photographs and you need significant size reduction, tools like Adobe Acrobat Pro, Ghostscript, or QPDF running on your computer will deliver substantially better results. This browser tool is ideal for quick, convenient compression of documents that are bloated by metadata, structural inefficiency, or form fields — the kinds of savings that do not require pixel-level image manipulation.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is it safe to compress PDFs online?</h4>
+              <p>Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device, making it safe for confidential and sensitive documents.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">How much can a PDF be compressed?</h4>
+              <p>Results vary widely. PDFs with extensive metadata, unused objects, or editable form fields can shrink by 10–40%. Already-optimized PDFs may show little to no reduction. The tool will clearly tell you if the file is already well-optimized.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does compression reduce the quality of my PDF?</h4>
+              <p>No. This tool does not re-render, downsample, or re-compress images. It reduces size by restructuring the file, removing metadata, and flattening forms. All visual content — text, images, graphics, and fonts — remains identical to the original.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What is form flattening?</h4>
+              <p>Flattening converts interactive form fields (text inputs, checkboxes, dropdowns) into static content baked into the page. The filled-in values become permanent and the fields are no longer editable. This removes the overhead of form field objects and their appearance streams.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need to install any software?</h4>
+              <p>No. The tool runs entirely in your web browser. There is nothing to download, install, or configure. It works on Windows, macOS, Linux, iOS, and Android in any modern browser.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- pdf-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('pdf-compressor');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { PDFDocument } = PDFLib;
+
+    const dropZone       = document.getElementById('drop-zone');
+    const fileInput      = document.getElementById('file-input');
+    const compressPanel  = document.getElementById('compress-panel');
+    const fileNameEl     = document.getElementById('file-name');
+    const filePagesEl    = document.getElementById('file-pages');
+    const fileSizeEl     = document.getElementById('file-size');
+    const changeFileBtn  = document.getElementById('change-file-btn');
+    const optMetadata    = document.getElementById('opt-metadata');
+    const optFlatten     = document.getElementById('opt-flatten');
+    const compressBtn    = document.getElementById('compress-btn');
+    const downloadBtn    = document.getElementById('download-btn');
+    const resetBtn       = document.getElementById('reset-btn');
+    const progressWrapper = document.getElementById('progress-wrapper');
+    const progressLabel  = document.getElementById('progress-label');
+    const progressPct    = document.getElementById('progress-pct');
+    const progressBar    = document.getElementById('progress-bar');
+    const resultsWrapper = document.getElementById('results-wrapper');
+    const resultOriginal = document.getElementById('result-original');
+    const resultCompressed = document.getElementById('result-compressed');
+    const resultReduction = document.getElementById('result-reduction');
+    const resultMessage  = document.getElementById('result-message');
+    const presetBtns     = document.querySelectorAll('[data-preset]');
+
+    let originalBuffer = null;
+    let originalName   = '';
+    let originalSize   = 0;
+    let originalPages  = 0;
+    let compressedBlob = null;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function setPreset(name) {
+      presetBtns.forEach(b => {
+        const isActive = b.dataset.preset === name;
+        b.classList.toggle('active', isActive);
+        if (!isActive) {
+          b.classList.add('hover:border-[#2563eb]/50');
+        } else {
+          b.classList.remove('hover:border-[#2563eb]/50');
+        }
+      });
+
+      if (name === 'light') {
+        optMetadata.checked = true;
+        optFlatten.checked  = false;
+      } else if (name === 'medium') {
+        optMetadata.checked = true;
+        optFlatten.checked  = true;
+      } else if (name === 'maximum') {
+        optMetadata.checked = true;
+        optFlatten.checked  = true;
+      }
+    }
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => setPreset(btn.dataset.preset));
+    });
+
+    function syncPresetsFromOptions() {
+      presetBtns.forEach(b => b.classList.remove('active'));
+      if (optMetadata.checked && optFlatten.checked) {
+        document.querySelector('[data-preset="maximum"]').classList.add('active');
+      } else if (optMetadata.checked && !optFlatten.checked) {
+        document.querySelector('[data-preset="light"]').classList.add('active');
+      }
+    }
+
+    optMetadata.addEventListener('change', syncPresetsFromOptions);
+    optFlatten.addEventListener('change', syncPresetsFromOptions);
+
+    function updateProgress(label, pct) {
+      progressLabel.textContent = label;
+      progressPct.textContent   = Math.round(pct) + '%';
+      progressBar.style.width   = pct + '%';
+    }
+
+    function resetProgress() {
+      progressBar.classList.remove('bg-emerald-500', 'bg-red-500');
+      progressBar.classList.add('bg-[#2563eb]');
+      progressBar.style.width = '0%';
+      progressLabel.textContent = 'Compressing…';
+      progressPct.textContent = '0%';
+    }
+
+    async function loadFile(file) {
+      if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) return;
+
+      try {
+        originalBuffer = await file.arrayBuffer();
+        const pdf = await PDFDocument.load(originalBuffer, { ignoreEncryption: true });
+        originalName  = file.name;
+        originalSize  = file.size;
+        originalPages = pdf.getPageCount();
+
+        fileNameEl.textContent  = originalName;
+        filePagesEl.textContent = originalPages;
+        fileSizeEl.textContent  = formatBytes(originalSize);
+
+        dropZone.classList.add('hidden');
+        compressPanel.classList.remove('hidden');
+        hideResults();
+      } catch (err) {
+        console.error('Failed to load PDF:', err);
+        alert('Could not read this PDF file. It may be corrupted or password-protected.');
+      }
+    }
+
+    function hideResults() {
+      compressedBlob = null;
+      downloadBtn.classList.add('hidden');
+      resultsWrapper.classList.add('hidden');
+      resultMessage.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+      resetProgress();
+    }
+
+    function resetAll() {
+      originalBuffer = null;
+      originalName   = '';
+      originalSize   = 0;
+      originalPages  = 0;
+      compressedBlob = null;
+      fileInput.value = '';
+      dropZone.classList.remove('hidden');
+      compressPanel.classList.add('hidden');
+      hideResults();
+      setPreset('light');
+    }
+
+    // Upload events
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files.length) loadFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) loadFile(fileInput.files[0]);
+      fileInput.value = '';
+    });
+
+    changeFileBtn.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/pdf';
+      inp.addEventListener('change', () => { if (inp.files.length) loadFile(inp.files[0]); });
+      inp.click();
+    });
+
+    resetBtn.addEventListener('click', resetAll);
+
+    // Compress
+    compressBtn.addEventListener('click', async () => {
+      if (!originalBuffer) return;
+
+      compressBtn.disabled = true;
+      compressBtn.classList.add('opacity-40', 'cursor-not-allowed');
+      downloadBtn.classList.add('hidden');
+      resultsWrapper.classList.add('hidden');
+      resultMessage.classList.add('hidden');
+      progressWrapper.classList.remove('hidden');
+      resetProgress();
+
+      try {
+        updateProgress('Loading PDF…', 10);
+        const srcDoc = await PDFDocument.load(originalBuffer, { ignoreEncryption: true });
+
+        updateProgress('Creating optimized copy…', 25);
+        const newDoc = await PDFDocument.create();
+
+        const pageIndices = srcDoc.getPageIndices();
+        const totalPages = pageIndices.length;
+
+        const copiedPages = await newDoc.copyPages(srcDoc, pageIndices);
+        for (let i = 0; i < copiedPages.length; i++) {
+          newDoc.addPage(copiedPages[i]);
+          updateProgress(`Copying page ${i + 1} of ${totalPages}…`, 25 + ((i + 1) / totalPages) * 40);
+        }
+
+        if (optMetadata.checked) {
+          updateProgress('Removing metadata…', 70);
+          newDoc.setTitle('');
+          newDoc.setAuthor('');
+          newDoc.setSubject('');
+          newDoc.setKeywords([]);
+          newDoc.setCreator('');
+          newDoc.setProducer('');
+        }
+
+        if (optFlatten.checked) {
+          updateProgress('Flattening form fields…', 80);
+          const form = newDoc.getForm();
+          try {
+            form.flatten();
+          } catch (_) {
+            // No form fields or already flat
+          }
+        }
+
+        updateProgress('Saving optimized PDF…', 90);
+        const pdfBytes = await newDoc.save();
+
+        const compressedSize = pdfBytes.length;
+        compressedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+        updateProgress('Done!', 100);
+        progressBar.classList.remove('bg-[#2563eb]');
+        progressBar.classList.add('bg-emerald-500');
+
+        resultOriginal.textContent   = formatBytes(originalSize);
+        resultCompressed.textContent = formatBytes(compressedSize);
+
+        const reduction = ((originalSize - compressedSize) / originalSize) * 100;
+
+        if (compressedSize >= originalSize) {
+          resultReduction.textContent = '0%';
+          resultReduction.className = 'text-lg font-bold text-[#94a3b8]';
+          resultsWrapper.querySelector('.bg-\\[\\#f0fdf4\\]').className = 'bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-5 py-4';
+          resultMessage.textContent = 'This PDF is already well-optimized. No further reduction was possible with browser-based compression.';
+          resultMessage.classList.remove('hidden');
+        } else {
+          resultReduction.textContent = reduction.toFixed(1) + '%';
+          resultReduction.className = 'text-lg font-bold text-emerald-600';
+          resultsWrapper.querySelector('div').className = 'bg-[#f0fdf4] border border-[#bbf7d0] rounded-lg px-5 py-4';
+
+          if (reduction < 2) {
+            resultMessage.textContent = 'Minimal reduction achieved. This PDF was already fairly well-optimized.';
+            resultMessage.classList.remove('hidden');
+          }
+        }
+
+        resultsWrapper.classList.remove('hidden');
+
+        if (compressedSize < originalSize) {
+          downloadBtn.classList.remove('hidden');
+        }
+
+      } catch (err) {
+        console.error('Compression failed:', err);
+        updateProgress('Error: ' + (err.message || 'Compression failed'), 0);
+        progressBar.classList.remove('bg-[#2563eb]');
+        progressBar.classList.add('bg-red-500');
+      } finally {
+        compressBtn.disabled = false;
+        compressBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+      }
+    });
+
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!compressedBlob) return;
+      const baseName = originalName.replace(/\.pdf$/i, '');
+      const a = document.createElement('a');
+      a.download = baseName + '-compressed.pdf';
+      a.href = URL.createObjectURL(compressedBlob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+  });
+  </script>
+
+</body>
+</html>

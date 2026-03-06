@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Fraction Calculator Online — Add, Subtract, Multiply, Divide | ClickSolveTools</title>
+  <meta name="description" content="Calculate fractions with step-by-step solutions. Add, subtract, multiply, and divide fractions or mixed numbers. Shows LCD, GCD simplification, and decimal conversion. Free, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/fraction-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Fraction Calculator Online — Add, Subtract, Multiply, Divide | ClickSolveTools">
+  <meta property="og:description" content="Calculate fractions with step-by-step solutions. Add, subtract, multiply, and divide fractions or mixed numbers. Shows LCD, GCD simplification, and decimal conversion.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/fraction-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Fraction Calculator Online | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate fractions with step-by-step solutions. Add, subtract, multiply, and divide fractions or mixed numbers.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Fraction Calculator",
+    "url": "https://clicksolvetools.com/tools/fraction-calculator",
+    "description": "Calculate fractions with step-by-step solutions. Add, subtract, multiply, and divide fractions or mixed numbers with LCD, GCD simplification, and decimal conversion.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    .fade-in { animation: fadeIn 300ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 2px; }
+    .frac .num, .frac .den { display: block; text-align: center; padding: 0 4px; line-height: 1.3; }
+    .frac .num { border-bottom: 2px solid currentColor; }
+    .op-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; box-shadow: 0 1px 3px rgba(37,99,235,.3); }
+    .op-btn:not(.active):hover { background-color: #f1f5f9; color: #1e293b; }
+    .step-row { border-left: 3px solid #e2e8f0; }
+    .step-row.highlight { border-left-color: #2563eb; background-color: #eff6ff; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+  <div id="nav-container"></div>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <div class="mb-8 text-center">
+      <span class="text-4xl mb-3 block">🔢</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Fraction Calculator</h1>
+      <p class="text-[#475569] text-base max-w-lg mx-auto">Add, subtract, multiply, or divide fractions and mixed numbers with step-by-step solutions.</p>
+    </div>
+
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm overflow-hidden">
+      <div class="p-6 sm:p-8">
+
+        <!-- Fraction Inputs -->
+        <div class="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+
+          <!-- Fraction A -->
+          <div class="flex items-center gap-2">
+            <!-- Whole number -->
+            <div class="flex flex-col items-center">
+              <label class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Whole</label>
+              <input id="a-whole" type="number" step="1" placeholder="0" class="w-14 sm:w-16 px-2 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+            </div>
+            <!-- Numerator / Denominator -->
+            <div class="flex flex-col items-center gap-1">
+              <label class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Fraction</label>
+              <input id="a-num" type="number" step="1" placeholder="1" class="w-14 sm:w-16 px-2 py-1.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-base">
+              <div class="w-14 sm:w-16 h-0.5 bg-[#1e293b] rounded-full"></div>
+              <input id="a-den" type="number" step="1" placeholder="2" class="w-14 sm:w-16 px-2 py-1.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-base">
+            </div>
+          </div>
+
+          <!-- Visual Fraction A -->
+          <div id="viz-a" class="hidden sm:flex items-center text-2xl font-semibold text-[#475569] min-w-[48px] justify-center"></div>
+
+          <!-- Operator -->
+          <div class="flex flex-col items-center">
+            <label class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Op</label>
+            <div class="flex gap-1">
+              <button data-op="+" class="op-btn active w-9 h-9 rounded-lg border border-[#e2e8f0] text-sm font-bold transition-all flex items-center justify-center">+</button>
+              <button data-op="-" class="op-btn w-9 h-9 rounded-lg border border-[#e2e8f0] text-[#475569] text-sm font-bold transition-all flex items-center justify-center">−</button>
+              <button data-op="*" class="op-btn w-9 h-9 rounded-lg border border-[#e2e8f0] text-[#475569] text-sm font-bold transition-all flex items-center justify-center">×</button>
+              <button data-op="/" class="op-btn w-9 h-9 rounded-lg border border-[#e2e8f0] text-[#475569] text-sm font-bold transition-all flex items-center justify-center">÷</button>
+            </div>
+          </div>
+
+          <!-- Fraction B -->
+          <div class="flex items-center gap-2">
+            <div class="flex flex-col items-center">
+              <label class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Whole</label>
+              <input id="b-whole" type="number" step="1" placeholder="0" class="w-14 sm:w-16 px-2 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <label class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Fraction</label>
+              <input id="b-num" type="number" step="1" placeholder="1" class="w-14 sm:w-16 px-2 py-1.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-base">
+              <div class="w-14 sm:w-16 h-0.5 bg-[#1e293b] rounded-full"></div>
+              <input id="b-den" type="number" step="1" placeholder="3" class="w-14 sm:w-16 px-2 py-1.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-center text-[#1e293b] placeholder-[#cbd5e1] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-base">
+            </div>
+          </div>
+
+          <!-- Visual Fraction B -->
+          <div id="viz-b" class="hidden sm:flex items-center text-2xl font-semibold text-[#475569] min-w-[48px] justify-center"></div>
+        </div>
+
+        <!-- Calculate / Reset -->
+        <div class="mt-6 flex items-center justify-center gap-3">
+          <button id="calc-btn" class="px-8 py-3 text-sm font-semibold bg-[#2563eb] text-white rounded-xl hover:bg-[#1d4ed8] transition-all shadow-sm shadow-[#2563eb]/20 active:scale-[.97]">Calculate</button>
+          <button id="reset-btn" class="px-5 py-3 text-sm font-medium bg-[#f1f5f9] text-[#475569] rounded-xl hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-all">Reset</button>
+        </div>
+
+        <!-- Result -->
+        <div id="result-area" class="mt-6 hidden fade-in">
+          <div id="result-box" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5"></div>
+
+          <!-- Steps -->
+          <div class="mt-4">
+            <button id="toggle-steps" class="text-sm font-medium text-[#2563eb] hover:text-[#1d4ed8] transition-colors flex items-center gap-1">
+              <svg id="steps-chevron" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              Show step-by-step solution
+            </button>
+            <div id="steps-container" class="hidden mt-3 space-y-2 fade-in"></div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div id="error-area" class="mt-6 hidden">
+          <div class="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm font-medium text-center"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Calculate Fractions — LCD, GCD, and Step-by-Step Simplification</h2>
+
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Fractions represent parts of a whole and are fundamental to arithmetic, algebra, cooking, construction, and countless everyday tasks. Despite their simplicity, fraction operations — especially addition and subtraction — require careful attention to denominators. This calculator handles all four operations (addition, subtraction, multiplication, and division) on proper fractions, improper fractions, and mixed numbers, showing every step along the way so you can learn the process or verify your homework.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding Fractions and Mixed Numbers</h3>
+        <p>A fraction consists of a <strong class="text-[#1e293b]">numerator</strong> (top number) and a <strong class="text-[#1e293b]">denominator</strong> (bottom number). When the numerator is smaller than the denominator, such as 3/4, it is a <strong class="text-[#1e293b]">proper fraction</strong>. When the numerator is equal to or larger than the denominator, like 7/4, it is an <strong class="text-[#1e293b]">improper fraction</strong>. A <strong class="text-[#1e293b]">mixed number</strong> combines a whole number with a proper fraction — for example, 1 3/4, which equals 7/4. This calculator accepts mixed numbers directly; just enter the whole part in the "Whole" field and the fractional part in the numerator and denominator fields.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Adding and Subtracting Fractions — Finding the LCD</h3>
+        <p>To add or subtract fractions, you need a <strong class="text-[#1e293b]">common denominator</strong>. The most efficient choice is the <strong class="text-[#1e293b]">Least Common Denominator (LCD)</strong>, which is the smallest number that both denominators divide into evenly. The LCD is computed as LCD = (d₁ × d₂) / GCD(d₁, d₂). Once both fractions share the same denominator, you simply add or subtract the numerators and keep the denominator. For example, 1/4 + 1/6 requires an LCD of 12: convert to 3/12 + 2/12 = 5/12. This calculator finds the LCD automatically and shows the conversion step so you can follow along.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Multiplying and Dividing Fractions</h3>
+        <p>Multiplication is the simplest fraction operation: multiply the numerators together and the denominators together. For instance, 2/3 × 4/5 = 8/15. Division flips the second fraction (its reciprocal) and then multiplies: 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12, which simplifies to 5/6. Neither operation requires finding a common denominator, which is why many students find multiplication and division easier than addition and subtraction.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Simplifying with the GCD (Euclidean Algorithm)</h3>
+        <p>After computing the raw result, fractions should be <strong class="text-[#1e293b]">simplified</strong> (or "reduced") to their lowest terms. This means dividing both the numerator and denominator by their <strong class="text-[#1e293b]">Greatest Common Divisor (GCD)</strong>. The GCD is found efficiently using the <strong class="text-[#1e293b]">Euclidean algorithm</strong>: repeatedly replace the larger number with the remainder of dividing it by the smaller number until the remainder is zero. The last non-zero remainder is the GCD. For example, GCD(48, 18): 48 mod 18 = 12, then 18 mod 12 = 6, then 12 mod 6 = 0 — so GCD is 6. Dividing 48/18 by 6 gives the simplified fraction 8/3.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Use Cases for Fraction Math</h3>
+        <p>Fractions appear constantly in real life. In <strong class="text-[#1e293b]">cooking and baking</strong>, recipes call for 3/4 cup of flour or 1 1/2 teaspoons of salt, and doubling or halving recipes means multiplying fractions. In <strong class="text-[#1e293b]">construction and woodworking</strong>, measurements are given in fractions of an inch — you might need to add 5/8" and 3/16" to figure out total thickness. In <strong class="text-[#1e293b]">academics</strong>, fraction arithmetic is a core skill tested from elementary school through college algebra. <strong class="text-[#1e293b]">Music theory</strong> uses fractions for time signatures and note durations. Even <strong class="text-[#1e293b]">finance</strong> touches fractions — stock prices were historically quoted in eighths and sixteenths.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">What is an improper fraction?</strong><br>An improper fraction has a numerator larger than or equal to its denominator (e.g., 7/3). It represents a value of one or more. You can convert it to a mixed number — 7/3 = 2 1/3 — by dividing the numerator by the denominator.</p>
+
+        <p><strong class="text-[#1e293b]">What if I only want to enter a whole number?</strong><br>Leave the numerator and denominator fields empty (or set them to 0) and just enter the whole number. The calculator treats it as that whole number over 1.</p>
+
+        <p><strong class="text-[#1e293b]">Can I use negative fractions?</strong><br>Yes. Enter a negative whole number or a negative numerator. The calculator handles signs correctly through all four operations and simplifies the result so the negative sign appears in the numerator.</p>
+
+        <p><strong class="text-[#1e293b]">How does the step-by-step solution work?</strong><br>After you click Calculate, expand the "Show step-by-step solution" section. It walks you through converting mixed numbers to improper fractions, finding the LCD (for addition and subtraction), performing the operation, and simplifying the result using the GCD — exactly the way you would solve it on paper.</p>
+
+        <p><strong class="text-[#1e293b]">Is this calculator free?</strong><br>Yes. This fraction calculator runs entirely in your browser with no ads, no signup, and no data collection. Your inputs never leave your device.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+    // ─── Math Utilities ───
+    function gcd(a, b) {
+      a = Math.abs(a); b = Math.abs(b);
+      while (b) { [a, b] = [b, a % b]; }
+      return a;
+    }
+    function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+
+    function simplify(n, d) {
+      if (d === 0) return { n, d };
+      if (n === 0) return { n: 0, d: 1 };
+      const sign = (d < 0) ? -1 : 1;
+      n *= sign; d *= sign;
+      const g = gcd(Math.abs(n), d);
+      return { n: n / g, d: d / g };
+    }
+
+    function toImproper(whole, num, den) {
+      whole = parseInt(whole) || 0;
+      num = parseInt(num) || 0;
+      den = parseInt(den) || (num === 0 ? 1 : 0);
+      if (den === 0) return null;
+      const sign = whole < 0 ? -1 : 1;
+      const n = Math.abs(whole) * den + Math.abs(num);
+      return { n: sign * n, d: den };
+    }
+
+    function toMixed(n, d) {
+      if (d === 0) return { whole: 0, n: 0, d: 1 };
+      const s = simplify(n, d);
+      n = s.n; d = s.d;
+      const sign = n < 0 ? -1 : 1;
+      const absN = Math.abs(n);
+      const whole = Math.floor(absN / d);
+      const rem = absN % d;
+      return { whole: sign * whole, n: rem, d };
+    }
+
+    function fracStr(n, d) { return `${n}/${d}`; }
+
+    function fracHTML(n, d, large) {
+      const cls = large ? 'text-2xl font-bold text-[#2563eb]' : 'text-base text-[#1e293b]';
+      return `<span class="frac ${cls}"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+    }
+
+    function mixedStr(m) {
+      if (m.n === 0) return `${m.whole}`;
+      if (m.whole === 0) return `${m.n}/${m.d}`;
+      return `${m.whole} ${Math.abs(m.n)}/${m.d}`;
+    }
+
+    function mixedHTML(m, large) {
+      const cls = large ? 'text-2xl font-bold text-[#2563eb]' : 'text-base text-[#1e293b]';
+      if (m.n === 0) return `<span class="${cls}">${m.whole}</span>`;
+      const wholePart = m.whole !== 0 ? `<span class="${cls}" style="vertical-align:middle">${m.whole}</span>` : '';
+      const fracN = m.whole < 0 && m.n > 0 ? m.n : m.n;
+      return `${wholePart}${fracHTML(fracN, m.d, large)}`;
+    }
+
+    // ─── Visual fraction display ───
+    function updateViz(prefix) {
+      const el = document.getElementById(`viz-${prefix}`);
+      const w = parseInt(document.getElementById(`${prefix}-whole`).value) || 0;
+      const n = parseInt(document.getElementById(`${prefix}-num`).value) || 0;
+      const d = parseInt(document.getElementById(`${prefix}-den`).value) || 0;
+      if (d === 0 && n === 0 && w === 0) { el.innerHTML = ''; return; }
+      if (d === 0 && n !== 0) { el.innerHTML = '<span class="text-red-400 text-sm">d≠0</span>'; return; }
+      const parts = [];
+      if (w !== 0) parts.push(`<span>${w}</span>`);
+      if (n !== 0 && d !== 0) parts.push(`<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`);
+      el.innerHTML = parts.join('') || '';
+    }
+
+    // ─── DOM ───
+    const opBtns = document.querySelectorAll('.op-btn');
+    let selectedOp = '+';
+
+    opBtns.forEach(btn => btn.addEventListener('click', () => {
+      selectedOp = btn.dataset.op;
+      opBtns.forEach(b => b.classList.toggle('active', b === btn));
+    }));
+
+    ['a-whole','a-num','a-den'].forEach(id => document.getElementById(id).addEventListener('input', () => updateViz('a')));
+    ['b-whole','b-num','b-den'].forEach(id => document.getElementById(id).addEventListener('input', () => updateViz('b')));
+
+    const opSymbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+
+    document.getElementById('calc-btn').addEventListener('click', calculate);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && document.activeElement.tagName === 'INPUT') calculate();
+    });
+
+    function showError(msg) {
+      document.getElementById('result-area').classList.add('hidden');
+      const errArea = document.getElementById('error-area');
+      errArea.classList.remove('hidden');
+      errArea.querySelector('div').textContent = msg;
+    }
+
+    function calculate() {
+      document.getElementById('error-area').classList.add('hidden');
+      const stepsContainer = document.getElementById('steps-container');
+      stepsContainer.classList.add('hidden');
+      document.getElementById('toggle-steps').querySelector('span')?.remove();
+      const chevron = document.getElementById('steps-chevron');
+      chevron.style.transform = '';
+      document.getElementById('toggle-steps').childNodes[1].textContent = ' Show step-by-step solution';
+
+      const fracA = toImproper(
+        document.getElementById('a-whole').value,
+        document.getElementById('a-num').value,
+        document.getElementById('a-den').value
+      );
+      const fracB = toImproper(
+        document.getElementById('b-whole').value,
+        document.getElementById('b-num').value,
+        document.getElementById('b-den').value
+      );
+
+      if (!fracA) return showError('Fraction A has an invalid denominator (cannot be zero).');
+      if (!fracB) return showError('Fraction B has an invalid denominator (cannot be zero).');
+
+      const steps = [];
+      const aw = parseInt(document.getElementById('a-whole').value) || 0;
+      const an = parseInt(document.getElementById('a-num').value) || 0;
+      const ad = parseInt(document.getElementById('a-den').value) || (an === 0 ? 1 : 0);
+      const bw = parseInt(document.getElementById('b-whole').value) || 0;
+      const bn = parseInt(document.getElementById('b-num').value) || 0;
+      const bd = parseInt(document.getElementById('b-den').value) || (bn === 0 ? 1 : 0);
+
+      const hasMixedA = aw !== 0 && an !== 0;
+      const hasMixedB = bw !== 0 && bn !== 0;
+
+      if (hasMixedA || hasMixedB) {
+        let desc = 'Convert mixed number(s) to improper fractions:';
+        if (hasMixedA) desc += `<br>${mixedStr({whole:aw, n:Math.abs(an), d:ad})} → (${Math.abs(aw)}×${ad} + ${Math.abs(an)})/${ad} = ${fracStr(fracA.n, fracA.d)}`;
+        if (hasMixedB) desc += `<br>${mixedStr({whole:bw, n:Math.abs(bn), d:bd})} → (${Math.abs(bw)}×${bd} + ${Math.abs(bn)})/${bd} = ${fracStr(fracB.n, fracB.d)}`;
+        steps.push({ label: 'Convert to improper', desc });
+      }
+
+      steps.push({ label: 'Set up', desc: `${fracStr(fracA.n, fracA.d)} ${opSymbols[selectedOp]} ${fracStr(fracB.n, fracB.d)}` });
+
+      let rn, rd;
+
+      if (selectedOp === '+' || selectedOp === '-') {
+        const commonD = lcm(fracA.d, fracB.d);
+        const multA = commonD / fracA.d;
+        const multB = commonD / fracB.d;
+        const newA = fracA.n * multA;
+        const newB = fracB.n * multB;
+
+        steps.push({
+          label: 'Find LCD',
+          desc: `LCD(${fracA.d}, ${fracB.d}) = ${commonD}`,
+          highlight: true
+        });
+        steps.push({
+          label: 'Convert',
+          desc: `${fracStr(fracA.n, fracA.d)} = ${fracStr(newA, commonD)}<br>${fracStr(fracB.n, fracB.d)} = ${fracStr(newB, commonD)}`
+        });
+
+        rn = selectedOp === '+' ? newA + newB : newA - newB;
+        rd = commonD;
+
+        steps.push({
+          label: selectedOp === '+' ? 'Add numerators' : 'Subtract numerators',
+          desc: `${fracStr(newA, commonD)} ${opSymbols[selectedOp]} ${fracStr(newB, commonD)} = ${fracStr(rn, rd)}`
+        });
+
+      } else if (selectedOp === '*') {
+        rn = fracA.n * fracB.n;
+        rd = fracA.d * fracB.d;
+        steps.push({
+          label: 'Multiply',
+          desc: `(${fracA.n}×${fracB.n}) / (${fracA.d}×${fracB.d}) = ${fracStr(rn, rd)}`
+        });
+
+      } else {
+        if (fracB.n === 0) return showError('Cannot divide by zero.');
+        steps.push({
+          label: 'Flip & multiply',
+          desc: `${fracStr(fracA.n, fracA.d)} × ${fracStr(fracB.d, fracB.n)}`
+        });
+        rn = fracA.n * fracB.d;
+        rd = fracA.d * fracB.n;
+        steps.push({
+          label: 'Multiply',
+          desc: `(${fracA.n}×${fracB.d}) / (${fracA.d}×${fracB.n}) = ${fracStr(rn, rd)}`
+        });
+      }
+
+      const g = gcd(Math.abs(rn), Math.abs(rd));
+      const simp = simplify(rn, rd);
+
+      if (g > 1) {
+        steps.push({
+          label: 'Simplify (GCD)',
+          desc: `GCD(${Math.abs(rn)}, ${Math.abs(rd)}) = ${g}<br>${fracStr(rn, rd)} ÷ ${g}/${g} = ${fracStr(simp.n, simp.d)}`,
+          highlight: true
+        });
+      }
+
+      const mixed = toMixed(simp.n, simp.d);
+      const decimal = simp.n / simp.d;
+      const decStr = Number.isFinite(decimal) ? (Math.round(decimal * 1e8) / 1e8).toString() : '—';
+
+      // Build result display
+      const resultBox = document.getElementById('result-box');
+      const isWholeNumber = simp.d === 1;
+
+      let resultHTML = '<div class="text-center">';
+      resultHTML += '<div class="text-[#94a3b8] text-xs uppercase tracking-wider font-medium mb-3">Result</div>';
+
+      if (isWholeNumber) {
+        resultHTML += `<div class="text-3xl font-bold text-[#2563eb] mb-4">${simp.n}</div>`;
+      } else {
+        resultHTML += `<div class="mb-4">${fracHTML(simp.n, simp.d, true)}</div>`;
+      }
+
+      resultHTML += '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">';
+      resultHTML += `<div class="bg-white border border-[#e2e8f0] rounded-lg p-3"><div class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Improper</div><div class="font-semibold text-sm">${rn === simp.n && rd === simp.d ? fracStr(simp.n, simp.d) : fracStr(rn, rd) + ' → ' + fracStr(simp.n, simp.d)}</div></div>`;
+      resultHTML += `<div class="bg-white border border-[#e2e8f0] rounded-lg p-3"><div class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Simplified</div><div class="font-semibold text-sm">${fracStr(simp.n, simp.d)}</div></div>`;
+      resultHTML += `<div class="bg-white border border-[#e2e8f0] rounded-lg p-3"><div class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Mixed</div><div class="font-semibold text-sm">${isWholeNumber ? simp.n : mixedStr(mixed)}</div></div>`;
+      resultHTML += `<div class="bg-white border border-[#e2e8f0] rounded-lg p-3"><div class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-medium mb-1">Decimal</div><div class="font-semibold text-sm">${decStr}</div></div>`;
+      resultHTML += '</div></div>';
+
+      resultBox.innerHTML = resultHTML;
+
+      // Build steps
+      stepsContainer.innerHTML = steps.map(s => `
+        <div class="step-row ${s.highlight ? 'highlight' : ''} pl-4 py-2.5 rounded-r-lg">
+          <div class="text-xs font-semibold uppercase tracking-wider ${s.highlight ? 'text-[#2563eb]' : 'text-[#94a3b8]'} mb-0.5">${s.label}</div>
+          <div class="text-sm text-[#1e293b]">${s.desc}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('result-area').classList.remove('hidden');
+    }
+
+    // Toggle steps
+    let stepsOpen = false;
+    document.getElementById('toggle-steps').addEventListener('click', () => {
+      stepsOpen = !stepsOpen;
+      document.getElementById('steps-container').classList.toggle('hidden', !stepsOpen);
+      document.getElementById('steps-chevron').style.transform = stepsOpen ? 'rotate(180deg)' : '';
+      const textNode = document.getElementById('toggle-steps').childNodes[1];
+      if (textNode) textNode.textContent = stepsOpen ? ' Hide step-by-step solution' : ' Show step-by-step solution';
+    });
+
+    // Reset
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      ['a-whole','a-num','a-den','b-whole','b-num','b-den'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('result-area').classList.add('hidden');
+      document.getElementById('error-area').classList.add('hidden');
+      document.getElementById('viz-a').innerHTML = '';
+      document.getElementById('viz-b').innerHTML = '';
+      stepsOpen = false;
+      document.getElementById('steps-container').classList.add('hidden');
+      document.getElementById('steps-chevron').style.transform = '';
+    });
+  </script>
+
+  <script type="module">import { initToolPage } from '/js/shared.js'; initToolPage('fraction-calculator');</script>
+</body>
+</html>

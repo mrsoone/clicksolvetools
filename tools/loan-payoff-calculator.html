@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Loan Payoff Calculator — Payoff Date, Interest &amp; Extra Payments | ClickSolveTools</title>
+  <meta name="description" content="Calculate your loan payoff date, total interest, and see how extra payments save money. Free amortization schedule and side-by-side savings comparison.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/loan-payoff-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Loan Payoff Calculator — Payoff Date &amp; Extra Payments | ClickSolveTools">
+  <meta property="og:description" content="Calculate your loan payoff date, total interest, and see how extra payments save money. Free amortization schedule and side-by-side savings comparison.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/loan-payoff-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Loan Payoff Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your loan payoff date, total interest, and see how extra payments save money. Free amortization schedule and savings comparison.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Loan Payoff Calculator","url":"https://clicksolvetools.com/tools/loan-payoff-calculator","description":"Calculate your loan payoff date, total interest, and see how extra payments save money. Free amortization schedule and side-by-side savings comparison.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do extra payments reduce total interest on a loan?","acceptedAnswer":{"@type":"Answer","text":"Extra payments go directly toward reducing the principal balance. Since interest is calculated on the remaining balance each month, a lower balance means less interest accrues. Even small extra payments can save thousands of dollars and shorten the loan by months or years."}},{"@type":"Question","name":"Should I pay off my loan early or invest the extra money?","acceptedAnswer":{"@type":"Answer","text":"It depends on your loan interest rate versus your expected investment return. If your loan rate is higher than your after-tax investment return, paying off the loan faster saves more. If your investment return exceeds the loan rate, investing may be more profitable, though paying off debt offers a guaranteed return."}},{"@type":"Question","name":"Does my loan have a prepayment penalty?","acceptedAnswer":{"@type":"Answer","text":"Some loans charge a fee for paying off the balance early. Check your loan agreement or contact your lender before making extra payments. Federal student loans and most modern mortgages do not have prepayment penalties, but some auto loans and personal loans may."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Input Form -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <h2 class="text-base font-semibold text-[#1e293b] mb-4">Loan Details</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+
+          <div class="sm:col-span-2">
+            <label for="loan-balance" class="block text-sm font-medium text-[#475569] mb-1">Current Loan Balance</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="loan-balance" type="text" inputmode="decimal" placeholder="25,000" class="lp-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="interest-rate" class="block text-sm font-medium text-[#475569] mb-1">Annual Interest Rate</label>
+            <div class="relative">
+              <input id="interest-rate" type="text" inputmode="decimal" placeholder="6.5" class="lp-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="monthly-payment" class="block text-sm font-medium text-[#475569] mb-1">Monthly Payment</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="monthly-payment" type="text" inputmode="decimal" placeholder="500" class="lp-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div class="sm:col-span-2 border-t border-[#e2e8f0] pt-4 mt-1">
+            <label for="extra-payment" class="block text-sm font-medium text-[#475569] mb-1">Extra Monthly Payment <span class="text-[#94a3b8] font-normal">(optional)</span></label>
+            <div class="relative max-w-xs">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="extra-payment" type="text" inputmode="decimal" placeholder="100" class="lp-input pl-7 w-full">
+            </div>
+          </div>
+        </div>
+
+        <button id="calc-btn" class="mt-6 w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold py-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb]/40">
+          Calculate Payoff
+        </button>
+      </div>
+
+      <!-- Error -->
+      <div id="error-msg" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm"></div>
+
+      <!-- Results: Standard -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Standard Payoff</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Payoff Date</div>
+            <div id="out-payoff-date" class="text-lg font-semibold text-[#2563eb]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Months Remaining</div>
+            <div id="out-months" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Total Interest</div>
+            <div id="out-total-interest" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Total Amount Paid</div>
+            <div id="out-total-paid" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results: With Extra Payments -->
+      <div id="extra-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">With Extra Payments</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">New Payoff Date</div>
+            <div id="out-extra-date" class="text-lg font-semibold text-[#2563eb]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Months Saved</div>
+            <div id="out-months-saved" class="text-lg font-semibold text-[#22c55e]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">Interest Saved</div>
+            <div id="out-interest-saved" class="text-lg font-semibold text-[#22c55e]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569] mb-0.5">New Total Paid</div>
+            <div id="out-extra-total" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings Comparison -->
+      <div id="compare-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Side-by-Side Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
+                <th class="py-2 text-left font-medium"></th>
+                <th class="py-2 text-right font-medium px-3">Without Extra</th>
+                <th class="py-2 text-right font-medium px-3">With Extra</th>
+                <th class="py-2 text-right font-medium px-3">Savings</th>
+              </tr>
+            </thead>
+            <tbody id="compare-body" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Amortization Schedule -->
+      <div id="amort-wrapper" class="hidden">
+        <button id="amort-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="amort-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Amortization Schedule
+          </span>
+          <span id="amort-label" class="text-xs text-[#94a3b8]"></span>
+        </button>
+        <div id="amort-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-white">
+              <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
+                <th class="px-4 py-3 text-left font-medium">Month</th>
+                <th class="px-4 py-3 text-right font-medium">Payment</th>
+                <th class="px-4 py-3 text-right font-medium">Principal</th>
+                <th class="px-4 py-3 text-right font-medium">Interest</th>
+                <th class="px-4 py-3 text-right font-medium">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amort-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Loan Payoff Strategies: How to Eliminate Debt Faster and Save on Interest</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Paying off a loan is one of the most impactful financial goals you can pursue. Whether it is a car loan, student loan, personal loan, or credit line, understanding how your payments are applied — and how extra payments accelerate payoff — can save you thousands of dollars and years of monthly obligations. This calculator gives you a clear picture of where you stand and what happens when you pay even a little more each month.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Loan Amortization Works</h3>
+      <p>Most installment loans use an amortization schedule that divides each monthly payment into two portions: interest and principal. Early in the loan, the majority of each payment covers interest because the outstanding balance is at its highest. As the balance decreases over time, a larger share of each payment is applied to principal. This front-loading of interest is why the total interest paid over a loan's lifetime can be surprisingly high — and why accelerating principal reduction through extra payments is so effective.</p>
+      <p>The standard amortization formula calculates a fixed monthly payment that fully repays the loan over its term:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">M = P × [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> − 1]</p>
+      <p>Here <strong class="text-[#1e293b]">P</strong> is the principal balance, <strong class="text-[#1e293b]">r</strong> is the monthly interest rate (annual rate ÷ 12), and <strong class="text-[#1e293b]">n</strong> is the total number of payments. This calculator uses the same formula to determine your payoff timeline, total interest, and the impact of any additional payments you choose to make.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Power of Extra Payments</h3>
+      <p>Making extra payments — even modest ones — directly reduces the principal balance. Because interest is recalculated on the remaining balance each month, lowering the principal means less interest accrues in every subsequent period. The compounding effect of this reduction is dramatic. For example, adding just $50 per month to a $20,000 auto loan at 7% interest can save over $800 in interest and shorten the loan by nearly a year. The amortization table and savings comparison above let you see this effect month by month for your specific situation.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Popular Payoff Strategies</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Fixed extra amount</strong> — Add a consistent dollar amount to each monthly payment. This is the simplest strategy and what this calculator models directly.</li>
+        <li><strong class="text-[#1e293b]">Debt avalanche</strong> — Focus extra payments on the loan with the highest interest rate first, then roll freed-up payments into the next highest rate. This minimizes total interest across all debts.</li>
+        <li><strong class="text-[#1e293b]">Debt snowball</strong> — Pay off the smallest balance first for a quick psychological win, then apply that payment to the next smallest. The snowball method builds momentum even if it costs slightly more in interest.</li>
+        <li><strong class="text-[#1e293b]">Lump-sum payments</strong> — Apply windfalls like tax refunds, bonuses, or side income directly to the principal. A single large payment early in the loan can save more than years of small extra payments made later.</li>
+        <li><strong class="text-[#1e293b]">Biweekly payments</strong> — Pay half your monthly amount every two weeks. Because there are 26 biweekly periods in a year, you effectively make 13 full payments instead of 12, adding one extra payment per year.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">When to Prioritize Extra Payments</h3>
+      <p>Extra payments are most beneficial when your loan has a high interest rate, a large remaining balance, or a long remaining term. If your interest rate is very low — say under 3% — the money might grow faster in an investment account. However, paying off debt offers a guaranteed return equal to the interest rate you avoid, and there is real value in the peace of mind that comes with being debt-free. There is no wrong answer; it depends on your financial priorities, risk tolerance, and whether your loan carries a prepayment penalty.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How do extra payments reduce total interest on a loan?</strong></p>
+      <p>Extra payments go directly toward reducing the principal balance. Since interest is calculated on the remaining balance each month, a lower balance means less interest accrues. Even small extra payments can save thousands of dollars and shorten the loan by months or years.</p>
+
+      <p><strong class="text-[#1e293b]">Should I pay off my loan early or invest the extra money?</strong></p>
+      <p>It depends on your loan interest rate versus your expected investment return. If your loan rate is higher than your after-tax investment return, paying off the loan faster saves more. If your investment return exceeds the loan rate, investing may be more profitable, though paying off debt offers a guaranteed, risk-free return.</p>
+
+      <p><strong class="text-[#1e293b]">Does my loan have a prepayment penalty?</strong></p>
+      <p>Some loans charge a fee for paying off the balance early. Check your loan agreement or contact your lender before making extra payments. Federal student loans and most modern mortgages do not have prepayment penalties, but some auto loans and personal loans may.</p>
+
+      <p><strong class="text-[#1e293b]">What if my monthly payment is not enough to cover the interest?</strong></p>
+      <p>If your monthly payment is less than the interest that accrues each month, your balance will grow instead of shrink — this is called negative amortization. This calculator will warn you if your payment is too low to ever pay off the loan. In that case, you need to increase your monthly payment or refinance to a lower rate.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Consult a qualified financial advisor for decisions about your specific situation. Actual results may vary based on payment timing, compounding method, and lender-specific terms.
+      </div>
+
+      <p>This loan payoff calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to plan your debt repayment strategy or compare the impact of extra payments.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .lp-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .lp-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .lp-input::placeholder { color: #94a3b8; }
+
+    #amort-table tr { border-top: 1px solid #e2e8f0; }
+    #amort-table td { padding: 0.5rem 1rem; white-space: nowrap; }
+    #amort-table td:first-child { text-align: left; }
+    #amort-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #compare-body tr { border-top: 1px solid #e2e8f0; }
+    #compare-body td { padding: 0.5rem 0.75rem; white-space: nowrap; }
+    #compare-body td:first-child { text-align: left; font-weight: 500; }
+    #compare-body td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #amort-body::-webkit-scrollbar { width: 6px; }
+    #amort-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #amort-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const fmt2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const $ = id => document.getElementById(id);
+
+    const balanceEl = $('loan-balance');
+    const rateEl = $('interest-rate');
+    const paymentEl = $('monthly-payment');
+    const extraEl = $('extra-payment');
+    const calcBtn = $('calc-btn');
+    const errorMsg = $('error-msg');
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    [balanceEl, paymentEl, extraEl].forEach(el => {
+      el.addEventListener('input', () => formatInput(el));
+    });
+
+    function payoffDate(monthsFromNow) {
+      const d = new Date();
+      d.setMonth(d.getMonth() + monthsFromNow);
+      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+    function hideError() {
+      errorMsg.classList.add('hidden');
+    }
+
+    function runAmortization(principal, monthlyRate, payment, extra) {
+      let balance = principal;
+      let totalInterest = 0;
+      let totalPaid = 0;
+      let months = 0;
+      const schedule = [];
+      const maxMonths = 1200;
+
+      while (balance > 0.005 && months < maxMonths) {
+        months++;
+        const interestPart = balance * monthlyRate;
+        let principalPart = payment - interestPart + extra;
+
+        if (principalPart <= 0 && months > 1) return null;
+
+        if (principalPart > balance) {
+          principalPart = balance;
+          const actualPayment = principalPart + interestPart;
+          totalInterest += interestPart;
+          totalPaid += actualPayment;
+          balance = 0;
+          schedule.push({ month: months, payment: actualPayment, principal: principalPart, interest: interestPart, balance: 0 });
+        } else {
+          balance -= principalPart;
+          totalInterest += interestPart;
+          totalPaid += payment + extra;
+          schedule.push({ month: months, payment: payment + extra, principal: principalPart, interest: interestPart, balance });
+        }
+      }
+
+      if (balance > 0.005) return null;
+
+      return { months, totalInterest, totalPaid, schedule };
+    }
+
+    function calculate() {
+      hideError();
+      $('results-panel').classList.add('hidden');
+      $('extra-panel').classList.add('hidden');
+      $('compare-panel').classList.add('hidden');
+      $('amort-wrapper').classList.add('hidden');
+
+      const principal = parseNum(balanceEl);
+      const annualRate = parseFloat(rateEl.value) || 0;
+      const payment = parseNum(paymentEl);
+      const extra = parseNum(extraEl);
+
+      if (principal <= 0) { showError('Enter a loan balance greater than zero.'); return; }
+      if (annualRate < 0) { showError('Interest rate cannot be negative.'); return; }
+      if (payment <= 0) { showError('Enter a monthly payment greater than zero.'); return; }
+
+      const monthlyRate = annualRate / 100 / 12;
+      const minPayment = principal * monthlyRate;
+
+      if (payment <= minPayment) {
+        showError(`Your monthly payment must exceed ${fmt2.format(minPayment)} (the monthly interest) to pay off this loan.`);
+        return;
+      }
+
+      const standard = runAmortization(principal, monthlyRate, payment, 0);
+      if (!standard) { showError('Could not calculate payoff. Check your inputs.'); return; }
+
+      $('out-payoff-date').textContent = payoffDate(standard.months);
+      $('out-months').textContent = standard.months;
+      $('out-total-interest').textContent = fmt.format(standard.totalInterest);
+      $('out-total-paid').textContent = fmt.format(standard.totalPaid);
+      $('results-panel').classList.remove('hidden');
+
+      if (extra > 0) {
+        const withExtra = runAmortization(principal, monthlyRate, payment, extra);
+        if (withExtra) {
+          const monthsSaved = standard.months - withExtra.months;
+          const interestSaved = standard.totalInterest - withExtra.totalInterest;
+
+          $('out-extra-date').textContent = payoffDate(withExtra.months);
+          $('out-months-saved').textContent = monthsSaved;
+          $('out-interest-saved').textContent = fmt.format(interestSaved);
+          $('out-extra-total').textContent = fmt.format(withExtra.totalPaid);
+          $('extra-panel').classList.remove('hidden');
+
+          buildComparison(standard, withExtra);
+          buildAmortTable(withExtra.schedule, `${withExtra.months} payments (with extra)`);
+        } else {
+          buildAmortTable(standard.schedule, `${standard.months} payments`);
+        }
+      } else {
+        buildAmortTable(standard.schedule, `${standard.months} payments`);
+      }
+
+      $('amort-wrapper').classList.remove('hidden');
+    }
+
+    function buildComparison(std, ext) {
+      const monthsSaved = std.months - ext.months;
+      const interestSaved = std.totalInterest - ext.totalInterest;
+      const totalSaved = std.totalPaid - ext.totalPaid;
+
+      const rows = [
+        ['Payoff Time', `${std.months} months`, `${ext.months} months`, `${monthsSaved} months`],
+        ['Payoff Date', payoffDate(std.months), payoffDate(ext.months), '—'],
+        ['Total Interest', fmt.format(std.totalInterest), fmt.format(ext.totalInterest), fmt.format(interestSaved)],
+        ['Total Paid', fmt.format(std.totalPaid), fmt.format(ext.totalPaid), fmt.format(totalSaved)],
+      ];
+
+      $('compare-body').innerHTML = rows.map((r, i) => {
+        const savingsClass = i === 0 || i === 2 || i === 3 ? ' text-[#22c55e] font-semibold' : '';
+        return `<tr>
+          <td class="text-[#475569]">${r[0]}</td>
+          <td class="px-3">${r[1]}</td>
+          <td class="px-3">${r[2]}</td>
+          <td class="px-3${savingsClass}">${r[3]}</td>
+        </tr>`;
+      }).join('');
+
+      $('compare-panel').classList.remove('hidden');
+    }
+
+    function buildAmortTable(schedule, label) {
+      $('amort-label').textContent = label;
+      $('amort-table').innerHTML = schedule.map(r =>
+        `<tr>
+          <td>${r.month}</td>
+          <td>${fmt2.format(r.payment)}</td>
+          <td>${fmt2.format(r.principal)}</td>
+          <td>${fmt2.format(r.interest)}</td>
+          <td>${fmt2.format(r.balance)}</td>
+        </tr>`
+      ).join('');
+    }
+
+    $('amort-toggle').addEventListener('click', () => {
+      const body = $('amort-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('amort-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('amort-toggle').classList.add('rounded-b-none');
+      else $('amort-toggle').classList.remove('rounded-b-none');
+    });
+
+    calcBtn.addEventListener('click', calculate);
+
+    [balanceEl, rateEl, paymentEl, extraEl].forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('loan-payoff-calculator');
+  </script>
+</body>
+</html>

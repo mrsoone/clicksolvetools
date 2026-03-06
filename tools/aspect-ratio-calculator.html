@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Aspect Ratio Calculator Online | ClickSolveTools</title>
+  <meta name="description" content="Calculate and convert aspect ratios instantly. Lock ratio to auto-resize, use presets like 16:9, 4:3, and 1:1, preview proportions visually, and find common resolutions. Free — runs in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/aspect-ratio-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Aspect Ratio Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Calculate and convert aspect ratios instantly. Lock ratio, use presets, preview proportions, and find common resolutions. Free, no signup — runs in your browser.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/aspect-ratio-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Aspect Ratio Calculator Online | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate and convert aspect ratios instantly. Lock ratio, use presets, preview proportions, and find common resolutions.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Aspect Ratio Calculator",
+    "url": "https://clicksolvetools.com/tools/aspect-ratio-calculator",
+    "description": "Calculate and convert aspect ratios instantly. Lock ratio to auto-resize dimensions, use common presets, preview proportions visually, and reference common resolutions.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an aspect ratio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An aspect ratio is the proportional relationship between the width and height of an image, video, or screen. It is expressed as two numbers separated by a colon, such as 16:9 or 4:3."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the most common aspect ratio for video?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "16:9 (widescreen) is the most common aspect ratio for video content, used by YouTube, most TV broadcasts, and standard HD, Full HD, and 4K resolutions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate the aspect ratio of an image?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide both the width and height by their greatest common divisor (GCD). For example, a 1920×1080 image: GCD of 1920 and 1080 is 120, so 1920÷120 = 16 and 1080÷120 = 9, giving an aspect ratio of 16:9."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What aspect ratio is best for Instagram?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Instagram supports 1:1 for square posts, 4:5 for portrait feed posts (recommended for maximum screen area), 9:16 for Stories and Reels, and 1.91:1 for landscape posts."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    .preset-btn { transition: all 150ms ease; }
+    .preset-btn:hover { transform: translateY(-1px); }
+    .preset-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; box-shadow: 0 2px 8px rgba(37,99,235,0.2); }
+    .fade-in { animation: fadeIn 300ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .lock-toggle { transition: all 200ms ease; }
+    .lock-toggle.locked { background-color: #2563eb; color: #fff; border-color: #2563eb; }
+    .preview-box { transition: width 300ms ease, height 300ms ease; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+  <div id="nav-container"></div>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <div class="mb-8 text-center">
+      <span class="text-4xl mb-3 block">📐</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Aspect Ratio Calculator</h1>
+      <p class="text-[#475569] text-base max-w-lg mx-auto">Enter dimensions to find the aspect ratio, lock it to auto-resize, or pick a preset. Results update instantly.</p>
+    </div>
+
+    <!-- Dimension Inputs + Ratio Display -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 mb-6 fade-in">
+      <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        <div class="flex-1 w-full">
+          <label for="input-w" class="block text-sm font-medium text-[#1e293b] mb-1.5">Width</label>
+          <input id="input-w" type="number" min="1" step="1" placeholder="1920" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg" autofocus>
+        </div>
+
+        <button id="lock-btn" class="lock-toggle mt-5 sm:mt-6 flex items-center gap-1.5 px-4 py-2.5 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc] hover:bg-[#f1f5f9]" title="Lock aspect ratio">
+          <svg id="lock-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4m-9 0h10a2 2 0 012 2v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2z"/></svg>
+          <span id="lock-label">Lock</span>
+        </button>
+
+        <div class="flex-1 w-full">
+          <label for="input-h" class="block text-sm font-medium text-[#1e293b] mb-1.5">Height</label>
+          <input id="input-h" type="number" min="1" step="1" placeholder="1080" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+        </div>
+      </div>
+
+      <!-- Ratio Result -->
+      <div id="ratio-result" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 text-center min-h-[80px] flex flex-col items-center justify-center">
+        <span class="text-[#94a3b8] text-sm">Enter width and height above</span>
+      </div>
+    </div>
+
+    <!-- Preset Buttons -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 mb-6 fade-in" style="animation-delay:60ms">
+      <h2 class="text-sm font-semibold text-[#1e293b] mb-4">Common Presets</h2>
+      <div class="flex flex-wrap gap-2" id="presets">
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="16" data-h="9">16:9</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="4" data-h="3">4:3</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="1" data-h="1">1:1</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="21" data-h="9">21:9</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="3" data-h="2">3:2</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="9" data-h="16">9:16</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="4" data-h="5">4:5</button>
+        <button class="preset-btn px-4 py-2 border border-[#e2e8f0] rounded-lg text-sm font-medium text-[#475569] bg-[#f8fafc]" data-w="5" data-h="4">5:4</button>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <!-- Visual Preview -->
+      <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 fade-in" style="animation-delay:120ms">
+        <h2 class="text-sm font-semibold text-[#1e293b] mb-4">Visual Preview</h2>
+        <div class="flex items-center justify-center min-h-[220px]">
+          <div id="preview-box" class="preview-box border-2 border-[#2563eb] rounded-lg bg-[#eff6ff] flex items-center justify-center" style="width:240px;height:135px">
+            <span id="preview-label" class="text-[#2563eb] font-bold text-lg">16:9</span>
+          </div>
+        </div>
+        <p id="preview-dims" class="text-center text-xs text-[#94a3b8] mt-3"></p>
+      </div>
+
+      <!-- Resize Calculator -->
+      <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 fade-in" style="animation-delay:180ms">
+        <h2 class="text-sm font-semibold text-[#1e293b] mb-1">Resize Calculator</h2>
+        <p class="text-xs text-[#94a3b8] mb-4">Enter a target width <strong>or</strong> height — the other dimension is calculated from the current ratio.</p>
+        <div class="space-y-3">
+          <div>
+            <label for="resize-w" class="block text-xs font-medium text-[#475569] mb-1">Target Width</label>
+            <input id="resize-w" type="number" min="1" step="1" placeholder="e.g. 1280" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+          </div>
+          <div>
+            <label for="resize-h" class="block text-xs font-medium text-[#475569] mb-1">Target Height</label>
+            <input id="resize-h" type="number" min="1" step="1" placeholder="e.g. 720" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+          </div>
+          <div id="resize-result" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4 text-center min-h-[60px] flex flex-col items-center justify-center">
+            <span class="text-[#94a3b8] text-sm">Set a ratio above, then enter a target dimension</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Resolutions Reference -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 mt-6 fade-in" style="animation-delay:240ms">
+      <h2 class="text-sm font-semibold text-[#1e293b] mb-4">Common Resolutions</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-[#e2e8f0] text-left">
+              <th class="py-2 pr-4 font-semibold text-[#1e293b]">Name</th>
+              <th class="py-2 pr-4 font-semibold text-[#1e293b]">Resolution</th>
+              <th class="py-2 pr-4 font-semibold text-[#1e293b]">Ratio</th>
+              <th class="py-2 font-semibold text-[#1e293b]">Use</th>
+            </tr>
+          </thead>
+          <tbody id="res-table" class="text-[#475569]">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reset -->
+    <div class="mt-6 text-center">
+      <button id="reset-btn" class="px-5 py-2 text-sm font-medium bg-[#f1f5f9] text-[#475569] rounded-lg hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-all">Reset All</button>
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Aspect Ratios — A Complete Guide</h2>
+
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>An aspect ratio is the proportional relationship between the width and height of an image, video frame, or display screen. It is written as two numbers separated by a colon — for example, 16:9 means the width is 16 units for every 9 units of height. Aspect ratios are fundamental in photography, filmmaking, web design, and graphic design because they determine how content looks on different devices and platforms. Getting the ratio wrong can lead to stretched, cropped, or letterboxed media that looks unprofessional.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Most Common Aspect Ratios</h3>
+        <p><strong class="text-[#1e293b]">16:9 (Widescreen)</strong> is the dominant ratio for modern screens. It's the standard for HD television, YouTube videos, computer monitors, and most smartphones in landscape mode. Common resolutions in this ratio include 1280×720 (HD), 1920×1080 (Full HD), 2560×1440 (QHD), and 3840×2160 (4K UHD). If you're producing video content for the web or broadcast, 16:9 is almost always the safe choice.</p>
+        <p><strong class="text-[#1e293b]">4:3 (Standard)</strong> was the traditional TV and computer monitor ratio before widescreen became the norm. It's still used in some presentations, iPad displays, and retro-style photography. Classic resolutions include 640×480, 800×600, and 1024×768.</p>
+        <p><strong class="text-[#1e293b]">1:1 (Square)</strong> became popular with Instagram's square photo format. It's widely used for social media profile pictures, thumbnails, and album art. The most common resolution is 1080×1080.</p>
+        <p><strong class="text-[#1e293b]">9:16 (Vertical)</strong> is the portrait orientation of 16:9 and has become essential for mobile-first content. TikTok, Instagram Reels, YouTube Shorts, and Snapchat all use 9:16 at resolutions like 1080×1920.</p>
+        <p><strong class="text-[#1e293b]">21:9 (Ultra-wide)</strong> is used in cinematic films and ultra-wide gaming monitors. It delivers an immersive, panoramic field of view. Common resolutions are 2560×1080 and 3440×1440.</p>
+        <p><strong class="text-[#1e293b]">3:2</strong> is the native ratio of 35mm film and is used in many DSLR cameras, Microsoft Surface devices, and the MacBook lineup. It provides slightly more vertical space than 16:9, which many photographers prefer for composition.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Use Cases by Industry</h3>
+        <p>In <strong class="text-[#1e293b]">video production</strong>, choosing the right aspect ratio is one of the first decisions in pre-production. YouTube and streaming services default to 16:9, while theatrical releases often use 2.39:1 (close to 21:9) for a cinematic look. Social media platforms each have preferred ratios — Instagram feed posts perform best at 4:5, Stories use 9:16, and landscape posts use 1.91:1.</p>
+        <p>In <strong class="text-[#1e293b]">photography</strong>, the aspect ratio affects composition and how images appear in print. A 3:2 ratio maps perfectly to standard 6×4-inch prints, while 4:3 fits 8×6-inch prints without cropping. Photographers often shoot at their camera's native ratio and crop later for specific platforms.</p>
+        <p>In <strong class="text-[#1e293b]">web design</strong>, aspect ratios determine the layout of hero images, thumbnails, and video embeds. Using CSS <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">aspect-ratio</code> property, designers can enforce consistent proportions across responsive layouts without JavaScript. Maintaining consistent ratios prevents cumulative layout shift (CLS), which is a Core Web Vital metric that affects SEO.</p>
+        <p>In <strong class="text-[#1e293b]">gaming</strong>, monitor aspect ratio directly impacts the field of view. Ultra-wide 21:9 monitors give competitive and immersive advantages in many games, though some titles lock to 16:9. Multi-monitor setups may use combined ratios like 48:9 for triple-screen racing simulators.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Calculate an Aspect Ratio</h3>
+        <p>To find the aspect ratio of any resolution, divide both the width and height by their greatest common divisor (GCD). For example, for a 1920×1080 image, the GCD of 1920 and 1080 is 120. Dividing both by 120 gives 16:9. This calculator performs that math automatically — just enter any width and height, and the simplified ratio appears instantly.</p>
+        <p>The lock feature is especially useful for resizing. Once you've established a ratio (either by entering dimensions or selecting a preset), toggle the lock on. Now changing the width automatically recalculates the height to maintain the same proportions, and vice versa. This eliminates guesswork when scaling images or video for different platforms.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">What is an aspect ratio?</strong><br>An aspect ratio is the proportional relationship between width and height. A 16:9 ratio means for every 16 units of width there are 9 units of height, regardless of the actual pixel dimensions.</p>
+
+        <p><strong class="text-[#1e293b]">What is the best aspect ratio for YouTube?</strong><br>YouTube's standard player uses 16:9. Uploading videos in 1920×1080 or 3840×2160 ensures they fill the player without black bars. YouTube also supports 9:16 for Shorts.</p>
+
+        <p><strong class="text-[#1e293b]">What aspect ratio should I use for Instagram?</strong><br>For feed posts, 4:5 (1080×1350) takes up the most screen real estate. For Stories and Reels, use 9:16 (1080×1920). Square posts use 1:1 (1080×1080).</p>
+
+        <p><strong class="text-[#1e293b]">How do I resize an image without distortion?</strong><br>Always maintain the original aspect ratio when scaling. Use this calculator's lock feature: enter your current dimensions, lock the ratio, then type your desired width or height — the other dimension adjusts automatically.</p>
+
+        <p><strong class="text-[#1e293b]">Is this calculator free?</strong><br>Yes. This aspect ratio calculator runs entirely in your browser with no ads, no signup, and no data collection. Your inputs never leave your device.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+    const inputW = document.getElementById('input-w');
+    const inputH = document.getElementById('input-h');
+    const lockBtn = document.getElementById('lock-btn');
+    const lockIcon = document.getElementById('lock-icon');
+    const lockLabel = document.getElementById('lock-label');
+    const ratioResult = document.getElementById('ratio-result');
+    const previewBox = document.getElementById('preview-box');
+    const previewLabel = document.getElementById('preview-label');
+    const previewDims = document.getElementById('preview-dims');
+    const resizeW = document.getElementById('resize-w');
+    const resizeH = document.getElementById('resize-h');
+    const resizeResult = document.getElementById('resize-result');
+    const presetBtns = document.querySelectorAll('.preset-btn');
+
+    let locked = false;
+    let ratioW = 0;
+    let ratioH = 0;
+    let lastChanged = 'w';
+
+    const resolutions = [
+      { name: 'HD (720p)',       w: 1280, h: 720,  use: 'Streaming, web video' },
+      { name: 'Full HD (1080p)', w: 1920, h: 1080, use: 'YouTube, TV, monitors' },
+      { name: 'QHD (1440p)',     w: 2560, h: 1440, use: 'Gaming monitors' },
+      { name: '4K UHD',          w: 3840, h: 2160, use: 'High-end displays, streaming' },
+      { name: 'Instagram Square',w: 1080, h: 1080, use: 'Social media posts' },
+      { name: 'Instagram Story', w: 1080, h: 1920, use: 'Stories, Reels, TikTok' },
+      { name: 'Instagram Portrait', w: 1080, h: 1350, use: 'Feed posts (4:5)' },
+      { name: 'Ultra-wide QHD',  w: 3440, h: 1440, use: 'Ultra-wide monitors' },
+      { name: 'MacBook Air 13″', w: 2560, h: 1664, use: 'Apple laptops (≈3:2)' },
+      { name: 'iPad (10th gen)', w: 2360, h: 1640, use: 'Tablet apps' },
+      { name: 'Classic VGA',     w: 640,  h: 480,  use: 'Legacy displays (4:3)' },
+      { name: 'DSLR Photo',      w: 6000, h: 4000, use: 'Photography (3:2)' },
+    ];
+
+    function gcd(a, b) {
+      a = Math.abs(Math.round(a));
+      b = Math.abs(Math.round(b));
+      while (b) { [a, b] = [b, a % b]; }
+      return a;
+    }
+
+    function simplify(w, h) {
+      if (!w || !h || w <= 0 || h <= 0) return null;
+      const d = gcd(w, h);
+      return { w: w / d, h: h / d };
+    }
+
+    function updateRatioDisplay(w, h) {
+      const s = simplify(w, h);
+      if (!s) {
+        ratioResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter width and height above</span>';
+        return;
+      }
+      ratioW = s.w;
+      ratioH = s.h;
+      const decimal = (w / h).toFixed(4);
+      ratioResult.innerHTML = `
+        <span class="text-[#94a3b8] text-sm mb-1">${Math.round(w)} × ${Math.round(h)}</span>
+        <span class="text-3xl font-bold text-[#2563eb]">${s.w}:${s.h}</span>
+        <span class="text-[#94a3b8] text-xs mt-1">Decimal: ${decimal}</span>
+      `;
+    }
+
+    function updatePreview(w, h) {
+      const s = simplify(w, h);
+      if (!s) return;
+      const maxW = 260, maxH = 200;
+      let pw, ph;
+      if (s.w / s.h >= maxW / maxH) {
+        pw = maxW;
+        ph = Math.round(maxW * s.h / s.w);
+      } else {
+        ph = maxH;
+        pw = Math.round(maxH * s.w / s.h);
+      }
+      previewBox.style.width = pw + 'px';
+      previewBox.style.height = ph + 'px';
+      previewLabel.textContent = s.w + ':' + s.h;
+      previewDims.textContent = `Preview scaled to ${pw} × ${ph} px`;
+    }
+
+    function highlightPreset(rw, rh) {
+      presetBtns.forEach(btn => {
+        const bw = parseInt(btn.dataset.w);
+        const bh = parseInt(btn.dataset.h);
+        btn.classList.toggle('active', bw === rw && bh === rh);
+      });
+    }
+
+    function fullUpdate() {
+      const w = parseFloat(inputW.value);
+      const h = parseFloat(inputH.value);
+      if (w > 0 && h > 0) {
+        updateRatioDisplay(w, h);
+        updatePreview(w, h);
+        const s = simplify(w, h);
+        if (s) highlightPreset(s.w, s.h);
+      } else {
+        ratioResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter width and height above</span>';
+        highlightPreset(-1, -1);
+      }
+    }
+
+    function onWidthChange() {
+      lastChanged = 'w';
+      const w = parseFloat(inputW.value);
+      if (locked && ratioW && ratioH && w > 0) {
+        inputH.value = Math.round(w * ratioH / ratioW);
+      }
+      fullUpdate();
+    }
+
+    function onHeightChange() {
+      lastChanged = 'h';
+      const h = parseFloat(inputH.value);
+      if (locked && ratioW && ratioH && h > 0) {
+        inputW.value = Math.round(h * ratioW / ratioH);
+      }
+      fullUpdate();
+    }
+
+    inputW.addEventListener('input', onWidthChange);
+    inputH.addEventListener('input', onHeightChange);
+
+    lockBtn.addEventListener('click', () => {
+      const w = parseFloat(inputW.value);
+      const h = parseFloat(inputH.value);
+      if (!locked && (!w || !h || w <= 0 || h <= 0) && ratioW <= 0) {
+        ratioResult.innerHTML = '<span class="text-red-500 text-sm font-medium">Enter dimensions or pick a preset first</span>';
+        return;
+      }
+      locked = !locked;
+      lockBtn.classList.toggle('locked', locked);
+      lockIcon.innerHTML = locked
+        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6-6V7a4 4 0 118 0v4H6zm10 0H8a2 2 0 00-2 2v7a2 2 0 002 2h8a2 2 0 002-2v-7a2 2 0 00-2-2z"/>'
+        : '<path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4m-9 0h10a2 2 0 012 2v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2z"/>';
+      lockLabel.textContent = locked ? 'Locked' : 'Lock';
+      if (locked && w > 0 && h > 0) {
+        const s = simplify(w, h);
+        if (s) { ratioW = s.w; ratioH = s.h; }
+      }
+    });
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pw = parseInt(btn.dataset.w);
+        const ph = parseInt(btn.dataset.h);
+        ratioW = pw;
+        ratioH = ph;
+
+        const curW = parseFloat(inputW.value);
+        const curH = parseFloat(inputH.value);
+        if (curW > 0) {
+          inputH.value = Math.round(curW * ph / pw);
+        } else if (curH > 0) {
+          inputW.value = Math.round(curH * pw / ph);
+        } else {
+          inputW.value = pw * 120;
+          inputH.value = ph * 120;
+        }
+
+        locked = true;
+        lockBtn.classList.add('locked');
+        lockIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6-6V7a4 4 0 118 0v4H6zm10 0H8a2 2 0 00-2 2v7a2 2 0 002 2h8a2 2 0 002-2v-7a2 2 0 00-2-2z"/>';
+        lockLabel.textContent = 'Locked';
+        fullUpdate();
+      });
+    });
+
+    let resizeSource = null;
+    resizeW.addEventListener('input', () => { resizeSource = 'w'; calcResize(); });
+    resizeH.addEventListener('input', () => { resizeSource = 'h'; calcResize(); });
+    resizeW.addEventListener('focus', () => { resizeSource = 'w'; });
+    resizeH.addEventListener('focus', () => { resizeSource = 'h'; });
+
+    function calcResize() {
+      if (ratioW <= 0 || ratioH <= 0) {
+        resizeResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Set a ratio above first</span>';
+        return;
+      }
+      if (resizeSource === 'w') {
+        const tw = parseFloat(resizeW.value);
+        if (!tw || tw <= 0) {
+          resizeResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter a target width</span>';
+          return;
+        }
+        const th = Math.round(tw * ratioH / ratioW);
+        resizeH.value = th;
+        resizeResult.innerHTML = `
+          <span class="text-[#94a3b8] text-xs mb-1">At ${ratioW}:${ratioH} ratio</span>
+          <span class="text-xl font-bold text-[#2563eb]">${Math.round(tw)} × ${th}</span>
+        `;
+      } else {
+        const th = parseFloat(resizeH.value);
+        if (!th || th <= 0) {
+          resizeResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter a target height</span>';
+          return;
+        }
+        const tw = Math.round(th * ratioW / ratioH);
+        resizeW.value = tw;
+        resizeResult.innerHTML = `
+          <span class="text-[#94a3b8] text-xs mb-1">At ${ratioW}:${ratioH} ratio</span>
+          <span class="text-xl font-bold text-[#2563eb]">${tw} × ${Math.round(th)}</span>
+        `;
+      }
+    }
+
+    (function buildResTable() {
+      const tbody = document.getElementById('res-table');
+      tbody.innerHTML = resolutions.map(r => {
+        const s = simplify(r.w, r.h);
+        const ratio = s ? `${s.w}:${s.h}` : '—';
+        return `
+          <tr class="border-b border-[#f1f5f9] hover:bg-[#f8fafc] cursor-pointer res-row" data-w="${r.w}" data-h="${r.h}">
+            <td class="py-2.5 pr-4 font-medium text-[#1e293b]">${r.name}</td>
+            <td class="py-2.5 pr-4">${r.w} × ${r.h}</td>
+            <td class="py-2.5 pr-4"><span class="px-2 py-0.5 rounded-full bg-[#eff6ff] text-[#2563eb] text-xs font-semibold">${ratio}</span></td>
+            <td class="py-2.5 text-xs">${r.use}</td>
+          </tr>`;
+      }).join('');
+
+      tbody.querySelectorAll('.res-row').forEach(row => {
+        row.addEventListener('click', () => {
+          inputW.value = row.dataset.w;
+          inputH.value = row.dataset.h;
+          fullUpdate();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    })();
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      inputW.value = '';
+      inputH.value = '';
+      resizeW.value = '';
+      resizeH.value = '';
+      locked = false;
+      ratioW = 0;
+      ratioH = 0;
+      lockBtn.classList.remove('locked');
+      lockIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4m-9 0h10a2 2 0 012 2v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2z"/>';
+      lockLabel.textContent = 'Lock';
+      ratioResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter width and height above</span>';
+      resizeResult.innerHTML = '<span class="text-[#94a3b8] text-sm">Set a ratio above, then enter a target dimension</span>';
+      previewBox.style.width = '240px';
+      previewBox.style.height = '135px';
+      previewLabel.textContent = '16:9';
+      previewDims.textContent = '';
+      highlightPreset(-1, -1);
+    });
+  </script>
+
+  <script type="module">import { initToolPage } from '/js/shared.js'; initToolPage('aspect-ratio-calculator');</script>
+</body>
+</html>

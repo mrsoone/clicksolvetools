@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Duplicate Line Remover Online — Remove Repeated Lines Instantly | ClickSolveTools</title>
+    <meta name="description" content="Remove duplicate lines from text instantly. Options for case-sensitive matching, trimming whitespace, sorting output, and showing only duplicates. Free, private, runs in your browser.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/duplicate-line-remover">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧹</text></svg>" type="image/svg+xml">
+
+    <meta property="og:title" content="Free Duplicate Line Remover Online — Remove Repeated Lines Instantly | ClickSolveTools">
+    <meta property="og:description" content="Remove duplicate lines from text instantly. Options for case-sensitive matching, trimming whitespace, sorting output, and showing only duplicates. Free, private, runs in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/duplicate-line-remover">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Duplicate Line Remover Online — Remove Repeated Lines Instantly | ClickSolveTools">
+    <meta name="twitter:description" content="Remove duplicate lines from text instantly. Options for case-sensitive matching, trimming whitespace, sorting, and showing only duplicates.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Duplicate Line Remover",
+      "url": "https://clicksolvetools.com/tools/duplicate-line-remover",
+      "description": "Remove duplicate lines from text instantly. Options for case-sensitive matching, trimming whitespace, sorting output, and showing only duplicates.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+        .line-numbers {
+            counter-reset: line;
+        }
+        .line-numbers .line::before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            width: 3ch;
+            margin-right: 1ch;
+            text-align: right;
+            color: #94a3b8;
+            user-select: none;
+        }
+        .toggle-track {
+            transition: background-color 200ms ease;
+        }
+        .toggle-thumb {
+            transition: transform 200ms ease;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Duplicate Line Remover</h1>
+                <p class="text-[#475569] text-lg">Paste your text, remove duplicate lines, and get clean unique output instantly</p>
+            </div>
+
+            <!-- Input -->
+            <div class="mb-4">
+                <label for="text-input" class="text-sm font-medium text-[#475569] mb-2 block">Input Text</label>
+                <div class="relative">
+                    <textarea
+                        id="text-input"
+                        class="w-full bg-white border border-[#e2e8f0] rounded-lg p-4 pl-16 text-[#1e293b] text-sm font-mono leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8]"
+                        style="min-height:220px"
+                        placeholder="Paste your text here — one item per line..."
+                        spellcheck="false"
+                    ></textarea>
+                    <div id="line-numbers-input" class="absolute top-0 left-0 pt-4 pl-3 text-sm font-mono leading-relaxed text-[#94a3b8] select-none pointer-events-none" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 mb-4 flex flex-wrap gap-x-6 gap-y-3 items-center">
+                <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                    <button type="button" role="switch" aria-checked="true" id="opt-case" class="relative inline-flex h-5 w-9 items-center rounded-full toggle-track bg-[#2563eb]" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true'); this.className='relative inline-flex h-5 w-9 items-center rounded-full toggle-track '+(this.getAttribute('aria-checked')==='true'?'bg-[#2563eb]':'bg-[#cbd5e1]'); this.querySelector('span').className='toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow '+(this.getAttribute('aria-checked')==='true'?'translate-x-[18px]':'translate-x-[3px]');">
+                        <span class="toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow translate-x-[18px]"></span>
+                    </button>
+                    <span class="text-sm text-[#475569]">Case-sensitive</span>
+                </label>
+
+                <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                    <button type="button" role="switch" aria-checked="true" id="opt-trim" class="relative inline-flex h-5 w-9 items-center rounded-full toggle-track bg-[#2563eb]" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true'); this.className='relative inline-flex h-5 w-9 items-center rounded-full toggle-track '+(this.getAttribute('aria-checked')==='true'?'bg-[#2563eb]':'bg-[#cbd5e1]'); this.querySelector('span').className='toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow '+(this.getAttribute('aria-checked')==='true'?'translate-x-[18px]':'translate-x-[3px]');">
+                        <span class="toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow translate-x-[18px]"></span>
+                    </button>
+                    <span class="text-sm text-[#475569]">Trim whitespace</span>
+                </label>
+
+                <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                    <button type="button" role="switch" aria-checked="false" id="opt-dupes-only" class="relative inline-flex h-5 w-9 items-center rounded-full toggle-track bg-[#cbd5e1]" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true'); this.className='relative inline-flex h-5 w-9 items-center rounded-full toggle-track '+(this.getAttribute('aria-checked')==='true'?'bg-[#2563eb]':'bg-[#cbd5e1]'); this.querySelector('span').className='toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow '+(this.getAttribute('aria-checked')==='true'?'translate-x-[18px]':'translate-x-[3px]');">
+                        <span class="toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow translate-x-[3px]"></span>
+                    </button>
+                    <span class="text-sm text-[#475569]">Show only duplicates</span>
+                </label>
+
+                <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                    <button type="button" role="switch" aria-checked="false" id="opt-sort" class="relative inline-flex h-5 w-9 items-center rounded-full toggle-track bg-[#cbd5e1]" onclick="this.setAttribute('aria-checked', this.getAttribute('aria-checked')==='true'?'false':'true'); this.className='relative inline-flex h-5 w-9 items-center rounded-full toggle-track '+(this.getAttribute('aria-checked')==='true'?'bg-[#2563eb]':'bg-[#cbd5e1]'); this.querySelector('span').className='toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow '+(this.getAttribute('aria-checked')==='true'?'translate-x-[18px]':'translate-x-[3px]');">
+                        <span class="toggle-thumb inline-block h-3.5 w-3.5 rounded-full bg-white shadow translate-x-[3px]"></span>
+                    </button>
+                    <span class="text-sm text-[#475569]">Sort alphabetically</span>
+                </label>
+            </div>
+
+            <!-- Action Button -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button id="btn-remove" class="px-6 py-2.5 bg-[#2563eb] text-white font-medium rounded-lg hover:bg-[#1d4ed8] active:scale-[0.98] transition-all shadow-sm shadow-[#2563eb]/20">
+                    Remove Duplicates
+                </button>
+                <button id="btn-clear" class="px-5 py-2.5 bg-white border border-[#e2e8f0] text-[#475569] font-medium rounded-lg hover:bg-[#f1f5f9] active:scale-[0.98] transition-all">
+                    Clear
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div id="stats-bar" class="grid grid-cols-3 gap-3 mb-6 hidden">
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-original" class="text-2xl sm:text-3xl font-bold text-[#2563eb]">0</div>
+                    <div class="text-xs sm:text-sm text-[#475569] mt-1">Original Lines</div>
+                </div>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-unique" class="text-2xl sm:text-3xl font-bold text-[#2563eb]">0</div>
+                    <div id="label-unique" class="text-xs sm:text-sm text-[#475569] mt-1">Unique Lines</div>
+                </div>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-removed" class="text-2xl sm:text-3xl font-bold text-[#2563eb]">0</div>
+                    <div id="label-removed" class="text-xs sm:text-sm text-[#475569] mt-1">Duplicates Removed</div>
+                </div>
+            </div>
+
+            <!-- Output -->
+            <div id="output-section" class="mb-12 hidden">
+                <div class="flex items-center justify-between mb-2">
+                    <label for="text-output" class="text-sm font-medium text-[#475569]">Output</label>
+                    <button id="btn-copy" class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#2563eb] bg-[#eff6ff] rounded-md hover:bg-[#dbeafe] active:scale-[0.97] transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <span id="copy-label">Copy</span>
+                    </button>
+                </div>
+                <textarea
+                    id="text-output"
+                    class="w-full bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm font-mono leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors"
+                    style="min-height:180px"
+                    readonly
+                ></textarea>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Remove Duplicate Lines from Text</h2>
+
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>Duplicate lines creep into text files more often than you might think. Whether you are cleaning up a mailing list, deduplicating log entries, tidying a CSV export, or merging data from multiple sources, repeated lines waste space, cause confusion, and can introduce errors into downstream processes. This free duplicate line remover gives you a fast, one-click way to strip out every repeated line and produce clean, unique output — entirely in your browser with no data ever leaving your device.</p>
+
+                    <p>To use the tool, paste or type your text into the input area. Each line is treated as a separate entry. Click <strong class="text-[#1e293b]">Remove Duplicates</strong> and the output textarea instantly shows your deduplicated result along with statistics: the original line count, the number of unique lines retained, and how many duplicates were removed. You can copy the result with one click and paste it back into your spreadsheet, code editor, or any other application.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Flexible Options for Every Use Case</h3>
+                    <p>The tool ships with four toggles that let you tailor deduplication to your exact needs:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#1e293b]">Case-sensitive matching</strong> — When enabled, "Apple" and "apple" are treated as different lines. Turn it off to perform case-insensitive deduplication, which is useful when merging lists from different sources that may have inconsistent capitalization.</li>
+                        <li><strong class="text-[#1e293b]">Trim whitespace</strong> — Leading and trailing spaces are a common culprit when two lines look identical but are not technically the same string. Enabling this option strips whitespace before comparing, catching those hidden mismatches.</li>
+                        <li><strong class="text-[#1e293b]">Show only duplicates</strong> — Instead of removing duplicates, this mode flips the logic and shows you only the lines that appeared more than once. It is perfect for auditing data: quickly find which entries are repeated in a customer list, a set of URLs, or a log file.</li>
+                        <li><strong class="text-[#1e293b]">Sort alphabetically</strong> — Sorts the output A–Z after deduplication, making it easy to scan long lists or prepare sorted data for further processing.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases for Removing Duplicate Lines</h3>
+                    <p>Duplicate removal is a fundamental step in many text-processing and data-cleaning workflows. Here are some of the most common scenarios:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#1e293b]">Data cleaning and ETL</strong> — Before loading data into a database or analytics platform, deduplication ensures you are not inflating row counts or skewing aggregates with repeated records.</li>
+                        <li><strong class="text-[#1e293b]">Email and mailing lists</strong> — Merging subscriber lists from different campaigns often produces duplicates. Running the combined list through this tool gives you a clean, unique set of addresses.</li>
+                        <li><strong class="text-[#1e293b]">CSV and spreadsheet cleanup</strong> — Copy a column from Excel or Google Sheets, paste it here, remove duplicates, and paste the clean list back. It is often faster than spreadsheet formulas for a quick one-off task.</li>
+                        <li><strong class="text-[#1e293b]">Log file analysis</strong> — Server logs, application logs, and error logs frequently contain repeated entries. Deduplicating them helps you focus on unique events and identify patterns faster.</li>
+                        <li><strong class="text-[#1e293b]">Code and configuration</strong> — Remove duplicate import statements, environment variables, or configuration entries that have accumulated over time in a project.</li>
+                        <li><strong class="text-[#1e293b]">SEO keyword lists</strong> — When compiling keyword research from multiple tools, duplicates are inevitable. Clean them up before importing into your SEO platform.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How It Works Under the Hood</h3>
+                    <p>The tool splits your input on newline characters, applies any active options (trimming whitespace, normalizing case), and then iterates through the lines while tracking which values have already been seen using a high-performance JavaScript Set. Because Set lookups are O(1) on average, the tool handles thousands of lines in milliseconds. The first occurrence of each line is preserved in its original order unless you enable alphabetical sorting. Everything runs client-side — your text is never transmitted to a server.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#1e293b]">Does this tool handle large files?</strong><br>
+                    Yes. Because the deduplication runs entirely in your browser using optimized JavaScript, it can comfortably process tens of thousands of lines in under a second on modern hardware. For extremely large files (millions of lines), you may experience a brief delay, but the tool will not crash or time out since there is no server round-trip involved.</p>
+
+                    <p><strong class="text-[#1e293b]">Is my data private?</strong><br>
+                    Absolutely. Your text never leaves your browser. There are no API calls, no server-side processing, and no data storage. Once you close or refresh the page, the text is gone. This makes the tool safe for sensitive data like internal logs, customer lists, or proprietary content.</p>
+
+                    <p><strong class="text-[#1e293b]">What counts as a "duplicate"?</strong><br>
+                    A duplicate is any line whose content exactly matches another line that appeared earlier in the input. With case-sensitive mode on, "Hello" and "hello" are different. With trim whitespace on, "  Hello  " and "Hello" are treated as the same. Blank lines are also deduplicated — if your input has ten empty lines, only one will remain in the output.</p>
+
+                    <p><strong class="text-[#1e293b]">Can I keep the original order of lines?</strong><br>
+                    Yes. By default, the tool preserves the order in which lines first appear. The first occurrence of each unique line stays in place while subsequent duplicates are silently dropped. Toggle on "Sort alphabetically" only if you want the output reordered A–Z.</p>
+
+                    <p>This duplicate line remover is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. No text is stored or transmitted — your content stays private on your device. Bookmark this page and use it whenever you need to clean up repeated lines quickly.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('duplicate-line-remover');
+    </script>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const textOutput = document.getElementById('text-output');
+        const lineNumbersEl = document.getElementById('line-numbers-input');
+        const btnRemove = document.getElementById('btn-remove');
+        const btnClear = document.getElementById('btn-clear');
+        const btnCopy = document.getElementById('btn-copy');
+        const copyLabel = document.getElementById('copy-label');
+        const statsBar = document.getElementById('stats-bar');
+        const outputSection = document.getElementById('output-section');
+        const statOriginal = document.getElementById('stat-original');
+        const statUnique = document.getElementById('stat-unique');
+        const statRemoved = document.getElementById('stat-removed');
+
+        const labelUnique = document.getElementById('label-unique');
+        const labelRemoved = document.getElementById('label-removed');
+        const optCase = document.getElementById('opt-case');
+        const optTrim = document.getElementById('opt-trim');
+        const optDupesOnly = document.getElementById('opt-dupes-only');
+        const optSort = document.getElementById('opt-sort');
+
+        function isOn(toggle) {
+            return toggle.getAttribute('aria-checked') === 'true';
+        }
+
+        function updateLineNumbers() {
+            const lines = textInput.value.split('\n');
+            const nums = lines.map((_, i) => `<span class="block text-right pr-2" style="line-height:1.625rem">${i + 1}</span>`).join('');
+            lineNumbersEl.innerHTML = nums;
+        }
+
+        function removeDuplicates() {
+            const raw = textInput.value;
+            if (!raw.trim()) return;
+
+            const caseSensitive = isOn(optCase);
+            const trimWs = isOn(optTrim);
+            const dupesOnly = isOn(optDupesOnly);
+            const sortOutput = isOn(optSort);
+
+            const lines = raw.split('\n');
+            const originalCount = lines.length;
+
+            const seen = new Map();
+            for (let i = 0; i < lines.length; i++) {
+                let key = lines[i];
+                if (trimWs) key = key.trim();
+                if (!caseSensitive) key = key.toLowerCase();
+
+                if (seen.has(key)) {
+                    seen.get(key).count++;
+                } else {
+                    seen.set(key, { index: i, original: trimWs ? lines[i].trim() : lines[i], count: 1 });
+                }
+            }
+
+            let result;
+            if (dupesOnly) {
+                result = [];
+                for (const [, entry] of seen) {
+                    if (entry.count > 1) result.push(entry);
+                }
+                result.sort((a, b) => a.index - b.index);
+                result = result.map(e => e.original);
+            } else {
+                result = [];
+                for (const [, entry] of seen) {
+                    result.push({ index: entry.index, text: entry.original });
+                }
+                result.sort((a, b) => a.index - b.index);
+                result = result.map(e => e.text);
+            }
+
+            if (sortOutput) {
+                result.sort((a, b) => a.localeCompare(b));
+            }
+
+            statOriginal.textContent = originalCount.toLocaleString();
+            if (dupesOnly) {
+                statUnique.textContent = result.length.toLocaleString();
+                statRemoved.textContent = (originalCount - result.length).toLocaleString();
+                labelUnique.textContent = 'Duplicate Lines';
+                labelRemoved.textContent = 'Unique (hidden)';
+            } else {
+                statUnique.textContent = result.length.toLocaleString();
+                statRemoved.textContent = (originalCount - result.length).toLocaleString();
+                labelUnique.textContent = 'Unique Lines';
+                labelRemoved.textContent = 'Duplicates Removed';
+            }
+
+            textOutput.value = result.join('\n');
+            statsBar.classList.remove('hidden');
+            outputSection.classList.remove('hidden');
+        }
+
+        function clearAll() {
+            textInput.value = '';
+            textOutput.value = '';
+            statsBar.classList.add('hidden');
+            outputSection.classList.add('hidden');
+            updateLineNumbers();
+        }
+
+        async function copyOutput() {
+            if (!textOutput.value) return;
+            try {
+                await navigator.clipboard.writeText(textOutput.value);
+                copyLabel.textContent = 'Copied!';
+                btnCopy.classList.add('text-green-600', 'bg-green-50');
+                btnCopy.classList.remove('text-[#2563eb]', 'bg-[#eff6ff]');
+                setTimeout(() => {
+                    copyLabel.textContent = 'Copy';
+                    btnCopy.classList.remove('text-green-600', 'bg-green-50');
+                    btnCopy.classList.add('text-[#2563eb]', 'bg-[#eff6ff]');
+                }, 2000);
+            } catch {
+                textOutput.select();
+                document.execCommand('copy');
+            }
+        }
+
+        textInput.addEventListener('input', updateLineNumbers);
+        textInput.addEventListener('scroll', () => {
+            lineNumbersEl.style.transform = `translateY(-${textInput.scrollTop}px)`;
+        });
+        btnRemove.addEventListener('click', removeDuplicates);
+        btnClear.addEventListener('click', clearAll);
+        btnCopy.addEventListener('click', copyOutput);
+
+        updateLineNumbers();
+    </script>
+</body>
+</html>

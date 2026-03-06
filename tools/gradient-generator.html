@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free CSS Gradient Generator — Linear, Radial &amp; Conic | ClickSolveTools</title>
+  <meta name="description" content="Create beautiful CSS gradients with a live preview. Supports linear, radial, and conic gradients with multiple color stops, presets, and one-click code copy. Free, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/gradient-generator">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free CSS Gradient Generator — Linear, Radial & Conic | ClickSolveTools">
+  <meta property="og:description" content="Create beautiful CSS gradients with a live preview. Supports linear, radial, and conic gradients with multiple color stops, presets, and one-click code copy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/gradient-generator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free CSS Gradient Generator — Linear, Radial & Conic | ClickSolveTools">
+  <meta name="twitter:description" content="Create beautiful CSS gradients with a live preview. Supports linear, radial, and conic gradients with multiple color stops, presets, and one-click code copy.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CSS Gradient Generator",
+    "url": "https://clicksolvetools.com/tools/gradient-generator",
+    "description": "Create beautiful CSS gradients with a live preview. Supports linear, radial, and conic gradients with multiple color stops, presets, and one-click code copy.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a CSS gradient?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A CSS gradient is a smooth transition between two or more colors rendered natively by the browser, without using an image file. CSS supports linear, radial, and conic gradient types."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between linear, radial, and conic gradients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Linear gradients transition colors along a straight line at a specified angle. Radial gradients radiate outward from a center point in a circular or elliptical shape. Conic gradients sweep colors around a center point like a color wheel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need vendor prefixes for CSS gradients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Modern browsers support CSS gradients without prefixes. However, for older browser support (Safari 5, Chrome 25 and earlier), you may want to include -webkit- prefixed versions. This tool can generate prefixed CSS for you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many color stops can a CSS gradient have?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no fixed limit to the number of color stops in a CSS gradient. This generator supports up to 8 color stops, which is sufficient for virtually any design need."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    input[type="color"] { -webkit-appearance: none; border: none; padding: 0; cursor: pointer; }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    input[type="color"]::-webkit-color-swatch { border: none; border-radius: 0.5rem; }
+    input[type="color"]::-moz-color-swatch { border: none; border-radius: 0.5rem; }
+    input[type="range"] { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e2e8f0; outline: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .toast { animation: toastIn 200ms ease, toastOut 200ms ease 1.2s forwards; }
+    @keyframes toastIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes toastOut { from { opacity:1; } to { opacity:0; } }
+    .preset-btn { transition: transform 150ms ease, box-shadow 150ms ease; }
+    .preset-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+    .checkerboard { background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <h1 class="text-2xl sm:text-3xl font-bold text-[#1e293b] mb-1">CSS Gradient Generator</h1>
+        <p class="text-[#64748b] text-sm mb-6">Create beautiful gradients with a live preview and copy the CSS.</p>
+
+        <!-- Live Preview -->
+        <div class="mb-6">
+          <div class="checkerboard rounded-xl overflow-hidden">
+            <div id="gradient-preview" class="w-full h-52 sm:h-64 rounded-xl border border-[#e2e8f0]" style="background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%)"></div>
+          </div>
+        </div>
+
+        <!-- Controls Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <!-- Gradient Type -->
+          <div>
+            <label for="grad-type" class="block text-sm font-medium text-[#475569] mb-2">Gradient Type</label>
+            <select id="grad-type" class="w-full px-3 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] text-sm focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+              <option value="linear">Linear</option>
+              <option value="radial">Radial</option>
+              <option value="conic">Conic</option>
+            </select>
+          </div>
+
+          <!-- Linear: Angle -->
+          <div id="linear-controls">
+            <label for="angle-input" class="block text-sm font-medium text-[#475569] mb-2">Angle: <span id="angle-value">90</span>°</label>
+            <div class="flex items-center gap-3">
+              <input type="range" id="angle-slider" min="0" max="360" value="90" class="flex-1">
+              <input type="number" id="angle-input" min="0" max="360" value="90" class="w-20 px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+            </div>
+          </div>
+
+          <!-- Radial: Shape + Position -->
+          <div id="radial-controls" class="hidden">
+            <label class="block text-sm font-medium text-[#475569] mb-2">Shape &amp; Position</label>
+            <div class="flex gap-3">
+              <select id="radial-shape" class="flex-1 px-3 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] text-sm focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+                <option value="circle">Circle</option>
+                <option value="ellipse">Ellipse</option>
+              </select>
+              <select id="radial-position" class="flex-1 px-3 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] text-sm focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+                <option value="center">Center</option>
+                <option value="top">Top</option>
+                <option value="top right">Top Right</option>
+                <option value="right">Right</option>
+                <option value="bottom right">Bottom Right</option>
+                <option value="bottom">Bottom</option>
+                <option value="bottom left">Bottom Left</option>
+                <option value="left">Left</option>
+                <option value="top left">Top Left</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Conic: Angle -->
+          <div id="conic-controls" class="hidden">
+            <label for="conic-angle-input" class="block text-sm font-medium text-[#475569] mb-2">Start Angle: <span id="conic-angle-value">0</span>°</label>
+            <div class="flex items-center gap-3">
+              <input type="range" id="conic-angle-slider" min="0" max="360" value="0" class="flex-1">
+              <input type="number" id="conic-angle-input" min="0" max="360" value="0" class="w-20 px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Stops -->
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium text-[#475569]">Color Stops</h3>
+            <div class="flex items-center gap-2">
+              <button id="btn-add-stop" class="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] transition-colors px-2 py-1 rounded-md hover:bg-[#eff6ff]">+ Add Stop</button>
+            </div>
+          </div>
+          <div id="color-stops" class="space-y-3"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <button id="btn-random" class="flex items-center gap-1.5 px-4 py-2.5 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Random
+          </button>
+          <label class="flex items-center gap-2 text-sm text-[#475569] select-none cursor-pointer">
+            <input type="checkbox" id="show-prefixes" class="w-4 h-4 rounded border-[#e2e8f0] text-[#2563eb] focus:ring-[#2563eb]">
+            Include vendor prefixes
+          </label>
+        </div>
+
+        <!-- Presets -->
+        <div class="mb-6">
+          <h3 class="text-sm font-medium text-[#475569] mb-3">Presets</h3>
+          <div id="presets-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2"></div>
+        </div>
+
+        <!-- CSS Output -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-medium text-[#475569]">CSS Code</h3>
+            <button id="btn-copy-css" class="text-xs font-medium text-[#2563eb] hover:text-[#1d4ed8] transition-colors">Copy CSS</button>
+          </div>
+          <pre id="css-output" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 text-sm font-mono text-[#1e293b] overflow-x-auto whitespace-pre-wrap leading-relaxed"></pre>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">CSS Gradients: A Complete Guide to Beautiful Color Transitions</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>CSS gradients are one of the most versatile tools in modern web design. Instead of relying on image files to create smooth color transitions, browsers can render gradients natively using pure CSS — resulting in crisper visuals at any resolution, faster page loads, and infinitely scalable backgrounds. This free CSS gradient generator lets you build linear, radial, and conic gradients visually with a live preview, then copy the production-ready CSS code with a single click.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Understanding the Three Gradient Types</h3>
+          <p>CSS offers three distinct gradient functions, each producing a fundamentally different pattern. <strong class="text-[#1e293b]">Linear gradients</strong> transition colors along a straight line defined by an angle — <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">linear-gradient(90deg, #2563eb, #7c3aed)</code> creates a horizontal sweep from blue to purple. You control the direction with an angle value (0° is bottom-to-top, 90° is left-to-right) or with keywords like <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">to right</code> or <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">to bottom left</code>.</p>
+
+          <p><strong class="text-[#1e293b]">Radial gradients</strong> radiate outward from a center point in a circular or elliptical shape. They are ideal for spotlight effects, vignettes, and soft glowing backgrounds. You can control the shape (circle or ellipse) and the position of the center point to create off-center lighting effects that add depth to hero sections and cards.</p>
+
+          <p><strong class="text-[#1e293b]">Conic gradients</strong> sweep colors around a center point, much like a color wheel or pie chart. Introduced more recently in CSS, conic gradients are perfect for creating progress indicators, decorative borders, and abstract art-style backgrounds. By adjusting the start angle and color stop positions, you can produce sharp pie-chart segments or smooth rainbow sweeps.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Color Stops and How They Work</h3>
+          <p>Every gradient is defined by at least two color stops — the starting and ending colors. Each color stop consists of a color value and an optional position expressed as a percentage. When you add more color stops, the browser interpolates between each consecutive pair to create smooth transitions. Positioning stops closer together creates sharper transitions, while spreading them apart produces softer blends. This generator supports up to eight color stops, giving you fine-grained control over complex multi-color gradients.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases in Web Design</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Hero sections and banners</strong> — Gradients behind text create depth and visual interest without competing with the content.</li>
+            <li><strong class="text-[#1e293b]">Button hover states</strong> — Subtle gradient shifts on hover give buttons a polished, interactive feel.</li>
+            <li><strong class="text-[#1e293b]">Card backgrounds</strong> — Light gradient overlays can add dimension to flat card designs.</li>
+            <li><strong class="text-[#1e293b]">Text gradients</strong> — Combined with <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">background-clip: text</code>, gradients can colorize text for striking headings.</li>
+            <li><strong class="text-[#1e293b]">Loading indicators</strong> — Animated conic gradients make effective spinner-style loading animations.</li>
+            <li><strong class="text-[#1e293b]">Border effects</strong> — Using <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">border-image</code> with a gradient creates vivid, colorful borders without images.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How to Use This Tool</h3>
+          <p>Select your gradient type (linear, radial, or conic), adjust the direction or shape controls, then customize your color stops using the color pickers and position sliders. The preview updates in real time as you make changes. Choose from over a dozen beautiful presets — including Sunset, Ocean, Northern Lights, and more — to start from a polished foundation, then tweak to fit your project. Click <strong class="text-[#1e293b]">Random</strong> to generate an entirely new gradient for instant inspiration. When you are happy with the result, copy the generated CSS code with a single click. Enable the vendor prefixes option if you need to support older browsers.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Browser Support and Vendor Prefixes</h3>
+          <p>All modern browsers — Chrome, Firefox, Safari, Edge, and Opera — support CSS gradients without vendor prefixes. The <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">-webkit-</code> prefix was historically needed for older versions of Safari and Chrome (pre-2013), but is now only necessary if your project must support very old browsers. This tool optionally includes prefixed output so you can cover all bases if needed. Conic gradients have slightly narrower support but work in all current browser versions.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What is a CSS gradient?</h4>
+              <p>A CSS gradient is a smooth transition between two or more colors rendered natively by the browser, without using an image file. CSS supports linear, radial, and conic gradient types, each producing a different visual pattern.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What is the difference between linear, radial, and conic gradients?</h4>
+              <p>Linear gradients transition colors along a straight line at a specified angle. Radial gradients radiate outward from a center point in a circular or elliptical shape. Conic gradients sweep colors around a center point like a color wheel.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need vendor prefixes for CSS gradients?</h4>
+              <p>Modern browsers support CSS gradients without prefixes. However, for older browser support (Safari 5, Chrome 25 and earlier), you may want to include <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">-webkit-</code> prefixed versions. This tool can generate prefixed CSS for you with the checkbox option.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">How many color stops can a CSS gradient have?</h4>
+              <p>There is no fixed browser limit to the number of color stops in a CSS gradient. This generator supports up to 8 color stops, which is sufficient for virtually any design need from simple two-color fades to complex multi-color spectrums.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is this tool free to use?</h4>
+              <p>Yes. This gradient generator runs entirely in your browser — no server processing, no signup, no data collection. Build as many gradients as you like and copy the CSS instantly.</p>
+            </div>
+          </div>
+
+          <p>Whether you are building hero backgrounds, crafting brand identities, or just exploring color combinations, this CSS gradient generator provides everything you need — a real-time preview, flexible controls, curated presets, and clean, copy-ready CSS output. Bookmark this page and come back whenever you need a gradient.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('gradient-generator');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const preview       = document.getElementById('gradient-preview');
+    const gradType      = document.getElementById('grad-type');
+    const angleSlider   = document.getElementById('angle-slider');
+    const angleInput    = document.getElementById('angle-input');
+    const angleValue    = document.getElementById('angle-value');
+    const conicSlider   = document.getElementById('conic-angle-slider');
+    const conicInput    = document.getElementById('conic-angle-input');
+    const conicValue    = document.getElementById('conic-angle-value');
+    const linearCtrl    = document.getElementById('linear-controls');
+    const radialCtrl    = document.getElementById('radial-controls');
+    const conicCtrl     = document.getElementById('conic-controls');
+    const radialShape   = document.getElementById('radial-shape');
+    const radialPos     = document.getElementById('radial-position');
+    const stopsContainer= document.getElementById('color-stops');
+    const btnAddStop    = document.getElementById('btn-add-stop');
+    const btnRandom     = document.getElementById('btn-random');
+    const showPrefixes  = document.getElementById('show-prefixes');
+    const cssOutput     = document.getElementById('css-output');
+    const btnCopyCss    = document.getElementById('btn-copy-css');
+    const presetsGrid   = document.getElementById('presets-grid');
+
+    const MAX_STOPS = 8;
+    const MIN_STOPS = 2;
+
+    let stops = [
+      { color: '#2563eb', position: 0 },
+      { color: '#7c3aed', position: 100 }
+    ];
+
+    const presets = [
+      { name: 'Sunset',          colors: ['#f97316','#ef4444','#ec4899'],       positions: [0,50,100] },
+      { name: 'Ocean',           colors: ['#06b6d4','#3b82f6','#1e3a5f'],       positions: [0,50,100] },
+      { name: 'Northern Lights', colors: ['#10b981','#06b6d4','#8b5cf6'],       positions: [0,50,100] },
+      { name: 'Peach',           colors: ['#fbbf24','#f97316','#ef4444'],       positions: [0,50,100] },
+      { name: 'Lavender Dream',  colors: ['#c084fc','#818cf8','#60a5fa'],       positions: [0,50,100] },
+      { name: 'Emerald',         colors: ['#065f46','#10b981','#6ee7b7'],       positions: [0,50,100] },
+      { name: 'Berry',           colors: ['#be185d','#9333ea','#4f46e5'],       positions: [0,50,100] },
+      { name: 'Candy',           colors: ['#f472b6','#fb923c','#facc15'],       positions: [0,50,100] },
+      { name: 'Midnight',        colors: ['#0f172a','#1e3a5f','#2563eb'],       positions: [0,50,100] },
+      { name: 'Fire',            colors: ['#fbbf24','#f97316','#dc2626','#7f1d1d'], positions: [0,30,65,100] },
+      { name: 'Aqua Splash',     colors: ['#67e8f9','#22d3ee','#0891b2'],       positions: [0,50,100] },
+      { name: 'Royal',           colors: ['#7c3aed','#2563eb'],                 positions: [0,100] },
+      { name: 'Citrus',          colors: ['#84cc16','#facc15','#f97316'],       positions: [0,50,100] },
+      { name: 'Flamingo',        colors: ['#fb7185','#f472b6','#e879f9'],       positions: [0,50,100] },
+      { name: 'Deep Space',      colors: ['#0f172a','#312e81','#7c3aed','#c084fc'], positions: [0,33,66,100] },
+      { name: 'Cotton Candy',    colors: ['#a5f3fc','#c4b5fd','#fbcfe8'],       positions: [0,50,100] }
+    ];
+
+    // --- Render presets ---
+    presets.forEach((p, idx) => {
+      const btn = document.createElement('button');
+      const grad = `linear-gradient(135deg, ${p.colors.map((c,i) => c + ' ' + p.positions[i] + '%').join(', ')})`;
+      btn.className = 'preset-btn w-full aspect-square rounded-lg border border-[#e2e8f0] cursor-pointer';
+      btn.style.background = grad;
+      btn.title = p.name;
+      btn.addEventListener('click', () => applyPreset(idx));
+      presetsGrid.appendChild(btn);
+    });
+
+    function applyPreset(idx) {
+      const p = presets[idx];
+      stops = p.colors.map((c, i) => ({ color: c, position: p.positions[i] }));
+      gradType.value = 'linear';
+      angleSlider.value = 135;
+      angleInput.value = 135;
+      angleValue.textContent = '135';
+      showTypeControls('linear');
+      renderStops();
+      updateGradient();
+    }
+
+    // --- Type switching ---
+    gradType.addEventListener('change', () => {
+      showTypeControls(gradType.value);
+      updateGradient();
+    });
+
+    function showTypeControls(type) {
+      linearCtrl.classList.toggle('hidden', type !== 'linear');
+      radialCtrl.classList.toggle('hidden', type !== 'radial');
+      conicCtrl.classList.toggle('hidden', type !== 'conic');
+    }
+
+    // --- Angle syncing ---
+    angleSlider.addEventListener('input', () => {
+      angleInput.value = angleSlider.value;
+      angleValue.textContent = angleSlider.value;
+      updateGradient();
+    });
+    angleInput.addEventListener('input', () => {
+      const v = clamp(parseInt(angleInput.value) || 0, 0, 360);
+      angleSlider.value = v;
+      angleValue.textContent = v;
+      updateGradient();
+    });
+
+    conicSlider.addEventListener('input', () => {
+      conicInput.value = conicSlider.value;
+      conicValue.textContent = conicSlider.value;
+      updateGradient();
+    });
+    conicInput.addEventListener('input', () => {
+      const v = clamp(parseInt(conicInput.value) || 0, 0, 360);
+      conicSlider.value = v;
+      conicValue.textContent = v;
+      updateGradient();
+    });
+
+    // --- Radial controls ---
+    radialShape.addEventListener('change', updateGradient);
+    radialPos.addEventListener('change', updateGradient);
+
+    // --- Prefixes ---
+    showPrefixes.addEventListener('change', updateGradient);
+
+    // --- Color stops rendering ---
+    function renderStops() {
+      stopsContainer.innerHTML = '';
+      stops.forEach((stop, i) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-3';
+        row.innerHTML = `
+          <input type="color" value="${stop.color}" data-idx="${i}" class="stop-color w-10 h-10 rounded-lg border-2 border-[#e2e8f0] hover:border-[#2563eb] transition-colors flex-shrink-0">
+          <input type="range" min="0" max="100" value="${stop.position}" data-idx="${i}" class="stop-pos-slider flex-1">
+          <input type="number" min="0" max="100" value="${stop.position}" data-idx="${i}" class="stop-pos-input w-16 px-2 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors flex-shrink-0">
+          <span class="text-xs text-[#94a3b8] flex-shrink-0">%</span>
+          <button data-idx="${i}" class="stop-remove w-8 h-8 flex items-center justify-center rounded-lg text-[#94a3b8] hover:text-red-500 hover:bg-red-50 transition-colors flex-shrink-0 ${stops.length <= MIN_STOPS ? 'invisible' : ''}" title="Remove stop">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        `;
+        stopsContainer.appendChild(row);
+      });
+      bindStopEvents();
+      updateAddBtnState();
+    }
+
+    function bindStopEvents() {
+      stopsContainer.querySelectorAll('.stop-color').forEach(el => {
+        el.addEventListener('input', (e) => {
+          stops[+e.target.dataset.idx].color = e.target.value;
+          updateGradient();
+        });
+      });
+      stopsContainer.querySelectorAll('.stop-pos-slider').forEach(el => {
+        el.addEventListener('input', (e) => {
+          const idx = +e.target.dataset.idx;
+          const v = parseInt(e.target.value);
+          stops[idx].position = v;
+          const numInput = stopsContainer.querySelectorAll('.stop-pos-input')[idx];
+          if (numInput) numInput.value = v;
+          updateGradient();
+        });
+      });
+      stopsContainer.querySelectorAll('.stop-pos-input').forEach(el => {
+        el.addEventListener('input', (e) => {
+          const idx = +e.target.dataset.idx;
+          const v = clamp(parseInt(e.target.value) || 0, 0, 100);
+          stops[idx].position = v;
+          const slider = stopsContainer.querySelectorAll('.stop-pos-slider')[idx];
+          if (slider) slider.value = v;
+          updateGradient();
+        });
+      });
+      stopsContainer.querySelectorAll('.stop-remove').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const idx = +e.currentTarget.dataset.idx;
+          if (stops.length <= MIN_STOPS) return;
+          stops.splice(idx, 1);
+          renderStops();
+          updateGradient();
+        });
+      });
+    }
+
+    function updateAddBtnState() {
+      btnAddStop.classList.toggle('opacity-40', stops.length >= MAX_STOPS);
+      btnAddStop.classList.toggle('pointer-events-none', stops.length >= MAX_STOPS);
+    }
+
+    btnAddStop.addEventListener('click', () => {
+      if (stops.length >= MAX_STOPS) return;
+      const last = stops[stops.length - 1];
+      const secondLast = stops[stops.length - 2];
+      const newPos = Math.min(100, Math.round((last.position + secondLast.position) / 2 + 10));
+      const newColor = randomColor();
+      stops.push({ color: newColor, position: clamp(newPos, 0, 100) });
+      stops.sort((a, b) => a.position - b.position);
+      renderStops();
+      updateGradient();
+    });
+
+    // --- Gradient generation ---
+    function buildGradientCSS(prefix) {
+      const p = prefix || '';
+      const type = gradType.value;
+      const stopsStr = stops.map(s => `${s.color} ${s.position}%`).join(', ');
+
+      if (type === 'linear') {
+        const angle = angleSlider.value;
+        return `${p}linear-gradient(${angle}deg, ${stopsStr})`;
+      } else if (type === 'radial') {
+        const shape = radialShape.value;
+        const pos = radialPos.value;
+        return `${p}radial-gradient(${shape} at ${pos}, ${stopsStr})`;
+      } else {
+        const angle = conicSlider.value;
+        return `${p}conic-gradient(from ${angle}deg, ${stopsStr})`;
+      }
+    }
+
+    function updateGradient() {
+      const css = buildGradientCSS();
+      preview.style.background = css;
+
+      let output = `background: ${css};`;
+      if (showPrefixes.checked) {
+        const type = gradType.value;
+        if (type === 'linear' || type === 'radial') {
+          output = `background: ${buildGradientCSS('-webkit-')};\nbackground: ${buildGradientCSS('-moz-')};\nbackground: ${buildGradientCSS('-o-')};\n${output}`;
+        } else {
+          output = `background: ${buildGradientCSS('-webkit-')};\n${output}`;
+        }
+      }
+      cssOutput.textContent = output;
+    }
+
+    // --- Copy CSS ---
+    btnCopyCss.addEventListener('click', () => {
+      const text = cssOutput.textContent;
+      navigator.clipboard.writeText(text).then(() => showToast('CSS copied to clipboard!')).catch(() => {});
+    });
+
+    // --- Random gradient ---
+    btnRandom.addEventListener('click', () => {
+      const count = 2 + Math.floor(Math.random() * 3);
+      stops.length = 0;
+      for (let i = 0; i < count; i++) {
+        stops.push({
+          color: randomColor(),
+          position: Math.round((i / (count - 1)) * 100)
+        });
+      }
+      const types = ['linear', 'radial', 'conic'];
+      const rType = types[Math.floor(Math.random() * types.length)];
+      gradType.value = rType;
+      showTypeControls(rType);
+      if (rType === 'linear') {
+        const a = Math.floor(Math.random() * 361);
+        angleSlider.value = a;
+        angleInput.value = a;
+        angleValue.textContent = a;
+      } else if (rType === 'conic') {
+        const a = Math.floor(Math.random() * 361);
+        conicSlider.value = a;
+        conicInput.value = a;
+        conicValue.textContent = a;
+      } else {
+        radialShape.value = Math.random() > 0.5 ? 'circle' : 'ellipse';
+        const positions = [...radialPos.options].map(o => o.value);
+        radialPos.value = positions[Math.floor(Math.random() * positions.length)];
+      }
+      renderStops();
+      updateGradient();
+    });
+
+    function randomColor() {
+      return '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
+    }
+
+    function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = 'toast bg-[#1e293b] text-white text-sm px-4 py-2 rounded-lg shadow-lg pointer-events-auto';
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 1500);
+    }
+
+    // --- Init ---
+    renderStops();
+    updateGradient();
+  });
+  </script>
+
+</body>
+</html>

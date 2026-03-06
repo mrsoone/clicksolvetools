@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools</title>
+  <meta name="description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert multiple files, adjust quality, preview results, and download — no uploads, completely free.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/image-format-converter">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools">
+  <meta property="og:description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert, adjust quality, and download.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/image-format-converter">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools">
+  <meta name="twitter:description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch mode, quality control, side-by-side preview.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Format Converter",
+    "url": "https://clicksolvetools.com/tools/image-format-converter",
+    "description": "Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert multiple files with quality control.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which image format should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use JPEG for photographs where small file size matters. Use PNG for graphics, logos, or images that need transparency. Use WebP for the best quality-to-size ratio on the web. Use BMP when you need completely uncompressed pixel data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does converting image format reduce quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Converting to a lossy format like JPEG or WebP may reduce quality depending on the quality setting. Converting to lossless formats like PNG or BMP preserves full visual quality but may increase file size."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All image conversion happens entirely in your browser using the HTML5 Canvas API. Your images never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert multiple images at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Switch to Batch Mode to upload and convert multiple images simultaneously. You can download them individually or all at once as a ZIP file."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Mode Toggle -->
+        <div class="flex items-center gap-2 mb-6">
+          <button id="mode-single" class="mode-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-[#2563eb] text-white">Single Image</button>
+          <button id="mode-batch" class="mode-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0]">Batch Mode</button>
+        </div>
+
+        <!-- ═══════════ SINGLE MODE ═══════════ -->
+        <div id="single-mode">
+
+          <!-- Drop zone -->
+          <div id="drop-zone" class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6">
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hidden">
+            <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-[#475569] text-base mb-1">Drop an image here or click to browse</p>
+            <p class="text-[#64748b] text-sm">Supports JPEG, PNG, WebP, BMP, GIF</p>
+          </div>
+
+          <!-- Original info -->
+          <div id="original-info" class="hidden mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-medium text-[#475569]">Original Image</h3>
+              <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 items-start">
+              <div class="w-full sm:w-1/3 flex justify-center">
+                <img id="preview-img" class="max-h-40 rounded-lg border border-[#e2e8f0] object-contain" alt="Original preview">
+              </div>
+              <div class="w-full sm:w-2/3 space-y-1.5">
+                <p class="text-sm text-[#475569]">File: <span id="orig-name" class="text-[#1e293b] font-semibold"></span></p>
+                <p class="text-sm text-[#475569]">Format: <span id="orig-format" class="text-[#1e293b] font-semibold uppercase"></span></p>
+                <p class="text-sm text-[#475569]">Dimensions: <span id="orig-dims" class="text-[#1e293b] font-semibold"></span></p>
+                <p class="text-sm text-[#475569]">Size: <span id="orig-size" class="text-[#1e293b] font-semibold"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div id="controls" class="hidden space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="format-select" class="block text-sm font-medium text-[#475569] mb-2">Convert to</label>
+                <select id="format-select" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
+                  <option value="image/png">PNG (lossless)</option>
+                  <option value="image/jpeg">JPEG (lossy)</option>
+                  <option value="image/webp">WebP (lossy / lossless)</option>
+                  <option value="image/bmp">BMP (uncompressed)</option>
+                </select>
+              </div>
+              <div id="quality-group">
+                <label for="quality-slider" class="block text-sm font-medium text-[#475569] mb-2">Quality: <span id="quality-val" class="text-[#1e293b]">90</span>%</label>
+                <input type="range" id="quality-slider" min="1" max="100" step="1" value="90" class="w-full accent-[#2563eb] mt-2">
+              </div>
+            </div>
+
+            <!-- Preview comparison -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+              <div>
+                <h3 class="text-sm font-medium text-[#475569] mb-2">Original</h3>
+                <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
+                  <img id="compare-original" class="max-h-56 rounded object-contain" alt="Original">
+                </div>
+                <p class="text-xs text-[#94a3b8] mt-2">Size: <span id="compare-orig-size" class="text-[#475569]"></span></p>
+              </div>
+              <div>
+                <h3 class="text-sm font-medium text-[#475569] mb-2">Converted</h3>
+                <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
+                  <img id="compare-converted" class="max-h-56 rounded object-contain" alt="Converted">
+                </div>
+                <p class="text-xs text-[#94a3b8] mt-2">Size: <span id="converted-size" class="text-[#475569]"></span> &nbsp; <span id="size-badge" class="hidden text-xs font-semibold"></span></p>
+              </div>
+            </div>
+
+            <!-- Download -->
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button id="download-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+                Download Converted Image
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ BATCH MODE ═══════════ -->
+        <div id="batch-mode" class="hidden">
+
+          <!-- Batch drop zone -->
+          <div id="batch-drop-zone" class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6">
+            <input type="file" id="batch-file-input" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" multiple class="hidden">
+            <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-[#475569] text-base mb-1">Drop multiple images here or click to browse</p>
+            <p class="text-[#64748b] text-sm">Supports JPEG, PNG, WebP, BMP, GIF</p>
+          </div>
+
+          <!-- Batch controls -->
+          <div id="batch-controls" class="hidden space-y-5">
+            <div class="flex flex-col sm:flex-row gap-4 items-end">
+              <div class="flex-1">
+                <label for="batch-format" class="block text-sm font-medium text-[#475569] mb-2">Convert all to</label>
+                <select id="batch-format" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] text-base appearance-none cursor-pointer">
+                  <option value="image/png">PNG</option>
+                  <option value="image/jpeg">JPEG</option>
+                  <option value="image/webp">WebP</option>
+                  <option value="image/bmp">BMP</option>
+                </select>
+              </div>
+              <div class="flex-1" id="batch-quality-group">
+                <label for="batch-quality" class="block text-sm font-medium text-[#475569] mb-2">Quality: <span id="batch-quality-val" class="text-[#1e293b]">90</span>%</label>
+                <input type="range" id="batch-quality" min="1" max="100" step="1" value="90" class="w-full accent-[#2563eb]">
+              </div>
+              <div class="flex gap-2 shrink-0">
+                <button id="batch-convert-btn" class="px-6 py-2.5 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors whitespace-nowrap">Convert All</button>
+                <button id="batch-clear-btn" class="px-4 py-2.5 rounded-lg bg-[#f1f5f9] text-[#475569] text-sm font-medium hover:bg-[#e2e8f0] transition-colors">Clear</button>
+              </div>
+            </div>
+
+            <!-- Batch list -->
+            <div id="batch-list" class="space-y-2"></div>
+
+            <!-- Download all ZIP -->
+            <div id="batch-download-section" class="hidden pt-2">
+              <button id="batch-download-all" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+                Download All as ZIP
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Image Formats and When to Convert Between Them</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+
+          <p>Digital images come in a variety of file formats, each designed with different priorities — some favor small file sizes for fast web delivery, while others preserve every pixel for archival-quality output. Knowing when and why to convert between formats is an essential skill for web developers, designers, photographers, and anyone who works with images regularly. This free image format converter lets you switch between PNG, JPEG, WebP, and BMP instantly inside your browser. Upload a single image or batch-convert dozens at once, adjust quality for lossy formats, compare the original and converted versions side by side, and download the results — all without uploading a single byte to any server.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Image Formats Explained</h3>
+
+          <p><strong class="text-[#1e293b]">JPEG (Joint Photographic Experts Group)</strong> is the most widely used format for photographs and complex images with smooth gradients. It uses lossy compression — meaning some visual data is permanently discarded to achieve smaller files. A quality slider lets you control the trade-off between file size and visual fidelity. At quality levels of 80–90, most photographs look nearly identical to the original while being 60–80% smaller. JPEG does not support transparency, so it is not suitable for logos, icons, or images that need a transparent background.</p>
+
+          <p><strong class="text-[#1e293b]">PNG (Portable Network Graphics)</strong> uses lossless compression, which means the decompressed image is pixel-for-pixel identical to the original. PNG supports an alpha channel for full or partial transparency, making it the format of choice for logos, UI elements, icons, screenshots, and graphics with sharp edges or flat color areas. The trade-off is file size: PNG files are typically much larger than JPEG or WebP for photographic content, because lossless compression cannot exploit the same perceptual shortcuts that lossy algorithms use.</p>
+
+          <p><strong class="text-[#1e293b]">WebP</strong> is a modern format developed by Google that supports both lossy and lossless compression, as well as transparency and animation. In lossy mode, WebP files are typically 25–35% smaller than JPEG at the same visual quality. In lossless mode, WebP files are roughly 25% smaller than PNG. All major modern browsers — Chrome, Firefox, Safari, and Edge — support WebP, making it an excellent default for web images. If your target audience uses any browser released after 2020, WebP is almost always the optimal choice.</p>
+
+          <p><strong class="text-[#1e293b]">BMP (Bitmap)</strong> stores raw, uncompressed pixel data with no compression at all. This means BMP files are extremely large — a 1920×1080 image occupies roughly 6 MB as a 24-bit BMP. While BMP is rarely used on the web, it remains relevant in legacy desktop software, embedded systems, and certain scientific or medical imaging workflows that require bit-exact pixel data with zero compression artifacts.</p>
+
+          <p><strong class="text-[#1e293b]">GIF (Graphics Interchange Format)</strong> supports animation and uses lossless compression but is limited to a 256-color palette per frame. This makes GIF suitable for simple animations and small graphics with few colors, but poorly suited for photographs. This converter accepts GIF as an input format so you can convert animated or static GIFs into more modern formats.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Lossy vs. Lossless Compression</h3>
+
+          <p>Image compression falls into two categories. <strong class="text-[#1e293b]">Lossy compression</strong> (JPEG, WebP lossy) permanently discards visual information that the human eye is unlikely to notice, achieving dramatic file size reductions — often 70–95% smaller than the raw pixel data. The quality setting controls how aggressively data is removed: lower values produce smaller files with more visible artifacts like blockiness and color banding. <strong class="text-[#1e293b]">Lossless compression</strong> (PNG, WebP lossless, BMP) reduces file size by finding patterns in the data without removing any information. The decompressed file is identical to the original. Lossless is ideal when visual precision matters — screenshots, graphics, medical imaging — but produces larger files than lossy for photographic content.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">When to Convert Between Formats</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Web optimization</strong> — Convert large PNGs or BMPs to WebP or JPEG to reduce page load times and improve Core Web Vitals scores.</li>
+            <li><strong class="text-[#1e293b]">Transparency needs</strong> — Convert JPEG or BMP to PNG or WebP when you need a transparent background for overlays, logos, or compositing.</li>
+            <li><strong class="text-[#1e293b]">Compatibility</strong> — Convert WebP to JPEG or PNG for email clients, older software, or platforms that don't support WebP.</li>
+            <li><strong class="text-[#1e293b]">Archival or editing</strong> — Convert lossy formats to PNG to prevent further quality loss during repeated edits.</li>
+            <li><strong class="text-[#1e293b]">Reducing storage</strong> — Convert BMP screenshots or scans to PNG or WebP to reclaim disk space without losing quality.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Which format gives the smallest file size?</h4>
+              <p>For photographs, WebP lossy at quality 80–85 generally produces the smallest file at a given visual quality. For graphics with flat colors and transparency, WebP lossless or well-optimized PNG are the most compact lossless options.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Will converting JPEG to PNG improve quality?</h4>
+              <p>No. Once lossy compression has removed data, converting to a lossless format cannot recover it. The PNG version will be visually identical to the JPEG but will likely be larger in file size. To get the highest quality, always start from the original uncompressed source when possible.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does the quality slider affect PNG and BMP?</h4>
+              <p>No. PNG uses lossless compression and BMP is uncompressed, so the quality slider has no effect on these formats. It is only relevant for JPEG and WebP, which use lossy compression.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I convert animated GIFs?</h4>
+              <p>This tool extracts the first frame of an animated GIF and converts it to the target format. For full animated conversion, a dedicated GIF-to-video or GIF-to-WebP animation tool would be needed.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All processing happens entirely in your browser. Your images are never uploaded to any server. No data leaves your device.</strong></p>
+
+          <p>This image format converter is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. Convert single images or batches, adjust quality, compare side by side, and download — your files stay private on your device at all times.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('image-format-converter');
+  </script>
+
+  <!-- JSZip for batch ZIP download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ── Helpers ── */
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function mimeToExt(mime) {
+      const map = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/bmp': 'bmp' };
+      return map[mime] || 'png';
+    }
+
+    function formatLabel(mime) {
+      return mimeToExt(mime).toUpperCase();
+    }
+
+    function detectFormat(file) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      const map = { jpg: 'JPEG', jpeg: 'JPEG', png: 'PNG', webp: 'WebP', bmp: 'BMP', gif: 'GIF' };
+      return map[ext] || file.type.split('/')[1]?.toUpperCase() || 'Unknown';
+    }
+
+    function baseName(filename) {
+      const dot = filename.lastIndexOf('.');
+      return dot > 0 ? filename.substring(0, dot) : filename;
+    }
+
+    function isLossy(mime) {
+      return mime === 'image/jpeg' || mime === 'image/webp';
+    }
+
+    /* BMP encoder — 24-bit uncompressed, bottom-up BGR */
+    function canvasToBmpBlob(canvas) {
+      const w = canvas.width, h = canvas.height;
+      const ctx = canvas.getContext('2d');
+      const imgData = ctx.getImageData(0, 0, w, h).data;
+      const rowBytes = w * 3;
+      const padBytes = (4 - (rowBytes % 4)) % 4;
+      const stride = rowBytes + padBytes;
+      const pixelDataSize = stride * h;
+      const fileSize = 54 + pixelDataSize;
+
+      const buf = new ArrayBuffer(fileSize);
+      const view = new DataView(buf);
+
+      view.setUint8(0, 0x42); view.setUint8(1, 0x4D);
+      view.setUint32(2, fileSize, true);
+      view.setUint32(10, 54, true);
+      view.setUint32(14, 40, true);
+      view.setInt32(18, w, true);
+      view.setInt32(22, h, true);
+      view.setUint16(26, 1, true);
+      view.setUint16(28, 24, true);
+      view.setUint32(30, 0, true);
+      view.setUint32(34, pixelDataSize, true);
+      view.setUint32(38, 2835, true);
+      view.setUint32(42, 2835, true);
+
+      let offset = 54;
+      for (let y = h - 1; y >= 0; y--) {
+        for (let x = 0; x < w; x++) {
+          const src = (y * w + x) * 4;
+          view.setUint8(offset++, imgData[src + 2]);
+          view.setUint8(offset++, imgData[src + 1]);
+          view.setUint8(offset++, imgData[src]);
+        }
+        for (let p = 0; p < padBytes; p++) view.setUint8(offset++, 0);
+      }
+
+      return new Blob([buf], { type: 'image/bmp' });
+    }
+
+    function convertImageToBlob(img, targetMime, quality) {
+      return new Promise(resolve => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+
+        if (targetMime === 'image/jpeg') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        ctx.drawImage(img, 0, 0);
+
+        if (targetMime === 'image/bmp') {
+          resolve(canvasToBmpBlob(canvas));
+          return;
+        }
+
+        const q = isLossy(targetMime) ? quality / 100 : undefined;
+        canvas.toBlob(blob => resolve(blob), targetMime, q);
+      });
+    }
+
+    function loadImageElement(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => resolve({ img, url });
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Failed to load image')); };
+        img.src = url;
+      });
+    }
+
+    function downloadBlob(blob, filename) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+
+    function sizeBadge(origSize, newSize) {
+      const pct = ((newSize - origSize) / origSize) * 100;
+      if (Math.abs(pct) < 0.1) return { text: 'same size', cls: 'text-[#94a3b8]' };
+      if (pct < 0) return { text: '↓ ' + Math.abs(pct).toFixed(1) + '% smaller', cls: 'text-emerald-500' };
+      return { text: '↑ ' + pct.toFixed(1) + '% larger', cls: 'text-amber-500' };
+    }
+
+    /* ══════════════════════════════════
+       SINGLE MODE
+       ══════════════════════════════════ */
+
+    const dropZone       = document.getElementById('drop-zone');
+    const fileInput      = document.getElementById('file-input');
+    const originalInfo   = document.getElementById('original-info');
+    const previewImg     = document.getElementById('preview-img');
+    const origName       = document.getElementById('orig-name');
+    const origFormat     = document.getElementById('orig-format');
+    const origDims       = document.getElementById('orig-dims');
+    const origSize       = document.getElementById('orig-size');
+    const clearBtn       = document.getElementById('clear-btn');
+    const controls       = document.getElementById('controls');
+    const formatSelect   = document.getElementById('format-select');
+    const qualityGroup   = document.getElementById('quality-group');
+    const qualitySlider  = document.getElementById('quality-slider');
+    const qualityVal     = document.getElementById('quality-val');
+    const compareOrig    = document.getElementById('compare-original');
+    const compareConv    = document.getElementById('compare-converted');
+    const compareOrigSz  = document.getElementById('compare-orig-size');
+    const convertedSize  = document.getElementById('converted-size');
+    const sizeBadgeEl    = document.getElementById('size-badge');
+    const downloadBtn    = document.getElementById('download-btn');
+
+    let sourceImg = null, sourceFile = null, currentBlob = null, debounceTimer = null;
+
+    function updateQualityVisibility() {
+      const show = isLossy(formatSelect.value);
+      qualityGroup.style.display = show ? '' : 'none';
+    }
+
+    async function convert() {
+      if (!sourceImg) return;
+      const blob = await convertImageToBlob(sourceImg, formatSelect.value, parseInt(qualitySlider.value));
+      if (!blob) return;
+      currentBlob = blob;
+
+      if (compareConv._url) URL.revokeObjectURL(compareConv._url);
+      const url = URL.createObjectURL(blob);
+      compareConv._url = url;
+      compareConv.src = url;
+
+      convertedSize.textContent = formatBytes(blob.size);
+      const badge = sizeBadge(sourceFile.size, blob.size);
+      sizeBadgeEl.textContent = badge.text;
+      sizeBadgeEl.className = 'text-xs font-semibold ' + badge.cls;
+      sizeBadgeEl.classList.remove('hidden');
+      downloadBtn.disabled = false;
+    }
+
+    function debounceConvert() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(convert, 150);
+    }
+
+    async function loadSingle(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      sourceFile = file;
+      try {
+        const { img, url } = await loadImageElement(file);
+        sourceImg = img;
+        previewImg.src = url;
+        compareOrig.src = url;
+        origName.textContent = file.name;
+        origFormat.textContent = detectFormat(file);
+        origDims.textContent = img.naturalWidth + ' × ' + img.naturalHeight + ' px';
+        origSize.textContent = formatBytes(file.size);
+        compareOrigSz.textContent = formatBytes(file.size);
+        dropZone.classList.add('hidden');
+        originalInfo.classList.remove('hidden');
+        controls.classList.remove('hidden');
+        updateQualityVisibility();
+        convert();
+      } catch {}
+    }
+
+    function resetSingle() {
+      sourceImg = null; sourceFile = null; currentBlob = null;
+      fileInput.value = '';
+      dropZone.classList.remove('hidden');
+      originalInfo.classList.add('hidden');
+      controls.classList.add('hidden');
+      downloadBtn.disabled = true;
+      sizeBadgeEl.classList.add('hidden');
+      convertedSize.textContent = '';
+      if (compareConv._url) { URL.revokeObjectURL(compareConv._url); compareConv._url = null; }
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files[0]) loadSingle(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadSingle(fileInput.files[0]); });
+    clearBtn.addEventListener('click', resetSingle);
+    qualitySlider.addEventListener('input', () => { qualityVal.textContent = qualitySlider.value; debounceConvert(); });
+    formatSelect.addEventListener('change', () => { updateQualityVisibility(); convert(); });
+    downloadBtn.addEventListener('click', () => {
+      if (!currentBlob || !sourceFile) return;
+      const ext = mimeToExt(formatSelect.value);
+      downloadBlob(currentBlob, baseName(sourceFile.name) + '.' + ext);
+    });
+
+    /* ══════════════════════════════════
+       BATCH MODE
+       ══════════════════════════════════ */
+
+    const batchDropZone    = document.getElementById('batch-drop-zone');
+    const batchFileInput   = document.getElementById('batch-file-input');
+    const batchControls    = document.getElementById('batch-controls');
+    const batchFormat      = document.getElementById('batch-format');
+    const batchQualityGrp  = document.getElementById('batch-quality-group');
+    const batchQuality     = document.getElementById('batch-quality');
+    const batchQualityVal  = document.getElementById('batch-quality-val');
+    const batchConvertBtn  = document.getElementById('batch-convert-btn');
+    const batchClearBtn    = document.getElementById('batch-clear-btn');
+    const batchList        = document.getElementById('batch-list');
+    const batchDownloadSec = document.getElementById('batch-download-section');
+    const batchDownloadAll = document.getElementById('batch-download-all');
+
+    let batchItems = [];
+
+    function updateBatchQualityVisibility() {
+      batchQualityGrp.style.display = isLossy(batchFormat.value) ? '' : 'none';
+    }
+
+    batchFormat.addEventListener('change', updateBatchQualityVisibility);
+    batchQuality.addEventListener('input', () => { batchQualityVal.textContent = batchQuality.value; });
+
+    function renderBatchList() {
+      batchList.innerHTML = batchItems.map((item, i) => {
+        const statusHtml = item.converted
+          ? `<span class="text-xs text-emerald-500 font-medium">✓ ${formatBytes(item.convertedBlob.size)}</span>
+             <span class="text-xs font-semibold ${sizeBadge(item.file.size, item.convertedBlob.size).cls}">${sizeBadge(item.file.size, item.convertedBlob.size).text}</span>`
+          : `<span class="text-xs text-[#94a3b8]">Pending</span>`;
+
+        const dlBtn = item.converted
+          ? `<button data-dl="${i}" class="batch-dl-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium whitespace-nowrap">Download</button>`
+          : '';
+
+        return `
+          <div class="flex items-center gap-3 p-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg">
+            <img src="${item.thumbUrl}" class="w-10 h-10 rounded object-cover border border-[#e2e8f0] shrink-0" alt="">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-[#1e293b] font-medium truncate">${item.file.name}</p>
+              <p class="text-xs text-[#94a3b8]">${detectFormat(item.file)} · ${formatBytes(item.file.size)}</p>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              ${statusHtml}
+              ${dlBtn}
+              <button data-remove="${i}" class="batch-remove-btn text-[#94a3b8] hover:text-red-400 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>`;
+      }).join('');
+
+      batchList.querySelectorAll('.batch-dl-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.dl);
+          const item = batchItems[idx];
+          if (item?.convertedBlob) {
+            downloadBlob(item.convertedBlob, baseName(item.file.name) + '.' + mimeToExt(batchFormat.value));
+          }
+        });
+      });
+
+      batchList.querySelectorAll('.batch-remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.remove);
+          if (batchItems[idx]?.thumbUrl) URL.revokeObjectURL(batchItems[idx].thumbUrl);
+          batchItems.splice(idx, 1);
+          if (batchItems.length === 0) resetBatch();
+          else renderBatchList();
+          updateBatchDownloadVisibility();
+        });
+      });
+    }
+
+    function updateBatchDownloadVisibility() {
+      const allConverted = batchItems.length > 0 && batchItems.every(it => it.converted);
+      batchDownloadSec.classList.toggle('hidden', !allConverted);
+    }
+
+    async function addBatchFiles(files) {
+      for (const file of files) {
+        if (!file.type.startsWith('image/')) continue;
+        try {
+          const { img, url } = await loadImageElement(file);
+          batchItems.push({ file, img, thumbUrl: url, converted: false, convertedBlob: null });
+        } catch {}
+      }
+      if (batchItems.length > 0) {
+        batchDropZone.classList.add('hidden');
+        batchControls.classList.remove('hidden');
+        updateBatchQualityVisibility();
+        renderBatchList();
+      }
+    }
+
+    function resetBatch() {
+      batchItems.forEach(it => { if (it.thumbUrl) URL.revokeObjectURL(it.thumbUrl); });
+      batchItems = [];
+      batchFileInput.value = '';
+      batchDropZone.classList.remove('hidden');
+      batchControls.classList.add('hidden');
+      batchDownloadSec.classList.add('hidden');
+      batchList.innerHTML = '';
+    }
+
+    batchDropZone.addEventListener('click', () => batchFileInput.click());
+    batchDropZone.addEventListener('dragover', e => { e.preventDefault(); batchDropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    batchDropZone.addEventListener('dragleave', e => { e.preventDefault(); batchDropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    batchDropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      batchDropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      addBatchFiles(e.dataTransfer.files);
+    });
+    batchFileInput.addEventListener('change', () => { addBatchFiles(batchFileInput.files); });
+    batchClearBtn.addEventListener('click', resetBatch);
+
+    batchConvertBtn.addEventListener('click', async () => {
+      const mime = batchFormat.value;
+      const q = parseInt(batchQuality.value);
+      batchConvertBtn.disabled = true;
+      batchConvertBtn.textContent = 'Converting…';
+
+      for (const item of batchItems) {
+        item.convertedBlob = await convertImageToBlob(item.img, mime, q);
+        item.converted = true;
+      }
+
+      batchConvertBtn.disabled = false;
+      batchConvertBtn.textContent = 'Convert All';
+      renderBatchList();
+      updateBatchDownloadVisibility();
+    });
+
+    batchDownloadAll.addEventListener('click', async () => {
+      if (typeof JSZip === 'undefined') {
+        batchItems.forEach((item, i) => {
+          if (item.convertedBlob) {
+            downloadBlob(item.convertedBlob, baseName(item.file.name) + '.' + mimeToExt(batchFormat.value));
+          }
+        });
+        return;
+      }
+
+      batchDownloadAll.disabled = true;
+      batchDownloadAll.textContent = 'Zipping…';
+
+      const zip = new JSZip();
+      const ext = mimeToExt(batchFormat.value);
+      const usedNames = new Set();
+
+      for (const item of batchItems) {
+        if (!item.convertedBlob) continue;
+        let name = baseName(item.file.name) + '.' + ext;
+        let counter = 1;
+        while (usedNames.has(name)) { name = baseName(item.file.name) + '-' + counter++ + '.' + ext; }
+        usedNames.add(name);
+        zip.file(name, item.convertedBlob);
+      }
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      downloadBlob(zipBlob, 'converted-images.zip');
+
+      batchDownloadAll.disabled = false;
+      batchDownloadAll.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg> Download All as ZIP';
+    });
+
+    /* ══════════════════════════════════
+       MODE TOGGLE
+       ══════════════════════════════════ */
+
+    const modeSingleBtn = document.getElementById('mode-single');
+    const modeBatchBtn  = document.getElementById('mode-batch');
+    const singleMode    = document.getElementById('single-mode');
+    const batchMode     = document.getElementById('batch-mode');
+
+    function setMode(mode) {
+      const isSingle = mode === 'single';
+      singleMode.classList.toggle('hidden', !isSingle);
+      batchMode.classList.toggle('hidden', isSingle);
+      modeSingleBtn.className = 'mode-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors ' +
+        (isSingle ? 'bg-[#2563eb] text-white' : 'bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0]');
+      modeBatchBtn.className = 'mode-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors ' +
+        (!isSingle ? 'bg-[#2563eb] text-white' : 'bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0]');
+    }
+
+    modeSingleBtn.addEventListener('click', () => setMode('single'));
+    modeBatchBtn.addEventListener('click', () => setMode('batch'));
+
+    updateQualityVisibility();
+    updateBatchQualityVisibility();
+  });
+  </script>
+
+</body>
+</html>

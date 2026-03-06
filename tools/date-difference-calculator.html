@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Date Difference Calculator — Days, Weeks &amp; Business Days Between Dates | ClickSolveTools</title>
+  <meta name="description" content="Calculate the exact difference between two dates in years, months, days, weeks, business days, and hours. Add or subtract days from any date — free, instant, and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/date-difference-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Date Difference Calculator — Days, Weeks &amp; Business Days Between Dates | ClickSolveTools">
+  <meta property="og:description" content="Calculate the exact difference between two dates in years, months, days, weeks, business days, and hours. Add or subtract days from any date — free, instant, and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/date-difference-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Date Difference Calculator","url":"https://clicksolvetools.com/tools/date-difference-calculator","description":"Calculate the exact difference between two dates in years, months, days, weeks, business days, and hours. Add or subtract days from any date.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How are business days calculated?","acceptedAnswer":{"@type":"Answer","text":"Business days exclude Saturdays and Sundays. The calculator counts only Monday through Friday between the two dates, not including public holidays."}},{"@type":"Question","name":"Does this calculator handle leap years?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator uses standard date arithmetic that correctly accounts for leap years, including February 29."}},{"@type":"Question","name":"Can I calculate a future date by adding days?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Add/Subtract Days tab to enter a starting date and a number of days. The tool returns the resulting date."}},{"@type":"Question","name":"Is my data stored or sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations run entirely in your browser using JavaScript. No data is transmitted or stored."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Mode Tabs -->
+      <div class="flex bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <button id="tab-diff" class="flex-1 py-3 text-sm font-semibold transition-colors bg-[#2563eb] text-white">Date Difference</button>
+        <button id="tab-add" class="flex-1 py-3 text-sm font-semibold transition-colors text-[#475569] hover:bg-[#f1f5f9]">Add / Subtract Days</button>
+      </div>
+
+      <!-- ─── Date Difference Mode ─── -->
+      <div id="mode-diff">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label for="start-date" class="block text-sm font-medium text-[#475569] mb-1.5">Start Date</label>
+              <input type="date" id="start-date" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+              <button data-today="start-date" class="today-btn mt-1.5 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Today</button>
+            </div>
+            <div>
+              <label for="end-date" class="block text-sm font-medium text-[#475569] mb-1.5">End Date</label>
+              <input type="date" id="end-date" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+              <button data-today="end-date" class="today-btn mt-1.5 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Today</button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center mb-5">
+            <button id="btn-swap" class="inline-flex items-center gap-1.5 text-xs text-[#64748b] hover:text-[#2563eb] font-medium transition-colors" title="Swap start and end dates">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+              Swap Dates
+            </button>
+          </div>
+
+          <button id="btn-calc" class="w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] active:bg-[#1e40af] text-white font-semibold text-sm transition-colors">
+            Calculate Difference
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results-diff" class="hidden space-y-4 mt-6">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 text-center">
+            <p class="text-[#94a3b8] text-xs font-medium uppercase tracking-wider mb-2">Date Difference</p>
+            <p id="res-ymd" class="text-2xl sm:text-3xl font-bold text-[#1e293b]"></p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+              <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Days</p>
+              <p id="res-days" class="text-xl font-bold text-[#2563eb]"></p>
+            </div>
+            <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+              <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Weeks</p>
+              <p id="res-weeks" class="text-xl font-bold text-[#2563eb]"></p>
+            </div>
+            <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+              <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Business Days</p>
+              <p id="res-biz" class="text-xl font-bold text-[#2563eb]"></p>
+            </div>
+            <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+              <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Hours</p>
+              <p id="res-hours" class="text-xl font-bold text-[#2563eb]"></p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+            <p class="text-[#94a3b8] text-xs font-medium uppercase tracking-wider mb-3">Also Expressed As</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div class="flex justify-between"><span class="text-[#475569]">Total months</span><span id="res-months" class="font-semibold text-[#1e293b]"></span></div>
+              <div class="flex justify-between"><span class="text-[#475569]">Total minutes</span><span id="res-minutes" class="font-semibold text-[#1e293b]"></span></div>
+              <div class="flex justify-between"><span class="text-[#475569]">Total seconds</span><span id="res-seconds" class="font-semibold text-[#1e293b]"></span></div>
+              <div class="flex justify-between"><span class="text-[#475569]">Weekend days</span><span id="res-weekends" class="font-semibold text-[#1e293b]"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Add / Subtract Days Mode ─── -->
+      <div id="mode-add" class="hidden">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8">
+          <div class="space-y-4 mb-5">
+            <div>
+              <label for="add-start" class="block text-sm font-medium text-[#475569] mb-1.5">Starting Date</label>
+              <input type="date" id="add-start" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+              <button data-today="add-start" class="today-btn mt-1.5 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Today</button>
+            </div>
+            <div class="grid grid-cols-[1fr_auto] gap-3">
+              <div>
+                <label for="add-num" class="block text-sm font-medium text-[#475569] mb-1.5">Number of Days</label>
+                <input type="number" id="add-num" value="30" min="0" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+              </div>
+              <div>
+                <label for="add-dir" class="block text-sm font-medium text-[#475569] mb-1.5">Direction</label>
+                <select id="add-dir" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+                  <option value="add">Add (+)</option>
+                  <option value="sub">Subtract (−)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button id="btn-add-calc" class="w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] active:bg-[#1e40af] text-white font-semibold text-sm transition-colors">
+            Calculate Date
+          </button>
+        </div>
+
+        <div id="results-add" class="hidden mt-6">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 text-center">
+            <p class="text-[#94a3b8] text-xs font-medium uppercase tracking-wider mb-2">Resulting Date</p>
+            <p id="res-add-date" class="text-2xl sm:text-3xl font-bold text-[#1e293b]"></p>
+            <p id="res-add-day" class="text-[#475569] text-sm mt-1"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Date Difference Calculator — Count Days, Weeks, and Business Days Between Two Dates</h2>
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Counting the number of days between two dates by hand is tedious and error-prone, especially when the span crosses months of different lengths or includes leap years. This <strong class="text-[#1e293b]">free date difference calculator</strong> does the arithmetic instantly: enter a start date and an end date and get the precise difference expressed in years, months, days, total weeks, total hours, and — critically for project planning — <strong class="text-[#1e293b]">total business days</strong> (Monday through Friday, excluding weekends).</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Date Arithmetic Works</h3>
+        <p>The calculation starts by determining the absolute number of calendar days between two dates. From there, the tool breaks the span into complete years, complete months, and remaining days using the same borrow-and-carry logic that date libraries use internally. Because months vary from 28 to 31 days and February gains a day in leap years, manual subtraction frequently produces off-by-one errors. The calculator avoids this by working with UTC timestamps and applying standard Gregorian calendar rules to every intermediate step. The result is a precise, unambiguous breakdown you can trust for legal, medical, or business purposes.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Business Days vs. Calendar Days</h3>
+        <p>For anyone tracking project timelines, shipping windows, or contractual deadlines, the distinction between <strong class="text-[#1e293b]">calendar days</strong> and <strong class="text-[#1e293b]">business days</strong> matters enormously. Calendar days count every day on the calendar, weekends included. Business days count only weekdays — Monday through Friday. A span of 14 calendar days, for example, contains only 10 business days. The calculator walks through the date range day by day, checking whether each falls on a Saturday or Sunday, and produces an accurate weekday count. Note that public holidays are not excluded because holiday calendars vary by country and jurisdiction; if you need to account for holidays, subtract them from the business-day total.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Add or Subtract Days from a Date</h3>
+        <p>Sometimes the question isn't "how many days between two dates?" but rather "what date is 90 days from today?" The <strong class="text-[#1e293b]">Add/Subtract Days</strong> mode handles exactly that. Enter a starting date, specify how many days to add or subtract, and the tool returns the resulting date along with the day of the week. This is useful for calculating due dates, contract expirations, delivery windows, or countdown targets. The calculation correctly rolls across month and year boundaries, including leap years.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong class="text-[#1e293b]">Project management</strong> — Determine how many working days remain until a deadline so you can allocate resources and set milestones.</li>
+          <li><strong class="text-[#1e293b]">Legal and contractual deadlines</strong> — Courts, lease agreements, and regulatory filings often specify deadlines in calendar or business days. This tool lets you verify the exact date.</li>
+          <li><strong class="text-[#1e293b]">Travel planning</strong> — Count the days between departure and return to calculate accommodation costs, rental periods, or trip duration.</li>
+          <li><strong class="text-[#1e293b]">Academic planning</strong> — Students and educators count days remaining in a semester, between exam dates, or from application submission to decision day.</li>
+          <li><strong class="text-[#1e293b]">Personal milestones</strong> — Find out how many days until a wedding, anniversary, retirement date, or any event you are counting down to.</li>
+          <li><strong class="text-[#1e293b]">Payroll and HR</strong> — Calculate the exact number of working days in a pay period, or determine the end date when an employee is granted a certain number of leave days.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+        <p><strong class="text-[#1e293b]">How are business days calculated?</strong><br>
+        Business days include Monday through Friday and exclude Saturday and Sunday. The calculator does not remove public holidays because holiday schedules differ by country, state, and industry. If you need to account for specific holidays, subtract them manually from the total.</p>
+
+        <p><strong class="text-[#1e293b]">Does this calculator handle leap years?</strong><br>
+        Yes. The underlying date arithmetic follows Gregorian calendar rules, correctly adding February 29 in leap years. Results remain accurate across century boundaries (e.g., 2000 was a leap year, 1900 was not).</p>
+
+        <p><strong class="text-[#1e293b]">Can I calculate a future date by adding days?</strong><br>
+        Absolutely. Switch to the "Add / Subtract Days" tab, enter your starting date and the number of days, choose "Add" or "Subtract," and the tool will display the resulting date along with its day of the week.</p>
+
+        <p><strong class="text-[#1e293b]">Is my data stored or sent to a server?</strong><br>
+        No. Every calculation runs entirely in your browser using JavaScript. No dates or results are transmitted, stored, or logged anywhere. The tool works even if you go offline after the page loads.</p>
+
+        <p>Whether you need a quick day count for a deadline, a business-day tally for a project plan, or a future date for a contract clause, this date difference calculator gives you the answer in seconds — free, private, and accurate.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const startInput = $('start-date');
+    const endInput   = $('end-date');
+    const addStartInput = $('add-start');
+    const addNumInput   = $('add-num');
+    const addDirSelect  = $('add-dir');
+
+    const tabDiff = $('tab-diff');
+    const tabAdd  = $('tab-add');
+    const modeDiff = $('mode-diff');
+    const modeAdd  = $('mode-add');
+
+    function fmtISO(d) {
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function parseDate(str) {
+      const [y, m, d] = str.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function fmtReadable(d) {
+      return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function num(n) {
+      return n.toLocaleString('en-US');
+    }
+
+    const today = new Date();
+    endInput.value = fmtISO(today);
+    addStartInput.value = fmtISO(today);
+
+    // Tab switching
+    function switchTab(tab) {
+      const isDiff = tab === 'diff';
+      modeDiff.classList.toggle('hidden', !isDiff);
+      modeAdd.classList.toggle('hidden', isDiff);
+      tabDiff.className = 'flex-1 py-3 text-sm font-semibold transition-colors ' + (isDiff ? 'bg-[#2563eb] text-white' : 'text-[#475569] hover:bg-[#f1f5f9]');
+      tabAdd.className  = 'flex-1 py-3 text-sm font-semibold transition-colors ' + (!isDiff ? 'bg-[#2563eb] text-white' : 'text-[#475569] hover:bg-[#f1f5f9]');
+    }
+    tabDiff.addEventListener('click', () => switchTab('diff'));
+    tabAdd.addEventListener('click', () => switchTab('add'));
+
+    // Today buttons
+    document.querySelectorAll('.today-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = $(btn.dataset.today);
+        target.value = fmtISO(new Date());
+        target.dispatchEvent(new Event('change'));
+      });
+    });
+
+    // Swap
+    $('btn-swap').addEventListener('click', () => {
+      const tmp = startInput.value;
+      startInput.value = endInput.value;
+      endInput.value = tmp;
+      if (startInput.value && endInput.value) calcDiff();
+    });
+
+    // ─── Difference calculation ───
+
+    function totalDays(a, b) {
+      const utcA = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+      const utcB = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.round((utcB - utcA) / 86400000);
+    }
+
+    function ymdDiff(a, b) {
+      let years = b.getFullYear() - a.getFullYear();
+      let months = b.getMonth() - a.getMonth();
+      let days = b.getDate() - a.getDate();
+      if (days < 0) {
+        months--;
+        const prev = new Date(b.getFullYear(), b.getMonth(), 0);
+        days += prev.getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      return { years, months, days };
+    }
+
+    function totalMonths(a, b) {
+      return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()) + (b.getDate() < a.getDate() ? -1 : 0);
+    }
+
+    function businessDays(a, b) {
+      let count = 0;
+      const start = new Date(a.getTime());
+      const end = new Date(b.getTime());
+      if (start > end) return 0;
+      const cursor = new Date(start);
+      cursor.setDate(cursor.getDate() + 1);
+      while (cursor <= end) {
+        const dow = cursor.getDay();
+        if (dow !== 0 && dow !== 6) count++;
+        cursor.setDate(cursor.getDate() + 1);
+      }
+      return count;
+    }
+
+    function weekendDays(totalD, bizD) {
+      return Math.max(0, totalD - bizD);
+    }
+
+    function calcDiff() {
+      if (!startInput.value || !endInput.value) return;
+
+      let a = parseDate(startInput.value);
+      let b = parseDate(endInput.value);
+      const swapped = a > b;
+      if (swapped) { const t = a; a = b; b = t; }
+
+      const days = totalDays(a, b);
+      const diff = ymdDiff(a, b);
+      const biz = businessDays(a, b);
+      const weeks = Math.floor(days / 7);
+      const hours = days * 24;
+      const months = totalMonths(a, b);
+      const minutes = hours * 60;
+      const seconds = minutes * 60;
+      const wkends = weekendDays(days, biz);
+
+      let label = '';
+      if (diff.years) label += diff.years + (diff.years === 1 ? ' year' : ' years');
+      if (diff.months) label += (label ? ', ' : '') + diff.months + (diff.months === 1 ? ' month' : ' months');
+      label += (label ? ', ' : '') + diff.days + (diff.days === 1 ? ' day' : ' days');
+
+      $('res-ymd').textContent = label;
+      $('res-days').textContent = num(days);
+      $('res-weeks').textContent = num(weeks);
+      $('res-biz').textContent = num(biz);
+      $('res-hours').textContent = num(hours);
+      $('res-months').textContent = num(months);
+      $('res-minutes').textContent = num(minutes);
+      $('res-seconds').textContent = num(seconds);
+      $('res-weekends').textContent = num(wkends);
+
+      $('results-diff').classList.remove('hidden');
+    }
+
+    $('btn-calc').addEventListener('click', calcDiff);
+    startInput.addEventListener('change', () => { if (startInput.value && endInput.value) calcDiff(); });
+    endInput.addEventListener('change', () => { if (startInput.value && endInput.value) calcDiff(); });
+    startInput.addEventListener('keydown', e => { if (e.key === 'Enter') calcDiff(); });
+    endInput.addEventListener('keydown', e => { if (e.key === 'Enter') calcDiff(); });
+
+    // ─── Add / Subtract calculation ───
+
+    function calcAdd() {
+      if (!addStartInput.value || !addNumInput.value) return;
+      const base = parseDate(addStartInput.value);
+      const n = parseInt(addNumInput.value, 10);
+      if (isNaN(n)) return;
+      const sign = addDirSelect.value === 'sub' ? -1 : 1;
+      const result = new Date(base);
+      result.setDate(result.getDate() + n * sign);
+
+      $('res-add-date').textContent = fmtReadable(result);
+      $('res-add-day').textContent = fmtISO(result);
+      $('results-add').classList.remove('hidden');
+    }
+
+    $('btn-add-calc').addEventListener('click', calcAdd);
+    addStartInput.addEventListener('change', calcAdd);
+    addNumInput.addEventListener('input', calcAdd);
+    addDirSelect.addEventListener('change', calcAdd);
+    addNumInput.addEventListener('keydown', e => { if (e.key === 'Enter') calcAdd(); });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('date-difference-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Auto Loan Calculator — Monthly Payment, Interest &amp; Amortization | ClickSolveTools</title>
+  <meta name="description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your car purchase.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/auto-loan-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Auto Loan Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your car purchase.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/auto-loan-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Auto Loan Calculator Online | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare terms and plan your car purchase.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Auto Loan Calculator","url":"https://clicksolvetools.com/tools/auto-loan-calculator","description":"Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms and plan your car purchase.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the monthly payment on an auto loan calculated?","acceptedAnswer":{"@type":"Answer","text":"The monthly payment uses the standard amortization formula: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate, and n is the total number of payments."}},{"@type":"Question","name":"Should I choose a shorter or longer auto loan term?","acceptedAnswer":{"@type":"Answer","text":"A shorter term means higher monthly payments but less total interest. A longer term lowers the monthly payment but costs more overall. Most financial advisors recommend keeping auto loans to 48 or 60 months to avoid going upside-down on the loan."}},{"@type":"Question","name":"Does a trade-in reduce sales tax?","acceptedAnswer":{"@type":"Answer","text":"In most U.S. states, the trade-in value reduces the taxable price of the vehicle. This calculator applies sales tax to the vehicle price minus the trade-in value."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Input Form -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+
+          <div class="sm:col-span-2">
+            <label for="vehicle-price" class="block text-sm font-medium text-[#475569] mb-1">Vehicle Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="vehicle-price" type="text" inputmode="decimal" placeholder="35,000" class="al-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="down-payment" class="block text-sm font-medium text-[#475569] mb-1">Down Payment</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="down-payment" type="text" inputmode="decimal" placeholder="5,000" class="al-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="trade-in" class="block text-sm font-medium text-[#475569] mb-1">Trade-In Value</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="trade-in" type="text" inputmode="decimal" placeholder="0" class="al-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="tax-rate" class="block text-sm font-medium text-[#475569] mb-1">Sales Tax Rate</label>
+            <div class="relative">
+              <input id="tax-rate" type="text" inputmode="decimal" placeholder="7.0" class="al-input pr-7 w-full text-right">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="interest-rate" class="block text-sm font-medium text-[#475569] mb-1">Interest Rate (APR)</label>
+            <div class="relative">
+              <input id="interest-rate" type="text" inputmode="decimal" placeholder="6.5" class="al-input pr-7 w-full text-right">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="loan-term" class="block text-sm font-medium text-[#475569] mb-1">Loan Term</label>
+            <div class="flex gap-2 flex-wrap" id="term-btns">
+              <button data-term="24" class="term-btn">24 mo</button>
+              <button data-term="36" class="term-btn">36 mo</button>
+              <button data-term="48" class="term-btn">48 mo</button>
+              <button data-term="60" class="term-btn term-active">60 mo</button>
+              <button data-term="72" class="term-btn">72 mo</button>
+              <button data-term="84" class="term-btn">84 mo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm hidden">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+          <div>
+            <div class="text-xs text-[#475569]">Loan Amount</div>
+            <div id="out-loan" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Sales Tax</div>
+            <div id="out-tax" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Interest</div>
+            <div id="out-interest" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Cost</div>
+            <div id="out-total-cost" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+        </div>
+        <div class="border-t border-[#e2e8f0] pt-4 flex items-end justify-between">
+          <div>
+            <div class="text-xs text-[#475569]">Monthly Payment</div>
+            <div id="out-monthly" class="text-3xl font-bold text-[#2563eb]">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie Chart -->
+      <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Cost Breakdown</h3>
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+          <div id="pie-chart" class="w-44 h-44 rounded-full flex-shrink-0" style="background: conic-gradient(#e2e8f0 0deg 360deg);"></div>
+          <div class="flex flex-col gap-2 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#2563eb] flex-shrink-0"></span>
+              <span class="text-[#475569]">Principal: <strong id="legend-principal" class="text-[#1e293b]">—</strong></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#f59e0b] flex-shrink-0"></span>
+              <span class="text-[#475569]">Interest: <strong id="legend-interest" class="text-[#1e293b]">—</strong></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#10b981] flex-shrink-0"></span>
+              <span class="text-[#475569]">Sales Tax: <strong id="legend-tax" class="text-[#1e293b]">—</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term Comparison Table -->
+      <div id="comparison-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Loan Term Comparison</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
+                <th class="px-4 py-3 text-left font-medium">Term</th>
+                <th class="px-4 py-3 text-right font-medium">Monthly Payment</th>
+                <th class="px-4 py-3 text-right font-medium">Total Interest</th>
+                <th class="px-4 py-3 text-right font-medium">Total Cost</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-body" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Amortization Schedule -->
+      <div id="amort-wrapper" class="hidden">
+        <button id="amort-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between shadow-sm">
+          <span class="flex items-center gap-2">
+            <svg id="amort-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Amortization Schedule
+          </span>
+          <span id="amort-months" class="text-xs text-[#94a3b8]"></span>
+        </button>
+        <div id="amort-body" class="hidden bg-white border border-[#e2e8f0] border-t-0 rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-white">
+              <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
+                <th class="px-4 py-3 text-left font-medium">Month</th>
+                <th class="px-4 py-3 text-right font-medium">Payment</th>
+                <th class="px-4 py-3 text-right font-medium">Principal</th>
+                <th class="px-4 py-3 text-right font-medium">Interest</th>
+                <th class="px-4 py-3 text-right font-medium">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amort-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Auto Loan Calculator: Understand Your Car Payment Before You Buy</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Buying a car is one of the most significant purchases most people make after a home. Whether you are shopping for a new sedan, a certified pre-owned SUV, or a used truck, financing plays a central role in determining what you can comfortably afford. An auto loan calculator removes the guesswork by showing you the exact monthly payment, total interest, and overall cost of the loan before you ever step onto a dealer lot. Armed with these numbers, you can negotiate from a position of knowledge rather than uncertainty.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Auto Loan Payments Are Calculated</h3>
+      <p>Auto loans use the same amortization formula as mortgages and other installment loans. The lender takes the total amount financed — the vehicle price minus your down payment and trade-in value, plus any applicable sales tax — and applies an annual percentage rate (APR) over a fixed number of monthly payments. The standard formula is:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">M = P &times; [r(1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> &minus; 1]</p>
+      <p>Here, <strong class="text-[#1e293b]">M</strong> is the monthly payment, <strong class="text-[#1e293b]">P</strong> is the principal (amount financed), <strong class="text-[#1e293b]">r</strong> is the monthly interest rate (APR divided by 12), and <strong class="text-[#1e293b]">n</strong> is the total number of payments. Early payments are heavily weighted toward interest, with more principal being paid off as the balance decreases. The amortization schedule this calculator generates lets you see that shift month by month.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Choosing the Right Loan Term</h3>
+      <p>Auto loan terms typically range from 24 to 84 months. Each option involves a trade-off between monthly affordability and total cost:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">24–36 months</strong> — The highest monthly payment but the lowest total interest. Best for buyers who want to minimize borrowing costs and build equity in the vehicle quickly.</li>
+        <li><strong class="text-[#1e293b]">48–60 months</strong> — A balanced middle ground that keeps payments manageable while limiting total interest. Most financial advisors consider 60 months the sweet spot for auto loans.</li>
+        <li><strong class="text-[#1e293b]">72–84 months</strong> — The lowest monthly payment, but you pay significantly more in interest over the life of the loan. Longer terms also increase the risk of being "upside-down," meaning you owe more than the car is worth, especially as vehicles depreciate quickly in the first few years.</li>
+      </ul>
+      <p>Use the term comparison table above to see exact numbers for your specific scenario. Comparing 36, 48, 60, and 72 months side by side makes the cost of a longer term immediately clear.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Down Payments and Trade-Ins Reduce Your Loan</h3>
+      <p>A larger down payment directly reduces the principal, which lowers both the monthly payment and total interest. Most experts recommend putting at least 20% down on a new car and 10% on a used car. A trade-in serves the same purpose — your existing vehicle's value is subtracted from the purchase price. In most U.S. states, the trade-in also reduces the amount subject to sales tax, saving you even more.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Getting the Best Auto Loan Rate</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Check your credit score first.</strong> Lenders reserve the lowest APRs for borrowers with good to excellent credit (typically 700 and above). Knowing your score helps you set realistic expectations.</li>
+        <li><strong class="text-[#1e293b]">Get pre-approved before visiting the dealership.</strong> Banks, credit unions, and online lenders often offer lower rates than dealer financing. A pre-approval letter also strengthens your negotiating position.</li>
+        <li><strong class="text-[#1e293b]">Keep the term as short as you can afford.</strong> A shorter term usually comes with a lower APR and dramatically reduces total interest paid.</li>
+        <li><strong class="text-[#1e293b]">Negotiate the price of the car, not the payment.</strong> Dealers can make almost any monthly payment "work" by stretching the term. Focus on the total out-the-door price first.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is a good interest rate for a car loan?</strong></p>
+      <p>Interest rates vary by credit score, loan term, and whether the vehicle is new or used. As of recent data, borrowers with excellent credit can expect rates between 4% and 6% for new vehicles and 5% to 8% for used vehicles. Rates for subprime borrowers can exceed 10%. Always compare offers from multiple lenders.</p>
+
+      <p><strong class="text-[#1e293b]">Does a trade-in reduce the sales tax I owe?</strong></p>
+      <p>In most U.S. states, yes. The taxable amount is the vehicle price minus the trade-in value. For example, if you buy a $35,000 car and trade in a vehicle worth $8,000, you pay sales tax on $27,000. This calculator applies that deduction automatically. Check your state's specific rules, as a few states do not allow this deduction.</p>
+
+      <p><strong class="text-[#1e293b]">How much should I put down on a car?</strong></p>
+      <p>A down payment of 20% on a new car or 10% on a used car is a widely recommended guideline. Putting more down reduces your loan balance, lowers your monthly payment, and decreases the chance of owing more than the car is worth if you need to sell it early.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Actual loan terms, rates, and taxes may vary. Consult your lender or a qualified financial advisor for decisions about your specific situation.
+      </div>
+
+      <p>This auto loan calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page and come back whenever you need to estimate payments, compare loan terms, or plan your next vehicle purchase.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .al-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .al-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .al-input::placeholder { color: #94a3b8; }
+
+    .term-btn {
+      flex: 1;
+      min-width: 64px;
+      padding: 0.5rem 0;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .term-btn:hover { border-color: #2563eb; color: #2563eb; }
+    .term-active {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      border-color: #2563eb !important;
+    }
+
+    #comparison-body tr { border-top: 1px solid #e2e8f0; }
+    #comparison-body td { padding: 0.625rem 1rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    #comparison-body td:first-child { text-align: left; font-weight: 600; }
+    #comparison-body td:not(:first-child) { text-align: right; }
+    #comparison-body tr.active-term { background: #eff6ff; }
+
+    #amort-table tr { border-top: 1px solid #e2e8f0; }
+    #amort-table td { padding: 0.5rem 1rem; white-space: nowrap; }
+    #amort-table td:first-child { text-align: left; }
+    #amort-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #amort-body::-webkit-scrollbar { width: 6px; }
+    #amort-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #amort-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const fmt2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const $ = id => document.getElementById(id);
+
+    const vehiclePrice = $('vehicle-price');
+    const downPayment  = $('down-payment');
+    const tradeIn      = $('trade-in');
+    const taxRate      = $('tax-rate');
+    const interestRate = $('interest-rate');
+
+    let termMonths = 60;
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    $('term-btns').addEventListener('click', e => {
+      const btn = e.target.closest('.term-btn');
+      if (!btn) return;
+      document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('term-active'));
+      btn.classList.add('term-active');
+      termMonths = parseInt(btn.dataset.term);
+      calculate();
+    });
+
+    $('amort-toggle').addEventListener('click', () => {
+      const body = $('amort-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('amort-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('amort-toggle').classList.add('rounded-b-none');
+      else $('amort-toggle').classList.remove('rounded-b-none');
+    });
+
+    [vehiclePrice, downPayment, tradeIn].forEach(el => {
+      el.addEventListener('input', () => { formatInput(el); calculate(); });
+    });
+    [taxRate, interestRate].forEach(el => {
+      el.addEventListener('input', calculate);
+    });
+
+    function calcPayment(principal, apr, months) {
+      if (principal <= 0 || months <= 0) return null;
+      const r = apr / 100 / 12;
+      if (r === 0) return principal / months;
+      const payment = principal * (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+      return isFinite(payment) ? payment : null;
+    }
+
+    function calculate() {
+      const vp = parseNum(vehiclePrice);
+      const dp = parseNum(downPayment);
+      const ti = parseNum(tradeIn);
+      const tr = parseFloat(taxRate.value) || 0;
+      const apr = parseFloat(interestRate.value) || 0;
+
+      const taxableAmount = Math.max(0, vp - ti);
+      const salesTax = taxableAmount * (tr / 100);
+      const loanAmount = Math.max(0, vp - dp - ti + salesTax);
+
+      if (loanAmount <= 0 || vp <= 0) {
+        $('results-panel').classList.add('hidden');
+        $('chart-panel').classList.add('hidden');
+        $('comparison-panel').classList.add('hidden');
+        $('amort-wrapper').classList.add('hidden');
+        return;
+      }
+
+      const monthly = calcPayment(loanAmount, apr, termMonths);
+      if (monthly === null) return;
+
+      const totalPaid = monthly * termMonths;
+      const totalInterest = totalPaid - loanAmount;
+      const totalCost = totalPaid + dp + ti;
+
+      $('out-loan').textContent = fmt.format(loanAmount);
+      $('out-tax').textContent = fmt.format(salesTax);
+      $('out-interest').textContent = fmt.format(totalInterest);
+      $('out-total-cost').textContent = fmt.format(totalPaid);
+      $('out-monthly').textContent = fmt2.format(monthly);
+
+      $('results-panel').classList.remove('hidden');
+      $('chart-panel').classList.remove('hidden');
+      $('comparison-panel').classList.remove('hidden');
+      $('amort-wrapper').classList.remove('hidden');
+
+      renderPie(loanAmount - salesTax, totalInterest, salesTax);
+      renderComparison(loanAmount, apr);
+      buildAmortization(loanAmount, apr, termMonths, monthly);
+    }
+
+    function renderPie(principal, interest, tax) {
+      const total = principal + interest + tax;
+      if (total <= 0) return;
+
+      const pDeg = (principal / total) * 360;
+      const iDeg = (interest / total) * 360;
+
+      $('pie-chart').style.background = `conic-gradient(
+        #2563eb 0deg ${pDeg}deg,
+        #f59e0b ${pDeg}deg ${pDeg + iDeg}deg,
+        #10b981 ${pDeg + iDeg}deg 360deg
+      )`;
+
+      const pPct = ((principal / total) * 100).toFixed(1);
+      const iPct = ((interest / total) * 100).toFixed(1);
+      const tPct = ((tax / total) * 100).toFixed(1);
+
+      $('legend-principal').textContent = `${fmt.format(principal)} (${pPct}%)`;
+      $('legend-interest').textContent = `${fmt.format(interest)} (${iPct}%)`;
+      $('legend-tax').textContent = `${fmt.format(tax)} (${tPct}%)`;
+    }
+
+    function renderComparison(loanAmount, apr) {
+      const terms = [36, 48, 60, 72];
+      const rows = terms.map(t => {
+        const m = calcPayment(loanAmount, apr, t);
+        if (m === null) return '';
+        const totalPaid = m * t;
+        const totalInt = totalPaid - loanAmount;
+        const isActive = t === termMonths;
+        return `<tr class="${isActive ? 'active-term' : ''}">
+          <td>${t} months</td>
+          <td>${fmt2.format(m)}</td>
+          <td>${fmt.format(totalInt)}</td>
+          <td>${fmt.format(totalPaid)}</td>
+        </tr>`;
+      });
+      $('comparison-body').innerHTML = rows.join('');
+    }
+
+    function buildAmortization(loanAmount, apr, months, monthlyPayment) {
+      const r = apr / 100 / 12;
+      let balance = loanAmount;
+      const rows = [];
+
+      for (let m = 1; m <= months; m++) {
+        const interest = balance * r;
+        let principal = monthlyPayment - interest;
+        if (principal > balance) principal = balance;
+        balance = Math.max(0, balance - principal);
+        rows.push(`<tr>
+          <td>${m}</td>
+          <td>${fmt2.format(monthlyPayment)}</td>
+          <td>${fmt2.format(principal)}</td>
+          <td>${fmt2.format(interest)}</td>
+          <td>${fmt2.format(balance)}</td>
+        </tr>`);
+      }
+
+      $('amort-table').innerHTML = rows.join('');
+      $('amort-months').textContent = `${months} payments`;
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('auto-loan-calculator');
+  </script>
+</body>
+</html>

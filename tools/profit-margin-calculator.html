@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Profit Margin Calculator — Margin vs Markup, Formulas &amp; Breakdown | ClickSolveTools</title>
+  <meta name="description" content="Calculate profit margin, markup, and selling price instantly. Compare margin vs markup, see visual cost/profit breakdowns, and understand formulas — free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/profit-margin-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Profit Margin Calculator — Margin vs Markup, Formulas &amp; Breakdown | ClickSolveTools">
+  <meta property="og:description" content="Calculate profit margin, markup, and selling price instantly. Compare margin vs markup, see visual cost/profit breakdowns, and understand formulas — free, private, no signup.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/profit-margin-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Profit Margin Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate profit margin, markup, and selling price instantly. Visual breakdowns, margin vs markup comparison, and key formulas.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Profit Margin Calculator","url":"https://clicksolvetools.com/tools/profit-margin-calculator","description":"Calculate profit margin, markup percentage, and selling price. Visual cost vs profit breakdown, margin vs markup comparison table, and currency formatting.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between margin and markup?","acceptedAnswer":{"@type":"Answer","text":"Margin is profit as a percentage of the selling price, while markup is profit as a percentage of the cost. A 50% markup on a $100 cost gives a $150 selling price, but the margin is only 33.3% because $50 profit ÷ $150 revenue = 33.3%."}},{"@type":"Question","name":"How do I calculate profit margin?","acceptedAnswer":{"@type":"Answer","text":"Profit Margin (%) = ((Selling Price − Cost) ÷ Selling Price) × 100. For example, if you sell an item for $200 that cost you $120, the margin is (($200 − $120) ÷ $200) × 100 = 40%."}},{"@type":"Question","name":"What is a good profit margin?","acceptedAnswer":{"@type":"Answer","text":"It varies by industry. Retail margins typically range from 20–50%, software and SaaS companies often exceed 70%, and grocery stores operate on thin margins of 1–3%. Compare your margin to industry benchmarks for a meaningful assessment."}},{"@type":"Question","name":"Can profit margin be negative?","acceptedAnswer":{"@type":"Answer","text":"Yes. A negative margin means you are selling below cost, resulting in a loss on each unit sold. This can happen intentionally (loss leaders to attract customers) or unintentionally due to rising costs or pricing errors."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Mode Selector -->
+    <div class="max-w-2xl mx-auto mb-6">
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-1.5 flex gap-1" id="mode-tabs" role="tablist">
+        <button data-mode="0" role="tab" aria-selected="true" class="mode-btn mode-active flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Cost + Price → Margin</button>
+        <button data-mode="1" role="tab" aria-selected="false" class="mode-btn flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Cost + Margin → Price</button>
+        <button data-mode="2" role="tab" aria-selected="false" class="mode-btn flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all">Price + Margin → Cost</button>
+      </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto space-y-5">
+
+      <!-- Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div id="field-cost">
+            <label for="cost" class="block text-sm font-medium text-[#475569] mb-1">Cost Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-lg font-medium">$</span>
+              <input id="cost" type="text" inputmode="decimal" placeholder="0.00" class="pm-input pl-8 w-full text-lg font-semibold" autofocus>
+            </div>
+          </div>
+          <div id="field-revenue">
+            <label for="revenue" class="block text-sm font-medium text-[#475569] mb-1">Selling Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-lg font-medium">$</span>
+              <input id="revenue" type="text" inputmode="decimal" placeholder="0.00" class="pm-input pl-8 w-full text-lg font-semibold">
+            </div>
+          </div>
+          <div id="field-margin" class="hidden">
+            <label for="margin-input" class="block text-sm font-medium text-[#475569] mb-1">Desired Margin</label>
+            <div class="relative">
+              <input id="margin-input" type="text" inputmode="decimal" placeholder="0" class="pm-input pr-8 w-full text-lg font-semibold">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-lg font-medium">%</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center gap-3">
+          <button id="calc-btn" class="px-6 py-2.5 bg-[#2563eb] text-white font-semibold text-sm rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm shadow-[#2563eb]/20">Calculate</button>
+          <button id="reset-btn" class="px-4 py-2.5 text-[#64748b] text-sm font-medium hover:text-[#1e293b] transition-colors">Reset</button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="hidden space-y-5">
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Profit</div>
+            <div id="out-profit" class="text-xl font-bold text-[#1e293b] tabular-nums">$0.00</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Margin</div>
+            <div id="out-margin" class="text-xl font-bold text-[#2563eb] tabular-nums">0%</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Markup</div>
+            <div id="out-markup" class="text-xl font-bold text-[#7c3aed] tabular-nums">0%</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Revenue</div>
+            <div id="out-revenue" class="text-xl font-bold text-[#1e293b] tabular-nums">$0.00</div>
+          </div>
+        </div>
+
+        <!-- Summary Row -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+          <div class="grid grid-cols-3 gap-4 text-center text-sm mb-1">
+            <div>
+              <span class="text-[#94a3b8] block text-xs mb-0.5">Cost</span>
+              <span id="sum-cost" class="font-semibold text-[#1e293b] tabular-nums">$0.00</span>
+            </div>
+            <div>
+              <span class="text-[#94a3b8] block text-xs mb-0.5">+ Profit</span>
+              <span id="sum-profit" class="font-semibold text-[#059669] tabular-nums">$0.00</span>
+            </div>
+            <div>
+              <span class="text-[#94a3b8] block text-xs mb-0.5">= Selling Price</span>
+              <span id="sum-revenue" class="font-semibold text-[#1e293b] tabular-nums">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Breakdown Bar -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+          <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Cost vs Profit Breakdown</h3>
+          <div class="relative h-10 rounded-lg overflow-hidden flex">
+            <div id="bar-cost" class="h-full bg-[#e2e8f0] transition-all duration-500 flex items-center justify-center text-xs font-semibold text-[#475569]" style="width:100%">
+              Cost 100%
+            </div>
+            <div id="bar-profit" class="h-full bg-[#2563eb] transition-all duration-500 flex items-center justify-center text-xs font-semibold text-white" style="width:0%">
+            </div>
+          </div>
+          <div class="flex justify-between mt-2 text-xs text-[#94a3b8]">
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-[#e2e8f0] inline-block"></span> Cost</div>
+            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-[#2563eb] inline-block"></span> Profit</div>
+          </div>
+        </div>
+
+        <!-- Margin vs Markup Explanation -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+          <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Margin vs Markup — Your Numbers</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[#e2e8f0]">
+                  <th class="text-left py-2 pr-4 font-semibold text-[#475569]">Metric</th>
+                  <th class="text-right py-2 px-4 font-semibold text-[#2563eb]">Margin</th>
+                  <th class="text-right py-2 pl-4 font-semibold text-[#7c3aed]">Markup</th>
+                </tr>
+              </thead>
+              <tbody class="text-[#1e293b]">
+                <tr class="border-b border-[#f1f5f9]">
+                  <td class="py-2 pr-4 text-[#475569]">Formula</td>
+                  <td class="py-2 px-4 text-right font-mono text-xs">Profit ÷ Revenue</td>
+                  <td class="py-2 pl-4 text-right font-mono text-xs">Profit ÷ Cost</td>
+                </tr>
+                <tr class="border-b border-[#f1f5f9]">
+                  <td class="py-2 pr-4 text-[#475569]">Percentage</td>
+                  <td id="tbl-margin" class="py-2 px-4 text-right font-semibold tabular-nums">0%</td>
+                  <td id="tbl-markup" class="py-2 pl-4 text-right font-semibold tabular-nums">0%</td>
+                </tr>
+                <tr class="border-b border-[#f1f5f9]">
+                  <td class="py-2 pr-4 text-[#475569]">Base amount</td>
+                  <td id="tbl-margin-base" class="py-2 px-4 text-right tabular-nums">$0.00</td>
+                  <td id="tbl-markup-base" class="py-2 pl-4 text-right tabular-nums">$0.00</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 text-[#475569]">Interpretation</td>
+                  <td class="py-2 px-4 text-right text-xs text-[#64748b]">% of revenue kept</td>
+                  <td class="py-2 pl-4 text-right text-xs text-[#64748b]">% added to cost</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 p-3 bg-[#eff6ff] rounded-lg">
+            <p id="comparison-note" class="text-xs text-[#2563eb] leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Common Margin/Markup Reference -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+          <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Common Margin ↔ Markup Conversions</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[#e2e8f0]">
+                  <th class="text-left py-2 pr-4 font-semibold text-[#475569]">Margin</th>
+                  <th class="text-left py-2 px-4 font-semibold text-[#475569]">Markup</th>
+                  <th class="text-left py-2 pl-4 font-semibold text-[#475569]">Multiplier</th>
+                </tr>
+              </thead>
+              <tbody class="text-[#1e293b] tabular-nums">
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">10%</td><td class="py-1.5 px-4">11.1%</td><td class="py-1.5 pl-4">×1.111</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">20%</td><td class="py-1.5 px-4">25%</td><td class="py-1.5 pl-4">×1.25</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">25%</td><td class="py-1.5 px-4">33.3%</td><td class="py-1.5 pl-4">×1.333</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">30%</td><td class="py-1.5 px-4">42.9%</td><td class="py-1.5 pl-4">×1.429</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">33.3%</td><td class="py-1.5 px-4">50%</td><td class="py-1.5 pl-4">×1.5</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">40%</td><td class="py-1.5 px-4">66.7%</td><td class="py-1.5 pl-4">×1.667</td></tr>
+                <tr class="border-b border-[#f1f5f9]"><td class="py-1.5 pr-4">50%</td><td class="py-1.5 px-4">100%</td><td class="py-1.5 pl-4">×2.0</td></tr>
+                <tr><td class="py-1.5 pr-4">75%</td><td class="py-1.5 px-4">300%</td><td class="py-1.5 pl-4">×4.0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Profit Margin, Markup, and Pricing Formulas</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Profit margin is one of the most important metrics in business. Whether you are pricing a product for the first time, evaluating supplier quotes, or reviewing your company's financial health, understanding the relationship between cost, revenue, and profit is essential. This calculator lets you work in any direction — plug in two values and it computes the third, along with every related metric you need.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Profit Margin vs Markup: The Critical Difference</h3>
+      <p>Margin and markup both describe the relationship between cost and profit, but they use different bases for the percentage calculation — and confusing the two is one of the most common pricing mistakes in business.</p>
+      <p><strong class="text-[#1e293b]">Profit margin</strong> expresses profit as a percentage of the <em>selling price</em> (revenue). The formula is:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Margin % = ((Selling Price − Cost) ÷ Selling Price) × 100</p>
+      <p><strong class="text-[#1e293b]">Markup</strong> expresses profit as a percentage of the <em>cost</em>. The formula is:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#7c3aed] text-center">Markup % = ((Selling Price − Cost) ÷ Cost) × 100</p>
+      <p>Consider a product that costs $60 to make and sells for $100. The profit is $40. The margin is 40% ($40 ÷ $100), but the markup is 66.7% ($40 ÷ $60). Same dollar profit, very different percentages. Markup is always higher than or equal to margin for any profitable sale — and the gap widens as the profit increases. A 50% margin corresponds to a 100% markup, meaning you doubled your cost.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">When to Use Each Metric</h3>
+      <p><strong class="text-[#1e293b]">Margin</strong> is preferred for financial reporting, profit analysis, and comparing profitability across products or business units. Investors and analysts almost always discuss margin because it relates profit to revenue — the top-line number that determines how much of each dollar earned you actually keep.</p>
+      <p><strong class="text-[#1e293b]">Markup</strong> is more practical for day-to-day pricing decisions. If you know your cost and your target markup, you can compute the selling price directly: Selling Price = Cost × (1 + Markup% ÷ 100). Retailers, wholesalers, and procurement teams typically think in terms of markup when setting prices.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Gross Margin in Context</h3>
+      <p>Gross profit margin measures profit after subtracting the direct cost of goods sold (COGS) but before operating expenses, taxes, and interest. It tells you how efficiently a company produces its goods or services. Healthy gross margins vary widely by industry: software companies may exceed 80%, while grocery stores typically operate at 25–30%. If your gross margin is shrinking over time, it signals rising production costs or pricing pressure that needs attention before it erodes net profitability.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">E-commerce sellers</strong> — Calculate the margin on each SKU to ensure profitability after shipping, fees, and advertising costs are factored in.</li>
+        <li><strong class="text-[#1e293b]">Freelancers and consultants</strong> — Convert your hourly cost (salary, overhead, benefits) into a selling rate that delivers your target margin.</li>
+        <li><strong class="text-[#1e293b]">Retailers</strong> — Use markup to set shelf prices from wholesale cost, then verify margin to make sure the product meets company profitability targets.</li>
+        <li><strong class="text-[#1e293b]">Students and job seekers</strong> — Understand these formulas for accounting, finance, and MBA coursework or interviews.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is a good profit margin?</strong></p>
+      <p>It depends entirely on your industry. Net profit margins of 10–20% are considered healthy for most businesses. Software and SaaS companies may achieve 60–80% gross margins, while restaurants and grocery stores operate on margins as thin as 3–9%. Compare your margin against industry benchmarks for a meaningful assessment.</p>
+
+      <p><strong class="text-[#1e293b]">Can profit margin exceed 100%?</strong></p>
+      <p>No. Since margin is profit divided by revenue, and profit can never exceed revenue (it is a portion of it), margin is always below 100%. Markup, on the other hand, has no upper limit — a 400% markup is entirely possible.</p>
+
+      <p><strong class="text-[#1e293b]">Can profit margin be negative?</strong></p>
+      <p>Yes. A negative margin means you are selling below cost. This might be intentional — loss leaders attract customers who then buy higher-margin items — or it could indicate a pricing problem that needs correction. This calculator will flag negative margins clearly when they occur.</p>
+
+      <p><strong class="text-[#1e293b]">How do I convert between margin and markup?</strong></p>
+      <p>Markup% = Margin% ÷ (1 − Margin% ÷ 100), and Margin% = Markup% ÷ (1 + Markup% ÷ 100). The conversion table in the results above shows the most common equivalents at a glance.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Note:</strong> This calculator provides estimates for educational and planning purposes. Actual profitability depends on additional factors like operating expenses, taxes, returns, and volume discounts. Consult a financial professional for business decisions.
+      </div>
+
+      <p>This profit margin calculator is free, runs entirely in your browser, and never sends your data to a server. Bookmark it for quick access whenever you need to price a product, evaluate a deal, or compare margin and markup on the fly.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .pm-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .pm-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .pm-input::placeholder { color: #94a3b8; }
+
+    .mode-btn {
+      background: transparent;
+      color: #64748b;
+      border: none;
+      cursor: pointer;
+    }
+    .mode-btn:hover:not(.mode-active) {
+      color: #1e293b;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+    }
+    .mode-active {
+      background: #2563eb !important;
+      color: #fff !important;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] { -moz-appearance: textfield; }
+  </style>
+
+  <script>
+  (function () {
+    const fmtUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtPct = (v) => (isFinite(v) ? v.toFixed(2) + '%' : '—');
+    const $ = id => document.getElementById(id);
+
+    const costInput = $('cost');
+    const revenueInput = $('revenue');
+    const marginInput = $('margin-input');
+    const resultsPanel = $('results-panel');
+
+    let mode = 0; // 0: cost+price→margin, 1: cost+margin→price, 2: price+margin→cost
+
+    // Mode tabs
+    $('mode-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.mode-btn');
+      if (!btn) return;
+      mode = parseInt(btn.dataset.mode);
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.remove('mode-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('mode-active');
+      btn.setAttribute('aria-selected', 'true');
+      updateFieldVisibility();
+      resultsPanel.classList.add('hidden');
+    });
+
+    function updateFieldVisibility() {
+      const fieldCost = $('field-cost');
+      const fieldRevenue = $('field-revenue');
+      const fieldMargin = $('field-margin');
+
+      fieldCost.classList.remove('hidden');
+      fieldRevenue.classList.remove('hidden');
+      fieldMargin.classList.add('hidden');
+
+      if (mode === 0) {
+        fieldMargin.classList.add('hidden');
+        fieldRevenue.classList.remove('hidden');
+      } else if (mode === 1) {
+        fieldRevenue.classList.add('hidden');
+        fieldMargin.classList.remove('hidden');
+      } else {
+        fieldCost.classList.add('hidden');
+        fieldMargin.classList.remove('hidden');
+      }
+    }
+
+    function sanitizeCurrency(input) {
+      let raw = input.value.replace(/[^0-9.]/g, '');
+      const parts = raw.split('.');
+      if (parts.length > 2) raw = parts[0] + '.' + parts.slice(1).join('');
+      input.value = raw;
+    }
+
+    function blurFormat(input) {
+      const val = parseFloat(input.value);
+      if (!isNaN(val) && val >= 0) input.value = val.toFixed(2);
+    }
+
+    [costInput, revenueInput].forEach(inp => {
+      inp.addEventListener('input', () => sanitizeCurrency(inp));
+      inp.addEventListener('blur', () => blurFormat(inp));
+    });
+
+    marginInput.addEventListener('input', () => {
+      marginInput.value = marginInput.value.replace(/[^0-9.]/g, '');
+    });
+
+    $('calc-btn').addEventListener('click', calculate);
+
+    [costInput, revenueInput, marginInput].forEach(inp => {
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+    });
+
+    $('reset-btn').addEventListener('click', () => {
+      costInput.value = '';
+      revenueInput.value = '';
+      marginInput.value = '';
+      resultsPanel.classList.add('hidden');
+    });
+
+    function calculate() {
+      let cost, revenue, profit, marginPct, markupPct;
+
+      if (mode === 0) {
+        cost = parseFloat(costInput.value);
+        revenue = parseFloat(revenueInput.value);
+        if (isNaN(cost) || isNaN(revenue) || revenue === 0) return;
+        profit = revenue - cost;
+        marginPct = (profit / revenue) * 100;
+        markupPct = cost !== 0 ? (profit / cost) * 100 : Infinity;
+      } else if (mode === 1) {
+        cost = parseFloat(costInput.value);
+        marginPct = parseFloat(marginInput.value);
+        if (isNaN(cost) || isNaN(marginPct) || marginPct >= 100) return;
+        revenue = cost / (1 - marginPct / 100);
+        profit = revenue - cost;
+        markupPct = cost !== 0 ? (profit / cost) * 100 : Infinity;
+        revenueInput.value = revenue.toFixed(2);
+      } else {
+        revenue = parseFloat(revenueInput.value);
+        marginPct = parseFloat(marginInput.value);
+        if (isNaN(revenue) || isNaN(marginPct)) return;
+        cost = revenue * (1 - marginPct / 100);
+        profit = revenue - cost;
+        markupPct = cost !== 0 ? (profit / cost) * 100 : Infinity;
+        costInput.value = cost.toFixed(2);
+      }
+
+      resultsPanel.classList.remove('hidden');
+
+      $('out-profit').textContent = fmtUSD.format(profit);
+      $('out-margin').textContent = fmtPct(marginPct);
+      $('out-markup').textContent = fmtPct(markupPct);
+      $('out-revenue').textContent = fmtUSD.format(revenue);
+
+      $('out-profit').className = 'text-xl font-bold tabular-nums ' + (profit < 0 ? 'text-red-500' : 'text-[#1e293b]');
+      $('out-margin').className = 'text-xl font-bold tabular-nums ' + (marginPct < 0 ? 'text-red-500' : 'text-[#2563eb]');
+
+      $('sum-cost').textContent = fmtUSD.format(cost);
+      $('sum-profit').textContent = fmtUSD.format(profit);
+      $('sum-profit').className = 'font-semibold tabular-nums ' + (profit < 0 ? 'text-red-500' : 'text-[#059669]');
+      $('sum-revenue').textContent = fmtUSD.format(revenue);
+
+      // Stacked bar
+      const costPct = revenue > 0 ? Math.max(0, Math.min(100, (cost / revenue) * 100)) : 100;
+      const profitPct = 100 - costPct;
+
+      const barCost = $('bar-cost');
+      const barProfit = $('bar-profit');
+
+      if (profit <= 0) {
+        barCost.style.width = '100%';
+        barCost.textContent = profit < 0 ? 'Loss' : 'Cost 100%';
+        barCost.className = 'h-full transition-all duration-500 flex items-center justify-center text-xs font-semibold ' + (profit < 0 ? 'bg-red-100 text-red-600' : 'bg-[#e2e8f0] text-[#475569]');
+        barProfit.style.width = '0%';
+        barProfit.textContent = '';
+      } else {
+        barCost.style.width = costPct.toFixed(1) + '%';
+        barCost.textContent = costPct >= 15 ? 'Cost ' + costPct.toFixed(1) + '%' : '';
+        barCost.className = 'h-full bg-[#e2e8f0] transition-all duration-500 flex items-center justify-center text-xs font-semibold text-[#475569]';
+        barProfit.style.width = profitPct.toFixed(1) + '%';
+        barProfit.textContent = profitPct >= 12 ? 'Profit ' + profitPct.toFixed(1) + '%' : '';
+        barProfit.className = 'h-full bg-[#2563eb] transition-all duration-500 flex items-center justify-center text-xs font-semibold text-white';
+      }
+
+      // Table
+      $('tbl-margin').textContent = fmtPct(marginPct);
+      $('tbl-markup').textContent = fmtPct(markupPct);
+      $('tbl-margin-base').textContent = fmtUSD.format(revenue) + ' (revenue)';
+      $('tbl-markup-base').textContent = fmtUSD.format(cost) + ' (cost)';
+
+      const note = profit >= 0
+        ? `A ${fmtPct(marginPct)} margin means you keep ${fmtUSD.format(profit)} of every ${fmtUSD.format(revenue)} in revenue. The equivalent ${fmtPct(markupPct)} markup means you added ${fmtUSD.format(profit)} on top of your ${fmtUSD.format(cost)} cost. Markup is always ≥ margin for profitable sales.`
+        : `You are selling below cost — each sale loses ${fmtUSD.format(Math.abs(profit))}. Consider raising your selling price or reducing costs to achieve profitability.`;
+      $('comparison-note').textContent = note;
+
+      resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    updateFieldVisibility();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('profit-margin-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Markdown Preview Online — Live Editor &amp; Renderer | ClickSolveTools</title>
+    <meta name="description" content="Write and preview Markdown in real time with syntax highlighting, GitHub Flavored Markdown support, side-by-side editing, and one-click HTML export. Free, private, runs in your browser.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/markdown-preview">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Free Markdown Preview Online — Live Editor & Renderer | ClickSolveTools">
+    <meta property="og:description" content="Write and preview Markdown in real time with syntax highlighting, GitHub Flavored Markdown support, side-by-side editing, and one-click HTML export. Free, private, runs in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/markdown-preview">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Markdown Preview Online — Live Editor & Renderer | ClickSolveTools">
+    <meta name="twitter:description" content="Write and preview Markdown in real time with syntax highlighting, GitHub Flavored Markdown support, side-by-side editing, and one-click HTML export.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Markdown Preview",
+      "url": "https://clicksolvetools.com/tools/markdown-preview",
+      "description": "Write and preview Markdown in real time with syntax highlighting, GitHub Flavored Markdown support, side-by-side editing, and one-click HTML export.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- GA4 placeholder -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+        .editor-wrap { display: flex; gap: 1rem; }
+        .editor-wrap.stacked { flex-direction: column; }
+        .editor-wrap > div { flex: 1; min-width: 0; }
+
+        .fullscreen-preview {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 100;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            border-radius: 0 !important;
+            border: none !important;
+        }
+        .fullscreen-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 101;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .fullscreen-preview .preview-inner { padding-top: 3.5rem; }
+
+        /* Markdown preview prose styles */
+        .md-preview h1 { font-size: 2em; font-weight: 700; margin: 0.67em 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3em; color: #1e293b; }
+        .md-preview h2 { font-size: 1.5em; font-weight: 700; margin: 0.83em 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3em; color: #1e293b; }
+        .md-preview h3 { font-size: 1.25em; font-weight: 600; margin: 1em 0; color: #1e293b; }
+        .md-preview h4 { font-size: 1em; font-weight: 600; margin: 1em 0; color: #1e293b; }
+        .md-preview h5 { font-size: 0.875em; font-weight: 600; margin: 1em 0; color: #1e293b; }
+        .md-preview h6 { font-size: 0.85em; font-weight: 600; margin: 1em 0; color: #64748b; }
+        .md-preview p { margin: 0.75em 0; line-height: 1.7; }
+        .md-preview ul, .md-preview ol { margin: 0.75em 0; padding-left: 2em; }
+        .md-preview ul { list-style-type: disc; }
+        .md-preview ol { list-style-type: decimal; }
+        .md-preview li { margin: 0.25em 0; line-height: 1.6; }
+        .md-preview li > ul, .md-preview li > ol { margin: 0.25em 0; }
+        .md-preview blockquote { border-left: 4px solid #2563eb; padding: 0.5em 1em; margin: 1em 0; background: #eff6ff; color: #475569; border-radius: 0 0.375rem 0.375rem 0; }
+        .md-preview blockquote p { margin: 0.25em 0; }
+        .md-preview code { background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 0.25rem; font-size: 0.875em; color: #e11d48; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .md-preview pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1em; overflow-x: auto; margin: 1em 0; }
+        .md-preview pre code { background: none; padding: 0; color: inherit; font-size: 0.875em; }
+        .md-preview a { color: #2563eb; text-decoration: underline; text-underline-offset: 2px; }
+        .md-preview a:hover { color: #1d4ed8; }
+        .md-preview img { max-width: 100%; height: auto; border-radius: 0.375rem; margin: 1em 0; }
+        .md-preview hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5em 0; }
+        .md-preview table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+        .md-preview th, .md-preview td { border: 1px solid #e2e8f0; padding: 0.5em 0.75em; text-align: left; }
+        .md-preview th { background: #f1f5f9; font-weight: 600; color: #1e293b; }
+        .md-preview tr:nth-child(even) { background: #f8fafc; }
+        .md-preview strong { font-weight: 700; color: #1e293b; }
+        .md-preview em { font-style: italic; }
+        .md-preview del { text-decoration: line-through; color: #94a3b8; }
+        .md-preview input[type="checkbox"] { margin-right: 0.5em; accent-color: #2563eb; }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-6 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Markdown Preview</h1>
+                <p class="text-[#475569] text-lg">Write Markdown on the left, see the rendered preview on the right — instantly</p>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <button id="btn-layout" class="px-4 py-2 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v18m12-18H3"/></svg>
+                    <span id="layout-label">Stacked View</span>
+                </button>
+                <button id="btn-fullscreen" class="px-4 py-2 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
+                    Full-Screen Preview
+                </button>
+                <button id="btn-copy-html" class="px-4 py-2 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all text-sm">
+                    Copy HTML
+                </button>
+                <button id="btn-copy-md" class="px-4 py-2 bg-white border border-[#e2e8f0] text-[#1e293b] font-medium rounded-lg hover:bg-[#e2e8f0] hover:border-[#cbd5e1] active:scale-95 transition-all text-sm">
+                    Copy Markdown
+                </button>
+                <div class="ml-auto text-xs text-[#94a3b8] flex items-center gap-3">
+                    <span id="word-count">0 words</span>
+                    <span class="text-[#e2e8f0]">|</span>
+                    <span id="char-count">0 characters</span>
+                </div>
+            </div>
+
+            <!-- Editor + Preview -->
+            <div id="editor-wrap" class="editor-wrap mb-12">
+                <!-- Markdown Input -->
+                <div class="flex flex-col">
+                    <label for="md-input" class="text-sm font-medium text-[#475569] mb-2">Markdown</label>
+                    <textarea
+                        id="md-input"
+                        class="w-full h-[32rem] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] font-mono text-sm resize-none focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8] leading-relaxed"
+                        placeholder="Type or paste Markdown here..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <!-- Rendered Preview -->
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-[#475569] mb-2">Preview</label>
+                    <div
+                        id="md-preview"
+                        class="md-preview w-full h-[32rem] bg-white border border-[#e2e8f0] rounded-lg p-6 overflow-auto text-[#475569] text-sm"
+                    >
+                        <p class="text-[#94a3b8] italic">Your rendered Markdown will appear here…</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full-screen overlay bar (hidden by default) -->
+            <div id="fs-bar" class="fullscreen-bar hidden">
+                <span class="font-semibold text-[#1e293b] text-sm">Full-Screen Preview</span>
+                <button id="btn-exit-fs" class="px-3 py-1.5 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] active:scale-95 transition-all">
+                    Exit Full Screen
+                </button>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is Markdown and Why Use a Live Preview Tool?</h2>
+
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>Markdown is a lightweight markup language created by John Gruber in 2004. It lets you add formatting to plain text using simple, readable syntax — asterisks for bold and italic, hashes for headings, dashes for lists, and backticks for code. Because Markdown files are plain text, they are tiny, portable, and version-control friendly. Millions of developers, writers, and content creators use Markdown daily for documentation, README files, blog posts, notes, and technical writing.</p>
+
+                    <p>A live Markdown preview tool bridges the gap between writing and seeing. Instead of saving a file, opening it in another application, and switching back and forth, you type on one side and instantly see the formatted result on the other. This real-time feedback loop speeds up writing, catches formatting mistakes early, and makes it easier to learn Markdown syntax by experimentation. Whether you are drafting a GitHub README, authoring a blog post, or taking structured notes, a live preview editor is one of the most productive ways to work with Markdown.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Markdown Syntax</h3>
+                    <p>Markdown's core syntax is intentionally minimal. Headings are created with one to six <code class="text-[#e11d48] bg-[#f1f5f9] px-1.5 py-0.5 rounded text-sm">#</code> symbols. Bold text uses double asterisks <code class="text-[#e11d48] bg-[#f1f5f9] px-1.5 py-0.5 rounded text-sm">**like this**</code>, and italic uses single asterisks <code class="text-[#e11d48] bg-[#f1f5f9] px-1.5 py-0.5 rounded text-sm">*like this*</code>. Unordered lists use dashes or asterisks, while ordered lists use numbers followed by a period. Links follow the pattern <code class="text-[#e11d48] bg-[#f1f5f9] px-1.5 py-0.5 rounded text-sm">[text](url)</code>, and images are the same but with a leading exclamation mark. Code blocks are fenced with triple backticks, and inline code uses single backticks. Blockquotes start with <code class="text-[#e11d48] bg-[#f1f5f9] px-1.5 py-0.5 rounded text-sm">&gt;</code>. These few rules cover the vast majority of everyday formatting needs.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">GitHub Flavored Markdown (GFM)</h3>
+                    <p>GitHub Flavored Markdown extends the original spec with features that developers rely on every day. GFM adds support for tables using pipe characters, task lists with checkboxes, strikethrough text with double tildes, auto-linked URLs, and fenced code blocks with language-specific syntax highlighting. This tool uses the <strong class="text-[#1e293b]">marked</strong> library with GFM enabled, so tables, task lists, and strikethrough all render correctly in the preview pane. If you write Markdown for GitHub repositories, pull requests, or issues, what you see here is what you will get on GitHub.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Use Cases for Markdown</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#1e293b]">Documentation</strong> — Most open-source projects use Markdown for README files, contribution guides, changelogs, and API documentation.</li>
+                        <li><strong class="text-[#1e293b]">Technical writing</strong> — Static site generators like Jekyll, Hugo, Astro, and Next.js use Markdown as the source format for blog posts and pages.</li>
+                        <li><strong class="text-[#1e293b]">Note-taking</strong> — Applications like Obsidian, Notion, and Typora use Markdown for structured, searchable notes.</li>
+                        <li><strong class="text-[#1e293b]">Messaging</strong> — Slack, Discord, Reddit, and Stack Overflow all support Markdown formatting in messages and posts.</li>
+                        <li><strong class="text-[#1e293b]">Email drafts</strong> — Some email clients and newsletter platforms accept Markdown for composing richly formatted messages.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Tool Works</h3>
+                    <p>Type or paste Markdown into the editor on the left. The preview pane on the right updates instantly as you type — no buttons to click, no delays. Code blocks receive syntax highlighting via <strong class="text-[#1e293b]">highlight.js</strong>, making snippets easy to read. Toggle between a side-by-side layout (ideal for wide screens) and a stacked layout (ideal for narrow screens or focused editing). Use the full-screen preview to see your rendered document without distraction. When you are done, copy the rendered HTML for pasting into a CMS, or copy the raw Markdown to save to a file.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#1e293b]">Is Markdown the same as HTML?</strong><br>
+                    No. Markdown is a plain-text formatting syntax that gets converted into HTML. It is much simpler to read and write than raw HTML, which is why it has become the preferred format for documentation and content authoring. This tool converts your Markdown into HTML in real time so you can see exactly what the output looks like.</p>
+
+                    <p><strong class="text-[#1e293b]">Can I use HTML inside Markdown?</strong><br>
+                    Yes. Most Markdown parsers, including the one used here, allow inline HTML. You can mix HTML tags directly into your Markdown for elements that Markdown does not natively support, such as centered text, colored spans, or embedded iframes.</p>
+
+                    <p><strong class="text-[#1e293b]">What is GitHub Flavored Markdown?</strong><br>
+                    GitHub Flavored Markdown (GFM) is a superset of standard Markdown maintained by GitHub. It adds tables, task lists, strikethrough, auto-linking, and fenced code blocks. GFM has become a de facto standard across many platforms beyond GitHub, including GitLab, Bitbucket, and numerous documentation tools.</p>
+
+                    <p><strong class="text-[#1e293b]">Is my content stored anywhere?</strong><br>
+                    No. Everything runs in your browser. Your Markdown text is never sent to a server. When you close the tab, the content is gone unless you copied it first. This tool is completely private.</p>
+
+                    <p>This Markdown preview tool is <strong class="text-[#1e293b]">free</strong>, runs <strong class="text-[#1e293b]">entirely in your browser</strong>, and requires no signup. Use it whenever you need a quick, distraction-free environment to write and preview Markdown.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('markdown-preview');
+    </script>
+
+    <script>
+        const mdInput = document.getElementById('md-input');
+        const mdPreview = document.getElementById('md-preview');
+        const editorWrap = document.getElementById('editor-wrap');
+        const btnLayout = document.getElementById('btn-layout');
+        const layoutLabel = document.getElementById('layout-label');
+        const btnFullscreen = document.getElementById('btn-fullscreen');
+        const btnExitFs = document.getElementById('btn-exit-fs');
+        const fsBar = document.getElementById('fs-bar');
+        const btnCopyHtml = document.getElementById('btn-copy-html');
+        const btnCopyMd = document.getElementById('btn-copy-md');
+        const wordCountEl = document.getElementById('word-count');
+        const charCountEl = document.getElementById('char-count');
+
+        let isStacked = false;
+        let isFullscreen = false;
+        let lastRenderedHtml = '';
+
+        const STARTER = `# Welcome to Markdown Preview
+
+Write your **Markdown** here and see it rendered *instantly* on the right.
+
+---
+
+## Headings
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+
+## Text Formatting
+
+This is **bold text** and this is *italic text*. You can also use ~~strikethrough~~.
+
+Combine them: ***bold and italic***.
+
+## Links & Images
+
+[Visit ClickSolveTools](https://clicksolvetools.com)
+
+![Placeholder Image](https://via.placeholder.com/400x200?text=Markdown+Preview)
+
+## Lists
+
+### Unordered
+- First item
+- Second item
+  - Nested item
+  - Another nested item
+- Third item
+
+### Ordered
+1. Step one
+2. Step two
+3. Step three
+
+### Task List
+- [x] Write the Markdown
+- [x] Preview the output
+- [ ] Copy the HTML
+
+## Blockquote
+
+> "Markdown is intended to be as easy-to-read and easy-to-write as is feasible."
+> — John Gruber
+
+## Code
+
+Inline code: \`const x = 42;\`
+
+\`\`\`javascript
+function greet(name) {
+  return \`Hello, \${name}!\`;
+}
+
+console.log(greet("World"));
+\`\`\`
+
+## Table
+
+| Feature        | Supported |
+|----------------|-----------|
+| Headings       | Yes       |
+| Bold / Italic  | Yes       |
+| Tables (GFM)   | Yes       |
+| Code Blocks    | Yes       |
+| Task Lists     | Yes       |
+
+## Horizontal Rule
+
+---
+
+That's it! Edit this content or clear it and start fresh.`;
+
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try { return hljs.highlight(code, { language: lang }).value; } catch (_) {}
+                }
+                try { return hljs.highlightAuto(code).value; } catch (_) {}
+                return code;
+            }
+        });
+
+        function renderMarkdown() {
+            const raw = mdInput.value;
+            if (!raw.trim()) {
+                mdPreview.innerHTML = '<p class="text-[#94a3b8] italic">Your rendered Markdown will appear here…</p>';
+                lastRenderedHtml = '';
+                updateCounts('');
+                return;
+            }
+            lastRenderedHtml = marked.parse(raw);
+            mdPreview.innerHTML = lastRenderedHtml;
+            updateCounts(raw);
+        }
+
+        function updateCounts(text) {
+            const trimmed = text.trim();
+            const words = trimmed ? trimmed.split(/\s+/).length : 0;
+            const chars = text.length;
+            wordCountEl.textContent = words + ' word' + (words !== 1 ? 's' : '');
+            charCountEl.textContent = chars.toLocaleString() + ' character' + (chars !== 1 ? 's' : '');
+        }
+
+        function toggleLayout() {
+            isStacked = !isStacked;
+            editorWrap.classList.toggle('stacked', isStacked);
+            layoutLabel.textContent = isStacked ? 'Side-by-Side' : 'Stacked View';
+        }
+
+        function enterFullscreen() {
+            isFullscreen = true;
+            mdPreview.classList.add('fullscreen-preview');
+            fsBar.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function exitFullscreen() {
+            isFullscreen = false;
+            mdPreview.classList.remove('fullscreen-preview');
+            fsBar.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function flashButton(btn, label) {
+            const orig = btn.textContent;
+            btn.textContent = label;
+            btn.classList.add('bg-emerald-600', 'border-emerald-500', 'text-white');
+            btn.classList.remove('bg-white', 'border-[#e2e8f0]', 'text-[#1e293b]');
+            setTimeout(() => {
+                btn.textContent = orig;
+                btn.classList.remove('bg-emerald-600', 'border-emerald-500', 'text-white');
+                btn.classList.add('bg-white', 'border-[#e2e8f0]', 'text-[#1e293b]');
+            }, 1500);
+        }
+
+        function copyHtml() {
+            if (!lastRenderedHtml) return;
+            navigator.clipboard.writeText(lastRenderedHtml).then(() => flashButton(btnCopyHtml, 'Copied!'));
+        }
+
+        function copyMarkdown() {
+            const raw = mdInput.value;
+            if (!raw.trim()) return;
+            navigator.clipboard.writeText(raw).then(() => flashButton(btnCopyMd, 'Copied!'));
+        }
+
+        mdInput.addEventListener('input', renderMarkdown);
+        btnLayout.addEventListener('click', toggleLayout);
+        btnFullscreen.addEventListener('click', enterFullscreen);
+        btnExitFs.addEventListener('click', exitFullscreen);
+        btnCopyHtml.addEventListener('click', copyHtml);
+        btnCopyMd.addEventListener('click', copyMarkdown);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isFullscreen) exitFullscreen();
+        });
+
+        mdInput.value = STARTER;
+        renderMarkdown();
+    </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free 401(k) Retirement Calculator — Projected Balance, Employer Match &amp; Growth | ClickSolveTools</title>
+  <meta name="description" content="Calculate your projected 401(k) balance at retirement. See employer match contributions, year-by-year growth, contribution limits, and estimated monthly retirement income using the 4% rule.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/retirement-401k-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free 401(k) Retirement Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate your projected 401(k) balance at retirement. See employer match, year-by-year growth, and estimated monthly retirement income.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/retirement-401k-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"401(k) Retirement Calculator","url":"https://clicksolvetools.com/tools/retirement-401k-calculator","description":"Calculate your projected 401(k) balance at retirement with employer match, contribution limits, year-by-year growth, and estimated monthly retirement income using the 4% rule.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much should I contribute to my 401(k)?","acceptedAnswer":{"@type":"Answer","text":"Financial advisors generally recommend contributing at least enough to capture your full employer match, which is essentially free money. Beyond that, aim for 10–15% of your gross salary. The 2025 contribution limit is $23,500 per year, with an additional $7,500 catch-up contribution for those aged 50 and older."}},{"@type":"Question","name":"What is an employer 401(k) match?","acceptedAnswer":{"@type":"Answer","text":"An employer match is when your company contributes additional money to your 401(k) based on your own contributions. A common structure is a 50% match on the first 6% of salary you contribute — meaning if you put in 6%, your employer adds another 3%. This is essentially free money and one of the best returns on investment available."}},{"@type":"Question","name":"What is the 4% rule for retirement?","acceptedAnswer":{"@type":"Answer","text":"The 4% rule is a widely used retirement planning guideline suggesting you can withdraw 4% of your portfolio in the first year of retirement, then adjust for inflation each subsequent year, with a high probability of your savings lasting at least 30 years. It was derived from the Trinity Study analyzing historical market returns."}},{"@type":"Question","name":"What are the 2025 401(k) contribution limits?","acceptedAnswer":{"@type":"Answer","text":"For 2025, the annual employee contribution limit is $23,500. Workers aged 50 and older can make an additional catch-up contribution of $7,500, bringing their total to $31,000. These limits apply to employee elective deferrals only and do not include employer matching contributions."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+
+          <div>
+            <label for="current-age" class="block text-sm font-medium text-[#475569] mb-1">Current Age</label>
+            <input id="current-age" type="number" min="18" max="80" placeholder="30" class="rk-input w-full">
+          </div>
+
+          <div>
+            <label for="retirement-age" class="block text-sm font-medium text-[#475569] mb-1">Retirement Age</label>
+            <input id="retirement-age" type="number" min="30" max="85" placeholder="65" class="rk-input w-full">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="current-balance" class="block text-sm font-medium text-[#475569] mb-1">Current 401(k) Balance</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="current-balance" type="text" inputmode="decimal" placeholder="50,000" class="rk-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="annual-salary" class="block text-sm font-medium text-[#475569] mb-1">Annual Salary</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="annual-salary" type="text" inputmode="decimal" placeholder="75,000" class="rk-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="employee-contrib" class="block text-sm font-medium text-[#475569] mb-1">Your Contribution (%)</label>
+            <div class="relative">
+              <input id="employee-contrib" type="text" inputmode="decimal" placeholder="10" class="rk-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="employer-match" class="block text-sm font-medium text-[#475569] mb-1">Employer Match (%)</label>
+            <div class="relative">
+              <input id="employer-match" type="text" inputmode="decimal" placeholder="50" class="rk-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="match-limit" class="block text-sm font-medium text-[#475569] mb-1">Employer Matches Up To (% of Salary)</label>
+            <div class="relative">
+              <input id="match-limit" type="text" inputmode="decimal" placeholder="6" class="rk-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="annual-return" class="block text-sm font-medium text-[#475569] mb-1">Expected Annual Return (%)</label>
+            <div class="relative">
+              <input id="annual-return" type="text" inputmode="decimal" placeholder="7" class="rk-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="salary-increase" class="block text-sm font-medium text-[#475569] mb-1">Salary Increase (%/yr)</label>
+            <div class="relative">
+              <input id="salary-increase" type="text" inputmode="decimal" placeholder="3" class="rk-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2 pt-2">
+            <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] active:bg-[#1e40af] transition-colors shadow-sm shadow-[#2563eb]/20">
+              Calculate 401(k) Growth
+            </button>
+          </div>
+        </div>
+
+        <!-- Contribution Limits Note -->
+        <div class="mt-4 p-3 bg-[#eff6ff] border border-[#bfdbfe] rounded-lg text-xs text-[#1e40af] leading-relaxed">
+          <strong>2025 Contribution Limits:</strong> $23,500/year employee max. Age 50+: additional $7,500 catch-up ($31,000 total).
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Projected 401(k) at Retirement</h3>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="sm:col-span-2">
+            <div class="text-xs text-[#475569]">Projected Balance at Retirement</div>
+            <div id="out-balance" class="text-3xl font-bold text-[#2563eb]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Employee Contributions</div>
+            <div id="out-employee" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Employer Contributions</div>
+            <div id="out-employer" class="text-lg font-semibold text-[#7c3aed]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Investment Growth</div>
+            <div id="out-growth" class="text-lg font-semibold text-[#22c55e]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Monthly Income (4% Rule)</div>
+            <div id="out-monthly" class="text-lg font-semibold text-[#2563eb]">—</div>
+          </div>
+        </div>
+        <div id="limit-warning" class="hidden mt-2 p-3 bg-[#fefce8] border border-[#fde68a] rounded-lg text-xs text-[#92400e] leading-relaxed"></div>
+      </div>
+
+      <!-- Growth Chart -->
+      <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-1">401(k) Growth Over Time</h3>
+        <div class="flex items-center gap-4 text-xs text-[#475569] mb-4">
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#2563eb]"></span>Your Contributions</span>
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#7c3aed]"></span>Employer Match</span>
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#22c55e]"></span>Investment Growth</span>
+        </div>
+        <div id="chart" class="flex items-end gap-[2px] h-56 overflow-x-auto pb-1"></div>
+        <div id="chart-labels" class="flex gap-[2px] text-[10px] text-[#94a3b8] mt-1 overflow-x-auto"></div>
+      </div>
+
+      <!-- Year-by-Year Table -->
+      <div id="table-wrapper" class="hidden">
+        <button id="table-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="table-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Year-by-Year Breakdown
+          </span>
+          <span id="table-years" class="text-xs text-[#94a3b8]"></span>
+        </button>
+        <div id="table-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-white border-b border-[#e2e8f0]">
+              <tr class="text-[#475569] text-xs">
+                <th class="px-3 py-3 text-left font-medium">Age</th>
+                <th class="px-3 py-3 text-right font-medium">Salary</th>
+                <th class="px-3 py-3 text-right font-medium">You Add</th>
+                <th class="px-3 py-3 text-right font-medium">Employer</th>
+                <th class="px-3 py-3 text-right font-medium">Growth</th>
+                <th class="px-3 py-3 text-right font-medium">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">401(k) Retirement Calculator: Plan Your Future With Confidence</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>A 401(k) plan is one of the most powerful retirement savings vehicles available to American workers. Offered through employers, a 401(k) allows you to contribute a portion of your pre-tax salary to a tax-advantaged investment account that grows over time. Many employers sweeten the deal by matching a percentage of your contributions — effectively giving you free money for saving. This calculator helps you project your 401(k) balance at retirement based on your current savings rate, employer match, expected returns, and salary growth, so you can make informed decisions about your retirement strategy.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How a 401(k) Works</h3>
+      <p>When you enroll in a 401(k) plan, you choose a percentage of each paycheck to contribute. These contributions are deducted before federal income tax is calculated, which reduces your taxable income for the year. The money is then invested in a selection of mutual funds, index funds, or target-date funds chosen from your plan's options. Your investments grow tax-deferred, meaning you don't pay capital gains or income taxes on the returns until you withdraw funds in retirement. Traditional 401(k) withdrawals are taxed as ordinary income; Roth 401(k) contributions are made with after-tax dollars but qualified withdrawals are tax-free.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Employer Matching: Don't Leave Free Money on the Table</h3>
+      <p>Many employers match a portion of your 401(k) contributions, and this is widely considered the best guaranteed return on investment you can get. A common match formula is 50% of employee contributions up to 6% of salary. If you earn $75,000 and contribute 6% ($4,500), your employer adds $2,250 — an instant 50% return on that money. Some employers match dollar-for-dollar, and a few offer even more generous formulas. The single most important 401(k) strategy is to contribute at least enough to capture your full employer match. Anything less means you are turning down part of your compensation package.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">2025 Contribution Limits</h3>
+      <p>The IRS sets annual limits on how much employees can contribute to their 401(k) plans. For the 2025 tax year, the employee elective deferral limit is <strong class="text-[#1e293b]">$23,500</strong>. If you are age 50 or older at any point during the calendar year, you can make an additional <strong class="text-[#1e293b]">$7,500 catch-up contribution</strong>, bringing your personal maximum to $31,000. These limits apply only to your own contributions — employer matching dollars are separate and do not count toward the employee limit. The combined employer-plus-employee limit for 2025 is $70,000 ($77,500 including catch-up). These limits are adjusted periodically by the IRS to keep pace with inflation.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The 4% Rule and Monthly Retirement Income</h3>
+      <p>Once you retire, you need a strategy for turning your 401(k) balance into a sustainable income stream. The 4% rule, based on the widely cited Trinity Study, suggests that withdrawing 4% of your portfolio in the first year of retirement and adjusting that amount for inflation each subsequent year gives you a high probability of your savings lasting at least 30 years. For example, a $1,000,000 portfolio would support $40,000 per year, or roughly $3,333 per month. This calculator uses the 4% rule to estimate your potential monthly retirement income so you can gauge whether your savings trajectory is on track.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Investment Returns and Salary Growth</h3>
+      <p>Historical stock market returns have averaged roughly 10% annually before inflation (about 7% after inflation). A balanced portfolio of stocks and bonds might average 6–8% depending on allocation and market conditions. This calculator lets you input your own expected return rate to match your risk tolerance and investment strategy. It also factors in annual salary increases, which affect your dollar contributions and employer match over time. Even modest 2–3% annual raises compound significantly over a 30-year career.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How much should I contribute to my 401(k)?</strong></p>
+      <p>At minimum, contribute enough to get your full employer match. Financial planners typically recommend saving 10–15% of gross income for retirement. If you can't start there, increase your contribution by 1% each year until you reach your target. Many plans offer automatic escalation features that do this for you.</p>
+
+      <p><strong class="text-[#1e293b]">When can I withdraw from my 401(k) without penalty?</strong></p>
+      <p>You can take penalty-free withdrawals starting at age 59½. Withdrawals before that age generally incur a 10% early withdrawal penalty in addition to income tax, though exceptions exist for hardship, disability, and certain other qualifying events. Required minimum distributions (RMDs) begin at age 73 under current rules.</p>
+
+      <p><strong class="text-[#1e293b]">What happens to my 401(k) if I change jobs?</strong></p>
+      <p>You have several options: leave the funds in your former employer's plan (if allowed), roll the balance into your new employer's 401(k), roll it into a traditional IRA, or cash it out (not recommended due to taxes and penalties). A direct rollover to an IRA or new 401(k) preserves the tax-deferred status with no penalties.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for educational purposes only. It does not account for taxes, inflation, fees, variable market returns, or changes to contribution limits. Actual 401(k) growth will vary. Consult a qualified financial advisor for retirement planning specific to your situation.
+      </div>
+
+      <p>This 401(k) retirement calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit whenever you want to check your retirement projections.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .rk-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .rk-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .rk-input::placeholder { color: #94a3b8; }
+
+    #breakdown-table tr { border-top: 1px solid #e2e8f0; }
+    #breakdown-table td { padding: 0.5rem 0.75rem; white-space: nowrap; }
+    #breakdown-table td:first-child { text-align: left; }
+    #breakdown-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #table-body::-webkit-scrollbar { width: 6px; }
+    #table-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #table-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 1;
+      min-width: 14px;
+      max-width: 48px;
+      position: relative;
+      border-radius: 3px 3px 0 0;
+      overflow: hidden;
+      cursor: default;
+    }
+    .bar-col .bar-employee { background: #2563eb; width: 100%; transition: height 300ms ease; }
+    .bar-col .bar-employer { background: #7c3aed; width: 100%; transition: height 300ms ease; }
+    .bar-col .bar-growth   { background: #22c55e; width: 100%; transition: height 300ms ease; }
+
+    .bar-col:hover .bar-employee { background: #1d4ed8; }
+    .bar-col:hover .bar-employer { background: #6d28d9; }
+    .bar-col:hover .bar-growth   { background: #16a34a; }
+
+    .bar-tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #f1f5f9;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+      margin-bottom: 4px;
+    }
+    .bar-col:hover .bar-tooltip { display: block; }
+  </style>
+
+  <script>
+  (function () {
+    const fmtC = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const fmtC2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtN = new Intl.NumberFormat('en-US');
+    const $ = id => document.getElementById(id);
+
+    const LIMIT_UNDER50 = 23500;
+    const LIMIT_CATCHUP = 7500;
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatCurrencyInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = fmtN.format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    [$('current-balance'), $('annual-salary')].forEach(el => {
+      el.addEventListener('input', () => formatCurrencyInput(el));
+    });
+
+    $('table-toggle').addEventListener('click', () => {
+      const body = $('table-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('table-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('table-toggle').classList.add('rounded-b-none');
+      else $('table-toggle').classList.remove('rounded-b-none');
+    });
+
+    $('calc-btn').addEventListener('click', calculate);
+
+    document.querySelectorAll('.rk-input').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); calculate(); }
+      });
+    });
+
+    function calculate() {
+      const currentAge = parseInt($('current-age').value) || 0;
+      const retirementAge = parseInt($('retirement-age').value) || 0;
+      const currentBalance = parseNum($('current-balance'));
+      const annualSalary = parseNum($('annual-salary'));
+      const employeeContribPct = parseFloat($('employee-contrib').value) || 0;
+      const employerMatchPct = parseFloat($('employer-match').value) || 0;
+      const matchLimitPct = parseFloat($('match-limit').value) || 0;
+      const annualReturn = parseFloat($('annual-return').value) || 0;
+      const salaryIncrease = parseFloat($('salary-increase').value) || 0;
+
+      const years = retirementAge - currentAge;
+      if (years <= 0 || years > 60) return;
+      if (currentAge < 18 || retirementAge > 85) return;
+      if (annualSalary <= 0) return;
+
+      const returnRate = annualReturn / 100;
+      const salaryGrowth = salaryIncrease / 100;
+
+      let balance = currentBalance;
+      let totalEmployee = 0;
+      let totalEmployer = 0;
+      let hitLimit = false;
+      const yearlyData = [];
+
+      for (let y = 0; y < years; y++) {
+        const age = currentAge + y;
+        const salary = annualSalary * Math.pow(1 + salaryGrowth, y);
+        const contribLimit = age >= 50 ? LIMIT_UNDER50 + LIMIT_CATCHUP : LIMIT_UNDER50;
+
+        let employeeContrib = salary * (employeeContribPct / 100);
+        if (employeeContrib > contribLimit) {
+          employeeContrib = contribLimit;
+          hitLimit = true;
+        }
+
+        const matchableContrib = Math.min(salary * (matchLimitPct / 100), employeeContrib);
+        const employerContrib = matchableContrib * (employerMatchPct / 100);
+
+        const startBalance = balance;
+        const totalAdded = employeeContrib + employerContrib;
+        const growthOnExisting = startBalance * returnRate;
+        const growthOnContrib = totalAdded * returnRate * 0.5;
+        const yearGrowth = growthOnExisting + growthOnContrib;
+
+        balance = startBalance + totalAdded + yearGrowth;
+        totalEmployee += employeeContrib;
+        totalEmployer += employerContrib;
+
+        yearlyData.push({
+          age: age,
+          salary,
+          employeeContrib,
+          employerContrib,
+          growth: yearGrowth,
+          endBalance: balance
+        });
+      }
+
+      const totalGrowth = balance - currentBalance - totalEmployee - totalEmployer;
+      const monthlyIncome = (balance * 0.04) / 12;
+
+      $('out-balance').textContent = fmtC.format(balance);
+      $('out-employee').textContent = fmtC.format(totalEmployee);
+      $('out-employer').textContent = fmtC.format(totalEmployer);
+      $('out-growth').textContent = fmtC.format(totalGrowth);
+      $('out-monthly').textContent = fmtC2.format(monthlyIncome) + '/mo';
+
+      const warn = $('limit-warning');
+      if (hitLimit) {
+        warn.textContent = 'Note: Your contributions were capped at the annual 401(k) limit ($23,500, or $31,000 for age 50+) in one or more years.';
+        warn.classList.remove('hidden');
+      } else {
+        warn.classList.add('hidden');
+      }
+
+      $('results-panel').classList.remove('hidden');
+
+      buildChart(yearlyData);
+      buildTable(yearlyData, years);
+
+      $('chart-panel').classList.remove('hidden');
+      $('table-wrapper').classList.remove('hidden');
+    }
+
+    function buildChart(data) {
+      const chart = $('chart');
+      const labels = $('chart-labels');
+      chart.innerHTML = '';
+      labels.innerHTML = '';
+
+      const maxVal = data[data.length - 1].endBalance;
+      if (maxVal <= 0) return;
+
+      let cumEmployee = 0;
+      let cumEmployer = 0;
+
+      data.forEach((d, i) => {
+        cumEmployee += d.employeeContrib;
+        cumEmployer += d.employerContrib;
+        const cumGrowth = d.endBalance - cumEmployee - cumEmployer - parseNum($('current-balance'));
+
+        const empPct = (cumEmployee / maxVal) * 100;
+        const erPct = (cumEmployer / maxVal) * 100;
+        const grPct = (Math.max(0, cumGrowth + parseNum($('current-balance'))) / maxVal) * 100;
+
+        const col = document.createElement('div');
+        col.className = 'bar-col';
+        col.innerHTML = `
+          <div class="bar-tooltip">Age ${d.age}: ${fmtC.format(d.endBalance)}</div>
+          <div class="bar-growth" style="height: ${grPct}%"></div>
+          <div class="bar-employer" style="height: ${erPct}%"></div>
+          <div class="bar-employee" style="height: ${empPct}%"></div>
+        `;
+        chart.appendChild(col);
+
+        const lbl = document.createElement('div');
+        lbl.className = 'text-center';
+        lbl.style.flex = '1';
+        lbl.style.minWidth = '14px';
+        lbl.style.maxWidth = '48px';
+        const showLabel = data.length <= 15 || (d.age % 5 === 0) || i === 0 || i === data.length - 1;
+        lbl.textContent = showLabel ? d.age : '';
+        labels.appendChild(lbl);
+      });
+    }
+
+    function buildTable(data, years) {
+      const tbody = $('breakdown-table');
+      tbody.innerHTML = data.map(d => `<tr>
+        <td>${d.age}</td>
+        <td>${fmtC.format(d.salary)}</td>
+        <td>${fmtC.format(d.employeeContrib)}</td>
+        <td>${fmtC.format(d.employerContrib)}</td>
+        <td>${fmtC.format(d.growth)}</td>
+        <td class="font-medium">${fmtC.format(d.endBalance)}</td>
+      </tr>`).join('');
+      $('table-years').textContent = `${years} years`;
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('retirement-401k-calculator');
+  </script>
+</body>
+</html>

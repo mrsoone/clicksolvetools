@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Calculator — Free Online Grade Point Average Calculator | ClickSolveTools</title>
+  <meta name="description" content="Free online GPA calculator using the standard 4.0 scale. Add courses with credits and letter grades, instantly calculate your cumulative weighted GPA. No signup required.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/gpa-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GPA Calculator — Free Online Grade Point Average Calculator">
+  <meta property="og:description" content="Free online GPA calculator using the standard 4.0 scale. Add courses with credits and letter grades, instantly calculate your cumulative weighted GPA.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/gpa-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="GPA Calculator — Free Online Grade Point Average Calculator">
+  <meta name="twitter:description" content="Free online GPA calculator using the standard 4.0 scale. Add courses, calculate weighted GPA instantly.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GPA Calculator",
+    "url": "https://clicksolvetools.com/tools/gpa-calculator",
+    "description": "Free online GPA calculator using the standard 4.0 scale. Add courses with credit hours and letter grades to calculate your cumulative weighted GPA.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is GPA calculated on a 4.0 scale?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For each course, multiply the grade points (e.g., A = 4.0, B = 3.0) by the number of credit hours to get quality points. Then divide the total quality points by the total credit hours to get your cumulative GPA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between weighted and unweighted GPA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An unweighted GPA treats all courses equally on a 4.0 scale. A weighted GPA gives extra points for honors, AP, or IB courses (often on a 5.0 scale). This calculator uses the standard weighted-by-credits 4.0 scale used by most colleges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What GPA do I need for the Dean's List or honors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Requirements vary by institution. Common thresholds are: Dean's List 3.5+, Cum Laude 3.5+, Magna Cum Laude 3.7+, and Summa Cum Laude 3.9+. Check your school's specific requirements."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    .fade-in { animation: fadeIn 400ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    input:focus, select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+    .gpa-ring { background: conic-gradient(#2563eb calc(var(--pct) * 1%), #e2e8f0 0); }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- ─── Navigation ─── -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 group">
+        <span class="text-xl">🛠️</span>
+        <span class="text-[#1e293b] font-bold text-lg group-hover:text-[#2563eb] transition-colors">ClickSolveTools</span>
+      </a>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="/" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">All Tools</a>
+        <a href="/about" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">About</a>
+        <a href="/privacy" class="text-[#64748b] hover:text-[#1e293b] transition-colors hidden sm:inline">Privacy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Main Content ─── -->
+  <main class="flex-1 max-w-4xl mx-auto w-full px-4 py-10">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6 text-sm text-[#94a3b8]">
+      <ol class="flex items-center gap-1.5">
+        <li><a href="/" class="hover:text-[#2563eb] transition-colors">Home</a></li>
+        <li>/</li>
+        <li><a href="/" class="hover:text-[#2563eb] transition-colors">Math</a></li>
+        <li>/</li>
+        <li class="text-[#475569] font-medium">GPA Calculator</li>
+      </ol>
+    </nav>
+
+    <!-- Tool Header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-3xl">🎓</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1e293b]">GPA Calculator</h1>
+      </div>
+      <p class="text-[#475569] text-lg max-w-2xl">Add your courses, credit hours, and letter grades to calculate your cumulative GPA on the standard 4.0 scale. Everything runs in your browser — nothing is stored.</p>
+    </div>
+
+    <!-- ─── Calculator Card ─── -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 mb-8 fade-in">
+
+      <!-- Course Table Header -->
+      <div class="hidden sm:grid sm:grid-cols-[1fr_100px_140px_100px_40px] gap-3 mb-3 px-1 text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
+        <span>Course Name</span>
+        <span>Credits</span>
+        <span>Grade</span>
+        <span>Quality Pts</span>
+        <span></span>
+      </div>
+
+      <!-- Course Rows Container -->
+      <div id="course-rows" class="space-y-3 mb-6"></div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <button id="btn-add" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2563eb] text-white text-sm font-semibold rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm shadow-[#2563eb]/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Add Course
+        </button>
+        <button id="btn-clear" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f1f5f9] text-[#475569] text-sm font-semibold rounded-lg hover:bg-[#e2e8f0] transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          Clear All
+        </button>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="border-t border-[#e2e8f0] pt-8 hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <!-- GPA Display -->
+          <div class="sm:col-span-1 flex flex-col items-center">
+            <div class="relative w-36 h-36 mb-3">
+              <div id="gpa-ring" class="gpa-ring w-full h-full rounded-full flex items-center justify-center" style="--pct:0">
+                <div class="w-28 h-28 bg-white rounded-full flex items-center justify-center">
+                  <span id="gpa-value" class="text-4xl font-extrabold text-[#2563eb]">0.00</span>
+                </div>
+              </div>
+            </div>
+            <span class="text-sm font-semibold text-[#475569]">Cumulative GPA</span>
+            <span id="gpa-label" class="text-xs text-[#94a3b8] mt-0.5"></span>
+          </div>
+          <!-- Stats -->
+          <div class="sm:col-span-2 grid grid-cols-2 gap-4">
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4">
+              <p class="text-2xl font-bold text-[#1e293b]" id="stat-credits">0</p>
+              <p class="text-xs text-[#94a3b8] mt-1">Total Credits</p>
+            </div>
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4">
+              <p class="text-2xl font-bold text-[#1e293b]" id="stat-qp">0.00</p>
+              <p class="text-xs text-[#94a3b8] mt-1">Total Quality Points</p>
+            </div>
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4">
+              <p class="text-2xl font-bold text-[#1e293b]" id="stat-courses">0</p>
+              <p class="text-xs text-[#94a3b8] mt-1">Courses</p>
+            </div>
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4">
+              <p class="text-2xl font-bold text-[#1e293b]" id="stat-best">—</p>
+              <p class="text-xs text-[#94a3b8] mt-1">Highest Grade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── GPA Scale Reference ─── -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm p-6 sm:p-8 mb-8 fade-in" style="animation-delay:100ms">
+      <h2 class="text-lg font-bold text-[#1e293b] mb-4">GPA Scale Reference (Standard 4.0)</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-[#e2e8f0] text-[#94a3b8] text-xs uppercase tracking-wider">
+              <th class="text-left py-2 pr-4 font-semibold">Letter Grade</th>
+              <th class="text-left py-2 pr-4 font-semibold">Grade Points</th>
+              <th class="text-left py-2 pr-4 font-semibold">Percentage (Typical)</th>
+              <th class="text-left py-2 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#475569]" id="scale-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── SEO Article ─── -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Calculate Your GPA — A Complete Guide</h2>
+
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Your Grade Point Average (GPA) is one of the most important numbers in your academic career. Whether you are applying to colleges, graduate schools, scholarships, or your first job, admissions officers and employers use GPA as a quick snapshot of your academic performance. Understanding how GPA works — and how to calculate it accurately — puts you in control of your academic trajectory.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Is GPA and Why Does It Matter?</h3>
+        <p>GPA stands for Grade Point Average, a standardized numerical representation of your grades. In the United States and many other countries, GPA is measured on a 4.0 scale where an A equals 4.0 and an F equals 0.0. Schools, employers, and scholarship committees rely on GPA because it provides a single, comparable metric across different courses, semesters, and institutions. A strong GPA can open doors to honors programs, Dean's List recognition, financial aid, internships, and competitive graduate admissions.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Standard 4.0 GPA Scale</h3>
+        <p>Most U.S. colleges and universities use the standard 4.0 grading scale. Each letter grade maps to a specific number of grade points: A+ and A both equal 4.0, A- equals 3.7, B+ is 3.3, B is 3.0, and so on down to F at 0.0. Some schools use plus/minus modifiers while others do not — always check your institution's specific scale. This calculator uses the most widely adopted version of the 4.0 scale, which includes plus and minus distinctions for every letter grade from A through D.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Calculate Weighted GPA (Credit-Weighted)</h3>
+        <p>Your cumulative GPA is not a simple average of your grades — it is a credit-weighted average. A 4-credit course has more impact on your GPA than a 1-credit seminar. Here is the step-by-step process:</p>
+        <ol class="list-decimal list-inside space-y-2 ml-2">
+          <li><strong class="text-[#1e293b]">Convert each letter grade to grade points</strong> using the 4.0 scale (e.g., B+ = 3.3).</li>
+          <li><strong class="text-[#1e293b]">Multiply grade points by credit hours</strong> for each course to get quality points. A B+ in a 3-credit course yields 3.3 × 3 = 9.9 quality points.</li>
+          <li><strong class="text-[#1e293b]">Sum all quality points</strong> across every course.</li>
+          <li><strong class="text-[#1e293b]">Sum all credit hours</strong> across every course.</li>
+          <li><strong class="text-[#1e293b]">Divide total quality points by total credit hours</strong> to get your cumulative GPA.</li>
+        </ol>
+        <p>For example, if you took four courses with a combined 13 credit hours and earned 45.5 total quality points, your GPA would be 45.5 ÷ 13 = 3.50.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Weighted vs. Unweighted GPA</h3>
+        <p>It is important to distinguish between two uses of the word "weighted." In college settings, <strong class="text-[#1e293b]">credit-weighted GPA</strong> means each course's influence is proportional to its credit hours — this is what our calculator computes. In high school, <strong class="text-[#1e293b]">weighted GPA</strong> often refers to a scale that awards extra points (up to 5.0) for Advanced Placement (AP), International Baccalaureate (IB), or honors courses. An <strong class="text-[#1e293b]">unweighted GPA</strong> uses the same 4.0 maximum for all courses regardless of difficulty. Colleges typically recalculate applicants' GPAs using their own internal formula, but understanding your unweighted 4.0-scale GPA is the universal starting point.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common GPA Thresholds and What They Mean</h3>
+        <p>While every institution sets its own benchmarks, here are some widely recognized thresholds: a 3.5 GPA or higher often qualifies for the Dean's List, 3.5 and above is generally Cum Laude at graduation, 3.7+ is Magna Cum Laude, and 3.9+ is Summa Cum Laude. Many graduate programs expect applicants to have a minimum 3.0 GPA, while competitive programs like medical or law schools often look for 3.5 or above. Scholarship providers frequently set a 3.0 minimum as a baseline eligibility criterion.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Improving Your GPA</h3>
+        <p>If your GPA is lower than you would like, there are practical strategies. Focus on high-credit courses since they carry more weight. Retake courses where your institution allows grade replacement. Seek tutoring early — catching a slip in the first weeks is far easier than recovering at finals. Finally, use this calculator at the start of each semester to set grade targets: enter your current cumulative GPA and model different grade scenarios to see exactly what you need.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">How is GPA calculated on a 4.0 scale?</strong><br>
+        Multiply each course's grade points by its credit hours to get quality points, then divide the total quality points by the total credit hours. This gives you a credit-weighted cumulative GPA on the standard 4.0 scale.</p>
+
+        <p><strong class="text-[#1e293b]">Does an A+ count higher than an A?</strong><br>
+        On the standard 4.0 scale, both A+ and A equal 4.0. Some institutions award 4.3 for an A+, but this is uncommon. Our calculator uses the widely accepted 4.0 maximum.</p>
+
+        <p><strong class="text-[#1e293b]">Can I calculate GPA for a single semester?</strong><br>
+        Yes. Simply enter only the courses from that semester. The result will be your semester GPA. To find your overall cumulative GPA, enter every course from all semesters.</p>
+
+        <p><strong class="text-[#1e293b]">Is my data saved anywhere?</strong><br>
+        No. This tool runs entirely in your browser using JavaScript. Nothing is uploaded, stored, or sent to a server. Your grades remain completely private on your device.</p>
+
+        <p>Whether you are a freshman planning ahead, a senior checking graduation honors eligibility, or a graduate school applicant verifying your transcript math, this free GPA calculator gives you an instant, accurate result without any signup or data collection. Bookmark this page and use it each semester to stay on top of your academic goals.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── Related Tools ─── -->
+  <section class="bg-[#f8fafc] border-t border-[#e2e8f0]">
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <h2 class="text-xl font-bold text-[#1e293b] mb-6 text-center">Related Tools</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/tools/percentage-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
+          <span class="text-2xl mb-2 block">📊</span>
+          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Percentage Calculator</h3>
+          <p class="text-[#64748b] text-xs leading-relaxed">Calculate percentages, percent change, and ratios instantly.</p>
+        </a>
+        <a href="/tools/scientific-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
+          <span class="text-2xl mb-2 block">🔢</span>
+          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Scientific Calculator</h3>
+          <p class="text-[#64748b] text-xs leading-relaxed">Full-featured scientific calculator with advanced functions.</p>
+        </a>
+        <a href="/tools/standard-deviation-calculator" class="block bg-white border border-[#e2e8f0] rounded-xl p-5 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all">
+          <span class="text-2xl mb-2 block">📈</span>
+          <h3 class="font-semibold text-[#1e293b] text-sm mb-1">Standard Deviation Calculator</h3>
+          <p class="text-[#64748b] text-xs leading-relaxed">Compute mean, variance, and standard deviation for any data set.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─── -->
+  <footer class="bg-[#1e293b]">
+    <div class="max-w-7xl mx-auto px-4 py-10 text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <span class="text-xl">🛠️</span>
+        <span class="text-white font-bold text-lg">ClickSolveTools</span>
+      </div>
+      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
+      <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
+      <div class="flex items-center justify-center gap-4 text-xs">
+        <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/about" class="text-[#94a3b8] hover:text-white transition-colors">About</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/privacy" class="text-[#94a3b8] hover:text-white transition-colors">Privacy</a>
+        <span class="text-[#475569]">|</span>
+        <a href="/licenses" class="text-[#94a3b8] hover:text-white transition-colors">Licenses</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── shared.js ─── -->
+  <script src="/shared.js" defer></script>
+
+  <!-- ─── App Logic ─── -->
+  <script>
+  (function() {
+    const GRADES = [
+      { letter: 'A+', points: 4.0, pct: '97–100', desc: 'Exceptional' },
+      { letter: 'A',  points: 4.0, pct: '93–96',  desc: 'Excellent' },
+      { letter: 'A-', points: 3.7, pct: '90–92',  desc: 'Very Good' },
+      { letter: 'B+', points: 3.3, pct: '87–89',  desc: 'Good' },
+      { letter: 'B',  points: 3.0, pct: '83–86',  desc: 'Above Average' },
+      { letter: 'B-', points: 2.7, pct: '80–82',  desc: 'Satisfactory' },
+      { letter: 'C+', points: 2.3, pct: '77–79',  desc: 'Fair' },
+      { letter: 'C',  points: 2.0, pct: '73–76',  desc: 'Average' },
+      { letter: 'C-', points: 1.7, pct: '70–72',  desc: 'Below Average' },
+      { letter: 'D+', points: 1.3, pct: '67–69',  desc: 'Poor' },
+      { letter: 'D',  points: 1.0, pct: '63–66',  desc: 'Barely Passing' },
+      { letter: 'D-', points: 0.7, pct: '60–62',  desc: 'Minimal Passing' },
+      { letter: 'F',  points: 0.0, pct: '0–59',   desc: 'Failing' }
+    ];
+
+    const gradeMap = {};
+    GRADES.forEach(g => { gradeMap[g.letter] = g.points; });
+
+    const container   = document.getElementById('course-rows');
+    const btnAdd      = document.getElementById('btn-add');
+    const btnClear    = document.getElementById('btn-clear');
+    const results     = document.getElementById('results');
+    const gpaValue    = document.getElementById('gpa-value');
+    const gpaRing     = document.getElementById('gpa-ring');
+    const gpaLabel    = document.getElementById('gpa-label');
+    const statCredits = document.getElementById('stat-credits');
+    const statQP      = document.getElementById('stat-qp');
+    const statCourses = document.getElementById('stat-courses');
+    const statBest    = document.getElementById('stat-best');
+
+    let rowId = 0;
+
+    function buildScaleTable() {
+      const tbody = document.getElementById('scale-table');
+      tbody.innerHTML = GRADES.map(g => {
+        const bg = g.points >= 3.7 ? 'bg-emerald-50 text-emerald-700'
+                 : g.points >= 2.7 ? 'bg-blue-50 text-blue-700'
+                 : g.points >= 1.7 ? 'bg-amber-50 text-amber-700'
+                 : 'bg-red-50 text-red-700';
+        return `<tr class="border-b border-[#f1f5f9]">
+          <td class="py-2.5 pr-4"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold ${bg}">${g.letter}</span></td>
+          <td class="py-2.5 pr-4 font-semibold text-[#1e293b]">${g.points.toFixed(1)}</td>
+          <td class="py-2.5 pr-4">${g.pct}%</td>
+          <td class="py-2.5">${g.desc}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function gradeOptions() {
+      return GRADES.map(g =>
+        `<option value="${g.letter}">${g.letter} (${g.points.toFixed(1)})</option>`
+      ).join('');
+    }
+
+    function addRow(name, credits, grade) {
+      const id = ++rowId;
+      const row = document.createElement('div');
+      row.dataset.id = id;
+      row.className = 'grid grid-cols-1 sm:grid-cols-[1fr_100px_140px_100px_40px] gap-3 items-center bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-3 sm:p-3 fade-in';
+      row.innerHTML = `
+        <div>
+          <label class="text-xs text-[#94a3b8] sm:hidden mb-1 block">Course Name</label>
+          <input type="text" placeholder="e.g. Calculus I" value="${name || ''}" class="course-name w-full px-3 py-2 border border-[#e2e8f0] rounded-lg text-sm bg-white text-[#1e293b] placeholder-[#94a3b8] transition-all">
+        </div>
+        <div>
+          <label class="text-xs text-[#94a3b8] sm:hidden mb-1 block">Credits</label>
+          <input type="number" min="1" max="6" value="${credits || 3}" class="course-credits w-full px-3 py-2 border border-[#e2e8f0] rounded-lg text-sm bg-white text-[#1e293b] text-center transition-all">
+        </div>
+        <div>
+          <label class="text-xs text-[#94a3b8] sm:hidden mb-1 block">Grade</label>
+          <select class="course-grade w-full px-3 py-2 border border-[#e2e8f0] rounded-lg text-sm bg-white text-[#1e293b] transition-all">
+            ${gradeOptions()}
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-[#94a3b8] sm:hidden mb-1 block">Quality Points</label>
+          <span class="course-qp block text-center font-semibold text-sm text-[#1e293b]">—</span>
+        </div>
+        <div class="flex justify-center">
+          <button class="btn-remove p-1.5 rounded-lg text-[#94a3b8] hover:text-red-500 hover:bg-red-50 transition-all" title="Remove course" aria-label="Remove course">
+            <svg class="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          </button>
+        </div>
+      `;
+
+      if (grade) {
+        row.querySelector('.course-grade').value = grade;
+      }
+
+      container.appendChild(row);
+      updateRow(row);
+      calculate();
+
+      row.querySelector('.course-credits').addEventListener('input', () => { updateRow(row); calculate(); });
+      row.querySelector('.course-grade').addEventListener('change', () => { updateRow(row); calculate(); });
+      row.querySelector('.btn-remove').addEventListener('click', () => { row.remove(); calculate(); });
+    }
+
+    function updateRow(row) {
+      const credits = parseInt(row.querySelector('.course-credits').value) || 0;
+      const grade   = row.querySelector('.course-grade').value;
+      const pts     = gradeMap[grade];
+      const qp      = (pts * credits).toFixed(2);
+      row.querySelector('.course-qp').textContent = credits > 0 ? qp : '—';
+    }
+
+    function getGPALabel(gpa) {
+      if (gpa >= 3.9) return 'Summa Cum Laude range';
+      if (gpa >= 3.7) return 'Magna Cum Laude range';
+      if (gpa >= 3.5) return 'Cum Laude range';
+      if (gpa >= 3.0) return 'Good standing';
+      if (gpa >= 2.0) return 'Satisfactory';
+      if (gpa >= 1.0) return 'Below average';
+      return 'Academic probation risk';
+    }
+
+    function calculate() {
+      const rows = container.querySelectorAll('[data-id]');
+      if (rows.length === 0) {
+        results.classList.add('hidden');
+        return;
+      }
+
+      let totalCredits = 0;
+      let totalQP = 0;
+      let bestGrade = -1;
+      let bestLetter = '—';
+
+      rows.forEach(row => {
+        const credits = parseInt(row.querySelector('.course-credits').value) || 0;
+        const grade   = row.querySelector('.course-grade').value;
+        const pts     = gradeMap[grade];
+        totalCredits += credits;
+        totalQP += pts * credits;
+        if (pts > bestGrade) { bestGrade = pts; bestLetter = grade; }
+      });
+
+      const gpa = totalCredits > 0 ? totalQP / totalCredits : 0;
+      const pct = Math.min((gpa / 4.0) * 100, 100);
+
+      results.classList.remove('hidden');
+      gpaValue.textContent = gpa.toFixed(2);
+      gpaRing.style.setProperty('--pct', pct.toFixed(1));
+      gpaLabel.textContent = getGPALabel(gpa);
+      statCredits.textContent = totalCredits;
+      statQP.textContent = totalQP.toFixed(2);
+      statCourses.textContent = rows.length;
+      statBest.textContent = bestLetter;
+    }
+
+    btnAdd.addEventListener('click', () => addRow('', 3, 'A'));
+
+    btnClear.addEventListener('click', () => {
+      container.innerHTML = '';
+      results.classList.add('hidden');
+    });
+
+    buildScaleTable();
+    addRow('', 3, 'A');
+    addRow('', 3, 'A');
+    addRow('', 3, 'A');
+  })();
+  </script>
+</body>
+</html>

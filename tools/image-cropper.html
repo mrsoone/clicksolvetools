@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image Cropper Online — Crop, Resize &amp; Download Instantly | ClickSolveTools</title>
+  <meta name="description" content="Crop images with precision using a draggable selection rectangle, aspect ratio presets, and manual dimension inputs. Preview and download as PNG or JPEG — entirely in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/image-cropper">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Image Cropper Online — Crop, Resize & Download Instantly | ClickSolveTools">
+  <meta property="og:description" content="Crop images with precision using a draggable selection rectangle, aspect ratio presets, and manual dimension inputs. Preview and download as PNG or JPEG — entirely in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/image-cropper">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Image Cropper Online — Crop, Resize & Download Instantly | ClickSolveTools">
+  <meta name="twitter:description" content="Crop images with precision using a draggable selection rectangle, aspect ratio presets, and manual dimension inputs. Preview and download as PNG or JPEG — entirely in your browser.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Cropper",
+    "url": "https://clicksolvetools.com/tools/image-cropper",
+    "description": "Crop images with precision using a draggable selection rectangle, aspect ratio presets, and manual dimension inputs. Preview and download as PNG or JPEG — entirely in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I crop an image online for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload your image to this free image cropper, drag a selection rectangle over the area you want to keep, choose an aspect ratio if needed, and click Download. Everything runs in your browser — no uploads, no signup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What aspect ratios can I use when cropping?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool supports Free (unconstrained), 1:1 (square), 4:3, 16:9, 3:2, and custom aspect ratios. Select a preset or enter your own ratio for precise control."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download the cropped image as JPEG or PNG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Choose PNG for lossless quality or JPEG with an adjustable quality slider (1–100%) for smaller file sizes. The cropped image downloads instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All processing happens entirely in your browser using the HTML5 Canvas API. Your image never leaves your device."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    #crop-canvas { cursor: crosshair; }
+    .handle { position: absolute; width: 10px; height: 10px; background: #2563eb; border: 2px solid #fff; border-radius: 2px; z-index: 20; }
+    .handle-nw { top: -5px; left: -5px; cursor: nw-resize; }
+    .handle-ne { top: -5px; right: -5px; cursor: ne-resize; }
+    .handle-sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+    .handle-se { bottom: -5px; right: -5px; cursor: se-resize; }
+    .handle-n { top: -5px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
+    .handle-s { bottom: -5px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
+    .handle-w { top: 50%; left: -5px; transform: translateY(-50%); cursor: w-resize; }
+    .handle-e { top: 50%; right: -5px; transform: translateY(-50%); cursor: e-resize; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div id="drop-zone" class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6">
+          <input type="file" id="file-input" accept="image/*" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop image here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Supports JPEG, PNG, WebP, GIF, BMP</p>
+        </div>
+
+        <!-- Editor (hidden until upload) -->
+        <div id="editor" class="hidden">
+
+          <!-- Image info bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-[#475569]">
+              <span>Original: <strong id="orig-dims" class="text-[#1e293b]"></strong></span>
+              <span>Crop: <strong id="crop-dims" class="text-[#1e293b]">—</strong></span>
+            </div>
+            <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors font-medium">Remove image</button>
+          </div>
+
+          <!-- Canvas area -->
+          <div id="canvas-wrapper" class="relative inline-block bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg overflow-hidden mb-6 select-none" style="max-width:100%">
+            <canvas id="crop-canvas"></canvas>
+            <!-- Selection overlay -->
+            <div id="selection" class="hidden absolute border-2 border-[#2563eb] pointer-events-auto" style="box-shadow: 0 0 0 9999px rgba(0,0,0,0.45);">
+              <div class="handle handle-nw" data-handle="nw"></div>
+              <div class="handle handle-ne" data-handle="ne"></div>
+              <div class="handle handle-sw" data-handle="sw"></div>
+              <div class="handle handle-se" data-handle="se"></div>
+              <div class="handle handle-n" data-handle="n"></div>
+              <div class="handle handle-s" data-handle="s"></div>
+              <div class="handle handle-w" data-handle="w"></div>
+              <div class="handle handle-e" data-handle="e"></div>
+            </div>
+          </div>
+
+          <!-- Controls row -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+            <!-- Aspect ratio -->
+            <div>
+              <label class="block text-sm font-medium text-[#475569] mb-2">Aspect ratio</label>
+              <div class="flex flex-wrap gap-2" id="ratio-pills">
+                <button data-ratio="free" class="ratio-pill active px-3 py-1.5 text-xs font-medium rounded-lg bg-[#2563eb] text-white transition-colors">Free</button>
+                <button data-ratio="1:1" class="ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">1:1</button>
+                <button data-ratio="4:3" class="ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">4:3</button>
+                <button data-ratio="16:9" class="ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">16:9</button>
+                <button data-ratio="3:2" class="ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">3:2</button>
+                <button data-ratio="custom" class="ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">Custom</button>
+              </div>
+              <div id="custom-ratio-row" class="hidden flex items-center gap-2 mt-3">
+                <input type="number" id="custom-rw" min="1" value="16" class="w-20 px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                <span class="text-[#94a3b8] font-medium">:</span>
+                <input type="number" id="custom-rh" min="1" value="9" class="w-20 px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                <button id="apply-custom-ratio" class="px-3 py-2 text-xs font-medium rounded-lg bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-colors">Apply</button>
+              </div>
+            </div>
+
+            <!-- Manual crop inputs -->
+            <div>
+              <label class="block text-sm font-medium text-[#475569] mb-2">Manual crop (pixels)</label>
+              <div class="grid grid-cols-4 gap-2">
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-[#94a3b8]">X</label>
+                  <input type="number" id="inp-x" min="0" value="0" class="w-full px-2 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-[#94a3b8]">Y</label>
+                  <input type="number" id="inp-y" min="0" value="0" class="w-full px-2 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-[#94a3b8]">Width</label>
+                  <input type="number" id="inp-w" min="1" value="0" class="w-full px-2 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                </div>
+                <div>
+                  <label class="text-[10px] uppercase tracking-wider text-[#94a3b8]">Height</label>
+                  <input type="number" id="inp-h" min="1" value="0" class="w-full px-2 py-2 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb]">
+                </div>
+              </div>
+              <button id="apply-manual" class="mt-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">Apply dimensions</button>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div id="preview-section" class="hidden mb-6">
+            <h3 class="text-sm font-medium text-[#475569] mb-2">Crop preview</h3>
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 inline-block">
+              <canvas id="preview-canvas" class="rounded max-h-48 object-contain"></canvas>
+            </div>
+          </div>
+
+          <!-- Download controls -->
+          <div class="flex flex-wrap items-end gap-4">
+            <div>
+              <label for="format-select" class="block text-sm font-medium text-[#475569] mb-2">Format</label>
+              <select id="format-select" class="px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] text-sm cursor-pointer">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPEG</option>
+              </select>
+            </div>
+            <div id="quality-wrapper" class="hidden">
+              <label for="quality-slider" class="block text-sm font-medium text-[#475569] mb-2">Quality: <span id="quality-val" class="text-[#1e293b]">90</span>%</label>
+              <input type="range" id="quality-slider" min="1" max="100" step="1" value="90" class="w-40 accent-[#2563eb]">
+            </div>
+            <button id="download-btn" disabled class="inline-flex items-center gap-2 px-8 py-2.5 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Cropped Image
+            </button>
+            <button id="reset-crop-btn" class="px-5 py-2.5 rounded-lg border border-[#e2e8f0] text-sm font-medium text-[#475569] hover:bg-[#f1f5f9] transition-colors">Reset crop</button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Crop Images Online — A Complete Guide to Image Cropping</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Image cropping is one of the most fundamental and frequently used operations in photo editing. Whether you are preparing a profile picture for social media, trimming whitespace from a screenshot, or extracting a specific region from a larger photograph, cropping allows you to remove unwanted areas and focus the viewer's attention on the subject that matters. This free online image cropper runs entirely in your browser using the HTML5 Canvas API — your image is never uploaded to any server, so your files stay completely private on your device.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">What Is Image Cropping?</h3>
+          <p>Cropping is the process of selecting a rectangular region of an image and discarding everything outside that region. Unlike resizing — which scales the entire image to new dimensions — cropping changes the composition by physically removing pixels from the edges. The result is a smaller image (in terms of pixel count) that contains only the portion you selected. Cropping does not inherently reduce image quality; the pixels within the selected area remain at their original resolution and clarity. This makes cropping an ideal first step before any further editing, because you start with the highest-quality data possible for the area you want to keep.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Understanding Aspect Ratios</h3>
+          <p>An aspect ratio expresses the proportional relationship between an image's width and height. When you lock a crop selection to a specific aspect ratio, the tool constrains the rectangle so that the width-to-height proportion remains constant, regardless of how you resize the selection. Common aspect ratios serve distinct purposes:</p>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">1:1 (Square)</strong> — Used for profile pictures on Instagram, Facebook, LinkedIn, and most social platforms. Also popular for product thumbnails in e-commerce.</li>
+            <li><strong class="text-[#1e293b]">4:3</strong> — The traditional aspect ratio for standard-definition television and many digital cameras. Common for presentations, documents, and older display formats.</li>
+            <li><strong class="text-[#1e293b]">16:9 (Widescreen)</strong> — The standard for HD video, YouTube thumbnails, website hero banners, and modern monitors. Ideal for cinematic compositions and landscape photography.</li>
+            <li><strong class="text-[#1e293b]">3:2</strong> — The native ratio for 35mm film and many DSLR cameras. Widely used in print photography and photo galleries.</li>
+            <li><strong class="text-[#1e293b]">Custom</strong> — Enter any width-to-height proportion for specialized requirements such as print dimensions, app icons, or platform-specific media sizes.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases for Image Cropping</h3>
+          <p>Cropping is useful in a wide variety of scenarios. Social media platforms each have specific image dimension requirements — Instagram posts work best at 1080×1080 (1:1), Twitter header images at 1500×500, and Facebook cover photos at 820×312. Rather than resizing the entire image and distorting the composition, cropping lets you select exactly the right portion at the correct ratio. Web developers crop images to fit within specific layout containers, ensuring consistent visual design without relying on CSS to hide overflow. Photographers crop to improve composition — applying the rule of thirds, eliminating distracting background elements, or creating tighter portraits from wider shots. Print designers crop to match specific paper sizes and bleed margins. Even everyday tasks like cropping a screenshot to share just the relevant portion of a window or cropping a scanned document to remove scanner borders benefit from a quick, browser-based cropper.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">PNG vs. JPEG: Choosing the Right Output Format</h3>
+          <p>After cropping, you need to decide which format to save the result in. <strong class="text-[#1e293b]">PNG</strong> uses lossless compression, preserving every pixel exactly as cropped — ideal for screenshots, graphics with text, logos, and any image where sharpness matters more than file size. <strong class="text-[#1e293b]">JPEG</strong> uses lossy compression that discards some visual data to achieve smaller file sizes. For photographs and images with smooth gradients, JPEG at 85–95% quality offers a strong balance between visual fidelity and file size. The quality slider in this tool gives you fine-grained control over the trade-off: lower quality means smaller files but more compression artifacts; higher quality preserves detail at the cost of a larger file. Use PNG when you need pixel-perfect output, and JPEG when file size matters more than absolute precision.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How This Tool Works</h3>
+          <p>When you upload an image, it loads directly into an HTML5 Canvas element rendered in your browser. You create a crop selection by clicking and dragging on the canvas, or by entering precise pixel coordinates in the manual input fields. The selection rectangle can be moved by dragging its interior and resized by dragging any of the eight handles (corners and edges). When an aspect ratio is locked, resizing automatically adjusts the opposite dimension to maintain the proportion. A real-time preview shows exactly what the cropped result will look like. When you click Download, the Canvas API extracts the selected region, encodes it in your chosen format, and triggers a file download — all without any network requests. The entire operation is instantaneous for typical image sizes.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">How do I crop an image online for free?</h4>
+              <p>Upload your image to this tool by dragging and dropping or clicking the upload area. Draw a crop selection on the canvas, optionally lock an aspect ratio, then click Download. The cropped image saves directly to your device. No signup or payment required.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does cropping reduce image quality?</h4>
+              <p>Cropping itself does not degrade quality — it simply extracts a region at the original resolution. If you save as PNG, the output is pixel-perfect. If you save as JPEG, some compression is applied based on your quality setting, but at 90%+ the difference is negligible.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What aspect ratio should I use for Instagram?</h4>
+              <p>Instagram feed posts are best at 1:1 (1080×1080). Stories and Reels use 9:16 (1080×1920). For landscape posts, 1.91:1 works well. Use the custom ratio option to enter any specific proportion.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I crop very large images?</h4>
+              <p>Yes. Since everything runs in your browser, the limiting factor is your device's available memory. Modern browsers handle images up to 50+ megapixels without issue. Very large files may take a moment to render but will crop correctly.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is my image uploaded to a server?</h4>
+              <p>No. All processing happens entirely in your browser using the HTML5 Canvas API. Your image never leaves your device — there is no backend, no server storage, and no network transmission of your file data.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+
+          <p>This image cropper is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. Select your crop area, choose your aspect ratio and format, and download — your files stay private on your device at all times.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('image-cropper');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropZone      = document.getElementById('drop-zone');
+    const fileInput     = document.getElementById('file-input');
+    const editor        = document.getElementById('editor');
+    const canvas        = document.getElementById('crop-canvas');
+    const ctx           = canvas.getContext('2d');
+    const canvasWrap    = document.getElementById('canvas-wrapper');
+    const selectionEl   = document.getElementById('selection');
+    const origDimsEl    = document.getElementById('orig-dims');
+    const cropDimsEl    = document.getElementById('crop-dims');
+    const clearBtn      = document.getElementById('clear-btn');
+    const ratioPills    = document.getElementById('ratio-pills');
+    const customRow     = document.getElementById('custom-ratio-row');
+    const customRW      = document.getElementById('custom-rw');
+    const customRH      = document.getElementById('custom-rh');
+    const applyCustom   = document.getElementById('apply-custom-ratio');
+    const inpX          = document.getElementById('inp-x');
+    const inpY          = document.getElementById('inp-y');
+    const inpW          = document.getElementById('inp-w');
+    const inpH          = document.getElementById('inp-h');
+    const applyManual   = document.getElementById('apply-manual');
+    const previewSec    = document.getElementById('preview-section');
+    const previewCanvas = document.getElementById('preview-canvas');
+    const previewCtx    = previewCanvas.getContext('2d');
+    const formatSelect  = document.getElementById('format-select');
+    const qualityWrap   = document.getElementById('quality-wrapper');
+    const qualitySlider = document.getElementById('quality-slider');
+    const qualityVal    = document.getElementById('quality-val');
+    const downloadBtn   = document.getElementById('download-btn');
+    const resetCropBtn  = document.getElementById('reset-crop-btn');
+
+    let sourceImg = null;
+    let fileName = '';
+    let scale = 1;
+    let imgW = 0, imgH = 0;
+    let dispW = 0, dispH = 0;
+
+    let crop = { x: 0, y: 0, w: 0, h: 0 };
+    let hasCrop = false;
+    let aspectRatio = null;
+
+    let dragMode = null;
+    let dragStart = { x: 0, y: 0 };
+    let dragCropStart = { x: 0, y: 0, w: 0, h: 0 };
+
+    const MAX_DISPLAY = 800;
+
+    function loadImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      fileName = file.name;
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        sourceImg = img;
+        imgW = img.naturalWidth;
+        imgH = img.naturalHeight;
+
+        scale = Math.min(1, MAX_DISPLAY / Math.max(imgW, imgH));
+        dispW = Math.round(imgW * scale);
+        dispH = Math.round(imgH * scale);
+
+        canvas.width = dispW;
+        canvas.height = dispH;
+        ctx.drawImage(img, 0, 0, dispW, dispH);
+
+        canvasWrap.style.width = dispW + 'px';
+
+        origDimsEl.textContent = imgW + ' × ' + imgH + ' px';
+        cropDimsEl.textContent = '—';
+
+        dropZone.classList.add('hidden');
+        editor.classList.remove('hidden');
+        resetCrop();
+      };
+      img.onerror = () => URL.revokeObjectURL(url);
+      img.src = url;
+    }
+
+    function reset() {
+      sourceImg = null;
+      fileName = '';
+      fileInput.value = '';
+      hasCrop = false;
+      selectionEl.classList.add('hidden');
+      previewSec.classList.add('hidden');
+      downloadBtn.disabled = true;
+      editor.classList.add('hidden');
+      dropZone.classList.remove('hidden');
+    }
+
+    function resetCrop() {
+      hasCrop = false;
+      crop = { x: 0, y: 0, w: 0, h: 0 };
+      selectionEl.classList.add('hidden');
+      previewSec.classList.add('hidden');
+      downloadBtn.disabled = true;
+      cropDimsEl.textContent = '—';
+      updateManualInputs();
+    }
+
+    function clampCrop() {
+      crop.x = Math.max(0, Math.min(crop.x, dispW - 1));
+      crop.y = Math.max(0, Math.min(crop.y, dispH - 1));
+      crop.w = Math.max(1, Math.min(crop.w, dispW - crop.x));
+      crop.h = Math.max(1, Math.min(crop.h, dispH - crop.y));
+    }
+
+    function updateSelection() {
+      clampCrop();
+      selectionEl.style.left = crop.x + 'px';
+      selectionEl.style.top = crop.y + 'px';
+      selectionEl.style.width = crop.w + 'px';
+      selectionEl.style.height = crop.h + 'px';
+      selectionEl.classList.remove('hidden');
+
+      const realX = Math.round(crop.x / scale);
+      const realY = Math.round(crop.y / scale);
+      const realW = Math.round(crop.w / scale);
+      const realH = Math.round(crop.h / scale);
+      cropDimsEl.textContent = realW + ' × ' + realH + ' px (at ' + realX + ', ' + realY + ')';
+
+      updateManualInputs();
+      updatePreview();
+
+      hasCrop = true;
+      downloadBtn.disabled = false;
+    }
+
+    function updateManualInputs() {
+      inpX.value = Math.round(crop.x / scale);
+      inpY.value = Math.round(crop.y / scale);
+      inpW.value = Math.round(crop.w / scale);
+      inpH.value = Math.round(crop.h / scale);
+    }
+
+    function updatePreview() {
+      if (!sourceImg || crop.w < 1 || crop.h < 1) return;
+      const rX = crop.x / scale;
+      const rY = crop.y / scale;
+      const rW = crop.w / scale;
+      const rH = crop.h / scale;
+
+      const maxPrev = 192;
+      const pScale = Math.min(1, maxPrev / Math.max(rW, rH));
+      previewCanvas.width = Math.round(rW * pScale);
+      previewCanvas.height = Math.round(rH * pScale);
+      previewCtx.drawImage(sourceImg, rX, rY, rW, rH, 0, 0, previewCanvas.width, previewCanvas.height);
+      previewSec.classList.remove('hidden');
+    }
+
+    function applyAspectRatio(newW, newH) {
+      if (!aspectRatio) return;
+      const maxW = dispW - crop.x;
+      const maxH = dispH - crop.y;
+      let w = newW, h = newH;
+      h = w / aspectRatio;
+      if (h > maxH) { h = maxH; w = h * aspectRatio; }
+      if (w > maxW) { w = maxW; h = w / aspectRatio; }
+      crop.w = Math.max(1, Math.round(w));
+      crop.h = Math.max(1, Math.round(h));
+    }
+
+    // Mouse / touch on canvas
+    function getPos(e) {
+      const rect = canvasWrap.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function onPointerDown(e) {
+      if (e.target.dataset.handle) {
+        dragMode = 'handle-' + e.target.dataset.handle;
+      } else if (e.target === selectionEl || selectionEl.contains(e.target)) {
+        dragMode = 'move';
+      } else {
+        const pos = getPos(e);
+        crop.x = pos.x; crop.y = pos.y; crop.w = 0; crop.h = 0;
+        dragMode = 'new';
+      }
+      const pos = getPos(e);
+      dragStart = { x: pos.x, y: pos.y };
+      dragCropStart = { ...crop };
+      e.preventDefault();
+    }
+
+    function onPointerMove(e) {
+      if (!dragMode) return;
+      const pos = getPos(e);
+      const dx = pos.x - dragStart.x;
+      const dy = pos.y - dragStart.y;
+
+      if (dragMode === 'new') {
+        let x = dragCropStart.x, y = dragCropStart.y;
+        let w = dx, h = dy;
+        if (w < 0) { x += w; w = -w; }
+        if (h < 0) { y += h; h = -h; }
+        crop.x = x; crop.y = y; crop.w = w; crop.h = h;
+        if (aspectRatio) applyAspectRatio(crop.w, crop.h);
+        updateSelection();
+      } else if (dragMode === 'move') {
+        crop.x = Math.max(0, Math.min(dragCropStart.x + dx, dispW - dragCropStart.w));
+        crop.y = Math.max(0, Math.min(dragCropStart.y + dy, dispH - dragCropStart.h));
+        crop.w = dragCropStart.w;
+        crop.h = dragCropStart.h;
+        updateSelection();
+      } else if (dragMode.startsWith('handle-')) {
+        const h = dragMode.replace('handle-', '');
+        resizeHandle(h, dx, dy);
+        updateSelection();
+      }
+      e.preventDefault();
+    }
+
+    function resizeHandle(handle, dx, dy) {
+      let { x, y, w, h } = dragCropStart;
+
+      if (handle.includes('e')) w += dx;
+      if (handle.includes('w')) { x += dx; w -= dx; }
+      if (handle.includes('s')) h += dy;
+      if (handle.includes('n')) { y += dy; h -= dy; }
+
+      if (w < 1) { x += w - 1; w = 1; }
+      if (h < 1) { y += h - 1; h = 1; }
+
+      crop.x = x; crop.y = y; crop.w = w; crop.h = h;
+      if (aspectRatio) applyAspectRatio(crop.w, crop.h);
+    }
+
+    function onPointerUp() {
+      if (dragMode === 'new' && crop.w < 3 && crop.h < 3) {
+        resetCrop();
+      }
+      dragMode = null;
+    }
+
+    canvasWrap.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+    canvasWrap.addEventListener('touchstart', onPointerDown, { passive: false });
+    window.addEventListener('touchmove', onPointerMove, { passive: false });
+    window.addEventListener('touchend', onPointerUp);
+
+    // Ratio pills
+    ratioPills.addEventListener('click', e => {
+      const pill = e.target.closest('.ratio-pill');
+      if (!pill) return;
+      ratioPills.querySelectorAll('.ratio-pill').forEach(p => {
+        p.className = 'ratio-pill px-3 py-1.5 text-xs font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors';
+      });
+      pill.className = 'ratio-pill active px-3 py-1.5 text-xs font-medium rounded-lg bg-[#2563eb] text-white transition-colors';
+
+      const r = pill.dataset.ratio;
+      customRow.classList.toggle('hidden', r !== 'custom');
+
+      if (r === 'free') {
+        aspectRatio = null;
+      } else if (r === 'custom') {
+        const rw = parseFloat(customRW.value) || 16;
+        const rh = parseFloat(customRH.value) || 9;
+        aspectRatio = rw / rh;
+      } else {
+        const [rw, rh] = r.split(':').map(Number);
+        aspectRatio = rw / rh;
+      }
+
+      if (hasCrop && aspectRatio) {
+        applyAspectRatio(crop.w, crop.h);
+        updateSelection();
+      }
+    });
+
+    applyCustom.addEventListener('click', () => {
+      const rw = parseFloat(customRW.value) || 16;
+      const rh = parseFloat(customRH.value) || 9;
+      aspectRatio = rw / rh;
+      if (hasCrop) {
+        applyAspectRatio(crop.w, crop.h);
+        updateSelection();
+      }
+    });
+
+    // Manual inputs
+    applyManual.addEventListener('click', () => {
+      const rx = parseInt(inpX.value) || 0;
+      const ry = parseInt(inpY.value) || 0;
+      const rw = parseInt(inpW.value) || 1;
+      const rh = parseInt(inpH.value) || 1;
+      crop.x = rx * scale;
+      crop.y = ry * scale;
+      crop.w = rw * scale;
+      crop.h = rh * scale;
+      if (aspectRatio) applyAspectRatio(crop.w, crop.h);
+      updateSelection();
+    });
+
+    // Format toggle
+    formatSelect.addEventListener('change', () => {
+      qualityWrap.classList.toggle('hidden', formatSelect.value !== 'image/jpeg');
+    });
+    qualitySlider.addEventListener('input', () => {
+      qualityVal.textContent = qualitySlider.value;
+    });
+
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!sourceImg || !hasCrop) return;
+
+      const rX = Math.round(crop.x / scale);
+      const rY = Math.round(crop.y / scale);
+      const rW = Math.round(crop.w / scale);
+      const rH = Math.round(crop.h / scale);
+
+      const outCanvas = document.createElement('canvas');
+      outCanvas.width = rW;
+      outCanvas.height = rH;
+      const outCtx = outCanvas.getContext('2d');
+
+      const fmt = formatSelect.value;
+      if (fmt === 'image/jpeg') {
+        outCtx.fillStyle = '#ffffff';
+        outCtx.fillRect(0, 0, rW, rH);
+      }
+      outCtx.drawImage(sourceImg, rX, rY, rW, rH, 0, 0, rW, rH);
+
+      const quality = fmt === 'image/jpeg' ? parseInt(qualitySlider.value) / 100 : undefined;
+      outCanvas.toBlob(blob => {
+        if (!blob) return;
+        const ext = fmt === 'image/jpeg' ? 'jpg' : 'png';
+        const baseName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName || 'image';
+        const a = document.createElement('a');
+        a.download = baseName + '-cropped.' + ext;
+        a.href = URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+      }, fmt, quality);
+    });
+
+    // Clear / Reset
+    clearBtn.addEventListener('click', reset);
+    resetCropBtn.addEventListener('click', resetCrop);
+
+    // Drag & drop
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadImage(fileInput.files[0]); });
+  });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF Watermark Tool Online — Add Text Watermarks to PDFs | ClickSolveTools</title>
+  <meta name="description" content="Add custom text watermarks to PDF files for free. Set font size, opacity, color, rotation, and position. 100% client-side — your files never leave your device.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/pdf-watermark">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free PDF Watermark Tool Online — Add Text Watermarks to PDFs | ClickSolveTools">
+  <meta property="og:description" content="Add custom text watermarks to PDF files for free. Set font size, opacity, color, rotation, and position. 100% client-side — your files never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/pdf-watermark">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free PDF Watermark Tool Online — Add Text Watermarks to PDFs | ClickSolveTools">
+  <meta name="twitter:description" content="Add custom text watermarks to PDF files for free. Set font size, opacity, color, rotation, and position. 100% client-side — your files never leave your device.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Watermark Tool",
+    "url": "https://clicksolvetools.com/tools/pdf-watermark",
+    "description": "Add custom text watermarks to PDF files for free. Set font size, opacity, color, rotation, and position. 100% client-side — your files never leave your device.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it safe to add watermarks to PDFs online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool processes everything inside your browser using JavaScript and pdf-lib. Your PDF files are never uploaded to any server. No data leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does watermarking reduce PDF quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The watermark is added as a transparent text overlay on top of the existing page content. All original text, images, fonts, and graphics are preserved at their original quality."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I remove a watermark after adding it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The watermark is embedded directly into the PDF. To remove it, you would need to re-export from the original unwatermarked file. Always keep your original files as backups before watermarking."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="application/pdf" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop a PDF file here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Select one PDF file to watermark</p>
+        </div>
+
+        <!-- File info -->
+        <div id="file-info" class="hidden mb-6">
+          <div class="flex items-center gap-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3">
+            <svg class="w-8 h-8 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+            <div class="flex-1 min-w-0">
+              <p id="file-name" class="text-sm font-medium text-[#1e293b] truncate"></p>
+              <p id="file-meta" class="text-xs text-[#94a3b8]"></p>
+            </div>
+            <button id="change-file-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors shrink-0">Change file</button>
+          </div>
+        </div>
+
+        <!-- Watermark Options -->
+        <div id="options-panel" class="hidden space-y-6">
+          <h3 class="text-sm font-semibold text-[#1e293b] uppercase tracking-wider">Watermark Settings</h3>
+
+          <!-- Preset + Custom Text -->
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Watermark Text</label>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <button data-preset="CONFIDENTIAL" class="preset-btn px-3 py-1.5 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">CONFIDENTIAL</button>
+              <button data-preset="DRAFT" class="preset-btn px-3 py-1.5 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">DRAFT</button>
+              <button data-preset="SAMPLE" class="preset-btn px-3 py-1.5 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">SAMPLE</button>
+              <button data-preset="DO NOT COPY" class="preset-btn px-3 py-1.5 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">DO NOT COPY</button>
+              <button data-preset="VOID" class="preset-btn px-3 py-1.5 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">VOID</button>
+            </div>
+            <input type="text" id="watermark-text" value="CONFIDENTIAL" maxlength="80" placeholder="Enter custom watermark text…" class="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+          </div>
+
+          <!-- Font Size -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-[#475569]">Font Size</label>
+              <span id="font-size-value" class="text-sm font-semibold text-[#2563eb]">60px</span>
+            </div>
+            <input type="range" id="font-size" min="20" max="120" value="60" class="w-full h-2 bg-[#e2e8f0] rounded-full appearance-none cursor-pointer accent-[#2563eb]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] mt-1"><span>20px</span><span>120px</span></div>
+          </div>
+
+          <!-- Opacity -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-[#475569]">Opacity</label>
+              <span id="opacity-value" class="text-sm font-semibold text-[#2563eb]">15%</span>
+            </div>
+            <input type="range" id="opacity" min="5" max="50" value="15" class="w-full h-2 bg-[#e2e8f0] rounded-full appearance-none cursor-pointer accent-[#2563eb]">
+            <div class="flex justify-between text-[10px] text-[#94a3b8] mt-1"><span>5%</span><span>50%</span></div>
+          </div>
+
+          <!-- Color + Rotation row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Color -->
+            <div>
+              <label class="block text-sm font-medium text-[#475569] mb-2">Color</label>
+              <div class="flex items-center gap-3">
+                <input type="color" id="watermark-color" value="#888888" class="w-10 h-10 rounded-lg border border-[#e2e8f0] cursor-pointer p-0.5">
+                <span id="color-hex" class="text-sm text-[#64748b] font-mono">#888888</span>
+              </div>
+            </div>
+
+            <!-- Rotation -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-medium text-[#475569]">Rotation</label>
+                <span id="rotation-value" class="text-sm font-semibold text-[#2563eb]">-45°</span>
+              </div>
+              <input type="range" id="rotation" min="-90" max="90" value="-45" class="w-full h-2 bg-[#e2e8f0] rounded-full appearance-none cursor-pointer accent-[#2563eb]">
+              <div class="flex justify-between text-[10px] text-[#94a3b8] mt-1"><span>-90°</span><span>0°</span><span>90°</span></div>
+            </div>
+          </div>
+
+          <!-- Position -->
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Position</label>
+            <div class="flex flex-wrap gap-2">
+              <button data-position="center" class="pos-btn active px-4 py-2 text-xs font-medium rounded-lg border transition-colors bg-[#2563eb] text-white border-[#2563eb]">Center</button>
+              <button data-position="top" class="pos-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">Top</button>
+              <button data-position="bottom" class="pos-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">Bottom</button>
+            </div>
+          </div>
+
+          <!-- Apply To -->
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Apply To</label>
+            <div class="flex flex-wrap gap-2">
+              <button data-apply="all" class="apply-btn active px-4 py-2 text-xs font-medium rounded-lg border transition-colors bg-[#2563eb] text-white border-[#2563eb]">All Pages</button>
+              <button data-apply="first" class="apply-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">First Page Only</button>
+              <button data-apply="last" class="apply-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">Last Page Only</button>
+              <button data-apply="custom" class="apply-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">Specific Pages</button>
+            </div>
+            <div id="custom-pages-wrapper" class="hidden mt-3">
+              <input type="text" id="custom-pages" placeholder="e.g. 1,3,5-8" class="w-full px-4 py-2.5 border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+              <p class="text-[10px] text-[#94a3b8] mt-1">Comma-separated page numbers or ranges (e.g. 1,3,5-8)</p>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Preview</label>
+            <div id="preview-box" class="relative bg-white border border-[#e2e8f0] rounded-xl overflow-hidden" style="aspect-ratio:8.5/11;max-height:360px;">
+              <div class="absolute inset-0 flex items-center justify-center p-4">
+                <div class="w-full h-full bg-[#f8fafc] rounded-lg border border-dashed border-[#cbd5e1] flex flex-col items-start justify-start p-4 gap-2 overflow-hidden">
+                  <div class="w-3/4 h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-5/6 h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded mt-2"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-2/3 h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded mt-2"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-3/4 h-2 bg-[#e2e8f0] rounded"></div>
+                  <div class="w-full h-2 bg-[#e2e8f0] rounded mt-2"></div>
+                  <div class="w-5/6 h-2 bg-[#e2e8f0] rounded"></div>
+                </div>
+              </div>
+              <div id="preview-watermark" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span id="preview-text" class="font-bold whitespace-nowrap select-none" style="font-size:48px;color:rgba(136,136,136,0.15);transform:rotate(-45deg);">CONFIDENTIAL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div id="progress-wrapper" class="hidden">
+            <div class="flex items-center justify-between mb-1.5">
+              <span id="progress-label" class="text-sm text-[#475569]">Applying watermark…</span>
+              <span id="progress-pct" class="text-sm font-semibold text-[#2563eb]">0%</span>
+            </div>
+            <div class="w-full h-2 bg-[#e2e8f0] rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-[#2563eb] rounded-full transition-all duration-200" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button id="apply-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Apply Watermark
+            </button>
+            <button id="download-btn" class="hidden inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Watermarked PDF
+            </button>
+            <button id="reset-btn" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-[#94a3b8] hover:text-red-500 text-sm font-medium transition-colors">
+              Start over
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Add Watermarks to PDF Files Online — Free, Private, and Instant</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Adding a watermark to a PDF is one of the most effective ways to protect your documents, communicate their status, and deter unauthorized use. Whether you need to stamp "CONFIDENTIAL" across a financial report, mark a contract as "DRAFT" before final review, or brand proposal decks with your company name, a PDF watermark tool makes the process fast and effortless. This free online PDF watermark tool lets you upload any PDF, configure every aspect of the watermark — text, font size, opacity, color, rotation angle, and position — preview the result in real time, and download the watermarked file, all without installing software or creating an account.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why Watermark Your PDFs?</h3>
+          <p>PDF watermarks serve several important purposes across professional and personal workflows. In legal and corporate environments, marking documents as "CONFIDENTIAL" or "PRIVILEGED" signals to recipients that the contents are sensitive and should not be shared freely. Sending a contract marked "DRAFT" prevents premature reliance on terms that have not been finalized. Publishers and photographers use watermarks to protect intellectual property — a visible overlay makes it impractical to pass off someone else's work as your own. Educational institutions watermark examination papers and answer keys to discourage leaks. Real estate agencies watermark floor plans and listing sheets so competitors cannot reuse their marketing materials. In each of these cases, the watermark acts as both a visual deterrent and a clear statement of intent embedded directly into the document.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">100% Client-Side Processing — Your Files Stay Private</h3>
+          <p>Unlike most online PDF tools that require you to upload sensitive documents to a remote server, this watermark tool runs entirely inside your web browser. The tool uses <strong class="text-[#1e293b]">pdf-lib</strong>, a robust open-source JavaScript library, to load, modify, and export PDF files without any server involvement. Your financial records, legal agreements, medical forms, and proprietary designs never leave your device — not even temporarily. There is no upload, no cloud processing, and no server-side storage. Once you close or refresh the page, all data is cleared from memory. This makes the tool safe for handling any document, no matter how sensitive.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How It Works</h3>
+          <p>Using the tool is straightforward. Drop or select a PDF file to load it. The tool reads the file locally and displays the file name, page count, and size. Next, choose a preset watermark label — CONFIDENTIAL, DRAFT, SAMPLE, DO NOT COPY, or VOID — or type any custom text you like. Adjust the font size from 20 to 120 pixels, set opacity between 5% and 50%, pick a color, and dial in the rotation angle from -90° to 90° (the classic diagonal watermark defaults to -45°). Select whether the watermark appears at the center, top, or bottom of the page, and choose which pages to apply it to: all pages, first page only, last page only, or a custom set of specific pages. A live preview panel updates as you change settings so you can see exactly how your watermark will look before committing. When everything looks right, click "Apply Watermark" and download the result.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Does Watermarking Affect PDF Quality?</h3>
+          <p>No. The watermark is rendered as a transparent text overlay drawn on top of the existing page content. All original text, images, vector graphics, fonts, and annotations remain at their full quality. The file size increase is negligible — typically just a few kilobytes for the added text elements. The watermark becomes a permanent part of the PDF structure, visible in any PDF reader, and will appear when the document is printed.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Tips for Effective Watermarks</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Keep opacity low for readability</strong> — A value between 10% and 20% provides a clearly visible watermark without obscuring the document text underneath.</li>
+            <li><strong class="text-[#1e293b]">Use diagonal rotation</strong> — The default -45° angle works well because it spans the page visually and is harder to crop out compared to horizontal text.</li>
+            <li><strong class="text-[#1e293b]">Match the purpose</strong> — Use "DRAFT" for documents under review, "CONFIDENTIAL" for restricted distribution, and "SAMPLE" for demonstration copies.</li>
+            <li><strong class="text-[#1e293b]">Always keep originals</strong> — Since the watermark is permanently embedded, always retain an unwatermarked copy of your original file.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is it safe to watermark PDFs online?</h4>
+              <p>Yes. This tool processes everything inside your browser using JavaScript and pdf-lib. Your PDF files are never uploaded to any server. No data leaves your device, making it safe for confidential and sensitive documents.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does watermarking reduce PDF quality?</h4>
+              <p>No. The watermark is added as a transparent text overlay on top of existing page content. All original text, images, fonts, and graphics remain at their full quality.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I remove the watermark after adding it?</h4>
+              <p>The watermark is embedded directly into the PDF structure. To revert, you would need to use your original unwatermarked file. Always keep a backup of your original documents before watermarking.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is there a file size limit?</h4>
+              <p>There is no hard limit imposed by the tool. Performance depends on your device's available memory. Most modern computers can handle PDFs of hundreds of megabytes without issues.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I watermark specific pages only?</h4>
+              <p>Yes. You can apply the watermark to all pages, just the first page, just the last page, or a custom set of specific pages using comma-separated numbers and ranges (for example, 1,3,5-8).</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need to install any software?</h4>
+              <p>No. The tool runs entirely in your web browser. There is nothing to download, install, or configure. It works on Windows, macOS, Linux, iOS, and Android in any modern browser.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- pdf-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/standard-fonts/dist/standard-fonts.min.js"></script>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('pdf-watermark');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { PDFDocument, StandardFonts, rgb, degrees } = PDFLib;
+
+    const dropZone       = document.getElementById('drop-zone');
+    const fileInput      = document.getElementById('file-input');
+    const fileInfo       = document.getElementById('file-info');
+    const fileNameEl     = document.getElementById('file-name');
+    const fileMetaEl     = document.getElementById('file-meta');
+    const changeFileBtn  = document.getElementById('change-file-btn');
+    const optionsPanel   = document.getElementById('options-panel');
+
+    const watermarkText  = document.getElementById('watermark-text');
+    const fontSizeSlider = document.getElementById('font-size');
+    const fontSizeValue  = document.getElementById('font-size-value');
+    const opacitySlider  = document.getElementById('opacity');
+    const opacityValue   = document.getElementById('opacity-value');
+    const colorPicker    = document.getElementById('watermark-color');
+    const colorHex       = document.getElementById('color-hex');
+    const rotationSlider = document.getElementById('rotation');
+    const rotationValue  = document.getElementById('rotation-value');
+    const customPagesWrap = document.getElementById('custom-pages-wrapper');
+    const customPagesInput = document.getElementById('custom-pages');
+
+    const previewText    = document.getElementById('preview-text');
+    const previewWatermark = document.getElementById('preview-watermark');
+
+    const applyBtn       = document.getElementById('apply-btn');
+    const downloadBtn    = document.getElementById('download-btn');
+    const resetBtn       = document.getElementById('reset-btn');
+    const progressWrapper = document.getElementById('progress-wrapper');
+    const progressLabel  = document.getElementById('progress-label');
+    const progressPct    = document.getElementById('progress-pct');
+    const progressBar    = document.getElementById('progress-bar');
+
+    let pdfBuffer = null;
+    let pdfPageCount = 0;
+    let pdfFileName = '';
+    let resultBlob = null;
+    let position = 'center';
+    let applyTo = 'all';
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1, 3), 16) / 255;
+      const g = parseInt(hex.slice(3, 5), 16) / 255;
+      const b = parseInt(hex.slice(5, 7), 16) / 255;
+      return { r, g, b };
+    }
+
+    function parsePageSet(input, totalPages) {
+      const pages = new Set();
+      const parts = input.split(',').map(s => s.trim()).filter(Boolean);
+      for (const part of parts) {
+        if (part.includes('-')) {
+          const [startStr, endStr] = part.split('-');
+          const start = Math.max(1, parseInt(startStr) || 1);
+          const end = Math.min(totalPages, parseInt(endStr) || totalPages);
+          for (let i = start; i <= end; i++) pages.add(i);
+        } else {
+          const num = parseInt(part);
+          if (num >= 1 && num <= totalPages) pages.add(num);
+        }
+      }
+      return pages;
+    }
+
+    function getTargetPages() {
+      if (applyTo === 'all') return new Set(Array.from({ length: pdfPageCount }, (_, i) => i + 1));
+      if (applyTo === 'first') return new Set([1]);
+      if (applyTo === 'last') return new Set([pdfPageCount]);
+      if (applyTo === 'custom') return parsePageSet(customPagesInput.value, pdfPageCount);
+      return new Set();
+    }
+
+    function updatePreview() {
+      const text = watermarkText.value || 'WATERMARK';
+      const size = parseInt(fontSizeSlider.value);
+      const opacity = parseInt(opacitySlider.value) / 100;
+      const color = colorPicker.value;
+      const rotation = parseInt(rotationSlider.value);
+
+      const previewScale = Math.min(size / 60, 2);
+      const previewFontSize = Math.round(36 * previewScale);
+
+      previewText.textContent = text;
+      previewText.style.fontSize = previewFontSize + 'px';
+      previewText.style.color = color;
+      previewText.style.opacity = opacity;
+      previewText.style.transform = `rotate(${rotation}deg)`;
+
+      let alignItems = 'center';
+      if (position === 'top') alignItems = 'flex-start';
+      if (position === 'bottom') alignItems = 'flex-end';
+      previewWatermark.style.alignItems = alignItems;
+      previewWatermark.style.paddingTop = position === 'top' ? '40px' : '0';
+      previewWatermark.style.paddingBottom = position === 'bottom' ? '40px' : '0';
+
+      fontSizeValue.textContent = size + 'px';
+      opacityValue.textContent = Math.round(opacity * 100) + '%';
+      rotationValue.textContent = rotation + '°';
+      colorHex.textContent = color;
+    }
+
+    async function loadFile(file) {
+      if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) return;
+
+      try {
+        pdfBuffer = await file.arrayBuffer();
+        const pdf = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+        pdfPageCount = pdf.getPageCount();
+        pdfFileName = file.name;
+
+        fileNameEl.textContent = file.name;
+        fileMetaEl.textContent = `${pdfPageCount} page${pdfPageCount !== 1 ? 's' : ''} · ${formatBytes(file.size)}`;
+
+        dropZone.classList.add('hidden');
+        fileInfo.classList.remove('hidden');
+        optionsPanel.classList.remove('hidden');
+        hideResult();
+      } catch (err) {
+        alert('Could not read this PDF file. It may be corrupted or encrypted.');
+        console.error(err);
+      }
+    }
+
+    function hideResult() {
+      resultBlob = null;
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+      progressBar.className = 'h-full bg-[#2563eb] rounded-full transition-all duration-200';
+      progressBar.style.width = '0%';
+    }
+
+    function resetAll() {
+      pdfBuffer = null;
+      pdfPageCount = 0;
+      pdfFileName = '';
+      resultBlob = null;
+      fileInput.value = '';
+
+      dropZone.classList.remove('hidden');
+      fileInfo.classList.add('hidden');
+      optionsPanel.classList.add('hidden');
+      hideResult();
+    }
+
+    // File upload
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files.length) loadFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) loadFile(fileInput.files[0]); });
+
+    changeFileBtn.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/pdf';
+      inp.addEventListener('change', () => { if (inp.files.length) loadFile(inp.files[0]); });
+      inp.click();
+    });
+
+    resetBtn.addEventListener('click', resetAll);
+
+    // Preset buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        watermarkText.value = btn.dataset.preset;
+        updatePreview();
+      });
+    });
+
+    // Position buttons
+    document.querySelectorAll('.pos-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pos-btn').forEach(b => {
+          b.className = 'pos-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors';
+        });
+        btn.className = 'pos-btn active px-4 py-2 text-xs font-medium rounded-lg border transition-colors bg-[#2563eb] text-white border-[#2563eb]';
+        position = btn.dataset.position;
+        updatePreview();
+      });
+    });
+
+    // Apply-to buttons
+    document.querySelectorAll('.apply-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.apply-btn').forEach(b => {
+          b.className = 'apply-btn px-4 py-2 text-xs font-medium rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors';
+        });
+        btn.className = 'apply-btn active px-4 py-2 text-xs font-medium rounded-lg border transition-colors bg-[#2563eb] text-white border-[#2563eb]';
+        applyTo = btn.dataset.apply;
+        customPagesWrap.classList.toggle('hidden', applyTo !== 'custom');
+      });
+    });
+
+    // Live preview bindings
+    watermarkText.addEventListener('input', updatePreview);
+    fontSizeSlider.addEventListener('input', updatePreview);
+    opacitySlider.addEventListener('input', updatePreview);
+    colorPicker.addEventListener('input', updatePreview);
+    rotationSlider.addEventListener('input', updatePreview);
+
+    // Apply watermark
+    applyBtn.addEventListener('click', async () => {
+      if (!pdfBuffer) return;
+      const text = watermarkText.value.trim();
+      if (!text) { alert('Please enter watermark text.'); return; }
+
+      const targetPages = getTargetPages();
+      if (targetPages.size === 0) { alert('No pages selected. Please check your page selection.'); return; }
+
+      applyBtn.disabled = true;
+      applyBtn.classList.add('opacity-40', 'cursor-not-allowed');
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.remove('hidden');
+      progressBar.className = 'h-full bg-[#2563eb] rounded-full transition-all duration-200';
+
+      function updateProgress(label, pct) {
+        progressLabel.textContent = label;
+        progressPct.textContent = Math.round(pct) + '%';
+        progressBar.style.width = pct + '%';
+      }
+
+      try {
+        updateProgress('Loading PDF…', 5);
+        const pdfDoc = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+        const fontSize = parseInt(fontSizeSlider.value);
+        const opacity = parseInt(opacitySlider.value) / 100;
+        const { r, g, b } = hexToRgb(colorPicker.value);
+        const rotation = parseInt(rotationSlider.value);
+
+        const pages = pdfDoc.getPages();
+        const totalTarget = targetPages.size;
+        let processed = 0;
+
+        for (let i = 0; i < pages.length; i++) {
+          const pageNum = i + 1;
+          if (!targetPages.has(pageNum)) continue;
+
+          const page = pages[i];
+          const { width, height } = page.getSize();
+          const textWidth = font.widthOfTextAtSize(text, fontSize);
+          const textHeight = fontSize;
+
+          let x, y;
+          const cx = width / 2;
+          const cy = height / 2;
+
+          if (position === 'center') {
+            x = cx - textWidth / 2;
+            y = cy - textHeight / 2;
+          } else if (position === 'top') {
+            x = cx - textWidth / 2;
+            y = height - textHeight - height * 0.15;
+          } else {
+            x = cx - textWidth / 2;
+            y = height * 0.15;
+          }
+
+          const radians = (rotation * Math.PI) / 180;
+          const rotateX = cx;
+          const rotateY = position === 'center' ? cy : (position === 'top' ? y + textHeight / 2 : y + textHeight / 2);
+
+          page.drawText(text, {
+            x: x,
+            y: y,
+            size: fontSize,
+            font: font,
+            color: rgb(r, g, b),
+            opacity: opacity,
+            rotate: degrees(rotation),
+            rotateOrigin: { x: rotateX, y: rotateY },
+          });
+
+          processed++;
+          updateProgress(`Watermarking page ${pageNum}…`, 10 + (processed / totalTarget) * 80);
+
+          if (processed % 20 === 0) await new Promise(r => setTimeout(r, 0));
+        }
+
+        updateProgress('Generating file…', 95);
+        const bytes = await pdfDoc.save();
+        resultBlob = new Blob([bytes], { type: 'application/pdf' });
+
+        updateProgress('Done!', 100);
+        progressBar.className = 'h-full bg-emerald-500 rounded-full transition-all duration-200';
+        downloadBtn.classList.remove('hidden');
+      } catch (err) {
+        console.error('Watermark failed:', err);
+        updateProgress('Error: ' + (err.message || 'Watermark failed'), 0);
+        progressBar.className = 'h-full bg-red-500 rounded-full transition-all duration-200';
+      } finally {
+        applyBtn.disabled = false;
+        applyBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+      }
+    });
+
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!resultBlob) return;
+      const baseName = pdfFileName.replace(/\.pdf$/i, '');
+      const a = document.createElement('a');
+      a.download = baseName + '-watermarked.pdf';
+      a.href = URL.createObjectURL(resultBlob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+
+    updatePreview();
+  });
+  </script>
+
+</body>
+</html>

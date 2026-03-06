@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Age Calculator — Exact Age in Years, Months &amp; Days | ClickSolveTools</title>
+  <meta name="description" content="Calculate your exact age in years, months, and days. See total days alive, zodiac sign, generation, birth day of week, and next birthday countdown — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/age-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Age Calculator — Exact Age in Years, Months &amp; Days | ClickSolveTools">
+  <meta property="og:description" content="Calculate your exact age in years, months, and days. See total days alive, zodiac sign, generation, birth day of week, and next birthday countdown — free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/age-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","url":"https://clicksolvetools.com/tools/age-calculator","description":"Calculate your exact age in years, months, and days. See total days alive, zodiac sign, generation, birth day of week, and next birthday countdown.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Input Card -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <div>
+            <label for="dob" class="block text-sm font-medium text-[#475569] mb-1.5">Date of Birth</label>
+            <input type="date" id="dob" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+          </div>
+          <div>
+            <label for="as-of" class="block text-sm font-medium text-[#475569] mb-1.5">As of Date</label>
+            <input type="date" id="as-of" class="w-full px-4 py-2.5 bg-white border border-[#e2e8f0] rounded-lg text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-sm">
+          </div>
+        </div>
+        <button id="btn-calc" class="w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] active:bg-[#1e40af] text-white font-semibold text-sm transition-colors">
+          Calculate Age
+        </button>
+      </div>
+
+      <!-- Results (hidden until calculated) -->
+      <div id="results" class="hidden space-y-6">
+
+        <!-- Exact Age -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 text-center">
+          <p class="text-[#94a3b8] text-xs font-medium uppercase tracking-wider mb-2">Your Exact Age</p>
+          <p id="exact-age" class="text-3xl sm:text-4xl font-bold text-[#1e293b]"></p>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Days</p>
+            <p id="total-days" class="text-xl font-bold text-[#2563eb]"></p>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Weeks</p>
+            <p id="total-weeks" class="text-xl font-bold text-[#2563eb]"></p>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Total Months</p>
+            <p id="total-months" class="text-xl font-bold text-[#2563eb]"></p>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <p class="text-[#94a3b8] text-[11px] font-medium uppercase tracking-wider mb-1">Next Birthday</p>
+            <p id="next-bday" class="text-xl font-bold text-[#2563eb]"></p>
+            <p class="text-[#94a3b8] text-[10px] mt-0.5">days away</p>
+          </div>
+        </div>
+
+        <!-- Fun Facts -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <p class="text-[#94a3b8] text-xs font-medium uppercase tracking-wider mb-4">Fun Facts</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div class="flex items-start gap-3">
+              <span class="text-lg leading-none mt-0.5">♈</span>
+              <div>
+                <p class="text-[#94a3b8] text-[11px] uppercase tracking-wider">Western Zodiac</p>
+                <p id="zodiac-western" class="font-semibold text-[#1e293b]"></p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-lg leading-none mt-0.5">🐉</span>
+              <div>
+                <p class="text-[#94a3b8] text-[11px] uppercase tracking-wider">Chinese Zodiac</p>
+                <p id="zodiac-chinese" class="font-semibold text-[#1e293b]"></p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-lg leading-none mt-0.5">👥</span>
+              <div>
+                <p class="text-[#94a3b8] text-[11px] uppercase tracking-wider">Generation</p>
+                <p id="generation" class="font-semibold text-[#1e293b]"></p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-lg leading-none mt-0.5">📅</span>
+              <div>
+                <p class="text-[#94a3b8] text-[11px] uppercase tracking-wider">Born On</p>
+                <p id="birth-day" class="font-semibold text-[#1e293b]"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Calculate Your Exact Age in Years, Months, and Days</h2>
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Knowing your exact age sounds simple — you were born in a certain year, so you subtract that from the current year and you are done. But that quick mental math only gives you an approximate number. Your <strong class="text-[#1e293b]">true chronological age</strong> is measured in years, months, and days, and it changes every single day. Whether you need a precise figure for a legal form, a medical questionnaire, or just to satisfy your own curiosity, an age calculator removes all the guesswork by doing the date arithmetic for you.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Math Behind the Calculation</h3>
+        <p>Age calculation involves more than simple subtraction because months have different lengths (28, 29, 30, or 31 days) and leap years add an extra day every four years. The standard algorithm works backward from the "as of" date to the date of birth. First it counts the number of complete years — that is, how many full 12-month cycles have passed. Then it counts the remaining complete months, and finally the remaining days. If the current day of the month is earlier than the birth day, the calculator borrows a month and adds the appropriate number of days from the previous month. This is the same logic that date libraries use internally, and it guarantees an accurate result regardless of leap years, century boundaries, or months of different lengths.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Zodiac Signs and What They Mean</h3>
+        <p>Every date of birth falls under one of the 12 <strong class="text-[#1e293b]">Western zodiac signs</strong>, determined by the position of the Sun at the time of birth. Aries kicks off the cycle on March 21 and Pisces closes it on March 20. These signs are a staple of horoscopes and personality profiles in Western astrology. Separately, the <strong class="text-[#1e293b]">Chinese zodiac</strong> assigns one of 12 animals to each lunar year in a repeating cycle: Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, and Pig. The animal associated with your birth year is said to influence personality traits and compatibility. This calculator shows both systems so you can explore the astrological side of your birthday in one place.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Generations Explained</h3>
+        <p>Sociologists group people born in similar time periods into <strong class="text-[#1e293b]">generations</strong> that share cultural touchstones, economic conditions, and technological experiences. The most commonly referenced generations are the <strong class="text-[#1e293b]">Silent Generation</strong> (1928–1945), <strong class="text-[#1e293b]">Baby Boomers</strong> (1946–1964), <strong class="text-[#1e293b]">Generation X</strong> (1965–1980), <strong class="text-[#1e293b]">Millennials</strong> (1981–1996), <strong class="text-[#1e293b]">Generation Z</strong> (1997–2012), and <strong class="text-[#1e293b]">Generation Alpha</strong> (2013–present). While exact boundaries vary by source, these ranges are the ones most widely accepted by demographers and the Pew Research Center. Knowing your generation can be a fun conversation starter and gives context to shared cultural references.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases for an Age Calculator</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong class="text-[#1e293b]">Legal and official forms</strong> — Many government applications, insurance forms, and visa paperwork ask for your exact age in years, months, and days rather than just the year you were born.</li>
+          <li><strong class="text-[#1e293b]">Medical records</strong> — Pediatricians and gerontologists often need precise ages to plot growth charts or assess age-related health markers.</li>
+          <li><strong class="text-[#1e293b]">Retirement planning</strong> — Social Security and pension systems use your exact date of birth to determine eligibility dates and benefit amounts down to the month.</li>
+          <li><strong class="text-[#1e293b]">Personal milestones</strong> — Find out exactly how many days until your next birthday, when you will turn 10,000 days old, or the day of the week you were born.</li>
+          <li><strong class="text-[#1e293b]">Education</strong> — School enrollment cutoff dates often require children to be a specific age by a certain date, making exact age verification essential for parents.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+        <p><strong class="text-[#1e293b]">Does this calculator account for leap years?</strong><br>
+        Yes. The tool uses standard date arithmetic that correctly handles February 29 in leap years. If you were born on February 29, the calculator still produces an accurate result for non-leap years by treating March 1 as the next valid date boundary.</p>
+
+        <p><strong class="text-[#1e293b]">Can I calculate someone else's age?</strong><br>
+        Absolutely. Enter any date of birth and any "as of" date. You can use this to find the exact age of a historical figure, a family member, or anyone else whose birth date you know.</p>
+
+        <p><strong class="text-[#1e293b]">What is the "As of Date" field for?</strong><br>
+        By default it is set to today's date, which gives your current age. You can change it to any date — past or future — to see what your age was or will be on that specific day. This is useful for filling out forms that ask your age on a particular date.</p>
+
+        <p><strong class="text-[#1e293b]">Is my data stored anywhere?</strong><br>
+        No. All calculations happen in your browser using JavaScript. Your date of birth is never sent to a server, stored in a database, or shared with anyone. The page works even after it loads if you go offline.</p>
+
+        <p>Whether you need a precise age for paperwork, want to count down to your next birthday, or are simply curious about your zodiac sign and generation, this age calculator gives you all the answers instantly — free, private, and accurate.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const dobInput = $('dob');
+    const asOfInput = $('as-of');
+    const btnCalc = $('btn-calc');
+    const resultsEl = $('results');
+
+    const today = new Date();
+    asOfInput.value = fmt(today);
+
+    function fmt(d) {
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function parse(str) {
+      const [y, m, d] = str.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function daysInMonth(y, m) {
+      return new Date(y, m + 1, 0).getDate();
+    }
+
+    function calcAge(dob, asOf) {
+      let years = asOf.getFullYear() - dob.getFullYear();
+      let months = asOf.getMonth() - dob.getMonth();
+      let days = asOf.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(asOf.getFullYear(), asOf.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      return { years, months, days };
+    }
+
+    function totalDaysBetween(a, b) {
+      const msPerDay = 86400000;
+      const utcA = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+      const utcB = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.floor((utcB - utcA) / msPerDay);
+    }
+
+    function totalMonthsBetween(a, b) {
+      return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()) + (b.getDate() < a.getDate() ? -1 : 0);
+    }
+
+    function getWesternZodiac(m, d) {
+      const signs = [
+        [1,20,'Capricorn ♑'],[2,19,'Aquarius ♒'],[3,20,'Pisces ♓'],
+        [4,20,'Aries ♈'],[5,21,'Taurus ♉'],[6,21,'Gemini ♊'],
+        [7,22,'Cancer ♋'],[8,23,'Leo ♌'],[9,23,'Virgo ♍'],
+        [10,23,'Libra ♎'],[11,22,'Scorpio ♏'],[12,22,'Sagittarius ♐'],
+        [12,31,'Capricorn ♑']
+      ];
+      for (let i = 0; i < signs.length; i++) {
+        if (m < signs[i][0] || (m === signs[i][0] && d <= signs[i][1])) return signs[i][2];
+      }
+      return 'Capricorn ♑';
+    }
+
+    function getChineseZodiac(year) {
+      const animals = ['Rat 🐀','Ox 🐂','Tiger 🐅','Rabbit 🐇','Dragon 🐉','Snake 🐍','Horse 🐴','Goat 🐐','Monkey 🐒','Rooster 🐓','Dog 🐕','Pig 🐖'];
+      return animals[(year - 4) % 12];
+    }
+
+    function getGeneration(year) {
+      if (year <= 1927) return 'Greatest Generation';
+      if (year <= 1945) return 'Silent Generation';
+      if (year <= 1964) return 'Baby Boomer';
+      if (year <= 1980) return 'Generation X';
+      if (year <= 1996) return 'Millennial';
+      if (year <= 2012) return 'Generation Z';
+      return 'Generation Alpha';
+    }
+
+    function getDayOfWeek(d) {
+      return d.toLocaleDateString('en-US', { weekday: 'long' });
+    }
+
+    function daysUntilNextBirthday(dob, asOf) {
+      let nextBday = new Date(asOf.getFullYear(), dob.getMonth(), dob.getDate());
+      if (nextBday <= asOf) {
+        nextBday = new Date(asOf.getFullYear() + 1, dob.getMonth(), dob.getDate());
+      }
+      return totalDaysBetween(asOf, nextBday);
+    }
+
+    function numberWithCommas(n) {
+      return n.toLocaleString('en-US');
+    }
+
+    function calculate() {
+      if (!dobInput.value) { dobInput.focus(); return; }
+      if (!asOfInput.value) asOfInput.value = fmt(new Date());
+
+      const dob = parse(dobInput.value);
+      const asOf = parse(asOfInput.value);
+
+      if (dob >= asOf) {
+        resultsEl.classList.add('hidden');
+        return;
+      }
+
+      const age = calcAge(dob, asOf);
+      const days = totalDaysBetween(dob, asOf);
+      const weeks = Math.floor(days / 7);
+      const months = totalMonthsBetween(dob, asOf);
+      const nextBday = daysUntilNextBirthday(dob, asOf);
+      const m = dob.getMonth() + 1;
+      const d = dob.getDate();
+
+      $('exact-age').textContent = age.years + ' years, ' + age.months + ' months, ' + age.days + ' days';
+      $('total-days').textContent = numberWithCommas(days);
+      $('total-weeks').textContent = numberWithCommas(weeks);
+      $('total-months').textContent = numberWithCommas(months);
+      $('next-bday').textContent = nextBday === 0 ? '🎂 Today!' : numberWithCommas(nextBday);
+      $('next-bday').closest('.bg-white').querySelector('.text-\\[10px\\]').textContent = nextBday === 0 ? 'Happy Birthday!' : 'days away';
+
+      $('zodiac-western').textContent = getWesternZodiac(m, d);
+      $('zodiac-chinese').textContent = getChineseZodiac(dob.getFullYear());
+      $('generation').textContent = getGeneration(dob.getFullYear());
+      $('birth-day').textContent = getDayOfWeek(dob);
+
+      resultsEl.classList.remove('hidden');
+    }
+
+    btnCalc.addEventListener('click', calculate);
+
+    dobInput.addEventListener('change', () => {
+      if (dobInput.value && asOfInput.value) calculate();
+    });
+    asOfInput.addEventListener('change', () => {
+      if (dobInput.value && asOfInput.value) calculate();
+    });
+
+    dobInput.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+    asOfInput.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('age-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Base64 Encoder &amp; Decoder Online — Encode Text, Files &amp; UTF-8 | ClickSolveTools</title>
+  <meta name="description" content="Encode and decode Base64 strings instantly in your browser. Supports UTF-8 text, file drag-and-drop for data URIs, real-time conversion, and copy-to-clipboard. Free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/base64-encoder-decoder">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔣</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Base64 Encoder &amp; Decoder Online — Encode Text, Files &amp; UTF-8 | ClickSolveTools">
+  <meta property="og:description" content="Encode and decode Base64 strings instantly in your browser. Supports UTF-8 text, file drag-and-drop for data URIs, real-time conversion, and copy-to-clipboard.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/base64-encoder-decoder">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Base64 Encoder &amp; Decoder Online | ClickSolveTools">
+  <meta name="twitter:description" content="Encode and decode Base64 strings instantly. Supports UTF-8, file uploads, and data URIs. Free and private.">
+
+  <!-- GA4 with Consent Mode v2 (all denied by default) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Base64 Encoder & Decoder",
+    "url": "https://clicksolvetools.com/tools/base64-encoder-decoder",
+    "description": "Encode and decode Base64 strings instantly in your browser. Supports UTF-8 text, file drag-and-drop for data URIs, real-time conversion, and copy-to-clipboard.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Base64 encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 is a binary-to-text encoding scheme that represents binary data using 64 printable ASCII characters (A–Z, a–z, 0–9, +, and /). It is commonly used to embed binary content such as images or files inside text-based formats like HTML, CSS, JSON, and email."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Base64 encoding encrypt my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Base64 is an encoding, not encryption. Anyone can decode a Base64 string back to its original content. It provides no security or confidentiality whatsoever."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Base64 make data larger?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 encodes every 3 bytes of input into 4 ASCII characters, resulting in roughly a 33% size increase. This overhead is the trade-off for being able to safely transmit binary data through text-only channels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this tool handle UTF-8 characters like emoji?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool properly encodes multi-byte UTF-8 characters by first converting the string to UTF-8 byte sequences before applying Base64 encoding, so emoji, accented characters, and non-Latin scripts all work correctly."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mono { font-family: 'Courier New', Consolas, monospace; }
+    .tab-active { background-color: #2563eb; color: #fff; font-weight: 600; }
+    .tab-inactive { background-color: #f1f5f9; color: #475569; }
+    .tab-inactive:hover { background-color: #e2e8f0; color: #1e293b; }
+    textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.25); }
+    .drop-zone.drag-over { border-color: #2563eb; background-color: #eff6ff; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <div id="nav-container"></div>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+    <article>
+
+      <!-- Widget -->
+      <section class="mb-12">
+        <!-- Mode Tabs -->
+        <div class="flex gap-2 mb-5" id="mode-tabs">
+          <button data-mode="encode" class="tab-active px-5 py-2 rounded-lg text-sm transition-colors">Encode</button>
+          <button data-mode="decode" class="tab-inactive px-5 py-2 rounded-lg text-sm transition-colors">Decode</button>
+        </div>
+
+        <!-- Input -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="input-label" class="text-sm font-semibold text-[#475569]">Plain Text</label>
+            <button id="clear-btn" class="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors hidden">Clear</button>
+          </div>
+          <textarea
+            id="input-area"
+            class="w-full min-h-[160px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Type or paste text to encode…"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- File Drop Zone -->
+        <div
+          id="drop-zone"
+          class="drop-zone mb-4 border-2 border-dashed border-[#e2e8f0] rounded-lg p-6 text-center cursor-pointer transition-colors"
+        >
+          <div class="flex flex-col items-center gap-2">
+            <svg class="w-8 h-8 text-[#94a3b8]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-sm text-[#475569]">Drag &amp; drop a file here or <span class="text-[#2563eb] font-medium">click to browse</span></p>
+            <p class="text-xs text-[#94a3b8]" id="file-info">File will be encoded as a Base64 data URI</p>
+          </div>
+          <input type="file" id="file-input" class="hidden">
+        </div>
+
+        <!-- Output -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="output-label" class="text-sm font-semibold text-[#475569]">Base64 Output</label>
+            <div class="flex items-center gap-3">
+              <span id="size-info" class="text-xs text-[#94a3b8] hidden"></span>
+              <button id="copy-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Copy</button>
+            </div>
+          </div>
+          <textarea
+            id="output-area"
+            class="w-full min-h-[160px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Base64 output appears here…"
+            spellcheck="false"
+            readonly
+          ></textarea>
+        </div>
+
+        <!-- Error -->
+        <div id="error-msg" class="text-red-500 text-sm hidden"></div>
+      </section>
+
+      <!-- SEO Content -->
+      <section class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-4">What Is Base64 Encoding and How Does It Work?</h2>
+
+        <div class="text-[#475569] leading-relaxed space-y-4 text-[15px]">
+          <p>
+            Base64 is a binary-to-text encoding scheme that converts arbitrary binary data into a string composed of 64 printable ASCII characters: the uppercase letters A–Z, the lowercase letters a–z, the digits 0–9, and the two symbols <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">+</code> and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/</code>. A padding character <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">=</code> is appended when the input length is not a multiple of three bytes. The name "Base64" simply refers to the fact that the encoding uses a 64-character alphabet to represent data. It was originally defined in RFC 4648, which also specifies a URL-safe variant that replaces <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">+</code> and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/</code> with <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">-</code> and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">_</code> to avoid conflicts in URLs and filenames.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">How the Encoding Process Works</h3>
+          <p>
+            The algorithm takes the input data three bytes (24 bits) at a time and splits each group into four 6-bit segments. Each 6-bit value maps to one character in the Base64 alphabet. For example, the ASCII string "Hi" consists of two bytes: <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">H</code> (72, binary 01001000) and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">i</code> (105, binary 01101001). Together they form 16 bits. Because the input is not a multiple of three bytes, the encoder pads the bit stream to 24 bits, splits it into four 6-bit groups, and uses <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">=</code> for the final character, yielding <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">SGk=</code>. Decoding reverses the process exactly: each Base64 character is mapped back to its 6-bit value, the bits are reassembled into bytes, and padding characters are discarded.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Handling UTF-8 and Multi-Byte Characters</h3>
+          <p>
+            JavaScript's built-in <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">btoa()</code> function only accepts Latin-1 (ISO 8859-1) strings, which means it will throw an error on any character outside the 0–255 range — including emoji, Chinese characters, and accented letters. The standard workaround is to first encode the string to UTF-8 bytes using <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURIComponent</code> and then map the percent-encoded sequences back to single-byte characters that <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">btoa()</code> can handle. This tool applies that technique automatically, so you can encode any Unicode text — including emoji like 🚀 — without errors.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Common Use Cases for Base64</h3>
+          <p>
+            Base64 appears in a wide variety of contexts across web development, networking, and data processing. <strong>Email attachments</strong> have historically used Base64 to embed binary files inside MIME messages, since the SMTP protocol was designed for 7-bit ASCII text. <strong>Data URIs</strong> embed small images, fonts, or other assets directly into HTML and CSS, eliminating extra HTTP requests and simplifying deployment. <strong>API payloads</strong> in JSON or XML often carry binary blobs — such as profile pictures or signed certificates — as Base64 strings because JSON has no native binary type. <strong>JSON Web Tokens (JWTs)</strong> use Base64url encoding for the header and payload segments, making them safe to pass in URLs and HTTP headers. <strong>Basic HTTP authentication</strong> encodes the username:password pair with Base64 before sending it in the Authorization header. And developers frequently use Base64 to quickly inspect or share small binary payloads during debugging without needing specialized hex editors.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Base64 Is Not Encryption</h3>
+          <p>
+            A common misconception is that Base64 provides security. It does not. Base64 is a fully reversible encoding — anyone with access to the encoded string can decode it instantly. It is designed for safe transport, not confidentiality. If you need to protect sensitive data, use proper encryption algorithms such as AES or RSA, and transmit the ciphertext over TLS/HTTPS. Think of Base64 as a packaging format: it changes the shape of the data so it can travel through text-only channels, but it does not lock or hide the contents.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">The Size Overhead Trade-Off</h3>
+          <p>
+            Because every three bytes of input produce four bytes of output, Base64 increases data size by approximately 33%. For small assets like icons or configuration snippets, this overhead is negligible. For large files — such as high-resolution images or video — the size penalty becomes significant, and it is usually better to serve those assets as separate binary files with proper caching. The sweet spot for data URIs is typically files under 10 KB, where the saved HTTP request outweighs the encoding overhead.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <p><strong class="text-[#1e293b]">What is Base64 encoding used for?</strong><br>
+            Base64 is used whenever binary data needs to be represented as text — in email attachments, data URIs, JSON/XML payloads, JWT tokens, HTTP Basic Auth headers, and during debugging. It ensures binary content passes safely through systems that only support ASCII text.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Does Base64 encoding encrypt my data?</strong><br>
+            No. Base64 is a reversible encoding, not encryption. Anyone can decode a Base64 string. Use AES, RSA, or another encryption algorithm if you need confidentiality.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Why does Base64 output end with = or ==?</strong><br>
+            The <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">=</code> sign is a padding character. Base64 processes input in groups of three bytes. When the input length is not divisible by three, one or two <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">=</code> characters are added so the output length is always a multiple of four.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Can this tool handle emoji and non-Latin characters?</strong><br>
+            Yes. The encoder first converts text to UTF-8 byte sequences before applying Base64 encoding, so multi-byte characters like emoji, Chinese, Arabic, and accented letters all work correctly.
+          </p>
+
+          <p>
+            This converter runs entirely in your browser — no data is sent to any server. It is free to use with no sign-up required. Paste your text, drag a file, and get results instantly.
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('base64-encoder-decoder');
+  </script>
+
+  <script>
+  (function () {
+    const $ = s => document.querySelector(s);
+    const inputArea  = $('#input-area');
+    const outputArea = $('#output-area');
+    const inputLabel = $('#input-label');
+    const outputLabel = $('#output-label');
+    const copyBtn    = $('#copy-btn');
+    const clearBtn   = $('#clear-btn');
+    const errorMsg   = $('#error-msg');
+    const sizeInfo   = $('#size-info');
+    const dropZone   = $('#drop-zone');
+    const fileInput  = $('#file-input');
+    const fileInfo   = $('#file-info');
+    const modeTabs   = document.querySelectorAll('#mode-tabs button');
+
+    let mode = 'encode';
+
+    function setMode(m) {
+      mode = m;
+      modeTabs.forEach(t => {
+        t.classList.toggle('tab-active', t.dataset.mode === m);
+        t.classList.toggle('tab-inactive', t.dataset.mode !== m);
+      });
+
+      if (m === 'encode') {
+        inputLabel.textContent = 'Plain Text';
+        outputLabel.textContent = 'Base64 Output';
+        inputArea.placeholder = 'Type or paste text to encode…';
+        outputArea.placeholder = 'Base64 output appears here…';
+        dropZone.classList.remove('hidden');
+      } else {
+        inputLabel.textContent = 'Base64 String';
+        outputLabel.textContent = 'Decoded Text';
+        inputArea.placeholder = 'Paste a Base64 string to decode…';
+        outputArea.placeholder = 'Decoded output appears here…';
+        dropZone.classList.add('hidden');
+      }
+
+      inputArea.value = '';
+      outputArea.value = '';
+      clearError();
+      updateUI();
+    }
+
+    function clearError() {
+      errorMsg.textContent = '';
+      errorMsg.classList.add('hidden');
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    function updateUI() {
+      clearBtn.classList.toggle('hidden', !inputArea.value);
+      const outLen = outputArea.value.length;
+      if (outLen > 0) {
+        const kb = (new Blob([outputArea.value]).size / 1024).toFixed(1);
+        sizeInfo.textContent = `${outLen.toLocaleString()} chars · ${kb} KB`;
+        sizeInfo.classList.remove('hidden');
+      } else {
+        sizeInfo.classList.add('hidden');
+      }
+    }
+
+    // UTF-8-safe Base64 encode
+    function utf8ToBase64(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+        String.fromCharCode(parseInt(p1, 16))
+      ));
+    }
+
+    // UTF-8-safe Base64 decode
+    function base64ToUtf8(b64) {
+      return decodeURIComponent(
+        Array.from(atob(b64), c =>
+          '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join('')
+      );
+    }
+
+    function convert() {
+      clearError();
+      const input = inputArea.value;
+
+      if (!input.trim()) {
+        outputArea.value = '';
+        updateUI();
+        return;
+      }
+
+      try {
+        if (mode === 'encode') {
+          outputArea.value = utf8ToBase64(input);
+        } else {
+          const cleaned = input.replace(/\s/g, '');
+          if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleaned)) {
+            throw new Error('Invalid Base64 string. Allowed characters: A–Z, a–z, 0–9, +, /, and = padding.');
+          }
+          outputArea.value = base64ToUtf8(cleaned);
+        }
+      } catch (e) {
+        const msg = mode === 'decode'
+          ? 'Invalid Base64 input. Check for typos or unsupported characters.'
+          : e.message;
+        showError(msg);
+        outputArea.value = '';
+      }
+
+      updateUI();
+    }
+
+    // File handling
+    function handleFile(file) {
+      if (!file) return;
+      setMode('encode');
+      modeTabs.forEach(t => {
+        t.classList.toggle('tab-active', t.dataset.mode === 'encode');
+        t.classList.toggle('tab-inactive', t.dataset.mode !== 'encode');
+      });
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        outputArea.value = reader.result;
+        inputArea.value = `[File: ${file.name} — ${(file.size / 1024).toFixed(1)} KB]`;
+        fileInfo.textContent = `✓ Loaded ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        fileInfo.classList.add('text-emerald-600');
+        updateUI();
+      };
+      reader.onerror = function () {
+        showError('Failed to read file.');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files[0]) handleFile(fileInput.files[0]);
+    });
+
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+    });
+
+    // Events
+    inputArea.addEventListener('input', convert);
+    modeTabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+    clearBtn.addEventListener('click', () => {
+      inputArea.value = '';
+      outputArea.value = '';
+      clearError();
+      fileInfo.textContent = 'File will be encoded as a Base64 data URI';
+      fileInfo.classList.remove('text-emerald-600');
+      updateUI();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const text = outputArea.value;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.remove('text-[#2563eb]');
+        copyBtn.classList.add('text-emerald-500');
+        setTimeout(() => {
+          copyBtn.textContent = orig;
+          copyBtn.classList.remove('text-emerald-500');
+          copyBtn.classList.add('text-[#2563eb]');
+        }, 1500);
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

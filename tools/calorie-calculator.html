@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Calorie Calculator (TDEE) — Daily Calorie Needs Instantly | ClickSolveTools</title>
+  <meta name="description" content="Calculate your BMR and TDEE for free using the Mifflin-St Jeor formula. See daily calories for maintenance, weight loss, and weight gain with macronutrient breakdowns — all in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/calorie-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Calorie Calculator (TDEE) — Daily Calorie Needs | ClickSolveTools">
+  <meta property="og:description" content="Calculate your BMR and TDEE for free using the Mifflin-St Jeor formula. See daily calories for maintenance, weight loss, and weight gain with macro breakdowns.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/calorie-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Calorie Calculator (TDEE) — Daily Calorie Needs | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your BMR and TDEE for free using the Mifflin-St Jeor formula. See daily calories for maintenance, weight loss, and weight gain.">
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Calorie Calculator (TDEE)",
+    "url":"https://clicksolvetools.com/tools/calorie-calculator",
+    "description":"Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) for free using the Mifflin-St Jeor formula. See calories for maintenance, weight loss, and weight gain with macronutrient breakdowns.",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+  }</script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What is TDEE?","acceptedAnswer":{"@type":"Answer","text":"Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day, combining your Basal Metabolic Rate with calories burned through physical activity and digestion."}},
+      {"@type":"Question","name":"How is BMR calculated?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses the Mifflin-St Jeor equation: for men, BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5. For women, BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161."}},
+      {"@type":"Question","name":"How many calories should I eat to lose weight?","acceptedAnswer":{"@type":"Answer","text":"A common approach is to eat 500 calories below your TDEE, which creates a deficit of roughly one pound of fat loss per week. This calculator shows that figure automatically."}},
+      {"@type":"Question","name":"What are activity multipliers?","acceptedAnswer":{"@type":"Answer","text":"Activity multipliers scale your BMR to estimate total daily calorie burn. They range from 1.2 for sedentary individuals to 1.9 for extremely active people."}}
+    ]
+  }</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Gender + Personal Info -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+
+        <!-- Gender Toggle -->
+        <label class="block text-sm font-medium text-[#475569] mb-2">Gender</label>
+        <div class="flex justify-center mb-6">
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-male" class="gender-btn px-6 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Male</button>
+            <button id="btn-female" class="gender-btn px-6 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Female</button>
+          </div>
+        </div>
+
+        <!-- Age -->
+        <div class="mb-4">
+          <label for="input-age" class="block text-sm font-medium text-[#475569] mb-1">Age</label>
+          <div class="relative">
+            <input id="input-age" type="number" min="1" max="120" placeholder="25" class="cal-input w-full pr-14">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">years</span>
+          </div>
+        </div>
+
+        <!-- Unit Toggle -->
+        <div class="flex justify-center mb-4">
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-imperial" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Imperial</button>
+            <button id="btn-metric" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Metric</button>
+          </div>
+        </div>
+
+        <!-- Imperial Fields -->
+        <div id="fields-imperial" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+            <div class="flex gap-3">
+              <div class="flex-1 relative">
+                <input id="imp-ft" type="number" min="0" max="9" placeholder="5" class="cal-input w-full pr-9">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">ft</span>
+              </div>
+              <div class="flex-1 relative">
+                <input id="imp-in" type="number" min="0" max="11" step="1" placeholder="10" class="cal-input w-full pr-9">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">in</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="imp-lbs" class="block text-sm font-medium text-[#475569] mb-1">Weight</label>
+            <div class="relative">
+              <input id="imp-lbs" type="number" min="0" step="0.1" placeholder="160" class="cal-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">lbs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Fields -->
+        <div id="fields-metric" class="space-y-4 hidden">
+          <div>
+            <label for="met-cm" class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+            <div class="relative">
+              <input id="met-cm" type="number" min="0" step="0.1" placeholder="178" class="cal-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">cm</span>
+            </div>
+          </div>
+          <div>
+            <label for="met-kg" class="block text-sm font-medium text-[#475569] mb-1">Weight</label>
+            <div class="relative">
+              <input id="met-kg" type="number" min="0" step="0.1" placeholder="73" class="cal-input w-full pr-10">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Level -->
+        <div class="mt-4">
+          <label for="activity-level" class="block text-sm font-medium text-[#475569] mb-1">Activity Level</label>
+          <select id="activity-level" class="cal-input w-full appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M2%204l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_12px_center] pr-8">
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">Lightly Active (light exercise 1–3 days/week)</option>
+            <option value="1.55" selected>Moderately Active (moderate exercise 3–5 days/week)</option>
+            <option value="1.725">Very Active (hard exercise 6–7 days/week)</option>
+            <option value="1.9">Extra Active (very hard exercise &amp; physical job)</option>
+          </select>
+        </div>
+
+        <!-- Calculate Button -->
+        <button id="calc-btn" class="mt-5 w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-sm transition-colors shadow-sm shadow-[#2563eb]/20">
+          Calculate Calories
+        </button>
+      </div>
+
+      <!-- Results Panel -->
+      <div id="results-panel" class="space-y-4 hidden">
+
+        <!-- BMR + TDEE Cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">BMR</div>
+            <div id="res-bmr" class="text-3xl font-extrabold tracking-tight text-[#1e293b]">—</div>
+            <div class="text-xs text-[#475569] mt-1">cal / day</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">TDEE</div>
+            <div id="res-tdee" class="text-3xl font-extrabold tracking-tight text-[#2563eb]">—</div>
+            <div class="text-xs text-[#475569] mt-1">cal / day</div>
+          </div>
+        </div>
+
+        <!-- Calorie Goal Cards -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Weight Loss</div>
+            <div id="res-lose" class="text-2xl font-bold text-[#22c55e]">—</div>
+            <div class="text-[10px] text-[#475569] mt-1">−500 cal/day</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Maintain</div>
+            <div id="res-maintain" class="text-2xl font-bold text-[#2563eb]">—</div>
+            <div class="text-[10px] text-[#475569] mt-1">TDEE</div>
+          </div>
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+            <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Weight Gain</div>
+            <div id="res-gain" class="text-2xl font-bold text-[#f59e0b]">—</div>
+            <div class="text-[10px] text-[#475569] mt-1">+500 cal/day</div>
+          </div>
+        </div>
+
+        <!-- Macronutrient Breakdown -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4">Macronutrient Breakdown</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[#e2e8f0]">
+                  <th class="text-left text-[#94a3b8] font-medium text-xs uppercase tracking-wider pb-2 pr-3">Goal</th>
+                  <th class="text-right text-[#94a3b8] font-medium text-xs uppercase tracking-wider pb-2 px-2">Calories</th>
+                  <th class="text-right text-[#94a3b8] font-medium text-xs uppercase tracking-wider pb-2 px-2">Protein</th>
+                  <th class="text-right text-[#94a3b8] font-medium text-xs uppercase tracking-wider pb-2 px-2">Carbs</th>
+                  <th class="text-right text-[#94a3b8] font-medium text-xs uppercase tracking-wider pb-2 pl-2">Fat</th>
+                </tr>
+              </thead>
+              <tbody id="macro-body" class="text-[#475569]"></tbody>
+            </table>
+          </div>
+          <p class="text-[10px] text-[#94a3b8] mt-3">Cutting: 40% protein / 30% carbs / 30% fat · Maintenance: 30% protein / 40% carbs / 30% fat · Bulking: 30% protein / 45% carbs / 25% fat</p>
+        </div>
+      </div>
+
+      <!-- Health Disclaimer -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <div class="flex gap-3">
+          <div class="text-lg leading-none mt-0.5">⚕️</div>
+          <p class="text-xs text-[#475569] leading-relaxed">
+            <strong class="text-[#1e293b]">Health Disclaimer:</strong> This calculator provides estimates based on the Mifflin-St Jeor equation and general activity multipliers. Individual caloric needs vary based on genetics, body composition, medical conditions, and other factors. These results are not a substitute for professional medical or dietary advice. Consult a healthcare professional or registered dietitian before making significant changes to your diet or exercise routine.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding TDEE, BMR, and Daily Calorie Needs</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Knowing how many calories your body needs each day is the foundation of any effective nutrition plan, whether your goal is losing fat, building muscle, or simply maintaining a healthy weight. This free calorie calculator uses the Mifflin-St Jeor equation — widely regarded as the most accurate predictive formula for estimating Basal Metabolic Rate — combined with standard activity multipliers to determine your Total Daily Energy Expenditure (TDEE). Everything runs in your browser; no data is uploaded or stored anywhere.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Is Basal Metabolic Rate (BMR)?</h3>
+      <p>Your Basal Metabolic Rate is the number of calories your body burns at complete rest just to sustain vital functions — breathing, circulating blood, regulating temperature, and maintaining organ function. BMR typically accounts for 60–75% of your total daily calorie expenditure. It varies based on age, sex, height, and weight: larger bodies and younger individuals tend to have higher BMRs because they have more metabolically active tissue.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Mifflin-St Jeor Equation</h3>
+      <p>Published in 1990, the Mifflin-St Jeor equation replaced older formulas like Harris-Benedict as the gold standard for BMR estimation. Research has shown it predicts resting metabolic rate within 10% for most adults, making it the formula recommended by the Academy of Nutrition and Dietetics. The equations are:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center text-sm">Men: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center text-sm mt-2">Women: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161</p>
+      <p>The key difference between the male and female formulas is the constant at the end (+5 for men, −161 for women), which reflects the higher average lean body mass found in males. This difference translates to roughly 150–170 fewer baseline calories for women of equivalent size and age.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Is TDEE?</h3>
+      <p>Total Daily Energy Expenditure is your BMR multiplied by an activity factor that accounts for all movement throughout the day — from structured exercise to walking, fidgeting, and other non-exercise activity thermogenesis (NEAT). TDEE gives you the number of calories you need to consume to maintain your current weight. Eating below this number creates a calorie deficit (weight loss), while eating above it creates a surplus (weight gain).</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Activity Multipliers Explained</h3>
+      <p>The calculator uses five standard activity levels, each with a corresponding multiplier applied to your BMR:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Sedentary (×1.2)</strong> — Desk job, little to no exercise. Most of the day is spent sitting.</li>
+        <li><strong class="text-[#1e293b]">Lightly Active (×1.375)</strong> — Light exercise or walking 1–3 days per week.</li>
+        <li><strong class="text-[#1e293b]">Moderately Active (×1.55)</strong> — Moderate exercise 3–5 days per week, such as jogging, cycling, or swimming at a steady pace.</li>
+        <li><strong class="text-[#1e293b]">Very Active (×1.725)</strong> — Hard exercise or sports 6–7 days per week.</li>
+        <li><strong class="text-[#1e293b]">Extra Active (×1.9)</strong> — Very intense training combined with a physically demanding job, or two-a-day training sessions.</li>
+      </ul>
+      <p>Most people overestimate their activity level. If you are unsure, start with "Lightly Active" or "Moderately Active" and adjust based on real-world results over two to four weeks.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Calorie Targets for Weight Loss and Gain</h3>
+      <p>A deficit of 500 calories per day below your TDEE corresponds to approximately one pound (0.45 kg) of fat loss per week, since one pound of body fat contains roughly 3,500 stored calories. Similarly, a surplus of 500 calories supports about one pound of weight gain per week. These are general guidelines — actual results depend on macronutrient composition, training stimulus, sleep quality, stress levels, and individual metabolism.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Macronutrient Breakdown</h3>
+      <p>Once you know your calorie target, distributing those calories across protein, carbohydrates, and fat ensures balanced nutrition. This calculator provides three preset macro splits: a higher-protein ratio for cutting (to preserve muscle during a deficit), a balanced ratio for maintenance, and a higher-carb ratio for bulking (to fuel training and recovery). Protein is set at 4 calories per gram, carbohydrates at 4 calories per gram, and fat at 9 calories per gram.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is TDEE?</strong></p>
+      <p>TDEE stands for Total Daily Energy Expenditure. It is the total number of calories your body burns in a 24-hour period, combining your BMR with calories burned through physical activity, digestion (the thermic effect of food), and non-exercise activity. Your TDEE represents the calorie intake needed to maintain your current body weight.</p>
+
+      <p><strong class="text-[#1e293b]">How accurate is the Mifflin-St Jeor formula?</strong></p>
+      <p>Studies show the Mifflin-St Jeor equation predicts resting metabolic rate within 10% of measured values for most healthy adults. It is more accurate than the older Harris-Benedict equation and is the formula recommended by the American Dietetic Association for estimating calorie needs.</p>
+
+      <p><strong class="text-[#1e293b]">How many calories should I eat to lose weight?</strong></p>
+      <p>A common and sustainable approach is to eat 500 calories below your TDEE each day, creating a weekly deficit of about 3,500 calories — equivalent to roughly one pound of fat. More aggressive deficits can lead to faster results but may also cause muscle loss, fatigue, and nutrient deficiencies. Consult a healthcare professional before starting any restrictive diet.</p>
+
+      <p><strong class="text-[#1e293b]">Should I eat back exercise calories?</strong></p>
+      <p>If your activity level selection already accounts for your exercise routine, your TDEE estimate includes those calories. Eating additional "exercise calories" on top of your TDEE can lead to unintended surplus. It is generally better to choose an accurate activity level and eat consistently at your target rather than adjusting daily for individual workouts.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. Actual caloric needs vary based on individual factors including genetics, body composition, metabolic health, medications, and more. Always consult a qualified healthcare professional or registered dietitian before making significant dietary changes.
+      </div>
+
+      <p>This calorie calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to check your daily calorie needs anytime — quick, private, and instant.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .cal-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .cal-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .cal-input::placeholder { color: #94a3b8; }
+    .cal-input::-webkit-inner-spin-button,
+    .cal-input::-webkit-outer-spin-button { opacity: 1; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    let gender = 'male';
+    let unit = 'imperial';
+
+    const btnMale = $('btn-male');
+    const btnFemale = $('btn-female');
+    const btnImp = $('btn-imperial');
+    const btnMet = $('btn-metric');
+    const fieldsImp = $('fields-imperial');
+    const fieldsMet = $('fields-metric');
+    const inputAge = $('input-age');
+    const impFt = $('imp-ft');
+    const impIn = $('imp-in');
+    const impLbs = $('imp-lbs');
+    const metCm = $('met-cm');
+    const metKg = $('met-kg');
+    const activityLevel = $('activity-level');
+    const resultsPanel = $('results-panel');
+
+    function setToggle(activeBtn, inactiveBtn) {
+      activeBtn.className = 'gender-btn px-6 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm';
+      inactiveBtn.className = 'gender-btn px-6 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+    }
+
+    function setUnitToggle(activeBtn, inactiveBtn) {
+      activeBtn.className = 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm';
+      inactiveBtn.className = 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+    }
+
+    btnMale.addEventListener('click', () => { gender = 'male'; setToggle(btnMale, btnFemale); });
+    btnFemale.addEventListener('click', () => { gender = 'female'; setToggle(btnFemale, btnMale); });
+
+    btnImp.addEventListener('click', () => {
+      unit = 'imperial';
+      fieldsImp.classList.remove('hidden');
+      fieldsMet.classList.add('hidden');
+      setUnitToggle(btnImp, btnMet);
+    });
+    btnMet.addEventListener('click', () => {
+      unit = 'metric';
+      fieldsMet.classList.remove('hidden');
+      fieldsImp.classList.add('hidden');
+      setUnitToggle(btnMet, btnImp);
+    });
+
+    function getHeightCm() {
+      if (unit === 'imperial') {
+        const ft = parseFloat(impFt.value) || 0;
+        const inches = parseFloat(impIn.value) || 0;
+        return (ft * 12 + inches) * 2.54;
+      }
+      return parseFloat(metCm.value) || 0;
+    }
+
+    function getWeightKg() {
+      if (unit === 'imperial') {
+        return (parseFloat(impLbs.value) || 0) * 0.453592;
+      }
+      return parseFloat(metKg.value) || 0;
+    }
+
+    function calcMacros(calories, proteinPct, carbsPct, fatPct) {
+      return {
+        protein: Math.round((calories * proteinPct) / 4),
+        carbs: Math.round((calories * carbsPct) / 4),
+        fat: Math.round((calories * fatPct) / 9)
+      };
+    }
+
+    function renderMacroRow(label, calories, proteinPct, carbsPct, fatPct, labelColor) {
+      const m = calcMacros(calories, proteinPct, carbsPct, fatPct);
+      return `<tr class="border-b border-[#f1f5f9]">
+        <td class="py-2.5 pr-3 font-medium text-[#1e293b] whitespace-nowrap"><span class="inline-block w-2 h-2 rounded-full mr-2" style="background:${labelColor}"></span>${label}</td>
+        <td class="py-2.5 px-2 text-right font-semibold">${Math.round(calories).toLocaleString()}</td>
+        <td class="py-2.5 px-2 text-right">${m.protein}g</td>
+        <td class="py-2.5 px-2 text-right">${m.carbs}g</td>
+        <td class="py-2.5 pl-2 text-right">${m.fat}g</td>
+      </tr>`;
+    }
+
+    function calculate() {
+      const age = parseFloat(inputAge.value) || 0;
+      const heightCm = getHeightCm();
+      const weightKg = getWeightKg();
+      const multiplier = parseFloat(activityLevel.value);
+
+      if (age <= 0 || heightCm <= 0 || weightKg <= 0) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const genderOffset = gender === 'male' ? 5 : -161;
+      const bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + genderOffset;
+
+      if (!isFinite(bmr) || bmr <= 0) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const tdee = bmr * multiplier;
+      const loseCal = tdee - 500;
+      const gainCal = tdee + 500;
+
+      $('res-bmr').textContent = Math.round(bmr).toLocaleString();
+      $('res-tdee').textContent = Math.round(tdee).toLocaleString();
+      $('res-lose').textContent = Math.round(loseCal).toLocaleString();
+      $('res-maintain').textContent = Math.round(tdee).toLocaleString();
+      $('res-gain').textContent = Math.round(gainCal).toLocaleString();
+
+      $('macro-body').innerHTML =
+        renderMacroRow('Cutting', loseCal, 0.40, 0.30, 0.30, '#22c55e') +
+        renderMacroRow('Maintenance', tdee, 0.30, 0.40, 0.30, '#2563eb') +
+        renderMacroRow('Bulking', gainCal, 0.30, 0.45, 0.25, '#f59e0b');
+
+      resultsPanel.classList.remove('hidden');
+    }
+
+    [inputAge, impFt, impIn, impLbs, metCm, metKg, activityLevel].forEach(el => {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    });
+
+    $('calc-btn').addEventListener('click', calculate);
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('calorie-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Sales Tax Calculator — Add or Remove Tax from Any Price | ClickSolveTools</title>
+  <meta name="description" content="Calculate sales tax instantly. Add tax to a price, reverse-calculate pre-tax amounts, enter multiple line items, and generate an itemized receipt — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/sales-tax-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Sales Tax Calculator — Add or Remove Tax from Any Price | ClickSolveTools">
+  <meta property="og:description" content="Calculate sales tax instantly. Add tax to a price, reverse-calculate pre-tax amounts, enter multiple line items, and generate an itemized receipt — free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/sales-tax-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Sales Tax Calculator — Add or Remove Tax | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate sales tax instantly. Add tax to a price or reverse-calculate pre-tax amounts. Free, private, runs in your browser.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sales Tax Calculator","url":"https://clicksolvetools.com/tools/sales-tax-calculator","description":"Calculate sales tax instantly. Add tax to a price, reverse-calculate pre-tax amounts, enter multiple line items, and generate an itemized receipt.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate sales tax?","acceptedAnswer":{"@type":"Answer","text":"Multiply the item price by the tax rate expressed as a decimal. For example, an 8% tax on a $50 item is $50 × 0.08 = $4.00 in tax, making the total $54.00."}},{"@type":"Question","name":"How do I find the pre-tax price from a total that includes tax?","acceptedAnswer":{"@type":"Answer","text":"Divide the total by (1 + tax rate as a decimal). For example, if the total is $54 and the tax rate is 8%, the pre-tax price is $54 ÷ 1.08 = $50.00."}},{"@type":"Question","name":"Which US states have no sales tax?","acceptedAnswer":{"@type":"Answer","text":"Five states have no state-level sales tax: Alaska, Delaware, Montana, New Hampshire, and Oregon. However, Alaska allows local municipalities to levy their own sales taxes."}},{"@type":"Question","name":"Is sales tax included in the listed price in the US?","acceptedAnswer":{"@type":"Answer","text":"No. In the United States, sales tax is almost always added at the register on top of the listed shelf price. The sticker price you see does not include tax."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-5">
+
+      <!-- Mode Toggle -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-2">
+        <div class="grid grid-cols-2 gap-1">
+          <button id="mode-add" class="mode-btn mode-active rounded-lg py-2.5 text-sm font-semibold transition-all">Add Tax to Price</button>
+          <button id="mode-remove" class="mode-btn rounded-lg py-2.5 text-sm font-semibold transition-all">Remove Tax from Price</button>
+        </div>
+      </div>
+
+      <!-- Single Item -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-4">
+        <div>
+          <label for="price" class="block text-sm font-medium text-[#475569] mb-1" id="price-label">Price Before Tax</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-lg font-medium">$</span>
+            <input id="price" type="text" inputmode="decimal" placeholder="0.00" class="stc-input pl-8 w-full text-2xl font-semibold" autofocus>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-[#475569] mb-2">Tax Rate</label>
+          <div class="flex flex-wrap gap-2 mb-3" id="rate-presets">
+            <button data-rate="5" class="rate-btn">5%</button>
+            <button data-rate="6" class="rate-btn">6%</button>
+            <button data-rate="7" class="rate-btn">7%</button>
+            <button data-rate="8" class="rate-btn rate-active">8%</button>
+            <button data-rate="8.875" class="rate-btn">8.875%</button>
+            <button data-rate="10" class="rate-btn">10%</button>
+            <button data-rate="custom" class="rate-btn">Custom</button>
+          </div>
+          <div id="custom-rate-wrapper" class="hidden">
+            <div class="relative">
+              <input id="custom-rate" type="number" min="0" max="100" step="0.001" placeholder="Enter tax rate" class="stc-input pr-8 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Single Result -->
+      <div id="single-result" class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#475569]" id="lbl-base">Price Before Tax</span>
+          <span id="out-base" class="text-lg font-semibold tabular-nums">$0.00</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#475569]">Tax Amount</span>
+          <span id="out-tax" class="text-lg font-semibold tabular-nums">$0.00</span>
+        </div>
+        <div class="border-t border-[#e2e8f0] pt-3 flex items-center justify-between">
+          <span class="text-sm font-medium text-[#475569]" id="lbl-total">Total with Tax</span>
+          <span id="out-total" class="text-2xl font-bold text-[#2563eb] tabular-nums">$0.00</span>
+        </div>
+        <div class="text-xs text-[#94a3b8] text-right" id="out-effective-rate"></div>
+      </div>
+
+      <!-- Multi-Item Toggle -->
+      <button id="multi-toggle" class="w-full flex items-center justify-center gap-2 py-3 bg-white border border-[#e2e8f0] rounded-xl text-sm font-semibold text-[#2563eb] hover:bg-[#f8fafc] transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+        Multiple Items Mode
+      </button>
+
+      <!-- Multi-Item Section -->
+      <div id="multi-section" class="hidden space-y-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-semibold text-[#1e293b]">Line Items</h3>
+            <button id="add-item-btn" class="flex items-center gap-1 text-xs font-semibold text-[#2563eb] hover:text-[#1d4ed8] transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+              Add Item
+            </button>
+          </div>
+          <div id="item-list" class="space-y-2"></div>
+        </div>
+
+        <!-- Itemized Receipt -->
+        <div id="receipt" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-semibold text-[#1e293b]">Itemized Receipt</h3>
+            <button id="copy-receipt" class="text-xs font-semibold text-[#2563eb] hover:text-[#1d4ed8] transition-colors">Copy</button>
+          </div>
+          <div id="receipt-body" class="font-mono text-xs text-[#475569] space-y-1"></div>
+          <div class="border-t border-dashed border-[#e2e8f0] mt-3 pt-3 font-mono text-xs space-y-1">
+            <div class="flex justify-between text-[#475569]"><span>Subtotal</span><span id="receipt-subtotal" class="tabular-nums"></span></div>
+            <div class="flex justify-between text-[#475569]"><span id="receipt-tax-label">Tax (8%)</span><span id="receipt-tax" class="tabular-nums"></span></div>
+            <div class="flex justify-between font-bold text-[#1e293b] text-sm pt-1"><span>Total</span><span id="receipt-total" class="tabular-nums"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Sales Tax Calculator — How Sales Tax Works and US Tax Rates by State</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Sales tax is a consumption tax imposed by state and local governments on the sale of goods and, in many cases, services. In the United States, sales tax is not included in the sticker price — it is added at the point of sale, which means the amount you pay at the register is always higher than the price on the shelf. This sales tax calculator lets you instantly compute the tax amount and final price, reverse-calculate the pre-tax cost from a tax-inclusive total, or build a multi-item receipt with an itemized tax breakdown. Everything runs in your browser with no data sent to any server.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Sales Tax Is Calculated</h3>
+      <p>The formula for adding sales tax to a price is straightforward:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Tax Amount = Price × (Tax Rate ÷ 100)</p>
+      <p>The total you pay is simply the original price plus the tax amount. For example, if you buy an item priced at $75.00 in a jurisdiction with an 8.875% combined sales tax rate, the tax is $75.00 × 0.08875 = $6.66, and you pay $81.66 at checkout.</p>
+      <p>To reverse the calculation — finding the pre-tax price from a total that already includes tax — divide the total by (1 + the tax rate as a decimal). Using the same example: $81.66 ÷ 1.08875 = $75.00. The "Remove Tax from Price" mode in this calculator handles that math for you automatically.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">US Sales Tax Rates by State</h3>
+      <p>Sales tax in the United States is a patchwork system. There is no federal sales tax; instead, 45 states and the District of Columbia impose their own state-level sales tax, and many allow cities and counties to add local taxes on top. Combined rates — state plus local — can vary dramatically even within a single state. Here is a general overview of state base rates:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">No sales tax</strong> — Alaska (no state tax, but local taxes apply in some areas), Delaware, Montana, New Hampshire, and Oregon.</li>
+        <li><strong class="text-[#1e293b]">Low rates (under 5%)</strong> — Colorado (2.9%), Alabama (4%), Georgia (4%), Hawaii (4%), Louisiana (4.45%), New York (4%), Wyoming (4%), and others.</li>
+        <li><strong class="text-[#1e293b]">Mid-range (5%–7%)</strong> — Most states fall here, including Florida (6%), Texas (6.25%), Pennsylvania (6%), Ohio (5.75%), Illinois (6.25%), and Michigan (6%).</li>
+        <li><strong class="text-[#1e293b]">High rates (7%+)</strong> — California has the highest base state rate at 7.25%, followed by Indiana (7%), Mississippi (7%), Rhode Island (7%), and Tennessee (7%). When local surcharges are added, combined rates in parts of California, Louisiana, and Tennessee can exceed 10%.</li>
+      </ul>
+      <p>Because local jurisdictions add their own levies, the actual rate you pay depends on the exact city or county where the purchase is made. This calculator lets you enter any rate — including fractional rates like 8.875% (the combined rate in New York City) — so you can match your local tax precisely.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">When Sales Tax Applies (and When It Doesn't)</h3>
+      <p>Most tangible goods are subject to sales tax, but many states exempt essentials. Groceries are exempt in about 30 states, and prescription medications are exempt nearly everywhere. Clothing is exempt in a handful of states including Pennsylvania, New Jersey, and Minnesota. Some states hold annual "tax-free weekends" for back-to-school shopping, where qualifying items under a price threshold are temporarily exempt. Always check your state's department of revenue for current exemption rules.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How do I calculate sales tax?</strong></p>
+      <p>Multiply the item price by the tax rate as a decimal. For a $50 item at 8% tax: $50 × 0.08 = $4.00 in tax, so you pay $54.00 total. Enter any price and rate above and the calculator does it instantly.</p>
+
+      <p><strong class="text-[#1e293b]">How do I find the pre-tax price from a total that includes tax?</strong></p>
+      <p>Divide the total by (1 + the tax rate as a decimal). If you paid $54.00 and the rate was 8%: $54 ÷ 1.08 = $50.00 before tax. Use the "Remove Tax from Price" mode above to do this automatically.</p>
+
+      <p><strong class="text-[#1e293b]">Which states have no sales tax?</strong></p>
+      <p>Five states have no state-level sales tax: Alaska, Delaware, Montana, New Hampshire, and Oregon. Alaska is unique because it allows local municipalities to levy their own sales taxes, so some Alaskan cities do charge a local sales tax.</p>
+
+      <p><strong class="text-[#1e293b]">Is sales tax included in the listed price in the US?</strong></p>
+      <p>No. Unlike many countries where VAT or GST is built into the displayed price, US retailers show the pre-tax price on the shelf. Tax is calculated and added at the register, which is why your receipt total is higher than the sticker price.</p>
+
+      <p><strong class="text-[#1e293b]">What is a use tax?</strong></p>
+      <p>Use tax is a companion to sales tax that applies when you buy goods from an out-of-state retailer that did not collect sales tax. The rate is typically identical to your state's sales tax rate, and you are technically required to self-report and pay it on your state tax return.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Note:</strong> Tax rates change frequently. This calculator is for estimation purposes. Always verify current rates with your state or local tax authority before making financial decisions.
+      </div>
+
+      <p>This sales tax calculator is free, runs entirely in your browser, and stores nothing on a server. Bookmark it for the next time you need to figure out tax on a purchase, verify a receipt, or compare prices across tax jurisdictions.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .stc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .stc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .stc-input::placeholder { color: #94a3b8; }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .mode-btn:hover { color: #1e293b; }
+    .mode-active {
+      background: #2563eb !important;
+      color: #fff !important;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+    }
+
+    .rate-btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .rate-btn:hover { border-color: #2563eb; color: #2563eb; }
+    .rate-active {
+      background: #2563eb !important;
+      color: #fff !important;
+      border-color: #2563eb !important;
+    }
+
+    .item-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .remove-item-btn {
+      flex-shrink: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .remove-item-btn:hover { border-color: #ef4444; color: #ef4444; background: #fef2f2; }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const $ = id => document.getElementById(id);
+
+    let mode = 'add';
+    let taxRate = 8;
+    let items = [];
+    let multiOpen = false;
+    let itemIdCounter = 0;
+
+    const priceInput = $('price');
+    const customRateInput = $('custom-rate');
+    const customRateWrapper = $('custom-rate-wrapper');
+
+    // Mode toggle
+    $('mode-add').addEventListener('click', () => setMode('add'));
+    $('mode-remove').addEventListener('click', () => setMode('remove'));
+
+    function setMode(m) {
+      mode = m;
+      $('mode-add').classList.toggle('mode-active', m === 'add');
+      $('mode-remove').classList.toggle('mode-active', m === 'remove');
+      $('price-label').textContent = m === 'add' ? 'Price Before Tax' : 'Total Price (Tax Included)';
+      $('lbl-base').textContent = m === 'add' ? 'Price Before Tax' : 'Pre-Tax Price';
+      $('lbl-total').textContent = m === 'add' ? 'Total with Tax' : 'Total (Tax Included)';
+      calculate();
+    }
+
+    // Rate presets
+    $('rate-presets').addEventListener('click', e => {
+      const btn = e.target.closest('.rate-btn');
+      if (!btn) return;
+      document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('rate-active'));
+      btn.classList.add('rate-active');
+      const val = btn.dataset.rate;
+      if (val === 'custom') {
+        customRateWrapper.classList.remove('hidden');
+        customRateInput.focus();
+        taxRate = parseFloat(customRateInput.value) || 0;
+      } else {
+        customRateWrapper.classList.add('hidden');
+        taxRate = parseFloat(val);
+      }
+      calculate();
+    });
+
+    customRateInput.addEventListener('input', () => {
+      taxRate = parseFloat(customRateInput.value) || 0;
+      calculate();
+    });
+
+    // Price input
+    priceInput.addEventListener('input', () => {
+      let raw = priceInput.value.replace(/[^0-9.]/g, '');
+      const parts = raw.split('.');
+      if (parts.length > 2) raw = parts[0] + '.' + parts.slice(1).join('');
+      priceInput.value = raw;
+      calculate();
+    });
+    priceInput.addEventListener('blur', () => {
+      const val = parseFloat(priceInput.value);
+      if (!isNaN(val) && val > 0) priceInput.value = val.toFixed(2);
+    });
+
+    function calculate() {
+      const input = parseFloat(priceInput.value) || 0;
+      const rate = taxRate / 100;
+      let base, tax, total;
+
+      if (mode === 'add') {
+        base = input;
+        tax = Math.round(base * rate * 100) / 100;
+        total = base + tax;
+      } else {
+        total = input;
+        base = Math.round((total / (1 + rate)) * 100) / 100;
+        tax = Math.round((total - base) * 100) / 100;
+      }
+
+      $('out-base').textContent = fmt.format(base);
+      $('out-tax').textContent = fmt.format(tax);
+      $('out-total').textContent = fmt.format(total);
+
+      if (base > 0) {
+        const effective = (tax / base) * 100;
+        $('out-effective-rate').textContent = `Effective rate: ${effective.toFixed(3)}%`;
+      } else {
+        $('out-effective-rate').textContent = '';
+      }
+
+      calculateMulti();
+    }
+
+    // Multi-item mode
+    $('multi-toggle').addEventListener('click', () => {
+      multiOpen = !multiOpen;
+      $('multi-section').classList.toggle('hidden', !multiOpen);
+      $('multi-toggle').innerHTML = multiOpen
+        ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M5 12h14"/></svg> Hide Multiple Items'
+        : '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg> Multiple Items Mode';
+      if (multiOpen && items.length === 0) addItem();
+    });
+
+    $('add-item-btn').addEventListener('click', addItem);
+
+    function addItem() {
+      const id = ++itemIdCounter;
+      items.push({ id, name: '', price: 0 });
+      renderItems();
+      const nameEl = document.querySelector(`[data-item-name="${id}"]`);
+      if (nameEl) nameEl.focus();
+    }
+
+    function removeItem(id) {
+      items = items.filter(i => i.id !== id);
+      renderItems();
+      calculateMulti();
+    }
+
+    function renderItems() {
+      const list = $('item-list');
+      list.innerHTML = items.map(item => `
+        <div class="item-row" data-id="${item.id}">
+          <input type="text" data-item-name="${item.id}" placeholder="Item name" value="${escHtml(item.name)}" class="stc-input flex-1 text-sm" style="min-width:0">
+          <div class="relative" style="width:7rem">
+            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">$</span>
+            <input type="text" data-item-price="${item.id}" inputmode="decimal" placeholder="0.00" value="${item.price || ''}" class="stc-input pl-7 w-full text-sm tabular-nums">
+          </div>
+          <button class="remove-item-btn" data-remove="${item.id}" aria-label="Remove item">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('[data-item-name]').forEach(el => {
+        el.addEventListener('input', () => {
+          const id = parseInt(el.dataset.itemName);
+          const item = items.find(i => i.id === id);
+          if (item) item.name = el.value;
+          calculateMulti();
+        });
+      });
+      list.querySelectorAll('[data-item-price]').forEach(el => {
+        el.addEventListener('input', () => {
+          let raw = el.value.replace(/[^0-9.]/g, '');
+          const pts = raw.split('.');
+          if (pts.length > 2) raw = pts[0] + '.' + pts.slice(1).join('');
+          el.value = raw;
+          const id = parseInt(el.dataset.itemPrice);
+          const item = items.find(i => i.id === id);
+          if (item) item.price = parseFloat(raw) || 0;
+          calculateMulti();
+        });
+        el.addEventListener('blur', () => {
+          const val = parseFloat(el.value);
+          if (!isNaN(val) && val > 0) el.value = val.toFixed(2);
+        });
+      });
+      list.querySelectorAll('[data-remove]').forEach(el => {
+        el.addEventListener('click', () => removeItem(parseInt(el.dataset.remove)));
+      });
+    }
+
+    function calculateMulti() {
+      if (!multiOpen || items.length === 0) {
+        $('receipt').classList.add('hidden');
+        return;
+      }
+
+      const validItems = items.filter(i => i.price > 0);
+      if (validItems.length === 0) {
+        $('receipt').classList.add('hidden');
+        return;
+      }
+
+      $('receipt').classList.remove('hidden');
+      const rate = taxRate / 100;
+      let subtotal = 0;
+      const body = $('receipt-body');
+
+      body.innerHTML = validItems.map(item => {
+        const p = Math.round(item.price * 100) / 100;
+        subtotal += p;
+        const label = item.name || 'Item';
+        return `<div class="flex justify-between"><span class="truncate mr-4">${escHtml(label)}</span><span class="tabular-nums flex-shrink-0">${fmt.format(p)}</span></div>`;
+      }).join('');
+
+      const tax = Math.round(subtotal * rate * 100) / 100;
+      const total = subtotal + tax;
+
+      $('receipt-subtotal').textContent = fmt.format(subtotal);
+      $('receipt-tax-label').textContent = `Tax (${taxRate}%)`;
+      $('receipt-tax').textContent = fmt.format(tax);
+      $('receipt-total').textContent = fmt.format(total);
+    }
+
+    $('copy-receipt').addEventListener('click', () => {
+      const validItems = items.filter(i => i.price > 0);
+      if (validItems.length === 0) return;
+      const rate = taxRate / 100;
+      let subtotal = 0;
+      let lines = validItems.map(item => {
+        const p = Math.round(item.price * 100) / 100;
+        subtotal += p;
+        return `${item.name || 'Item'}  ${fmt.format(p)}`;
+      });
+      const tax = Math.round(subtotal * rate * 100) / 100;
+      const total = subtotal + tax;
+      lines.push('─'.repeat(30));
+      lines.push(`Subtotal  ${fmt.format(subtotal)}`);
+      lines.push(`Tax (${taxRate}%)  ${fmt.format(tax)}`);
+      lines.push(`Total  ${fmt.format(total)}`);
+      navigator.clipboard.writeText(lines.join('\n')).then(() => {
+        const btn = $('copy-receipt');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('sales-tax-calculator');
+  </script>
+</body>
+</html>

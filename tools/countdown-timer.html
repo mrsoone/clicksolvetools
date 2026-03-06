@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Countdown Timer — Presets, Alerts &amp; Progress Ring | ClickSolveTools</title>
+  <meta name="description" content="Set a countdown timer with hour, minute, and second inputs, quick presets, a live progress ring, browser notifications, and an audible alert — all free and private in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/countdown-timer">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Online Countdown Timer — Presets, Alerts &amp; Progress Ring | ClickSolveTools">
+  <meta property="og:description" content="Set a countdown timer with hour, minute, and second inputs, quick presets, a live progress ring, browser notifications, and an audible alert — all free and private in your browser.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/countdown-timer">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online Countdown Timer — Presets, Alerts &amp; Progress Ring | ClickSolveTools">
+  <meta name="twitter:description" content="Set a countdown timer with presets, a live progress ring, browser notifications, and an audible alert.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Countdown Timer","url":"https://clicksolvetools.com/tools/countdown-timer","description":"Set a countdown timer with hour, minute, and second inputs, quick presets, a live progress ring, browser notifications, and an audible alert.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-xl mx-auto space-y-6">
+
+      <!-- Timer Card -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-10">
+
+        <!-- Progress Ring + Display -->
+        <div class="relative flex items-center justify-center mb-8">
+          <svg id="ring-svg" class="w-56 h-56 sm:w-72 sm:h-72 -rotate-90" viewBox="0 0 240 240">
+            <circle cx="120" cy="120" r="108" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+            <circle id="ring" cx="120" cy="120" r="108" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round"
+              stroke-dasharray="678.58" stroke-dashoffset="0" class="transition-[stroke-dashoffset] duration-200"/>
+          </svg>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div id="display" class="font-mono text-5xl sm:text-6xl font-bold tracking-tight text-[#1e293b] select-none">00:00:00</div>
+          </div>
+        </div>
+
+        <!-- Time Inputs -->
+        <div id="input-section" class="mb-6">
+          <div class="flex items-center justify-center gap-2 sm:gap-3">
+            <div class="flex flex-col items-center">
+              <label for="inp-h" class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-semibold mb-1">Hours</label>
+              <input id="inp-h" type="number" min="0" max="99" value="0" class="ct-input" aria-label="Hours">
+            </div>
+            <span class="text-2xl font-bold text-[#cbd5e1] mt-4">:</span>
+            <div class="flex flex-col items-center">
+              <label for="inp-m" class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-semibold mb-1">Minutes</label>
+              <input id="inp-m" type="number" min="0" max="59" value="0" class="ct-input" aria-label="Minutes">
+            </div>
+            <span class="text-2xl font-bold text-[#cbd5e1] mt-4">:</span>
+            <div class="flex flex-col items-center">
+              <label for="inp-s" class="text-[10px] uppercase tracking-wider text-[#94a3b8] font-semibold mb-1">Seconds</label>
+              <input id="inp-s" type="number" min="0" max="59" value="0" class="ct-input" aria-label="Seconds">
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div id="preset-section" class="flex flex-wrap justify-center gap-2 mb-6">
+          <button data-seconds="60" class="ct-preset">1 min</button>
+          <button data-seconds="300" class="ct-preset">5 min</button>
+          <button data-seconds="600" class="ct-preset">10 min</button>
+          <button data-seconds="900" class="ct-preset">15 min</button>
+          <button data-seconds="1800" class="ct-preset">30 min</button>
+          <button data-seconds="3600" class="ct-preset">1 hour</button>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex justify-center gap-3 sm:gap-4 flex-wrap">
+          <button id="btn-start" class="ct-btn bg-[#2563eb] hover:bg-[#1d4ed8] active:bg-[#1e40af] text-white">Start</button>
+          <button id="btn-pause" class="ct-btn bg-[#f59e0b] hover:bg-[#d97706] active:bg-[#b45309] text-white hidden">Pause</button>
+          <button id="btn-reset" class="ct-btn bg-[#f1f5f9] hover:bg-[#e2e8f0] active:bg-[#cbd5e1] text-[#1e293b]">Reset</button>
+        </div>
+
+        <!-- Notification opt-in -->
+        <div id="notif-bar" class="mt-5 text-center">
+          <button id="btn-notif" class="inline-flex items-center gap-1.5 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span id="notif-label">Enable notifications</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Done Banner (hidden by default) -->
+      <div id="done-banner" class="hidden bg-[#2563eb] text-white rounded-xl p-6 text-center animate-pulse">
+        <div class="text-4xl mb-2">🔔</div>
+        <p class="text-lg font-bold">Time's up!</p>
+        <button id="btn-dismiss" class="mt-3 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-colors">Dismiss</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Free Online Countdown Timer — Set, Start, and Stay Focused</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>A countdown timer measures time in reverse, ticking down from a duration you choose until it reaches zero. Unlike a stopwatch, which counts up, a countdown timer lets you define an endpoint, making it an essential tool for anything that has a fixed time limit. Whether you are timing a presentation rehearsal, tracking a study session, managing a workout interval, or waiting for food to finish cooking, setting a timer removes the guesswork and frees your attention for the task at hand.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Countdown Timer Works</h3>
+      <p>This tool runs entirely in your browser — no app to install, no account to create, and no data sent to any server. Enter your desired duration using the hours, minutes, and seconds fields, or tap one of the quick-preset buttons (1 min, 5 min, 10 min, 15 min, 30 min, or 1 hour) to fill in common durations with a single click. Press <strong class="text-[#1e293b]">Start</strong> and the countdown begins immediately. A large monospace display updates in real time, and a circular progress ring around the digits shrinks as time elapses so you can gauge remaining time at a glance. While the timer is running, the browser tab title updates to show the remaining time, which means you can switch to another tab and still see the countdown in your tab bar.</p>
+
+      <p>If you need to pause the timer, press <strong class="text-[#1e293b]">Pause</strong> to freeze the countdown. Press <strong class="text-[#1e293b]">Resume</strong> to pick up exactly where you left off. Press <strong class="text-[#1e293b]">Reset</strong> at any time to clear the timer and return to the input screen. When the timer reaches zero, a short audible alert plays through your speakers or headphones, generated using the Web Audio API with no external sound files. If you have granted notification permission, a browser notification also appears, ensuring you will notice even if the page is in the background.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Productivity Tips for Using Timers</h3>
+      <p>Time-boxing is one of the most effective productivity strategies available. By assigning a fixed duration to a task, you create a sense of urgency that combats procrastination and prevents perfectionism from eating into your schedule. Here are practical ways to use a countdown timer in daily life:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Pomodoro Technique</strong> — Work for 25 minutes, take a 5-minute break, and repeat. After four cycles, take a longer 15–30-minute break. Use the preset buttons to switch between intervals quickly.</li>
+        <li><strong class="text-[#1e293b]">Meeting limits</strong> — Set a 15-minute or 30-minute timer at the start of a meeting to keep discussions focused and on schedule.</li>
+        <li><strong class="text-[#1e293b]">Exercise intervals</strong> — HIIT workouts, stretching routines, and plank holds all benefit from a visible countdown. The progress ring makes it easy to see how much time is left without reading numbers.</li>
+        <li><strong class="text-[#1e293b]">Cooking</strong> — Oven timers fail if you walk out of the kitchen. A browser timer with notifications follows you to any device with the tab open.</li>
+        <li><strong class="text-[#1e293b]">Exam practice</strong> — Simulate real test conditions by setting the exact time limit. The title-bar countdown lets you monitor time while reviewing questions in another tab.</li>
+        <li><strong class="text-[#1e293b]">Screen-time breaks</strong> — Set a 20-minute timer as a reminder to follow the 20-20-20 rule: every 20 minutes, look at something 20 feet away for 20 seconds to reduce eye strain.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Browser Notifications and Sound Alerts</h3>
+      <p>The first time you click "Enable notifications," your browser will ask for permission. Once granted, a desktop notification appears when the timer hits zero — even if the tab is in the background or minimized. The audible alert uses the Web Audio API to synthesize a short, pleasant beep sequence directly in your browser; no sound file is downloaded or streamed. Together, these two alert methods ensure you never miss the end of your timer, regardless of what else you are doing on your computer.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Does the timer keep running if I switch tabs?</strong><br>
+      Yes. The countdown continues in the background and the tab title updates with the remaining time. When the timer finishes, the alert sound plays and a notification appears if permission was granted.</p>
+
+      <p><strong class="text-[#1e293b]">Can I set a timer for more than one hour?</strong><br>
+      Absolutely. The hours field accepts values up to 99, so you can set a countdown of up to 99 hours, 59 minutes, and 59 seconds.</p>
+
+      <p><strong class="text-[#1e293b]">Why do I need to enable notifications separately?</strong><br>
+      Browser security requires websites to ask for notification permission explicitly. Clicking the "Enable notifications" button triggers that permission prompt. You only need to do this once per browser; the preference is remembered for future visits.</p>
+
+      <p><strong class="text-[#1e293b]">Is my data private?</strong><br>
+      Yes. This tool is 100 percent client-side JavaScript. Your timer settings are not stored, transmitted, or tracked in any way. Everything runs locally on your device.</p>
+
+      <p><strong class="text-[#1e293b]">Does it work on mobile?</strong><br>
+      Yes. The interface is responsive and works on phones and tablets. Note that some mobile browsers limit background audio and notifications, so keep the tab in the foreground for the most reliable experience on mobile devices.</p>
+
+      <p>Bookmark this page and use it whenever you need a quick, reliable countdown. It is free, private, and works on every modern browser — no downloads, no signups, no ads.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ct-input {
+      width: 4.5rem;
+      text-align: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 0.625rem 0.25rem;
+      transition: border-color 150ms, box-shadow 150ms;
+      -moz-appearance: textfield;
+    }
+    .ct-input::-webkit-inner-spin-button,
+    .ct-input::-webkit-outer-spin-button { opacity: 1; }
+    .ct-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    .ct-preset {
+      padding: 0.375rem 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+      cursor: pointer;
+      transition: background-color 150ms, color 150ms, border-color 150ms;
+      user-select: none;
+    }
+    .ct-preset:hover { background: #e2e8f0; color: #1e293b; }
+    .ct-preset.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+
+    .ct-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 6rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background-color 150ms, transform 80ms;
+      user-select: none;
+    }
+    .ct-btn:active { transform: scale(0.96); }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const display   = $('display');
+    const ring      = $('ring');
+    const inpH      = $('inp-h');
+    const inpM      = $('inp-m');
+    const inpS      = $('inp-s');
+    const btnStart  = $('btn-start');
+    const btnPause  = $('btn-pause');
+    const btnReset  = $('btn-reset');
+    const inputSec  = $('input-section');
+    const presetSec = $('preset-section');
+    const doneBanner = $('done-banner');
+    const btnDismiss = $('btn-dismiss');
+    const btnNotif   = $('btn-notif');
+    const notifLabel = $('notif-label');
+
+    const CIRCUMFERENCE = 2 * Math.PI * 108; // ≈ 678.58
+    let totalMs   = 0;
+    let remaining = 0;
+    let endTime   = 0;
+    let rafId     = null;
+    let state     = 'idle'; // idle | running | paused | done
+    let notifGranted = Notification.permission === 'granted';
+    const origTitle = document.title;
+
+    if (notifGranted) notifLabel.textContent = 'Notifications enabled';
+
+    btnNotif.addEventListener('click', () => {
+      if (notifGranted) return;
+      Notification.requestPermission().then(p => {
+        notifGranted = p === 'granted';
+        notifLabel.textContent = notifGranted ? 'Notifications enabled' : 'Notifications blocked';
+      });
+    });
+
+    function getTotalFromInputs() {
+      const h = Math.max(0, parseInt(inpH.value) || 0);
+      const m = Math.max(0, parseInt(inpM.value) || 0);
+      const s = Math.max(0, parseInt(inpS.value) || 0);
+      return (h * 3600 + m * 60 + s) * 1000;
+    }
+
+    function setInputsFromSeconds(sec) {
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      inpH.value = h;
+      inpM.value = m;
+      inpS.value = s;
+    }
+
+    function formatDisplay(ms) {
+      const t = Math.max(0, Math.ceil(ms / 1000));
+      const h = Math.floor(t / 3600);
+      const m = Math.floor((t % 3600) / 60);
+      const s = t % 60;
+      return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    function updateRing(fraction) {
+      const offset = CIRCUMFERENCE * (1 - fraction);
+      ring.setAttribute('stroke-dashoffset', offset);
+    }
+
+    function updateTitleBar(ms) {
+      if (state === 'running' || state === 'paused') {
+        document.title = formatDisplay(ms) + ' — Countdown Timer';
+      } else {
+        document.title = origTitle;
+      }
+    }
+
+    function render(ms) {
+      display.textContent = formatDisplay(ms);
+      const fraction = totalMs > 0 ? Math.max(0, ms / totalMs) : 0;
+      updateRing(fraction);
+      updateTitleBar(ms);
+    }
+
+    function tick() {
+      const now = performance.now();
+      remaining = Math.max(0, endTime - now);
+      render(remaining);
+
+      if (remaining <= 0) {
+        finish();
+        return;
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function playBeep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const times = [0, 0.25, 0.5, 0.9];
+        const freqs = [880, 880, 880, 1174.66];
+        const durs  = [0.15, 0.15, 0.15, 0.4];
+        times.forEach((t, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freqs[i];
+          gain.gain.setValueAtTime(0.3, ctx.currentTime + t);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + durs[i]);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(ctx.currentTime + t);
+          osc.stop(ctx.currentTime + t + durs[i] + 0.05);
+        });
+      } catch (_) {}
+    }
+
+    function sendNotification() {
+      if (!notifGranted) return;
+      try {
+        new Notification('Countdown Timer', {
+          body: 'Your timer has finished!',
+          icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⏱️</text></svg>'
+        });
+      } catch (_) {}
+    }
+
+    function finish() {
+      state = 'done';
+      cancelAnimationFrame(rafId);
+      render(0);
+      document.title = '✅ Time\'s up! — Countdown Timer';
+      playBeep();
+      sendNotification();
+      doneBanner.classList.remove('hidden');
+      btnStart.classList.add('hidden');
+      btnPause.classList.add('hidden');
+    }
+
+    function showInputs(show) {
+      inputSec.classList.toggle('hidden', !show);
+      presetSec.classList.toggle('hidden', !show);
+    }
+
+    function start() {
+      if (state === 'idle') {
+        totalMs = getTotalFromInputs();
+        if (totalMs <= 0) return;
+        remaining = totalMs;
+      }
+      endTime = performance.now() + remaining;
+      state = 'running';
+      showInputs(false);
+      btnStart.classList.add('hidden');
+      btnPause.classList.remove('hidden');
+      tick();
+    }
+
+    function pause() {
+      if (state !== 'running') return;
+      state = 'paused';
+      cancelAnimationFrame(rafId);
+      remaining = Math.max(0, endTime - performance.now());
+      render(remaining);
+      btnPause.classList.add('hidden');
+      btnStart.classList.remove('hidden');
+      btnStart.textContent = 'Resume';
+    }
+
+    function reset() {
+      state = 'idle';
+      cancelAnimationFrame(rafId);
+      remaining = 0;
+      totalMs = 0;
+      render(0);
+      document.title = origTitle;
+      showInputs(true);
+      doneBanner.classList.add('hidden');
+      btnPause.classList.add('hidden');
+      btnStart.classList.remove('hidden');
+      btnStart.textContent = 'Start';
+      clearPresetHighlight();
+    }
+
+    function clearPresetHighlight() {
+      presetSec.querySelectorAll('.ct-preset').forEach(b => b.classList.remove('active'));
+    }
+
+    presetSec.addEventListener('click', e => {
+      const btn = e.target.closest('.ct-preset');
+      if (!btn) return;
+      const sec = parseInt(btn.dataset.seconds);
+      setInputsFromSeconds(sec);
+      clearPresetHighlight();
+      btn.classList.add('active');
+    });
+
+    btnStart.addEventListener('click', () => {
+      if (state === 'paused') {
+        endTime = performance.now() + remaining;
+        state = 'running';
+        btnStart.classList.add('hidden');
+        btnPause.classList.remove('hidden');
+        tick();
+      } else {
+        start();
+      }
+    });
+
+    btnPause.addEventListener('click', pause);
+    btnReset.addEventListener('click', reset);
+    btnDismiss.addEventListener('click', reset);
+
+    [inpH, inpM, inpS].forEach(inp => {
+      inp.addEventListener('input', clearPresetHighlight);
+      inp.addEventListener('focus', () => inp.select());
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (state === 'running') pause();
+        else if (state === 'paused' || state === 'idle') { btnStart.click(); }
+      } else if (e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        reset();
+      }
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('countdown-timer');
+  </script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Ideal Weight Calculator — Compare 5 Formulas Instantly | ClickSolveTools</title>
+  <meta name="description" content="Calculate your ideal body weight using Robinson, Miller, Devine, Hamwi, and Healthy BMI Range formulas. Compare results side by side with frame size adjustments — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/ideal-weight-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Ideal Weight Calculator — Compare 5 Formulas | ClickSolveTools">
+  <meta property="og:description" content="Calculate your ideal body weight using Robinson, Miller, Devine, Hamwi, and Healthy BMI Range formulas. Compare results side by side with frame size adjustments.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/ideal-weight-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Ideal Weight Calculator — Compare 5 Formulas | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your ideal body weight using Robinson, Miller, Devine, Hamwi, and Healthy BMI Range formulas. Compare results side by side.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ideal Weight Calculator","url":"https://clicksolvetools.com/tools/ideal-weight-calculator","description":"Calculate your ideal body weight using Robinson, Miller, Devine, Hamwi, and Healthy BMI Range formulas. Compare results side by side with frame size adjustments.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is ideal body weight?","acceptedAnswer":{"@type":"Answer","text":"Ideal body weight is a statistical estimate of the weight range associated with the lowest health risks for a given height, gender, and frame size. It is not a single number but a range derived from population-level research."}},{"@type":"Question","name":"Which ideal weight formula is most accurate?","acceptedAnswer":{"@type":"Answer","text":"No single formula is universally most accurate. The Devine formula is widely used in clinical pharmacology, while Robinson and Miller are considered more modern refinements. Comparing all formulas gives you a realistic range."}},{"@type":"Question","name":"Does frame size affect ideal weight?","acceptedAnswer":{"@type":"Answer","text":"Yes. People with larger bone structures naturally weigh more at the same height. Small frames typically subtract about 10% from the baseline estimate, while large frames add about 10%."}},{"@type":"Question","name":"Are these formulas valid for all heights?","acceptedAnswer":{"@type":"Answer","text":"These formulas were developed for adults 5 feet (152 cm) and taller. Results for shorter individuals may be less reliable. They also do not apply to children or adolescents."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Input Card -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+
+        <!-- Gender Toggle -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Gender</label>
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-male" class="gender-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Male</button>
+            <button id="btn-female" class="gender-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Female</button>
+          </div>
+        </div>
+
+        <!-- Unit Toggle -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Unit System</label>
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-imperial" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Imperial</button>
+            <button id="btn-metric" class="unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Metric</button>
+          </div>
+        </div>
+
+        <!-- Imperial Height -->
+        <div id="fields-imperial" class="mb-5">
+          <label class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+          <div class="flex gap-3">
+            <div class="flex-1 relative">
+              <input id="imp-ft" type="number" min="1" max="9" placeholder="5" class="iw-input w-full pr-9">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">ft</span>
+            </div>
+            <div class="flex-1 relative">
+              <input id="imp-in" type="number" min="0" max="11" step="1" placeholder="7" class="iw-input w-full pr-9">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">in</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Height -->
+        <div id="fields-metric" class="mb-5 hidden">
+          <label class="block text-sm font-medium text-[#475569] mb-1">Height</label>
+          <div class="relative max-w-[200px]">
+            <input id="met-cm" type="number" min="100" max="250" step="0.1" placeholder="170" class="iw-input w-full pr-10">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">cm</span>
+          </div>
+        </div>
+
+        <!-- Frame Size -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Frame Size</label>
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button data-frame="small" class="frame-btn px-4 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Small</button>
+            <button data-frame="medium" class="frame-btn px-4 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Medium</button>
+            <button data-frame="large" class="frame-btn px-4 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Large</button>
+          </div>
+        </div>
+
+        <!-- Calculate -->
+        <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-sm transition-colors shadow-sm shadow-[#2563eb]/20">
+          Calculate Ideal Weight
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div id="error-msg" class="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700 hidden"></div>
+
+      <!-- Results Panel -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+
+        <!-- Overall Range Highlight -->
+        <div class="text-center mb-6">
+          <div class="text-sm text-[#475569] mb-1">Your Ideal Weight Range</div>
+          <div id="range-value" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#2563eb]">—</div>
+          <p id="range-label" class="text-sm text-[#64748b] mt-1"></p>
+        </div>
+
+        <!-- Output Unit Toggle -->
+        <div class="flex justify-center mb-5">
+          <div class="inline-flex rounded-lg border border-[#e2e8f0] p-1 bg-[#f8fafc]">
+            <button id="btn-out-lbs" class="out-btn px-4 py-1.5 rounded-md text-xs font-semibold transition-all bg-[#2563eb] text-white shadow-sm">lbs</button>
+            <button id="btn-out-kg" class="out-btn px-4 py-1.5 rounded-md text-xs font-semibold transition-all text-[#475569] hover:text-[#1e293b]">kg</button>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[#e2e8f0]">
+                <th class="text-left py-3 pr-4 font-semibold text-[#475569]">Formula</th>
+                <th class="text-right py-3 pl-4 font-semibold text-[#475569]">Ideal Weight</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Visual Bar Chart -->
+        <div id="bar-chart" class="mt-6 space-y-2.5"></div>
+      </div>
+
+      <!-- Health Disclaimer -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <div class="flex gap-3">
+          <div class="text-lg leading-none mt-0.5">⚕️</div>
+          <p class="text-xs text-[#475569] leading-relaxed">
+            <strong class="text-[#1e293b]">Health Disclaimer:</strong> These are statistical estimates and don't account for individual factors like muscle mass, bone density, age, or ethnicity. They are not a substitute for professional medical advice. Consult a healthcare provider for personalized guidance.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is Ideal Body Weight and How Is It Calculated?</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Ideal body weight (IBW) refers to the weight range that medical research has associated with the lowest health risks for a person of a given height and gender. Unlike a single magic number, ideal weight is best understood as a range — a zone where your body is statistically most likely to function well and face the fewest weight-related health complications. The concept has been used in clinical medicine since the 1960s, originally developed to help determine drug dosages, assess nutritional status, and set goals for weight management programs.</p>
+
+      <p>Several researchers have proposed formulas to estimate ideal body weight, each based on different data sets and assumptions. No single formula is universally accepted as the most accurate, which is why this calculator presents results from five different methods side by side. Looking at the full range across formulas gives you a much more realistic picture than relying on any one equation alone.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Five Formulas Explained</h3>
+
+      <p><strong class="text-[#1e293b]">Devine Formula (1974)</strong> — Originally developed by Dr. B.J. Devine for calculating medication dosages, this formula became one of the most widely referenced in clinical practice. It estimates ideal weight based on a baseline at 5 feet of height plus an increment for each additional inch. Despite its widespread use, it is known to underestimate ideal weight for shorter women.</p>
+
+      <p><strong class="text-[#1e293b]">Robinson Formula (1983)</strong> — Created by Dr. J.D. Robinson and colleagues, this formula was designed as a refinement of the Devine equation. It uses different increments per inch for men and women and is considered a more balanced estimate across a range of heights.</p>
+
+      <p><strong class="text-[#1e293b]">Miller Formula (1983)</strong> — Dr. D.R. Miller proposed this formula in the same year as Robinson's, using slightly different coefficients. It tends to produce higher ideal weight estimates, particularly for taller individuals, and is sometimes seen as more lenient than Devine or Robinson.</p>
+
+      <p><strong class="text-[#1e293b]">Hamwi Formula (1964)</strong> — One of the earliest ideal weight formulas, proposed by Dr. G.J. Hamwi. It uses larger per-inch increments and tends to produce a wider spread between short and tall individuals. It remains popular in dietetics and clinical nutrition practice.</p>
+
+      <p><strong class="text-[#1e293b]">Healthy BMI Range (18.5–24.9)</strong> — Rather than a named formula, this method calculates the weight range corresponding to a BMI between 18.5 and 24.9, which the World Health Organization considers normal. It provides the broadest range and serves as a useful sanity check against the other formulas.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Frame Size Affects Your Results</h3>
+      <p>Body frame size reflects skeletal structure — people with wider shoulders and larger wrists naturally weigh more at the same height. The standard adjustment is roughly 10 percent: a small frame subtracts 10% from the base estimate, while a large frame adds 10%. If you're unsure of your frame size, wrapping your thumb and middle finger around your wrist is a common quick test. If they overlap, you likely have a small frame; if they just touch, medium; and if they don't meet, large.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Limitations to Keep in Mind</h3>
+      <p>All ideal weight formulas share important limitations. They were derived from population averages, primarily from data collected on Caucasian adults, and may not apply equally across all ethnic backgrounds. They do not distinguish between lean mass and fat mass — a muscular person may exceed their "ideal" weight while being in excellent health. Athletes, pregnant women, older adults, and anyone with a chronic health condition should interpret these numbers with extra caution and consult their healthcare provider.</p>
+      <p>These formulas also require a minimum height of 5 feet (152 cm). For individuals shorter than this threshold, the linear extrapolations used by these equations become unreliable.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is ideal body weight?</strong><br>
+      Ideal body weight is a statistical estimate of the weight range associated with the lowest health risks for a given height, gender, and frame size. It is not a single definitive number but a range derived from decades of population-level research.</p>
+
+      <p><strong class="text-[#1e293b]">Which ideal weight formula is most accurate?</strong><br>
+      No single formula is universally most accurate. The Devine formula is the most commonly cited in clinical settings, but Robinson and Miller are considered more modern refinements. Comparing results from all formulas — as this tool does — gives the most useful picture.</p>
+
+      <p><strong class="text-[#1e293b]">Does frame size really matter?</strong><br>
+      Yes. Skeletal structure varies significantly between individuals. Someone with a large frame will naturally weigh more at a given height without any excess body fat. The 10% adjustment is a simplified but widely used correction.</p>
+
+      <p><strong class="text-[#1e293b]">Are these formulas valid for all heights?</strong><br>
+      These formulas were developed for adults 5 feet (152 cm) and taller. Results for shorter individuals may be unreliable. They also do not apply to children or adolescents, whose ideal weight depends on age-specific growth charts.</p>
+
+      <p><strong class="text-[#1e293b]">Should I use ideal weight as a goal?</strong><br>
+      Ideal weight formulas can be a helpful reference point, but they should not be your sole target. Overall health depends on many factors including body composition, fitness level, blood markers, and mental wellbeing. Use these estimates as one data point among many.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides statistical estimates based on published medical formulas. It is not a medical diagnosis and should not replace professional healthcare advice. Individual factors such as muscle mass, bone density, age, ethnicity, and medical history all influence what a healthy weight looks like for you.
+      </div>
+
+      <p>This ideal weight calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to check your ideal weight anytime — quick, private, and instant.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .iw-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .iw-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .iw-input::placeholder { color: #94a3b8; }
+    .iw-input::-webkit-inner-spin-button,
+    .iw-input::-webkit-outer-spin-button { opacity: 1; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    let gender = 'male';
+    let inputUnit = 'imperial';
+    let outputUnit = 'lbs';
+    let frame = 'medium';
+    let lastResults = null;
+
+    const btnMale = $('btn-male');
+    const btnFemale = $('btn-female');
+    const btnImp = $('btn-imperial');
+    const btnMet = $('btn-metric');
+    const btnOutLbs = $('btn-out-lbs');
+    const btnOutKg = $('btn-out-kg');
+    const fieldsImp = $('fields-imperial');
+    const fieldsMet = $('fields-metric');
+    const impFt = $('imp-ft');
+    const impIn = $('imp-in');
+    const metCm = $('met-cm');
+    const resultsPanel = $('results-panel');
+    const errorMsg = $('error-msg');
+    const rangeValue = $('range-value');
+    const rangeLabel = $('range-label');
+    const resultsBody = $('results-body');
+    const barChart = $('bar-chart');
+
+    function toggleBtnPair(activeBtn, inactiveBtn) {
+      activeBtn.className = activeBtn.className.replace(
+        /text-\[#475569\] hover:text-\[#1e293b\]/,
+        ''
+      );
+      activeBtn.className = 'px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm ' + activeBtn.className.replace(/bg-\[#2563eb\] text-white shadow-sm/g, '').trim();
+
+      activeBtn.className = activeBtn.classList.contains('gender-btn')
+        ? 'gender-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm'
+        : activeBtn.classList.contains('unit-btn')
+          ? 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm'
+          : 'out-btn px-4 py-1.5 rounded-md text-xs font-semibold transition-all bg-[#2563eb] text-white shadow-sm';
+
+      inactiveBtn.className = inactiveBtn.classList.contains('gender-btn')
+        ? 'gender-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]'
+        : inactiveBtn.classList.contains('unit-btn')
+          ? 'unit-btn px-5 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]'
+          : 'out-btn px-4 py-1.5 rounded-md text-xs font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+    }
+
+    function setGender(g) {
+      gender = g;
+      toggleBtnPair(
+        g === 'male' ? btnMale : btnFemale,
+        g === 'male' ? btnFemale : btnMale
+      );
+    }
+
+    function setInputUnit(u) {
+      inputUnit = u;
+      fieldsImp.classList.toggle('hidden', u !== 'imperial');
+      fieldsMet.classList.toggle('hidden', u !== 'metric');
+      toggleBtnPair(
+        u === 'imperial' ? btnImp : btnMet,
+        u === 'imperial' ? btnMet : btnImp
+      );
+    }
+
+    function setOutputUnit(u) {
+      outputUnit = u;
+      toggleBtnPair(
+        u === 'lbs' ? btnOutLbs : btnOutKg,
+        u === 'lbs' ? btnOutKg : btnOutLbs
+      );
+      if (lastResults) renderResults(lastResults);
+    }
+
+    function setFrame(f) {
+      frame = f;
+      document.querySelectorAll('.frame-btn').forEach(btn => {
+        const isActive = btn.dataset.frame === f;
+        btn.className = isActive
+          ? 'frame-btn px-4 py-2 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm'
+          : 'frame-btn px-4 py-2 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+      });
+    }
+
+    btnMale.addEventListener('click', () => setGender('male'));
+    btnFemale.addEventListener('click', () => setGender('female'));
+    btnImp.addEventListener('click', () => setInputUnit('imperial'));
+    btnMet.addEventListener('click', () => setInputUnit('metric'));
+    btnOutLbs.addEventListener('click', () => setOutputUnit('lbs'));
+    btnOutKg.addEventListener('click', () => setOutputUnit('kg'));
+    document.querySelectorAll('.frame-btn').forEach(btn => {
+      btn.addEventListener('click', () => setFrame(btn.dataset.frame));
+    });
+
+    function getHeightInches() {
+      if (inputUnit === 'imperial') {
+        const ft = parseFloat(impFt.value) || 0;
+        const inches = parseFloat(impIn.value) || 0;
+        return ft * 12 + inches;
+      }
+      const cm = parseFloat(metCm.value) || 0;
+      return cm / 2.54;
+    }
+
+    function frameMultiplier() {
+      if (frame === 'small') return 0.90;
+      if (frame === 'large') return 1.10;
+      return 1.0;
+    }
+
+    function computeFormulas(heightIn, sex) {
+      const over60 = heightIn - 60;
+      const heightM = heightIn * 0.0254;
+      const mult = frameMultiplier();
+
+      const formulas = [];
+
+      if (sex === 'male') {
+        formulas.push({ name: 'Robinson (1983)', kg: (52 + 1.9 * over60) * mult });
+        formulas.push({ name: 'Miller (1983)', kg: (56.2 + 1.41 * over60) * mult });
+        formulas.push({ name: 'Devine (1974)', kg: (50 + 2.3 * over60) * mult });
+        formulas.push({ name: 'Hamwi (1964)', kg: (48 + 2.7 * over60) * mult });
+      } else {
+        formulas.push({ name: 'Robinson (1983)', kg: (49 + 1.7 * over60) * mult });
+        formulas.push({ name: 'Miller (1983)', kg: (53.1 + 1.36 * over60) * mult });
+        formulas.push({ name: 'Devine (1974)', kg: (45.5 + 2.3 * over60) * mult });
+        formulas.push({ name: 'Hamwi (1964)', kg: (45.5 + 2.2 * over60) * mult });
+      }
+
+      const bmiLow = 18.5 * heightM * heightM * mult;
+      const bmiHigh = 24.9 * heightM * heightM * mult;
+      formulas.push({ name: 'Healthy BMI Range', kg: (bmiLow + bmiHigh) / 2, lowKg: bmiLow, highKg: bmiHigh });
+
+      return formulas;
+    }
+
+    function formatWeight(kg) {
+      if (outputUnit === 'lbs') return (kg * 2.20462).toFixed(1) + ' lbs';
+      return kg.toFixed(1) + ' kg';
+    }
+
+    function formatWeightNum(kg) {
+      if (outputUnit === 'lbs') return (kg * 2.20462).toFixed(1);
+      return kg.toFixed(1);
+    }
+
+    function unitLabel() {
+      return outputUnit === 'lbs' ? 'lbs' : 'kg';
+    }
+
+    function renderResults(results) {
+      const allWeights = [];
+      results.forEach(r => {
+        if (r.lowKg !== undefined) {
+          allWeights.push(r.lowKg, r.highKg);
+        } else {
+          allWeights.push(r.kg);
+        }
+      });
+
+      const minKg = Math.min(...allWeights);
+      const maxKg = Math.max(...allWeights);
+
+      rangeValue.textContent = `${formatWeightNum(minKg)} – ${formatWeightNum(maxKg)} ${unitLabel()}`;
+      rangeLabel.textContent = `Across all formulas (${gender}, ${frame} frame)`;
+
+      let rows = '';
+      results.forEach(r => {
+        const isRange = r.lowKg !== undefined;
+        const display = isRange
+          ? `${formatWeightNum(r.lowKg)} – ${formatWeightNum(r.highKg)} ${unitLabel()}`
+          : formatWeight(r.kg);
+        rows += `<tr class="border-b border-[#f1f5f9]">
+          <td class="py-3 pr-4 text-[#1e293b] font-medium">${r.name}</td>
+          <td class="py-3 pl-4 text-right font-semibold text-[#2563eb]">${display}</td>
+        </tr>`;
+      });
+      resultsBody.innerHTML = rows;
+
+      const chartMin = minKg * 0.85;
+      const chartMax = maxKg * 1.15;
+      const chartSpan = chartMax - chartMin;
+      const colors = ['#2563eb', '#7c3aed', '#059669', '#d97706', '#64748b'];
+
+      let bars = '';
+      results.forEach((r, i) => {
+        const isRange = r.lowKg !== undefined;
+        const lo = isRange ? r.lowKg : r.kg;
+        const hi = isRange ? r.highKg : r.kg;
+        const leftPct = ((lo - chartMin) / chartSpan) * 100;
+        const widthPct = Math.max(((hi - lo) / chartSpan) * 100, 1.5);
+        const display = isRange
+          ? `${formatWeightNum(lo)} – ${formatWeightNum(hi)}`
+          : formatWeightNum(r.kg);
+
+        bars += `<div>
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-[#475569] font-medium truncate mr-2">${r.name}</span>
+            <span class="text-[#1e293b] font-semibold whitespace-nowrap">${display} ${unitLabel()}</span>
+          </div>
+          <div class="h-5 bg-[#f1f5f9] rounded-full relative overflow-hidden">
+            <div class="absolute h-full rounded-full transition-all duration-500" style="left:${leftPct}%;width:${widthPct}%;background:${colors[i]}"></div>
+          </div>
+        </div>`;
+      });
+      barChart.innerHTML = bars;
+    }
+
+    function calculate() {
+      errorMsg.classList.add('hidden');
+      const heightIn = getHeightInches();
+
+      if (heightIn < 48 || heightIn > 96) {
+        resultsPanel.classList.add('hidden');
+        errorMsg.textContent = heightIn === 0
+          ? 'Please enter your height to calculate.'
+          : 'Please enter a height between 4\'0″ (122 cm) and 8\'0″ (244 cm).';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      if (heightIn < 60) {
+        errorMsg.textContent = 'Note: These formulas are designed for heights of 5\'0″ (152 cm) and above. Results for shorter heights are extrapolated and may be less accurate.';
+        errorMsg.classList.remove('hidden');
+      }
+
+      const results = computeFormulas(heightIn, gender);
+      lastResults = results;
+      renderResults(results);
+      resultsPanel.classList.remove('hidden');
+    }
+
+    $('calc-btn').addEventListener('click', calculate);
+
+    [impFt, impIn, metCm].forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('ideal-weight-calculator');
+  </script>
+</body>
+</html>

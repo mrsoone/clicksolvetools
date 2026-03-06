@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Word Frequency Counter Online — Keyword Density &amp; Text Analysis | ClickSolveTools</title>
+    <meta name="description" content="Analyze word frequency, keyword density, and text patterns in real time. Sortable table, visual bar chart, stop word filtering, CSV export — all free and private.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/word-frequency-counter">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" type="image/svg+xml">
+
+    <meta property="og:title" content="Free Word Frequency Counter Online — Keyword Density & Text Analysis | ClickSolveTools">
+    <meta property="og:description" content="Analyze word frequency, keyword density, and text patterns in real time. Sortable table, visual bar chart, stop word filtering, CSV export — all free and private.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/word-frequency-counter">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Word Frequency Counter Online — Keyword Density & Text Analysis | ClickSolveTools">
+    <meta name="twitter:description" content="Analyze word frequency, keyword density, and text patterns in real time. Sortable table, visual bar chart, stop word filtering, CSV export.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Word Frequency Counter",
+      "url": "https://clicksolvetools.com/tools/word-frequency-counter",
+      "description": "Analyze word frequency, keyword density, and text patterns in real time. Sortable table, visual bar chart, stop word filtering, and CSV export.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+      .sort-btn { cursor: pointer; user-select: none; }
+      .sort-btn:hover { color: #2563eb; }
+      .sort-btn .arrow { opacity: 0.3; }
+      .sort-btn.active .arrow { opacity: 1; color: #2563eb; }
+      .bar-fill { transition: width 300ms ease; }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">Word Frequency Counter</h1>
+                <p class="text-[#475569] text-lg">Analyze word frequency, keyword density, and text patterns — with charts and CSV export</p>
+            </div>
+
+            <!-- Input -->
+            <div class="mb-6">
+                <label for="text-input" class="text-sm font-medium text-[#475569] mb-2 block">Your Text</label>
+                <textarea
+                    id="text-input"
+                    class="w-full bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-base leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors placeholder-[#94a3b8]"
+                    style="min-height:220px"
+                    placeholder="Type or paste your text here to see word frequencies in real time..."
+                    spellcheck="false"
+                ></textarea>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap items-center gap-4 mb-6">
+                <label class="flex items-center gap-2 text-sm text-[#475569] cursor-pointer select-none">
+                    <input type="checkbox" id="stop-words-toggle" checked class="w-4 h-4 rounded border-[#cbd5e1] text-[#2563eb] focus:ring-[#2563eb]">
+                    Exclude stop words
+                </label>
+                <label class="flex items-center gap-2 text-sm text-[#475569] cursor-pointer select-none">
+                    <input type="checkbox" id="case-toggle" checked class="w-4 h-4 rounded border-[#cbd5e1] text-[#2563eb] focus:ring-[#2563eb]">
+                    Case insensitive
+                </label>
+                <div class="flex items-center gap-2 text-sm text-[#475569]">
+                    <label for="min-count">Min count:</label>
+                    <input type="range" id="min-count-slider" min="1" max="10" value="1" class="w-24 accent-[#2563eb]">
+                    <input type="number" id="min-count" min="1" max="999" value="1" class="w-16 bg-white border border-[#e2e8f0] rounded px-2 py-1 text-center text-sm focus:outline-none focus:border-[#2563eb]">
+                </div>
+                <button id="export-csv" class="ml-auto px-4 py-2 bg-[#2563eb] text-white text-sm font-medium rounded-lg hover:bg-[#1d4ed8] transition-colors disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                    Export CSV
+                </button>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-total-words" class="text-2xl font-bold text-[#2563eb]">0</div>
+                    <div class="text-xs text-[#475569] mt-1">Total Words</div>
+                </div>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-unique-words" class="text-2xl font-bold text-[#2563eb]">0</div>
+                    <div class="text-xs text-[#475569] mt-1">Unique Words</div>
+                </div>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-shown" class="text-2xl font-bold text-[#2563eb]">0</div>
+                    <div class="text-xs text-[#475569] mt-1">Words Shown</div>
+                </div>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 text-center">
+                    <div id="stat-avg-length" class="text-2xl font-bold text-[#2563eb]">0</div>
+                    <div class="text-xs text-[#475569] mt-1">Avg. Word Length</div>
+                </div>
+            </div>
+
+            <!-- Bar Chart -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-[#1e293b] mb-3">Top 20 Words</h2>
+                <div id="bar-chart" class="bg-white border border-[#e2e8f0] rounded-lg p-4 overflow-hidden">
+                    <p class="text-[#64748b] italic text-sm">Start typing to see a frequency chart&hellip;</p>
+                </div>
+            </div>
+
+            <!-- Sortable Table -->
+            <div class="mb-12">
+                <h2 class="text-lg font-semibold text-[#1e293b] mb-3">Full Frequency Table</h2>
+                <div class="bg-white border border-[#e2e8f0] rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-[#e2e8f0] text-xs text-[#94a3b8] uppercase tracking-wider">
+                                    <th class="px-4 py-3 text-left font-medium sort-btn" data-sort="word">#<span class="ml-1">Word</span> <span class="arrow">▲</span></th>
+                                    <th class="px-4 py-3 text-right font-medium sort-btn active" data-sort="count">Count <span class="arrow">▼</span></th>
+                                    <th class="px-4 py-3 text-right font-medium sort-btn" data-sort="density">Density % <span class="arrow">▲</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="freq-table-body">
+                                <tr><td colspan="3" class="text-[#64748b] italic p-4 text-sm">Start typing to see word frequencies&hellip;</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Use the Word Frequency Counter for Text Analysis and SEO</h2>
+
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>Word frequency analysis is a core technique in text analytics, computational linguistics, and search engine optimization. By examining how often each word appears in a document, you can quickly identify dominant themes, spot overused terms, and fine-tune content for both readability and keyword targeting. This free word frequency counter processes your text entirely in the browser — nothing is uploaded, stored, or sent to any server — making it safe for confidential documents, unpublished articles, and sensitive data.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding Keyword Density for SEO</h3>
+                    <p>Keyword density is the percentage of times a target word appears relative to the total word count. Search engines use word frequency as one of hundreds of ranking signals — a page about "mortgage calculators" should naturally contain that phrase multiple times, but cramming it into every sentence triggers keyword-stuffing penalties. Most SEO professionals recommend a primary keyword density between <strong class="text-[#1e293b]">1% and 3%</strong>, with secondary keywords appearing at lower rates. This tool calculates density automatically for every word so you can verify your content hits the right balance before publishing.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What the Bar Chart and Table Show</h3>
+                    <p>The horizontal bar chart visualizes the top 20 most frequent words in your text. Longer bars represent higher frequency, giving you an immediate visual snapshot of your content's focus. Below the chart, the full frequency table lists every word alongside its count and density percentage. Click any column header to sort alphabetically by word, by count (highest first), or by density. The minimum count filter lets you hide words that only appear once or twice, so you can focus on the terms that truly define your text.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Stop Words and Case Sensitivity</h3>
+                    <p>Common English stop words — articles like "the" and "a," prepositions like "in" and "on," and auxiliary verbs like "is" and "was" — appear frequently in any text but carry little meaning for analysis. The <em>Exclude stop words</em> toggle removes over 100 of these common words so your results highlight content-carrying terms. The <em>Case insensitive</em> toggle (enabled by default) treats "Apple" and "apple" as the same word; turn it off when case distinctions matter, such as analyzing brand names versus common nouns.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Use Cases</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#1e293b]">SEO content auditing</strong> — Verify that target keywords appear at the recommended density before publishing blog posts, product pages, or landing pages.</li>
+                        <li><strong class="text-[#1e293b]">Academic writing</strong> — Spot unintentional repetition in essays, research papers, and dissertations. If one word dominates your text, it may signal a need for synonyms or restructuring.</li>
+                        <li><strong class="text-[#1e293b]">Competitive analysis</strong> — Paste a competitor's article to see which keywords they target and at what density, then adjust your own content strategy accordingly.</li>
+                        <li><strong class="text-[#1e293b]">Speech preparation</strong> — Analyze draft speeches to ensure key messages are reinforced without sounding repetitive.</li>
+                        <li><strong class="text-[#1e293b]">Translation and localization</strong> — Identify the most frequent domain-specific terms in a document to build a glossary before translating.</li>
+                        <li><strong class="text-[#1e293b]">Data cleaning</strong> — Export the frequency table as CSV and import it into spreadsheets or Python scripts for further analysis.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#1e293b]">What is word frequency analysis?</strong><br>
+                    Word frequency analysis counts how many times each unique word appears in a body of text. It is used in natural language processing, search engine optimization, content writing, and literary analysis to understand the distribution and prominence of terms within a document.</p>
+
+                    <p><strong class="text-[#1e293b]">What keyword density should I aim for?</strong><br>
+                    There is no universal perfect number, but a primary keyword density of 1–3% is widely considered safe and effective for SEO. More important than hitting a specific number is writing naturally — search engines increasingly reward readability, topical depth, and user intent over raw keyword counts.</p>
+
+                    <p><strong class="text-[#1e293b]">Does this tool store my text?</strong><br>
+                    No. All analysis happens in your browser using client-side JavaScript. Your text is never transmitted to a server, and nothing is saved after you close the page.</p>
+
+                    <p><strong class="text-[#1e293b]">Can I export the results?</strong><br>
+                    Yes. Click the <em>Export CSV</em> button to download a spreadsheet-ready file containing every word, its count, and its density percentage. You can open CSV files in Excel, Google Sheets, LibreOffice Calc, or any data analysis tool.</p>
+
+                    <p>This word frequency counter is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. Use it whenever you need fast, private text analysis — whether you are optimizing a blog post, auditing keyword density, or exploring word patterns in any document.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('word-frequency-counter');
+    </script>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const stopWordsToggle = document.getElementById('stop-words-toggle');
+        const caseToggle = document.getElementById('case-toggle');
+        const minCountSlider = document.getElementById('min-count-slider');
+        const minCountInput = document.getElementById('min-count');
+        const exportBtn = document.getElementById('export-csv');
+        const barChart = document.getElementById('bar-chart');
+        const tableBody = document.getElementById('freq-table-body');
+
+        const statTotalWords = document.getElementById('stat-total-words');
+        const statUniqueWords = document.getElementById('stat-unique-words');
+        const statShown = document.getElementById('stat-shown');
+        const statAvgLength = document.getElementById('stat-avg-length');
+
+        const STOP_WORDS = new Set([
+            'a','an','the','and','or','but','if','in','on','at','to','for','of','with',
+            'by','from','as','is','was','are','were','be','been','being','have','has',
+            'had','do','does','did','will','would','shall','should','may','might','must',
+            'can','could','that','which','who','whom','this','these','those','it','its',
+            'i','me','my','we','our','you','your','he','him','his','she','her','they',
+            'them','their','what','when','where','how','not','no','nor','so','than',
+            'too','very','just','about','above','after','again','all','also','am','any',
+            'because','before','between','both','each','few','get','got','here','into',
+            'more','most','new','now','only','other','out','over','own','same','some',
+            'still','such','take','then','there','through','under','up','us','while',
+            'yet','during','without','within','along','among','around','behind','below',
+            'beside','beyond','despite','except','like','near','since','upon','until',
+            'onto','off','down','away','back','much','many','well','even','really',
+            'already','always','never','often','sometimes','every','another','enough'
+        ]);
+
+        let sortKey = 'count';
+        let sortAsc = false;
+        let currentData = [];
+
+        function syncMinCount(source) {
+            const val = parseInt(source === 'slider' ? minCountSlider.value : minCountInput.value) || 1;
+            const clamped = Math.max(1, Math.min(999, val));
+            minCountSlider.value = Math.min(clamped, 10);
+            minCountInput.value = clamped;
+        }
+
+        minCountSlider.addEventListener('input', () => { syncMinCount('slider'); analyze(); });
+        minCountInput.addEventListener('input', () => { syncMinCount('input'); analyze(); });
+
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.sort;
+                if (sortKey === key) {
+                    sortAsc = !sortAsc;
+                } else {
+                    sortKey = key;
+                    sortAsc = key === 'word';
+                }
+                document.querySelectorAll('.sort-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.querySelector('.arrow').textContent = '▲';
+                });
+                btn.classList.add('active');
+                btn.querySelector('.arrow').textContent = sortAsc ? '▲' : '▼';
+                renderTable();
+            });
+        });
+
+        function analyze() {
+            const text = textInput.value.trim();
+            if (!text) {
+                currentData = [];
+                statTotalWords.textContent = '0';
+                statUniqueWords.textContent = '0';
+                statShown.textContent = '0';
+                statAvgLength.textContent = '0';
+                barChart.innerHTML = '<p class="text-[#64748b] italic text-sm">Start typing to see a frequency chart&hellip;</p>';
+                tableBody.innerHTML = '<tr><td colspan="3" class="text-[#64748b] italic p-4 text-sm">Start typing to see word frequencies&hellip;</td></tr>';
+                exportBtn.disabled = true;
+                return;
+            }
+
+            const caseInsensitive = caseToggle.checked;
+            const excludeStopWords = stopWordsToggle.checked;
+            const minCount = parseInt(minCountInput.value) || 1;
+
+            const rawWords = text.split(/\s+/);
+            const totalWords = rawWords.length;
+            const freq = {};
+            let totalLetters = 0;
+            let countedWords = 0;
+
+            for (const raw of rawWords) {
+                const cleaned = raw.replace(/[^a-zA-Z0-9'-]/g, '');
+                if (cleaned.length === 0) continue;
+                const word = caseInsensitive ? cleaned.toLowerCase() : cleaned;
+                if (word.length < 1) continue;
+                if (excludeStopWords && STOP_WORDS.has(word.toLowerCase())) continue;
+                freq[word] = (freq[word] || 0) + 1;
+                totalLetters += word.length;
+                countedWords++;
+            }
+
+            let entries = Object.entries(freq)
+                .filter(([, count]) => count >= minCount)
+                .map(([word, count]) => ({
+                    word,
+                    count,
+                    density: ((count / totalWords) * 100)
+                }));
+
+            currentData = entries;
+
+            const uniqueAll = Object.keys(freq).length;
+            const avgLen = countedWords > 0 ? (totalLetters / countedWords).toFixed(1) : '0';
+
+            statTotalWords.textContent = totalWords.toLocaleString();
+            statUniqueWords.textContent = uniqueAll.toLocaleString();
+            statShown.textContent = entries.length.toLocaleString();
+            statAvgLength.textContent = avgLen;
+
+            exportBtn.disabled = entries.length === 0;
+
+            renderChart();
+            renderTable();
+        }
+
+        function getSorted() {
+            const sorted = [...currentData];
+            sorted.sort((a, b) => {
+                let cmp;
+                if (sortKey === 'word') {
+                    cmp = a.word.localeCompare(b.word);
+                } else if (sortKey === 'count') {
+                    cmp = a.count - b.count;
+                } else {
+                    cmp = a.density - b.density;
+                }
+                return sortAsc ? cmp : -cmp;
+            });
+            return sorted;
+        }
+
+        function renderChart() {
+            if (currentData.length === 0) {
+                barChart.innerHTML = '<p class="text-[#64748b] italic text-sm">No words to display&hellip;</p>';
+                return;
+            }
+
+            const top = [...currentData]
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 20);
+
+            const maxCount = top[0].count;
+
+            barChart.innerHTML = top.map(d => {
+                const pct = (d.count / maxCount) * 100;
+                return `
+                    <div class="flex items-center gap-3 py-1.5 group">
+                        <span class="text-xs text-[#475569] font-medium w-24 sm:w-32 truncate text-right shrink-0">${d.word}</span>
+                        <div class="flex-1 bg-[#f1f5f9] rounded h-5 overflow-hidden relative">
+                            <div class="bar-fill bg-[#2563eb] h-5 rounded" style="width:${pct}%"></div>
+                        </div>
+                        <span class="text-xs text-[#64748b] w-12 text-right shrink-0">${d.count}</span>
+                        <span class="text-xs text-[#94a3b8] w-14 text-right shrink-0">${d.density.toFixed(1)}%</span>
+                    </div>`;
+            }).join('');
+        }
+
+        function renderTable() {
+            const sorted = getSorted();
+
+            if (sorted.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="3" class="text-[#64748b] italic p-4 text-sm">No words match the current filters&hellip;</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = sorted.map((d, i) => `
+                <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'} hover:bg-[#eff6ff] transition-colors">
+                    <td class="px-4 py-2 text-[#1e293b] font-medium"><span class="text-[#94a3b8] text-xs mr-2">${i + 1}</span>${d.word}</td>
+                    <td class="px-4 py-2 text-right text-[#475569]">${d.count.toLocaleString()}</td>
+                    <td class="px-4 py-2 text-right text-[#475569]">${d.density.toFixed(2)}%</td>
+                </tr>
+            `).join('');
+        }
+
+        exportBtn.addEventListener('click', () => {
+            const sorted = getSorted();
+            if (sorted.length === 0) return;
+
+            const header = 'Word,Count,Density %';
+            const rows = sorted.map(d => `"${d.word.replace(/"/g, '""')}",${d.count},${d.density.toFixed(2)}`);
+            const csv = [header, ...rows].join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'word-frequency.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        textInput.addEventListener('input', analyze);
+        stopWordsToggle.addEventListener('change', analyze);
+        caseToggle.addEventListener('change', analyze);
+        analyze();
+    </script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Meta Tag Generator — SEO, Open Graph &amp; Twitter Cards | ClickSolveTools</title>
+  <meta name="description" content="Generate perfect meta tags, Open Graph tags, and Twitter Card markup for any web page. Live Google snippet preview, social media card preview, and one-click copy. Free, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/meta-tag-generator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>">
+
+  <meta property="og:title" content="Free Meta Tag Generator — SEO, Open Graph & Twitter Cards | ClickSolveTools">
+  <meta property="og:description" content="Generate perfect meta tags, Open Graph tags, and Twitter Card markup for any web page. Live previews and one-click copy. Free, private, browser-based.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/meta-tag-generator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Meta Tag Generator — SEO, Open Graph & Twitter Cards | ClickSolveTools">
+  <meta name="twitter:description" content="Generate perfect meta tags, Open Graph tags, and Twitter Card markup. Live previews and one-click copy.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meta Tag Generator",
+    "url": "https://clicksolvetools.com/tools/meta-tag-generator",
+    "description": "Generate perfect meta tags, Open Graph tags, and Twitter Card markup for any web page. Live Google snippet and social media card previews with one-click copy.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are meta tags and why do they matter for SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Meta tags are HTML elements in the <head> section that provide structured information about a web page to search engines and social platforms. The title tag and meta description directly influence click-through rates in search results, while Open Graph and Twitter Card tags control how your page appears when shared on social media."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the ideal length for a title tag?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google typically displays up to 60 characters (or roughly 580 pixels) of a title tag. Titles longer than this are truncated with an ellipsis. Keep your most important keywords within the first 60 characters for maximum visibility."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should a meta description be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Meta descriptions should be between 120 and 160 characters. Google may display up to about 160 characters on desktop and around 120 on mobile. Staying within 160 characters ensures your full description is visible in most search results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Open Graph tags?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open Graph (OG) tags are meta tags defined by Facebook that control how a URL is displayed when shared on social media platforms including Facebook, LinkedIn, Pinterest, and messaging apps. Key OG tags include og:title, og:description, og:image, og:type, and og:url."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .char-count { transition: color 200ms ease; }
+    .char-warn { color: #f59e0b; }
+    .char-over { color: #ef4444; font-weight: 600; }
+    .preview-card { transition: all 200ms ease; }
+    .code-output { font-family: 'Menlo', 'Consolas', 'Monaco', monospace; font-size: 13px; line-height: 1.6; tab-size: 2; }
+    .code-output::selection { background: #2563eb33; }
+    .section-toggle { transition: all 200ms ease; }
+    .section-toggle:hover { border-color: rgba(37, 99, 235, 0.3); }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section class="space-y-6 mb-12">
+
+        <!-- ─── Basic Meta Tags ─── -->
+        <div class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-5 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+            Basic Meta Tags
+          </h2>
+
+          <div class="space-y-4">
+            <!-- Page Title -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="inp-title" class="text-sm font-medium text-[#475569]">Page Title</label>
+                <span id="title-count" class="text-xs tabular-nums char-count text-[#94a3b8]">0 / 60</span>
+              </div>
+              <input type="text" id="inp-title" placeholder="My Awesome Page — Brand Name" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+              <p id="title-warn" class="text-xs mt-1 hidden text-amber-500">Title exceeds 60 characters — Google may truncate it in search results.</p>
+            </div>
+
+            <!-- Meta Description -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="inp-desc" class="text-sm font-medium text-[#475569]">Meta Description</label>
+                <span id="desc-count" class="text-xs tabular-nums char-count text-[#94a3b8]">0 / 160</span>
+              </div>
+              <textarea id="inp-desc" rows="3" placeholder="A concise summary of your page content for search engine results…" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all resize-none"></textarea>
+              <p id="desc-warn" class="text-xs mt-1 hidden text-amber-500">Description exceeds 160 characters — it may be truncated in search results.</p>
+            </div>
+
+            <!-- Keywords -->
+            <div>
+              <label for="inp-keywords" class="block text-sm font-medium text-[#475569] mb-1.5">Keywords <span class="text-[#94a3b8] font-normal">(comma-separated)</span></label>
+              <input type="text" id="inp-keywords" placeholder="seo, meta tags, open graph, twitter cards" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+            </div>
+
+            <!-- Author + Canonical -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inp-author" class="block text-sm font-medium text-[#475569] mb-1.5">Author</label>
+                <input type="text" id="inp-author" placeholder="John Doe" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+              </div>
+              <div>
+                <label for="inp-canonical" class="block text-sm font-medium text-[#475569] mb-1.5">Canonical URL</label>
+                <input type="url" id="inp-canonical" placeholder="https://example.com/page" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+              </div>
+            </div>
+
+            <!-- Robots -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inp-robots-index" class="block text-sm font-medium text-[#475569] mb-1.5">Indexing</label>
+                <select id="inp-robots-index" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+                  <option value="index">index</option>
+                  <option value="noindex">noindex</option>
+                </select>
+              </div>
+              <div>
+                <label for="inp-robots-follow" class="block text-sm font-medium text-[#475569] mb-1.5">Link Following</label>
+                <select id="inp-robots-follow" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+                  <option value="follow">follow</option>
+                  <option value="nofollow">nofollow</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Open Graph ─── -->
+        <div class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-5 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            Open Graph Tags
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="inp-og-title" class="text-sm font-medium text-[#475569]">og:title</label>
+                <span id="og-title-count" class="text-xs tabular-nums char-count text-[#94a3b8]">0 / 60</span>
+              </div>
+              <input type="text" id="inp-og-title" placeholder="Defaults to page title if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="inp-og-desc" class="text-sm font-medium text-[#475569]">og:description</label>
+                <span id="og-desc-count" class="text-xs tabular-nums char-count text-[#94a3b8]">0 / 160</span>
+              </div>
+              <textarea id="inp-og-desc" rows="2" placeholder="Defaults to meta description if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all resize-none"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inp-og-image" class="block text-sm font-medium text-[#475569] mb-1.5">og:image URL</label>
+                <input type="url" id="inp-og-image" placeholder="https://example.com/image.jpg" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+              </div>
+              <div>
+                <label for="inp-og-type" class="block text-sm font-medium text-[#475569] mb-1.5">og:type</label>
+                <select id="inp-og-type" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+                  <option value="website">website</option>
+                  <option value="article">article</option>
+                  <option value="product">product</option>
+                  <option value="profile">profile</option>
+                  <option value="video.other">video</option>
+                  <option value="music.song">music</option>
+                  <option value="book">book</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="inp-og-url" class="block text-sm font-medium text-[#475569] mb-1.5">og:url</label>
+              <input type="url" id="inp-og-url" placeholder="Defaults to canonical URL if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Twitter Card ─── -->
+        <div class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-5 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+            Twitter Card Tags
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="inp-tw-card" class="block text-sm font-medium text-[#475569] mb-1.5">Card Type</label>
+              <select id="inp-tw-card" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+                <option value="summary">summary</option>
+                <option value="summary_large_image">summary_large_image</option>
+              </select>
+            </div>
+            <div>
+              <label for="inp-tw-title" class="block text-sm font-medium text-[#475569] mb-1.5">twitter:title <span class="text-[#94a3b8] font-normal">(defaults to og:title)</span></label>
+              <input type="text" id="inp-tw-title" placeholder="Defaults to og:title if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+            </div>
+            <div>
+              <label for="inp-tw-desc" class="block text-sm font-medium text-[#475569] mb-1.5">twitter:description <span class="text-[#94a3b8] font-normal">(defaults to og:description)</span></label>
+              <textarea id="inp-tw-desc" rows="2" placeholder="Defaults to og:description if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all resize-none"></textarea>
+            </div>
+            <div>
+              <label for="inp-tw-image" class="block text-sm font-medium text-[#475569] mb-1.5">twitter:image <span class="text-[#94a3b8] font-normal">(defaults to og:image)</span></label>
+              <input type="url" id="inp-tw-image" placeholder="Defaults to og:image if empty" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all">
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Live Previews ─── -->
+        <div class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-5 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            Live Previews
+          </h2>
+
+          <!-- Google Snippet Preview -->
+          <div class="mb-8">
+            <h3 class="text-sm font-semibold text-[#475569] mb-3 uppercase tracking-wider">Google Search Result</h3>
+            <div class="bg-white border border-[#e2e8f0] rounded-lg p-4 preview-card">
+              <div id="prev-google-url" class="text-xs text-[#202124] mb-1 truncate" style="font-family: arial, sans-serif;">https://example.com</div>
+              <div id="prev-google-title" class="text-xl mb-1 truncate" style="font-family: arial, sans-serif; color: #1a0dab; line-height: 1.3;">Your Page Title</div>
+              <div id="prev-google-desc" class="text-sm leading-relaxed" style="font-family: arial, sans-serif; color: #4d5156; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Your meta description will appear here. Write a compelling summary to improve click-through rates from search results.</div>
+            </div>
+          </div>
+
+          <!-- Facebook / OG Preview -->
+          <div class="mb-8">
+            <h3 class="text-sm font-semibold text-[#475569] mb-3 uppercase tracking-wider">Facebook / Social Media</h3>
+            <div class="border border-[#dadde1] rounded-lg overflow-hidden preview-card max-w-lg">
+              <div id="prev-fb-image" class="bg-[#f0f2f5] h-[200px] flex items-center justify-center">
+                <svg class="w-12 h-12 text-[#bec3c9]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+              </div>
+              <div class="px-3 py-2.5 bg-[#f0f2f5] border-t border-[#dadde1]">
+                <div id="prev-fb-domain" class="text-xs text-[#606770] uppercase mb-0.5">example.com</div>
+                <div id="prev-fb-title" class="text-sm font-semibold text-[#1d2129] leading-snug truncate">Your Page Title</div>
+                <div id="prev-fb-desc" class="text-xs text-[#606770] leading-relaxed mt-0.5" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Your description will appear here.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Twitter Preview -->
+          <div>
+            <h3 class="text-sm font-semibold text-[#475569] mb-3 uppercase tracking-wider">Twitter / X</h3>
+            <div id="prev-tw-card" class="border border-[#e1e8ed] rounded-xl overflow-hidden preview-card max-w-lg">
+              <div id="prev-tw-image" class="bg-[#f7f9f9] h-[180px] flex items-center justify-center">
+                <svg class="w-12 h-12 text-[#bec3c9]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+              </div>
+              <div class="px-3 py-2.5">
+                <div id="prev-tw-domain" class="text-xs text-[#536471] mb-0.5">example.com</div>
+                <div id="prev-tw-title" class="text-sm font-semibold text-[#0f1419] leading-snug truncate">Your Page Title</div>
+                <div id="prev-tw-desc" class="text-xs text-[#536471] leading-relaxed mt-0.5" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Your description will appear here.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Generated Code ─── -->
+        <div class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-lg font-bold text-[#1e293b] flex items-center gap-2">
+              <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              Generated HTML
+            </h2>
+            <button id="btn-copy" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2563eb] text-white text-sm font-semibold hover:bg-[#1d4ed8] transition-colors shadow-sm shadow-[#2563eb]/20">
+              <svg id="icon-copy" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              <svg id="icon-check" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span id="btn-copy-text">Copy All Tags</span>
+            </button>
+          </div>
+          <textarea id="code-output" readonly class="code-output w-full h-[320px] px-4 py-4 bg-[#1e293b] text-[#e2e8f0] border border-[#334155] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563eb]/30 resize-y" spellcheck="false"></textarea>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Meta Tags for SEO: A Complete Guide to Open Graph, Twitter Cards, and Best Practices</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Meta tags are invisible HTML elements that live in the <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;head&gt;</code> section of every web page. Despite being hidden from visitors, they play a critical role in how search engines understand, index, and display your content. They also control the appearance of your links when shared across social media platforms like Facebook, Twitter/X, LinkedIn, and messaging apps. Getting meta tags right is one of the simplest, highest-impact steps you can take to improve both your search visibility and social sharing engagement.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">The Essential Meta Tags for SEO</h3>
+          <p>The two most important meta tags for search engine optimization are the <strong class="text-[#1e293b]">title tag</strong> and the <strong class="text-[#1e293b]">meta description</strong>. The title tag determines the clickable headline shown in Google search results, and it is one of the strongest on-page ranking signals. Google typically displays the first 60 characters, so you should front-load your primary keyword within that limit. A well-crafted title is specific, includes your target keyword naturally, and gives users a clear reason to click. The meta description, while not a direct ranking factor, directly influences click-through rates. Google displays up to roughly 160 characters of the description. Think of it as ad copy for your page — a compelling summary that tells searchers exactly what they will find if they click through.</p>
+
+          <p>Beyond title and description, the <strong class="text-[#1e293b]">canonical URL</strong> tells search engines which version of a page is the authoritative one, preventing duplicate content issues when the same content is accessible through multiple URLs. The <strong class="text-[#1e293b]">robots meta tag</strong> controls whether a page should be indexed and whether its links should be followed. Setting <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">noindex</code> on thin or duplicate pages, staging environments, or internal search result pages prevents them from diluting your site's crawl budget and search equity.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Open Graph Tags for Social Sharing</h3>
+          <p>Open Graph (OG) is a protocol originally created by Facebook that lets you control how your URL is presented when shared on social platforms. The four required OG properties are <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">og:title</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">og:description</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">og:image</code>, and <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">og:url</code>. The image tag is especially important — posts with rich images receive dramatically higher engagement than plain text links. Facebook recommends images of at least 1200×630 pixels for optimal display. LinkedIn, Pinterest, WhatsApp, Slack, Discord, and many other platforms all read OG tags to generate link previews, making them essential for any page you expect to be shared.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Twitter Card Tags</h3>
+          <p>Twitter (now X) has its own card markup system that determines how links appear in tweets. The two most common card types are <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">summary</code>, which shows a small square thumbnail beside the title and description, and <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">summary_large_image</code>, which displays a large landscape image above the text. Twitter will fall back to OG tags if dedicated Twitter Card tags are not present, but specifying both gives you granular control over how your content appears on each platform.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Best Practices for Meta Tags</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Keep titles under 60 characters</strong> and front-load your primary keyword.</li>
+            <li><strong class="text-[#1e293b]">Write descriptions between 120 and 160 characters</strong> with a clear call to action or value proposition.</li>
+            <li><strong class="text-[#1e293b]">Always set a canonical URL</strong> to consolidate link equity and avoid duplicate content.</li>
+            <li><strong class="text-[#1e293b]">Use high-quality images</strong> (1200×630 px minimum) for OG and Twitter Card tags.</li>
+            <li><strong class="text-[#1e293b]">Make each page's meta tags unique.</strong> Duplicate titles and descriptions across pages confuse search engines and reduce click-through rates.</li>
+            <li><strong class="text-[#1e293b]">Test your tags</strong> with Facebook's Sharing Debugger and Twitter's Card Validator after deployment.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What are meta tags and why do they matter for SEO?</h4>
+              <p>Meta tags are HTML elements in the <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;head&gt;</code> section that provide structured information about a page to search engines and social platforms. The title tag is a confirmed Google ranking signal, and the meta description influences click-through rates, which indirectly affects rankings. Open Graph and Twitter Card tags determine how your links look when shared, impacting engagement and referral traffic.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What is the ideal length for a title tag?</h4>
+              <p>Google displays approximately 60 characters (or about 580 pixels wide) of a title tag. Titles longer than this are truncated with an ellipsis. Place your most important keywords within the first 60 characters to ensure they are always visible. Titles between 50 and 60 characters tend to perform best for both SEO and user engagement.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">How long should a meta description be?</h4>
+              <p>Aim for 120 to 160 characters. Google may display up to about 160 characters on desktop and roughly 120 on mobile. Keeping your description within this range ensures it appears in full across devices. Include a compelling reason to click and, if natural, your primary keyword — Google bolds matching query terms in the snippet.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need both Open Graph and Twitter Card tags?</h4>
+              <p>Twitter falls back to OG tags when its own tags are absent, so OG tags alone often suffice. However, if you want different titles, descriptions, or images on Twitter versus Facebook, you need both sets. Using both also ensures reliable previews regardless of how each platform's parser evolves over time.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Are meta keywords still useful?</h4>
+              <p>Google has officially stated that it ignores the meta keywords tag for ranking purposes, and has done so since at least 2009. Bing has said the same. Some smaller search engines may still reference them, but the SEO value is negligible. This tool includes the field for completeness, but you should focus your efforts on title, description, and structured data instead.</p>
+            </div>
+          </div>
+
+          <p>Well-optimized meta tags take only minutes to set up, yet they have an outsized impact on how your pages perform in search results and on social media. Use this generator to create your tags, preview exactly how they will appear, and copy the ready-to-use HTML directly into your site. Everything runs in your browser — your data stays on your device.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('meta-tag-generator');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const $ = id => document.getElementById(id);
+
+    const inputs = {
+      title:       $('inp-title'),
+      desc:        $('inp-desc'),
+      keywords:    $('inp-keywords'),
+      author:      $('inp-author'),
+      canonical:   $('inp-canonical'),
+      robotsIdx:   $('inp-robots-index'),
+      robotsFol:   $('inp-robots-follow'),
+      ogTitle:     $('inp-og-title'),
+      ogDesc:      $('inp-og-desc'),
+      ogImage:     $('inp-og-image'),
+      ogType:      $('inp-og-type'),
+      ogUrl:       $('inp-og-url'),
+      twCard:      $('inp-tw-card'),
+      twTitle:     $('inp-tw-title'),
+      twDesc:      $('inp-tw-desc'),
+      twImage:     $('inp-tw-image'),
+    };
+
+    const codeOutput = $('code-output');
+    const btnCopy    = $('btn-copy');
+    const iconCopy   = $('icon-copy');
+    const iconCheck  = $('icon-check');
+    const btnText    = $('btn-copy-text');
+
+    function esc(str) {
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function extractDomain(url) {
+      try { return new URL(url).hostname; } catch { return 'example.com'; }
+    }
+
+    function updateCharCount(input, countEl, warnEl, limit) {
+      const len = input.value.length;
+      countEl.textContent = `${len} / ${limit}`;
+      countEl.classList.remove('char-warn', 'char-over');
+      if (warnEl) warnEl.classList.add('hidden');
+      if (len > limit) {
+        countEl.classList.add('char-over');
+        if (warnEl) warnEl.classList.remove('hidden');
+      } else if (len > limit * 0.9) {
+        countEl.classList.add('char-warn');
+      }
+    }
+
+    function resolve(primary, fallback) {
+      return primary.value.trim() || fallback.value.trim();
+    }
+
+    function updatePreviews() {
+      const title = inputs.title.value.trim() || 'Your Page Title';
+      const desc  = inputs.desc.value.trim() || 'Your meta description will appear here. Write a compelling summary to improve click-through rates from search results.';
+      const url   = inputs.canonical.value.trim() || 'https://example.com';
+      const domain = extractDomain(url);
+
+      const ogTitle = resolve(inputs.ogTitle, inputs.title) || 'Your Page Title';
+      const ogDesc  = resolve(inputs.ogDesc, inputs.desc) || 'Your description will appear here.';
+      const ogUrl   = inputs.ogUrl.value.trim() || url;
+      const ogImage = inputs.ogImage.value.trim();
+      const ogDomain = extractDomain(ogUrl);
+
+      const twTitle = inputs.twTitle.value.trim() || ogTitle;
+      const twDesc  = inputs.twDesc.value.trim() || ogDesc;
+      const twImage = inputs.twImage.value.trim() || ogImage;
+      const twDomain = extractDomain(inputs.ogUrl.value.trim() || url);
+
+      $('prev-google-url').textContent = url;
+      $('prev-google-title').textContent = title;
+      $('prev-google-desc').textContent = desc;
+
+      $('prev-fb-domain').textContent = ogDomain.toUpperCase();
+      $('prev-fb-title').textContent = ogTitle;
+      $('prev-fb-desc').textContent = ogDesc;
+      updateImagePreview('prev-fb-image', ogImage);
+
+      $('prev-tw-domain').textContent = twDomain;
+      $('prev-tw-title').textContent = twTitle;
+      $('prev-tw-desc').textContent = twDesc;
+      updateImagePreview('prev-tw-image', twImage);
+
+      const isLarge = inputs.twCard.value === 'summary_large_image';
+      $('prev-tw-image').style.height = isLarge ? '220px' : '180px';
+    }
+
+    function updateImagePreview(elId, imageUrl) {
+      const el = $(elId);
+      if (imageUrl) {
+        el.innerHTML = '';
+        el.style.backgroundImage = `url('${imageUrl}')`;
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+      } else {
+        el.style.backgroundImage = '';
+        el.innerHTML = '<svg class="w-12 h-12 text-[#bec3c9]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>';
+      }
+    }
+
+    function generateCode() {
+      const lines = [];
+      const title     = inputs.title.value.trim();
+      const desc      = inputs.desc.value.trim();
+      const keywords  = inputs.keywords.value.trim();
+      const author    = inputs.author.value.trim();
+      const canonical = inputs.canonical.value.trim();
+      const robotsIdx = inputs.robotsIdx.value;
+      const robotsFol = inputs.robotsFol.value;
+      const ogTitle   = inputs.ogTitle.value.trim() || title;
+      const ogDesc    = inputs.ogDesc.value.trim() || desc;
+      const ogImage   = inputs.ogImage.value.trim();
+      const ogType    = inputs.ogType.value;
+      const ogUrl     = inputs.ogUrl.value.trim() || canonical;
+      const twCard    = inputs.twCard.value;
+      const twTitle   = inputs.twTitle.value.trim() || ogTitle;
+      const twDesc    = inputs.twDesc.value.trim() || ogDesc;
+      const twImage   = inputs.twImage.value.trim() || ogImage;
+
+      lines.push('<!-- Basic Meta Tags -->');
+      lines.push('<meta charset="UTF-8">');
+      lines.push('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+      if (title) lines.push(`<title>${esc(title)}</title>`);
+      if (desc) lines.push(`<meta name="description" content="${esc(desc)}">`);
+      if (keywords) lines.push(`<meta name="keywords" content="${esc(keywords)}">`);
+      if (author) lines.push(`<meta name="author" content="${esc(author)}">`);
+      lines.push(`<meta name="robots" content="${robotsIdx}, ${robotsFol}">`);
+      if (canonical) lines.push(`<link rel="canonical" href="${esc(canonical)}">`);
+
+      lines.push('');
+      lines.push('<!-- Open Graph Tags -->');
+      if (ogTitle) lines.push(`<meta property="og:title" content="${esc(ogTitle)}">`);
+      if (ogDesc) lines.push(`<meta property="og:description" content="${esc(ogDesc)}">`);
+      lines.push(`<meta property="og:type" content="${ogType}">`);
+      if (ogUrl) lines.push(`<meta property="og:url" content="${esc(ogUrl)}">`);
+      if (ogImage) lines.push(`<meta property="og:image" content="${esc(ogImage)}">`);
+
+      lines.push('');
+      lines.push('<!-- Twitter Card Tags -->');
+      lines.push(`<meta name="twitter:card" content="${twCard}">`);
+      if (twTitle) lines.push(`<meta name="twitter:title" content="${esc(twTitle)}">`);
+      if (twDesc) lines.push(`<meta name="twitter:description" content="${esc(twDesc)}">`);
+      if (twImage) lines.push(`<meta name="twitter:image" content="${esc(twImage)}">`);
+
+      codeOutput.value = lines.join('\n');
+    }
+
+    function update() {
+      updateCharCount(inputs.title, $('title-count'), $('title-warn'), 60);
+      updateCharCount(inputs.desc, $('desc-count'), $('desc-warn'), 160);
+      updateCharCount(inputs.ogTitle, $('og-title-count'), null, 60);
+      updateCharCount(inputs.ogDesc, $('og-desc-count'), null, 160);
+      updatePreviews();
+      generateCode();
+    }
+
+    Object.values(inputs).forEach(el => {
+      el.addEventListener('input', update);
+      el.addEventListener('change', update);
+    });
+
+    let copyTimeout;
+    btnCopy.addEventListener('click', () => {
+      const text = codeOutput.value;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        iconCopy.classList.add('hidden');
+        iconCheck.classList.remove('hidden');
+        btnText.textContent = 'Copied!';
+        clearTimeout(copyTimeout);
+        copyTimeout = setTimeout(() => {
+          iconCheck.classList.add('hidden');
+          iconCopy.classList.remove('hidden');
+          btnText.textContent = 'Copy All Tags';
+        }, 2000);
+      });
+    });
+
+    update();
+  });
+  </script>
+
+</body>
+</html>

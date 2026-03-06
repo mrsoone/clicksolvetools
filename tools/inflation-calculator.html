@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Inflation Calculator — Purchasing Power, CPI &amp; Future Value | ClickSolveTools</title>
+  <meta name="description" content="Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons using any inflation rate.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/inflation-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Inflation Calculator — Purchasing Power &amp; Future Value | ClickSolveTools">
+  <meta property="og:description" content="Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/inflation-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Inflation Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate how inflation erodes purchasing power over time. Future value, past value, year-by-year tables, and cost-of-living comparisons.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Inflation Calculator","url":"https://clicksolvetools.com/tools/inflation-calculator","description":"Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons using any inflation rate.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is inflation?","acceptedAnswer":{"@type":"Answer","text":"Inflation is the rate at which the general level of prices for goods and services rises over time, reducing the purchasing power of money. A 3% annual inflation rate means something that costs $100 today would cost about $103 next year."}},{"@type":"Question","name":"What is the Consumer Price Index (CPI)?","acceptedAnswer":{"@type":"Answer","text":"The CPI is a measure published by the Bureau of Labor Statistics that tracks the average change in prices paid by consumers for a basket of goods and services. It is the most widely used indicator of inflation in the United States."}},{"@type":"Question","name":"What is purchasing power?","acceptedAnswer":{"@type":"Answer","text":"Purchasing power is the quantity of goods or services that a unit of money can buy. When inflation rises, purchasing power falls — meaning each dollar buys less than it did before."}},{"@type":"Question","name":"What is a good inflation rate?","acceptedAnswer":{"@type":"Answer","text":"Most central banks, including the U.S. Federal Reserve, target an annual inflation rate of about 2%. This rate is considered low enough to preserve purchasing power while still encouraging economic activity."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Mode Toggle -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex rounded-lg bg-[#f1f5f9] p-1 mb-6">
+          <button id="mode-forward" class="mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm">Forward — Future Value</button>
+          <button id="mode-backward" class="mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]">Backward — Past Value</button>
+        </div>
+
+        <p id="mode-desc" class="text-xs text-[#64748b] mb-5">What will your money be worth after inflation?</p>
+
+        <div class="space-y-4">
+          <div>
+            <label for="amount" class="block text-sm font-medium text-[#475569] mb-1">Amount</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="amount" type="text" inputmode="decimal" placeholder="1,000" class="ic-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="years" class="block text-sm font-medium text-[#475569] mb-1">Number of Years</label>
+            <input id="years" type="number" min="1" max="200" placeholder="10" class="ic-input w-full">
+          </div>
+
+          <div>
+            <label for="rate" class="block text-sm font-medium text-[#475569] mb-1">Annual Inflation Rate</label>
+            <div class="relative">
+              <input id="rate" type="text" inputmode="decimal" placeholder="3" class="ic-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+            <div class="flex gap-2 mt-2">
+              <button class="preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#e2e8f0] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors" data-rate="2">2%</button>
+              <button class="preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#2563eb] bg-[#eff6ff] text-[#2563eb] transition-colors" data-rate="3">3%</button>
+              <button class="preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#e2e8f0] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors" data-rate="5">5%</button>
+              <button class="preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#e2e8f0] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors" data-rate="7">7%</button>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] active:bg-[#1e40af] transition-colors shadow-sm shadow-[#2563eb]/20">
+              Calculate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+          <div class="sm:col-span-3">
+            <div id="result-label" class="text-xs text-[#475569]">Equivalent Value</div>
+            <div id="out-value" class="text-3xl font-bold text-[#2563eb]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Total Inflation</div>
+            <div id="out-total-inflation" class="text-lg font-semibold text-[#ef4444]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Purchasing Power Change</div>
+            <div id="out-pp-change" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Price Multiplier</div>
+            <div id="out-multiplier" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+        </div>
+        <div class="border-t border-[#e2e8f0] pt-4">
+          <p id="out-summary" class="text-sm text-[#475569] leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- Purchasing Power Erosion Chart -->
+      <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-1">Purchasing Power Erosion</h3>
+        <p class="text-xs text-[#64748b] mb-4">How the value of your money declines year by year</p>
+        <div id="erosion-chart" class="space-y-1.5"></div>
+      </div>
+
+      <!-- Cost of Living Comparison -->
+      <div id="col-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">$100 Today — Cost of Living Over Time</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+          <div class="bg-[#fef2f2] border border-[#fecaca] rounded-lg p-4">
+            <div class="text-xs text-[#ef4444] mb-1">In 10 Years</div>
+            <div id="col-10" class="text-lg font-bold text-[#dc2626]">—</div>
+            <div id="col-10-pp" class="text-xs text-[#64748b] mt-1">—</div>
+          </div>
+          <div class="bg-[#fef2f2] border border-[#fecaca] rounded-lg p-4">
+            <div class="text-xs text-[#ef4444] mb-1">In 20 Years</div>
+            <div id="col-20" class="text-lg font-bold text-[#dc2626]">—</div>
+            <div id="col-20-pp" class="text-xs text-[#64748b] mt-1">—</div>
+          </div>
+          <div class="bg-[#fef2f2] border border-[#fecaca] rounded-lg p-4">
+            <div class="text-xs text-[#ef4444] mb-1">In 30 Years</div>
+            <div id="col-30" class="text-lg font-bold text-[#dc2626]">—</div>
+            <div id="col-30-pp" class="text-xs text-[#64748b] mt-1">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year-by-Year Table -->
+      <div id="table-wrapper" class="hidden">
+        <button id="table-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="table-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Year-by-Year Breakdown
+          </span>
+          <span id="table-years" class="text-xs text-[#94a3b8]"></span>
+        </button>
+        <div id="table-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-white border-b border-[#e2e8f0]">
+              <tr class="text-[#475569] text-xs">
+                <th class="px-4 py-3 text-left font-medium">Year</th>
+                <th id="th-value" class="px-4 py-3 text-right font-medium">Equivalent Value</th>
+                <th class="px-4 py-3 text-right font-medium">Cumulative Inflation</th>
+                <th class="px-4 py-3 text-right font-medium">Purchasing Power</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Inflation, CPI, and Purchasing Power</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Inflation is the gradual increase in the general price level of goods and services in an economy. When inflation rises, every dollar you hold buys a little less than it did before. Over short periods the effect feels negligible — a few cents more for a gallon of milk — but compounded over decades, inflation can cut the real value of your savings in half or more. This free inflation calculator lets you quantify exactly how much purchasing power you gain or lose over any time horizon, using either a historical average or a custom rate.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Is the Consumer Price Index (CPI)?</h3>
+      <p>The Consumer Price Index, published monthly by the U.S. Bureau of Labor Statistics (BLS), tracks the average change in prices paid by urban consumers for a representative basket of goods and services — food, housing, transportation, medical care, apparel, recreation, and more. The CPI is the most widely cited measure of inflation in the United States and serves as the basis for cost-of-living adjustments (COLAs) in Social Security benefits, federal tax brackets, and many private contracts. When economists say "inflation was 3.2% last year," they are almost always referring to the 12-month change in the CPI-U (CPI for All Urban Consumers).</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Purchasing Power Works</h3>
+      <p>Purchasing power is the quantity of goods or services that one unit of currency can buy. If a loaf of bread costs $3 today and inflation runs at 3% per year, that same loaf will cost about $3.09 next year and roughly $4.03 in ten years. Your dollar didn't shrink in nominal terms, but its purchasing power dropped — you need more dollars to buy the same bread. This is why financial planners emphasize "real" returns (returns after inflation) rather than "nominal" returns. An investment that earns 7% while inflation runs at 3% delivers a real return of approximately 4%.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Forward vs. Backward Calculation</h3>
+      <p>This calculator offers two modes. <strong class="text-[#1e293b]">Forward mode</strong> answers the question "What will $1,000 be worth in 20 years?" — it projects how much more money you'll need in the future to match today's purchasing power. <strong class="text-[#1e293b]">Backward mode</strong> answers the reverse: "What was $1,000 worth 20 years ago?" — it reveals how much less purchasing power an amount carried in the past. Both use the same compound formula: Future Value = Present Value × (1 + r)<sup>n</sup>, where <em>r</em> is the annual inflation rate and <em>n</em> is the number of years.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Historical U.S. Inflation Rates</h3>
+      <p>Over the past century, U.S. inflation has averaged approximately 3% per year, though individual years have varied widely. The 1970s saw double-digit inflation peaking at 13.5% in 1980, while the 2010s experienced an unusually low average near 1.8%. The Federal Reserve targets a long-run inflation rate of 2% as measured by the Personal Consumption Expenditures (PCE) price index, which is closely related to the CPI. When using this calculator for long-term planning, 2–3% is a reasonable baseline for the United States, though higher rates may be appropriate for other countries or for specific spending categories like healthcare and education, which have historically outpaced general inflation.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Inflation Matters for Retirement Planning</h3>
+      <p>A retiree drawing down savings over 30 years faces a significant inflation risk. At 3% annual inflation, prices roughly double every 24 years. A monthly expense of $4,000 today would require about $8,000 in 24 years and over $9,700 in 30 years just to maintain the same standard of living. This is why retirement planners recommend investing a portion of assets in growth-oriented vehicles even during retirement — to keep pace with or outpace inflation. The year-by-year table and erosion chart in this calculator help you visualize exactly how quickly purchasing power declines at various inflation rates.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is a normal inflation rate?</strong></p>
+      <p>In the United States, the Federal Reserve targets about 2% annual inflation. The long-term historical average is closer to 3%. Rates between 1% and 4% are generally considered moderate and healthy for the economy.</p>
+
+      <p><strong class="text-[#1e293b]">How does inflation affect savings accounts?</strong></p>
+      <p>If your savings account earns 1% interest while inflation runs at 3%, your money is losing about 2% of its real value each year. This is why high-yield savings accounts and inflation-protected securities (like TIPS) are important for preserving purchasing power.</p>
+
+      <p><strong class="text-[#1e293b]">What is the difference between CPI and PCE?</strong></p>
+      <p>Both measure inflation but use different methodologies. The CPI measures out-of-pocket spending by urban consumers, while the PCE (Personal Consumption Expenditures) index covers a broader range of spending including items paid for by employers and government programs. The Fed prefers PCE for policy decisions, but CPI is more widely reported.</p>
+
+      <p><strong class="text-[#1e293b]">Can I use this calculator for other currencies?</strong></p>
+      <p>Yes. While the dollar sign is displayed, the math is universal. Enter any amount and the inflation rate relevant to your country — the results apply regardless of currency.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for educational purposes only. Actual inflation varies by year, region, and spending category. It does not replace professional financial advice.
+      </div>
+
+      <p>This inflation calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to project the real value of money over time.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ic-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .ic-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .ic-input::placeholder { color: #94a3b8; }
+
+    #breakdown-table tr { border-top: 1px solid #e2e8f0; }
+    #breakdown-table td { padding: 0.5rem 1rem; white-space: nowrap; }
+    #breakdown-table td:first-child { text-align: left; }
+    #breakdown-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #table-body::-webkit-scrollbar { width: 6px; }
+    #table-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #table-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    .erosion-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+    .erosion-label {
+      width: 3rem;
+      text-align: right;
+      color: #64748b;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .erosion-track {
+      flex: 1;
+      height: 1.5rem;
+      background: #f1f5f9;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .erosion-bar {
+      height: 100%;
+      border-radius: 0.25rem;
+      transition: width 400ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: white;
+      white-space: nowrap;
+      min-width: 3rem;
+    }
+    .erosion-amount {
+      width: 5rem;
+      text-align: left;
+      color: #475569;
+      flex-shrink: 0;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  <script>
+  (function () {
+    const fmtC = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtPct = v => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+    const $ = id => document.getElementById(id);
+
+    let mode = 'forward';
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    $('amount').addEventListener('input', () => formatInput($('amount')));
+
+    // Mode toggle
+    function setMode(m) {
+      mode = m;
+      const fwd = $('mode-forward');
+      const bwd = $('mode-backward');
+      if (m === 'forward') {
+        fwd.className = 'mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm';
+        bwd.className = 'mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+        $('mode-desc').textContent = 'What will your money be worth after inflation?';
+        $('th-value').textContent = 'Future Value';
+      } else {
+        bwd.className = 'mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all bg-[#2563eb] text-white shadow-sm';
+        fwd.className = 'mode-btn flex-1 py-2.5 rounded-md text-sm font-semibold transition-all text-[#475569] hover:text-[#1e293b]';
+        $('mode-desc').textContent = 'What was your money worth before inflation?';
+        $('th-value').textContent = 'Past Value';
+      }
+    }
+
+    $('mode-forward').addEventListener('click', () => setMode('forward'));
+    $('mode-backward').addEventListener('click', () => setMode('backward'));
+
+    // Presets
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        $('rate').value = btn.dataset.rate;
+        document.querySelectorAll('.preset-btn').forEach(b => {
+          b.className = 'preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#e2e8f0] text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors';
+        });
+        btn.className = 'preset-btn px-3 py-1 rounded-full text-xs font-medium border border-[#2563eb] bg-[#eff6ff] text-[#2563eb] transition-colors';
+      });
+    });
+
+    // Table toggle
+    $('table-toggle').addEventListener('click', () => {
+      const body = $('table-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('table-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('table-toggle').classList.add('rounded-b-none');
+      else $('table-toggle').classList.remove('rounded-b-none');
+    });
+
+    $('calc-btn').addEventListener('click', calculate);
+    $('years').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); calculate(); } });
+
+    function calculate() {
+      const amount = parseNum($('amount'));
+      const years = parseInt($('years').value) || 0;
+      const rate = parseFloat($('rate').value) || 0;
+
+      if (amount <= 0 || years <= 0 || years > 200 || rate < 0) return;
+
+      const r = rate / 100;
+      let resultValue, totalInflationPct, ppChange, multiplier, summaryText;
+      const yearData = [];
+
+      if (mode === 'forward') {
+        multiplier = Math.pow(1 + r, years);
+        resultValue = amount * multiplier;
+        totalInflationPct = (multiplier - 1) * 100;
+        ppChange = ((1 / multiplier) - 1) * 100;
+
+        for (let y = 1; y <= years; y++) {
+          const cumMul = Math.pow(1 + r, y);
+          yearData.push({
+            year: y,
+            value: amount * cumMul,
+            cumInflation: (cumMul - 1) * 100,
+            purchasingPower: (1 / cumMul) * 100
+          });
+        }
+
+        $('result-label').textContent = `Equivalent Future Value (in ${years} years)`;
+        summaryText = `At ${rate}% annual inflation, you would need ${fmtC.format(resultValue)} in ${years} years to have the same purchasing power as ${fmtC.format(amount)} today. Your money loses ${Math.abs(ppChange).toFixed(1)}% of its purchasing power over this period.`;
+      } else {
+        multiplier = Math.pow(1 + r, years);
+        resultValue = amount / multiplier;
+        totalInflationPct = (multiplier - 1) * 100;
+        ppChange = ((multiplier) - 1) * 100;
+
+        for (let y = 1; y <= years; y++) {
+          const cumMul = Math.pow(1 + r, y);
+          yearData.push({
+            year: y,
+            value: amount / cumMul,
+            cumInflation: (cumMul - 1) * 100,
+            purchasingPower: (1 / cumMul) * 100
+          });
+        }
+
+        $('result-label').textContent = `Equivalent Past Value (${years} years ago)`;
+        summaryText = `At ${rate}% annual inflation, ${fmtC.format(amount)} today had the same purchasing power as ${fmtC.format(resultValue)} ${years} years ago. Prices have risen ${totalInflationPct.toFixed(1)}% cumulatively over this period.`;
+      }
+
+      $('out-value').textContent = fmtC.format(resultValue);
+      $('out-total-inflation').textContent = '+' + totalInflationPct.toFixed(2) + '%';
+      $('out-pp-change').textContent = fmtPct(ppChange);
+      $('out-multiplier').textContent = multiplier.toFixed(4) + '×';
+      $('out-summary').textContent = summaryText;
+
+      $('results-panel').classList.remove('hidden');
+
+      buildErosionChart(amount, r, years);
+      buildCostOfLiving(r);
+      buildTable(yearData, years);
+
+      $('chart-panel').classList.remove('hidden');
+      $('col-panel').classList.remove('hidden');
+      $('table-wrapper').classList.remove('hidden');
+    }
+
+    function buildErosionChart(amount, r, years) {
+      const container = $('erosion-chart');
+      container.innerHTML = '';
+
+      const maxBars = Math.min(years, 40);
+      const step = years <= 40 ? 1 : Math.ceil(years / 40);
+      const displayYears = [];
+      for (let y = 0; y <= years; y += step) displayYears.push(y);
+      if (displayYears[displayYears.length - 1] !== years) displayYears.push(years);
+
+      displayYears.forEach(y => {
+        const ppFraction = 1 / Math.pow(1 + r, y);
+        const pct = ppFraction * 100;
+        const realValue = amount * ppFraction;
+
+        const row = document.createElement('div');
+        row.className = 'erosion-row';
+
+        const greenIntensity = Math.round(180 + (ppFraction * 75));
+        const redIntensity = Math.round(255 - (ppFraction * 180));
+        const barColor = pct > 60
+          ? '#2563eb'
+          : pct > 30
+            ? '#f59e0b'
+            : '#ef4444';
+
+        row.innerHTML = `
+          <span class="erosion-label">Yr ${y}</span>
+          <div class="erosion-track">
+            <div class="erosion-bar" style="width: ${Math.max(pct, 8)}%; background: ${barColor};">${pct.toFixed(1)}%</div>
+          </div>
+          <span class="erosion-amount">${fmtC.format(realValue)}</span>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function buildCostOfLiving(r) {
+      [10, 20, 30].forEach(y => {
+        const mul = Math.pow(1 + r, y);
+        const futureVal = 100 * mul;
+        const pp = (1 / mul) * 100;
+        $('col-' + y).textContent = fmtC.format(futureVal);
+        $('col-' + y + '-pp').textContent = `$100 buys only $${pp.toFixed(2)} worth`;
+      });
+    }
+
+    function buildTable(yearData, years) {
+      const tbody = $('breakdown-table');
+      tbody.innerHTML = yearData.map(d => `<tr>
+        <td>${d.year}</td>
+        <td>${fmtC.format(d.value)}</td>
+        <td class="text-[#ef4444]">+${d.cumInflation.toFixed(2)}%</td>
+        <td>${d.purchasingPower.toFixed(2)}%</td>
+      </tr>`).join('');
+      $('table-years').textContent = `${years} years`;
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('inflation-calculator');
+  </script>
+</body>
+</html>

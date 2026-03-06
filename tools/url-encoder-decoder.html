@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free URL Encoder &amp; Decoder Online — Percent-Encoding, Query Builder &amp; URL Parser | ClickSolveTools</title>
+  <meta name="description" content="Encode and decode URLs instantly in your browser. Supports encodeURIComponent, encodeURI, full URL parsing, query string builder, and percent-encoding per RFC 3986. Free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/url-encoder-decoder">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free URL Encoder &amp; Decoder Online — Percent-Encoding, Query Builder &amp; URL Parser | ClickSolveTools">
+  <meta property="og:description" content="Encode and decode URLs instantly in your browser. Supports encodeURIComponent, encodeURI, full URL parsing, and query string builder.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/url-encoder-decoder">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free URL Encoder &amp; Decoder Online | ClickSolveTools">
+  <meta name="twitter:description" content="Encode and decode URLs instantly. Supports encodeURIComponent, encodeURI, URL parsing, and query string builder. Free and private.">
+
+  <!-- GA4 with Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "URL Encoder & Decoder",
+    "url": "https://clicksolvetools.com/tools/url-encoder-decoder",
+    "description": "Encode and decode URLs instantly in your browser. Supports encodeURIComponent, encodeURI, full URL parsing, query string builder, and percent-encoding per RFC 3986.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is URL encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "URL encoding, also called percent-encoding, replaces unsafe or reserved characters in a URL with a percent sign followed by two hexadecimal digits representing the character's byte value. For example, a space becomes %20 and an ampersand becomes %26."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between encodeURI and encodeURIComponent?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "encodeURI encodes a full URL but preserves characters that have special meaning in URLs such as ://?#[]@!$&'()*+,;=. encodeURIComponent encodes everything except unreserved characters (letters, digits, - _ . ~), making it suitable for encoding individual query parameter values."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do I need to URL-encode query parameters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Query parameters may contain characters like &, =, and # that have special meaning in a URL. Without encoding, these characters would be interpreted as delimiters rather than literal values, breaking the URL structure and causing incorrect data to be sent to the server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this tool free and private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This URL encoder and decoder runs entirely in your browser using JavaScript. No data is sent to any server, no signup is required, and there are no usage limits."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mono { font-family: 'Courier New', Consolas, monospace; }
+    .tab-active { background-color: #2563eb; color: #fff; font-weight: 600; }
+    .tab-inactive { background-color: #f1f5f9; color: #475569; }
+    .tab-inactive:hover { background-color: #e2e8f0; color: #1e293b; }
+    .opt-active { background-color: #eff6ff; border-color: #2563eb; color: #2563eb; font-weight: 600; }
+    .opt-inactive { background-color: #fff; border-color: #e2e8f0; color: #475569; }
+    .opt-inactive:hover { border-color: #cbd5e1; color: #1e293b; }
+    textarea:focus, input:focus { outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.25); }
+    .section-tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 600; }
+    .section-tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
+    .section-tab-inactive:hover { color: #1e293b; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <div id="nav-container"></div>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+    <article>
+
+      <!-- Encoder / Decoder Widget -->
+      <section class="mb-10">
+        <!-- Mode Tabs -->
+        <div class="flex gap-2 mb-5" id="mode-tabs">
+          <button data-mode="encode" class="tab-active px-5 py-2 rounded-lg text-sm transition-colors">Encode</button>
+          <button data-mode="decode" class="tab-inactive px-5 py-2 rounded-lg text-sm transition-colors">Decode</button>
+        </div>
+
+        <!-- Encoding Method Options -->
+        <div class="flex gap-2 mb-4" id="method-opts">
+          <button data-method="component" class="opt-active border rounded-lg px-4 py-1.5 text-xs transition-colors">encodeURIComponent</button>
+          <button data-method="uri" class="opt-inactive border rounded-lg px-4 py-1.5 text-xs transition-colors">encodeURI (full URL safe)</button>
+        </div>
+
+        <!-- Input -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="input-label" class="text-sm font-semibold text-[#475569]">Text to Encode</label>
+            <button id="clear-btn" class="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors hidden">Clear</button>
+          </div>
+          <textarea
+            id="input-area"
+            class="w-full min-h-[140px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Type or paste text to encode…"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- Output -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="output-label" class="text-sm font-semibold text-[#475569]">Encoded Output</label>
+            <button id="copy-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Copy</button>
+          </div>
+          <textarea
+            id="output-area"
+            class="w-full min-h-[140px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Encoded output appears here…"
+            spellcheck="false"
+            readonly
+          ></textarea>
+        </div>
+
+        <!-- Error -->
+        <div id="error-msg" class="text-red-500 text-sm hidden"></div>
+      </section>
+
+      <!-- URL Parser & Query Builder (tabbed) -->
+      <section class="mb-12">
+        <div class="flex gap-6 border-b border-[#e2e8f0] mb-6" id="section-tabs">
+          <button data-section="parser" class="section-tab-active pb-2 text-sm transition-colors">URL Parser</button>
+          <button data-section="builder" class="section-tab-inactive pb-2 text-sm transition-colors">Query String Builder</button>
+        </div>
+
+        <!-- URL Parser -->
+        <div id="panel-parser">
+          <div class="mb-4">
+            <label class="text-sm font-semibold text-[#475569] mb-2 block">Paste a Full URL</label>
+            <input
+              id="parser-input"
+              type="text"
+              class="w-full bg-white border border-[#e2e8f0] rounded-lg px-4 py-3 text-[#1e293b] text-sm placeholder-[#94a3b8] mono"
+              placeholder="https://example.com/path?key=value&foo=bar#section"
+              spellcheck="false"
+            >
+          </div>
+          <div id="parser-output" class="hidden">
+            <div class="bg-white border border-[#e2e8f0] rounded-lg overflow-hidden">
+              <table class="w-full text-sm">
+                <tbody id="parser-table"></tbody>
+              </table>
+            </div>
+            <div id="params-section" class="mt-4 hidden">
+              <h3 class="text-sm font-semibold text-[#475569] mb-2">Query Parameters</h3>
+              <div class="bg-white border border-[#e2e8f0] rounded-lg overflow-hidden">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-[#f8fafc] border-b border-[#e2e8f0]">
+                      <th class="text-left px-4 py-2 text-[#475569] font-semibold text-xs uppercase tracking-wider">Key</th>
+                      <th class="text-left px-4 py-2 text-[#475569] font-semibold text-xs uppercase tracking-wider">Value (decoded)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="params-table"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <p id="parser-error" class="text-red-500 text-sm mt-2 hidden"></p>
+        </div>
+
+        <!-- Query String Builder -->
+        <div id="panel-builder" class="hidden">
+          <div id="builder-rows" class="space-y-2 mb-4"></div>
+          <button id="add-row-btn" class="text-sm text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors mb-5">+ Add parameter</button>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-semibold text-[#475569]">Generated Query String</label>
+              <button id="copy-qs-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Copy</button>
+            </div>
+            <textarea
+              id="qs-output"
+              class="w-full min-h-[80px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+              placeholder="?key=value&foo=bar"
+              readonly
+            ></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO Content -->
+      <section class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-4">What Is URL Encoding and Why Does It Matter?</h2>
+
+        <div class="text-[#475569] leading-relaxed space-y-4 text-[15px]">
+          <p>
+            URL encoding — formally known as percent-encoding — is the mechanism defined by <strong class="text-[#1e293b]">RFC 3986</strong> for representing characters in a Uniform Resource Identifier (URI) that would otherwise be ambiguous, unsafe, or illegal. Every URL is composed of a strict set of allowed characters: the unreserved set consists of uppercase and lowercase ASCII letters, digits, hyphens, underscores, periods, and tildes (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">A-Z a-z 0-9 - _ . ~</code>). Any character outside this set must be replaced with a percent sign followed by two uppercase hexadecimal digits representing the byte value. For example, a space becomes <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%20</code>, an ampersand becomes <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%26</code>, and the plus sign becomes <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%2B</code>.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">encodeURIComponent vs. encodeURI</h3>
+          <p>
+            JavaScript provides two built-in functions for URL encoding, and choosing the right one is critical. <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURIComponent()</code> encodes everything except the unreserved characters, making it the correct choice for encoding individual query parameter keys and values. It will encode characters like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">/ : ? # [ ] @ ! $ & ' ( ) * + , ; =</code> that have special meaning in a URL. In contrast, <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURI()</code> is designed for encoding a complete URL and intentionally preserves those reserved characters so the URL structure stays intact. Using <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURI()</code> on a query parameter value that contains an ampersand would leave it unencoded, breaking the query string. This tool lets you switch between both methods so you can see exactly how each one handles your input.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">How Percent-Encoding Handles Unicode</h3>
+          <p>
+            Modern URLs frequently contain non-ASCII characters — think of internationalized domain names, search queries in Chinese or Arabic, or file paths with accented letters. RFC 3986 requires that these characters first be encoded as UTF-8 byte sequences, and then each byte is percent-encoded individually. The Japanese character "日" (U+65E5), for example, encodes to three UTF-8 bytes (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">E6 97 A5</code>), which become <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%E6%97%A5</code> in the URL. JavaScript's <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURIComponent()</code> handles this automatically, so emoji, CJK characters, and accented Latin letters all work correctly with this tool.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Common Use Cases for URL Encoding</h3>
+          <p>
+            URL encoding is essential in nearly every area of web development. When building <strong class="text-[#1e293b]">API requests</strong>, query parameters must be encoded to prevent reserved characters from corrupting the URL. <strong class="text-[#1e293b]">Form submissions</strong> sent with the <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">application/x-www-form-urlencoded</code> content type percent-encode all field names and values. <strong class="text-[#1e293b]">OAuth and authentication flows</strong> require precise encoding of callback URLs and token parameters — a single unencoded character can cause signature mismatches. <strong class="text-[#1e293b]">Redirect URLs</strong> embedded as query parameters must be double-encoded to avoid being parsed as part of the outer URL. And <strong class="text-[#1e293b]">analytics tracking parameters</strong> (UTM tags, click IDs) must be properly encoded so they survive browser redirects and server-side parsing without losing data.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">URL Parsing and Query String Building</h3>
+          <p>
+            Beyond simple encode/decode operations, this tool includes a URL parser that breaks down any URL into its constituent parts — protocol, hostname, port, path, individual query parameters (displayed in a table with decoded values), and fragment. This is useful for debugging complex URLs or inspecting redirect chains. The query string builder lets you assemble parameters visually by adding key-value rows, automatically handling the encoding and concatenation so you get a correctly formatted query string every time.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <p><strong class="text-[#1e293b]">What is URL encoding used for?</strong><br>
+            URL encoding replaces characters that are unsafe or reserved in a URL with percent-encoded equivalents. This ensures that query parameters, path segments, and fragment identifiers are transmitted correctly without ambiguity. It is required by RFC 3986 and is fundamental to how the web works.
+          </p>
+
+          <p><strong class="text-[#1e293b]">What is the difference between encodeURI and encodeURIComponent?</strong><br>
+            <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURI()</code> preserves URL-structural characters like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">: / ? # @ &</code> and is meant for encoding a complete URL. <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURIComponent()</code> encodes those characters too, making it the right choice for individual parameter values.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Should I use + or %20 for spaces?</strong><br>
+            In the <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">application/x-www-form-urlencoded</code> format (HTML forms), spaces are encoded as <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">+</code>. In standard percent-encoding per RFC 3986, spaces become <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%20</code>. JavaScript's <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">encodeURIComponent()</code> produces <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">%20</code>, which is universally safe.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Is this tool free and private?</strong><br>
+            Yes. Everything runs in your browser using JavaScript. No data is sent to any server, no signup is required, and there are no usage limits. Encode and decode as much as you like.
+          </p>
+
+          <p>
+            This URL encoder and decoder runs entirely client-side — your data never leaves your device. It is free to use with no account required. Paste your text, pick your encoding method, and get results instantly.
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('url-encoder-decoder');
+  </script>
+
+  <script>
+  (function () {
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+
+    /* ── Encoder / Decoder ── */
+    const inputArea  = $('#input-area');
+    const outputArea = $('#output-area');
+    const inputLabel = $('#input-label');
+    const outputLabel = $('#output-label');
+    const copyBtn    = $('#copy-btn');
+    const clearBtn   = $('#clear-btn');
+    const errorMsg   = $('#error-msg');
+    const modeTabs   = $$('#mode-tabs button');
+    const methodOpts = $$('#method-opts button');
+
+    let mode   = 'encode';
+    let method = 'component';
+
+    function setMode(m) {
+      mode = m;
+      modeTabs.forEach(t => {
+        t.classList.toggle('tab-active', t.dataset.mode === m);
+        t.classList.toggle('tab-inactive', t.dataset.mode !== m);
+      });
+      if (m === 'encode') {
+        inputLabel.textContent = 'Text to Encode';
+        outputLabel.textContent = 'Encoded Output';
+        inputArea.placeholder = 'Type or paste text to encode…';
+        outputArea.placeholder = 'Encoded output appears here…';
+        $('#method-opts').classList.remove('hidden');
+      } else {
+        inputLabel.textContent = 'Encoded String';
+        outputLabel.textContent = 'Decoded Output';
+        inputArea.placeholder = 'Paste a URL-encoded string to decode…';
+        outputArea.placeholder = 'Decoded output appears here…';
+        $('#method-opts').classList.add('hidden');
+      }
+      convert();
+    }
+
+    function setMethod(m) {
+      method = m;
+      methodOpts.forEach(o => {
+        const active = o.dataset.method === m;
+        o.classList.toggle('opt-active', active);
+        o.classList.toggle('opt-inactive', !active);
+      });
+      convert();
+    }
+
+    function clearError() {
+      errorMsg.textContent = '';
+      errorMsg.classList.add('hidden');
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    function convert() {
+      clearError();
+      const input = inputArea.value;
+      clearBtn.classList.toggle('hidden', !input);
+
+      if (!input) {
+        outputArea.value = '';
+        return;
+      }
+
+      try {
+        if (mode === 'encode') {
+          outputArea.value = method === 'component'
+            ? encodeURIComponent(input)
+            : encodeURI(input);
+        } else {
+          outputArea.value = decodeURIComponent(input);
+        }
+      } catch (e) {
+        showError('Invalid input — could not ' + (mode === 'encode' ? 'encode' : 'decode') + '. Check for malformed percent sequences.');
+        outputArea.value = '';
+      }
+    }
+
+    inputArea.addEventListener('input', convert);
+    modeTabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+    methodOpts.forEach(o => o.addEventListener('click', () => setMethod(o.dataset.method)));
+
+    clearBtn.addEventListener('click', () => {
+      inputArea.value = '';
+      outputArea.value = '';
+      clearError();
+      clearBtn.classList.add('hidden');
+    });
+
+    function clipCopy(btn, text) {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.remove('text-[#2563eb]');
+        btn.classList.add('text-emerald-500');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('text-emerald-500');
+          btn.classList.add('text-[#2563eb]');
+        }, 1500);
+      });
+    }
+
+    copyBtn.addEventListener('click', () => clipCopy(copyBtn, outputArea.value));
+
+    /* ── Section Tabs (Parser / Builder) ── */
+    const sectionTabs = $$('#section-tabs button');
+    const panelParser  = $('#panel-parser');
+    const panelBuilder = $('#panel-builder');
+
+    sectionTabs.forEach(t => t.addEventListener('click', () => {
+      const sec = t.dataset.section;
+      sectionTabs.forEach(s => {
+        s.classList.toggle('section-tab-active', s.dataset.section === sec);
+        s.classList.toggle('section-tab-inactive', s.dataset.section !== sec);
+      });
+      panelParser.classList.toggle('hidden', sec !== 'parser');
+      panelBuilder.classList.toggle('hidden', sec !== 'builder');
+    }));
+
+    /* ── URL Parser ── */
+    const parserInput  = $('#parser-input');
+    const parserOutput = $('#parser-output');
+    const parserTable  = $('#parser-table');
+    const paramsSection = $('#params-section');
+    const paramsTable  = $('#params-table');
+    const parserError  = $('#parser-error');
+
+    function parseURL() {
+      parserError.classList.add('hidden');
+      const raw = parserInput.value.trim();
+      if (!raw) {
+        parserOutput.classList.add('hidden');
+        return;
+      }
+
+      let url;
+      try {
+        url = new URL(raw);
+      } catch {
+        try {
+          url = new URL('https://' + raw);
+        } catch {
+          parserOutput.classList.add('hidden');
+          parserError.textContent = 'Invalid URL. Include a protocol (e.g. https://) or enter a valid URL.';
+          parserError.classList.remove('hidden');
+          return;
+        }
+      }
+
+      const parts = [
+        ['Protocol', url.protocol],
+        ['Host', url.hostname],
+        ['Port', url.port || '(default)'],
+        ['Path', url.pathname],
+        ['Query', url.search || '(none)'],
+        ['Fragment', url.hash || '(none)']
+      ];
+
+      parserTable.innerHTML = parts.map(([label, val]) =>
+        `<tr class="border-b border-[#e2e8f0] last:border-0">
+          <td class="px-4 py-2.5 font-semibold text-[#475569] w-32 text-xs uppercase tracking-wider bg-[#f8fafc]">${label}</td>
+          <td class="px-4 py-2.5 mono text-[#1e293b] break-all">${escHTML(val)}</td>
+        </tr>`
+      ).join('');
+
+      const params = [...url.searchParams.entries()];
+      if (params.length > 0) {
+        paramsTable.innerHTML = params.map(([k, v]) =>
+          `<tr class="border-b border-[#e2e8f0] last:border-0">
+            <td class="px-4 py-2 mono text-[#2563eb] break-all">${escHTML(k)}</td>
+            <td class="px-4 py-2 mono text-[#1e293b] break-all">${escHTML(v)}</td>
+          </tr>`
+        ).join('');
+        paramsSection.classList.remove('hidden');
+      } else {
+        paramsSection.classList.add('hidden');
+      }
+
+      parserOutput.classList.remove('hidden');
+    }
+
+    function escHTML(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    parserInput.addEventListener('input', parseURL);
+
+    /* ── Query String Builder ── */
+    const builderRows = $('#builder-rows');
+    const addRowBtn   = $('#add-row-btn');
+    const qsOutput    = $('#qs-output');
+    const copyQsBtn   = $('#copy-qs-btn');
+
+    function createRow(key, val) {
+      const row = document.createElement('div');
+      row.className = 'flex gap-2 items-center';
+      row.innerHTML =
+        `<input type="text" placeholder="Key" value="${escAttr(key || '')}" class="flex-1 bg-white border border-[#e2e8f0] rounded-lg px-3 py-2 text-sm mono text-[#1e293b] placeholder-[#94a3b8] builder-key">
+         <span class="text-[#94a3b8] text-sm">=</span>
+         <input type="text" placeholder="Value" value="${escAttr(val || '')}" class="flex-1 bg-white border border-[#e2e8f0] rounded-lg px-3 py-2 text-sm mono text-[#1e293b] placeholder-[#94a3b8] builder-val">
+         <button class="text-[#94a3b8] hover:text-red-500 transition-colors text-lg leading-none remove-row" title="Remove">&times;</button>`;
+      builderRows.appendChild(row);
+
+      row.querySelector('.remove-row').addEventListener('click', () => {
+        row.remove();
+        buildQS();
+      });
+      row.querySelector('.builder-key').addEventListener('input', buildQS);
+      row.querySelector('.builder-val').addEventListener('input', buildQS);
+    }
+
+    function escAttr(s) {
+      return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+    }
+
+    function buildQS() {
+      const rows = builderRows.querySelectorAll('.flex');
+      const pairs = [];
+      rows.forEach(r => {
+        const k = r.querySelector('.builder-key').value;
+        const v = r.querySelector('.builder-val').value;
+        if (k) pairs.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+      });
+      qsOutput.value = pairs.length ? '?' + pairs.join('&') : '';
+    }
+
+    addRowBtn.addEventListener('click', () => { createRow('', ''); });
+    copyQsBtn.addEventListener('click', () => clipCopy(copyQsBtn, qsOutput.value));
+
+    createRow('', '');
+    createRow('', '');
+  })();
+  </script>
+
+</body>
+</html>

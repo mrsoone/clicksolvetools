@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF Merger Online — Combine PDF Files Instantly | ClickSolveTools</title>
+  <meta name="description" content="Merge multiple PDF files into one document for free. Drag to reorder, preview page counts, and download instantly. 100% client-side — your files never leave your device.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/pdf-merger">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free PDF Merger Online — Combine PDF Files Instantly | ClickSolveTools">
+  <meta property="og:description" content="Merge multiple PDF files into one document for free. Drag to reorder, preview page counts, and download instantly. 100% client-side — your files never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/pdf-merger">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free PDF Merger Online — Combine PDF Files Instantly | ClickSolveTools">
+  <meta name="twitter:description" content="Merge multiple PDF files into one document for free. Drag to reorder, preview page counts, and download instantly. 100% client-side — your files never leave your device.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Merger",
+    "url": "https://clicksolvetools.com/tools/pdf-merger",
+    "description": "Merge multiple PDF files into one document for free. Drag to reorder, preview page counts, and download instantly. 100% client-side — your files never leave your device.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it safe to merge PDFs online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit on file size or number of PDFs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no hard limit, but performance depends on your device's memory. Most users can comfortably merge dozens of PDFs totaling hundreds of megabytes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does merging PDFs reduce quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The merge copies pages exactly as they are, preserving all text, images, fonts, annotations, and vector graphics at their original quality."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .dragging { opacity: 0.5; }
+    .drag-over { border-color: #2563eb !important; background-color: rgba(37, 99, 235, 0.05) !important; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="application/pdf" multiple class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop PDF files here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Select multiple files at once or add more later</p>
+        </div>
+
+        <!-- File list -->
+        <div id="file-list-wrapper" class="hidden">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium text-[#475569]">Files to merge <span id="file-count" class="text-[#94a3b8]">(0)</span></h3>
+            <button id="add-more-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">+ Add more files</button>
+          </div>
+
+          <!-- Summary bar -->
+          <div class="flex flex-wrap gap-4 mb-4 text-xs text-[#64748b] bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-2.5">
+            <span>Total files: <strong id="total-files" class="text-[#1e293b]">0</strong></span>
+            <span>Total pages: <strong id="total-pages" class="text-[#1e293b]">0</strong></span>
+            <span>Combined size: <strong id="total-size" class="text-[#1e293b]">0 B</strong></span>
+            <span>Est. output: <strong id="est-output" class="text-[#1e293b]">~0 B</strong></span>
+          </div>
+
+          <ul id="file-list" class="space-y-2 mb-6 max-h-[400px] overflow-y-auto"></ul>
+
+          <!-- Progress -->
+          <div id="progress-wrapper" class="hidden mb-6">
+            <div class="flex items-center justify-between mb-1.5">
+              <span id="progress-label" class="text-sm text-[#475569]">Merging…</span>
+              <span id="progress-pct" class="text-sm font-semibold text-[#2563eb]">0%</span>
+            </div>
+            <div class="w-full h-2 bg-[#e2e8f0] rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-[#2563eb] rounded-full transition-all duration-200" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-3">
+            <button id="merge-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              Merge PDFs
+            </button>
+            <button id="download-btn" class="hidden inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Merged PDF
+            </button>
+            <button id="clear-all-btn" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-[#94a3b8] hover:text-red-500 text-sm font-medium transition-colors">
+              Clear all
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Merge PDF Files Online — Free, Private, and Instant</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Combining multiple PDF documents into a single file is one of the most common document tasks people face every day. Whether you need to assemble a report from separate chapters, bundle receipts for an expense claim, compile scanned pages into one cohesive document, or consolidate contracts before sending them for signature, a PDF merger is the essential tool for the job. This free online PDF merger lets you upload any number of PDF files, reorder them with drag-and-drop or arrow buttons, see page counts and file sizes at a glance, and produce a single merged PDF — all without installing any software or creating an account.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Why Merge PDFs?</h3>
+          <p>There are many practical situations where merging PDFs saves time and reduces friction. Office workers frequently receive multi-part reports, invoices, or forms as separate attachments and need to combine them into a single document for filing or forwarding. Students assembling a thesis or portfolio often need to merge title pages, chapters, and appendices that were authored independently. Real estate agents, accountants, and legal professionals routinely combine contracts, disclosures, and supporting documents into unified packages for clients or courts. Rather than printing everything, scanning it back in, and hoping the page order is correct, a PDF merger handles it digitally in seconds.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">100% Client-Side Processing — Your Files Stay Private</h3>
+          <p>Unlike most online PDF tools that require you to upload your documents to a remote server, this merger runs entirely inside your web browser. The tool uses <strong class="text-[#1e293b]">pdf-lib</strong>, a robust open-source JavaScript library, to read, combine, and produce PDF files without any server involvement. Your sensitive financial records, legal documents, medical forms, and personal files never leave your device — not even temporarily. There is no upload, no cloud processing, and no server-side storage. Once you close or refresh the page, all data is gone from memory. This makes the tool safe for handling confidential, proprietary, or personally identifiable information.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How It Works</h3>
+          <p>Using the tool is straightforward. Drop your PDF files onto the upload area (or click to browse and multi-select). The tool immediately reads each file, displays its name, page count, and size, and adds it to an ordered list. You can drag files to rearrange them, use the up and down arrow buttons for precise positioning, or remove any file you no longer want. A summary bar shows the total number of files, total page count, combined input size, and an estimated output size. When you are satisfied with the order, click "Merge PDFs." A progress bar tracks the operation as pages are copied one by one. When merging is complete, a download button appears so you can save the result immediately.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Does Merging Affect Quality?</h3>
+          <p>No. The merging process copies each page exactly as it exists in the source file, preserving all text, images, vector graphics, fonts, annotations, bookmarks, and form fields at their original fidelity. There is no re-rendering, re-compression, or resolution reduction. The merged output is byte-for-byte faithful to the inputs — only the page sequence and file container change. This is fundamentally different from "printing to PDF," which can flatten layers and degrade quality.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Tips for Better Results</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Organize before merging</strong> — Rename your source files with numeric prefixes (01-, 02-, etc.) so they naturally sort into the correct order when you upload them.</li>
+            <li><strong class="text-[#1e293b]">Check page counts</strong> — Use the per-file page count display to verify that every source file loaded correctly before merging.</li>
+            <li><strong class="text-[#1e293b]">Remove unwanted pages first</strong> — If a source PDF contains pages you do not want in the final document, use a PDF splitter to extract just the pages you need, then merge the trimmed files.</li>
+            <li><strong class="text-[#1e293b]">Large merges</strong> — For very large jobs (hundreds of pages), give the browser a moment to process. The progress bar will keep you informed.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is it safe to merge PDFs online?</h4>
+              <p>Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device, making it safe for confidential and sensitive documents.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is there a limit on file size or number of PDFs?</h4>
+              <p>There is no hard limit imposed by the tool. Performance depends on your device's available memory and processing power. Most modern computers and phones can comfortably merge dozens of PDFs totaling hundreds of megabytes.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does merging reduce the quality of my PDFs?</h4>
+              <p>No. The merge operation copies pages exactly as they are — all text, images, fonts, annotations, and vector graphics remain at their original quality. Nothing is re-compressed or re-rendered.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I change the page order?</h4>
+              <p>Yes. After uploading, you can drag files to reorder them or use the up/down arrow buttons. The pages from each file will appear in the merged document in the order shown in the list.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need to install any software?</h4>
+              <p>No. The tool runs entirely in your web browser. There is nothing to download, install, or configure. It works on Windows, macOS, Linux, iOS, and Android in any modern browser.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- pdf-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('pdf-merger');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { PDFDocument } = PDFLib;
+
+    const dropZone        = document.getElementById('drop-zone');
+    const fileInput       = document.getElementById('file-input');
+    const fileListWrapper = document.getElementById('file-list-wrapper');
+    const fileList        = document.getElementById('file-list');
+    const addMoreBtn      = document.getElementById('add-more-btn');
+    const mergeBtn        = document.getElementById('merge-btn');
+    const downloadBtn     = document.getElementById('download-btn');
+    const clearAllBtn     = document.getElementById('clear-all-btn');
+    const fileCountEl     = document.getElementById('file-count');
+    const totalFilesEl    = document.getElementById('total-files');
+    const totalPagesEl    = document.getElementById('total-pages');
+    const totalSizeEl     = document.getElementById('total-size');
+    const estOutputEl     = document.getElementById('est-output');
+    const progressWrapper = document.getElementById('progress-wrapper');
+    const progressLabel   = document.getElementById('progress-label');
+    const progressPct     = document.getElementById('progress-pct');
+    const progressBar     = document.getElementById('progress-bar');
+
+    let pdfFiles = [];
+    let mergedBlob = null;
+    let dragSrcIdx = null;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    async function loadPdfInfo(file) {
+      const buffer = await file.arrayBuffer();
+      const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
+      return { file, name: file.name, size: file.size, pages: pdf.getPageCount(), buffer };
+    }
+
+    function updateSummary() {
+      const count = pdfFiles.length;
+      const pages = pdfFiles.reduce((s, f) => s + f.pages, 0);
+      const size  = pdfFiles.reduce((s, f) => s + f.size, 0);
+
+      fileCountEl.textContent  = `(${count})`;
+      totalFilesEl.textContent = count;
+      totalPagesEl.textContent = pages;
+      totalSizeEl.textContent  = formatBytes(size);
+      estOutputEl.textContent  = '~' + formatBytes(Math.round(size * 0.95));
+
+      mergeBtn.disabled = count < 2;
+      fileListWrapper.classList.toggle('hidden', count === 0);
+      dropZone.classList.toggle('hidden', count > 0);
+    }
+
+    function renderList() {
+      fileList.innerHTML = '';
+      pdfFiles.forEach((entry, idx) => {
+        const li = document.createElement('li');
+        li.className = 'flex items-center gap-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 group cursor-grab active:cursor-grabbing';
+        li.draggable = true;
+        li.dataset.idx = idx;
+
+        li.innerHTML = `
+          <span class="text-[#94a3b8] text-xs font-mono w-5 text-right select-none">${idx + 1}</span>
+          <svg class="w-5 h-5 text-[#cbd5e1] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-[#1e293b] truncate">${entry.name}</p>
+            <p class="text-xs text-[#94a3b8]">${entry.pages} page${entry.pages !== 1 ? 's' : ''} · ${formatBytes(entry.size)}</p>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button data-action="up" data-idx="${idx}" class="p-1 rounded hover:bg-[#e2e8f0] text-[#94a3b8] hover:text-[#1e293b] transition-colors disabled:opacity-30 disabled:cursor-not-allowed" ${idx === 0 ? 'disabled' : ''} title="Move up">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+            </button>
+            <button data-action="down" data-idx="${idx}" class="p-1 rounded hover:bg-[#e2e8f0] text-[#94a3b8] hover:text-[#1e293b] transition-colors disabled:opacity-30 disabled:cursor-not-allowed" ${idx === pdfFiles.length - 1 ? 'disabled' : ''} title="Move down">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <button data-action="remove" data-idx="${idx}" class="p-1 rounded hover:bg-red-50 text-[#94a3b8] hover:text-red-500 transition-colors ml-1" title="Remove">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        `;
+
+        li.addEventListener('dragstart', onDragStart);
+        li.addEventListener('dragover', onDragOver);
+        li.addEventListener('dragenter', onDragEnter);
+        li.addEventListener('dragleave', onDragLeave);
+        li.addEventListener('drop', onDrop);
+        li.addEventListener('dragend', onDragEnd);
+
+        fileList.appendChild(li);
+      });
+      updateSummary();
+    }
+
+    function onDragStart(e) {
+      dragSrcIdx = parseInt(e.currentTarget.dataset.idx);
+      e.currentTarget.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+
+    function onDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+
+    function onDragEnter(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    }
+
+    function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+
+    function onDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      const targetIdx = parseInt(e.currentTarget.dataset.idx);
+      if (dragSrcIdx === null || dragSrcIdx === targetIdx) return;
+      const [moved] = pdfFiles.splice(dragSrcIdx, 1);
+      pdfFiles.splice(targetIdx, 0, moved);
+      hideMergedResult();
+      renderList();
+    }
+
+    function onDragEnd(e) {
+      e.currentTarget.classList.remove('dragging');
+      dragSrcIdx = null;
+      fileList.querySelectorAll('li').forEach(li => li.classList.remove('drag-over'));
+    }
+
+    fileList.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const idx    = parseInt(btn.dataset.idx);
+
+      if (action === 'remove') {
+        pdfFiles.splice(idx, 1);
+        hideMergedResult();
+        renderList();
+        if (pdfFiles.length === 0) resetAll();
+      } else if (action === 'up' && idx > 0) {
+        [pdfFiles[idx - 1], pdfFiles[idx]] = [pdfFiles[idx], pdfFiles[idx - 1]];
+        hideMergedResult();
+        renderList();
+      } else if (action === 'down' && idx < pdfFiles.length - 1) {
+        [pdfFiles[idx], pdfFiles[idx + 1]] = [pdfFiles[idx + 1], pdfFiles[idx]];
+        hideMergedResult();
+        renderList();
+      }
+    });
+
+    async function addFiles(files) {
+      const validFiles = Array.from(files).filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+      if (validFiles.length === 0) return;
+
+      dropZone.classList.add('hidden');
+      fileListWrapper.classList.remove('hidden');
+
+      for (const file of validFiles) {
+        try {
+          const info = await loadPdfInfo(file);
+          pdfFiles.push(info);
+        } catch (err) {
+          console.warn('Skipped unreadable PDF:', file.name, err);
+        }
+      }
+      hideMergedResult();
+      renderList();
+    }
+
+    function hideMergedResult() {
+      mergedBlob = null;
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+    }
+
+    function resetAll() {
+      pdfFiles = [];
+      mergedBlob = null;
+      fileInput.value = '';
+      fileList.innerHTML = '';
+      fileListWrapper.classList.add('hidden');
+      dropZone.classList.remove('hidden');
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+      updateSummary();
+    }
+
+    // Drag & drop on upload zone
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      addFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) addFiles(fileInput.files); fileInput.value = ''; });
+
+    addMoreBtn.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/pdf';
+      inp.multiple = true;
+      inp.addEventListener('change', () => { if (inp.files.length) addFiles(inp.files); });
+      inp.click();
+    });
+
+    clearAllBtn.addEventListener('click', resetAll);
+
+    // Drop on the whole page when file list is visible
+    document.body.addEventListener('dragover', e => {
+      if (pdfFiles.length > 0) e.preventDefault();
+    });
+    document.body.addEventListener('drop', e => {
+      if (pdfFiles.length > 0 && e.dataTransfer.files.length) {
+        e.preventDefault();
+        addFiles(e.dataTransfer.files);
+      }
+    });
+
+    // Merge
+    mergeBtn.addEventListener('click', async () => {
+      if (pdfFiles.length < 2) return;
+      mergeBtn.disabled = true;
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.remove('hidden');
+
+      const totalPages = pdfFiles.reduce((s, f) => s + f.pages, 0);
+      let copiedPages = 0;
+
+      function updateProgress(label, pct) {
+        progressLabel.textContent = label;
+        progressPct.textContent   = Math.round(pct) + '%';
+        progressBar.style.width   = pct + '%';
+      }
+
+      try {
+        const merged = await PDFDocument.create();
+
+        for (let i = 0; i < pdfFiles.length; i++) {
+          const src = await PDFDocument.load(pdfFiles[i].buffer, { ignoreEncryption: true });
+          const indices = src.getPageIndices();
+          const pages = await merged.copyPages(src, indices);
+          for (const page of pages) {
+            merged.addPage(page);
+            copiedPages++;
+            updateProgress(`Merging: ${pdfFiles[i].name}`, (copiedPages / totalPages) * 90);
+          }
+        }
+
+        updateProgress('Generating file…', 95);
+        const bytes = await merged.save();
+        mergedBlob = new Blob([bytes], { type: 'application/pdf' });
+
+        updateProgress('Done!', 100);
+        progressBar.classList.remove('bg-[#2563eb]');
+        progressBar.classList.add('bg-emerald-500');
+        downloadBtn.classList.remove('hidden');
+      } catch (err) {
+        console.error('Merge failed:', err);
+        updateProgress('Error: ' + (err.message || 'Merge failed'), 0);
+        progressBar.classList.remove('bg-[#2563eb]');
+        progressBar.classList.add('bg-red-500');
+      } finally {
+        mergeBtn.disabled = false;
+      }
+    });
+
+    // Download
+    downloadBtn.addEventListener('click', () => {
+      if (!mergedBlob) return;
+      const a = document.createElement('a');
+      a.download = 'merged.pdf';
+      a.href = URL.createObjectURL(mergedBlob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+  });
+  </script>
+
+</body>
+</html>

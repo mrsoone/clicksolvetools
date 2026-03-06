@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free HTML Entity Encoder &amp; Decoder Online — Named, Numeric &amp; Hex Entities | ClickSolveTools</title>
+  <meta name="description" content="Encode and decode HTML entities instantly in your browser. Supports named (&amp;amp;), numeric (&#38;), and hex (&#x26;) formats. Prevent XSS, sanitize user input, and look up common entities. Free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/html-entity-encoder">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔤</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free HTML Entity Encoder &amp; Decoder Online — Named, Numeric &amp; Hex Entities | ClickSolveTools">
+  <meta property="og:description" content="Encode and decode HTML entities instantly in your browser. Supports named, numeric, and hex formats. Prevent XSS and sanitize user input. Free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/html-entity-encoder">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free HTML Entity Encoder &amp; Decoder Online | ClickSolveTools">
+  <meta name="twitter:description" content="Encode and decode HTML entities instantly. Named, numeric, and hex formats. Prevent XSS attacks. Free and private.">
+
+  <!-- GA4 with Consent Mode v2 (all denied by default) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HTML Entity Encoder & Decoder",
+    "url": "https://clicksolvetools.com/tools/html-entity-encoder",
+    "description": "Encode and decode HTML entities instantly in your browser. Supports named, numeric, and hex entity formats. Prevent XSS, sanitize user input, and reference common entities.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are HTML entities?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HTML entities are special text sequences that represent characters which have reserved meaning in HTML (like <, >, &) or characters that are not easily typed on a keyboard (like ©, €, →). They begin with an ampersand (&) and end with a semicolon (;)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do HTML entities prevent XSS attacks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cross-site scripting (XSS) attacks inject malicious HTML or JavaScript into a page. By encoding user input so that characters like < and > become &lt; and &gt;, the browser renders them as literal text instead of interpreting them as HTML tags, neutralizing the attack."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between named, numeric, and hex HTML entities?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Named entities use a human-readable alias like &amp; for &. Numeric entities use the character's Unicode code point in decimal like &#38;. Hex entities use the hexadecimal code point like &#x26;. All three produce the same character in the browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I encode all characters or just special ones?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most use cases, encoding only the five special HTML characters (<, >, &, \", ') is sufficient. Encoding all characters is useful when you need to ensure the text is fully ASCII-safe, such as when embedding content in systems that do not support Unicode."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mono { font-family: 'Courier New', Consolas, monospace; }
+    .tab-active { background-color: #2563eb; color: #fff; font-weight: 600; }
+    .tab-inactive { background-color: #f1f5f9; color: #475569; }
+    .tab-inactive:hover { background-color: #e2e8f0; color: #1e293b; }
+    textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.25); }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <div id="nav-container"></div>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+    <article>
+
+      <!-- Widget -->
+      <section class="mb-12">
+        <!-- Mode Tabs -->
+        <div class="flex gap-2 mb-5" id="mode-tabs">
+          <button data-mode="encode" class="tab-active px-5 py-2 rounded-lg text-sm transition-colors">Encode</button>
+          <button data-mode="decode" class="tab-inactive px-5 py-2 rounded-lg text-sm transition-colors">Decode</button>
+        </div>
+
+        <!-- Encode Options -->
+        <div id="encode-options" class="bg-white border border-[#e2e8f0] rounded-lg p-4 mb-4">
+          <div class="flex flex-wrap gap-x-8 gap-y-3">
+            <!-- Entity Format -->
+            <div>
+              <span class="text-xs font-semibold text-[#475569] uppercase tracking-wider block mb-2">Entity Format</span>
+              <div class="flex gap-2">
+                <label class="flex items-center gap-1.5 text-sm text-[#475569] cursor-pointer">
+                  <input type="radio" name="entity-format" value="named" checked class="accent-[#2563eb]">
+                  <span>Named <code class="mono text-[#2563eb] bg-[#eff6ff] px-1 py-0.5 rounded text-xs">&amp;amp;</code></span>
+                </label>
+                <label class="flex items-center gap-1.5 text-sm text-[#475569] cursor-pointer">
+                  <input type="radio" name="entity-format" value="numeric" class="accent-[#2563eb]">
+                  <span>Numeric <code class="mono text-[#2563eb] bg-[#eff6ff] px-1 py-0.5 rounded text-xs">&amp;#38;</code></span>
+                </label>
+                <label class="flex items-center gap-1.5 text-sm text-[#475569] cursor-pointer">
+                  <input type="radio" name="entity-format" value="hex" class="accent-[#2563eb]">
+                  <span>Hex <code class="mono text-[#2563eb] bg-[#eff6ff] px-1 py-0.5 rounded text-xs">&amp;#x26;</code></span>
+                </label>
+              </div>
+            </div>
+            <!-- Scope -->
+            <div>
+              <span class="text-xs font-semibold text-[#475569] uppercase tracking-wider block mb-2">Scope</span>
+              <div class="flex gap-2">
+                <label class="flex items-center gap-1.5 text-sm text-[#475569] cursor-pointer">
+                  <input type="radio" name="encode-scope" value="special" checked class="accent-[#2563eb]">
+                  <span>Special only <code class="mono text-[#2563eb] bg-[#eff6ff] px-1 py-0.5 rounded text-xs">&lt; &gt; &amp; " '</code></span>
+                </label>
+                <label class="flex items-center gap-1.5 text-sm text-[#475569] cursor-pointer">
+                  <input type="radio" name="encode-scope" value="all" class="accent-[#2563eb]">
+                  <span>All characters</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="input-label" class="text-sm font-semibold text-[#475569]">Raw HTML / Text</label>
+            <button id="clear-btn" class="text-xs text-[#94a3b8] hover:text-[#475569] transition-colors hidden">Clear</button>
+          </div>
+          <textarea
+            id="input-area"
+            class="w-full min-h-[160px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Type or paste HTML to encode… e.g. <div class=&quot;hello&quot;>"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- Output -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="output-label" class="text-sm font-semibold text-[#475569]">Encoded Output</label>
+            <div class="flex items-center gap-3">
+              <span id="char-count" class="text-xs text-[#94a3b8] hidden"></span>
+              <button id="copy-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Copy</button>
+            </div>
+          </div>
+          <textarea
+            id="output-area"
+            class="w-full min-h-[160px] bg-white border border-[#e2e8f0] rounded-lg p-4 text-[#1e293b] text-sm resize-y placeholder-[#94a3b8] mono"
+            placeholder="Encoded output appears here…"
+            spellcheck="false"
+            readonly
+          ></textarea>
+        </div>
+
+        <!-- Error -->
+        <div id="error-msg" class="text-red-500 text-sm hidden"></div>
+      </section>
+
+      <!-- Entity Reference Table -->
+      <section class="mb-12">
+        <h2 class="text-lg font-bold text-[#1e293b] mb-4">Common HTML Entity Reference</h2>
+        <div class="overflow-x-auto bg-white border border-[#e2e8f0] rounded-lg">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[#e2e8f0] bg-[#f8fafc]">
+                <th class="text-left px-4 py-2.5 font-semibold text-[#475569]">Character</th>
+                <th class="text-left px-4 py-2.5 font-semibold text-[#475569]">Named</th>
+                <th class="text-left px-4 py-2.5 font-semibold text-[#475569]">Numeric</th>
+                <th class="text-left px-4 py-2.5 font-semibold text-[#475569]">Hex</th>
+                <th class="text-left px-4 py-2.5 font-semibold text-[#475569]">Description</th>
+              </tr>
+            </thead>
+            <tbody class="mono text-[13px]" id="entity-table-body">
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SEO Content -->
+      <section class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-4">What Are HTML Entities and Why Do They Matter?</h2>
+
+        <div class="text-[#475569] leading-relaxed space-y-4 text-[15px]">
+          <p>
+            HTML entities are special character sequences that represent reserved or hard-to-type characters in HTML documents. Every entity begins with an ampersand (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;</code>) and ends with a semicolon (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">;</code>). The five characters that must always be encoded in HTML content are the less-than sign (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;</code>), greater-than sign (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&gt;</code>), ampersand (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;</code>), double quote (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&quot;</code>), and single quote (<code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&#39;</code>). Without encoding, these characters are interpreted as HTML syntax rather than literal text, which can break your page layout or — far worse — open the door to security vulnerabilities.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Three Formats: Named, Numeric, and Hexadecimal</h3>
+          <p>
+            HTML supports three entity formats that all produce the same result in the browser. <strong>Named entities</strong> use a human-readable alias defined in the HTML specification, such as <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;amp;</code> for the ampersand or <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;copy;</code> for the copyright symbol. They are easy to read and remember but not every Unicode character has a named entity. <strong>Numeric (decimal) entities</strong> use the Unicode code point in base-10, written as <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;#38;</code>. <strong>Hexadecimal entities</strong> use base-16, written as <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;#x26;</code>. Numeric and hex entities can represent any Unicode character, making them universally applicable even when a named alias does not exist.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Preventing Cross-Site Scripting (XSS) Attacks</h3>
+          <p>
+            Cross-site scripting is one of the most common web security vulnerabilities, consistently appearing in the OWASP Top 10. It occurs when an attacker injects malicious HTML or JavaScript into a web page — typically through user-generated input fields like comments, search boxes, or profile bios. If the application renders that input without encoding, the browser executes the injected script as if it were part of the legitimate page, allowing the attacker to steal cookies, hijack sessions, redirect users, or deface the site. Encoding user input so that <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;</code> becomes <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;lt;</code> and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&gt;</code> becomes <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;gt;</code> is the first and most fundamental defense against XSS. The browser then displays those characters as literal text rather than interpreting them as tag delimiters. This tool lets you test encoding output before integrating it into your sanitization pipeline.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Common Use Cases for HTML Entity Encoding</h3>
+          <p>
+            Beyond security, HTML entities serve many practical purposes in everyday web development. When writing code samples inside <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;pre&gt;</code> or <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&lt;code&gt;</code> blocks, you must encode angle brackets so the browser displays them as text instead of parsing them as tags. Email templates often use entities to guarantee correct rendering across email clients that strip certain characters. Content management systems encode user submissions before storing or displaying them to prevent markup injection. RSS and Atom feeds require encoded content within CDATA sections. And entities like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;nbsp;</code>, <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;mdash;</code>, <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;copy;</code>, and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;euro;</code> are frequently used in text to insert special typographic and currency symbols that are not available on every keyboard layout.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Encode All vs. Encode Special Characters Only</h3>
+          <p>
+            This tool offers two encoding scopes. The "Special only" mode encodes just the five HTML-reserved characters — this is the most common approach and keeps your output readable while making it HTML-safe. The "All characters" mode converts every non-ASCII character and even basic letters into their entity representation, which is useful when you need to guarantee the output is pure 7-bit ASCII. This can be helpful when embedding HTML in environments that do not fully support UTF-8, such as certain legacy email systems, older databases with limited character set support, or when debugging encoding issues where you want to make every character's code point explicitly visible.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">How This Tool Works</h3>
+          <p>
+            This HTML entity encoder and decoder runs entirely in your web browser using client-side JavaScript. No data is transmitted to any server. In encode mode, the tool scans your input character by character and replaces each eligible character with the corresponding HTML entity in your chosen format (named, numeric, or hexadecimal). Named entities are used when available; characters without a named entity fall back to numeric or hex representation. In decode mode, the tool parses all entity formats — named, numeric, and hex — and converts them back to their original characters. Conversion happens in real time as you type, so you can see results instantly without clicking a submit button.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <p><strong class="text-[#1e293b]">What are HTML entities used for?</strong><br>
+            HTML entities encode characters that have special meaning in HTML (like &lt; and &amp;) so they display as literal text. They also insert symbols not found on a standard keyboard, such as ©, €, and →. Proper encoding is essential for preventing XSS attacks and ensuring correct page rendering.
+          </p>
+
+          <p><strong class="text-[#1e293b]">What is the difference between named and numeric entities?</strong><br>
+            Named entities like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;amp;</code> use a human-readable alias. Numeric entities like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;#38;</code> use the character's decimal Unicode code point. Hex entities like <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;#x26;</code> use the hexadecimal code point. All three render identically in browsers.
+          </p>
+
+          <p><strong class="text-[#1e293b]">How do HTML entities prevent XSS?</strong><br>
+            By converting &lt; and &gt; to <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;lt;</code> and <code class="mono text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">&amp;gt;</code>, user-supplied input cannot be interpreted as HTML tags or script elements. The browser displays the encoded characters as plain text instead of executing them.
+          </p>
+
+          <p><strong class="text-[#1e293b]">Is my data sent to a server?</strong><br>
+            No. This tool processes everything locally in your browser using JavaScript. Your input never leaves your device. There is no backend, no logging, and no data storage of any kind.
+          </p>
+
+          <p>
+            This encoder and decoder is free to use with no sign-up required. Paste your HTML, choose your encoding options, and get instant results. Bookmark this page and use it whenever you need to sanitize HTML content or look up entity codes.
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('html-entity-encoder');
+  </script>
+
+  <script>
+  (function () {
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const inputArea   = $('#input-area');
+    const outputArea  = $('#output-area');
+    const inputLabel  = $('#input-label');
+    const outputLabel = $('#output-label');
+    const copyBtn     = $('#copy-btn');
+    const clearBtn    = $('#clear-btn');
+    const errorMsg    = $('#error-msg');
+    const charCount   = $('#char-count');
+    const encodeOpts  = $('#encode-options');
+    const modeTabs    = $$('#mode-tabs button');
+
+    let mode = 'encode';
+
+    const NAMED_ENTITIES = {
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;',
+      '\u00a0': '&nbsp;', '\u00a9': '&copy;', '\u00ae': '&reg;', '\u00b0': '&deg;',
+      '\u00b1': '&plusmn;', '\u00b7': '&middot;', '\u00bc': '&frac14;',
+      '\u00bd': '&frac12;', '\u00be': '&frac34;', '\u00d7': '&times;',
+      '\u00f7': '&divide;', '\u2013': '&ndash;', '\u2014': '&mdash;',
+      '\u2018': '&lsquo;', '\u2019': '&rsquo;', '\u201c': '&ldquo;',
+      '\u201d': '&rdquo;', '\u2022': '&bull;', '\u2026': '&hellip;',
+      '\u2032': '&prime;', '\u2033': '&Prime;', '\u2039': '&lsaquo;',
+      '\u203a': '&rsaquo;', '\u20ac': '&euro;', '\u2122': '&trade;',
+      '\u2190': '&larr;', '\u2191': '&uarr;', '\u2192': '&rarr;',
+      '\u2193': '&darr;', '\u2194': '&harr;', '\u2260': '&ne;',
+      '\u2264': '&le;', '\u2265': '&ge;', '\u221e': '&infin;',
+      '\u00a3': '&pound;', '\u00a5': '&yen;', '\u00a2': '&cent;',
+      '\u00a7': '&sect;', '\u2202': '&part;', '\u2211': '&sum;',
+      '\u221a': '&radic;', '\u00b2': '&sup2;', '\u00b3': '&sup3;',
+      '\u2665': '&hearts;', '\u2660': '&spades;', '\u2663': '&clubs;',
+      '\u2666': '&diams;'
+    };
+
+    const SPECIAL_CHARS = new Set(['&', '<', '>', '"', "'"]);
+
+    const REVERSE_NAMED = {};
+    for (const [ch, ent] of Object.entries(NAMED_ENTITIES)) {
+      REVERSE_NAMED[ent] = ch;
+    }
+
+    function getFormat() {
+      return $('input[name="entity-format"]:checked').value;
+    }
+
+    function getScope() {
+      return $('input[name="encode-scope"]:checked').value;
+    }
+
+    function encodeChar(ch, format) {
+      if (format === 'named' && NAMED_ENTITIES[ch]) {
+        return NAMED_ENTITIES[ch];
+      }
+      const cp = ch.codePointAt(0);
+      if (format === 'hex') return '&#x' + cp.toString(16).toUpperCase() + ';';
+      return '&#' + cp + ';';
+    }
+
+    function encodeText(text) {
+      const format = getFormat();
+      const scope = getScope();
+      let result = '';
+      for (const ch of text) {
+        if (scope === 'special') {
+          if (SPECIAL_CHARS.has(ch)) {
+            result += encodeChar(ch, format);
+          } else {
+            result += ch;
+          }
+        } else {
+          const cp = ch.codePointAt(0);
+          if (cp > 127 || SPECIAL_CHARS.has(ch)) {
+            result += encodeChar(ch, format);
+          } else if (ch === ' ' || ch === '\n' || ch === '\r' || ch === '\t') {
+            result += ch;
+          } else {
+            result += encodeChar(ch, format);
+          }
+        }
+      }
+      return result;
+    }
+
+    function decodeText(text) {
+      const el = document.createElement('textarea');
+      el.innerHTML = text;
+      return el.value;
+    }
+
+    function setMode(m) {
+      mode = m;
+      modeTabs.forEach(t => {
+        t.classList.toggle('tab-active', t.dataset.mode === m);
+        t.classList.toggle('tab-inactive', t.dataset.mode !== m);
+      });
+
+      if (m === 'encode') {
+        inputLabel.textContent = 'Raw HTML / Text';
+        outputLabel.textContent = 'Encoded Output';
+        inputArea.placeholder = 'Type or paste HTML to encode… e.g. <div class="hello">';
+        outputArea.placeholder = 'Encoded output appears here…';
+        encodeOpts.classList.remove('hidden');
+      } else {
+        inputLabel.textContent = 'Encoded HTML Entities';
+        outputLabel.textContent = 'Decoded Output';
+        inputArea.placeholder = 'Paste HTML entities to decode… e.g. &lt;div&gt;';
+        outputArea.placeholder = 'Decoded output appears here…';
+        encodeOpts.classList.add('hidden');
+      }
+
+      inputArea.value = '';
+      outputArea.value = '';
+      clearError();
+      updateUI();
+    }
+
+    function clearError() {
+      errorMsg.textContent = '';
+      errorMsg.classList.add('hidden');
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    function updateUI() {
+      clearBtn.classList.toggle('hidden', !inputArea.value);
+      const outLen = outputArea.value.length;
+      if (outLen > 0) {
+        charCount.textContent = outLen.toLocaleString() + ' chars';
+        charCount.classList.remove('hidden');
+      } else {
+        charCount.classList.add('hidden');
+      }
+    }
+
+    function convert() {
+      clearError();
+      const input = inputArea.value;
+
+      if (!input) {
+        outputArea.value = '';
+        updateUI();
+        return;
+      }
+
+      try {
+        if (mode === 'encode') {
+          outputArea.value = encodeText(input);
+        } else {
+          outputArea.value = decodeText(input);
+        }
+      } catch (e) {
+        showError('Conversion error: ' + e.message);
+        outputArea.value = '';
+      }
+
+      updateUI();
+    }
+
+    inputArea.addEventListener('input', convert);
+    modeTabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+    $$('input[name="entity-format"], input[name="encode-scope"]').forEach(r => {
+      r.addEventListener('change', convert);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      inputArea.value = '';
+      outputArea.value = '';
+      clearError();
+      updateUI();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const text = outputArea.value;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.remove('text-[#2563eb]');
+        copyBtn.classList.add('text-emerald-500');
+        setTimeout(() => {
+          copyBtn.textContent = orig;
+          copyBtn.classList.remove('text-emerald-500');
+          copyBtn.classList.add('text-[#2563eb]');
+        }, 1500);
+      });
+    });
+
+    // Entity Reference Table
+    const entities = [
+      ['<', '&lt;', '&#60;', '&#x3C;', 'Less-than sign'],
+      ['>', '&gt;', '&#62;', '&#x3E;', 'Greater-than sign'],
+      ['&', '&amp;', '&#38;', '&#x26;', 'Ampersand'],
+      ['"', '&quot;', '&#34;', '&#x22;', 'Double quotation mark'],
+      ["'", '&apos;', '&#39;', '&#x27;', 'Apostrophe'],
+      ['\u00a0', '&nbsp;', '&#160;', '&#xA0;', 'Non-breaking space'],
+      ['\u00a9', '&copy;', '&#169;', '&#xA9;', 'Copyright sign'],
+      ['\u00ae', '&reg;', '&#174;', '&#xAE;', 'Registered sign'],
+      ['\u2122', '&trade;', '&#8482;', '&#x2122;', 'Trademark sign'],
+      ['\u20ac', '&euro;', '&#8364;', '&#x20AC;', 'Euro sign'],
+      ['\u00a3', '&pound;', '&#163;', '&#xA3;', 'Pound sign'],
+      ['\u00a5', '&yen;', '&#165;', '&#xA5;', 'Yen sign'],
+      ['\u00a2', '&cent;', '&#162;', '&#xA2;', 'Cent sign'],
+      ['\u00b0', '&deg;', '&#176;', '&#xB0;', 'Degree sign'],
+      ['\u00b1', '&plusmn;', '&#177;', '&#xB1;', 'Plus-minus sign'],
+      ['\u00d7', '&times;', '&#215;', '&#xD7;', 'Multiplication sign'],
+      ['\u00f7', '&divide;', '&#247;', '&#xF7;', 'Division sign'],
+      ['\u2013', '&ndash;', '&#8211;', '&#x2013;', 'En dash'],
+      ['\u2014', '&mdash;', '&#8212;', '&#x2014;', 'Em dash'],
+      ['\u2190', '&larr;', '&#8592;', '&#x2190;', 'Left arrow'],
+      ['\u2191', '&uarr;', '&#8593;', '&#x2191;', 'Up arrow'],
+      ['\u2192', '&rarr;', '&#8594;', '&#x2192;', 'Right arrow'],
+      ['\u2193', '&darr;', '&#8595;', '&#x2193;', 'Down arrow'],
+      ['\u2264', '&le;', '&#8804;', '&#x2264;', 'Less-than or equal'],
+      ['\u2265', '&ge;', '&#8805;', '&#x2265;', 'Greater-than or equal'],
+      ['\u2260', '&ne;', '&#8808;', '&#x2260;', 'Not equal to'],
+      ['\u221e', '&infin;', '&#8734;', '&#x221E;', 'Infinity'],
+      ['\u00bd', '&frac12;', '&#189;', '&#xBD;', 'Fraction one half'],
+      ['\u2022', '&bull;', '&#8226;', '&#x2022;', 'Bullet'],
+      ['\u2026', '&hellip;', '&#8230;', '&#x2026;', 'Horizontal ellipsis'],
+    ];
+
+    const tbody = $('#entity-table-body');
+    entities.forEach(([ch, named, num, hex, desc], i) => {
+      const display = ch === '\u00a0' ? '&nbsp;' : ch;
+      const stripe = i % 2 === 0 ? '' : 'bg-[#f8fafc]';
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-[#f1f5f9] ' + stripe;
+      tr.innerHTML = `
+        <td class="px-4 py-2 text-center text-base">${ch === '\u00a0' ? '<span class="bg-[#eff6ff] px-2 rounded text-xs text-[#94a3b8]">space</span>' : display}</td>
+        <td class="px-4 py-2 text-[#2563eb]">${named.replace(/&/g, '&amp;')}</td>
+        <td class="px-4 py-2 text-[#64748b]">${num.replace(/&/g, '&amp;')}</td>
+        <td class="px-4 py-2 text-[#64748b]">${hex.replace(/&/g, '&amp;')}</td>
+        <td class="px-4 py-2 text-[#475569] font-sans text-xs">${desc}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools</title>
+  <meta name="description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100% client-side — your images never leave your device.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/image-to-pdf">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools">
+  <meta property="og:description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100% client-side — your images never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/image-to-pdf">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools">
+  <meta name="twitter:description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image to PDF Converter",
+    "url": "https://clicksolvetools.com/tools/image-to-pdf",
+    "description": "Convert JPG, PNG, and WebP images to a single PDF document for free. Reorder pages, set page size, orientation, and margins. 100% client-side processing.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it safe to convert images to PDF online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool processes everything inside your browser using JavaScript. Your images are never uploaded to any server. No data leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The converter supports JPEG (JPG), PNG, and WebP image formats. WebP images are automatically converted to PNG in your browser before embedding into the PDF."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I choose the page size and orientation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can select A4, US Letter, or Original (matching the image dimensions). Orientation options include Portrait, Landscape, and Auto which matches each image's aspect ratio."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .dragging { opacity: 0.5; }
+    .drag-over { border-color: #2563eb !important; background-color: rgba(37, 99, 235, 0.05) !important; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" multiple class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop images here or click to browse</p>
+          <p class="text-[#64748b] text-sm">JPEG, PNG, WebP — select multiple files at once</p>
+        </div>
+
+        <!-- Image list & options -->
+        <div id="image-list-wrapper" class="hidden">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium text-[#475569]">Images <span id="image-count" class="text-[#94a3b8]">(0)</span></h3>
+            <button id="add-more-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">+ Add more images</button>
+          </div>
+
+          <!-- Thumbnail list -->
+          <ul id="image-list" class="space-y-2 mb-6 max-h-[420px] overflow-y-auto"></ul>
+
+          <!-- Options panel -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4">
+            <div>
+              <label for="page-size" class="block text-xs font-medium text-[#475569] mb-1">Page Size</label>
+              <select id="page-size" class="w-full text-sm border border-[#e2e8f0] rounded-lg px-3 py-2 bg-white text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20">
+                <option value="a4">A4 (210 × 297 mm)</option>
+                <option value="letter">US Letter (8.5 × 11 in)</option>
+                <option value="original">Original (fit to image)</option>
+              </select>
+            </div>
+            <div>
+              <label for="orientation" class="block text-xs font-medium text-[#475569] mb-1">Orientation</label>
+              <select id="orientation" class="w-full text-sm border border-[#e2e8f0] rounded-lg px-3 py-2 bg-white text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20">
+                <option value="portrait">Portrait</option>
+                <option value="landscape">Landscape</option>
+                <option value="auto">Auto (match image)</option>
+              </select>
+            </div>
+            <div>
+              <label for="margin" class="block text-xs font-medium text-[#475569] mb-1">Margin</label>
+              <select id="margin" class="w-full text-sm border border-[#e2e8f0] rounded-lg px-3 py-2 bg-white text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20">
+                <option value="none">None</option>
+                <option value="small">Small (10 pt)</option>
+                <option value="medium" selected>Medium (30 pt)</option>
+              </select>
+            </div>
+            <div>
+              <label for="image-fit" class="block text-xs font-medium text-[#475569] mb-1">Image Fit</label>
+              <select id="image-fit" class="w-full text-sm border border-[#e2e8f0] rounded-lg px-3 py-2 bg-white text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20">
+                <option value="fit" selected>Fit to page</option>
+                <option value="fill">Fill page</option>
+                <option value="original">Original size</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div id="progress-wrapper" class="hidden mb-6">
+            <div class="flex items-center justify-between mb-1.5">
+              <span id="progress-label" class="text-sm text-[#475569]">Creating PDF…</span>
+              <span id="progress-pct" class="text-sm font-semibold text-[#2563eb]">0%</span>
+            </div>
+            <div class="w-full h-2 bg-[#e2e8f0] rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-[#2563eb] rounded-full transition-all duration-200" style="width:0%"></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-3">
+            <button id="create-btn" disabled class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+              Create PDF
+            </button>
+            <button id="download-btn" class="hidden inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download PDF
+            </button>
+            <button id="clear-all-btn" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-[#94a3b8] hover:text-red-500 text-sm font-medium transition-colors">
+              Clear all
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Convert Images to PDF — Free, Private, and Instant</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Converting images to PDF is one of the most common document tasks people perform on a daily basis. Whether you are scanning receipts with your phone camera, preparing a portfolio of design work, digitizing handwritten notes, or assembling product photos into a catalog, creating a PDF from images gives you a single, universally readable file that preserves layout and quality across every device and operating system. This free image to PDF converter lets you upload JPEG, PNG, and WebP images, arrange them in any order, configure page size and orientation, and produce a polished PDF document — all without installing software or creating an account.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases</h3>
+          <p>There are many practical reasons to bundle images into a PDF. Students photograph whiteboard notes or textbook pages and need to submit them as a single document. Freelancers and agencies compile screenshots, mockups, or photo proofs into client-ready deliverables. Homeowners scan insurance documents, warranties, or ID cards and want a neat archive. Job applicants combine certificate scans, portfolio pieces, and identification into one attachment. Real estate agents photograph property details and send them as a unified listing sheet. In every case, a PDF offers consistent formatting, smaller total file size compared with sending multiple loose images, and guaranteed compatibility with virtually any viewer.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Page Size and Orientation Options</h3>
+          <p>This tool offers three page size presets. <strong class="text-[#1e293b]">A4</strong> (210 × 297 mm) is the international standard for documents and is ideal for reports, letters, and academic submissions. <strong class="text-[#1e293b]">US Letter</strong> (8.5 × 11 inches) is the North American standard and suits business correspondence and legal filings. <strong class="text-[#1e293b]">Original</strong> sets each page to match the pixel dimensions of the image itself — perfect for high-resolution photos where you want no cropping or scaling at all. Orientation can be fixed to Portrait or Landscape, or set to Auto, which inspects each image's aspect ratio and rotates the page accordingly so that every image gets the most space possible.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">100% Client-Side Processing — Your Images Stay Private</h3>
+          <p>Unlike most online converters that upload your files to a remote server, this tool runs entirely inside your web browser. It uses <strong class="text-[#1e293b]">pdf-lib</strong>, a robust open-source JavaScript library, to construct the PDF document without any server involvement. Your photos, scans, and screenshots never leave your device — not even temporarily. There is no upload, no cloud processing, and no storage. Once you close or refresh the page, all data is gone from memory. This makes the tool safe for handling personal photos, confidential scans, medical records, and identification documents.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How It Works</h3>
+          <p>Using the tool is straightforward. Drop your images onto the upload area or click to browse and multi-select. Each image appears as a thumbnail in an ordered list that you can rearrange by dragging or with the up and down arrow buttons. Choose your preferred page size, orientation, margin, and image fit mode. Click "Create PDF" and a progress bar tracks the conversion. When it finishes, a download button appears so you can save your new PDF immediately. WebP images are automatically converted to PNG in memory before embedding, so every supported format works seamlessly.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Tips for Better Results</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Use high-resolution images</strong> — Higher-resolution source images produce sharper PDFs, especially when printing.</li>
+            <li><strong class="text-[#1e293b]">Choose the right fit mode</strong> — "Fit to page" ensures the entire image is visible. "Fill page" covers the full page area but may crop edges. "Original size" embeds the image at its native resolution.</li>
+            <li><strong class="text-[#1e293b]">Set orientation to Auto</strong> — This ensures landscape photos get landscape pages and portrait photos get portrait pages, maximizing image area.</li>
+            <li><strong class="text-[#1e293b]">Organize before converting</strong> — Name your files with numeric prefixes (01-, 02-, etc.) so they sort into the correct order when uploaded.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is it safe to convert images to PDF online?</h4>
+              <p>Yes. This tool processes everything inside your browser using JavaScript. Your images are never uploaded to any server. No data leaves your device, making it safe for personal and confidential files.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What image formats are supported?</h4>
+              <p>The converter supports JPEG (JPG), PNG, and WebP. WebP images are automatically converted to PNG in your browser before embedding into the PDF, so all three formats work seamlessly.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I choose the page size and orientation?</h4>
+              <p>Yes. You can select A4, US Letter, or Original (matching image dimensions). Orientation options include Portrait, Landscape, and Auto which matches each image's aspect ratio automatically.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is there a limit on the number of images?</h4>
+              <p>There is no hard limit. Performance depends on your device's available memory. Most modern computers can comfortably handle dozens of high-resolution images.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does converting images reduce their quality?</h4>
+              <p>No. JPEG and PNG images are embedded directly into the PDF at their original quality. WebP images are losslessly converted to PNG before embedding, preserving full fidelity.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All processing happens entirely in your browser. Your images are never uploaded to any server. No data leaves your device.</strong></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- pdf-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('image-to-pdf');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { PDFDocument } = PDFLib;
+
+    const dropZone         = document.getElementById('drop-zone');
+    const fileInput        = document.getElementById('file-input');
+    const imageListWrapper = document.getElementById('image-list-wrapper');
+    const imageList        = document.getElementById('image-list');
+    const imageCountEl     = document.getElementById('image-count');
+    const addMoreBtn       = document.getElementById('add-more-btn');
+    const createBtn        = document.getElementById('create-btn');
+    const downloadBtn      = document.getElementById('download-btn');
+    const clearAllBtn      = document.getElementById('clear-all-btn');
+    const pageSizeSelect   = document.getElementById('page-size');
+    const orientationSelect = document.getElementById('orientation');
+    const marginSelect     = document.getElementById('margin');
+    const imageFitSelect   = document.getElementById('image-fit');
+    const progressWrapper  = document.getElementById('progress-wrapper');
+    const progressLabel    = document.getElementById('progress-label');
+    const progressPct      = document.getElementById('progress-pct');
+    const progressBar      = document.getElementById('progress-bar');
+
+    const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    const PAGE_SIZES = {
+      a4:     [595.28, 841.89],
+      letter: [612, 792],
+    };
+    const MARGINS = { none: 0, small: 10, medium: 30 };
+
+    let images = [];
+    let pdfBlob = null;
+    let dragSrcIdx = null;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function loadImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          resolve({ file, name: file.name, size: file.size, type: file.type, width: img.naturalWidth, height: img.naturalHeight, url });
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Failed to load image')); };
+        img.src = url;
+      });
+    }
+
+    function updateUI() {
+      const count = images.length;
+      imageCountEl.textContent = `(${count})`;
+      createBtn.disabled = count < 1;
+      imageListWrapper.classList.toggle('hidden', count === 0);
+      dropZone.classList.toggle('hidden', count > 0);
+    }
+
+    function renderList() {
+      imageList.innerHTML = '';
+      images.forEach((entry, idx) => {
+        const li = document.createElement('li');
+        li.className = 'flex items-center gap-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2 group cursor-grab active:cursor-grabbing';
+        li.draggable = true;
+        li.dataset.idx = idx;
+
+        li.innerHTML = `
+          <span class="text-[#94a3b8] text-xs font-mono w-5 text-right select-none">${idx + 1}</span>
+          <img src="${entry.url}" alt="" class="w-12 h-12 object-cover rounded border border-[#e2e8f0] shrink-0 bg-[#f1f5f9]">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-[#1e293b] truncate">${entry.name}</p>
+            <p class="text-xs text-[#94a3b8]">${entry.width}×${entry.height} · ${formatBytes(entry.size)}</p>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button data-action="up" data-idx="${idx}" class="p-1 rounded hover:bg-[#e2e8f0] text-[#94a3b8] hover:text-[#1e293b] transition-colors disabled:opacity-30 disabled:cursor-not-allowed" ${idx === 0 ? 'disabled' : ''} title="Move up">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+            </button>
+            <button data-action="down" data-idx="${idx}" class="p-1 rounded hover:bg-[#e2e8f0] text-[#94a3b8] hover:text-[#1e293b] transition-colors disabled:opacity-30 disabled:cursor-not-allowed" ${idx === images.length - 1 ? 'disabled' : ''} title="Move down">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <button data-action="remove" data-idx="${idx}" class="p-1 rounded hover:bg-red-50 text-[#94a3b8] hover:text-red-500 transition-colors ml-1" title="Remove">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        `;
+
+        li.addEventListener('dragstart', onDragStart);
+        li.addEventListener('dragover', onDragOver);
+        li.addEventListener('dragenter', onDragEnter);
+        li.addEventListener('dragleave', onDragLeave);
+        li.addEventListener('drop', onDrop);
+        li.addEventListener('dragend', onDragEnd);
+
+        imageList.appendChild(li);
+      });
+      updateUI();
+    }
+
+    function onDragStart(e) {
+      dragSrcIdx = parseInt(e.currentTarget.dataset.idx);
+      e.currentTarget.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+    function onDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+    function onDragEnter(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+    function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+    function onDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-over');
+      const targetIdx = parseInt(e.currentTarget.dataset.idx);
+      if (dragSrcIdx === null || dragSrcIdx === targetIdx) return;
+      const [moved] = images.splice(dragSrcIdx, 1);
+      images.splice(targetIdx, 0, moved);
+      hideResult();
+      renderList();
+    }
+    function onDragEnd(e) {
+      e.currentTarget.classList.remove('dragging');
+      dragSrcIdx = null;
+      imageList.querySelectorAll('li').forEach(li => li.classList.remove('drag-over'));
+    }
+
+    imageList.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const idx = parseInt(btn.dataset.idx);
+
+      if (action === 'remove') {
+        URL.revokeObjectURL(images[idx].url);
+        images.splice(idx, 1);
+        hideResult();
+        if (images.length === 0) resetAll(); else renderList();
+      } else if (action === 'up' && idx > 0) {
+        [images[idx - 1], images[idx]] = [images[idx], images[idx - 1]];
+        hideResult();
+        renderList();
+      } else if (action === 'down' && idx < images.length - 1) {
+        [images[idx], images[idx + 1]] = [images[idx + 1], images[idx]];
+        hideResult();
+        renderList();
+      }
+    });
+
+    async function addFiles(files) {
+      const valid = Array.from(files).filter(f => ACCEPTED_TYPES.includes(f.type));
+      if (valid.length === 0) return;
+
+      dropZone.classList.add('hidden');
+      imageListWrapper.classList.remove('hidden');
+
+      for (const file of valid) {
+        try {
+          const info = await loadImage(file);
+          images.push(info);
+        } catch (err) {
+          console.warn('Skipped unreadable image:', file.name, err);
+        }
+      }
+      hideResult();
+      renderList();
+    }
+
+    function hideResult() {
+      pdfBlob = null;
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+      progressBar.className = 'h-full bg-[#2563eb] rounded-full transition-all duration-200';
+    }
+
+    function resetAll() {
+      images.forEach(img => URL.revokeObjectURL(img.url));
+      images = [];
+      pdfBlob = null;
+      fileInput.value = '';
+      imageList.innerHTML = '';
+      imageListWrapper.classList.add('hidden');
+      dropZone.classList.remove('hidden');
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.add('hidden');
+      updateUI();
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      addFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) addFiles(fileInput.files); fileInput.value = ''; });
+
+    addMoreBtn.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'image/jpeg,image/png,image/webp';
+      inp.multiple = true;
+      inp.addEventListener('change', () => { if (inp.files.length) addFiles(inp.files); });
+      inp.click();
+    });
+
+    clearAllBtn.addEventListener('click', resetAll);
+
+    document.body.addEventListener('dragover', e => { if (images.length > 0) e.preventDefault(); });
+    document.body.addEventListener('drop', e => {
+      if (images.length > 0 && e.dataTransfer.files.length) {
+        e.preventDefault();
+        addFiles(e.dataTransfer.files);
+      }
+    });
+
+    async function webpToPng(file) {
+      const bitmap = await createImageBitmap(file);
+      const canvas = document.createElement('canvas');
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bitmap, 0, 0);
+      bitmap.close();
+      return new Promise(resolve => {
+        canvas.toBlob(blob => {
+          blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf)));
+        }, 'image/png');
+      });
+    }
+
+    async function embedImage(pdfDoc, entry) {
+      const buffer = await entry.file.arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+
+      if (entry.type === 'image/jpeg') {
+        return pdfDoc.embedJpg(bytes);
+      } else if (entry.type === 'image/png') {
+        return pdfDoc.embedPng(bytes);
+      } else {
+        const pngBytes = await webpToPng(entry.file);
+        return pdfDoc.embedPng(pngBytes);
+      }
+    }
+
+    function getPageDimensions(imgW, imgH, pageSize, orientation) {
+      if (pageSize === 'original') {
+        return [imgW, imgH];
+      }
+
+      let [pw, ph] = PAGE_SIZES[pageSize];
+
+      if (orientation === 'landscape') {
+        [pw, ph] = [Math.max(pw, ph), Math.min(pw, ph)];
+      } else if (orientation === 'portrait') {
+        [pw, ph] = [Math.min(pw, ph), Math.max(pw, ph)];
+      } else {
+        const imgIsLandscape = imgW > imgH;
+        if (imgIsLandscape) {
+          [pw, ph] = [Math.max(pw, ph), Math.min(pw, ph)];
+        } else {
+          [pw, ph] = [Math.min(pw, ph), Math.max(pw, ph)];
+        }
+      }
+      return [pw, ph];
+    }
+
+    createBtn.addEventListener('click', async () => {
+      if (images.length < 1) return;
+      createBtn.disabled = true;
+      downloadBtn.classList.add('hidden');
+      progressWrapper.classList.remove('hidden');
+      progressBar.className = 'h-full bg-[#2563eb] rounded-full transition-all duration-200';
+
+      const pageSize = pageSizeSelect.value;
+      const orientation = orientationSelect.value;
+      const marginVal = MARGINS[marginSelect.value];
+      const fitMode = imageFitSelect.value;
+
+      function updateProgress(label, pct) {
+        progressLabel.textContent = label;
+        progressPct.textContent = Math.round(pct) + '%';
+        progressBar.style.width = pct + '%';
+      }
+
+      try {
+        const pdfDoc = await PDFDocument.create();
+
+        for (let i = 0; i < images.length; i++) {
+          const entry = images[i];
+          updateProgress(`Processing: ${entry.name}`, (i / images.length) * 85);
+
+          const embeddedImg = await embedImage(pdfDoc, entry);
+          const imgW = embeddedImg.width;
+          const imgH = embeddedImg.height;
+
+          const [pageW, pageH] = getPageDimensions(imgW, imgH, pageSize, orientation);
+          const page = pdfDoc.addPage([pageW, pageH]);
+
+          const availW = pageW - marginVal * 2;
+          const availH = pageH - marginVal * 2;
+
+          let drawW, drawH, drawX, drawY;
+
+          if (fitMode === 'original') {
+            drawW = imgW;
+            drawH = imgH;
+          } else if (fitMode === 'fill') {
+            const scale = Math.max(availW / imgW, availH / imgH);
+            drawW = imgW * scale;
+            drawH = imgH * scale;
+          } else {
+            const scale = Math.min(availW / imgW, availH / imgH);
+            drawW = imgW * scale;
+            drawH = imgH * scale;
+          }
+
+          drawX = marginVal + (availW - drawW) / 2;
+          drawY = marginVal + (availH - drawH) / 2;
+
+          page.drawImage(embeddedImg, { x: drawX, y: drawY, width: drawW, height: drawH });
+        }
+
+        updateProgress('Generating PDF…', 90);
+        const pdfBytes = await pdfDoc.save();
+        pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+        updateProgress('Done!', 100);
+        progressBar.className = 'h-full bg-emerald-500 rounded-full transition-all duration-200';
+        downloadBtn.classList.remove('hidden');
+      } catch (err) {
+        console.error('PDF creation failed:', err);
+        updateProgress('Error: ' + (err.message || 'Creation failed'), 0);
+        progressBar.className = 'h-full bg-red-500 rounded-full transition-all duration-200';
+      } finally {
+        createBtn.disabled = false;
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!pdfBlob) return;
+      const a = document.createElement('a');
+      a.download = 'images.pdf';
+      a.href = URL.createObjectURL(pdfBlob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+  });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Standard Deviation Calculator Online | ClickSolveTools</title>
+  <meta name="description" content="Calculate standard deviation, variance, mean, median, mode, and range instantly. Supports population and sample modes with step-by-step work and a visual dot plot. Free, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/standard-deviation-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Standard Deviation Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Calculate standard deviation, variance, mean, median, mode, and range instantly. Supports population and sample modes with step-by-step work and a visual dot plot.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/standard-deviation-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Standard Deviation Calculator Online | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate standard deviation, variance, mean, median, mode, and range instantly with step-by-step work.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Standard Deviation Calculator",
+    "url": "https://clicksolvetools.com/tools/standard-deviation-calculator",
+    "description": "Calculate standard deviation, variance, mean, median, mode, and range with population and sample modes, step-by-step work, and a visual dot plot.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between population and sample standard deviation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Population standard deviation divides by N (the total number of data points) and is used when your data set includes every member of a group. Sample standard deviation divides by N−1 (Bessel's correction) and is used when your data is a subset drawn from a larger population, which gives an unbiased estimate of the true spread."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use sample vs population standard deviation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use population standard deviation when you have data for every member of the group you're analyzing — for example, final exam scores for every student in a class. Use sample standard deviation when your data is a subset of a larger group — for example, survey responses from 200 out of 10,000 customers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a high standard deviation mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A high standard deviation means data points are spread far from the mean, indicating high variability. A low standard deviation means values are clustered tightly around the mean, indicating consistency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this standard deviation calculator free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This calculator runs entirely in your browser with no ads, no signup, and no data collection. Your numbers never leave your device."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    .toggle-active { background-color: #2563eb; color: #fff; box-shadow: 0 1px 3px rgba(37,99,235,.3); }
+    .toggle-inactive { background-color: #f1f5f9; color: #475569; }
+    .toggle-inactive:hover { background-color: #e2e8f0; color: #1e293b; }
+    .fade-in { animation: fadeIn 300ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .stat-card { transition: transform 150ms ease; }
+    .stat-card:hover { transform: translateY(-2px); }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+  <div id="nav-container"></div>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <div class="mb-8 text-center">
+      <span class="text-4xl mb-3 block">📊</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Standard Deviation Calculator</h1>
+      <p class="text-[#475569] text-base max-w-lg mx-auto">Enter your numbers below. Get standard deviation, variance, mean, median, mode, range, and step-by-step work — all updating live.</p>
+    </div>
+
+    <!-- Input Card -->
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm overflow-hidden mb-6">
+      <div class="p-6 sm:p-8">
+        <label for="data-input" class="block text-sm font-medium text-[#1e293b] mb-2">Data Set</label>
+        <textarea id="data-input" rows="4" placeholder="Enter numbers separated by commas, spaces, or newlines&#10;e.g. 4, 8, 6, 5, 3, 7, 8, 9" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-base font-mono resize-y leading-relaxed"></textarea>
+
+        <div class="flex flex-wrap items-center justify-between mt-4 gap-3">
+          <!-- Population / Sample Toggle -->
+          <div class="flex items-center gap-1 bg-[#f1f5f9] rounded-lg p-1">
+            <button id="btn-population" class="toggle-active px-4 py-2 rounded-md text-sm font-semibold transition-all">Population (σ)</button>
+            <button id="btn-sample" class="toggle-inactive px-4 py-2 rounded-md text-sm font-semibold transition-all">Sample (s)</button>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="parsed-count" class="text-xs text-[#94a3b8]"></span>
+            <button id="clear-btn" class="px-4 py-2 text-sm font-medium bg-[#f1f5f9] text-[#475569] rounded-lg hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-all">Clear</button>
+            <button id="example-btn" class="px-4 py-2 text-sm font-medium bg-[#eff6ff] text-[#2563eb] rounded-lg hover:bg-[#dbeafe] transition-all">Example</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results (hidden until data entered) -->
+    <div id="results-section" class="hidden fade-in space-y-6">
+
+      <!-- Summary Stats Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Count</div>
+          <div id="stat-count" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Sum</div>
+          <div id="stat-sum" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Mean (x̄)</div>
+          <div id="stat-mean" class="text-xl font-bold text-[#2563eb]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Median</div>
+          <div id="stat-median" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Mode</div>
+          <div id="stat-mode" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Range</div>
+          <div id="stat-range" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider mb-1">Variance</div>
+          <div id="stat-variance" class="text-xl font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="stat-card bg-white border border-[#e2e8f0] rounded-xl p-4 text-center border-[#2563eb]/30 bg-[#eff6ff]/40">
+          <div class="text-xs font-medium text-[#2563eb] uppercase tracking-wider mb-1">Std Dev</div>
+          <div id="stat-stddev" class="text-xl font-bold text-[#2563eb]">—</div>
+        </div>
+      </div>
+
+      <!-- Dot Plot -->
+      <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm overflow-hidden">
+        <div class="px-6 pt-5 pb-2 flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-[#1e293b]">Distribution Plot</h2>
+          <span id="plot-label" class="text-xs text-[#94a3b8]"></span>
+        </div>
+        <div class="px-6 pb-5">
+          <canvas id="dot-plot" class="w-full" height="160" style="max-height:200px;"></canvas>
+        </div>
+      </div>
+
+      <!-- Step-by-Step -->
+      <details class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm overflow-hidden group" open>
+        <summary class="px-6 py-4 cursor-pointer flex items-center justify-between select-none hover:bg-[#f8fafc] transition-colors">
+          <h2 class="text-sm font-semibold text-[#1e293b]">Step-by-Step Calculation</h2>
+          <svg class="w-5 h-5 text-[#94a3b8] transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div id="steps-content" class="px-6 pb-6 text-sm text-[#475569] leading-relaxed space-y-4 border-t border-[#e2e8f0] pt-4"></div>
+      </details>
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="text-center py-16">
+      <div class="text-5xl mb-4">📊</div>
+      <p class="text-[#475569] text-lg mb-2">Enter your data set above</p>
+      <p class="text-[#94a3b8] text-sm">Separate numbers with commas, spaces, or newlines</p>
+    </div>
+  </main>
+
+  <!-- SEO Article -->
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">What Is Standard Deviation and How to Calculate It</h2>
+
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Standard deviation is one of the most widely used measures of variability in statistics. It quantifies how spread out a set of numbers is relative to the average (mean). A small standard deviation means the data points cluster tightly around the mean, while a large standard deviation means they are widely dispersed. Understanding standard deviation is essential for anyone working with data — whether you are a student analyzing lab results, an investor evaluating portfolio risk, or a quality engineer monitoring manufacturing tolerances.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Population vs. Sample Standard Deviation</h3>
+        <p>The key distinction when computing standard deviation is whether your data represents an <strong class="text-[#1e293b]">entire population</strong> or a <strong class="text-[#1e293b]">sample</strong> drawn from a larger population. Population standard deviation (σ) divides by N, the total number of data points. Sample standard deviation (s) divides by N − 1, applying what is known as Bessel's correction. This adjustment compensates for the fact that a sample tends to underestimate the true variability of the population, producing an unbiased estimate of the population variance.</p>
+        <p>Use the population formula when you have measured every single member of the group — for example, the heights of all 30 students in a classroom. Use the sample formula when you have a subset — for example, the heights of 100 randomly selected adults from a city of one million people.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Standard Deviation Formula Step by Step</h3>
+        <p>Regardless of whether you use the population or sample version, the calculation follows the same core steps:</p>
+        <ol class="list-decimal list-inside space-y-2">
+          <li><strong class="text-[#1e293b]">Find the mean</strong> — add all values and divide by the count (N).</li>
+          <li><strong class="text-[#1e293b]">Compute deviations</strong> — subtract the mean from each value to see how far each point sits from the center.</li>
+          <li><strong class="text-[#1e293b]">Square the deviations</strong> — squaring removes negative signs and gives extra weight to outliers.</li>
+          <li><strong class="text-[#1e293b]">Sum the squared deviations</strong> — combine all the squared differences into a single total.</li>
+          <li><strong class="text-[#1e293b]">Divide</strong> — by N for population variance, or by N − 1 for sample variance.</li>
+          <li><strong class="text-[#1e293b]">Take the square root</strong> — the result is the standard deviation, expressed in the same units as the original data.</li>
+        </ol>
+        <p>For example, given the data set {4, 8, 6, 5, 3}, the mean is 5.2. The squared deviations are 1.44, 7.84, 0.64, 0.04, and 4.84, which sum to 14.8. Dividing by 5 (population) gives a variance of 2.96, and the square root is σ ≈ 1.72. Dividing by 4 (sample) gives a variance of 3.7, and s ≈ 1.92.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Use Cases</h3>
+        <p>Standard deviation appears in virtually every discipline that deals with data. In <strong class="text-[#1e293b]">finance</strong>, it measures investment volatility — a stock with a standard deviation of 20% in annual returns is far riskier than one at 5%. In <strong class="text-[#1e293b]">manufacturing</strong>, it drives Six Sigma quality control by tracking how far products deviate from specifications. In <strong class="text-[#1e293b]">education</strong>, standardized test scores use standard deviation to define score bands and percentiles. In <strong class="text-[#1e293b]">science</strong>, error bars on charts almost always represent one or two standard deviations from the mean, giving readers a visual sense of data reliability.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Related Measures: Variance, Range, and Mean</h3>
+        <p>Variance is simply the standard deviation squared — it is used more often in theoretical statistics because it has convenient mathematical properties. Range (max minus min) is the simplest measure of spread but is heavily influenced by outliers. The mean provides the center of the data, and standard deviation tells you how far, on average, values fall from that center. Together, the mean and standard deviation give a compact two-number summary of any data set.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">What is the difference between population and sample standard deviation?</strong><br>Population standard deviation (σ) divides by N, the total count. Sample standard deviation (s) divides by N − 1 to correct for the bias introduced by estimating the population mean from a sample. If your data includes every member of the group, use population; if it is a subset, use sample.</p>
+
+        <p><strong class="text-[#1e293b]">When should I use sample vs. population standard deviation?</strong><br>Use population when your data set covers the entire group you are studying — for example, final exam scores for all students in a class. Use sample when your data is drawn from a larger group — for example, survey responses from 200 out of 10,000 customers.</p>
+
+        <p><strong class="text-[#1e293b]">What does a high standard deviation mean?</strong><br>A high standard deviation indicates that data points are spread far from the mean, suggesting high variability. A low standard deviation means values are tightly clustered around the mean, suggesting consistency.</p>
+
+        <p><strong class="text-[#1e293b]">Can standard deviation be zero?</strong><br>Yes. A standard deviation of zero means every data point is identical — there is no variation at all.</p>
+
+        <p><strong class="text-[#1e293b]">Is this calculator free to use?</strong><br>Yes. This standard deviation calculator runs entirely in your browser with no ads, no signup, and no data collection. Your numbers never leave your device.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+    const textarea = document.getElementById('data-input');
+    const resultsSection = document.getElementById('results-section');
+    const emptyState = document.getElementById('empty-state');
+    const parsedCount = document.getElementById('parsed-count');
+    const canvas = document.getElementById('dot-plot');
+    const ctx = canvas.getContext('2d');
+
+    let isSample = false;
+
+    function parseNumbers(str) {
+      return str
+        .split(/[\s,;\n\r\t]+/)
+        .map(s => s.trim())
+        .filter(s => s !== '' && !isNaN(s))
+        .map(Number);
+    }
+
+    function fmt(n) {
+      if (!isFinite(n)) return '—';
+      const r = Math.round(n * 1e10) / 1e10;
+      if (Number.isInteger(r) && Math.abs(r) < 1e15) return r.toLocaleString('en-US');
+      return r.toLocaleString('en-US', { maximumFractionDigits: 8 });
+    }
+
+    function median(arr) {
+      const s = [...arr].sort((a, b) => a - b);
+      const m = Math.floor(s.length / 2);
+      return s.length % 2 !== 0 ? s[m] : (s[m - 1] + s[m]) / 2;
+    }
+
+    function mode(arr) {
+      const freq = {};
+      arr.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+      const maxFreq = Math.max(...Object.values(freq));
+      if (maxFreq === 1) return null;
+      return Object.keys(freq).filter(k => freq[k] === maxFreq).map(Number);
+    }
+
+    function calculate() {
+      const nums = parseNumbers(textarea.value);
+
+      if (nums.length === 0) {
+        resultsSection.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        parsedCount.textContent = '';
+        return;
+      }
+
+      resultsSection.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      parsedCount.textContent = `${nums.length} number${nums.length !== 1 ? 's' : ''} parsed`;
+
+      const n = nums.length;
+      const sum = nums.reduce((a, b) => a + b, 0);
+      const mean = sum / n;
+      const sorted = [...nums].sort((a, b) => a - b);
+      const med = median(nums);
+      const mod = mode(nums);
+      const range = sorted[n - 1] - sorted[0];
+      const divisor = isSample ? n - 1 : n;
+      const deviations = nums.map(v => v - mean);
+      const sqDeviations = deviations.map(d => d * d);
+      const sumSqDev = sqDeviations.reduce((a, b) => a + b, 0);
+      const variance = divisor > 0 ? sumSqDev / divisor : 0;
+      const stddev = Math.sqrt(variance);
+
+      document.getElementById('stat-count').textContent = n;
+      document.getElementById('stat-sum').textContent = fmt(sum);
+      document.getElementById('stat-mean').textContent = fmt(mean);
+      document.getElementById('stat-median').textContent = fmt(med);
+      document.getElementById('stat-mode').textContent = mod ? mod.map(fmt).join(', ') : 'None';
+      document.getElementById('stat-range').textContent = fmt(range);
+      document.getElementById('stat-variance').textContent = fmt(variance);
+      document.getElementById('stat-stddev').textContent = fmt(stddev);
+
+      drawPlot(sorted, mean, stddev);
+      renderSteps(nums, mean, deviations, sqDeviations, sumSqDev, divisor, variance, stddev, n);
+    }
+
+    function drawPlot(sorted, mean, stddev) {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = 160 * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const w = rect.width;
+      const h = 160;
+      const pad = { l: 40, r: 20, t: 20, b: 35 };
+      const plotW = w - pad.l - pad.r;
+      const plotH = h - pad.t - pad.b;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const min = sorted[0];
+      const max = sorted[sorted.length - 1];
+      const spread = max - min || 1;
+      const margin = spread * 0.1;
+      const dMin = min - margin;
+      const dMax = max + margin;
+      const dRange = dMax - dMin;
+
+      function xPos(v) { return pad.l + ((v - dMin) / dRange) * plotW; }
+
+      const freq = {};
+      sorted.forEach(v => { freq[v] = (freq[v] || 0) + 1; });
+      const maxFreq = Math.max(...Object.values(freq));
+
+      // Grid lines
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      const ticks = 5;
+      for (let i = 0; i <= ticks; i++) {
+        const val = dMin + (dRange / ticks) * i;
+        const x = xPos(val);
+        ctx.beginPath();
+        ctx.moveTo(x, pad.t);
+        ctx.lineTo(x, h - pad.b);
+        ctx.stroke();
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(fmt(Math.round(val * 100) / 100), x, h - pad.b + 16);
+      }
+
+      // Axis line
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, h - pad.b);
+      ctx.lineTo(w - pad.r, h - pad.b);
+      ctx.stroke();
+
+      // Std dev shading
+      const sdLeft = xPos(mean - stddev);
+      const sdRight = xPos(mean + stddev);
+      ctx.fillStyle = 'rgba(37, 99, 235, 0.06)';
+      ctx.fillRect(Math.max(sdLeft, pad.l), pad.t, Math.min(sdRight, w - pad.r) - Math.max(sdLeft, pad.l), plotH);
+
+      // Std dev boundary lines
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      [mean - stddev, mean + stddev].forEach(v => {
+        const x = xPos(v);
+        if (x >= pad.l && x <= w - pad.r) {
+          ctx.beginPath();
+          ctx.moveTo(x, pad.t);
+          ctx.lineTo(x, h - pad.b);
+          ctx.stroke();
+        }
+      });
+      ctx.setLineDash([]);
+
+      // Mean line
+      const meanX = xPos(mean);
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(meanX, pad.t);
+      ctx.lineTo(meanX, h - pad.b);
+      ctx.stroke();
+
+      // Mean label
+      ctx.fillStyle = '#2563eb';
+      ctx.font = 'bold 10px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('x̄=' + fmt(Math.round(mean * 100) / 100), meanX, pad.t - 5);
+
+      // Dots
+      const dotR = Math.min(8, Math.max(4, plotW / sorted.length / 2.5));
+      const uniqueVals = [...new Set(sorted)];
+
+      uniqueVals.forEach(val => {
+        const count = freq[val];
+        const x = xPos(val);
+        for (let i = 0; i < count; i++) {
+          const y = (h - pad.b) - dotR - (i * (dotR * 2 + 2));
+          ctx.beginPath();
+          ctx.arc(x, y, dotR, 0, Math.PI * 2);
+          ctx.fillStyle = '#2563eb';
+          ctx.globalAlpha = 0.75;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = '#1d4ed8';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+
+      document.getElementById('plot-label').textContent =
+        `Blue line = mean (${fmt(Math.round(mean * 100) / 100)}) · Shaded = ±1 σ`;
+    }
+
+    function renderSteps(nums, mean, deviations, sqDeviations, sumSqDev, divisor, variance, stddev, n) {
+      const container = document.getElementById('steps-content');
+      const label = isSample ? 'Sample' : 'Population';
+      const symbol = isSample ? 's' : 'σ';
+      const divLabel = isSample ? `N − 1 = ${n} − 1 = ${n - 1}` : `N = ${n}`;
+      const maxShow = 20;
+      const truncated = nums.length > maxShow;
+      const showNums = truncated ? nums.slice(0, maxShow) : nums;
+
+      let tableRows = '';
+      showNums.forEach((v, i) => {
+        tableRows += `<tr class="${i % 2 === 0 ? 'bg-[#f8fafc]' : 'bg-white'}">
+          <td class="px-3 py-1.5 text-right font-mono">${fmt(v)}</td>
+          <td class="px-3 py-1.5 text-right font-mono">${fmt(deviations[i])}</td>
+          <td class="px-3 py-1.5 text-right font-mono">${fmt(sqDeviations[i])}</td>
+        </tr>`;
+      });
+      if (truncated) {
+        tableRows += `<tr class="bg-[#f8fafc]">
+          <td class="px-3 py-1.5 text-center text-[#94a3b8]" colspan="3">… ${nums.length - maxShow} more rows</td>
+        </tr>`;
+      }
+
+      container.innerHTML = `
+        <div>
+          <p class="font-semibold text-[#1e293b] mb-1">Step 1: Find the Mean</p>
+          <p>Sum = ${fmt(nums.reduce((a, b) => a + b, 0))}, Count (N) = ${n}</p>
+          <p>Mean (x̄) = Sum ÷ N = ${fmt(nums.reduce((a, b) => a + b, 0))} ÷ ${n} = <strong class="text-[#2563eb]">${fmt(mean)}</strong></p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-[#1e293b] mb-1">Step 2: Deviations and Squared Deviations</p>
+          <p class="mb-2">For each value, subtract the mean, then square the result.</p>
+          <div class="overflow-x-auto -mx-2">
+            <table class="min-w-full text-xs border border-[#e2e8f0] rounded-lg overflow-hidden">
+              <thead>
+                <tr class="bg-[#f1f5f9]">
+                  <th class="px-3 py-2 text-right font-semibold text-[#1e293b]">Value (xᵢ)</th>
+                  <th class="px-3 py-2 text-right font-semibold text-[#1e293b]">xᵢ − x̄</th>
+                  <th class="px-3 py-2 text-right font-semibold text-[#1e293b]">(xᵢ − x̄)²</th>
+                </tr>
+              </thead>
+              <tbody>${tableRows}</tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold text-[#1e293b] mb-1">Step 3: Sum of Squared Deviations</p>
+          <p>Σ(xᵢ − x̄)² = <strong class="text-[#1e293b]">${fmt(sumSqDev)}</strong></p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-[#1e293b] mb-1">Step 4: ${label} Variance</p>
+          <p>Variance (${symbol}²) = Σ(xᵢ − x̄)² ÷ ${divLabel} = ${fmt(sumSqDev)} ÷ ${divisor} = <strong class="text-[#1e293b]">${fmt(variance)}</strong></p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-[#1e293b] mb-1">Step 5: ${label} Standard Deviation</p>
+          <p>${symbol} = √variance = √${fmt(variance)} = <strong class="text-[#2563eb] text-base">${fmt(stddev)}</strong></p>
+        </div>
+      `;
+    }
+
+    // Toggle buttons
+    document.getElementById('btn-population').addEventListener('click', function() {
+      isSample = false;
+      this.className = 'toggle-active px-4 py-2 rounded-md text-sm font-semibold transition-all';
+      document.getElementById('btn-sample').className = 'toggle-inactive px-4 py-2 rounded-md text-sm font-semibold transition-all';
+      calculate();
+    });
+
+    document.getElementById('btn-sample').addEventListener('click', function() {
+      isSample = true;
+      this.className = 'toggle-active px-4 py-2 rounded-md text-sm font-semibold transition-all';
+      document.getElementById('btn-population').className = 'toggle-inactive px-4 py-2 rounded-md text-sm font-semibold transition-all';
+      calculate();
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', () => {
+      textarea.value = '';
+      calculate();
+      textarea.focus();
+    });
+
+    document.getElementById('example-btn').addEventListener('click', () => {
+      textarea.value = '4, 8, 6, 5, 3, 7, 8, 9, 2, 10';
+      calculate();
+    });
+
+    textarea.addEventListener('input', calculate);
+
+    window.addEventListener('resize', () => {
+      if (!resultsSection.classList.contains('hidden')) {
+        const nums = parseNumbers(textarea.value);
+        if (nums.length > 0) {
+          const sorted = [...nums].sort((a, b) => a - b);
+          const mean = nums.reduce((a, b) => a + b, 0) / nums.length;
+          const divisor = isSample ? nums.length - 1 : nums.length;
+          const variance = nums.reduce((s, v) => s + (v - mean) ** 2, 0) / (divisor || 1);
+          drawPlot(sorted, mean, Math.sqrt(variance));
+        }
+      }
+    });
+
+    calculate();
+  </script>
+
+  <script type="module">import { initToolPage } from '/js/shared.js'; initToolPage('standard-deviation-calculator');</script>
+</body>
+</html>

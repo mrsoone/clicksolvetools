@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free PDF to Text Extractor Online — Extract Text from PDF | ClickSolveTools</title>
+    <meta name="description" content="Extract text from any PDF file instantly in your browser. Copy text, view page-by-page, download as .txt — no uploads, no signup. Works with text-based PDFs.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicksolvetools.com/tools/pdf-to-text">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Free PDF to Text Extractor Online — Extract Text from PDF | ClickSolveTools">
+    <meta property="og:description" content="Extract text from any PDF file instantly in your browser. Copy text, view page-by-page, download as .txt — no uploads, no signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicksolvetools.com/tools/pdf-to-text">
+    <meta property="og:site_name" content="ClickSolveTools">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free PDF to Text Extractor Online — Extract Text from PDF | ClickSolveTools">
+    <meta name="twitter:description" content="Extract text from any PDF file instantly in your browser. Copy text, view page-by-page, download as .txt — no uploads, no signup.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PDF to Text Extractor",
+      "url": "https://clicksolvetools.com/tools/pdf-to-text",
+      "description": "Extract text from any PDF file instantly in your browser. Copy text, view page-by-page, download as .txt file.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ClickSolveTools",
+        "url": "https://clicksolvetools.com"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can this tool extract text from scanned PDFs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This tool extracts embedded text from text-based PDFs. Scanned or image-only PDFs require OCR (Optical Character Recognition) software, which is a different process. If your PDF was created from a Word document, web page, or other digital source, this tool will work perfectly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my PDF uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Your PDF is processed entirely in your browser using JavaScript. The file never leaves your device — all text extraction happens locally, making it safe for confidential documents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the maximum PDF size supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no server-side limit. Performance depends on your device's memory and the PDF's complexity. Most modern browsers handle PDFs up to 100–200 MB without issues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool preserve formatting from the PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The tool extracts raw text content in reading order. Basic paragraph structure is preserved, but complex layouts like tables, columns, and headers may not appear in the same visual arrangement as the original PDF."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+        .drop-zone.dragover { border-color: #2563eb; background: #eff6ff; }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+    <div id="nav-container"></div>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <article>
+            <div class="mb-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#1e293b] mb-2">PDF to Text Extractor</h1>
+                <p class="text-[#475569] text-lg">Extract all text from a PDF — entirely in your browser</p>
+            </div>
+
+            <!-- Upload Zone -->
+            <div id="drop-zone" class="drop-zone mb-6 border-2 border-dashed border-[#e2e8f0] rounded-xl p-10 text-center cursor-pointer bg-white hover:border-[#2563eb]/40 transition-colors">
+                <div id="upload-prompt">
+                    <div class="text-5xl mb-3">📄</div>
+                    <p class="text-[#1e293b] font-semibold mb-1">Drop a PDF here or click to upload</p>
+                    <p class="text-[#94a3b8] text-sm">Supports any text-based PDF file</p>
+                </div>
+                <input type="file" id="file-input" accept=".pdf,application/pdf" class="hidden">
+            </div>
+
+            <!-- File Info -->
+            <div id="file-info" class="hidden mb-6 bg-white border border-[#e2e8f0] rounded-xl p-5">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="text-2xl">📄</span>
+                        <div class="min-w-0">
+                            <p id="file-name" class="font-semibold text-[#1e293b] truncate"></p>
+                            <p id="file-meta" class="text-[#94a3b8] text-sm"></p>
+                        </div>
+                    </div>
+                    <button id="btn-remove" class="text-sm text-red-400 hover:text-red-500 font-medium transition-colors shrink-0">Remove</button>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div id="progress-section" class="hidden mb-6">
+                <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-[#475569]">Extracting text…</span>
+                        <span id="progress-text" class="text-sm text-[#94a3b8]">0 / 0 pages</span>
+                    </div>
+                    <div class="w-full bg-[#e2e8f0] rounded-full h-2">
+                        <div id="progress-bar" class="bg-[#2563eb] h-2 rounded-full transition-all duration-300" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div id="stats-section" class="hidden mb-6">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+                        <p class="text-2xl font-bold text-[#2563eb]" id="stat-pages">0</p>
+                        <p class="text-xs text-[#94a3b8] mt-1">Pages</p>
+                    </div>
+                    <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+                        <p class="text-2xl font-bold text-[#2563eb]" id="stat-words">0</p>
+                        <p class="text-xs text-[#94a3b8] mt-1">Words</p>
+                    </div>
+                    <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 text-center">
+                        <p class="text-2xl font-bold text-[#2563eb]" id="stat-chars">0</p>
+                        <p class="text-xs text-[#94a3b8] mt-1">Characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Mode & Actions -->
+            <div id="actions-section" class="hidden mb-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2">
+                        <button id="btn-view-all" class="px-4 py-2 text-sm font-medium rounded-lg bg-[#2563eb] text-white transition-colors">All Pages</button>
+                        <button id="btn-view-page" class="px-4 py-2 text-sm font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors">Page-by-Page</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="btn-copy" class="px-4 py-2 text-sm font-medium rounded-lg bg-[#eff6ff] text-[#2563eb] hover:bg-[#dbeafe] transition-colors">Copy All</button>
+                        <button id="btn-download" class="px-4 py-2 text-sm font-medium rounded-lg bg-[#2563eb] text-white hover:bg-[#1d4ed8] transition-colors">Download .txt</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Navigation (page-by-page mode) -->
+            <div id="page-nav" class="hidden mb-4">
+                <div class="flex items-center justify-center gap-3">
+                    <button id="btn-prev" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-white border border-[#e2e8f0] text-[#475569] hover:bg-[#f1f5f9] disabled:opacity-40 disabled:cursor-not-allowed transition-colors">&larr; Prev</button>
+                    <span id="page-indicator" class="text-sm font-medium text-[#475569]">Page 1 of 1</span>
+                    <button id="btn-next" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-white border border-[#e2e8f0] text-[#475569] hover:bg-[#f1f5f9] disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Text Output -->
+            <div id="output-section" class="hidden mb-6">
+                <textarea id="text-output" readonly class="w-full h-[500px] p-4 bg-white border border-[#e2e8f0] rounded-xl text-[#1e293b] text-sm font-mono leading-relaxed resize-y focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="Extracted text will appear here…"></textarea>
+            </div>
+
+            <!-- Notice -->
+            <div id="notice-section" class="hidden mb-12">
+                <div class="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl p-4 flex items-start gap-3">
+                    <span class="text-lg leading-none mt-0.5">ℹ️</span>
+                    <p class="text-sm text-[#1e40af] leading-relaxed">Text extraction quality depends on the PDF. Scanned or image-only PDFs may not contain extractable text — they require OCR software. This tool works best with PDFs created from digital documents (Word, web pages, etc.).</p>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="max-w-3xl mx-auto mt-16">
+                <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Extract Text from a PDF — Free, Private, and Instant</h2>
+
+                <div class="space-y-4 text-[#475569] leading-relaxed">
+                    <p>Extracting text from a PDF is one of the most common document tasks people encounter daily. Whether you need to pull quotes from a research paper, repurpose content from a report, copy data from an invoice, or convert a PDF into an editable format, this free PDF to text extractor handles it all directly in your browser. There is no software to install, no file to upload to a remote server, and no account to create. Your document stays on your device at all times because all text extraction is performed client-side using Mozilla's open-source pdf.js library.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding PDF Text Extraction</h3>
+                    <p>PDF files come in two fundamentally different flavors when it comes to text content. <strong class="text-[#1e293b]">Text-based PDFs</strong> are created from digital sources — exported from Microsoft Word, generated by web browsers, produced by LaTeX, or output by any application that embeds actual character data into the file. These PDFs contain real text that can be selected, searched, and extracted programmatically. This tool is designed for exactly these types of files and will reliably pull out every word, paragraph, and heading in reading order.</p>
+                    <p><strong class="text-[#1e293b]">Scanned or image-based PDFs</strong>, on the other hand, are essentially photographs of pages. When you scan a paper document or take a photo and save it as a PDF, the resulting file contains image data rather than text characters. Extracting text from these files requires OCR (Optical Character Recognition) technology, which analyzes the visual appearance of characters and converts them into machine-readable text. OCR is a computationally intensive process that typically requires specialized software or cloud services. This tool does not perform OCR — if your PDF contains only scanned images, the extracted text output will be empty or minimal.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Tool Works</h3>
+                    <p>Upload or drag-and-drop a PDF onto the page. The tool reads your file locally using pdf.js, a battle-tested open-source PDF rendering engine maintained by Mozilla — the same technology that powers Firefox's built-in PDF viewer. As each page is processed, a progress bar shows the extraction status in real time. Once complete, the full text appears in an editable textarea along with word count, character count, and page count statistics.</p>
+                    <p>You can view the extracted text in two modes: <strong class="text-[#1e293b]">All Pages</strong> displays the complete document text at once, while <strong class="text-[#1e293b]">Page-by-Page</strong> lets you navigate through individual pages using Previous and Next buttons — useful for long documents where you need to locate content from a specific page. From there, you can copy the entire text to your clipboard with one click or download it as a plain <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">.txt</code> file for offline use.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong class="text-[#1e293b]">Academic research</strong> — Pull citations, abstracts, or full sections from journal articles and dissertations without retyping.</li>
+                        <li><strong class="text-[#1e293b]">Content repurposing</strong> — Extract blog posts, whitepapers, or ebook chapters from PDF format so you can edit, translate, or republish the content.</li>
+                        <li><strong class="text-[#1e293b]">Data entry &amp; analysis</strong> — Copy text from invoices, receipts, or reports into spreadsheets, databases, or other systems.</li>
+                        <li><strong class="text-[#1e293b]">Legal &amp; compliance</strong> — Extract clauses, terms, and definitions from contracts and policy documents for review or comparison.</li>
+                        <li><strong class="text-[#1e293b]">Accessibility</strong> — Convert PDF content into plain text for screen readers, Braille displays, or other assistive technologies.</li>
+                        <li><strong class="text-[#1e293b]">Search &amp; indexing</strong> — Extract text to make PDF content searchable in your own systems, notes apps, or knowledge bases.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Privacy and Security</h3>
+                    <p>Unlike most online PDF tools that require you to upload your file to a remote server, this extractor runs entirely inside your web browser. Your PDF is read into memory on your own device, processed using the open-source <a href="https://mozilla.github.io/pdf.js/" class="text-[#2563eb] hover:underline" target="_blank" rel="noopener">pdf.js</a> JavaScript library, and the extracted text is generated locally. At no point does your file travel over the internet. This makes it safe for sensitive documents including financial statements, medical records, legal filings, HR documents, and confidential business reports.</p>
+
+                    <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+                    <p><strong class="text-[#1e293b]">Can this tool extract text from scanned PDFs?</strong><br>
+                    No. This tool extracts embedded text from text-based PDFs. Scanned or image-only PDFs require OCR (Optical Character Recognition) software, which is a separate process. If your PDF was created from a Word document, web page, or other digital source, this tool will work perfectly.</p>
+
+                    <p><strong class="text-[#1e293b]">Is my PDF uploaded to a server?</strong><br>
+                    No. Your PDF is processed entirely in your browser using JavaScript. The file never leaves your device — all text extraction happens locally on your machine, making it safe for confidential and sensitive documents.</p>
+
+                    <p><strong class="text-[#1e293b]">What is the maximum PDF size supported?</strong><br>
+                    There is no server-side limit since nothing is uploaded. Performance depends on your device's available memory and the complexity of the PDF. Most modern browsers comfortably handle PDFs up to 100–200 MB. Very large files may take a few extra seconds to process.</p>
+
+                    <p><strong class="text-[#1e293b]">Does this tool preserve formatting?</strong><br>
+                    The tool extracts raw text content in reading order. Basic paragraph structure is maintained, but complex layouts such as multi-column text, tables, headers, and footers may not appear in the same visual arrangement as the original PDF. For most single-column documents, the output closely matches the source.</p>
+
+                    <p>This tool is completely <strong class="text-[#1e293b]">free</strong> and runs <strong class="text-[#1e293b]">entirely in your browser</strong>. No data is sent to any server — your PDF never leaves your machine. Extract text from as many files as you need, as often as you like.</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div id="related-tools"></div>
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { initToolPage } from '/js/shared.js';
+        initToolPage('pdf-to-text');
+    </script>
+
+    <script type="module">
+    const pdfjsLib = await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs';
+
+    const dropZone      = document.getElementById('drop-zone');
+    const fileInput      = document.getElementById('file-input');
+    const fileInfo       = document.getElementById('file-info');
+    const fileNameEl     = document.getElementById('file-name');
+    const fileMeta       = document.getElementById('file-meta');
+    const btnRemove      = document.getElementById('btn-remove');
+    const progressSec    = document.getElementById('progress-section');
+    const progressBar    = document.getElementById('progress-bar');
+    const progressText   = document.getElementById('progress-text');
+    const statsSec       = document.getElementById('stats-section');
+    const statPages      = document.getElementById('stat-pages');
+    const statWords      = document.getElementById('stat-words');
+    const statChars      = document.getElementById('stat-chars');
+    const actionsSec     = document.getElementById('actions-section');
+    const btnViewAll     = document.getElementById('btn-view-all');
+    const btnViewPage    = document.getElementById('btn-view-page');
+    const btnCopy        = document.getElementById('btn-copy');
+    const btnDownload    = document.getElementById('btn-download');
+    const pageNav        = document.getElementById('page-nav');
+    const btnPrev        = document.getElementById('btn-prev');
+    const btnNext        = document.getElementById('btn-next');
+    const pageIndicator  = document.getElementById('page-indicator');
+    const outputSec      = document.getElementById('output-section');
+    const textOutput     = document.getElementById('text-output');
+    const noticeSec      = document.getElementById('notice-section');
+
+    let pageTexts = [];
+    let fullText  = '';
+    let baseName  = '';
+    let viewMode  = 'all';
+    let currentPage = 0;
+
+    function formatSize(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function countWords(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return 0;
+        return trimmed.split(/\s+/).length;
+    }
+
+    function resetAll() {
+        pageTexts = [];
+        fullText = '';
+        baseName = '';
+        viewMode = 'all';
+        currentPage = 0;
+        fileInfo.classList.add('hidden');
+        progressSec.classList.add('hidden');
+        statsSec.classList.add('hidden');
+        actionsSec.classList.add('hidden');
+        pageNav.classList.add('hidden');
+        outputSec.classList.add('hidden');
+        noticeSec.classList.add('hidden');
+        dropZone.classList.remove('hidden');
+        textOutput.value = '';
+        progressBar.style.width = '0%';
+        progressText.textContent = '0 / 0 pages';
+        setViewMode('all');
+    }
+
+    function setViewMode(mode) {
+        viewMode = mode;
+        if (mode === 'all') {
+            btnViewAll.className  = 'px-4 py-2 text-sm font-medium rounded-lg bg-[#2563eb] text-white transition-colors';
+            btnViewPage.className = 'px-4 py-2 text-sm font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors';
+            pageNav.classList.add('hidden');
+            textOutput.value = fullText;
+        } else {
+            btnViewAll.className  = 'px-4 py-2 text-sm font-medium rounded-lg bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-colors';
+            btnViewPage.className = 'px-4 py-2 text-sm font-medium rounded-lg bg-[#2563eb] text-white transition-colors';
+            pageNav.classList.remove('hidden');
+            showPage(currentPage);
+        }
+    }
+
+    function showPage(idx) {
+        currentPage = idx;
+        textOutput.value = pageTexts[idx] || '(No text found on this page)';
+        pageIndicator.textContent = 'Page ' + (idx + 1) + ' of ' + pageTexts.length;
+        btnPrev.disabled = idx === 0;
+        btnNext.disabled = idx === pageTexts.length - 1;
+    }
+
+    async function loadAndExtract(file) {
+        if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+            alert('Please select a PDF file.');
+            return;
+        }
+
+        resetAll();
+        baseName = file.name.replace(/\.pdf$/i, '');
+        fileNameEl.textContent = file.name;
+        fileMeta.textContent = formatSize(file.size);
+        dropZone.classList.add('hidden');
+        fileInfo.classList.remove('hidden');
+        progressSec.classList.remove('hidden');
+
+        try {
+            const buffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+            const numPages = pdf.numPages;
+
+            fileMeta.textContent = numPages + ' page' + (numPages !== 1 ? 's' : '') + '  •  ' + formatSize(file.size);
+            progressText.textContent = '0 / ' + numPages + ' pages';
+
+            pageTexts = [];
+
+            for (let i = 1; i <= numPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                const strings = content.items.map(item => item.str);
+                pageTexts.push(strings.join(' '));
+
+                const pct = Math.round((i / numPages) * 100);
+                progressBar.style.width = pct + '%';
+                progressText.textContent = i + ' / ' + numPages + ' pages';
+
+                if (i % 5 === 0) await new Promise(r => setTimeout(r, 0));
+            }
+
+            fullText = pageTexts.map((t, i) => '--- Page ' + (i + 1) + ' ---\n' + t).join('\n\n');
+            const totalWords = countWords(pageTexts.join(' '));
+            const totalChars = pageTexts.join('').length;
+
+            statPages.textContent = numPages.toLocaleString();
+            statWords.textContent = totalWords.toLocaleString();
+            statChars.textContent = totalChars.toLocaleString();
+
+            progressSec.classList.add('hidden');
+            statsSec.classList.remove('hidden');
+            actionsSec.classList.remove('hidden');
+            outputSec.classList.remove('hidden');
+            noticeSec.classList.remove('hidden');
+            textOutput.value = fullText;
+
+            if (totalChars === 0) {
+                textOutput.value = '(No extractable text found. This PDF may be scanned or image-based.)';
+            }
+        } catch (e) {
+            alert('Could not read this PDF. It may be corrupted, password-protected, or not a valid PDF file.\n\n' + e.message);
+            resetAll();
+        }
+    }
+
+    // Drag-and-drop
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) loadAndExtract(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) loadAndExtract(fileInput.files[0]); });
+    btnRemove.addEventListener('click', () => { resetAll(); fileInput.value = ''; });
+
+    // View mode toggles
+    btnViewAll.addEventListener('click', () => setViewMode('all'));
+    btnViewPage.addEventListener('click', () => { if (pageTexts.length) setViewMode('page'); });
+
+    // Page navigation
+    btnPrev.addEventListener('click', () => { if (currentPage > 0) showPage(currentPage - 1); });
+    btnNext.addEventListener('click', () => { if (currentPage < pageTexts.length - 1) showPage(currentPage + 1); });
+
+    // Copy all
+    btnCopy.addEventListener('click', async () => {
+        const textToCopy = viewMode === 'all' ? fullText : (pageTexts[currentPage] || '');
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+            const orig = btnCopy.textContent;
+            btnCopy.textContent = 'Copied!';
+            setTimeout(() => { btnCopy.textContent = orig; }, 1500);
+        } catch {
+            textOutput.select();
+            document.execCommand('copy');
+        }
+    });
+
+    // Download .txt
+    btnDownload.addEventListener('click', () => {
+        const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = baseName + '.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+    </script>
+</body>
+</html>

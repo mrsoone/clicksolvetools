@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Pregnancy Due Date Calculator — Estimate Your Baby's Arrival | ClickSolveTools</title>
+  <meta name="description" content="Calculate your estimated due date for free using your last menstrual period, conception date, or IVF transfer date. See trimester timeline, key milestones, and current pregnancy progress — all in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/pregnancy-due-date-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Pregnancy Due Date Calculator — Estimate Your Baby's Arrival | ClickSolveTools">
+  <meta property="og:description" content="Calculate your estimated due date using LMP, conception date, or IVF transfer date. See trimester timeline and key pregnancy milestones.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/pregnancy-due-date-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Pregnancy Due Date Calculator","url":"https://clicksolvetools.com/tools/pregnancy-due-date-calculator","description":"Calculate your estimated due date using your last menstrual period, conception date, or IVF transfer date. See trimester timeline and key pregnancy milestones.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a pregnancy due date calculated?","acceptedAnswer":{"@type":"Answer","text":"The most common method uses Naegele's rule: add 280 days (40 weeks) to the first day of your last menstrual period (LMP). This assumes a 28-day cycle with ovulation on day 14. Adjustments are made for longer or shorter cycles."}},{"@type":"Question","name":"How accurate is a due date calculator?","acceptedAnswer":{"@type":"Answer","text":"Due date calculators provide an estimate. Only about 5% of babies are born on their exact due date. Most births occur within two weeks before or after the estimated date. Ultrasound dating in the first trimester is generally the most accurate method."}},{"@type":"Question","name":"What are the three trimesters of pregnancy?","acceptedAnswer":{"@type":"Answer","text":"The first trimester spans weeks 1–12, the second trimester covers weeks 13–27, and the third trimester runs from week 28 until delivery around week 40."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Method & Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+
+        <!-- Method Selector -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-[#475569] mb-2">Calculation Method</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button data-method="lmp" class="method-btn active px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#2563eb] bg-[#eff6ff] text-[#2563eb]">Last Menstrual Period</button>
+            <button data-method="conception" class="method-btn px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]">Conception Date</button>
+            <button data-method="ivf3" class="method-btn px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]">IVF Transfer (3-day)</button>
+            <button data-method="ivf5" class="method-btn px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]">IVF Transfer (5-day)</button>
+          </div>
+        </div>
+
+        <!-- Date Input -->
+        <div class="mb-4">
+          <label id="date-label" for="input-date" class="block text-sm font-medium text-[#475569] mb-1">First Day of Last Menstrual Period</label>
+          <input id="input-date" type="date" class="dd-input w-full">
+        </div>
+
+        <!-- Cycle Length (LMP only) -->
+        <div id="cycle-row" class="mb-5">
+          <label for="cycle-length" class="block text-sm font-medium text-[#475569] mb-1">Average Cycle Length</label>
+          <div class="relative w-40">
+            <input id="cycle-length" type="number" min="20" max="45" value="28" class="dd-input w-full pr-12">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">days</span>
+          </div>
+          <p class="text-xs text-[#94a3b8] mt-1">Typical range: 21–35 days</p>
+        </div>
+
+        <!-- Calculate -->
+        <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold text-sm transition-colors shadow-sm shadow-[#2563eb]/20">
+          Calculate Due Date
+        </button>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+
+        <!-- Due Date Hero -->
+        <div class="text-center mb-6">
+          <div class="text-sm text-[#475569] mb-1">Estimated Due Date</div>
+          <div id="due-date" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1e293b]">—</div>
+          <div id="days-until" class="text-sm text-[#475569] mt-1"></div>
+        </div>
+
+        <!-- Progress Summary -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 text-center">
+            <div class="text-xs text-[#94a3b8] mb-0.5">Current Week</div>
+            <div id="current-week" class="text-lg font-bold text-[#1e293b]">—</div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 text-center">
+            <div class="text-xs text-[#94a3b8] mb-0.5">Trimester</div>
+            <div id="trimester" class="text-lg font-bold text-[#1e293b]">—</div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 text-center">
+            <div class="text-xs text-[#94a3b8] mb-0.5">Conception (est.)</div>
+            <div id="conception-est" class="text-sm font-bold text-[#1e293b] mt-0.5">—</div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 text-center">
+            <div class="text-xs text-[#94a3b8] mb-0.5">Progress</div>
+            <div id="progress-pct" class="text-lg font-bold text-[#2563eb]">—</div>
+          </div>
+        </div>
+
+        <!-- Trimester Timeline -->
+        <div class="mb-6">
+          <div class="text-sm font-semibold text-[#1e293b] mb-2">Trimester Timeline</div>
+          <div class="relative">
+            <div class="flex h-8 rounded-full overflow-hidden">
+              <div class="h-full bg-[#818cf8] flex items-center justify-center text-[11px] font-semibold text-white" style="width:30%">1st</div>
+              <div class="h-full bg-[#34d399] flex items-center justify-center text-[11px] font-semibold text-white" style="width:37.5%">2nd</div>
+              <div class="h-full bg-[#fb923c] flex items-center justify-center text-[11px] font-semibold text-white" style="width:32.5%">3rd</div>
+            </div>
+            <!-- Progress marker -->
+            <div id="timeline-marker" class="absolute top-0 h-8 w-0.5 bg-[#1e293b] transition-all duration-500 ease-out" style="left:0%">
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-bold text-[#1e293b] whitespace-nowrap" id="timeline-label">You</div>
+            </div>
+            <!-- Week labels -->
+            <div class="flex justify-between text-[10px] text-[#94a3b8] mt-6 px-0.5">
+              <span>Week 1</span>
+              <span>Week 12</span>
+              <span>Week 27</span>
+              <span>Week 40</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Milestones -->
+        <div class="border-t border-[#e2e8f0] pt-4">
+          <div class="text-sm font-semibold text-[#1e293b] mb-3">Key Milestone Dates</div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-sm">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#818cf8] inline-block"></span>
+                <span class="text-[#475569]">End of 1st Trimester (12 weeks)</span>
+              </div>
+              <span id="ms-t1" class="font-semibold text-[#1e293b]">—</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#34d399] inline-block"></span>
+                <span class="text-[#475569]">Viability Date (24 weeks)</span>
+              </div>
+              <span id="ms-viability" class="font-semibold text-[#1e293b]">—</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#fb923c] inline-block"></span>
+                <span class="text-[#475569]">Full Term (37 weeks)</span>
+              </div>
+              <span id="ms-fullterm" class="font-semibold text-[#1e293b]">—</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block"></span>
+                <span class="text-[#475569]">Due Date (40 weeks)</span>
+              </div>
+              <span id="ms-due" class="font-semibold text-[#1e293b]">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Disclaimer -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5">
+        <div class="flex gap-3">
+          <div class="text-lg leading-none mt-0.5">⚕️</div>
+          <p class="text-xs text-[#475569] leading-relaxed">
+            <strong class="text-[#1e293b]">Health Disclaimer:</strong> This is an estimate. Only about 5% of babies are born on their exact due date. Consult your healthcare provider for accurate dating, especially if your cycles are irregular or you are unsure of your dates. This tool is not a substitute for professional medical advice.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Is a Pregnancy Due Date Calculated?</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>A pregnancy due date — also called the estimated date of delivery (EDD) — is the projected date when a baby is expected to arrive. While only about 5 percent of babies are born on their exact due date, having an estimated date helps healthcare providers track fetal development, schedule prenatal tests, and prepare for delivery. This calculator supports three common methods for determining your EDD: last menstrual period, known conception date, and IVF transfer date.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Naegele's Rule — The Standard LMP Method</h3>
+      <p>The most widely used formula for calculating a due date is known as Naegele's rule, named after German obstetrician Franz Naegele who popularized it in the early 1800s. The rule is straightforward: take the first day of your last menstrual period (LMP), add one year, subtract three months, and add seven days. Mathematically, this equals adding 280 days — or 40 weeks — to the LMP date.</p>
+      <p>Naegele's rule assumes a standard 28-day menstrual cycle with ovulation occurring on day 14. Since actual cycle lengths vary significantly from person to person, this calculator adjusts the result when you enter a cycle length other than 28 days. If your cycle is 32 days, for example, ovulation likely occurs around day 18 instead of day 14, so the due date shifts forward by four days. This adjustment improves accuracy for anyone whose cycle differs from the textbook average.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Conception Date Method</h3>
+      <p>If you know the exact date of conception — perhaps through ovulation tracking, basal body temperature charting, or timed intercourse — the due date calculation is simpler. A full-term pregnancy from conception to birth is approximately 266 days (38 weeks). This method bypasses the two-week assumption built into Naegele's rule and can be more accurate when the conception date is known with confidence.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">IVF Transfer Date Method</h3>
+      <p>For pregnancies achieved through in vitro fertilization (IVF), the transfer date and embryo age provide a precise starting point. A 3-day embryo transfer adds 263 days to the transfer date (266 minus 3 days of embryo development), while a 5-day blastocyst transfer adds 261 days. Because the embryo age is exactly known in IVF, these calculations tend to be the most accurate of any method.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding the Three Trimesters</h3>
+      <p>A full-term pregnancy spans approximately 40 weeks from the first day of the last menstrual period and is divided into three trimesters, each with distinct developmental milestones:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">First Trimester (Weeks 1–12)</strong> — The fertilized egg implants in the uterus, and all major organs begin to form. By the end of week 12, the fetus is about 2.5 inches long and has a detectable heartbeat. This trimester carries the highest risk of miscarriage, which is why many people wait until week 12 to share their news.</li>
+        <li><strong class="text-[#1e293b]">Second Trimester (Weeks 13–27)</strong> — Often called the most comfortable trimester. The fetus grows rapidly, begins to move noticeably, and develops features like fingerprints and the ability to hear. An anatomy scan ultrasound is typically performed around week 20. Viability — the point at which a baby may survive outside the womb with medical intervention — is generally reached around 24 weeks.</li>
+        <li><strong class="text-[#1e293b]">Third Trimester (Weeks 28–40)</strong> — The baby gains significant weight, the lungs mature, and the body prepares for birth. A pregnancy is considered full term at 37 weeks, meaning the baby is developed enough for a safe delivery. Births between 37 and 42 weeks are considered within the normal range.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How Accurate Are Due Date Estimates?</h3>
+      <p>No due date calculation is perfectly precise. Even with first-trimester ultrasound — the gold standard for pregnancy dating — the margin of error is plus or minus five to seven days. LMP-based calculations can be off by even more if your menstrual cycles are irregular, you have recently stopped hormonal contraception, or you are unsure of the exact date of your last period. Healthcare providers often combine LMP dating with ultrasound measurements to arrive at the most reliable estimate.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How is a pregnancy due date calculated?</strong></p>
+      <p>The most common method uses Naegele's rule: add 280 days (40 weeks) to the first day of your last menstrual period. This assumes a 28-day cycle with ovulation on day 14. Adjustments are made for longer or shorter cycles. Alternatively, if you know your conception date, add 266 days (38 weeks) to that date.</p>
+
+      <p><strong class="text-[#1e293b]">What if my cycles are irregular?</strong></p>
+      <p>Irregular cycles make LMP-based dating less reliable because ovulation may not occur on the expected day. If your cycles vary significantly, a first-trimester ultrasound provides a more accurate estimate. You can also use the conception date method if you tracked ovulation with tests or temperature charting.</p>
+
+      <p><strong class="text-[#1e293b]">Can my due date change during pregnancy?</strong></p>
+      <p>Yes. If an early ultrasound shows that the baby's size does not match the LMP-based estimate by more than a week, your provider may adjust your due date. This is common and does not indicate a problem — it simply means the original estimate was off. Due dates established by first-trimester ultrasound are rarely changed later.</p>
+
+      <p><strong class="text-[#1e293b]">What does "full term" mean?</strong></p>
+      <p>The American College of Obstetricians and Gynecologists defines full term as 39 weeks 0 days through 40 weeks 6 days. Early term is 37–38 weeks, late term is 41 weeks, and post-term begins at 42 weeks. Babies born at full term have the best health outcomes overall.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides an estimate for informational purposes only. It is not a medical diagnosis and should not replace professional prenatal care. Consult your healthcare provider for accurate pregnancy dating and personalized medical advice.
+      </div>
+
+      <p>This pregnancy due date calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to check your dates anytime — quick, private, and instant.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .dd-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .dd-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .dd-input::placeholder { color: #94a3b8; }
+    .dd-input::-webkit-inner-spin-button,
+    .dd-input::-webkit-outer-spin-button { opacity: 1; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    let method = 'lmp';
+
+    const methodBtns = document.querySelectorAll('.method-btn');
+    const dateLabel = $('date-label');
+    const inputDate = $('input-date');
+    const cycleRow = $('cycle-row');
+    const cycleLength = $('cycle-length');
+    const resultsPanel = $('results-panel');
+
+    const labels = {
+      lmp: 'First Day of Last Menstrual Period',
+      conception: 'Date of Conception',
+      ivf3: 'IVF Transfer Date (3-Day Embryo)',
+      ivf5: 'IVF Transfer Date (5-Day Embryo)'
+    };
+
+    function setMethod(m) {
+      method = m;
+      dateLabel.textContent = labels[m];
+      cycleRow.classList.toggle('hidden', m !== 'lmp');
+      methodBtns.forEach(btn => {
+        const active = btn.dataset.method === m;
+        btn.className = active
+          ? 'method-btn active px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#2563eb] bg-[#eff6ff] text-[#2563eb]'
+          : 'method-btn px-3 py-2.5 rounded-lg text-xs font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]';
+      });
+    }
+
+    methodBtns.forEach(btn => {
+      btn.addEventListener('click', () => setMethod(btn.dataset.method));
+    });
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function formatDate(d) {
+      return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function formatShort(d) {
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function daysBetween(a, b) {
+      const msPerDay = 86400000;
+      const utcA = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+      const utcB = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.floor((utcB - utcA) / msPerDay);
+    }
+
+    function calculate() {
+      const dateVal = inputDate.value;
+      if (!dateVal) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const parts = dateVal.split('-');
+      const baseDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+
+      let lmpEquivalent, conceptionDate, dueDate;
+      const cycle = Math.max(20, Math.min(45, parseInt(cycleLength.value) || 28));
+
+      switch (method) {
+        case 'lmp': {
+          const cycleAdjust = cycle - 28;
+          lmpEquivalent = new Date(baseDate);
+          conceptionDate = addDays(baseDate, cycle - 14);
+          dueDate = addDays(baseDate, 280 + cycleAdjust);
+          break;
+        }
+        case 'conception':
+          conceptionDate = new Date(baseDate);
+          lmpEquivalent = addDays(baseDate, -14);
+          dueDate = addDays(baseDate, 266);
+          break;
+        case 'ivf3':
+          conceptionDate = addDays(baseDate, -3);
+          lmpEquivalent = addDays(baseDate, -17);
+          dueDate = addDays(baseDate, 263);
+          break;
+        case 'ivf5':
+          conceptionDate = addDays(baseDate, -5);
+          lmpEquivalent = addDays(baseDate, -19);
+          dueDate = addDays(baseDate, 261);
+          break;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const totalDays = daysBetween(lmpEquivalent, today);
+      const daysUntilDue = daysBetween(today, dueDate);
+
+      if (totalDays < 0) {
+        resultsPanel.classList.add('hidden');
+        return;
+      }
+
+      const weeks = Math.floor(totalDays / 7);
+      const days = totalDays % 7;
+      const totalWeeks = 40;
+      const pct = Math.min(100, Math.max(0, (totalDays / (totalWeeks * 7)) * 100));
+
+      let trimesterText;
+      if (weeks < 13) trimesterText = '1st';
+      else if (weeks < 28) trimesterText = '2nd';
+      else trimesterText = '3rd';
+
+      $('due-date').textContent = formatDate(dueDate);
+
+      if (daysUntilDue > 0) {
+        $('days-until').textContent = `${daysUntilDue} days from today`;
+      } else if (daysUntilDue === 0) {
+        $('days-until').textContent = "That's today!";
+      } else {
+        $('days-until').textContent = `${Math.abs(daysUntilDue)} days past due date`;
+      }
+
+      $('current-week').textContent = weeks + 'w ' + days + 'd';
+      $('trimester').textContent = trimesterText;
+      $('conception-est').textContent = formatShort(conceptionDate);
+      $('progress-pct').textContent = Math.round(pct) + '%';
+
+      const marker = $('timeline-marker');
+      const clampedPct = Math.min(98, Math.max(1, pct));
+      marker.style.left = clampedPct + '%';
+
+      const t1End = addDays(lmpEquivalent, 12 * 7);
+      const viability = addDays(lmpEquivalent, 24 * 7);
+      const fullTerm = addDays(lmpEquivalent, 37 * 7);
+
+      $('ms-t1').textContent = formatShort(t1End);
+      $('ms-viability').textContent = formatShort(viability);
+      $('ms-fullterm').textContent = formatShort(fullTerm);
+      $('ms-due').textContent = formatShort(dueDate);
+
+      resultsPanel.classList.remove('hidden');
+    }
+
+    $('calc-btn').addEventListener('click', calculate);
+    inputDate.addEventListener('change', calculate);
+    cycleLength.addEventListener('input', calculate);
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('pregnancy-due-date-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Typing Speed Test — WPM, Accuracy &amp; Consistency | ClickSolveTools</title>
+  <meta name="description" content="Test your typing speed with a free online WPM test. Choose 15s, 30s, 60s, or 120s durations. Get instant results for words per minute, accuracy, and consistency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/typing-speed-test">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Typing Speed Test — WPM, Accuracy &amp; Consistency | ClickSolveTools">
+  <meta property="og:description" content="Test your typing speed with a free online WPM test. Choose 15s, 30s, 60s, or 120s durations. Get instant results for words per minute, accuracy, and consistency.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/typing-speed-test">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Typing Speed Test — WPM &amp; Accuracy | ClickSolveTools">
+  <meta name="twitter:description" content="Test your typing speed with a free online WPM test. Choose 15s, 30s, 60s, or 120s durations. Get instant results for words per minute, accuracy, and consistency.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Typing Speed Test","url":"https://clicksolvetools.com/tools/typing-speed-test","description":"Test your typing speed with a free online WPM test. Choose 15s, 30s, 60s, or 120s durations. Get instant results for words per minute, accuracy, and consistency.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto space-y-5">
+
+      <!-- Duration & Controls -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-medium text-[#475569]">Duration</span>
+            <div class="flex rounded-lg overflow-hidden border border-[#e2e8f0]" id="duration-bar">
+              <button data-dur="15" class="dur-btn px-3.5 py-1.5 text-sm font-semibold transition-colors">15s</button>
+              <button data-dur="30" class="dur-btn active px-3.5 py-1.5 text-sm font-semibold transition-colors border-l border-[#e2e8f0]">30s</button>
+              <button data-dur="60" class="dur-btn px-3.5 py-1.5 text-sm font-semibold transition-colors border-l border-[#e2e8f0]">60s</button>
+              <button data-dur="120" class="dur-btn px-3.5 py-1.5 text-sm font-semibold transition-colors border-l border-[#e2e8f0]">120s</button>
+            </div>
+          </div>
+          <div id="live-stats" class="flex items-center gap-5 text-sm tabular-nums hidden">
+            <div><span class="text-[#94a3b8]">WPM</span> <span id="live-wpm" class="font-bold text-[#2563eb]">0</span></div>
+            <div><span class="text-[#94a3b8]">Acc</span> <span id="live-acc" class="font-bold text-[#2563eb]">100%</span></div>
+            <div><span class="text-[#94a3b8]">Time</span> <span id="live-time" class="font-bold text-[#1e293b]">30s</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Display -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 sm:p-6">
+        <div id="text-display" class="font-mono text-lg sm:text-xl leading-relaxed tracking-wide select-none min-h-[140px] whitespace-pre-wrap break-all"></div>
+      </div>
+
+      <!-- Input -->
+      <div class="relative">
+        <textarea id="type-input" rows="3" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+          placeholder="Click here and start typing…"
+          class="w-full bg-white border-2 border-[#e2e8f0] rounded-xl p-5 text-lg font-mono leading-relaxed tracking-wide resize-none focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all placeholder-[#94a3b8]"></textarea>
+        <div id="input-overlay" class="hidden absolute inset-0 bg-white/80 rounded-xl flex items-center justify-center">
+          <span class="text-[#94a3b8] font-medium">Time's up!</span>
+        </div>
+      </div>
+
+      <!-- Results Panel (hidden until test ends) -->
+      <div id="results-panel" class="hidden">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-5 text-center">Your Results</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div class="text-center">
+              <div id="res-wpm" class="text-3xl sm:text-4xl font-extrabold text-[#2563eb]">0</div>
+              <div class="text-xs text-[#94a3b8] mt-1 font-medium">WPM</div>
+            </div>
+            <div class="text-center">
+              <div id="res-acc" class="text-3xl sm:text-4xl font-extrabold text-[#2563eb]">0%</div>
+              <div class="text-xs text-[#94a3b8] mt-1 font-medium">Accuracy</div>
+            </div>
+            <div class="text-center">
+              <div id="res-consistency" class="text-3xl sm:text-4xl font-extrabold text-[#2563eb]">—</div>
+              <div class="text-xs text-[#94a3b8] mt-1 font-medium">Consistency</div>
+            </div>
+            <div class="text-center">
+              <div id="res-chars" class="text-3xl sm:text-4xl font-extrabold text-[#1e293b]">0</div>
+              <div class="text-xs text-[#94a3b8] mt-1 font-medium">Characters</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center gap-3 text-sm text-[#475569] mb-6">
+            <span>✅ Correct: <strong id="res-correct" class="text-[#1e293b]">0</strong></span>
+            <span>❌ Incorrect: <strong id="res-incorrect" class="text-[#1e293b]">0</strong></span>
+            <span>📝 Total: <strong id="res-total" class="text-[#1e293b]">0</strong></span>
+          </div>
+          <div class="text-center">
+            <button id="btn-retry" class="inline-flex items-center gap-2 px-6 py-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold rounded-lg transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.5 15A7.5 7.5 0 0118.5 9M18.5 9l-3-3M5.5 15l3 3"/></svg>
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Measure and Improve Your Typing Speed</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Typing speed is measured in words per minute (WPM), and it has become one of the most practical skills in modern work and education. Whether you write emails, code software, draft reports, or chat with teammates, the speed and accuracy at which you type directly affects your daily productivity. This free typing speed test lets you measure your WPM, accuracy, and consistency so you can track progress over time and identify areas for improvement.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How WPM Is Calculated</h3>
+      <p>The standard definition of a "word" in typing tests is <strong class="text-[#1e293b]">five characters</strong>, including spaces and punctuation. This convention was established decades ago during typewriter-era testing and remains the universal standard today. To calculate gross WPM, the formula is: <strong class="text-[#1e293b]">(total characters typed / 5) / minutes elapsed</strong>. Net WPM subtracts uncorrected errors from the gross figure, giving a more accurate picture of effective typing speed. This tool calculates net WPM by counting only correctly typed characters, so the number you see represents your true productive speed.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Typing Speed Benchmarks</h3>
+      <p>Understanding where your typing speed falls relative to others can help set realistic goals:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Below 30 WPM</strong> — Beginner level. Typical for people who hunt and peck with two fingers. At this speed, typing is a bottleneck for most work tasks.</li>
+        <li><strong class="text-[#1e293b]">30–50 WPM</strong> — Average range. Most casual computer users fall here. Adequate for everyday tasks but slower than what most office jobs require.</li>
+        <li><strong class="text-[#1e293b]">50–70 WPM</strong> — Above average. Comfortable for professional work, email, and general writing. Most employers consider this a satisfactory speed.</li>
+        <li><strong class="text-[#1e293b]">70–100 WPM</strong> — Fast. Common among writers, programmers, and professionals who spend significant time typing. This range puts you ahead of the vast majority of typists.</li>
+        <li><strong class="text-[#1e293b]">100+ WPM</strong> — Expert. Achieved through years of practice or formal touch-typing training. Competitive typists often exceed 120–150 WPM, and the world record is over 200 WPM.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Improving Your Typing Speed</h3>
+      <p>Improving typing speed is a gradual process, but a few evidence-based strategies can accelerate your progress significantly:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Learn proper finger placement.</strong> The home row (ASDF JKL;) is the foundation of touch typing. Resting your fingers on these keys and reaching for others without looking at the keyboard is the single most impactful habit you can develop.</li>
+        <li><strong class="text-[#1e293b]">Prioritize accuracy over speed.</strong> Speed follows accuracy naturally. If you focus on not making mistakes, your fingers build correct muscle memory, and speed increases over time without conscious effort.</li>
+        <li><strong class="text-[#1e293b]">Practice consistently.</strong> Ten to fifteen minutes of daily practice is more effective than occasional hour-long sessions. Consistency builds neural pathways, and short sessions prevent fatigue-induced bad habits.</li>
+        <li><strong class="text-[#1e293b]">Use varied text.</strong> Practicing with diverse passages — fiction, technical writing, quotes, business text — prevents you from memorizing patterns and forces your fingers to adapt to unfamiliar sequences.</li>
+        <li><strong class="text-[#1e293b]">Monitor your weak spots.</strong> Pay attention to which keys or sequences slow you down. Many typists struggle with numbers, punctuation, or specific letter combinations. Targeted drills on weak areas yield faster overall improvement.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding Consistency</h3>
+      <p>Beyond raw speed and accuracy, consistency measures how stable your typing speed is throughout the test. A highly consistent typist maintains a steady rhythm, while an inconsistent typist has large speed fluctuations — bursts of fast typing followed by pauses or slowdowns. This tool rates your consistency based on the standard deviation of your per-second WPM across the test duration. A lower deviation means more even performance, which generally correlates with better real-world typing efficiency.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is a good typing speed?</strong><br>
+      For most professional work, 50–70 WPM with high accuracy (above 95%) is considered good. Data entry and transcription roles often require 60–80 WPM. Programmers and writers benefit from 70+ WPM, though code involves frequent pauses for thinking that raw WPM does not capture.</p>
+
+      <p><strong class="text-[#1e293b]">Does the test duration affect my WPM score?</strong><br>
+      Shorter tests (15 seconds) tend to produce higher WPM because fatigue and sustained focus are not factors. Longer tests (60–120 seconds) give a more realistic picture of your sustained typing speed. For benchmarking, a 60-second test is the most commonly used standard.</p>
+
+      <p><strong class="text-[#1e293b]">Why is accuracy more important than speed?</strong><br>
+      Every error you make costs time to correct. In real-world typing, a fast typist who makes frequent mistakes may produce less net output than a slower typist with near-perfect accuracy. Most typing experts recommend maintaining at least 95% accuracy before pushing for higher speeds.</p>
+
+      <p><strong class="text-[#1e293b]">Can I improve my typing speed as an adult?</strong><br>
+      Absolutely. Research shows that typing speed can be improved at any age with deliberate practice. Adults who switch from hunt-and-peck to touch typing typically see dramatic gains within a few weeks, and continued daily practice leads to steady long-term improvement.</p>
+
+      <p>This typing speed test runs entirely in your browser — no data is uploaded, no account is required, and the results are instant. Bookmark this page and test yourself regularly to track your progress over time.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .dur-btn { background: #f8fafc; color: #64748b; }
+    .dur-btn:hover { background: #f1f5f9; color: #1e293b; }
+    .dur-btn.active { background: #2563eb; color: #fff; }
+
+    .char-correct { color: #16a34a; }
+    .char-error { color: #ef4444; text-decoration: line-through; }
+    .char-current { background: #2563eb; color: #fff; border-radius: 2px; padding: 0 1px; }
+    .char-upcoming { color: #64748b; }
+
+    #type-input { font-variant-numeric: tabular-nums; }
+    #type-input:disabled { cursor: not-allowed; opacity: 0.6; }
+
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    .cursor-blink { animation: blink 1s step-end infinite; }
+  </style>
+
+  <script>
+  (function () {
+    const passages = [
+      "The quick brown fox jumps over the lazy dog near the riverbank. Sunlight filters through the canopy of ancient oaks, casting dappled shadows on the mossy ground below. A gentle breeze carries the scent of wildflowers across the meadow while birds sing their morning songs from hidden perches. The fox pauses, ears twitching, then disappears into the undergrowth without a sound.",
+      "Technology has transformed the way we communicate, work, and entertain ourselves over the past few decades. Smartphones have become extensions of our bodies, always within reach. Cloud computing lets us access files from anywhere in the world, and artificial intelligence now writes code, generates images, and answers complex questions. Yet despite all this progress, the fundamentals of good communication remain unchanged: clarity, empathy, and listening.",
+      "Cooking a perfect steak requires patience and attention to detail. Start by bringing the meat to room temperature for at least thirty minutes before cooking. Season generously with coarse salt and freshly cracked black pepper on both sides. Heat a cast iron skillet over high heat until it begins to smoke lightly. Sear the steak for three to four minutes per side without moving it, then rest it for five minutes before slicing. The result is a beautifully caramelized crust with a juicy interior.",
+      "The ocean covers more than seventy percent of the Earth's surface, yet we have explored less than five percent of it. Deep beneath the waves, hydrothermal vents support ecosystems that thrive without sunlight, relying instead on chemical energy from the Earth's interior. Giant squid patrol the midnight zone, bioluminescent jellyfish pulse with ghostly light, and pressure crushes everything not adapted to survive. The deep sea remains one of the last true frontiers of exploration on our planet.",
+      "Learning to play a musical instrument is one of the most rewarding long-term investments a person can make. Studies have shown that musicians develop stronger neural connections, better working memory, and enhanced problem-solving abilities compared to non-musicians. Whether you choose piano, guitar, violin, or drums, the discipline required to practice daily builds patience and resilience. The journey from struggling through scales to performing a piece from memory is deeply satisfying and teaches lessons that extend far beyond music.",
+      "Running a small business requires wearing many hats. On any given day, you might handle customer support in the morning, review financial reports at lunch, manage inventory in the afternoon, and plan a marketing campaign in the evening. Cash flow management is critical because even profitable businesses can fail if they run out of liquidity at the wrong time. Building a strong team and delegating effectively are skills that separate businesses that scale from those that stall.",
+      "The history of space exploration is a story of ambition, risk, and discovery. In nineteen sixty-nine, humans first set foot on the Moon, an achievement that seemed impossible just a decade earlier. Since then, robotic probes have visited every planet in our solar system, rovers have driven across the surface of Mars, and the Hubble Space Telescope has captured images of galaxies billions of light-years away. Private companies are now developing reusable rockets that could make space travel routine within our lifetime.",
+      "Good software design begins with understanding the problem before writing a single line of code. Requirements gathering, user research, and system architecture are the foundation upon which reliable software is built. Clean code is not clever code; it is code that any competent developer can read, understand, and modify six months later without documentation. Testing, version control, and continuous integration are not optional extras but essential practices that prevent small bugs from becoming catastrophic failures in production.",
+      "Photography is the art of capturing light. Understanding exposure, which depends on aperture, shutter speed, and ISO sensitivity, is the technical foundation every photographer must master. But technical skill alone does not make a great photograph. Composition, timing, and the ability to see beauty in ordinary moments are what separate snapshots from art. The best camera is the one you have with you, and the best photograph is the one that makes you feel something when you look at it years later.",
+      "Regular exercise delivers benefits that extend far beyond physical fitness. Research consistently shows that people who exercise regularly experience lower rates of anxiety, depression, and cognitive decline. Even moderate activity, such as thirty minutes of brisk walking five days a week, significantly reduces the risk of heart disease, diabetes, and certain cancers. The hardest part of any exercise routine is starting, but once movement becomes a habit, the body begins to crave it rather than resist it.",
+      "Mountains have fascinated humans for thousands of years, serving as sacred sites, natural barriers, and ultimate challenges. The highest peaks push climbers to their physical and mental limits, where thin air and brutal cold test every ounce of preparation. Yet mountains are also ecosystems teeming with life, from alpine wildflowers that bloom in impossibly thin soil to snow leopards that prowl rocky ridges in near silence. Protecting these fragile environments from climate change and human encroachment is one of the great conservation challenges of our time.",
+      "Reading books remains one of the most effective ways to build knowledge and expand your perspective. Unlike short-form content that encourages skimming, books demand sustained attention and reward readers with deep understanding. Fiction develops empathy by placing you inside the minds of characters whose lives differ from your own. Non-fiction distills years of research and experience into a few hundred pages. Making time to read even twenty pages a day adds up to dozens of books per year, compounding knowledge in ways that are difficult to achieve through any other medium."
+    ];
+
+    const $ = id => document.getElementById(id);
+    const durationBar = $('duration-bar');
+    const textDisplay = $('text-display');
+    const typeInput = $('type-input');
+    const inputOverlay = $('input-overlay');
+    const liveStats = $('live-stats');
+    const liveWpm = $('live-wpm');
+    const liveAcc = $('live-acc');
+    const liveTime = $('live-time');
+    const resultsPanel = $('results-panel');
+    const btnRetry = $('btn-retry');
+
+    let duration = 30;
+    let passage = '';
+    let started = false;
+    let finished = false;
+    let startTime = 0;
+    let timerInterval = null;
+    let wpmSamples = [];
+
+    function pickPassage() {
+      const idx = Math.floor(Math.random() * passages.length);
+      return passages[idx];
+    }
+
+    function renderText(typed) {
+      let html = '';
+      for (let i = 0; i < passage.length; i++) {
+        const ch = passage[i] === ' ' ? '\u00A0' : passage[i];
+        if (i < typed.length) {
+          if (typed[i] === passage[i]) {
+            html += '<span class="char-correct">' + escHtml(ch) + '</span>';
+          } else {
+            html += '<span class="char-error">' + escHtml(ch) + '</span>';
+          }
+        } else if (i === typed.length) {
+          html += '<span class="char-current cursor-blink">' + escHtml(ch) + '</span>';
+        } else {
+          html += '<span class="char-upcoming">' + escHtml(ch) + '</span>';
+        }
+      }
+      textDisplay.innerHTML = html;
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function calcStats(typed) {
+      let correct = 0;
+      let incorrect = 0;
+      for (let i = 0; i < typed.length; i++) {
+        if (i < passage.length && typed[i] === passage[i]) correct++;
+        else incorrect++;
+      }
+      const elapsed = (Date.now() - startTime) / 1000;
+      const minutes = elapsed / 60;
+      const wpm = minutes > 0 ? Math.round((correct / 5) / minutes) : 0;
+      const total = typed.length;
+      const accuracy = total > 0 ? Math.round((correct / total) * 100) : 100;
+      return { correct, incorrect, total, wpm, accuracy, elapsed };
+    }
+
+    function updateLiveStats(typed) {
+      const s = calcStats(typed);
+      liveWpm.textContent = s.wpm;
+      liveAcc.textContent = s.accuracy + '%';
+      const remaining = Math.max(0, duration - Math.floor(s.elapsed));
+      liveTime.textContent = remaining + 's';
+
+      wpmSamples.push(s.wpm);
+    }
+
+    function startTest() {
+      if (started || finished) return;
+      started = true;
+      startTime = Date.now();
+      liveStats.classList.remove('hidden');
+      wpmSamples = [];
+
+      timerInterval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        const remaining = Math.max(0, duration - Math.floor(elapsed));
+        liveTime.textContent = remaining + 's';
+
+        if (elapsed >= duration) {
+          endTest();
+        }
+      }, 200);
+    }
+
+    function endTest() {
+      finished = true;
+      clearInterval(timerInterval);
+      typeInput.disabled = true;
+      inputOverlay.classList.remove('hidden');
+      liveTime.textContent = '0s';
+
+      const typed = typeInput.value;
+      const s = calcStats(typed);
+
+      $('res-wpm').textContent = s.wpm;
+      $('res-acc').textContent = s.accuracy + '%';
+      $('res-correct').textContent = s.correct;
+      $('res-incorrect').textContent = s.incorrect;
+      $('res-total').textContent = s.total;
+      $('res-chars').textContent = s.total;
+
+      const consistencyLabel = calcConsistency();
+      $('res-consistency').textContent = consistencyLabel;
+
+      resultsPanel.classList.remove('hidden');
+      resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcConsistency() {
+      const samples = wpmSamples.filter(v => v > 0);
+      if (samples.length < 3) return 'N/A';
+
+      const mean = samples.reduce((a, b) => a + b, 0) / samples.length;
+      if (mean === 0) return 'N/A';
+
+      const variance = samples.reduce((sum, v) => sum + (v - mean) ** 2, 0) / samples.length;
+      const stdDev = Math.sqrt(variance);
+      const cv = (stdDev / mean) * 100;
+
+      if (cv < 10) return 'Excellent';
+      if (cv < 20) return 'Good';
+      if (cv < 30) return 'Fair';
+      return 'Low';
+    }
+
+    function resetTest() {
+      clearInterval(timerInterval);
+      started = false;
+      finished = false;
+      startTime = 0;
+      wpmSamples = [];
+      typeInput.disabled = false;
+      typeInput.value = '';
+      inputOverlay.classList.add('hidden');
+      liveStats.classList.add('hidden');
+      resultsPanel.classList.add('hidden');
+      liveWpm.textContent = '0';
+      liveAcc.textContent = '100%';
+      liveTime.textContent = duration + 's';
+      passage = pickPassage();
+      renderText('');
+      typeInput.focus();
+    }
+
+    durationBar.addEventListener('click', e => {
+      const btn = e.target.closest('.dur-btn');
+      if (!btn) return;
+      durationBar.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      duration = parseInt(btn.dataset.dur, 10);
+      resetTest();
+    });
+
+    typeInput.addEventListener('input', () => {
+      if (finished) return;
+      if (!started) startTest();
+
+      const typed = typeInput.value;
+      renderText(typed);
+      updateLiveStats(typed);
+
+      if (typed.length >= passage.length) {
+        endTest();
+      }
+    });
+
+    typeInput.addEventListener('paste', e => e.preventDefault());
+
+    btnRetry.addEventListener('click', resetTest);
+
+    passage = pickPassage();
+    renderText('');
+    liveTime.textContent = duration + 's';
+    typeInput.focus();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('typing-speed-test');
+  </script>
+</body>
+</html>

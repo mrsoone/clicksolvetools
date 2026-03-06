@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Image Color Adjuster Online — Brightness, Contrast, Hue & More | ClickSolveTools</title>
+  <meta name="description" content="Adjust image brightness, contrast, saturation, hue, sepia, grayscale, blur, and invert with real-time preview. Before/after comparison and instant download. Free, private, runs in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/image-color-adjuster">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Image Color Adjuster Online — Brightness, Contrast, Hue & More | ClickSolveTools">
+  <meta property="og:description" content="Adjust image brightness, contrast, saturation, hue, sepia, grayscale, blur, and invert with real-time preview. Before/after comparison and instant download.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/image-color-adjuster">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Image Color Adjuster Online — Brightness, Contrast, Hue & More | ClickSolveTools">
+  <meta name="twitter:description" content="Adjust image brightness, contrast, saturation, hue, sepia, grayscale, blur, and invert with real-time preview. Before/after comparison and instant download.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Color Adjuster",
+    "url": "https://clicksolvetools.com/tools/image-color-adjuster",
+    "description": "Adjust image brightness, contrast, saturation, hue, sepia, grayscale, blur, and invert with real-time preview and before/after comparison. Free, private, runs in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the Image Color Adjuster work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool applies CSS filter functions (brightness, contrast, saturate, hue-rotate, sepia, grayscale, blur, invert) to your image in real time. When you download, those same filters are rendered to an HTML5 canvas so the exported file contains the final result."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All processing happens entirely in your browser using JavaScript. Your image never leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can upload JPEG, PNG, WebP, GIF, BMP, and SVG images. The adjusted image is downloaded as PNG to preserve quality."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compare the original and adjusted image?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Use the Before/After toggle to instantly switch between the original and adjusted views, or use the comparison slider to reveal each side."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    input[type="range"] { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e2e8f0; outline: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .compare-container { position: relative; overflow: hidden; user-select: none; touch-action: none; }
+    .compare-divider { position: absolute; top: 0; bottom: 0; width: 3px; background: #2563eb; cursor: ew-resize; z-index: 10; }
+    .compare-divider::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; border-radius: 50%; background: #2563eb; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+    .compare-divider svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="image/*" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop image here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Supports JPEG, PNG, WebP, GIF, BMP, SVG</p>
+        </div>
+
+        <!-- Image info (hidden until upload) -->
+        <div id="image-info" class="hidden mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="text-sm font-medium text-[#475569]">Uploaded image</h3>
+              <span id="info-dims" class="text-xs bg-[#f1f5f9] text-[#475569] px-2 py-0.5 rounded-full"></span>
+              <span id="info-size" class="text-xs bg-[#f1f5f9] text-[#475569] px-2 py-0.5 rounded-full"></span>
+            </div>
+            <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
+          </div>
+        </div>
+
+        <!-- Preview area (hidden until upload) -->
+        <div id="preview-area" class="hidden mb-6">
+          <!-- Mode tabs -->
+          <div class="flex items-center gap-2 mb-4">
+            <button data-mode="adjusted" class="mode-tab px-4 py-1.5 rounded-full text-xs font-medium bg-[#2563eb] text-white transition-all">Adjusted</button>
+            <button data-mode="compare" class="mode-tab px-4 py-1.5 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-all">Before / After</button>
+          </div>
+
+          <!-- Adjusted view -->
+          <div id="view-adjusted" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-2 flex items-center justify-center min-h-[12rem]">
+            <img id="preview-img" class="max-w-full max-h-[28rem] rounded object-contain" alt="Adjusted preview">
+          </div>
+
+          <!-- Compare view -->
+          <div id="view-compare" class="hidden bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-2 min-h-[12rem]">
+            <div id="compare-wrapper" class="compare-container relative inline-block w-full">
+              <img id="compare-original" class="block max-w-full max-h-[28rem] rounded object-contain w-full" alt="Original">
+              <div id="compare-overlay" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%">
+                <img id="compare-adjusted" class="block max-h-[28rem] rounded object-contain" alt="Adjusted" style="max-width:none">
+              </div>
+              <div id="compare-divider" class="compare-divider" style="left:50%">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3L1 8l4 5M11 3l4 5-4 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider bg-black/50 text-white px-2 py-0.5 rounded">Original</span>
+              <span class="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-[#2563eb]/80 text-white px-2 py-0.5 rounded">Adjusted</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls (hidden until upload) -->
+        <div id="controls" class="hidden space-y-5">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5" id="slider-grid">
+            <!-- Sliders are rendered by JS -->
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[#e2e8f0]">
+            <button id="reset-all-btn" class="px-5 py-2.5 rounded-lg border border-[#e2e8f0] text-[#475569] text-sm font-medium hover:bg-[#f1f5f9] transition-colors">
+              Reset All
+            </button>
+            <button id="download-btn" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Adjusted Image
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Free Online Image Color Adjuster — Edit Brightness, Contrast, Saturation & More</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Whether you are preparing product photos for an e-commerce store, color-grading social media posts, or simply fixing an under-exposed snapshot, having quick access to image color adjustments can save you from opening heavyweight desktop software. This free Image Color Adjuster lets you fine-tune eight essential visual properties — brightness, contrast, saturation, hue rotation, sepia, grayscale, blur, and invert — all through intuitive sliders with instant real-time preview. The entire process runs in your web browser; no image data is ever uploaded to a server, so your files remain completely private on your device.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How CSS Filters Power This Tool</h3>
+          <p>Under the hood, this tool leverages the CSS <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">filter</code> property — the same technology browsers use to style web pages. CSS filters are hardware-accelerated in modern browsers, which means adjustments happen nearly instantaneously even on large images. Each slider maps to a standard CSS filter function: <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">brightness()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">contrast()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">saturate()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">hue-rotate()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">sepia()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">grayscale()</code>, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">blur()</code>, and <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">invert()</code>. When you click "Download," the tool creates an offscreen HTML5 canvas, applies the same filter string to the canvas 2D rendering context, draws the original image onto it, and exports the result as a PNG file — preserving the exact adjustments you see on screen.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Understanding Each Adjustment</h3>
+          <p><strong class="text-[#1e293b]">Brightness</strong> controls the overall lightness of the image. Increasing brightness makes every pixel lighter, which is useful for correcting dark or under-exposed photos. Decreasing it darkens the image, simulating a low-light effect. <strong class="text-[#1e293b]">Contrast</strong> adjusts the difference between the lightest and darkest tones. Higher contrast makes shadows deeper and highlights brighter, adding visual punch; lower contrast produces a flatter, more muted look. <strong class="text-[#1e293b]">Saturation</strong> controls color intensity. Boosting saturation makes colors more vivid, while reducing it drains color toward a monochrome appearance. Setting saturation to its minimum produces a full desaturation similar to grayscale.</p>
+          <p><strong class="text-[#1e293b]">Hue rotation</strong> shifts every color in the image around the color wheel by the specified angle. A 180° rotation turns reds into cyans, blues into yellows, and so on — handy for creative effects or correcting unwanted color casts. <strong class="text-[#1e293b]">Sepia</strong> applies a warm brownish tone reminiscent of aged photographs. <strong class="text-[#1e293b]">Grayscale</strong> removes color information, converting the image to shades of gray. <strong class="text-[#1e293b]">Blur</strong> applies a Gaussian blur for softening or creating depth-of-field effects. <strong class="text-[#1e293b]">Invert</strong> reverses all color values, producing a photographic negative effect.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Before and After Comparison</h3>
+          <p>One of the most useful features of this tool is the built-in before/after comparison mode. Toggle to the "Before / After" view to see your original image beside the adjusted version, or drag the comparison slider left and right to reveal each side. This makes it easy to judge whether your adjustments enhance the photo or go too far. Combined with individual reset buttons on each slider, you can experiment freely and revert any single change without losing the rest of your work.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases for Image Color Adjustment</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Photo correction</strong> — Fix under- or over-exposed shots by tweaking brightness and contrast.</li>
+            <li><strong class="text-[#1e293b]">Social media styling</strong> — Apply vintage sepia or desaturated looks to match a brand aesthetic.</li>
+            <li><strong class="text-[#1e293b]">E-commerce preparation</strong> — Boost contrast and saturation so product photos look vibrant and consistent.</li>
+            <li><strong class="text-[#1e293b]">Accessibility testing</strong> — Use grayscale or invert to preview how images appear for users with color vision deficiencies or in high-contrast modes.</li>
+            <li><strong class="text-[#1e293b]">Creative effects</strong> — Combine hue rotation, blur, and invert for artistic or surreal compositions.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">How does the Image Color Adjuster work?</h4>
+              <p>The tool applies CSS filter functions to your image for a real-time preview. When you download, those same filters are rendered onto an HTML5 canvas so the exported PNG contains your exact adjustments.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is my image uploaded to a server?</h4>
+              <p>No. All processing happens entirely in your browser using client-side JavaScript. Your image never leaves your device, and no data is sent over the network.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What image formats can I upload?</h4>
+              <p>You can upload JPEG, PNG, WebP, GIF, BMP, and SVG files. The adjusted image is always downloaded as a high-quality PNG to preserve transparency and avoid lossy recompression artifacts.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I undo a single slider change?</h4>
+              <p>Yes. Every slider has an individual reset button that returns it to its default value without affecting the other adjustments. You can also click "Reset All" to restore every slider at once.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Will the downloaded image be the same resolution as the original?</h4>
+              <p>Yes. The download renders the filters at the original image dimensions, so no resolution is lost regardless of how the preview is displayed on screen.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All processing happens entirely in your browser. Your images are never uploaded to any server. No data leaves your device.</strong></p>
+
+          <p>This Image Color Adjuster is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. Adjust colors, compare before and after, and download your edited image — your files stay private on your device at all times.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('image-color-adjuster');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropZone    = document.getElementById('drop-zone');
+    const fileInput   = document.getElementById('file-input');
+    const imageInfo   = document.getElementById('image-info');
+    const infoDims    = document.getElementById('info-dims');
+    const infoSize    = document.getElementById('info-size');
+    const clearBtn    = document.getElementById('clear-btn');
+    const previewArea = document.getElementById('preview-area');
+    const previewImg  = document.getElementById('preview-img');
+    const controls    = document.getElementById('controls');
+    const sliderGrid  = document.getElementById('slider-grid');
+    const resetAllBtn = document.getElementById('reset-all-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    const viewAdjusted   = document.getElementById('view-adjusted');
+    const viewCompare    = document.getElementById('view-compare');
+    const compareOriginal = document.getElementById('compare-original');
+    const compareAdjusted = document.getElementById('compare-adjusted');
+    const compareOverlay  = document.getElementById('compare-overlay');
+    const compareDivider  = document.getElementById('compare-divider');
+    const compareWrapper  = document.getElementById('compare-wrapper');
+
+    let sourceImg  = null;
+    let sourceFile = null;
+    let activeMode = 'adjusted';
+
+    const sliders = [
+      { id: 'brightness', label: 'Brightness',    min: -100, max: 100,  def: 0,   unit: '',  step: 1 },
+      { id: 'contrast',   label: 'Contrast',      min: -100, max: 100,  def: 0,   unit: '',  step: 1 },
+      { id: 'saturate',   label: 'Saturation',     min: -100, max: 100,  def: 0,   unit: '',  step: 1 },
+      { id: 'hue',        label: 'Hue Rotation',   min: 0,    max: 360,  def: 0,   unit: '°', step: 1 },
+      { id: 'sepia',      label: 'Sepia',          min: 0,    max: 100,  def: 0,   unit: '%', step: 1 },
+      { id: 'grayscale',  label: 'Grayscale',      min: 0,    max: 100,  def: 0,   unit: '%', step: 1 },
+      { id: 'blur',       label: 'Blur',           min: 0,    max: 10,   def: 0,   unit: 'px', step: 0.1 },
+      { id: 'invert',     label: 'Invert',         min: 0,    max: 100,  def: 0,   unit: '%', step: 1 },
+    ];
+
+    const state = {};
+
+    function buildSliders() {
+      sliderGrid.innerHTML = '';
+      sliders.forEach(s => {
+        state[s.id] = s.def;
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <div class="flex items-center justify-between mb-1.5">
+            <label for="slider-${s.id}" class="text-sm font-medium text-[#475569]">${s.label}</label>
+            <div class="flex items-center gap-2">
+              <span id="val-${s.id}" class="text-sm font-semibold text-[#1e293b] tabular-nums w-14 text-right">${s.def}${s.unit}</span>
+              <button data-reset="${s.id}" title="Reset ${s.label}" class="w-6 h-6 flex items-center justify-center rounded-full text-[#94a3b8] hover:text-[#2563eb] hover:bg-[#eff6ff] transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4.5 9A8 8 0 0119.5 15M19.5 15A8 8 0 014.5 9"/></svg>
+              </button>
+            </div>
+          </div>
+          <input type="range" id="slider-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${s.def}" class="w-full">
+        `;
+        sliderGrid.appendChild(div);
+      });
+    }
+
+    function getFilterString() {
+      const b = 1 + state.brightness / 100;
+      const c = 1 + state.contrast / 100;
+      const s = 1 + state.saturate / 100;
+      return [
+        `brightness(${b})`,
+        `contrast(${c})`,
+        `saturate(${s})`,
+        `hue-rotate(${state.hue}deg)`,
+        `sepia(${state.sepia / 100})`,
+        `grayscale(${state.grayscale / 100})`,
+        `blur(${state.blur}px)`,
+        `invert(${state.invert / 100})`,
+      ].join(' ');
+    }
+
+    function applyPreview() {
+      const f = getFilterString();
+      previewImg.style.filter = f;
+      compareAdjusted.style.filter = f;
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function loadImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      sourceFile = file;
+
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        sourceImg = img;
+        previewImg.src = url;
+        compareOriginal.src = url;
+        compareAdjusted.src = url;
+
+        infoDims.textContent = img.naturalWidth + ' × ' + img.naturalHeight + ' px';
+        infoSize.textContent = formatBytes(file.size);
+
+        dropZone.classList.add('hidden');
+        imageInfo.classList.remove('hidden');
+        previewArea.classList.remove('hidden');
+        controls.classList.remove('hidden');
+
+        syncCompareSize();
+        applyPreview();
+      };
+      img.onerror = () => URL.revokeObjectURL(url);
+      img.src = url;
+    }
+
+    function resetAll() {
+      sliders.forEach(s => {
+        state[s.id] = s.def;
+        const input = document.getElementById('slider-' + s.id);
+        const val   = document.getElementById('val-' + s.id);
+        if (input) input.value = s.def;
+        if (val) val.textContent = (s.step < 1 ? Number(s.def).toFixed(1) : s.def) + s.unit;
+      });
+      applyPreview();
+    }
+
+    function clearImage() {
+      sourceImg  = null;
+      sourceFile = null;
+      fileInput.value = '';
+      dropZone.classList.remove('hidden');
+      imageInfo.classList.add('hidden');
+      previewArea.classList.add('hidden');
+      controls.classList.add('hidden');
+      resetAll();
+    }
+
+    function downloadImage() {
+      if (!sourceImg) return;
+      const canvas = document.createElement('canvas');
+      canvas.width  = sourceImg.naturalWidth;
+      canvas.height = sourceImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.filter = getFilterString();
+      ctx.drawImage(sourceImg, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        const baseName = sourceFile ? sourceFile.name.substring(0, sourceFile.name.lastIndexOf('.')) || sourceFile.name : 'image';
+        const a = document.createElement('a');
+        a.download = baseName + '-adjusted.png';
+        a.href = URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 'image/png');
+    }
+
+    /* --- Mode tabs --- */
+    document.querySelectorAll('.mode-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeMode = btn.dataset.mode;
+        document.querySelectorAll('.mode-tab').forEach(b => {
+          if (b.dataset.mode === activeMode) {
+            b.className = 'mode-tab px-4 py-1.5 rounded-full text-xs font-medium bg-[#2563eb] text-white transition-all';
+          } else {
+            b.className = 'mode-tab px-4 py-1.5 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] transition-all';
+          }
+        });
+        viewAdjusted.classList.toggle('hidden', activeMode !== 'adjusted');
+        viewCompare.classList.toggle('hidden', activeMode !== 'compare');
+        if (activeMode === 'compare') syncCompareSize();
+      });
+    });
+
+    /* --- Comparison slider drag --- */
+    let isDragging = false;
+
+    function setDividerPos(x) {
+      const rect = compareWrapper.getBoundingClientRect();
+      let pct = ((x - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      compareOverlay.style.width = pct + '%';
+      compareDivider.style.left  = pct + '%';
+    }
+
+    function syncCompareSize() {
+      requestAnimationFrame(() => {
+        compareAdjusted.style.width = compareOriginal.offsetWidth + 'px';
+        compareAdjusted.style.height = compareOriginal.offsetHeight + 'px';
+      });
+    }
+
+    compareDivider.addEventListener('pointerdown', e => { isDragging = true; compareDivider.setPointerCapture(e.pointerId); });
+    document.addEventListener('pointermove', e => { if (isDragging) setDividerPos(e.clientX); });
+    document.addEventListener('pointerup', () => { isDragging = false; });
+
+    compareWrapper.addEventListener('click', e => {
+      if (e.target === compareDivider || compareDivider.contains(e.target)) return;
+      setDividerPos(e.clientX);
+    });
+
+    window.addEventListener('resize', () => { if (activeMode === 'compare') syncCompareSize(); });
+
+    /* --- Slider events (delegated) --- */
+    sliderGrid.addEventListener('input', e => {
+      if (e.target.type !== 'range') return;
+      const sid = e.target.id.replace('slider-', '');
+      const cfg = sliders.find(s => s.id === sid);
+      if (!cfg) return;
+      const v = parseFloat(e.target.value);
+      state[sid] = v;
+      document.getElementById('val-' + sid).textContent = (cfg.step < 1 ? v.toFixed(1) : v) + cfg.unit;
+      applyPreview();
+    });
+
+    sliderGrid.addEventListener('click', e => {
+      const btn = e.target.closest('[data-reset]');
+      if (!btn) return;
+      const sid = btn.dataset.reset;
+      const cfg = sliders.find(s => s.id === sid);
+      if (!cfg) return;
+      state[sid] = cfg.def;
+      const input = document.getElementById('slider-' + sid);
+      const val   = document.getElementById('val-' + sid);
+      if (input) input.value = cfg.def;
+      if (val) val.textContent = (cfg.step < 1 ? Number(cfg.def).toFixed(1) : cfg.def) + cfg.unit;
+      applyPreview();
+    });
+
+    /* --- Drop zone --- */
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadImage(fileInput.files[0]); });
+
+    clearBtn.addEventListener('click', clearImage);
+    resetAllBtn.addEventListener('click', resetAll);
+    downloadBtn.addEventListener('click', downloadImage);
+
+    buildSliders();
+  });
+  </script>
+
+</body>
+</html>

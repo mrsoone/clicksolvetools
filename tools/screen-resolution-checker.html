@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen Resolution Checker — Viewport, DPI &amp; Display Info | ClickSolveTools</title>
+  <meta name="description" content="Instantly detect your screen resolution, viewport size, device pixel ratio, DPI, color depth, and orientation. Live updates on resize with Tailwind breakpoint indicators.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/screen-resolution-checker">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Screen Resolution Checker — Viewport, DPI &amp; Display Info | ClickSolveTools">
+  <meta property="og:description" content="Instantly detect your screen resolution, viewport size, device pixel ratio, DPI, color depth, and orientation. Live updates on resize.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/screen-resolution-checker">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Screen Resolution Checker — Viewport, DPI &amp; Display Info | ClickSolveTools">
+  <meta name="twitter:description" content="Instantly detect your screen resolution, viewport size, device pixel ratio, DPI, color depth, and orientation.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Screen Resolution Checker","url":"https://clicksolvetools.com/tools/screen-resolution-checker","description":"Instantly detect your screen resolution, viewport size, device pixel ratio, DPI, color depth, and orientation. Live updates on resize with Tailwind breakpoint indicators.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is screen resolution?","acceptedAnswer":{"@type":"Answer","text":"Screen resolution is the number of pixels displayed horizontally and vertically on a screen, expressed as width × height (e.g. 1920 × 1080). Higher resolutions mean more pixels and sharper images."}},{"@type":"Question","name":"What is device pixel ratio (DPR)?","acceptedAnswer":{"@type":"Answer","text":"Device pixel ratio is the ratio between physical pixels on the hardware screen and CSS (logical) pixels used by the browser. A DPR of 2 means each CSS pixel is rendered using a 2×2 block of hardware pixels, common on Retina and HiDPI displays."}},{"@type":"Question","name":"What is the difference between screen resolution and viewport size?","acceptedAnswer":{"@type":"Answer","text":"Screen resolution is the total pixel count of your monitor. Viewport size is the visible area within your browser window, which is smaller because it excludes the browser chrome, address bar, and any OS taskbar."}},{"@type":"Question","name":"How is DPI estimated in a browser?","acceptedAnswer":{"@type":"Answer","text":"Browsers don't expose actual hardware DPI directly. DPI is estimated by multiplying the standard CSS baseline of 96 DPI by the device pixel ratio. For a display with DPR 2, the estimated DPI is 192."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero Stats -->
+    <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8 mb-6">
+      <div class="text-center mb-6">
+        <div class="text-sm text-[#64748b] mb-1">Your Screen Resolution</div>
+        <div id="hero-res" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1e293b]">— × —</div>
+        <div id="hero-label" class="text-sm text-[#2563eb] font-medium mt-1"></div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+        <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3">
+          <div class="text-xs text-[#64748b] mb-1">Viewport</div>
+          <div id="stat-viewport" class="font-bold text-sm text-[#1e293b]">—</div>
+        </div>
+        <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3">
+          <div class="text-xs text-[#64748b] mb-1">Pixel Ratio</div>
+          <div id="stat-dpr" class="font-bold text-sm text-[#1e293b]">—</div>
+        </div>
+        <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3">
+          <div class="text-xs text-[#64748b] mb-1">Color Depth</div>
+          <div id="stat-color" class="font-bold text-sm text-[#1e293b]">—</div>
+        </div>
+        <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3">
+          <div class="text-xs text-[#64748b] mb-1">Orientation</div>
+          <div id="stat-orient" class="font-bold text-sm text-[#1e293b]">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+
+      <!-- Detailed Info -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-0">
+        <h2 class="text-lg font-bold text-[#1e293b] mb-4">Display Details</h2>
+        <table id="detail-table" class="w-full text-sm">
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Breakpoints + Comparison -->
+      <div class="space-y-6">
+        <!-- Tailwind Breakpoints -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-4">Tailwind Breakpoint Match</h2>
+          <div id="breakpoints" class="grid grid-cols-3 sm:grid-cols-6 gap-2"></div>
+        </div>
+
+        <!-- Resolution Comparison -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-4">Common Resolution Comparison</h2>
+          <div id="comparison" class="space-y-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copy Button -->
+    <div class="mt-6 text-center">
+      <button id="btn-copy" class="inline-flex items-center gap-2 px-6 py-3 bg-[#2563eb] hover:bg-[#1d4ed8] active:bg-[#1e40af] text-white font-semibold rounded-xl transition-colors shadow-sm shadow-[#2563eb]/20">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy All Info
+      </button>
+    </div>
+
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Screen Resolution, Viewport, and DPI</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+
+      <p>Screen resolution is one of the most fundamental display properties. It describes the total number of pixels a monitor can render, expressed as width times height — for example, 1920 × 1080 (commonly called "Full HD" or "1080p"). The higher the resolution, the more detail a display can show. A 4K monitor at 3840 × 2160 packs four times as many pixels as a 1080p screen, which makes text crisper, images sharper, and UI elements finer. Knowing your screen resolution matters for choosing wallpapers, diagnosing layout issues, verifying that a new monitor is running at its native resolution, or simply satisfying your curiosity about the hardware you use every day.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Viewport Size vs. Screen Resolution</h3>
+      <p>Screen resolution and viewport size are related but different measurements. Screen resolution refers to the total pixel dimensions of the physical display — the entire monitor. Viewport size, on the other hand, is the portion of the screen the browser actually uses to render web content. The viewport is always smaller than the full screen resolution because it excludes the operating system taskbar, the browser's address bar, tab strip, bookmarks toolbar, and any other chrome elements. When web developers build responsive layouts, they target the viewport rather than the screen resolution, because the viewport determines how much room their content actually has. This tool reports both values so you can see the exact difference.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Device Pixel Ratio and DPI</h3>
+      <p>Modern displays — especially smartphones, tablets, and Retina MacBooks — pack more physical pixels into every inch of screen than older monitors. The <strong class="text-[#1e293b]">device pixel ratio</strong> (DPR) describes this relationship. A DPR of 1 means one CSS pixel equals one hardware pixel (the traditional setup). A DPR of 2 (common on Apple Retina displays) means each CSS pixel is backed by a 2 × 2 grid of hardware pixels, producing much sharper text and images. DPR is critical information for front-end developers serving high-resolution images: an image displayed at 200 CSS pixels wide needs to be at least 400 physical pixels wide on a DPR-2 screen to look crisp.</p>
+      <p><strong class="text-[#1e293b]">DPI (dots per inch)</strong> measures pixel density. Browsers do not expose the true hardware DPI directly, so this tool estimates it by multiplying the standard CSS baseline of 96 DPI by the device pixel ratio. For a display with DPR 2, the estimated DPI is 192. While this is not an exact hardware measurement, it provides a useful approximation for comparing display densities and diagnosing rendering issues.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Responsive Design and Tailwind Breakpoints</h3>
+      <p>Responsive web design uses CSS media queries to adapt a layout to different screen widths. Tailwind CSS defines six standard breakpoints that are widely adopted across the front-end community: <strong class="text-[#1e293b]">sm</strong> (640 px), <strong class="text-[#1e293b]">md</strong> (768 px), <strong class="text-[#1e293b]">lg</strong> (1024 px), <strong class="text-[#1e293b]">xl</strong> (1280 px), and <strong class="text-[#1e293b]">2xl</strong> (1536 px). This tool tests each breakpoint against your current viewport width using live <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">window.matchMedia</code> queries and highlights the ones that match. As you resize the browser window, the indicators update in real time (debounced for performance), so you can see exactly which breakpoints fire at any window width. This is invaluable when debugging responsive layouts or choosing breakpoint values for a custom design system.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Color Depth and Aspect Ratio</h3>
+      <p>Color depth describes how many bits are used to represent the color of a single pixel. Most modern displays report a color depth of 24 bits, which supports 16.7 million colors (8 bits per channel for red, green, and blue). Some high-end displays and HDR screens report 30-bit or higher color depth. Aspect ratio is the proportional relationship between width and height. Common ratios include 16:9 (standard widescreen), 16:10 (many laptops), 21:9 (ultrawide monitors), and 4:3 (older monitors). This tool calculates the aspect ratio by reducing the screen width and height using the greatest common divisor, giving you the simplest integer ratio.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Use This Tool</h3>
+      <p>Simply open this page and all display information is detected automatically — no clicks or permissions required. The data refreshes live as you resize your browser window. Use the <strong class="text-[#1e293b]">Copy All Info</strong> button to copy every metric to your clipboard in a clean text format, which is handy for pasting into bug reports, design documents, or support tickets. Everything runs entirely in your browser; no data is sent to any server.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is screen resolution?</strong><br>
+      Screen resolution is the number of pixels displayed horizontally and vertically on a screen, expressed as width × height (e.g. 1920 × 1080). Higher resolutions mean more detail and sharper visuals.</p>
+
+      <p><strong class="text-[#1e293b]">What is the difference between screen resolution and viewport size?</strong><br>
+      Screen resolution is the total pixel count of your physical display. Viewport size is the visible rendering area inside your browser window, which excludes the browser UI and OS taskbar.</p>
+
+      <p><strong class="text-[#1e293b]">What is device pixel ratio (DPR)?</strong><br>
+      DPR is the ratio between hardware (physical) pixels and CSS (logical) pixels. A DPR of 2 means each CSS pixel maps to a 2 × 2 block of hardware pixels, common on Retina and HiDPI displays.</p>
+
+      <p><strong class="text-[#1e293b]">How is DPI estimated in a browser?</strong><br>
+      Browsers don't expose the actual hardware DPI. This tool estimates it by multiplying 96 (the CSS standard DPI) by the device pixel ratio. For DPR 2, the estimated DPI is 192.</p>
+
+      <p><strong class="text-[#1e293b]">Does this tool work on mobile devices?</strong><br>
+      Yes. All values are detected using standard browser APIs that work on smartphones, tablets, and desktop browsers. On mobile devices, the screen resolution reported is the logical resolution as seen by the browser, not always the full hardware resolution.</p>
+
+      <p>This tool is free, private, and requires no installation or sign-up. Bookmark it for quick access whenever you need to check your display properties.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    #detail-table tr { border-bottom: 1px solid #e2e8f0; }
+    #detail-table tr:last-child { border-bottom: none; }
+    #detail-table td { padding: 0.625rem 0; }
+    #detail-table td:first-child { color: #64748b; font-weight: 500; }
+    #detail-table td:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; color: #1e293b; }
+
+    .bp-pill { display: flex; flex-direction: column; align-items: center; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #e2e8f0; background: #f8fafc; transition: all 200ms; }
+    .bp-pill.active { background: #eff6ff; border-color: #2563eb; }
+    .bp-pill .bp-name { font-weight: 700; font-size: 0.8125rem; }
+    .bp-pill .bp-val { font-size: 0.625rem; color: #94a3b8; margin-top: 0.125rem; }
+    .bp-pill.active .bp-name { color: #2563eb; }
+    .bp-pill .bp-dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; margin-top: 0.375rem; transition: background 200ms; }
+    .bp-pill.active .bp-dot { background: #2563eb; }
+
+    .cmp-bar-track { height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; }
+    .cmp-bar-fill { height: 100%; border-radius: 3px; transition: width 400ms ease; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    const BREAKPOINTS = [
+      { name: 'xs', min: 0 },
+      { name: 'sm', min: 640 },
+      { name: 'md', min: 768 },
+      { name: 'lg', min: 1024 },
+      { name: 'xl', min: 1280 },
+      { name: '2xl', min: 1536 },
+    ];
+
+    const COMMON_RES = [
+      { label: 'HD (720p)', w: 1280, h: 720 },
+      { label: 'Full HD (1080p)', w: 1920, h: 1080 },
+      { label: 'QHD (1440p)', w: 2560, h: 1440 },
+      { label: '4K UHD', w: 3840, h: 2160 },
+    ];
+
+    function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+    function getAspectRatio(w, h) {
+      const d = gcd(w, h);
+      return (w / d) + ':' + (h / d);
+    }
+
+    function getOrientation() {
+      if (screen.orientation && screen.orientation.type) {
+        return screen.orientation.type.includes('portrait') ? 'Portrait' : 'Landscape';
+      }
+      return window.innerWidth >= window.innerHeight ? 'Landscape' : 'Portrait';
+    }
+
+    function getResLabel(w, h) {
+      const total = w * h;
+      if (w >= 3840 && h >= 2160) return '4K UHD or higher';
+      if (w >= 2560 && h >= 1440) return 'QHD (1440p)';
+      if (w >= 1920 && h >= 1080) return 'Full HD (1080p)';
+      if (w >= 1280 && h >= 720) return 'HD (720p)';
+      return total >= 480 * 320 ? 'Standard Definition' : 'Low Resolution';
+    }
+
+    function buildBreakpoints() {
+      const container = $('breakpoints');
+      container.innerHTML = BREAKPOINTS.map(bp => {
+        const label = bp.min === 0 ? '< 640' : bp.min + 'px';
+        return `<div class="bp-pill" data-bp="${bp.name}">
+          <span class="bp-name">${bp.name}</span>
+          <span class="bp-val">${label}</span>
+          <span class="bp-dot"></span>
+        </div>`;
+      }).join('');
+    }
+
+    function buildComparison() {
+      const container = $('comparison');
+      const userPixels = screen.width * screen.height;
+
+      container.innerHTML = COMMON_RES.map(r => {
+        const resPixels = r.w * r.h;
+        const pct = Math.min((userPixels / resPixels) * 100, 100);
+        const isMatch = screen.width === r.w && screen.height === r.h;
+        const color = pct >= 100 ? '#22c55e' : pct >= 50 ? '#2563eb' : '#f59e0b';
+
+        return `<div>
+          <div class="flex items-center justify-between text-sm mb-1">
+            <span class="font-medium text-[#1e293b]">${r.label} <span class="text-[#94a3b8] font-normal">${r.w}×${r.h}</span></span>
+            <span class="font-semibold" style="color:${color}">${pct >= 100 ? '✓ Meets' : Math.round(pct) + '%'}${isMatch ? ' (exact)' : ''}</span>
+          </div>
+          <div class="cmp-bar-track">
+            <div class="cmp-bar-fill" style="width:${pct}%;background:${color}"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function collectInfo() {
+      const sw = screen.width;
+      const sh = screen.height;
+      const aw = screen.availWidth;
+      const ah = screen.availHeight;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const ow = window.outerWidth;
+      const oh = window.outerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      const cd = screen.colorDepth;
+      const dpi = Math.round(96 * dpr);
+      const ar = getAspectRatio(sw, sh);
+      const orient = getOrientation();
+
+      return { sw, sh, aw, ah, vw, vh, ow, oh, dpr, cd, dpi, ar, orient };
+    }
+
+    function update() {
+      const d = collectInfo();
+
+      $('hero-res').textContent = d.sw + ' × ' + d.sh;
+      $('hero-label').textContent = getResLabel(d.sw, d.sh);
+
+      $('stat-viewport').textContent = d.vw + ' × ' + d.vh;
+      $('stat-dpr').textContent = d.dpr + 'x';
+      $('stat-color').textContent = d.cd + '-bit';
+      $('stat-orient').textContent = d.orient;
+
+      const rows = [
+        ['Screen Resolution', d.sw + ' × ' + d.sh + ' px'],
+        ['Viewport Size', d.vw + ' × ' + d.vh + ' px'],
+        ['Browser Window', d.ow + ' × ' + d.oh + ' px'],
+        ['Available Screen', d.aw + ' × ' + d.ah + ' px'],
+        ['Device Pixel Ratio', d.dpr + 'x'],
+        ['Estimated DPI', d.dpi + ' dpi'],
+        ['Color Depth', d.cd + '-bit (' + Math.pow(2, d.cd).toLocaleString() + ' colors)'],
+        ['Aspect Ratio', d.ar],
+        ['Orientation', d.orient],
+        ['Physical Pixels', (d.sw * d.dpr) + ' × ' + (d.sh * d.dpr)],
+      ];
+
+      $('detail-table').querySelector('tbody').innerHTML = rows.map(r =>
+        '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>'
+      ).join('');
+
+      // Breakpoints
+      const pills = document.querySelectorAll('.bp-pill');
+      let highestMatch = -1;
+      BREAKPOINTS.forEach((bp, i) => {
+        if (window.matchMedia('(min-width: ' + bp.min + 'px)').matches) {
+          highestMatch = i;
+        }
+      });
+      pills.forEach((pill, i) => {
+        pill.classList.toggle('active', i <= highestMatch);
+      });
+
+      buildComparison();
+    }
+
+    function getClipboardText() {
+      const d = collectInfo();
+      return [
+        'Screen Resolution: ' + d.sw + ' × ' + d.sh + ' px',
+        'Viewport Size: ' + d.vw + ' × ' + d.vh + ' px',
+        'Browser Window: ' + d.ow + ' × ' + d.oh + ' px',
+        'Available Screen: ' + d.aw + ' × ' + d.ah + ' px',
+        'Device Pixel Ratio: ' + d.dpr + 'x',
+        'Estimated DPI: ' + d.dpi + ' dpi',
+        'Color Depth: ' + d.cd + '-bit',
+        'Aspect Ratio: ' + d.ar,
+        'Orientation: ' + d.orient,
+        'Physical Pixels: ' + (d.sw * d.dpr) + ' × ' + (d.sh * d.dpr),
+      ].join('\n');
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(update, 150);
+    });
+
+    if (screen.orientation) {
+      screen.orientation.addEventListener('change', update);
+    }
+
+    $('btn-copy').addEventListener('click', () => {
+      const btn = $('btn-copy');
+      navigator.clipboard.writeText(getClipboardText()).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Copied!';
+        btn.classList.remove('bg-[#2563eb]', 'hover:bg-[#1d4ed8]');
+        btn.classList.add('bg-[#22c55e]', 'hover:bg-[#16a34a]');
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.remove('bg-[#22c55e]', 'hover:bg-[#16a34a]');
+          btn.classList.add('bg-[#2563eb]', 'hover:bg-[#1d4ed8]');
+        }, 2000);
+      });
+    });
+
+    buildBreakpoints();
+    update();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('screen-resolution-checker');
+  </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Tip Calculator — Split Bills &amp; Calculate Gratuity | ClickSolveTools</title>
+  <meta name="description" content="Calculate tips instantly, split bills between friends, and round up totals. Preset tip percentages, custom amounts, and per-person breakdowns — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/tip-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Tip Calculator — Split Bills &amp; Calculate Gratuity | ClickSolveTools">
+  <meta property="og:description" content="Calculate tips instantly, split bills between friends, and round up totals. Preset tip percentages, custom amounts, and per-person breakdowns — free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/tip-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tip Calculator","url":"https://clicksolvetools.com/tools/tip-calculator","description":"Calculate tips instantly, split bills between friends, and round up totals. Preset tip percentages, custom amounts, and per-person breakdowns.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto space-y-5">
+
+      <!-- Bill Amount -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label for="bill" class="block text-sm font-medium text-[#475569] mb-1">Bill Amount</label>
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-lg font-medium">$</span>
+          <input id="bill" type="text" inputmode="decimal" placeholder="0.00" class="tc-input pl-8 w-full text-2xl font-semibold" autofocus>
+        </div>
+      </div>
+
+      <!-- Tip Percentage -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label class="block text-sm font-medium text-[#475569] mb-3">Tip Percentage</label>
+        <div class="grid grid-cols-3 gap-2 mb-3" id="tip-presets">
+          <button data-tip="10" class="tip-btn">10%</button>
+          <button data-tip="15" class="tip-btn tip-active">15%</button>
+          <button data-tip="18" class="tip-btn">18%</button>
+          <button data-tip="20" class="tip-btn">20%</button>
+          <button data-tip="25" class="tip-btn">25%</button>
+          <button data-tip="custom" class="tip-btn">Custom</button>
+        </div>
+        <div id="custom-tip-wrapper" class="hidden">
+          <div class="relative">
+            <input id="custom-tip" type="number" min="0" max="100" step="0.5" placeholder="Enter tip %" class="tc-input pr-8 w-full">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split & Round -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex items-end gap-4">
+          <div class="flex-1">
+            <label for="people" class="block text-sm font-medium text-[#475569] mb-1">Split Between</label>
+            <div class="flex items-center gap-2">
+              <button id="people-minus" class="split-btn" aria-label="Decrease people">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M5 12h14"/></svg>
+              </button>
+              <input id="people" type="number" min="1" max="99" value="1" class="tc-input w-16 text-center font-semibold tabular-nums">
+              <button id="people-plus" class="split-btn" aria-label="Increase people">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+              </button>
+              <span class="text-sm text-[#94a3b8] ml-1" id="people-label">person</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 pb-1">
+            <button id="round-toggle" class="relative w-11 h-6 rounded-full bg-[#e2e8f0] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20" role="switch" aria-checked="false" aria-label="Round up total">
+              <span id="round-knob" class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"></span>
+            </button>
+            <span class="text-sm text-[#475569]">Round up</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#475569]">Tip Amount</span>
+          <span id="out-tip" class="text-lg font-semibold text-[#1e293b] tabular-nums">$0.00</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#475569]">Total</span>
+          <span id="out-total" class="text-lg font-semibold text-[#1e293b] tabular-nums">$0.00</span>
+        </div>
+        <div class="border-t border-[#e2e8f0] pt-3 flex items-center justify-between">
+          <span class="text-sm font-medium text-[#475569]">Per Person</span>
+          <span id="out-per-person" class="text-2xl font-bold text-[#2563eb] tabular-nums">$0.00</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Calculate Tips and Split Bills</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Tipping is a customary part of dining out, getting a haircut, taking a taxi, or using any number of personal services. While the concept is simple — leave extra money on top of the bill to thank your server — the math can get surprisingly tricky when you add custom percentages, bill splitting, and rounding into the mix. This tip calculator handles all of that instantly so you can focus on enjoying the experience instead of doing mental arithmetic at the table.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Basic Tip Formula</h3>
+      <p>Calculating a tip starts with a straightforward formula:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Tip = Bill Amount × (Tip Percentage ÷ 100)</p>
+      <p>For example, a 20% tip on a $85 bill is $85 × 0.20 = $17.00, making the total $102.00. If you are splitting that total between four people, each person pays $102.00 ÷ 4 = $25.50. The round-up option in this calculator bumps the total to the next whole dollar before dividing, which simplifies payments when you are using cash or want cleaner numbers on separate cards.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tipping Etiquette by Industry</h3>
+      <p>Tipping norms vary by country and service type. In the United States, the following ranges are generally expected:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Sit-down restaurants</strong> — 15% to 20% of the pre-tax bill is standard. For exceptional service, 25% or more is common. Anything below 15% may signal dissatisfaction.</li>
+        <li><strong class="text-[#1e293b]">Bars and coffee shops</strong> — $1 to $2 per drink, or 15% to 20% of the total tab. Tip jars at counter-service spots are discretionary; $0.50 to $1 per item is typical.</li>
+        <li><strong class="text-[#1e293b]">Food delivery</strong> — 15% to 20%, with a minimum of $3 to $5 depending on distance and weather conditions. Delivery drivers rely heavily on tips.</li>
+        <li><strong class="text-[#1e293b]">Hair salons and barbers</strong> — 15% to 20% of the service cost. Tip each person who works on your hair if multiple stylists are involved.</li>
+        <li><strong class="text-[#1e293b]">Taxis and rideshares</strong> — 15% to 20% for taxis. Rideshare apps make it easy to add a tip after the ride; $2 to $5 is common for shorter trips.</li>
+        <li><strong class="text-[#1e293b]">Hotel housekeeping</strong> — $2 to $5 per night, left daily rather than at checkout, since housekeepers rotate shifts.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">When and Why to Round Up</h3>
+      <p>Rounding your total up to the nearest dollar has practical benefits. It makes splitting cash easier, produces cleaner credit card charges, and often adds only a few extra cents to your bill. Some people round up as a habit because it slightly increases the server's tip without meaningfully affecting their own spending. Over the course of a year, rounding up on every restaurant bill might cost you an extra $20 to $30 total while making a noticeable difference for the people who serve you.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Group dinners</strong> — Enter the full bill, pick a tip percentage, set the number of people, and get each person's share instantly. No more passing a phone around the table.</li>
+        <li><strong class="text-[#1e293b]">Quick service checks</strong> — Tap a preset percentage on a smaller bill — coffee, lunch, or a quick trim — and know exactly what to leave.</li>
+        <li><strong class="text-[#1e293b]">Travel budgeting</strong> — Use the calculator to estimate daily tipping costs when traveling to a country with different tipping customs.</li>
+        <li><strong class="text-[#1e293b]">Custom tip amounts</strong> — Service was outstanding or a large party added an automatic gratuity that you want to supplement? Enter a custom percentage to calculate the exact addition.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Should I tip on the pre-tax or post-tax amount?</strong></p>
+      <p>Traditionally, tips are calculated on the pre-tax subtotal. However, many people tip on the post-tax total for simplicity, and the difference is usually small. Either approach is acceptable — the key is to land within the standard percentage range for the type of service you received.</p>
+
+      <p><strong class="text-[#1e293b]">What if the service was poor?</strong></p>
+      <p>A reduced tip of 10% signals that the service did not meet expectations. Leaving no tip at all is generally reserved for truly unacceptable situations. Keep in mind that factors like slow kitchen times are often beyond your server's control. If you have a specific complaint, it is more constructive to speak with a manager than to reduce the tip of someone who depends on gratuities for their income.</p>
+
+      <p><strong class="text-[#1e293b]">Is tipping mandatory?</strong></p>
+      <p>In the United States, tipping is not legally required but is a deeply embedded social norm. Many service workers earn a lower base wage with the expectation that tips will make up the difference. In countries like Japan, Australia, and much of Europe, tipping is uncommon or even considered rude — always check local customs when traveling abroad.</p>
+
+      <p><strong class="text-[#1e293b]">How does splitting work with the round-up option?</strong></p>
+      <p>When round-up is enabled, the calculator first rounds the total (bill plus tip) up to the next whole dollar, then divides by the number of people. This means each person's share is based on the slightly higher rounded total, keeping the math clean for everyone.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Note:</strong> This calculator is for estimation purposes. Always verify your bill and check whether automatic gratuity has already been added, especially for large parties.
+      </div>
+
+      <p>This tip calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to pull it up the next time you are out with friends and need to split the check quickly and fairly.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .tc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .tc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .tc-input::placeholder { color: #94a3b8; }
+
+    .tip-btn {
+      padding: 0.5rem 0;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .tip-btn:hover { border-color: #2563eb; color: #2563eb; }
+    .tip-active {
+      background: #2563eb !important;
+      color: #fff !important;
+      border-color: #2563eb !important;
+    }
+
+    .split-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+      background: #f1f5f9;
+      color: #475569;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .split-btn:hover { border-color: #2563eb; color: #2563eb; }
+    .split-btn:active { background: #e2e8f0; }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const $ = id => document.getElementById(id);
+
+    const billInput = $('bill');
+    const customTipInput = $('custom-tip');
+    const customTipWrapper = $('custom-tip-wrapper');
+    const peopleInput = $('people');
+    const peopleLabel = $('people-label');
+    const roundToggle = $('round-toggle');
+    const roundKnob = $('round-knob');
+
+    let tipPercent = 15;
+    let roundUp = false;
+
+    // Tip preset buttons
+    $('tip-presets').addEventListener('click', e => {
+      const btn = e.target.closest('.tip-btn');
+      if (!btn) return;
+      document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('tip-active'));
+      btn.classList.add('tip-active');
+      const val = btn.dataset.tip;
+      if (val === 'custom') {
+        customTipWrapper.classList.remove('hidden');
+        customTipInput.focus();
+        tipPercent = parseFloat(customTipInput.value) || 0;
+      } else {
+        customTipWrapper.classList.add('hidden');
+        tipPercent = parseFloat(val);
+      }
+      calculate();
+    });
+
+    customTipInput.addEventListener('input', () => {
+      tipPercent = parseFloat(customTipInput.value) || 0;
+      calculate();
+    });
+
+    // Bill input formatting
+    billInput.addEventListener('input', () => {
+      let raw = billInput.value.replace(/[^0-9.]/g, '');
+      const parts = raw.split('.');
+      if (parts.length > 2) raw = parts[0] + '.' + parts.slice(1).join('');
+      billInput.value = raw;
+      calculate();
+    });
+
+    billInput.addEventListener('blur', () => {
+      const val = parseFloat(billInput.value);
+      if (!isNaN(val) && val > 0) {
+        billInput.value = val.toFixed(2);
+      }
+    });
+
+    // People counter
+    $('people-minus').addEventListener('click', () => {
+      const current = parseInt(peopleInput.value) || 1;
+      if (current > 1) { peopleInput.value = current - 1; calculate(); }
+    });
+    $('people-plus').addEventListener('click', () => {
+      const current = parseInt(peopleInput.value) || 1;
+      if (current < 99) { peopleInput.value = current + 1; calculate(); }
+    });
+    peopleInput.addEventListener('input', () => {
+      let val = parseInt(peopleInput.value);
+      if (isNaN(val) || val < 1) val = 1;
+      if (val > 99) val = 99;
+      peopleInput.value = val;
+      calculate();
+    });
+
+    // Round-up toggle
+    roundToggle.addEventListener('click', () => {
+      roundUp = !roundUp;
+      roundToggle.setAttribute('aria-checked', roundUp);
+      if (roundUp) {
+        roundToggle.classList.remove('bg-[#e2e8f0]');
+        roundToggle.classList.add('bg-[#2563eb]');
+        roundKnob.style.transform = 'translateX(1.25rem)';
+      } else {
+        roundToggle.classList.remove('bg-[#2563eb]');
+        roundToggle.classList.add('bg-[#e2e8f0]');
+        roundKnob.style.transform = 'translateX(0)';
+      }
+      calculate();
+    });
+
+    function calculate() {
+      const bill = parseFloat(billInput.value) || 0;
+      const people = parseInt(peopleInput.value) || 1;
+
+      peopleLabel.textContent = people === 1 ? 'person' : 'people';
+
+      const tipAmount = bill * (tipPercent / 100);
+      let total = bill + tipAmount;
+
+      if (roundUp && total > 0) {
+        total = Math.ceil(total);
+      }
+
+      const actualTip = total - bill;
+      const perPerson = people > 0 ? total / people : total;
+
+      $('out-tip').textContent = fmt.format(actualTip);
+      $('out-total').textContent = fmt.format(total);
+      $('out-per-person').textContent = fmt.format(perPerson);
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('tip-calculator');
+  </script>
+</body>
+</html>

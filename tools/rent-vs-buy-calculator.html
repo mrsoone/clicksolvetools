@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Rent vs Buy Calculator — Compare Costs &amp; Find Break-Even | ClickSolveTools</title>
+  <meta name="description" content="Compare the true cost of renting versus buying a home over time. Factor in appreciation, investment returns, taxes, maintenance, and more to find your break-even year.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/rent-vs-buy-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Rent vs Buy Calculator | ClickSolveTools">
+  <meta property="og:description" content="Compare the true cost of renting versus buying a home over time. Factor in appreciation, investment returns, taxes, maintenance, and more to find your break-even year.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/rent-vs-buy-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rent vs Buy Calculator","url":"https://clicksolvetools.com/tools/rent-vs-buy-calculator","description":"Compare the true cost of renting versus buying a home over time. Factor in appreciation, investment returns, taxes, maintenance, and more to find your break-even year.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I know if I should rent or buy?","acceptedAnswer":{"@type":"Answer","text":"It depends on how long you plan to stay, local home prices versus rents, your down payment amount, expected investment returns, and personal financial goals. A rent vs buy calculator helps quantify the trade-offs by comparing total costs and wealth accumulation under both scenarios."}},{"@type":"Question","name":"What is the break-even point for buying a home?","acceptedAnswer":{"@type":"Answer","text":"The break-even point is the number of years it takes for the financial benefits of homeownership — equity buildup, appreciation, and eliminated rent — to outweigh the upfront and ongoing costs of buying. In most U.S. markets, this ranges from 3 to 7 years."}},{"@type":"Question","name":"Does this calculator account for the opportunity cost of a down payment?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator assumes a renter would invest the equivalent down payment in the stock market or another asset and grow it at the investment return rate you specify. This opportunity cost is a key factor in the comparison."}},{"@type":"Question","name":"What investment return rate should I use?","acceptedAnswer":{"@type":"Answer","text":"A common assumption is 7% for a diversified stock portfolio, which reflects the historical average annual return of the S&P 500 after inflation. Use a lower rate for more conservative investments or a higher rate if you have a strong risk tolerance."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Input Sections -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Renting Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <h2 class="text-base font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+          <span class="w-7 h-7 rounded-full bg-[#eff6ff] flex items-center justify-center text-sm">🔑</span>
+          Renting Costs
+        </h2>
+        <div class="space-y-4">
+          <div>
+            <label for="monthly-rent" class="block text-sm font-medium text-[#475569] mb-1">Monthly Rent</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="monthly-rent" type="text" inputmode="decimal" value="1,500" class="rb-input pl-7 w-full">
+            </div>
+          </div>
+          <div>
+            <label for="rent-increase" class="block text-sm font-medium text-[#475569] mb-1">Annual Rent Increase</label>
+            <div class="relative">
+              <input id="rent-increase" type="text" inputmode="decimal" value="3" class="rb-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+          <div>
+            <label for="renters-insurance" class="block text-sm font-medium text-[#475569] mb-1">Renter's Insurance</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="renters-insurance" type="text" inputmode="decimal" value="30" class="rb-input pl-7 pr-12 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">/mo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buying Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <h2 class="text-base font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+          <span class="w-7 h-7 rounded-full bg-[#eff6ff] flex items-center justify-center text-sm">🏡</span>
+          Buying Costs
+        </h2>
+        <div class="space-y-4">
+          <div>
+            <label for="home-price" class="block text-sm font-medium text-[#475569] mb-1">Home Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="home-price" type="text" inputmode="decimal" value="350,000" class="rb-input pl-7 w-full">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Down Payment</label>
+            <div class="flex gap-2">
+              <div class="relative flex-1">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="down-dollar" type="text" inputmode="decimal" value="70,000" class="rb-input pl-7 w-full">
+              </div>
+              <div class="relative w-24">
+                <input id="down-pct" type="text" inputmode="decimal" value="20" class="rb-input pr-7 w-full text-right">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="interest-rate" class="block text-sm font-medium text-[#475569] mb-1">Interest Rate</label>
+              <div class="relative">
+                <input id="interest-rate" type="text" inputmode="decimal" value="6.5" class="rb-input pr-7 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+            <div>
+              <label for="loan-term" class="block text-sm font-medium text-[#475569] mb-1">Loan Term</label>
+              <div class="relative">
+                <input id="loan-term" type="number" min="1" max="50" value="30" class="rb-input pr-12 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">yrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="property-tax" class="block text-sm font-medium text-[#475569] mb-1">Property Tax</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="property-tax" type="text" inputmode="decimal" value="4,200" class="rb-input pl-7 pr-10 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">/yr</span>
+              </div>
+            </div>
+            <div>
+              <label for="home-insurance" class="block text-sm font-medium text-[#475569] mb-1">Home Insurance</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="home-insurance" type="text" inputmode="decimal" value="1,500" class="rb-input pl-7 pr-10 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">/yr</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="hoa" class="block text-sm font-medium text-[#475569] mb-1">HOA</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="hoa" type="text" inputmode="decimal" value="0" class="rb-input pl-7 pr-12 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">/mo</span>
+              </div>
+            </div>
+            <div>
+              <label for="maintenance" class="block text-sm font-medium text-[#475569] mb-1">Maintenance</label>
+              <div class="relative">
+                <input id="maintenance" type="text" inputmode="decimal" value="1" class="rb-input pr-14 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">%/yr</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="appreciation" class="block text-sm font-medium text-[#475569] mb-1">Home Appreciation Rate</label>
+            <div class="relative">
+              <input id="appreciation" type="text" inputmode="decimal" value="3" class="rb-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Settings -->
+    <div class="mt-6 bg-white border border-[#e2e8f0] rounded-xl p-6">
+      <h2 class="text-base font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+        <span class="w-7 h-7 rounded-full bg-[#eff6ff] flex items-center justify-center text-sm">⚖️</span>
+        Comparison Settings
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label for="investment-return" class="block text-sm font-medium text-[#475569] mb-1">Investment Return Rate</label>
+          <div class="relative">
+            <input id="investment-return" type="text" inputmode="decimal" value="7" class="rb-input pr-7 w-full">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+          </div>
+          <p class="text-xs text-[#94a3b8] mt-1">Expected return if down payment were invested instead</p>
+        </div>
+        <div>
+          <label for="time-horizon" class="block text-sm font-medium text-[#475569] mb-1">Time Horizon</label>
+          <div class="relative">
+            <input id="time-horizon" type="number" min="1" max="40" value="10" class="rb-input pr-14 w-full">
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">years</span>
+          </div>
+          <p class="text-xs text-[#94a3b8] mt-1">How long you plan to stay in the home</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results-panel" class="mt-6 space-y-6">
+
+      <!-- Summary Banner -->
+      <div id="summary-card" class="rounded-xl p-6 text-center border-2">
+        <p id="summary-text" class="text-xl sm:text-2xl font-bold"></p>
+        <p id="breakeven-text" class="text-sm text-[#475569] mt-2"></p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Total Rent Paid</div>
+          <div id="out-rent-total" class="text-lg font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Total Buy Payments</div>
+          <div id="out-buy-total" class="text-lg font-bold text-[#1e293b]">—</div>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Renter's Portfolio</div>
+          <div id="out-investment" class="text-lg font-bold text-[#2563eb]">—</div>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Home Equity</div>
+          <div id="out-equity" class="text-lg font-bold text-[#2563eb]">—</div>
+        </div>
+      </div>
+
+      <!-- Net Position Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Renter Net Position</div>
+          <div class="flex items-baseline gap-2">
+            <span id="out-rent-net" class="text-xl font-bold text-[#1e293b]">—</span>
+            <span class="text-xs text-[#94a3b8]">portfolio − rent paid</span>
+          </div>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+          <div class="text-xs text-[#475569] mb-1">Buyer Net Position</div>
+          <div class="flex items-baseline gap-2">
+            <span id="out-buy-net" class="text-xl font-bold text-[#1e293b]">—</span>
+            <span class="text-xs text-[#94a3b8]">equity − buy payments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year-by-Year Table -->
+      <div>
+        <button id="table-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="table-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Year-by-Year Comparison
+          </span>
+          <span id="table-years" class="text-xs text-[#94a3b8]"></span>
+        </button>
+        <div id="table-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-[#f8fafc]">
+              <tr class="text-[#475569] text-xs border-b border-[#e2e8f0]">
+                <th class="px-3 py-3 text-left font-medium">Year</th>
+                <th class="px-3 py-3 text-right font-medium">Cum. Rent</th>
+                <th class="px-3 py-3 text-right font-medium">Cum. Buy</th>
+                <th class="px-3 py-3 text-right font-medium">Portfolio</th>
+                <th class="px-3 py-3 text-right font-medium">Home Equity</th>
+                <th class="px-3 py-3 text-right font-medium">Advantage</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Article -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">The Rent vs Buy Decision: How to Compare the True Cost of Renting and Buying a Home</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Deciding whether to rent or buy a home is one of the most significant financial choices most people face. The answer is not the same for everyone — it depends on local housing prices, how long you plan to stay, your savings, the cost of borrowing, and what else you could do with your money. This rent vs buy calculator helps you move beyond gut feelings and marketing slogans by modeling the actual financial outcomes of both options over a time horizon you choose.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How the Comparison Works</h3>
+      <p>A fair rent-versus-buy comparison goes well beyond comparing a monthly rent check to a mortgage payment. When you rent, your housing costs include monthly rent (which typically increases each year) and renter's insurance. The money you would have used for a down payment stays invested, growing at whatever return the market provides. When you buy, your costs include the down payment, monthly mortgage payments (principal and interest), property taxes, homeowner's insurance, HOA dues, and ongoing maintenance. In return, you build equity as you pay down the loan and as the home appreciates in value.</p>
+      <p>This calculator tracks both scenarios year by year. On the renting side, it compounds your rent increases and grows your down-payment investment. On the buying side, it amortizes your mortgage, adds all ownership costs, and appreciates the home's value. At the end of your chosen time horizon, it compares net positions — the renter's investment portfolio minus total rent paid versus the buyer's home equity minus total buying costs — to determine which option leaves you financially better off.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding the Break-Even Point</h3>
+      <p>The break-even point is the year at which buying becomes cheaper than renting on a net-wealth basis. In the early years, buying almost always looks more expensive because of the large upfront down payment and the fact that most of your mortgage payment goes toward interest rather than equity. Over time, home appreciation and principal paydown shift the balance in the buyer's favor. In many U.S. markets, the break-even point falls between three and seven years, but high-cost cities with low price-to-rent ratios can push it well beyond a decade. If you plan to move before reaching break-even, renting is likely the better financial choice.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Key Factors That Influence the Outcome</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Home appreciation rate</strong> — A higher rate makes buying more attractive because your equity grows faster. Even a one-percentage-point difference compounds dramatically over 10 to 30 years.</li>
+        <li><strong class="text-[#1e293b]">Investment return rate</strong> — This represents the opportunity cost of tying up your down payment in a house instead of investing it. A higher expected return on investments favors renting.</li>
+        <li><strong class="text-[#1e293b]">Rent growth</strong> — Rising rents erode the renting advantage over time. If rents in your area are increasing faster than home prices, buying becomes relatively more appealing.</li>
+        <li><strong class="text-[#1e293b]">Interest rate and loan term</strong> — Lower mortgage rates reduce the total cost of borrowing and accelerate equity buildup. Shorter loan terms mean higher monthly payments but significantly less interest paid overall.</li>
+        <li><strong class="text-[#1e293b]">Property taxes and maintenance</strong> — These ongoing costs are easy to underestimate. A home that costs 1% of its value per year in maintenance and another 1–2% in property taxes adds thousands to your annual housing expense.</li>
+        <li><strong class="text-[#1e293b]">Time horizon</strong> — The longer you stay, the more time buying has to overcome its upfront costs. Short stays almost always favor renting.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Beyond the Numbers</h3>
+      <p>Financial models capture the quantifiable side of the rent-versus-buy decision, but several non-financial factors also matter. Homeownership provides stability, the freedom to renovate, and a sense of permanence. Renting offers flexibility to relocate, freedom from maintenance responsibilities, and lower financial risk if the housing market declines. Consider both the numbers this calculator produces and your personal priorities before making a decision.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How do I know if I should rent or buy?</strong></p>
+      <p>It depends on how long you plan to stay, local home prices versus rents, your down payment amount, expected investment returns, and personal financial goals. This calculator helps quantify the trade-offs by comparing total costs and wealth accumulation under both scenarios over your chosen time horizon.</p>
+
+      <p><strong class="text-[#1e293b]">What is the break-even point for buying a home?</strong></p>
+      <p>The break-even point is the number of years it takes for the financial benefits of homeownership — equity buildup, appreciation, and eliminated rent payments — to outweigh the upfront and ongoing costs of buying. In most U.S. markets, this ranges from 3 to 7 years, though it varies widely based on local conditions and your specific inputs.</p>
+
+      <p><strong class="text-[#1e293b]">Does this calculator account for the opportunity cost of a down payment?</strong></p>
+      <p>Yes. The calculator assumes a renter would invest the equivalent down payment amount and grow it at the investment return rate you specify. This opportunity cost is one of the most important and most overlooked factors in the rent-versus-buy comparison.</p>
+
+      <p><strong class="text-[#1e293b]">What investment return rate should I use?</strong></p>
+      <p>A common assumption is 7% for a diversified stock portfolio, which reflects the historical average annual return of the S&P 500 after inflation. Use a lower rate for bonds or conservative allocations, or a higher rate if your portfolio has historically outperformed. The default of 7% is a reasonable starting point for most people.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Actual costs vary based on location, market conditions, tax situation, and other factors not modeled here. Consult a qualified financial advisor for decisions about your specific situation.
+      </div>
+
+      <p>This rent vs buy calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to compare renting and buying scenarios.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .rb-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .rb-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .rb-input::placeholder { color: #94a3b8; }
+
+    #comparison-table tr { border-top: 1px solid #e2e8f0; }
+    #comparison-table td { padding: 0.5rem 0.75rem; white-space: nowrap; }
+    #comparison-table td:first-child { text-align: left; }
+    #comparison-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #table-body::-webkit-scrollbar { width: 6px; }
+    #table-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #table-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+    const $ = id => document.getElementById(id);
+
+    let lastDownEdit = 'dollar';
+
+    function parseNum(id) {
+      return parseFloat($(id).value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    function syncDownPct() {
+      const hp = parseNum('home-price');
+      const dd = parseNum('down-dollar');
+      if (hp > 0) $('down-pct').value = ((dd / hp) * 100).toFixed(1).replace(/\.0$/, '');
+    }
+
+    function syncDownDollar() {
+      const hp = parseNum('home-price');
+      const pct = parseFloat($('down-pct').value) || 0;
+      const val = Math.round(hp * pct / 100);
+      $('down-dollar').value = val > 0 ? new Intl.NumberFormat('en-US').format(val) : '';
+    }
+
+    $('down-dollar').addEventListener('input', () => {
+      lastDownEdit = 'dollar';
+      formatInput($('down-dollar'));
+      syncDownPct();
+      calculate();
+    });
+    $('down-pct').addEventListener('input', () => {
+      lastDownEdit = 'pct';
+      syncDownDollar();
+      calculate();
+    });
+    $('home-price').addEventListener('input', () => {
+      formatInput($('home-price'));
+      if (lastDownEdit === 'pct') syncDownDollar();
+      else syncDownPct();
+      calculate();
+    });
+
+    const dollarFields = ['monthly-rent', 'renters-insurance', 'property-tax', 'home-insurance', 'hoa'];
+    dollarFields.forEach(id => {
+      $(id).addEventListener('input', () => { formatInput($(id)); calculate(); });
+    });
+
+    const rawFields = ['rent-increase', 'interest-rate', 'maintenance', 'appreciation', 'investment-return'];
+    rawFields.forEach(id => {
+      $(id).addEventListener('input', calculate);
+    });
+
+    $('loan-term').addEventListener('input', calculate);
+    $('time-horizon').addEventListener('input', calculate);
+
+    $('table-toggle').addEventListener('click', () => {
+      const body = $('table-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('table-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('table-toggle').classList.add('rounded-b-none');
+      else $('table-toggle').classList.remove('rounded-b-none');
+    });
+
+    function calculate() {
+      const monthlyRent = parseNum('monthly-rent');
+      const rentIncrease = parseFloat($('rent-increase').value) || 0;
+      const rentersInsurance = parseNum('renters-insurance');
+      const homePrice = parseNum('home-price');
+      const downDollar = parseNum('down-dollar');
+      const interestRate = parseFloat($('interest-rate').value) || 0;
+      const loanTermYears = parseInt($('loan-term').value) || 30;
+      const propertyTaxYr = parseNum('property-tax');
+      const homeInsuranceYr = parseNum('home-insurance');
+      const hoaMonthly = parseNum('hoa');
+      const maintenancePct = parseFloat($('maintenance').value) || 0;
+      const appreciationRate = parseFloat($('appreciation').value) || 0;
+      const investmentReturn = parseFloat($('investment-return').value) || 0;
+      const timeHorizon = parseInt($('time-horizon').value) || 10;
+
+      if (monthlyRent <= 0 || homePrice <= 0 || timeHorizon <= 0) {
+        $('results-panel').style.display = 'none';
+        return;
+      }
+      $('results-panel').style.display = '';
+
+      const loanAmount = Math.max(0, homePrice - downDollar);
+      const monthlyRate = interestRate / 100 / 12;
+      const numPayments = loanTermYears * 12;
+
+      let monthlyMortgage = 0;
+      if (loanAmount > 0) {
+        if (monthlyRate === 0) {
+          monthlyMortgage = loanAmount / numPayments;
+        } else {
+          monthlyMortgage = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+        }
+      }
+      if (!isFinite(monthlyMortgage)) monthlyMortgage = 0;
+
+      let investmentBalance = downDollar;
+      let mortgageBalance = loanAmount;
+      let totalRentCost = 0;
+      let totalBuyCost = downDollar;
+      let currentMonthlyRent = monthlyRent;
+      let currentHomeValue = homePrice;
+      let breakEvenYear = null;
+
+      const yearData = [];
+
+      for (let year = 1; year <= timeHorizon; year++) {
+        const annualRent = currentMonthlyRent * 12;
+        const annualRentersIns = rentersInsurance * 12;
+        totalRentCost += annualRent + annualRentersIns;
+
+        investmentBalance *= (1 + investmentReturn / 100);
+
+        let yearMortgagePayment = 0;
+        for (let m = 0; m < 12; m++) {
+          if (mortgageBalance > 0.01) {
+            const interestPmt = mortgageBalance * monthlyRate;
+            let principalPmt = monthlyMortgage - interestPmt;
+            if (principalPmt > mortgageBalance) {
+              yearMortgagePayment += interestPmt + mortgageBalance;
+              mortgageBalance = 0;
+            } else {
+              mortgageBalance -= principalPmt;
+              yearMortgagePayment += monthlyMortgage;
+            }
+          }
+        }
+
+        const annualMaint = currentHomeValue * (maintenancePct / 100);
+        const yearBuyCost = yearMortgagePayment + propertyTaxYr + homeInsuranceYr + (hoaMonthly * 12) + annualMaint;
+        totalBuyCost += yearBuyCost;
+
+        currentHomeValue *= (1 + appreciationRate / 100);
+
+        const homeEquity = currentHomeValue - Math.max(0, mortgageBalance);
+        const renterNet = investmentBalance - totalRentCost;
+        const buyerNet = homeEquity - totalBuyCost;
+        const buyAdvantage = buyerNet - renterNet;
+
+        if (breakEvenYear === null && buyAdvantage >= 0) {
+          breakEvenYear = year;
+        }
+
+        yearData.push({ year, totalRent: totalRentCost, totalBuy: totalBuyCost, investment: investmentBalance, homeEquity, renterNet, buyerNet, buyAdvantage });
+
+        currentMonthlyRent *= (1 + rentIncrease / 100);
+      }
+
+      const final = yearData[yearData.length - 1];
+
+      $('out-rent-total').textContent = fmt.format(final.totalRent);
+      $('out-buy-total').textContent = fmt.format(final.totalBuy);
+      $('out-investment').textContent = fmt.format(final.investment);
+      $('out-equity').textContent = fmt.format(final.homeEquity);
+      $('out-rent-net').textContent = fmt.format(final.renterNet);
+      $('out-buy-net').textContent = fmt.format(final.buyerNet);
+
+      const adv = final.buyAdvantage;
+      const summaryCard = $('summary-card');
+      if (Math.abs(adv) < 100) {
+        $('summary-text').innerHTML = `After ${timeHorizon} year${timeHorizon !== 1 ? 's' : ''}, renting and buying cost about the same`;
+        summaryCard.className = 'rounded-xl p-6 text-center border-2 bg-[#f8fafc] border-[#e2e8f0]';
+        $('summary-text').className = 'text-xl sm:text-2xl font-bold text-[#475569]';
+      } else if (adv > 0) {
+        $('summary-text').innerHTML = `After ${timeHorizon} year${timeHorizon !== 1 ? 's' : ''}, <span class="text-[#16a34a]">buying</span> saves you <span class="text-[#16a34a]">${fmt.format(adv)}</span>`;
+        summaryCard.className = 'rounded-xl p-6 text-center border-2 bg-[#f0fdf4] border-[#86efac]';
+        $('summary-text').className = 'text-xl sm:text-2xl font-bold text-[#1e293b]';
+      } else {
+        $('summary-text').innerHTML = `After ${timeHorizon} year${timeHorizon !== 1 ? 's' : ''}, <span class="text-[#2563eb]">renting</span> saves you <span class="text-[#2563eb]">${fmt.format(Math.abs(adv))}</span>`;
+        summaryCard.className = 'rounded-xl p-6 text-center border-2 bg-[#eff6ff] border-[#93c5fd]';
+        $('summary-text').className = 'text-xl sm:text-2xl font-bold text-[#1e293b]';
+      }
+
+      if (breakEvenYear !== null && breakEvenYear <= timeHorizon) {
+        $('breakeven-text').textContent = `Buying breaks even after year ${breakEvenYear}`;
+      } else {
+        $('breakeven-text').textContent = `Buying does not break even within ${timeHorizon} years`;
+      }
+
+      $('table-years').textContent = `${timeHorizon} years`;
+
+      const rows = yearData.map(d => {
+        let advClass, advLabel;
+        if (Math.abs(d.buyAdvantage) < 100) {
+          advClass = 'text-[#475569]';
+          advLabel = '—';
+        } else if (d.buyAdvantage > 0) {
+          advClass = 'text-[#16a34a] font-medium';
+          advLabel = 'Buy +' + fmt.format(d.buyAdvantage);
+        } else {
+          advClass = 'text-[#2563eb] font-medium';
+          advLabel = 'Rent +' + fmt.format(Math.abs(d.buyAdvantage));
+        }
+        return `<tr>
+          <td class="font-medium">${d.year}</td>
+          <td>${fmt.format(d.totalRent)}</td>
+          <td>${fmt.format(d.totalBuy)}</td>
+          <td>${fmt.format(d.investment)}</td>
+          <td>${fmt.format(d.homeEquity)}</td>
+          <td class="${advClass}">${advLabel}</td>
+        </tr>`;
+      });
+      $('comparison-table').innerHTML = rows.join('');
+    }
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('rent-vs-buy-calculator');
+  </script>
+</body>
+</html>

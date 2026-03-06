@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Color Picker &amp; Converter Online — HEX, RGB, HSL | ClickSolveTools</title>
+  <meta name="description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations. Free, no signup, runs in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/color-picker">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Color Picker & Converter Online — HEX, RGB, HSL | ClickSolveTools">
+  <meta property="og:description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/color-picker">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Color Picker & Converter",
+    "url": "https://clicksolvetools.com/tools/color-picker",
+    "description": "Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <style>
+    input[type="color"] { -webkit-appearance: none; border: none; padding: 0; }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    input[type="color"]::-webkit-color-swatch { border: none; border-radius: 0.75rem; }
+    input[type="color"]::-moz-color-swatch { border: none; border-radius: 0.75rem; }
+    .toast { animation: toastIn 200ms ease, toastOut 200ms ease 1.2s forwards; }
+    @keyframes toastIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes toastOut { from { opacity:1; } to { opacity:0; } }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Picker + Preview -->
+        <div class="flex flex-col sm:flex-row gap-6 mb-8">
+          <!-- Native Color Picker -->
+          <div class="flex flex-col items-center gap-3">
+            <label for="color-input" class="text-sm font-medium text-[#475569]">Pick a color</label>
+            <input type="color" id="color-input" value="#2563eb" class="w-32 h-32 rounded-xl cursor-pointer border-2 border-[#e2e8f0] hover:border-[#2563eb] transition-colors">
+          </div>
+          <!-- Preview Swatch -->
+          <div class="flex-1 flex flex-col items-center justify-center">
+            <div id="preview-swatch" class="w-full h-32 rounded-xl border border-[#e2e8f0] shadow-inner" style="background:#2563eb"></div>
+            <p id="preview-label" class="mt-2 text-sm font-mono text-[#64748b]">#2563EB</p>
+          </div>
+        </div>
+
+        <!-- Format Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <!-- HEX -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="hex-input" class="text-sm font-medium text-[#475569]">HEX</label>
+              <button data-copy="hex" class="copy-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors" title="Copy HEX">Copy</button>
+            </div>
+            <input type="text" id="hex-input" value="#2563EB" maxlength="7" spellcheck="false" class="w-full px-3 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors">
+          </div>
+          <!-- RGB -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-[#475569]">RGB</span>
+              <button data-copy="rgb" class="copy-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors" title="Copy RGB">Copy</button>
+            </div>
+            <div class="flex gap-2">
+              <input type="number" id="rgb-r" min="0" max="255" value="37" class="rgb-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="R">
+              <input type="number" id="rgb-g" min="0" max="255" value="99" class="rgb-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="G">
+              <input type="number" id="rgb-b" min="0" max="255" value="235" class="rgb-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="B">
+            </div>
+          </div>
+          <!-- HSL -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-[#475569]">HSL</span>
+              <button data-copy="hsl" class="copy-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors" title="Copy HSL">Copy</button>
+            </div>
+            <div class="flex gap-2">
+              <input type="number" id="hsl-h" min="0" max="360" value="221" class="hsl-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="H">
+              <input type="number" id="hsl-s" min="0" max="100" value="82" class="hsl-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="S">
+              <input type="number" id="hsl-l" min="0" max="100" value="53" class="hsl-field w-full px-2 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] font-mono text-sm text-center focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors" placeholder="L">
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Palettes -->
+        <div class="space-y-6 mb-8">
+          <div>
+            <h3 class="text-sm font-medium text-[#475569] mb-3">Complementary</h3>
+            <div id="palette-complementary" class="flex gap-2"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-[#475569] mb-3">Analogous</h3>
+            <div id="palette-analogous" class="flex gap-2"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-[#475569] mb-3">Triadic</h3>
+            <div id="palette-triadic" class="flex gap-2"></div>
+          </div>
+        </div>
+
+        <!-- Shade Variations -->
+        <div>
+          <h3 class="text-sm font-medium text-[#475569] mb-3">Shades &amp; Tints</h3>
+          <div id="shade-bar" class="flex gap-1.5 overflow-x-auto pb-1"></div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Color Models: HEX, RGB, and HSL</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Color is one of the most powerful tools in a designer's arsenal. Whether you are building a website, designing a logo, or choosing paint for a room, understanding how colors are represented digitally is essential. The three most common color models used on the web are HEX, RGB, and HSL — each offering a different way to describe the exact same color. This free color picker and converter lets you work with all three formats simultaneously, so you always have the value you need.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">HEX Color Codes</h3>
+          <p>HEX (hexadecimal) is the format most developers encounter first. A HEX code is a six-character string prefixed with a hash sign — for example, <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">#2563EB</code>. The six characters are actually three pairs: the first two represent red, the middle two represent green, and the last two represent blue, each ranging from <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">00</code> (none) to <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">FF</code> (maximum). HEX codes are compact and ubiquitous in CSS, making them the go-to format for web development.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">RGB — Red, Green, Blue</h3>
+          <p>RGB describes a color as a mixture of red, green, and blue light, with each channel ranging from 0 to 255. A value of <code class="text-[#2563eb] bg-[#eff6ff] px-1.5 py-0.5 rounded text-sm">rgb(37, 99, 235)</code> means 37 units of red, 99 of green, and 235 of blue. This additive model mirrors how screens actually produce color — by combining tiny red, green, and blue sub-pixels at varying intensities. RGB is ideal when you need precise control over each light channel, and it is the native format used in CSS functions, image editors, and programming libraries.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">HSL — Hue, Saturation, Lightness</h3>
+          <p>HSL rethinks color from a human perception standpoint. <strong class="text-[#1e293b]">Hue</strong> is the color's position on the color wheel (0–360 degrees), <strong class="text-[#1e293b]">saturation</strong> is how vivid or muted it is (0–100%), and <strong class="text-[#1e293b]">lightness</strong> is how bright or dark it appears (0–100%). This makes HSL incredibly intuitive for creating color palettes: to darken a color you simply lower its lightness, and to mute it you reduce the saturation — without having to juggle three separate RGB channels. Designers often prefer HSL for this reason.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How to Use This Tool</h3>
+          <p>Click the color picker to choose any color visually, or type a value directly into the HEX, RGB, or HSL fields. Every input syncs in real time — change one and all others update instantly. The large preview swatch shows your selected color, while the palettes below display harmonious combinations calculated from the HSL color wheel: the <strong class="text-[#1e293b]">complementary</strong> color sits 180° opposite, <strong class="text-[#1e293b]">analogous</strong> colors are 30° apart, and <strong class="text-[#1e293b]">triadic</strong> colors are 120° apart. The shades bar generates five lighter tints and five darker shades, giving you a complete range for gradients, hover states, and UI layering. Click any swatch to copy its HEX value to your clipboard.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Design Tips</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">60-30-10 rule</strong> — Use your primary color for 60% of the design, a secondary for 30%, and an accent for 10% to create visual balance.</li>
+            <li><strong class="text-[#1e293b]">Contrast matters</strong> — Ensure text and background colors meet WCAG contrast requirements (at least 4.5:1 for normal text) to keep your content accessible.</li>
+            <li><strong class="text-[#1e293b]">Start with HSL</strong> — When building a palette from scratch, pick a hue, then vary saturation and lightness to create a cohesive family of colors.</li>
+            <li><strong class="text-[#1e293b]">Use the shade bar</strong> — Instead of picking random dark or light variants, use calculated shades for consistent visual rhythm across buttons, borders, and backgrounds.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What is the difference between HEX and RGB?</h4>
+              <p>They represent the same information in different notations. HEX uses base-16 characters (0–F), while RGB uses base-10 integers (0–255). Converting between them is purely a number-base change — the underlying color is identical.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Why would I use HSL over RGB?</h4>
+              <p>HSL is more intuitive for adjusting colors. If you want a lighter version of a blue, you increase the lightness value in HSL. Achieving the same result in RGB requires changing all three channels in a coordinated way, which is harder to reason about.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is this tool free to use?</h4>
+              <p>Yes. This color picker runs entirely in your browser with JavaScript — no server, no signup, no data collection. Pick, convert, and copy colors as many times as you like.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I use the generated colors in CSS?</h4>
+              <p>Absolutely. Copy the HEX, RGB, or HSL value and paste it directly into your stylesheet. All three formats are valid CSS color values supported by every modern browser.</p>
+            </div>
+          </div>
+
+          <p>Whether you are a developer implementing a design system, a designer exploring palettes, or someone who simply needs to convert a HEX code to RGB, this color picker and converter gives you everything in one place — fast, free, and private.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('color-picker');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const colorInput = document.getElementById('color-input');
+    const hexInput   = document.getElementById('hex-input');
+    const rgbR       = document.getElementById('rgb-r');
+    const rgbG       = document.getElementById('rgb-g');
+    const rgbB       = document.getElementById('rgb-b');
+    const hslH       = document.getElementById('hsl-h');
+    const hslS       = document.getElementById('hsl-s');
+    const hslL       = document.getElementById('hsl-l');
+    const preview    = document.getElementById('preview-swatch');
+    const label      = document.getElementById('preview-label');
+
+    let currentH = 221, currentS = 82, currentL = 53;
+
+    // --- Conversion helpers ---
+
+    function hslToRgb(h, s, l) {
+      s /= 100; l /= 100;
+      const c = (1 - Math.abs(2 * l - 1)) * s;
+      const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+      const m = l - c / 2;
+      let r = 0, g = 0, b = 0;
+      if (h < 60)       { r = c; g = x; b = 0; }
+      else if (h < 120) { r = x; g = c; b = 0; }
+      else if (h < 180) { r = 0; g = c; b = x; }
+      else if (h < 240) { r = 0; g = x; b = c; }
+      else if (h < 300) { r = x; g = 0; b = c; }
+      else              { r = c; g = 0; b = x; }
+      return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h = 0, s = 0, l = (max + min) / 2;
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+        else if (max === g) h = ((b - r) / d + 2) * 60;
+        else h = ((r - g) / d + 4) * 60;
+      }
+      return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
+    }
+
+    function rgbToHex(r, g, b) {
+      return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      if (hex.length !== 6) return null;
+      const n = parseInt(hex, 16);
+      if (isNaN(n)) return null;
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+
+    // --- UI update ---
+
+    function updateFromHSL(h, s, l, source) {
+      currentH = h; currentS = s; currentL = l;
+      const [r, g, b] = hslToRgb(h, s, l);
+      const hex = rgbToHex(r, g, b);
+
+      preview.style.background = hex;
+      label.textContent = hex;
+
+      if (source !== 'picker') colorInput.value = hex.toLowerCase();
+      if (source !== 'hex')    hexInput.value = hex;
+      if (source !== 'rgb') { rgbR.value = r; rgbG.value = g; rgbB.value = b; }
+      if (source !== 'hsl') { hslH.value = h; hslS.value = s; hslL.value = l; }
+
+      renderPalettes(h, s, l);
+      renderShades(h, s, l);
+    }
+
+    // --- Event listeners ---
+
+    colorInput.addEventListener('input', () => {
+      const rgb = hexToRgb(colorInput.value);
+      if (!rgb) return;
+      const [h, s, l] = rgbToHsl(...rgb);
+      updateFromHSL(h, s, l, 'picker');
+    });
+
+    hexInput.addEventListener('input', () => {
+      const val = hexInput.value.trim();
+      const rgb = hexToRgb(val);
+      if (!rgb) return;
+      const [h, s, l] = rgbToHsl(...rgb);
+      updateFromHSL(h, s, l, 'hex');
+    });
+
+    document.querySelectorAll('.rgb-field').forEach(f => {
+      f.addEventListener('input', () => {
+        const r = clamp(parseInt(rgbR.value) || 0, 0, 255);
+        const g = clamp(parseInt(rgbG.value) || 0, 0, 255);
+        const b = clamp(parseInt(rgbB.value) || 0, 0, 255);
+        const [h, s, l] = rgbToHsl(r, g, b);
+        updateFromHSL(h, s, l, 'rgb');
+      });
+    });
+
+    document.querySelectorAll('.hsl-field').forEach(f => {
+      f.addEventListener('input', () => {
+        const h = clamp(parseInt(hslH.value) || 0, 0, 360);
+        const s = clamp(parseInt(hslS.value) || 0, 0, 100);
+        const l = clamp(parseInt(hslL.value) || 0, 0, 100);
+        updateFromHSL(h, s, l, 'hsl');
+      });
+    });
+
+    function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+
+    // --- Palettes ---
+
+    function makeSwatch(hex, label) {
+      const isLight = isLightColor(hex);
+      const el = document.createElement('button');
+      el.className = 'group flex flex-col items-center gap-1 flex-1 min-w-[52px]';
+      el.innerHTML = `
+        <div class="w-full aspect-square rounded-lg border border-[#e2e8f0] shadow-sm cursor-pointer transition-transform hover:scale-105 relative" style="background:${hex}">
+          <span class="absolute inset-0 flex items-center justify-center text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity ${isLight ? 'text-[#1e293b]' : 'text-white'}">Copy</span>
+        </div>
+        <span class="text-[10px] font-mono text-[#94a3b8] leading-tight">${label || hex}</span>
+      `;
+      el.addEventListener('click', () => copyToClipboard(hex));
+      return el;
+    }
+
+    function isLightColor(hex) {
+      const rgb = hexToRgb(hex);
+      if (!rgb) return true;
+      return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000 > 150;
+    }
+
+    function renderPalettes(h, s, l) {
+      const compEl = document.getElementById('palette-complementary');
+      const analEl = document.getElementById('palette-analogous');
+      const triadEl = document.getElementById('palette-triadic');
+
+      compEl.innerHTML = '';
+      analEl.innerHTML = '';
+      triadEl.innerHTML = '';
+
+      const baseHex = rgbToHex(...hslToRgb(h, s, l));
+      const compHex = rgbToHex(...hslToRgb((h + 180) % 360, s, l));
+      compEl.appendChild(makeSwatch(baseHex));
+      compEl.appendChild(makeSwatch(compHex));
+
+      const angles = [-30, 0, 30];
+      angles.forEach(a => {
+        const hex = rgbToHex(...hslToRgb(((h + a) % 360 + 360) % 360, s, l));
+        analEl.appendChild(makeSwatch(hex));
+      });
+
+      const triadAngles = [0, 120, 240];
+      triadAngles.forEach(a => {
+        const hex = rgbToHex(...hslToRgb((h + a) % 360, s, l));
+        triadEl.appendChild(makeSwatch(hex));
+      });
+    }
+
+    function renderShades(h, s, l) {
+      const bar = document.getElementById('shade-bar');
+      bar.innerHTML = '';
+
+      for (let i = 5; i >= 1; i--) {
+        const newL = Math.min(100, l + i * ((100 - l) / 6));
+        const hex = rgbToHex(...hslToRgb(h, s, Math.round(newL)));
+        bar.appendChild(makeSwatch(hex));
+      }
+
+      const baseHex = rgbToHex(...hslToRgb(h, s, l));
+      const base = makeSwatch(baseHex);
+      base.querySelector('div').classList.add('ring-2', 'ring-[#2563eb]', 'ring-offset-2');
+      bar.appendChild(base);
+
+      for (let i = 1; i <= 5; i++) {
+        const newL = Math.max(0, l - i * (l / 6));
+        const hex = rgbToHex(...hslToRgb(h, s, Math.round(newL)));
+        bar.appendChild(makeSwatch(hex));
+      }
+    }
+
+    // --- Copy buttons ---
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fmt = btn.dataset.copy;
+        let text = '';
+        if (fmt === 'hex') text = hexInput.value;
+        else if (fmt === 'rgb') text = `rgb(${rgbR.value}, ${rgbG.value}, ${rgbB.value})`;
+        else if (fmt === 'hsl') text = `hsl(${hslH.value}, ${hslS.value}%, ${hslL.value}%)`;
+        copyToClipboard(text);
+      });
+    });
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => showToast(`Copied ${text}`)).catch(() => {});
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = 'toast bg-[#1e293b] text-white text-sm px-4 py-2 rounded-lg shadow-lg pointer-events-auto';
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 1500);
+    }
+
+    // --- Init ---
+    updateFromHSL(currentH, currentS, currentL, 'init');
+  });
+  </script>
+
+</body>
+</html>

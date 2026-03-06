@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Number Base Converter — Binary, Octal, Decimal, Hex &amp; Base 2-36 | ClickSolveTools</title>
+  <meta name="description" content="Convert numbers between any base from 2 to 36 instantly. See binary, octal, decimal, and hexadecimal results at once with real-time validation. Free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/number-base-converter">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Number Base Converter — Binary, Octal, Decimal, Hex &amp; Base 2-36 | ClickSolveTools">
+  <meta property="og:description" content="Convert numbers between any base from 2 to 36 instantly. See binary, octal, decimal, and hexadecimal results at once with real-time validation.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/number-base-converter">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Number Base Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Convert numbers between any base from 2 to 36 instantly. Binary, octal, decimal, hex and more.">
+
+  <!-- GA4 with Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Number Base Converter",
+    "url": "https://clicksolvetools.com/tools/number-base-converter",
+    "description": "Convert numbers between any base from 2 to 36 instantly. See binary, octal, decimal, and hexadecimal results simultaneously with real-time input validation.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mono { font-family: 'Courier New', Consolas, monospace; }
+    .row-hover:hover { background-color: #f8fafc; }
+    input:focus, select:focus { outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.25); }
+    .copy-btn { transition: color 150ms ease, background-color 150ms ease; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <div id="nav-container"></div>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+    <article>
+
+      <!-- Tool Widget -->
+      <section class="mb-12">
+
+        <!-- Input Card -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 sm:p-6 shadow-sm mb-6">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-4">Input</h2>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <!-- From Base Selector -->
+            <div class="sm:w-48 flex-shrink-0">
+              <label for="from-base" class="block text-sm font-semibold text-[#475569] mb-1.5">From base</label>
+              <select id="from-base" class="w-full bg-white border border-[#e2e8f0] rounded-lg px-3 py-2.5 text-sm text-[#1e293b]">
+                <option value="2">2 — Binary</option>
+                <option value="8">8 — Octal</option>
+                <option value="10" selected>10 — Decimal</option>
+                <option value="16">16 — Hexadecimal</option>
+                <optgroup label="All bases">
+                </optgroup>
+              </select>
+            </div>
+
+            <!-- Input Field -->
+            <div class="flex-1">
+              <label for="number-input" class="block text-sm font-semibold text-[#475569] mb-1.5">Number</label>
+              <input
+                type="text"
+                id="number-input"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Enter a number…"
+                class="w-full bg-white border border-[#e2e8f0] rounded-lg px-4 py-2.5 text-sm text-[#1e293b] placeholder-[#94a3b8] mono"
+              >
+            </div>
+          </div>
+
+          <!-- Validation message -->
+          <div id="error-msg" class="text-red-500 text-sm mt-2 hidden"></div>
+
+          <!-- Quick presets -->
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="text-xs text-[#94a3b8] leading-7">Quick:</span>
+            <button data-base="2"  class="preset-btn px-3 py-1 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-colors">Binary</button>
+            <button data-base="8"  class="preset-btn px-3 py-1 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-colors">Octal</button>
+            <button data-base="10" class="preset-btn px-3 py-1 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-colors">Decimal</button>
+            <button data-base="16" class="preset-btn px-3 py-1 rounded-full text-xs font-medium bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-colors">Hex</button>
+          </div>
+        </div>
+
+        <!-- Output Card -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 sm:p-6 shadow-sm">
+          <h2 class="text-lg font-bold text-[#1e293b] mb-4">Output</h2>
+
+          <!-- Common Bases -->
+          <div id="common-outputs" class="divide-y divide-[#e2e8f0] border border-[#e2e8f0] rounded-lg overflow-hidden mb-5">
+            <div class="output-row row-hover flex items-center gap-3 px-4 py-3" data-base="2">
+              <span class="text-xs font-semibold text-[#94a3b8] w-24 flex-shrink-0">Binary (2)</span>
+              <span class="output-value flex-1 mono text-sm text-[#1e293b] break-all select-all">—</span>
+              <button class="copy-btn flex-shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium px-2 py-1 rounded hover:bg-[#eff6ff]" aria-label="Copy binary value">Copy</button>
+            </div>
+            <div class="output-row row-hover flex items-center gap-3 px-4 py-3" data-base="8">
+              <span class="text-xs font-semibold text-[#94a3b8] w-24 flex-shrink-0">Octal (8)</span>
+              <span class="output-value flex-1 mono text-sm text-[#1e293b] break-all select-all">—</span>
+              <button class="copy-btn flex-shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium px-2 py-1 rounded hover:bg-[#eff6ff]" aria-label="Copy octal value">Copy</button>
+            </div>
+            <div class="output-row row-hover flex items-center gap-3 px-4 py-3" data-base="10">
+              <span class="text-xs font-semibold text-[#94a3b8] w-24 flex-shrink-0">Decimal (10)</span>
+              <span class="output-value flex-1 mono text-sm text-[#1e293b] break-all select-all">—</span>
+              <button class="copy-btn flex-shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium px-2 py-1 rounded hover:bg-[#eff6ff]" aria-label="Copy decimal value">Copy</button>
+            </div>
+            <div class="output-row row-hover flex items-center gap-3 px-4 py-3" data-base="16">
+              <span class="text-xs font-semibold text-[#94a3b8] w-24 flex-shrink-0">Hex (16)</span>
+              <span class="output-value flex-1 mono text-sm text-[#1e293b] break-all select-all">—</span>
+              <button class="copy-btn flex-shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium px-2 py-1 rounded hover:bg-[#eff6ff]" aria-label="Copy hexadecimal value">Copy</button>
+            </div>
+          </div>
+
+          <!-- Custom Base -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-end gap-3 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg">
+            <div class="sm:w-40">
+              <label for="custom-base" class="block text-xs font-semibold text-[#475569] mb-1.5">Custom base</label>
+              <select id="custom-base" class="w-full bg-white border border-[#e2e8f0] rounded-lg px-3 py-2 text-sm text-[#1e293b]">
+              </select>
+            </div>
+            <div class="flex-1 w-full">
+              <label class="block text-xs font-semibold text-[#475569] mb-1.5">Result</label>
+              <div class="flex items-center gap-2">
+                <span id="custom-output" class="flex-1 mono text-sm text-[#1e293b] bg-white border border-[#e2e8f0] rounded-lg px-4 py-2 break-all select-all min-h-[36px]">—</span>
+                <button id="copy-custom" class="copy-btn flex-shrink-0 text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium px-3 py-2 rounded-lg hover:bg-[#eff6ff] border border-[#e2e8f0] bg-white" aria-label="Copy custom base value">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="prose max-w-none">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-4">Understanding Number Bases and How Base Conversion Works</h2>
+
+        <div class="text-[#475569] leading-relaxed space-y-4 text-[15px]">
+          <p>
+            Every number you use in daily life is expressed in <strong>base 10</strong> (decimal), a system built around ten unique digits: 0 through 9. But base 10 is only one of infinitely many positional numeral systems. A <strong>number base</strong> (also called a radix) determines how many distinct symbols a system uses and the value each digit position represents. In base <em>b</em>, the rightmost digit is worth <em>b<sup>0</sup></em> = 1, the next is worth <em>b<sup>1</sup></em>, then <em>b<sup>2</sup></em>, and so on. Changing the base does not change the underlying quantity — the number 255 in decimal, FF in hexadecimal, 11111111 in binary, and 377 in octal all represent the same value.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">The Most Common Number Bases</h3>
+          <p>
+            Four bases dominate computing and mathematics. <strong>Binary (base 2)</strong> uses only 0 and 1 and is the native language of digital electronics; every CPU instruction, memory address, and network packet is ultimately a sequence of binary digits. <strong>Octal (base 8)</strong> groups three binary bits into a single digit (0–7) and was historically popular in early Unix systems — you still see it in Unix file permissions like <code class="mono bg-white px-1 rounded">chmod 755</code>. <strong>Decimal (base 10)</strong> is the human default, aligned with our ten fingers and used in everyday arithmetic, financial calculations, and scientific notation. <strong>Hexadecimal (base 16)</strong> extends the digit set to 0–9 plus A–F, mapping exactly four binary bits per hex digit. Developers encounter hex in CSS color codes (<code class="mono bg-white px-1 rounded">#2563EB</code>), memory addresses, MAC addresses, UUIDs, and cryptographic hashes.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">How Base Conversion Works Mathematically</h3>
+          <p>
+            Converting from any base to decimal involves multiplying each digit by its positional power and summing the results. For example, the binary number <code class="mono bg-white px-1 rounded">1011</code> becomes 1×2<sup>3</sup> + 0×2<sup>2</sup> + 1×2<sup>1</sup> + 1×2<sup>0</sup> = 8 + 0 + 2 + 1 = 11 in decimal. Converting from decimal to another base uses repeated division: divide the decimal number by the target base, record the remainder as the next digit (from right to left), and repeat until the quotient is zero. To convert 255 to hex, divide 255 by 16 to get quotient 15 remainder 15 — that is digit F twice, giving <code class="mono bg-white px-1 rounded">FF</code>. When converting between two non-decimal bases, the simplest approach is to convert through decimal as an intermediate step, which is exactly what this tool does behind the scenes using JavaScript's built-in <code class="mono bg-white px-1 rounded">parseInt</code> and <code class="mono bg-white px-1 rounded">toString</code> methods for reliable, arbitrary-base arithmetic.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Bases Beyond 16: Why Go Up to 36?</h3>
+          <p>
+            Bases above 16 are less common but appear in specific domains. <strong>Base 32</strong> encoding is used in Crockford's Base32 and z-base-32 for generating human-readable identifiers that avoid confusing characters. <strong>Base 36</strong> is the highest base achievable with the standard alphanumeric set (0–9, A–Z) and is used in URL shorteners, compact ID generation, and some database keys where a short, case-insensitive string representation is desirable. This converter supports every base from 2 to 36, so you can explore niche bases for educational purposes or practical encoding tasks.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Practical Use Cases for Base Conversion</h3>
+          <p>
+            <strong>Software developers</strong> constantly switch between hex and binary when debugging memory dumps, bitwise operations, and color values. <strong>Network engineers</strong> work with binary subnet masks and hex-encoded packet headers. <strong>Computer science students</strong> learn base conversion as a core topic in discrete mathematics and computer architecture courses. <strong>Security professionals</strong> read hex-encoded hashes (SHA-256, MD5) and need to verify values across formats. <strong>Embedded systems engineers</strong> interpret register values in binary and octal. Even <strong>puzzle enthusiasts</strong> encounter base conversion in cipher challenges and math competitions. Having a tool that shows all common bases simultaneously — with a custom base option — eliminates tedious manual arithmetic and reduces transcription errors.
+          </p>
+
+          <h3 class="text-xl font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <p><strong>What digits are valid for each base?</strong><br>
+            A base-<em>b</em> number can only use digits from 0 to <em>b</em>−1. For bases above 10, letters extend the digit set: A = 10, B = 11, and so on up to Z = 35. This converter is case-insensitive — <code class="mono bg-white px-1 rounded">ff</code> and <code class="mono bg-white px-1 rounded">FF</code> both represent 255 in hexadecimal. If you type an invalid digit for the selected base, the tool highlights the error immediately.
+          </p>
+
+          <p><strong>Can this tool handle very large numbers?</strong><br>
+            The converter uses JavaScript's native number parsing, which handles integers accurately up to 2<sup>53</sup> − 1 (about 9 quadrillion). For most practical purposes — debugging, coursework, encoding — this range is more than sufficient. If you need arbitrary-precision arithmetic for cryptographic-scale numbers, a dedicated big-integer library is recommended.
+          </p>
+
+          <p><strong>Why do programmers use hexadecimal instead of binary?</strong><br>
+            Hex is a compact representation: every hex digit maps to exactly four binary bits, so a 32-bit address takes only 8 hex characters instead of 32 binary digits. This makes hex far easier to read, type, and compare while still aligning perfectly with binary structure — unlike decimal, which has no clean bit-boundary mapping.
+          </p>
+
+          <p><strong>Is my data sent to a server?</strong><br>
+            No. This converter runs entirely in your browser using client-side JavaScript. Nothing you type is transmitted, stored, or logged. It is completely free to use with no signup or account required.
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('number-base-converter');
+  </script>
+
+  <script>
+  (function () {
+    const DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fromBaseSelect  = document.getElementById('from-base');
+    const numberInput     = document.getElementById('number-input');
+    const errorMsg        = document.getElementById('error-msg');
+    const customBaseSelect = document.getElementById('custom-base');
+    const customOutput    = document.getElementById('custom-output');
+    const copyCustomBtn   = document.getElementById('copy-custom');
+    const outputRows      = document.querySelectorAll('#common-outputs .output-row');
+    const presetBtns      = document.querySelectorAll('.preset-btn');
+
+    // Populate the "from base" <optgroup> with bases 2-36
+    const optgroup = fromBaseSelect.querySelector('optgroup');
+    for (let b = 2; b <= 36; b++) {
+      const opt = document.createElement('option');
+      opt.value = b;
+      const labels = { 2: 'Binary', 8: 'Octal', 10: 'Decimal', 16: 'Hexadecimal' };
+      opt.textContent = labels[b] ? `${b} — ${labels[b]}` : `Base ${b}`;
+      optgroup.appendChild(opt);
+    }
+
+    // Populate custom base selector
+    for (let b = 2; b <= 36; b++) {
+      const opt = document.createElement('option');
+      opt.value = b;
+      const labels = { 2: 'Binary', 8: 'Octal', 10: 'Decimal', 16: 'Hex' };
+      opt.textContent = labels[b] ? `${b} — ${labels[b]}` : `Base ${b}`;
+      if (b === 32) opt.selected = true;
+      customBaseSelect.appendChild(opt);
+    }
+
+    function validDigits(base) {
+      return DIGITS.slice(0, base);
+    }
+
+    function validate(value, base) {
+      if (!value.trim()) return { ok: true, value: '' };
+      const allowed = validDigits(base);
+      const upper = value.toUpperCase().replace(/\s/g, '');
+      for (const ch of upper) {
+        if (!allowed.includes(ch)) {
+          return { ok: false, error: `Invalid digit "${ch}" for base ${base}. Allowed: ${allowed}` };
+        }
+      }
+      return { ok: true, value: upper };
+    }
+
+    function clearError() {
+      errorMsg.textContent = '';
+      errorMsg.classList.add('hidden');
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    function clearOutputs() {
+      outputRows.forEach(row => {
+        row.querySelector('.output-value').textContent = '—';
+      });
+      customOutput.textContent = '—';
+    }
+
+    function convert() {
+      clearError();
+      const base = parseInt(fromBaseSelect.value, 10);
+      const raw = numberInput.value;
+
+      if (!raw.trim()) {
+        clearOutputs();
+        return;
+      }
+
+      const result = validate(raw, base);
+      if (!result.ok) {
+        showError(result.error);
+        clearOutputs();
+        return;
+      }
+
+      const decimalValue = parseInt(result.value, base);
+      if (isNaN(decimalValue) || decimalValue < 0) {
+        showError('Could not parse the number. Check your input.');
+        clearOutputs();
+        return;
+      }
+
+      outputRows.forEach(row => {
+        const targetBase = parseInt(row.dataset.base, 10);
+        const converted = decimalValue.toString(targetBase).toUpperCase();
+        row.querySelector('.output-value').textContent = converted;
+      });
+
+      const customBase = parseInt(customBaseSelect.value, 10);
+      customOutput.textContent = decimalValue.toString(customBase).toUpperCase();
+    }
+
+    function updatePlaceholder() {
+      const base = parseInt(fromBaseSelect.value, 10);
+      const examples = {
+        2:  'e.g. 11111111',
+        8:  'e.g. 377',
+        10: 'e.g. 255',
+        16: 'e.g. FF'
+      };
+      numberInput.placeholder = examples[base] || `Enter a base-${base} number…`;
+    }
+
+    // Copy helper
+    function copyToClipboard(text, btn) {
+      if (!text || text === '—') return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('text-emerald-500');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('text-emerald-500');
+        }, 1500);
+      });
+    }
+
+    // Events
+    numberInput.addEventListener('input', convert);
+    fromBaseSelect.addEventListener('change', () => {
+      updatePlaceholder();
+      convert();
+    });
+    customBaseSelect.addEventListener('change', convert);
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const b = btn.dataset.base;
+        fromBaseSelect.value = b;
+        updatePlaceholder();
+        numberInput.focus();
+        convert();
+      });
+    });
+
+    outputRows.forEach(row => {
+      row.querySelector('.copy-btn').addEventListener('click', function () {
+        copyToClipboard(row.querySelector('.output-value').textContent, this);
+      });
+    });
+
+    copyCustomBtn.addEventListener('click', function () {
+      copyToClipboard(customOutput.textContent, this);
+    });
+
+    updatePlaceholder();
+  })();
+  </script>
+
+</body>
+</html>

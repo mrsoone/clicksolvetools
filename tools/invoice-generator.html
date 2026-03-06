@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Invoice Generator — Create, Preview &amp; Download PDF Invoices | ClickSolveTools</title>
+  <meta name="description" content="Create professional invoices instantly. Add line items, tax, discounts, shipping, and download as PDF — free, private, no signup. All data stays in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/invoice-generator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Invoice Generator — Create, Preview &amp; Download PDF Invoices | ClickSolveTools">
+  <meta property="og:description" content="Create professional invoices instantly. Add line items, tax, discounts, shipping, and download as PDF — free, private, no signup.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/invoice-generator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Invoice Generator | ClickSolveTools">
+  <meta name="twitter:description" content="Create professional invoices with line items, tax, discounts, and download as PDF — free and private.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Invoice Generator","url":"https://clicksolvetools.com/tools/invoice-generator","description":"Create professional invoices with line items, tax, discounts, shipping, and multiple currencies. Preview and download as PDF — free, private, browser-based.","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this invoice generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no limits. There are no premium tiers, watermarks, or hidden fees. Create as many invoices as you need."}},{"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"All data stays in your browser. Nothing is uploaded to any server. Your business information, client details, and invoice data never leave your device."}},{"@type":"Question","name":"What should an invoice include?","acceptedAnswer":{"@type":"Answer","text":"A proper invoice should include your business name and contact info, client details, a unique invoice number, issue and due dates, itemized line items with quantities and prices, subtotal, any applicable tax and discounts, the total amount due, and payment terms."}},{"@type":"Question","name":"How do I download the invoice as a PDF?","acceptedAnswer":{"@type":"Answer","text":"Click the Download PDF button. This opens your browser's print dialog with the invoice preview. Select 'Save as PDF' as the destination to save a clean PDF file."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+      <!-- ─── LEFT: Form ─── -->
+      <div class="space-y-5" id="invoice-form">
+
+        <!-- Business Info -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">1</span>
+            Your Business
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Company Name</label>
+              <input id="biz-name" type="text" placeholder="Acme Corp" class="inv-input w-full">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Address</label>
+              <input id="biz-address" type="text" placeholder="123 Main St, City, State 12345" class="inv-input w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Phone</label>
+              <input id="biz-phone" type="tel" placeholder="(555) 123-4567" class="inv-input w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Email</label>
+              <input id="biz-email" type="email" placeholder="billing@acme.com" class="inv-input w-full">
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Info -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">2</span>
+            Bill To
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Client Name</label>
+              <input id="client-name" type="text" placeholder="Jane Smith / Company Inc." class="inv-input w-full">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Address</label>
+              <input id="client-address" type="text" placeholder="456 Oak Ave, Town, State 67890" class="inv-input w-full">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Email</label>
+              <input id="client-email" type="email" placeholder="client@example.com" class="inv-input w-full">
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">3</span>
+            Invoice Details
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Invoice Number</label>
+              <input id="inv-number" type="text" class="inv-input w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Currency</label>
+              <select id="inv-currency" class="inv-input w-full">
+                <option value="$">$ — USD</option>
+                <option value="€">€ — EUR</option>
+                <option value="£">£ — GBP</option>
+                <option value="¥">¥ — JPY</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Invoice Date</label>
+              <input id="inv-date" type="date" class="inv-input w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Due Date</label>
+              <input id="inv-due" type="date" class="inv-input w-full">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-medium text-[#475569] mb-1">Payment Terms</label>
+              <select id="inv-terms" class="inv-input w-full">
+                <option value="Due on Receipt">Due on Receipt</option>
+                <option value="Net 15" selected>Net 15</option>
+                <option value="Net 30">Net 30</option>
+                <option value="Net 60">Net 60</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">4</span>
+            Line Items
+          </h2>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm" id="items-table">
+              <thead>
+                <tr class="border-b border-[#e2e8f0] text-[#475569]">
+                  <th class="text-left py-2 pr-2 font-medium text-xs">Description</th>
+                  <th class="text-right py-2 px-2 font-medium text-xs w-20">Qty</th>
+                  <th class="text-right py-2 px-2 font-medium text-xs w-28">Unit Price</th>
+                  <th class="text-right py-2 px-2 font-medium text-xs w-28">Total</th>
+                  <th class="w-10"></th>
+                </tr>
+              </thead>
+              <tbody id="items-body"></tbody>
+            </table>
+          </div>
+
+          <button id="add-item-btn" class="mt-3 flex items-center gap-1.5 text-[#2563eb] text-sm font-medium hover:text-[#1d4ed8] transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Add Line Item
+          </button>
+        </div>
+
+        <!-- Totals Adjustments -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">5</span>
+            Adjustments
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Discount</label>
+              <div class="flex gap-2">
+                <input id="discount-val" type="text" inputmode="decimal" placeholder="0" class="inv-input flex-1">
+                <select id="discount-type" class="inv-input w-20">
+                  <option value="%">%</option>
+                  <option value="$">$</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Tax Rate (%)</label>
+              <input id="tax-rate" type="text" inputmode="decimal" placeholder="0" class="inv-input w-full">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-[#475569] mb-1">Shipping</label>
+              <input id="shipping" type="text" inputmode="decimal" placeholder="0.00" class="inv-input w-full">
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#1e293b] mb-4 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#2563eb] text-white text-xs flex items-center justify-center font-bold">6</span>
+            Notes &amp; Terms
+          </h2>
+          <textarea id="inv-notes" rows="3" placeholder="Payment is due within the specified terms. Late payments may incur a 1.5% monthly fee." class="inv-input w-full resize-y"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-wrap gap-3">
+          <button id="btn-pdf" class="px-6 py-2.5 bg-[#2563eb] text-white font-semibold text-sm rounded-lg hover:bg-[#1d4ed8] transition-colors shadow-sm shadow-[#2563eb]/20 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            Download PDF
+          </button>
+          <button id="btn-print" class="px-6 py-2.5 bg-white border border-[#e2e8f0] text-[#475569] font-semibold text-sm rounded-lg hover:bg-[#f1f5f9] hover:text-[#1e293b] transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Print
+          </button>
+          <button id="btn-reset" class="px-4 py-2.5 text-[#64748b] text-sm font-medium hover:text-[#1e293b] transition-colors ml-auto">Reset All</button>
+        </div>
+      </div>
+
+      <!-- ─── RIGHT: Live Preview ─── -->
+      <div class="xl:sticky xl:top-[72px] xl:self-start">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-2">
+          <div class="text-xs font-medium text-[#94a3b8] uppercase tracking-wider px-4 pt-3 pb-2">Live Preview</div>
+          <div id="invoice-preview" class="bg-white rounded-lg border border-[#e2e8f0] p-8 min-h-[600px] text-sm leading-relaxed">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Create Professional Invoices: A Complete Guide</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>An invoice is more than a payment request — it is a legal document that records a transaction between a seller and a buyer. Whether you are a freelancer billing a client, a small business shipping products, or a consultant closing a project, a well-structured invoice ensures you get paid on time, keeps your bookkeeping organized, and projects professionalism. This free invoice generator lets you create, preview, and download polished invoices directly in your browser without signing up for expensive invoicing software.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Every Invoice Should Include</h3>
+      <p>A complete invoice typically contains several key elements. At the top, your business name, address, phone number, and email give the client a clear point of contact and establish your identity. The client's information — name, company, and address — follows, making it clear who is being billed. Every invoice needs a unique invoice number for tracking purposes. Sequential numbering (INV-001, INV-002) is the simplest approach, though some businesses use date-based or project-based schemes. The invoice date records when the bill was issued, while the due date tells the client exactly when payment is expected.</p>
+      <p>The core of any invoice is the line items section. Each entry should include a clear description of the product or service, the quantity delivered, the unit price, and the calculated line total. Itemizing your work avoids disputes and gives the client a transparent breakdown of charges. Below the line items, the subtotal, any applicable discounts, tax, and shipping charges are listed separately before arriving at the final total due. Keeping these adjustments visible builds trust and reduces back-and-forth questions.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Payment Terms and Best Practices</h3>
+      <p>Payment terms define when and how you expect to be paid. "Net 30" means payment is due within 30 days of the invoice date — it is the most common term in business-to-business transactions. "Net 15" is increasingly popular among freelancers and small businesses who need faster cash flow. "Due on Receipt" requests immediate payment and works well for one-off services or retail transactions. Regardless of which term you choose, state it clearly on every invoice so there is no ambiguity.</p>
+      <p>To improve your chances of getting paid promptly, send invoices as soon as work is completed, include your preferred payment methods (bank transfer, PayPal, check), and follow up with a polite reminder a few days before the due date. Offering a small early-payment discount (such as 2% off if paid within 10 days) can also accelerate collections. For overdue invoices, a late fee clause — commonly 1% to 1.5% per month — provides both a deterrent and a legal basis for charging interest on unpaid balances.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tax, Discounts, and Currency Considerations</h3>
+      <p>If your business collects sales tax, VAT, or GST, the tax rate and amount should be displayed as a separate line on the invoice. This is not just a best practice — it is a legal requirement in many jurisdictions. Discounts, whether a percentage off the subtotal or a flat dollar amount, should also be listed explicitly rather than silently reducing individual prices. Transparency in these calculations protects both you and your client in case of an audit or dispute.</p>
+      <p>When billing international clients, choose a currency that matches your contract or agreement. This invoice generator supports US dollars, euros, British pounds, and Japanese yen. Always confirm the agreed-upon currency with your client before sending the invoice to avoid confusion over exchange rates.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Is this invoice generator really free?</strong></p>
+      <p>Yes, completely free with no limits, no watermarks, and no hidden fees. Create as many invoices as you need. All processing happens in your browser — nothing is uploaded to any server.</p>
+
+      <p><strong class="text-[#1e293b]">Can I save my invoices?</strong></p>
+      <p>Use the "Download PDF" button to save a clean PDF file via your browser's print dialog. Select "Save as PDF" as the printer destination. You can also print directly on paper using the "Print" button. Your data is not stored between sessions, so download or print each invoice before closing the page.</p>
+
+      <p><strong class="text-[#1e293b]">What is the difference between an invoice and a receipt?</strong></p>
+      <p>An invoice is a request for payment sent before or at the time of delivery. A receipt is proof that payment has been received. Invoices are forward-looking ("you owe this amount"), while receipts are backward-looking ("this amount was paid"). Both are important for bookkeeping.</p>
+
+      <p><strong class="text-[#1e293b]">Do I need to include my tax ID on invoices?</strong></p>
+      <p>In many countries and US states, displaying your tax identification number (EIN, VAT number, GST number) is required when charging tax. Check your local regulations. You can include it in the business address or notes field.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This tool generates invoices for convenience and informational purposes. It does not constitute accounting or legal advice. Consult a qualified professional for tax compliance and invoicing regulations in your jurisdiction.
+      </div>
+
+      <p>This invoice generator is free, runs entirely in your browser, and never sends your data to a server. Bookmark it for instant access whenever you need to bill a client.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .inv-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .inv-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .inv-input::placeholder { color: #94a3b8; }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    #invoice-preview { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+    @media print {
+      body * { visibility: hidden !important; }
+      #print-frame, #print-frame * { visibility: visible !important; }
+      #print-frame {
+        position: fixed !important;
+        left: 0; top: 0;
+        width: 100%; height: auto;
+        margin: 0; padding: 20mm;
+        background: #fff;
+        z-index: 99999;
+      }
+      @page { margin: 10mm; size: A4; }
+    }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const qsa = (sel, el) => (el || document).querySelectorAll(sel);
+
+    let items = [{ desc: '', qty: 1, price: 0 }];
+
+    function genInvoiceNumber() {
+      const d = new Date();
+      const y = String(d.getFullYear()).slice(-2);
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const seq = String(Math.floor(Math.random() * 9000) + 1000);
+      return 'INV-' + y + m + '-' + seq;
+    }
+
+    function today() {
+      return new Date().toISOString().split('T')[0];
+    }
+
+    function addDays(dateStr, days) {
+      const d = new Date(dateStr);
+      d.setDate(d.getDate() + days);
+      return d.toISOString().split('T')[0];
+    }
+
+    $('inv-number').value = genInvoiceNumber();
+    $('inv-date').value = today();
+    $('inv-due').value = addDays(today(), 15);
+
+    $('inv-terms').addEventListener('change', function () {
+      const dateVal = $('inv-date').value || today();
+      const map = { 'Due on Receipt': 0, 'Net 15': 15, 'Net 30': 30, 'Net 60': 60 };
+      $('inv-due').value = addDays(dateVal, map[this.value] || 15);
+      updatePreview();
+    });
+
+    $('inv-date').addEventListener('change', function () {
+      const map = { 'Due on Receipt': 0, 'Net 15': 15, 'Net 30': 30, 'Net 60': 60 };
+      $('inv-due').value = addDays(this.value, map[$('inv-terms').value] || 15);
+      updatePreview();
+    });
+
+    function getCurrency() {
+      return $('inv-currency').value;
+    }
+
+    function fmtMoney(val) {
+      const c = getCurrency();
+      const n = parseFloat(val) || 0;
+      if (c === '¥') return c + Math.round(n).toLocaleString();
+      return c + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function parseNum(v) {
+      return parseFloat(v) || 0;
+    }
+
+    function renderItems() {
+      const tbody = $('items-body');
+      tbody.innerHTML = items.map((item, i) => `
+        <tr class="border-b border-[#f1f5f9] item-row" data-idx="${i}">
+          <td class="py-2 pr-2">
+            <input type="text" value="${escHtml(item.desc)}" placeholder="Service or product" data-field="desc" class="inv-input w-full text-sm">
+          </td>
+          <td class="py-2 px-2">
+            <input type="text" inputmode="decimal" value="${item.qty}" data-field="qty" class="inv-input w-full text-right text-sm tabular-nums">
+          </td>
+          <td class="py-2 px-2">
+            <input type="text" inputmode="decimal" value="${item.price || ''}" placeholder="0.00" data-field="price" class="inv-input w-full text-right text-sm tabular-nums">
+          </td>
+          <td class="py-2 px-2 text-right font-semibold text-[#1e293b] tabular-nums whitespace-nowrap">
+            ${fmtMoney(item.qty * item.price)}
+          </td>
+          <td class="py-2 pl-2 text-center">
+            <button data-remove="${i}" class="text-[#94a3b8] hover:text-red-500 transition-colors ${items.length === 1 ? 'invisible' : ''}" title="Remove">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      qsa('input', tbody).forEach(inp => {
+        inp.addEventListener('input', function () {
+          const row = this.closest('tr');
+          const idx = parseInt(row.dataset.idx);
+          const field = this.dataset.field;
+          if (field === 'desc') items[idx].desc = this.value;
+          else if (field === 'qty') items[idx].qty = parseNum(this.value);
+          else if (field === 'price') items[idx].price = parseNum(this.value);
+          renderItems();
+          updatePreview();
+        });
+      });
+
+      qsa('[data-remove]', tbody).forEach(btn => {
+        btn.addEventListener('click', function () {
+          items.splice(parseInt(this.dataset.remove), 1);
+          renderItems();
+          updatePreview();
+        });
+      });
+    }
+
+    $('add-item-btn').addEventListener('click', function () {
+      items.push({ desc: '', qty: 1, price: 0 });
+      renderItems();
+      updatePreview();
+      const rows = qsa('.item-row input[data-field="desc"]', $('items-body'));
+      if (rows.length) rows[rows.length - 1].focus();
+    });
+
+    function escHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function calcTotals() {
+      const subtotal = items.reduce((s, it) => s + (it.qty * it.price), 0);
+      const discVal = parseNum($('discount-val').value);
+      const discType = $('discount-type').value;
+      const discount = discType === '%' ? subtotal * (discVal / 100) : discVal;
+      const afterDiscount = Math.max(0, subtotal - discount);
+      const taxRate = parseNum($('tax-rate').value);
+      const tax = afterDiscount * (taxRate / 100);
+      const shipping = parseNum($('shipping').value);
+      const total = afterDiscount + tax + shipping;
+      return { subtotal, discount, afterDiscount, taxRate, tax, shipping, total };
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function updatePreview() {
+      const t = calcTotals();
+      const c = getCurrency();
+
+      const bizName = $('biz-name').value || 'Your Company';
+      const bizAddr = $('biz-address').value;
+      const bizPhone = $('biz-phone').value;
+      const bizEmail = $('biz-email').value;
+
+      const clientName = $('client-name').value || 'Client Name';
+      const clientAddr = $('client-address').value;
+      const clientEmail = $('client-email').value;
+
+      const invNum = $('inv-number').value;
+      const invDate = formatDate($('inv-date').value);
+      const invDue = formatDate($('inv-due').value);
+      const terms = $('inv-terms').value;
+      const notes = $('inv-notes').value;
+
+      const itemRows = items.map(it => `
+        <tr style="border-bottom:1px solid #f1f5f9">
+          <td style="padding:8px 8px 8px 0;color:#1e293b">${escHtml(it.desc) || '<span style="color:#94a3b8">—</span>'}</td>
+          <td style="padding:8px;text-align:right;color:#475569">${it.qty}</td>
+          <td style="padding:8px;text-align:right;color:#475569">${fmtMoney(it.price)}</td>
+          <td style="padding:8px 0 8px 8px;text-align:right;font-weight:600;color:#1e293b">${fmtMoney(it.qty * it.price)}</td>
+        </tr>
+      `).join('');
+
+      const discountRow = t.discount > 0 ? `
+        <tr>
+          <td style="padding:4px 12px 4px 0;text-align:right;color:#475569">Discount</td>
+          <td style="padding:4px 0;text-align:right;color:#dc2626;font-weight:500">-${fmtMoney(t.discount)}</td>
+        </tr>` : '';
+
+      const taxRow = t.taxRate > 0 ? `
+        <tr>
+          <td style="padding:4px 12px 4px 0;text-align:right;color:#475569">Tax (${t.taxRate}%)</td>
+          <td style="padding:4px 0;text-align:right;color:#475569;font-weight:500">${fmtMoney(t.tax)}</td>
+        </tr>` : '';
+
+      const shippingRow = t.shipping > 0 ? `
+        <tr>
+          <td style="padding:4px 12px 4px 0;text-align:right;color:#475569">Shipping</td>
+          <td style="padding:4px 0;text-align:right;color:#475569;font-weight:500">${fmtMoney(t.shipping)}</td>
+        </tr>` : '';
+
+      const bizDetails = [bizAddr, bizPhone, bizEmail].filter(Boolean).map(v => `<div style="color:#64748b;font-size:12px;margin-top:2px">${escHtml(v)}</div>`).join('');
+      const clientDetails = [clientAddr, clientEmail].filter(Boolean).map(v => `<div style="color:#64748b;font-size:12px;margin-top:2px">${escHtml(v)}</div>`).join('');
+
+      const html = `
+        <div style="font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:#1e293b;line-height:1.5">
+          <!-- Header -->
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px">
+            <div>
+              <div style="font-size:20px;font-weight:700;color:#1e293b">${escHtml(bizName)}</div>
+              ${bizDetails}
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:24px;font-weight:800;color:#2563eb;letter-spacing:-0.5px">INVOICE</div>
+              <div style="font-size:12px;color:#64748b;margin-top:4px">${escHtml(invNum)}</div>
+            </div>
+          </div>
+
+          <!-- Bill To + Dates -->
+          <div style="display:flex;justify-content:space-between;margin-bottom:28px;gap:20px;flex-wrap:wrap">
+            <div>
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-bottom:6px">Bill To</div>
+              <div style="font-weight:600;color:#1e293b">${escHtml(clientName)}</div>
+              ${clientDetails}
+            </div>
+            <div style="text-align:right;font-size:13px">
+              <div style="margin-bottom:4px"><span style="color:#94a3b8">Date:</span> <span style="color:#1e293b;font-weight:500">${invDate}</span></div>
+              <div style="margin-bottom:4px"><span style="color:#94a3b8">Due:</span> <span style="color:#1e293b;font-weight:500">${invDue}</span></div>
+              <div><span style="color:#94a3b8">Terms:</span> <span style="color:#1e293b;font-weight:500">${escHtml(terms)}</span></div>
+            </div>
+          </div>
+
+          <!-- Items Table -->
+          <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px">
+            <thead>
+              <tr style="border-bottom:2px solid #e2e8f0">
+                <th style="text-align:left;padding:8px 8px 8px 0;font-weight:600;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:0.05em">Description</th>
+                <th style="text-align:right;padding:8px;font-weight:600;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:0.05em">Qty</th>
+                <th style="text-align:right;padding:8px;font-weight:600;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:0.05em">Price</th>
+                <th style="text-align:right;padding:8px 0 8px 8px;font-weight:600;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:0.05em">Amount</th>
+              </tr>
+            </thead>
+            <tbody>${itemRows}</tbody>
+          </table>
+
+          <!-- Totals -->
+          <div style="display:flex;justify-content:flex-end">
+            <table style="border-collapse:collapse;font-size:13px;min-width:220px">
+              <tr>
+                <td style="padding:4px 12px 4px 0;text-align:right;color:#475569">Subtotal</td>
+                <td style="padding:4px 0;text-align:right;font-weight:500">${fmtMoney(t.subtotal)}</td>
+              </tr>
+              ${discountRow}
+              ${taxRow}
+              ${shippingRow}
+              <tr style="border-top:2px solid #1e293b">
+                <td style="padding:10px 12px 4px 0;text-align:right;font-weight:700;font-size:14px;color:#1e293b">Total Due</td>
+                <td style="padding:10px 0 4px;text-align:right;font-weight:800;font-size:18px;color:#2563eb">${fmtMoney(t.total)}</td>
+              </tr>
+            </table>
+          </div>
+
+          ${notes ? `
+          <div style="margin-top:32px;padding-top:16px;border-top:1px solid #e2e8f0">
+            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-bottom:6px">Notes</div>
+            <div style="font-size:12px;color:#64748b;white-space:pre-wrap">${escHtml(notes)}</div>
+          </div>` : ''}
+        </div>
+      `;
+
+      $('invoice-preview').innerHTML = html;
+    }
+
+    function doPrint() {
+      const previewHtml = $('invoice-preview').innerHTML;
+      const printWin = window.open('', '_blank', 'width=800,height=1100');
+      printWin.document.write(`<!DOCTYPE html><html><head><title>Invoice ${escHtml($('inv-number').value)}</title>
+        <style>
+          * { margin:0; padding:0; box-sizing:border-box; }
+          body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; padding:40px; color:#1e293b; }
+          @page { margin:15mm; size:A4; }
+        </style>
+      </head><body>${previewHtml}</body></html>`);
+      printWin.document.close();
+      printWin.focus();
+      setTimeout(() => { printWin.print(); }, 350);
+    }
+
+    $('btn-pdf').addEventListener('click', doPrint);
+    $('btn-print').addEventListener('click', doPrint);
+
+    $('btn-reset').addEventListener('click', function () {
+      if (!confirm('Reset all invoice data?')) return;
+      $('biz-name').value = '';
+      $('biz-address').value = '';
+      $('biz-phone').value = '';
+      $('biz-email').value = '';
+      $('client-name').value = '';
+      $('client-address').value = '';
+      $('client-email').value = '';
+      $('inv-number').value = genInvoiceNumber();
+      $('inv-date').value = today();
+      $('inv-terms').value = 'Net 15';
+      $('inv-due').value = addDays(today(), 15);
+      $('inv-currency').value = '$';
+      $('discount-val').value = '';
+      $('discount-type').value = '%';
+      $('tax-rate').value = '';
+      $('shipping').value = '';
+      $('inv-notes').value = '';
+      items = [{ desc: '', qty: 1, price: 0 }];
+      renderItems();
+      updatePreview();
+    });
+
+    const formInputs = qsa('#invoice-form input, #invoice-form select, #invoice-form textarea');
+    formInputs.forEach(el => el.addEventListener('input', updatePreview));
+    formInputs.forEach(el => el.addEventListener('change', updatePreview));
+
+    renderItems();
+    updatePreview();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('invoice-generator');
+  </script>
+</body>
+</html>

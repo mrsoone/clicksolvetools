@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools</title>
+  <meta name="description" content="Convert audio files between WAV, MP3, OGG, FLAC, AAC, M4A, and WebM formats in your browser. Adjust sample rate and channels, preview audio, and download — no uploads, completely free.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/audio-format-converter">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools">
+  <meta property="og:description" content="Convert audio between WAV, MP3, OGG, and more in your browser. Adjust sample rate and channels, preview, and download instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/audio-format-converter">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools">
+  <meta name="twitter:description" content="Convert audio between WAV, MP3, OGG, and more formats entirely in your browser. No uploads, no signup.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Audio Format Converter",
+    "url": "https://clicksolvetools.com/tools/audio-format-converter",
+    "description": "Convert audio files between WAV, MP3, OGG, FLAC, AAC, M4A, and WebM formats entirely in your browser using the Web Audio API.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which audio format should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use MP3 for broad compatibility and small file sizes. Use WAV for lossless quality in editing workflows. Use OGG for open-source projects and web audio. Use FLAC for archival-quality lossless compression."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does converting audio formats reduce quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Converting from a lossy format (like MP3) to a lossless format (like WAV) does not restore lost quality. Converting from lossless to lossy will reduce quality depending on the bitrate. For best results, always start from the highest quality source available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my audio file uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All audio conversion happens entirely in your browser using the Web Audio API. Your files never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What audio formats can this tool convert?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool accepts MP3, WAV, OGG, FLAC, AAC, M4A, and WebM as input. It can convert to WAV using the Web Audio API (always available) and to MP3 when the lamejs library loads successfully."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Drop zone -->
+        <div id="drop-zone" class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6">
+          <input type="file" id="file-input" accept=".mp3,.wav,.ogg,.flac,.aac,.m4a,.webm,audio/*" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop an audio file here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Supports MP3, WAV, OGG, FLAC, AAC, M4A, WebM</p>
+        </div>
+
+        <!-- File info -->
+        <div id="file-info" class="hidden mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium text-[#475569]">Source Audio</h3>
+            <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
+            <p class="text-sm text-[#475569]">File: <span id="info-name" class="text-[#1e293b] font-semibold"></span></p>
+            <p class="text-sm text-[#475569]">Format: <span id="info-format" class="text-[#1e293b] font-semibold uppercase"></span></p>
+            <p class="text-sm text-[#475569]">Size: <span id="info-size" class="text-[#1e293b] font-semibold"></span></p>
+            <p class="text-sm text-[#475569]">Duration: <span id="info-duration" class="text-[#1e293b] font-semibold"></span></p>
+          </div>
+        </div>
+
+        <!-- Audio preview player -->
+        <div id="player-section" class="hidden mb-6">
+          <h3 class="text-sm font-medium text-[#475569] mb-2">Preview</h3>
+          <audio id="audio-player" controls class="w-full rounded-lg"></audio>
+        </div>
+
+        <!-- Conversion controls -->
+        <div id="controls" class="hidden space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="format-select" class="block text-sm font-medium text-[#475569] mb-2">Convert to</label>
+              <select id="format-select" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
+                <option value="wav">WAV (lossless PCM)</option>
+                <option value="mp3">MP3 (lossy, via lamejs)</option>
+              </select>
+            </div>
+            <div>
+              <label for="sample-rate" class="block text-sm font-medium text-[#475569] mb-2">Sample Rate</label>
+              <select id="sample-rate" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
+                <option value="44100">44,100 Hz (CD quality)</option>
+                <option value="48000">48,000 Hz (Studio quality)</option>
+              </select>
+            </div>
+            <div>
+              <label for="channels" class="block text-sm font-medium text-[#475569] mb-2">Channels</label>
+              <select id="channels" class="w-full px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
+                <option value="2">Stereo</option>
+                <option value="1">Mono</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- MP3 bitrate (shown only for MP3) -->
+          <div id="bitrate-group" class="hidden">
+            <label for="bitrate" class="block text-sm font-medium text-[#475569] mb-2">MP3 Bitrate</label>
+            <select id="bitrate" class="w-full sm:w-48 px-4 py-2.5 rounded-lg bg-[#f8fafc] border border-[#e2e8f0] text-[#1e293b] focus:outline-none focus:border-[#2563eb] focus:ring-1 focus:ring-[#2563eb] transition-colors text-base appearance-none cursor-pointer">
+              <option value="128">128 kbps</option>
+              <option value="192" selected>192 kbps</option>
+              <option value="256">256 kbps</option>
+              <option value="320">320 kbps</option>
+            </select>
+          </div>
+
+          <!-- MP3 availability notice -->
+          <div id="mp3-notice" class="hidden">
+            <div class="flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+              <p class="text-sm text-amber-700">MP3 encoding requires the lamejs library. If it fails to load, WAV conversion is still available. For reliable MP3 encoding, consider desktop software like Audacity.</p>
+            </div>
+          </div>
+
+          <!-- Convert button + progress -->
+          <div class="flex flex-wrap items-center gap-3">
+            <button id="convert-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/></svg>
+              Convert
+            </button>
+            <span id="status-text" class="text-sm text-[#94a3b8]"></span>
+          </div>
+
+          <!-- Progress bar -->
+          <div id="progress-wrap" class="hidden">
+            <div class="w-full bg-[#e2e8f0] rounded-full h-2.5 overflow-hidden">
+              <div id="progress-bar" class="bg-[#2563eb] h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p id="progress-text" class="text-xs text-[#94a3b8] mt-1.5">0%</p>
+          </div>
+
+          <!-- Output section -->
+          <div id="output-section" class="hidden space-y-4 pt-2">
+            <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
+              <p class="text-sm text-[#475569]">Output format: <span id="out-format" class="text-[#1e293b] font-semibold uppercase"></span></p>
+              <p class="text-sm text-[#475569]">Output size: <span id="out-size" class="text-[#1e293b] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">Sample rate: <span id="out-rate" class="text-[#1e293b] font-semibold"></span></p>
+              <p class="text-sm text-[#475569]">Channels: <span id="out-channels" class="text-[#1e293b] font-semibold"></span></p>
+            </div>
+            <h3 class="text-sm font-medium text-[#475569]">Converted Audio Preview</h3>
+            <audio id="output-player" controls class="w-full rounded-lg"></audio>
+            <button id="download-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Converted Audio
+            </button>
+          </div>
+
+          <!-- Browser limitation note -->
+          <div class="flex items-start gap-2 p-3 bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg mt-2">
+            <svg class="w-5 h-5 text-[#94a3b8] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+            <p class="text-xs text-[#64748b]">Browser-based conversion. Your browser's Web Audio API decodes the source audio. Complex or rare formats may not decode in all browsers — desktop software like Audacity or FFmpeg handles edge cases more reliably.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Audio Formats, Conversion, and When to Use Each One</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+
+          <p>Audio files come in a wide variety of formats, each engineered for different use cases ranging from high-fidelity music production to compact streaming over mobile networks. Understanding the differences between audio formats — and when to convert between them — is essential for musicians, podcasters, content creators, developers, and anyone who works with sound. This free audio format converter lets you transform audio files between WAV and MP3 directly inside your browser using the Web Audio API, with no uploads, no server processing, and no sign-up required. Simply drop your audio file, choose your target format and settings, and download the result.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Audio Formats Explained</h3>
+
+          <p><strong class="text-[#1e293b]">WAV (Waveform Audio File Format)</strong> is the standard uncompressed audio format originally developed by Microsoft and IBM. WAV files store raw PCM (pulse-code modulation) data, which means every sample of the audio waveform is recorded without any compression or data loss. This makes WAV the gold standard for recording, editing, and mastering audio, because there are zero compression artifacts. The trade-off is file size: a typical three-minute stereo song at CD quality (44,100 Hz, 16-bit) occupies roughly 30 MB as a WAV file. WAV is universally supported across every operating system, DAW (digital audio workstation), and media player.</p>
+
+          <p><strong class="text-[#1e293b]">MP3 (MPEG Audio Layer III)</strong> is the most widely recognized lossy audio format. MP3 uses psychoacoustic compression to discard audio data that the human ear is unlikely to perceive, achieving file sizes that are roughly 70–90% smaller than the equivalent WAV. At higher bitrates like 256 or 320 kbps, most listeners cannot distinguish MP3 from lossless audio in blind tests. MP3 remains the default format for portable music players, podcasts, audiobooks, and web audio due to its universal compatibility. However, because MP3 permanently discards data, re-encoding an MP3 file will further degrade quality — so it should never be used as a working format during production.</p>
+
+          <p><strong class="text-[#1e293b]">OGG (Ogg Vorbis)</strong> is an open-source lossy audio codec that generally achieves better sound quality than MP3 at the same bitrate. OGG is widely used in gaming, web applications, and open-source projects. Most modern browsers support OGG playback, making it a solid choice for web-based audio. Unlike MP3, the OGG Vorbis codec is completely patent-free.</p>
+
+          <p><strong class="text-[#1e293b]">FLAC (Free Lossless Audio Codec)</strong> provides lossless compression, reducing file sizes by 40–60% compared to WAV while preserving every single sample of the original audio. FLAC is the preferred format for audiophiles, music archivists, and anyone who wants smaller files without sacrificing quality. It supports metadata, album art, and sample rates up to 655,350 Hz.</p>
+
+          <p><strong class="text-[#1e293b]">AAC (Advanced Audio Coding)</strong> is a lossy format that generally outperforms MP3 at the same bitrate. AAC is the default audio format for Apple devices, YouTube, and most streaming services. The M4A container typically wraps AAC audio data. AAC offers better stereo encoding and handles high frequencies more gracefully than MP3.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Lossy vs. Lossless Audio</h3>
+
+          <p><strong class="text-[#1e293b]">Lossy formats</strong> (MP3, OGG, AAC) permanently remove audio information using psychoacoustic models. They analyze the audio spectrum and discard frequencies, harmonics, and quiet passages that are masked by louder sounds. The bitrate setting controls how aggressively data is discarded — higher bitrates preserve more detail. Once data is removed, it cannot be recovered by converting to a lossless format. <strong class="text-[#1e293b]">Lossless formats</strong> (WAV, FLAC) preserve every sample of the original recording. FLAC compresses the data (like a ZIP file for audio), while WAV stores it raw. Converting lossless to lossy is a one-way operation: the conversion from WAV to MP3 discards data, but converting from MP3 back to WAV simply wraps the already-degraded audio in a larger container without restoring the lost information.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">When to Convert Between Audio Formats</h3>
+          <ul class="list-disc list-inside space-y-1.5 ml-1">
+            <li><strong class="text-[#1e293b]">Sharing and distribution</strong> — Convert WAV or FLAC to MP3 for email attachments, podcast hosting, or uploading to platforms with file size limits.</li>
+            <li><strong class="text-[#1e293b]">Editing workflows</strong> — Convert MP3 or AAC to WAV before editing in a DAW to avoid re-encoding artifacts on each save.</li>
+            <li><strong class="text-[#1e293b]">Web compatibility</strong> — Convert FLAC or M4A to WAV or MP3 for broad browser and device support.</li>
+            <li><strong class="text-[#1e293b]">Archival</strong> — Convert WAV recordings to FLAC for long-term storage at roughly half the file size with no quality loss.</li>
+            <li><strong class="text-[#1e293b]">Reducing file size</strong> — Convert large WAV files to MP3 at 192–256 kbps for everyday listening with minimal audible difference.</li>
+          </ul>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Will converting MP3 to WAV improve audio quality?</h4>
+              <p>No. Converting a lossy file to a lossless container does not restore discarded audio data. The WAV file will be larger but will sound identical to the original MP3. Always start from the highest quality source available.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What sample rate should I use?</h4>
+              <p>44,100 Hz (CD quality) is sufficient for virtually all listening purposes. Use 48,000 Hz if your project targets video production, as 48 kHz is the standard audio sample rate for film and television.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Should I choose mono or stereo?</h4>
+              <p>Use stereo for music, sound effects, and any audio where spatial information matters. Use mono for voice recordings, podcasts, and phone audio — it halves the file size and most spoken content has no meaningful stereo field.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Why can't this tool convert to FLAC or OGG?</h4>
+              <p>Browser-based JavaScript can reliably encode WAV (raw PCM) and MP3 (via the lamejs library). Encoding FLAC and OGG in the browser is technically possible but requires large WebAssembly codecs. For those formats, desktop software like Audacity or FFmpeg is recommended.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All processing happens entirely in your browser. Your audio files are never uploaded to any server. No data leaves your device.</strong></p>
+
+          <p>This audio format converter is completely <strong class="text-[#1e293b]">free</strong>, requires no sign-up, and works <strong class="text-[#1e293b]">entirely in your browser</strong>. Upload your audio file, choose a target format, adjust sample rate and channels, preview the result, and download — your files stay private on your device at all times.</p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('audio-format-converter');
+  </script>
+
+  <!-- lamejs for MP3 encoding (optional, graceful fallback) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    let lamejsAvailable = typeof lamejs !== 'undefined';
+
+    const dropZone      = document.getElementById('drop-zone');
+    const fileInput     = document.getElementById('file-input');
+    const fileInfo      = document.getElementById('file-info');
+    const infoName      = document.getElementById('info-name');
+    const infoFormat    = document.getElementById('info-format');
+    const infoSize      = document.getElementById('info-size');
+    const infoDuration  = document.getElementById('info-duration');
+    const clearBtn      = document.getElementById('clear-btn');
+    const playerSection = document.getElementById('player-section');
+    const audioPlayer   = document.getElementById('audio-player');
+    const controls      = document.getElementById('controls');
+    const formatSelect  = document.getElementById('format-select');
+    const sampleRate    = document.getElementById('sample-rate');
+    const channelsSelect= document.getElementById('channels');
+    const bitrateGroup  = document.getElementById('bitrate-group');
+    const bitrateSelect = document.getElementById('bitrate');
+    const mp3Notice     = document.getElementById('mp3-notice');
+    const convertBtn    = document.getElementById('convert-btn');
+    const statusText    = document.getElementById('status-text');
+    const progressWrap  = document.getElementById('progress-wrap');
+    const progressBar   = document.getElementById('progress-bar');
+    const progressText  = document.getElementById('progress-text');
+    const outputSection = document.getElementById('output-section');
+    const outFormat     = document.getElementById('out-format');
+    const outSize       = document.getElementById('out-size');
+    const outRate       = document.getElementById('out-rate');
+    const outChannels   = document.getElementById('out-channels');
+    const outputPlayer  = document.getElementById('output-player');
+    const downloadBtn   = document.getElementById('download-btn');
+
+    let sourceFile = null;
+    let sourceArrayBuffer = null;
+    let outputBlobUrl = null;
+    let outputBlob = null;
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function formatDuration(sec) {
+      if (!isFinite(sec)) return '—';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      const ms = Math.round((sec % 1) * 100);
+      return m + ':' + String(s).padStart(2, '0') + '.' + String(ms).padStart(2, '0');
+    }
+
+    function detectFormat(file) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      const map = { mp3: 'MP3', wav: 'WAV', ogg: 'OGG', flac: 'FLAC', aac: 'AAC', m4a: 'M4A', webm: 'WebM' };
+      return map[ext] || ext.toUpperCase();
+    }
+
+    function baseName(filename) {
+      const dot = filename.lastIndexOf('.');
+      return dot > 0 ? filename.substring(0, dot) : filename;
+    }
+
+    function setProgress(pct) {
+      progressBar.style.width = pct + '%';
+      progressText.textContent = Math.round(pct) + '%';
+    }
+
+    function updateFormatUI() {
+      const isMp3 = formatSelect.value === 'mp3';
+      bitrateGroup.classList.toggle('hidden', !isMp3);
+      mp3Notice.classList.toggle('hidden', !isMp3 || lamejsAvailable);
+    }
+
+    formatSelect.addEventListener('change', updateFormatUI);
+
+    function loadAudio(file) {
+      sourceFile = file;
+      infoName.textContent = file.name;
+      infoFormat.textContent = detectFormat(file);
+      infoSize.textContent = formatBytes(file.size);
+      infoDuration.textContent = 'Loading…';
+
+      const objectUrl = URL.createObjectURL(file);
+      audioPlayer.src = objectUrl;
+
+      audioPlayer.addEventListener('loadedmetadata', function onMeta() {
+        infoDuration.textContent = formatDuration(audioPlayer.duration);
+        audioPlayer.removeEventListener('loadedmetadata', onMeta);
+      });
+
+      audioPlayer.addEventListener('error', function onErr() {
+        infoDuration.textContent = 'Unable to read duration';
+        audioPlayer.removeEventListener('error', onErr);
+      });
+
+      file.arrayBuffer().then(buf => { sourceArrayBuffer = buf; });
+
+      dropZone.classList.add('hidden');
+      fileInfo.classList.remove('hidden');
+      playerSection.classList.remove('hidden');
+      controls.classList.remove('hidden');
+      outputSection.classList.add('hidden');
+      updateFormatUI();
+    }
+
+    function resetAll() {
+      sourceFile = null;
+      sourceArrayBuffer = null;
+      if (outputBlobUrl) { URL.revokeObjectURL(outputBlobUrl); outputBlobUrl = null; }
+      outputBlob = null;
+      fileInput.value = '';
+      audioPlayer.src = '';
+      outputPlayer.src = '';
+      dropZone.classList.remove('hidden');
+      fileInfo.classList.add('hidden');
+      playerSection.classList.add('hidden');
+      controls.classList.add('hidden');
+      outputSection.classList.add('hidden');
+      progressWrap.classList.add('hidden');
+      statusText.textContent = '';
+      setProgress(0);
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      if (e.dataTransfer.files[0]) loadAudio(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadAudio(fileInput.files[0]); });
+    clearBtn.addEventListener('click', resetAll);
+
+    /* ── WAV Encoder ── */
+
+    function encodeWav(audioBuffer, targetSampleRate, targetChannels) {
+      const numChannels = targetChannels;
+      const origRate = audioBuffer.sampleRate;
+      const ratio = origRate / targetSampleRate;
+      const origLength = audioBuffer.length;
+      const newLength = Math.round(origLength / ratio);
+
+      const channelData = [];
+      for (let ch = 0; ch < numChannels; ch++) {
+        const src = ch < audioBuffer.numberOfChannels ? audioBuffer.getChannelData(ch) : audioBuffer.getChannelData(0);
+        const resampled = new Float32Array(newLength);
+        for (let i = 0; i < newLength; i++) {
+          const srcIdx = i * ratio;
+          const idx = Math.floor(srcIdx);
+          const frac = srcIdx - idx;
+          const s0 = src[Math.min(idx, origLength - 1)];
+          const s1 = src[Math.min(idx + 1, origLength - 1)];
+          resampled[i] = s0 + frac * (s1 - s0);
+        }
+        channelData.push(resampled);
+      }
+
+      const bytesPerSample = 2;
+      const blockAlign = numChannels * bytesPerSample;
+      const byteRate = targetSampleRate * blockAlign;
+      const dataSize = newLength * blockAlign;
+      const buffer = new ArrayBuffer(44 + dataSize);
+      const view = new DataView(buffer);
+
+      function writeString(offset, str) {
+        for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+      }
+
+      writeString(0, 'RIFF');
+      view.setUint32(4, 36 + dataSize, true);
+      writeString(8, 'WAVE');
+      writeString(12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, numChannels, true);
+      view.setUint32(24, targetSampleRate, true);
+      view.setUint32(28, byteRate, true);
+      view.setUint16(32, blockAlign, true);
+      view.setUint16(34, 16, true);
+      writeString(36, 'data');
+      view.setUint32(40, dataSize, true);
+
+      let offset = 44;
+      for (let i = 0; i < newLength; i++) {
+        for (let ch = 0; ch < numChannels; ch++) {
+          let sample = channelData[ch][i];
+          sample = Math.max(-1, Math.min(1, sample));
+          const int16 = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+          view.setInt16(offset, int16, true);
+          offset += 2;
+        }
+      }
+
+      return new Blob([buffer], { type: 'audio/wav' });
+    }
+
+    /* ── MP3 Encoder (via lamejs) ── */
+
+    function encodeMp3(audioBuffer, targetSampleRate, targetChannels, kbps) {
+      if (typeof lamejs === 'undefined') throw new Error('lamejs not loaded');
+
+      const origRate = audioBuffer.sampleRate;
+      const ratio = origRate / targetSampleRate;
+      const origLength = audioBuffer.length;
+      const newLength = Math.round(origLength / ratio);
+
+      const channels = [];
+      for (let ch = 0; ch < targetChannels; ch++) {
+        const src = ch < audioBuffer.numberOfChannels ? audioBuffer.getChannelData(ch) : audioBuffer.getChannelData(0);
+        const resampled = new Int16Array(newLength);
+        for (let i = 0; i < newLength; i++) {
+          const srcIdx = i * ratio;
+          const idx = Math.floor(srcIdx);
+          const frac = srcIdx - idx;
+          const s0 = src[Math.min(idx, origLength - 1)];
+          const s1 = src[Math.min(idx + 1, origLength - 1)];
+          let sample = s0 + frac * (s1 - s0);
+          sample = Math.max(-1, Math.min(1, sample));
+          resampled[i] = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+        }
+        channels.push(resampled);
+      }
+
+      const mp3enc = new lamejs.Mp3Encoder(targetChannels, targetSampleRate, kbps);
+      const mp3Data = [];
+      const blockSize = 1152;
+
+      for (let i = 0; i < newLength; i += blockSize) {
+        const left = channels[0].subarray(i, i + blockSize);
+        const right = targetChannels > 1 ? channels[1].subarray(i, i + blockSize) : left;
+        const buf = targetChannels > 1
+          ? mp3enc.encodeBuffer(left, right)
+          : mp3enc.encodeBuffer(left);
+        if (buf.length > 0) mp3Data.push(buf);
+      }
+
+      const end = mp3enc.flush();
+      if (end.length > 0) mp3Data.push(end);
+
+      return new Blob(mp3Data, { type: 'audio/mp3' });
+    }
+
+    /* ── Conversion ── */
+
+    convertBtn.addEventListener('click', async () => {
+      if (!sourceArrayBuffer) {
+        statusText.textContent = 'Please wait for the file to finish loading.';
+        return;
+      }
+
+      const targetFormat = formatSelect.value;
+      const targetRate = parseInt(sampleRate.value);
+      const targetChannels = parseInt(channelsSelect.value);
+      const targetBitrate = parseInt(bitrateSelect.value);
+
+      if (targetFormat === 'mp3' && typeof lamejs === 'undefined') {
+        statusText.textContent = 'lamejs library failed to load. Please use WAV format instead.';
+        statusText.className = 'text-sm text-red-500';
+        return;
+      }
+
+      convertBtn.disabled = true;
+      statusText.textContent = 'Decoding audio…';
+      statusText.className = 'text-sm text-[#94a3b8]';
+      progressWrap.classList.remove('hidden');
+      outputSection.classList.add('hidden');
+      setProgress(10);
+
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const bufferCopy = sourceArrayBuffer.slice(0);
+        setProgress(20);
+        statusText.textContent = 'Decoding audio…';
+
+        const audioBuffer = await audioCtx.decodeAudioData(bufferCopy);
+        setProgress(50);
+        statusText.textContent = 'Encoding ' + targetFormat.toUpperCase() + '…';
+
+        let blob;
+        if (targetFormat === 'wav') {
+          blob = encodeWav(audioBuffer, targetRate, targetChannels);
+        } else {
+          blob = encodeMp3(audioBuffer, targetRate, targetChannels, targetBitrate);
+        }
+
+        setProgress(90);
+        statusText.textContent = 'Finalizing…';
+
+        if (outputBlobUrl) URL.revokeObjectURL(outputBlobUrl);
+        outputBlob = blob;
+        outputBlobUrl = URL.createObjectURL(blob);
+
+        outFormat.textContent = targetFormat.toUpperCase();
+        outSize.textContent = formatBytes(blob.size);
+        outRate.textContent = targetRate.toLocaleString() + ' Hz';
+        outChannels.textContent = targetChannels === 1 ? 'Mono' : 'Stereo';
+        outputPlayer.src = outputBlobUrl;
+
+        outputSection.classList.remove('hidden');
+        setProgress(100);
+        statusText.textContent = 'Conversion complete!';
+        statusText.className = 'text-sm text-emerald-500 font-medium';
+
+        await audioCtx.close();
+      } catch (err) {
+        statusText.textContent = 'Error: ' + (err.message || 'Failed to decode audio. This format may not be supported by your browser.');
+        statusText.className = 'text-sm text-red-500';
+        setProgress(0);
+        progressWrap.classList.add('hidden');
+      }
+
+      convertBtn.disabled = false;
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!outputBlob || !sourceFile) return;
+      const ext = formatSelect.value;
+      const a = document.createElement('a');
+      a.href = outputBlobUrl;
+      a.download = baseName(sourceFile.name) + '.' + ext;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    updateFormatUI();
+  });
+  </script>
+
+</body>
+</html>

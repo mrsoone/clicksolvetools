@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Savings Goal Calculator — Monthly Savings, Timeline &amp; Milestones | ClickSolveTools</title>
+  <meta name="description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/savings-goal-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Savings Goal Calculator | ClickSolveTools">
+  <meta property="og:description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/savings-goal-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Savings Goal Calculator","url":"https://clicksolvetools.com/tools/savings-goal-calculator","description":"Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much should I save each month?","acceptedAnswer":{"@type":"Answer","text":"A common guideline is the 50/30/20 rule: allocate 50% of after-tax income to needs, 30% to wants, and 20% to savings and debt repayment. The exact amount depends on your income, expenses, and financial goals."}},{"@type":"Question","name":"What is a high-yield savings account?","acceptedAnswer":{"@type":"Answer","text":"A high-yield savings account offers an interest rate significantly higher than a traditional savings account — often 10 to 25 times the national average. They are typically offered by online banks and are FDIC-insured up to $250,000."}},{"@type":"Question","name":"How much should I have in an emergency fund?","acceptedAnswer":{"@type":"Answer","text":"Most financial advisors recommend saving 3 to 6 months of essential living expenses in an easily accessible emergency fund. If you have variable income or are self-employed, aim for 6 to 12 months."}},{"@type":"Question","name":"Does compound interest help my savings goal?","acceptedAnswer":{"@type":"Answer","text":"Yes. When your savings earn interest and that interest earns additional interest, your money grows faster than with simple interest alone. A high-yield savings account or investment vehicle that compounds monthly or daily accelerates progress toward your goal."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Mode Selector -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <label class="block text-sm font-medium text-[#475569] mb-3">What do you want to calculate?</label>
+        <div class="grid grid-cols-2 gap-3">
+          <button id="mode-monthly" class="mode-btn active py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#2563eb] bg-[#eff6ff] text-[#2563eb]">
+            How much to save monthly?
+          </button>
+          <button id="mode-when" class="mode-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]">
+            When will I reach my goal?
+          </button>
+        </div>
+      </div>
+
+      <!-- Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+
+          <div class="sm:col-span-2">
+            <label for="goal" class="block text-sm font-medium text-[#475569] mb-1">Savings Goal</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="goal" type="text" inputmode="decimal" placeholder="10,000" class="sg-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="current" class="block text-sm font-medium text-[#475569] mb-1">Current Savings</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="current" type="text" inputmode="decimal" placeholder="1,000" class="sg-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div id="monthly-wrap" class="sm:col-span-2 hidden">
+            <label for="monthly" class="block text-sm font-medium text-[#475569] mb-1">Monthly Deposit</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="monthly" type="text" inputmode="decimal" placeholder="500" class="sg-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label for="rate" class="block text-sm font-medium text-[#475569] mb-1">Annual Interest Rate</label>
+            <div class="relative">
+              <input id="rate" type="text" inputmode="decimal" placeholder="4.5" class="sg-input pr-7 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+
+          <div id="timeframe-wrap">
+            <label for="timeframe" class="block text-sm font-medium text-[#475569] mb-1">Time Frame</label>
+            <div class="flex gap-2">
+              <input id="timeframe" type="number" min="1" max="600" placeholder="24" class="sg-input w-full">
+              <select id="time-unit" class="sg-input w-28 shrink-0">
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2 pt-2">
+            <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] active:bg-[#1e40af] transition-colors shadow-sm shadow-[#2563eb]/20">
+              Calculate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Summary -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <div id="result-main" class="text-center mb-6">
+          <div id="result-label" class="text-sm text-[#475569] mb-1"></div>
+          <div id="result-value" class="text-3xl font-bold text-[#2563eb]"></div>
+          <div id="result-sub" class="text-sm text-[#64748b] mt-1"></div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="text-center">
+            <div class="text-xs text-[#475569]">Total Deposited</div>
+            <div id="out-deposited" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-[#475569]">Interest Earned</div>
+            <div id="out-interest" class="text-lg font-semibold text-[#22c55e]">—</div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-[#475569]">Final Balance</div>
+            <div id="out-final" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div class="text-center">
+            <div class="text-xs text-[#475569]">Interest Share</div>
+            <div id="out-share" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div id="progress-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Progress Toward Goal</h3>
+        <div class="flex items-center justify-between text-xs text-[#475569] mb-2">
+          <span id="prog-current">$0</span>
+          <span id="prog-goal">$0</span>
+        </div>
+        <div class="w-full bg-[#e2e8f0] rounded-full h-5 overflow-hidden relative">
+          <div id="prog-start" class="absolute left-0 top-0 h-full bg-[#94a3b8] rounded-l-full transition-all duration-500" style="width:0%"></div>
+          <div id="prog-bar" class="absolute left-0 top-0 h-full bg-[#2563eb] rounded-full transition-all duration-500" style="width:0%"></div>
+          <div id="prog-pct" class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white drop-shadow"></div>
+        </div>
+        <div class="flex justify-between text-[10px] text-[#94a3b8] mt-1.5">
+          <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+        </div>
+      </div>
+
+      <!-- Milestones -->
+      <div id="milestone-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Goal Milestones</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="milestones"></div>
+      </div>
+
+      <!-- Growth Timeline Table -->
+      <div id="table-wrapper" class="hidden">
+        <button id="table-toggle" class="w-full bg-white border border-[#e2e8f0] rounded-xl px-6 py-4 text-left text-sm text-[#475569] hover:text-[#1e293b] transition-colors flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <svg id="table-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Growth Timeline
+          </span>
+          <div class="flex items-center gap-3">
+            <span id="table-period" class="text-xs text-[#94a3b8]"></span>
+            <div class="flex border border-[#e2e8f0] rounded-md overflow-hidden" id="interval-btns">
+              <button data-interval="monthly" class="interval-btn px-2.5 py-1 text-xs font-medium bg-[#2563eb] text-white">Monthly</button>
+              <button data-interval="quarterly" class="interval-btn px-2.5 py-1 text-xs font-medium bg-white text-[#475569] hover:bg-[#f1f5f9]">Quarterly</button>
+            </div>
+          </div>
+        </button>
+        <div id="table-body" class="hidden bg-white border border-t-0 border-[#e2e8f0] rounded-b-xl overflow-x-auto max-h-[500px] overflow-y-auto">
+          <table class="w-full text-sm">
+            <thead class="sticky top-0 bg-white border-b border-[#e2e8f0]">
+              <tr class="text-[#475569] text-xs">
+                <th class="px-4 py-3 text-left font-medium">Period</th>
+                <th class="px-4 py-3 text-right font-medium">Deposit</th>
+                <th class="px-4 py-3 text-right font-medium">Interest</th>
+                <th class="px-4 py-3 text-right font-medium">Balance</th>
+                <th class="px-4 py-3 text-right font-medium">% of Goal</th>
+              </tr>
+            </thead>
+            <tbody id="timeline-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Plan and Reach Your Savings Goal</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Setting a clear savings goal is the foundation of smart personal finance. Whether you are building an emergency fund, saving for a down payment on a home, planning a vacation, or setting aside money for education, having a specific target — and a plan to reach it — dramatically increases your chances of success. Research consistently shows that people who set defined financial goals save more effectively than those who simply try to "spend less." This calculator helps you turn a vague intention into a concrete, month-by-month plan.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Two Ways to Plan Your Savings</h3>
+      <p>This tool offers two calculation modes. The first answers the question <strong class="text-[#1e293b]">"How much do I need to save each month?"</strong> — you enter your goal amount, current savings, interest rate, and timeframe, and the calculator tells you the exact monthly deposit required. The second mode answers <strong class="text-[#1e293b]">"When will I reach my goal?"</strong> — you enter a fixed monthly deposit amount, and the calculator determines how many months or years it will take. Both modes factor in compound interest so your projections reflect real-world growth.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Role of High-Yield Savings Accounts</h3>
+      <p>Where you keep your savings matters. Traditional bank savings accounts often pay as little as 0.01% to 0.10% annual interest, which barely offsets inflation. High-yield savings accounts (HYSAs), typically offered by online banks, currently pay between 4% and 5% APY — roughly 40 to 500 times the national average. Over a multi-year savings timeline, this difference compounds significantly. For example, saving $500 per month toward a $25,000 goal at 0.05% interest takes about 48 months and earns roughly $25 in interest. The same contributions at 4.5% APY reach the goal in approximately 45 months and earn over $1,600 in interest. HYSAs are FDIC-insured up to $250,000 per depositor, making them one of the safest places to park short- and medium-term savings.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Building an Emergency Fund</h3>
+      <p>An emergency fund is the most important savings goal for financial stability. It covers unexpected expenses — medical bills, car repairs, job loss — without forcing you into high-interest debt. Most financial advisors recommend saving three to six months of essential living expenses. If your monthly essentials (rent, utilities, groceries, insurance, minimum debt payments) total $3,000, your emergency fund target is $9,000 to $18,000. Use this calculator's "How much to save monthly?" mode to determine a realistic contribution schedule. If building a full fund feels overwhelming, start with a smaller milestone — even $1,000 provides meaningful protection against common emergencies like an unexpected car repair or medical co-pay.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Savings Strategies That Work</h3>
+      <p>The most effective savings strategies combine automation with incremental growth. Set up an automatic transfer from your checking account to your savings account on payday — when money moves before you see it, you adapt to spending less without constant willpower. The "pay yourself first" method prioritizes savings as a fixed expense rather than saving whatever happens to be left over. Another powerful technique is the 1% increase method: each month, increase your savings rate by just 1% of your income. Over a year, you'll barely notice the adjustment, but your annual savings rate will climb substantially.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Understanding Milestones and Progress</h3>
+      <p>This calculator breaks your savings journey into four milestone markers at 25%, 50%, 75%, and 100% of your goal. Milestones serve a psychological purpose: they provide regular "wins" that keep motivation high during long savings timelines. Behavioral finance research shows that people are more likely to stick with a savings plan when they can see tangible progress. The progress bar and growth timeline table give you a visual roadmap — you can see exactly when each milestone will be reached and how interest accelerates your balance as it grows.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How much should I save each month?</strong></p>
+      <p>A widely recommended baseline is the 50/30/20 rule: allocate 50% of after-tax income to necessities, 30% to discretionary spending, and 20% to savings and debt repayment. However, the right amount depends on your specific goals and timeline. Use this calculator to find the monthly deposit that matches your goal and deadline.</p>
+
+      <p><strong class="text-[#1e293b]">Should I save or invest?</strong></p>
+      <p>For goals within one to three years, a high-yield savings account or CD is typically best because your principal is protected. For goals five or more years away, investing in diversified index funds historically provides higher returns, though with more short-term volatility. Goals in the three-to-five-year range fall in a gray area — consider a mix of both.</p>
+
+      <p><strong class="text-[#1e293b]">What if I can't save the calculated monthly amount?</strong></p>
+      <p>Adjust the variables. Extend the timeframe, increase the interest rate by moving to a high-yield account, reduce the goal, or start with what you can afford and increase contributions over time. Even small, consistent deposits grow substantially through compound interest and habit formation.</p>
+
+      <p><strong class="text-[#1e293b]">How does compound interest affect my savings?</strong></p>
+      <p>Compound interest means your balance earns interest not just on your deposits, but on previously earned interest as well. The longer your money stays invested and the higher the rate, the more dramatic the compounding effect. This is why starting early — even with small amounts — produces outsized results over time.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for educational purposes only. It does not account for taxes, inflation, fees, or variable interest rates. Consult a qualified financial advisor for decisions specific to your situation.
+      </div>
+
+      <p>This savings goal calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to plan a new savings target or adjust your monthly contributions.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .sg-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .sg-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .sg-input::placeholder { color: #94a3b8; }
+
+    select.sg-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6l3.5 4 3.5-4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2.25rem;
+    }
+
+    #timeline-table tr { border-top: 1px solid #e2e8f0; }
+    #timeline-table td { padding: 0.5rem 1rem; white-space: nowrap; }
+    #timeline-table td:first-child { text-align: left; }
+    #timeline-table td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+    #table-body::-webkit-scrollbar { width: 6px; }
+    #table-body::-webkit-scrollbar-track { background: #f8fafc; }
+    #table-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    .milestone-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      background: #f8fafc;
+      transition: border-color 200ms, background 200ms;
+    }
+    .milestone-card.reached {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+    }
+  </style>
+
+  <script>
+  (function () {
+    const fmtC = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtS = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const $ = id => document.getElementById(id);
+
+    let currentMode = 'monthly';
+    let lastResult = null;
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    [$('goal'), $('current'), $('monthly')].forEach(el => {
+      el.addEventListener('input', () => formatInput(el));
+    });
+
+    function setMode(mode) {
+      currentMode = mode;
+      const isMonthly = mode === 'monthly';
+
+      $('mode-monthly').className = isMonthly
+        ? 'mode-btn active py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#2563eb] bg-[#eff6ff] text-[#2563eb]'
+        : 'mode-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]';
+      $('mode-when').className = !isMonthly
+        ? 'mode-btn active py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#2563eb] bg-[#eff6ff] text-[#2563eb]'
+        : 'mode-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all border-2 border-[#e2e8f0] bg-white text-[#475569] hover:border-[#94a3b8]';
+
+      $('monthly-wrap').classList.toggle('hidden', isMonthly);
+      $('timeframe-wrap').classList.toggle('hidden', !isMonthly);
+    }
+
+    $('mode-monthly').addEventListener('click', () => setMode('monthly'));
+    $('mode-when').addEventListener('click', () => setMode('when'));
+
+    $('table-toggle').addEventListener('click', e => {
+      if (e.target.closest('#interval-btns')) return;
+      const body = $('table-body');
+      const open = !body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      $('table-chevron').style.transform = open ? '' : 'rotate(90deg)';
+      if (!open) $('table-toggle').classList.add('rounded-b-none');
+      else $('table-toggle').classList.remove('rounded-b-none');
+    });
+
+    $('interval-btns').addEventListener('click', e => {
+      const btn = e.target.closest('.interval-btn');
+      if (!btn || !lastResult) return;
+      e.stopPropagation();
+      $('interval-btns').querySelectorAll('.interval-btn').forEach(b => {
+        b.className = 'interval-btn px-2.5 py-1 text-xs font-medium bg-white text-[#475569] hover:bg-[#f1f5f9]';
+      });
+      btn.className = 'interval-btn px-2.5 py-1 text-xs font-medium bg-[#2563eb] text-white';
+      buildTable(lastResult.monthlyData, btn.dataset.interval);
+    });
+
+    $('calc-btn').addEventListener('click', calculate);
+
+    function calculate() {
+      const goal = parseNum($('goal'));
+      const current = parseNum($('current'));
+      const annualRate = parseFloat($('rate').value) || 0;
+      const monthlyRate = annualRate / 100 / 12;
+
+      if (goal <= 0) return;
+      if (current >= goal) {
+        showAlreadyReached(goal, current);
+        return;
+      }
+
+      if (currentMode === 'monthly') {
+        calcMonthly(goal, current, annualRate, monthlyRate);
+      } else {
+        calcWhen(goal, current, annualRate, monthlyRate);
+      }
+    }
+
+    function showAlreadyReached(goal, current) {
+      $('result-label').textContent = 'Congratulations!';
+      $('result-value').textContent = 'Goal Already Reached';
+      $('result-sub').textContent = `You have ${fmtC.format(current)} — that's ${((current / goal) * 100).toFixed(1)}% of your ${fmtC.format(goal)} goal.`;
+      showPanels(goal, current, 0, 0, current, []);
+    }
+
+    function calcMonthly(goal, current, annualRate, monthlyRate) {
+      const tf = parseInt($('timeframe').value) || 0;
+      if (tf <= 0) return;
+      const totalMonths = $('time-unit').value === 'years' ? tf * 12 : tf;
+
+      let requiredMonthly;
+      if (monthlyRate === 0) {
+        requiredMonthly = (goal - current) / totalMonths;
+      } else {
+        const fvCurrent = current * Math.pow(1 + monthlyRate, totalMonths);
+        const remaining = goal - fvCurrent;
+        if (remaining <= 0) {
+          requiredMonthly = 0;
+        } else {
+          requiredMonthly = remaining / ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+        }
+      }
+
+      requiredMonthly = Math.max(0, requiredMonthly);
+
+      const monthlyData = simulateMonths(current, requiredMonthly, monthlyRate, totalMonths, goal);
+      const finalBal = monthlyData[monthlyData.length - 1].balance;
+      const totalDeposited = current + requiredMonthly * totalMonths;
+      const totalInterest = finalBal - totalDeposited;
+
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+      let timeTxt = '';
+      if (years > 0) timeTxt += `${years} year${years !== 1 ? 's' : ''}`;
+      if (years > 0 && months > 0) timeTxt += ' ';
+      if (months > 0) timeTxt += `${months} month${months !== 1 ? 's' : ''}`;
+
+      $('result-label').textContent = 'Required Monthly Savings';
+      $('result-value').textContent = fmtC.format(requiredMonthly);
+      $('result-sub').textContent = `Save ${fmtC.format(requiredMonthly)}/month for ${timeTxt} to reach ${fmtC.format(goal)}`;
+
+      showPanels(goal, current, totalDeposited, totalInterest, finalBal, monthlyData);
+    }
+
+    function calcWhen(goal, current, annualRate, monthlyRate) {
+      const monthlyDeposit = parseNum($('monthly'));
+      if (monthlyDeposit <= 0 && monthlyRate <= 0) return;
+
+      const maxMonths = 1200;
+      const monthlyData = [];
+      let balance = current;
+      let months = 0;
+      let totalInterest = 0;
+
+      while (balance < goal && months < maxMonths) {
+        months++;
+        const interest = balance * monthlyRate;
+        totalInterest += interest;
+        balance += interest + monthlyDeposit;
+        monthlyData.push({
+          month: months,
+          deposit: monthlyDeposit,
+          interest,
+          balance: Math.min(balance, goal * 1.5),
+          pctOfGoal: (Math.min(balance, goal) / goal) * 100
+        });
+        if (balance >= goal) break;
+      }
+
+      if (balance < goal) {
+        $('result-label').textContent = 'Estimated Timeline';
+        $('result-value').textContent = '100+ years';
+        $('result-sub').textContent = 'At this rate, consider increasing your monthly deposit.';
+        $('results-panel').classList.remove('hidden');
+        return;
+      }
+
+      const totalDeposited = current + monthlyDeposit * months;
+      const finalBal = balance;
+
+      const years = Math.floor(months / 12);
+      const remMonths = months % 12;
+      let timeTxt = '';
+      if (years > 0) timeTxt += `${years} year${years !== 1 ? 's' : ''}`;
+      if (years > 0 && remMonths > 0) timeTxt += ' ';
+      if (remMonths > 0) timeTxt += `${remMonths} month${remMonths !== 1 ? 's' : ''}`;
+      if (!timeTxt) timeTxt = '0 months';
+
+      $('result-label').textContent = 'Time to Reach Your Goal';
+      $('result-value').textContent = timeTxt;
+      $('result-sub').textContent = `${months} month${months !== 1 ? 's' : ''} at ${fmtC.format(monthlyDeposit)}/month to reach ${fmtC.format(goal)}`;
+
+      showPanels(goal, current, totalDeposited, totalInterest, finalBal, monthlyData);
+    }
+
+    function simulateMonths(current, monthly, monthlyRate, totalMonths, goal) {
+      const data = [];
+      let balance = current;
+      for (let m = 1; m <= totalMonths; m++) {
+        const interest = balance * monthlyRate;
+        balance += interest + monthly;
+        data.push({
+          month: m,
+          deposit: monthly,
+          interest,
+          balance,
+          pctOfGoal: (Math.min(balance, goal) / goal) * 100
+        });
+      }
+      return data;
+    }
+
+    function showPanels(goal, current, totalDeposited, totalInterest, finalBal, monthlyData) {
+      $('out-deposited').textContent = fmtC.format(totalDeposited);
+      $('out-interest').textContent = fmtC.format(Math.max(0, totalInterest));
+      $('out-final').textContent = fmtC.format(finalBal);
+      $('out-share').textContent = finalBal > 0 ? ((Math.max(0, totalInterest) / finalBal) * 100).toFixed(1) + '%' : '0%';
+
+      const startPct = Math.min((current / goal) * 100, 100);
+      const endPct = Math.min((finalBal / goal) * 100, 100);
+      $('prog-current').textContent = fmtS.format(current) + ' now';
+      $('prog-goal').textContent = fmtS.format(goal) + ' goal';
+      $('prog-start').style.width = startPct + '%';
+      $('prog-bar').style.width = endPct + '%';
+      $('prog-pct').textContent = endPct.toFixed(0) + '%';
+
+      buildMilestones(goal, monthlyData, current);
+
+      lastResult = { monthlyData };
+      if (monthlyData.length > 0) {
+        buildTable(monthlyData, 'monthly');
+        $('table-wrapper').classList.remove('hidden');
+        $('interval-btns').querySelectorAll('.interval-btn').forEach(b => {
+          b.className = b.dataset.interval === 'monthly'
+            ? 'interval-btn px-2.5 py-1 text-xs font-medium bg-[#2563eb] text-white'
+            : 'interval-btn px-2.5 py-1 text-xs font-medium bg-white text-[#475569] hover:bg-[#f1f5f9]';
+        });
+      } else {
+        $('table-wrapper').classList.add('hidden');
+      }
+
+      $('results-panel').classList.remove('hidden');
+      $('progress-panel').classList.remove('hidden');
+      $('milestone-panel').classList.remove('hidden');
+    }
+
+    function buildMilestones(goal, monthlyData, current) {
+      const markers = [0.25, 0.50, 0.75, 1.00];
+      const icons = ['🌱', '📈', '🔥', '🎯'];
+      const labels = ['25%', '50%', '75%', '100%'];
+      const container = $('milestones');
+      container.innerHTML = '';
+
+      const now = new Date();
+
+      markers.forEach((pct, i) => {
+        const targetAmt = goal * pct;
+        let reachedMonth = null;
+
+        if (current >= targetAmt) {
+          reachedMonth = 0;
+        } else {
+          for (let j = 0; j < monthlyData.length; j++) {
+            if (monthlyData[j].balance >= targetAmt) {
+              reachedMonth = monthlyData[j].month;
+              break;
+            }
+          }
+        }
+
+        let dateStr = '—';
+        let reached = false;
+        if (reachedMonth !== null) {
+          reached = true;
+          if (reachedMonth === 0) {
+            dateStr = 'Already there!';
+          } else {
+            const d = new Date(now.getFullYear(), now.getMonth() + reachedMonth, 1);
+            dateStr = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+          }
+        }
+
+        const card = document.createElement('div');
+        card.className = 'milestone-card' + (reached ? ' reached' : '');
+        card.innerHTML = `
+          <div class="text-2xl mb-1">${icons[i]}</div>
+          <div class="text-sm font-bold text-[#1e293b]">${labels[i]}</div>
+          <div class="text-xs text-[#475569]">${fmtS.format(targetAmt)}</div>
+          <div class="text-xs font-medium mt-1.5 ${reached ? 'text-[#16a34a]' : 'text-[#94a3b8]'}">${dateStr}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function buildTable(monthlyData, interval) {
+      const tbody = $('timeline-table');
+      let rows = [];
+
+      if (interval === 'quarterly') {
+        for (let i = 2; i < monthlyData.length; i += 3) {
+          const start = i - 2;
+          let deposit = 0, interest = 0;
+          for (let j = start; j <= i; j++) {
+            deposit += monthlyData[j].deposit;
+            interest += monthlyData[j].interest;
+          }
+          rows.push({
+            label: 'Q' + Math.ceil((i + 1) / 3),
+            deposit,
+            interest,
+            balance: monthlyData[i].balance,
+            pctOfGoal: monthlyData[i].pctOfGoal
+          });
+        }
+        const rem = monthlyData.length % 3;
+        if (rem !== 0) {
+          const start = monthlyData.length - rem;
+          let deposit = 0, interest = 0;
+          for (let j = start; j < monthlyData.length; j++) {
+            deposit += monthlyData[j].deposit;
+            interest += monthlyData[j].interest;
+          }
+          rows.push({
+            label: 'Q' + (rows.length + 1),
+            deposit,
+            interest,
+            balance: monthlyData[monthlyData.length - 1].balance,
+            pctOfGoal: monthlyData[monthlyData.length - 1].pctOfGoal
+          });
+        }
+      } else {
+        rows = monthlyData.map(d => ({
+          label: 'Month ' + d.month,
+          deposit: d.deposit,
+          interest: d.interest,
+          balance: d.balance,
+          pctOfGoal: d.pctOfGoal
+        }));
+      }
+
+      tbody.innerHTML = rows.map(r => `<tr>
+        <td>${r.label}</td>
+        <td>${fmtC.format(r.deposit)}</td>
+        <td>${fmtC.format(r.interest)}</td>
+        <td>${fmtC.format(r.balance)}</td>
+        <td>${Math.min(r.pctOfGoal, 100).toFixed(1)}%</td>
+      </tr>`).join('');
+
+      $('table-period').textContent = `${rows.length} ${interval === 'quarterly' ? 'quarters' : 'months'}`;
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('savings-goal-calculator');
+  </script>
+</body>
+</html>

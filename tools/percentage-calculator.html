@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Percentage Calculator Online | ClickSolveTools</title>
+  <meta name="description" content="Calculate percentages instantly with three modes: find X% of Y, what percent X is of Y, and percentage change. Free, no signup — runs in your browser.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/percentage-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Percentage Calculator Online | ClickSolveTools">
+  <meta property="og:description" content="Calculate percentages instantly with three modes: find X% of Y, what percent X is of Y, and percentage change. Free, no signup — runs in your browser.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/percentage-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Percentage Calculator Online | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate percentages instantly with three modes: find X% of Y, what percent X is of Y, and percentage change.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Percentage Calculator",
+    "url": "https://clicksolvetools.com/tools/percentage-calculator",
+    "description": "Calculate percentages instantly with three modes: find X% of Y, what percent X is of Y, and percentage change between two numbers.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag('js',new Date());
+    gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+    gtag('config','G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    .tab-active { color: #2563eb; border-color: #2563eb; background-color: #eff6ff; }
+    .tab-inactive { color: #475569; border-color: #e2e8f0; background-color: #f8fafc; }
+    .tab-inactive:hover { color: #1e293b; background-color: #f1f5f9; }
+    .fade-in { animation: fadeIn 300ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+  <div id="nav-container"></div>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <div class="mb-8 text-center">
+      <span class="text-4xl mb-3 block">🔢</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Percentage Calculator</h1>
+      <p class="text-[#475569] text-base max-w-lg mx-auto">Three calculation modes for every percentage problem. Results update as you type.</p>
+    </div>
+
+    <div class="bg-white border border-[#e2e8f0] rounded-2xl shadow-sm overflow-hidden">
+      <!-- Mode Tabs -->
+      <div class="grid grid-cols-3 border-b border-[#e2e8f0]">
+        <button id="tab-1" data-mode="1" class="tab-btn tab-active py-3.5 text-sm font-semibold border-b-2 transition-all text-center">X% of Y</button>
+        <button id="tab-2" data-mode="2" class="tab-btn tab-inactive py-3.5 text-sm font-semibold border-b-2 transition-all text-center">X is ?% of Y</button>
+        <button id="tab-3" data-mode="3" class="tab-btn tab-inactive py-3.5 text-sm font-semibold border-b-2 transition-all text-center">% Change</button>
+      </div>
+
+      <div class="p-6 sm:p-8">
+        <!-- Mode 1: What is X% of Y? -->
+        <div id="mode-1" class="mode-panel fade-in">
+          <label class="block text-sm font-medium text-[#1e293b] mb-1.5">What is</label>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="relative flex-1">
+              <input id="m1-percent" type="number" step="any" placeholder="10" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg" autofocus>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] font-medium">%</span>
+            </div>
+            <span class="text-[#475569] font-medium">of</span>
+            <input id="m1-number" type="number" step="any" placeholder="200" class="flex-1 px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+          </div>
+          <div id="m1-result" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 text-center min-h-[88px] flex flex-col items-center justify-center">
+            <span class="text-[#94a3b8] text-sm">Enter values above</span>
+          </div>
+          <div id="m1-formula" class="mt-4 text-center text-xs text-[#94a3b8] hidden">
+            Formula: (X / 100) × Y
+          </div>
+        </div>
+
+        <!-- Mode 2: X is what % of Y? -->
+        <div id="mode-2" class="mode-panel hidden">
+          <label class="block text-sm font-medium text-[#1e293b] mb-1.5">What percent is</label>
+          <div class="flex items-center gap-3 mb-4">
+            <input id="m2-part" type="number" step="any" placeholder="25" class="flex-1 px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+            <span class="text-[#475569] font-medium">of</span>
+            <input id="m2-whole" type="number" step="any" placeholder="200" class="flex-1 px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+          </div>
+          <div id="m2-result" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 text-center min-h-[88px] flex flex-col items-center justify-center">
+            <span class="text-[#94a3b8] text-sm">Enter values above</span>
+          </div>
+          <div id="m2-formula" class="mt-4 text-center text-xs text-[#94a3b8] hidden">
+            Formula: (X / Y) × 100
+          </div>
+        </div>
+
+        <!-- Mode 3: Percentage change from X to Y -->
+        <div id="mode-3" class="mode-panel hidden">
+          <label class="block text-sm font-medium text-[#1e293b] mb-1.5">Percentage change</label>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex-1">
+              <span class="block text-xs text-[#94a3b8] mb-1">From</span>
+              <input id="m3-from" type="number" step="any" placeholder="80" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+            </div>
+            <span class="text-[#475569] font-medium mt-5">→</span>
+            <div class="flex-1">
+              <span class="block text-xs text-[#94a3b8] mb-1">To</span>
+              <input id="m3-to" type="number" step="any" placeholder="100" class="w-full px-4 py-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 transition-all text-lg">
+            </div>
+          </div>
+          <div id="m3-result" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 text-center min-h-[88px] flex flex-col items-center justify-center">
+            <span class="text-[#94a3b8] text-sm">Enter values above</span>
+          </div>
+          <div id="m3-formula" class="mt-4 text-center text-xs text-[#94a3b8] hidden">
+            Formula: ((New − Old) / |Old|) × 100
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <div class="mt-5 text-center">
+          <button id="reset-btn" class="px-5 py-2 text-sm font-medium bg-[#f1f5f9] text-[#475569] rounded-lg hover:bg-[#e2e8f0] hover:text-[#1e293b] transition-all">Reset</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <article class="bg-white border-t border-[#e2e8f0]">
+    <div class="max-w-3xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Calculate Percentages — Formulas and Examples</h2>
+
+      <div class="space-y-4 text-[#475569] leading-relaxed">
+        <p>Percentages are everywhere — from discount tags at the store to interest rates on loans. Despite being one of the most common math concepts, percentage calculations still trip people up. This guide covers the three core percentage formulas you'll encounter in everyday life and explains when to use each one, with clear examples.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">1. Finding X% of a Number</h3>
+        <p>This is the most common percentage calculation. You use it whenever you need to find a portion of a whole number based on a percentage. The formula is straightforward:</p>
+        <p><strong class="text-[#1e293b]">Result = (Percentage / 100) × Number</strong></p>
+        <p>For example, to find 15% of 200, you divide 15 by 100 to get 0.15, then multiply by 200. The answer is 30. You'll use this formula when calculating sales tax, tips at restaurants, discounts during a sale, or the amount of a down payment on a large purchase. If a $250 jacket is 20% off, you compute (20 / 100) × 250 = 50, so the discount is $50 and you pay $200.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">2. Finding What Percent X Is of Y</h3>
+        <p>This calculation answers the question "what fraction of the whole does this part represent, expressed as a percentage?" The formula is:</p>
+        <p><strong class="text-[#1e293b]">Percentage = (Part / Whole) × 100</strong></p>
+        <p>Say you scored 42 out of 50 on a test. To find your percentage score, divide 42 by 50 to get 0.84, then multiply by 100 to get 84%. This mode is useful for calculating test scores, savings rates (how much of your income did you save?), task completion rates, or comparing proportions. If a company earned $1.2 million in revenue and spent $300,000 on marketing, then marketing was (300,000 / 1,200,000) × 100 = 25% of total revenue.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">3. Calculating Percentage Change</h3>
+        <p>Percentage change tells you how much a value has increased or decreased relative to its original amount. The formula is:</p>
+        <p><strong class="text-[#1e293b]">% Change = ((New Value − Old Value) / |Old Value|) × 100</strong></p>
+        <p>If your monthly rent went from $1,500 to $1,650, the percentage change is ((1650 − 1500) / 1500) × 100 = 10%. A positive result means an increase; a negative result means a decrease. This formula is essential for tracking price changes, stock performance, weight loss or gain, population growth, and year-over-year business metrics. If a stock dropped from $80 to $68, the change is ((68 − 80) / 80) × 100 = −15%, indicating a 15% decline.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases for Percentage Calculations</h3>
+        <p>Percentages appear in nearly every field. In <strong class="text-[#1e293b]">personal finance</strong>, you use them to compare interest rates, figure out how much to tip, or see how your investments performed. In <strong class="text-[#1e293b]">business</strong>, percentages measure profit margins, conversion rates, and market share. In <strong class="text-[#1e293b]">academics</strong>, grades are almost always expressed as percentages. In <strong class="text-[#1e293b]">health and fitness</strong>, you track body fat percentage, calorie macro splits, and workout improvement over time.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Quick Mental Math</h3>
+        <p>To find 10% of any number, just move the decimal one place left — 10% of 350 is 35. To get 5%, halve the 10% result — 5% of 350 is 17.5. For 1%, move the decimal two places left — 1% of 350 is 3.5. You can combine these: 15% of 350 is 35 + 17.5 = 52.5. These shortcuts make tipping and quick estimations much faster without reaching for a calculator.</p>
+
+        <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+        <p><strong class="text-[#1e293b]">What is the difference between percentage and percentile?</strong><br>A percentage is a fraction of 100 (e.g., 85%). A percentile is a ranking — being in the 85th percentile means you scored higher than 85% of participants. They are related concepts but measure different things.</p>
+
+        <p><strong class="text-[#1e293b]">Can a percentage be greater than 100%?</strong><br>Yes. A percentage over 100% simply means the value exceeds the reference. If your investment doubled, the return is 200% of your original amount, or a 100% increase.</p>
+
+        <p><strong class="text-[#1e293b]">How do I convert a fraction to a percentage?</strong><br>Divide the numerator by the denominator, then multiply by 100. For example, 3/8 = 0.375 × 100 = 37.5%.</p>
+
+        <p><strong class="text-[#1e293b]">Is this calculator free to use?</strong><br>Yes. This percentage calculator runs entirely in your browser with no ads, no signup, and no data collection. Enter your numbers and get instant results — your data never leaves your device.</p>
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.mode-panel');
+    let currentMode = '1';
+
+    function switchMode(mode) {
+      currentMode = mode;
+      tabs.forEach(t => {
+        t.classList.remove('tab-active', 'tab-inactive');
+        t.classList.add(t.dataset.mode === mode ? 'tab-active' : 'tab-inactive');
+      });
+      panels.forEach(p => {
+        const id = p.id.split('-')[1];
+        p.classList.toggle('hidden', id !== mode);
+        if (id === mode) {
+          p.classList.add('fade-in');
+          const firstInput = p.querySelector('input');
+          if (firstInput) firstInput.focus();
+        }
+      });
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => switchMode(t.dataset.mode)));
+
+    function fmt(n) {
+      if (!isFinite(n)) return '—';
+      const rounded = Math.round(n * 1e10) / 1e10;
+      return rounded.toLocaleString('en-US', { maximumFractionDigits: 6 });
+    }
+
+    function calcMode1() {
+      const pct = parseFloat(document.getElementById('m1-percent').value);
+      const num = parseFloat(document.getElementById('m1-number').value);
+      const container = document.getElementById('m1-result');
+      const formula = document.getElementById('m1-formula');
+
+      if (isNaN(pct) || isNaN(num)) {
+        container.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter values above</span>';
+        formula.classList.add('hidden');
+        return;
+      }
+
+      const result = (pct / 100) * num;
+      container.innerHTML = `
+        <span class="text-[#94a3b8] text-sm mb-1">${fmt(pct)}% of ${fmt(num)} =</span>
+        <span class="text-3xl font-bold text-[#2563eb]">${fmt(result)}</span>
+      `;
+      formula.classList.remove('hidden');
+    }
+
+    function calcMode2() {
+      const part = parseFloat(document.getElementById('m2-part').value);
+      const whole = parseFloat(document.getElementById('m2-whole').value);
+      const container = document.getElementById('m2-result');
+      const formula = document.getElementById('m2-formula');
+
+      if (isNaN(part) || isNaN(whole)) {
+        container.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter values above</span>';
+        formula.classList.add('hidden');
+        return;
+      }
+
+      if (whole === 0) {
+        container.innerHTML = '<span class="text-red-500 text-sm font-medium">Cannot divide by zero</span>';
+        formula.classList.add('hidden');
+        return;
+      }
+
+      const result = (part / whole) * 100;
+      container.innerHTML = `
+        <span class="text-[#94a3b8] text-sm mb-1">${fmt(part)} is what % of ${fmt(whole)}?</span>
+        <span class="text-3xl font-bold text-[#2563eb]">${fmt(result)}%</span>
+      `;
+      formula.classList.remove('hidden');
+    }
+
+    function calcMode3() {
+      const from = parseFloat(document.getElementById('m3-from').value);
+      const to = parseFloat(document.getElementById('m3-to').value);
+      const container = document.getElementById('m3-result');
+      const formula = document.getElementById('m3-formula');
+
+      if (isNaN(from) || isNaN(to)) {
+        container.innerHTML = '<span class="text-[#94a3b8] text-sm">Enter values above</span>';
+        formula.classList.add('hidden');
+        return;
+      }
+
+      if (from === 0) {
+        container.innerHTML = '<span class="text-red-500 text-sm font-medium">Original value cannot be zero</span>';
+        formula.classList.add('hidden');
+        return;
+      }
+
+      const change = ((to - from) / Math.abs(from)) * 100;
+      const direction = change > 0 ? 'increase' : change < 0 ? 'decrease' : 'no change';
+      const color = change > 0 ? 'text-emerald-600' : change < 0 ? 'text-red-500' : 'text-[#2563eb]';
+      const arrow = change > 0 ? '↑' : change < 0 ? '↓' : '→';
+
+      container.innerHTML = `
+        <span class="text-[#94a3b8] text-sm mb-1">From ${fmt(from)} to ${fmt(to)}</span>
+        <span class="text-3xl font-bold ${color}">${arrow} ${fmt(Math.abs(change))}%</span>
+        <span class="text-sm ${color} mt-1 font-medium capitalize">${direction}</span>
+      `;
+      formula.classList.remove('hidden');
+    }
+
+    document.getElementById('m1-percent').addEventListener('input', calcMode1);
+    document.getElementById('m1-number').addEventListener('input', calcMode1);
+    document.getElementById('m2-part').addEventListener('input', calcMode2);
+    document.getElementById('m2-whole').addEventListener('input', calcMode2);
+    document.getElementById('m3-from').addEventListener('input', calcMode3);
+    document.getElementById('m3-to').addEventListener('input', calcMode3);
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      document.querySelectorAll('input[type="number"]').forEach(i => { i.value = ''; });
+      ['m1-result', 'm2-result', 'm3-result'].forEach(id => {
+        document.getElementById(id).innerHTML = '<span class="text-[#94a3b8] text-sm">Enter values above</span>';
+      });
+      ['m1-formula', 'm2-formula', 'm3-formula'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+    });
+  </script>
+
+  <script type="module">import { initToolPage } from '/js/shared.js'; initToolPage('percentage-calculator');</script>
+</body>
+</html>

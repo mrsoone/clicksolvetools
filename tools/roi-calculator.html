@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free ROI Calculator — Return on Investment, Annualized ROI &amp; Comparison | ClickSolveTools</title>
+  <meta name="description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts. Free, private, no signup.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/roi-calculator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free ROI Calculator — Return on Investment & Comparison | ClickSolveTools">
+  <meta property="og:description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual charts.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/roi-calculator">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ROI Calculator","url":"https://clicksolvetools.com/tools/roi-calculator","description":"Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you calculate ROI?","acceptedAnswer":{"@type":"Answer","text":"ROI is calculated as (Net Profit ÷ Initial Investment) × 100, or equivalently (Final Value − Initial Investment) ÷ Initial Investment × 100. For example, investing $10,000 that grows to $13,000 gives an ROI of 30%."}},{"@type":"Question","name":"What is annualized ROI?","acceptedAnswer":{"@type":"Answer","text":"Annualized ROI converts a total return into the equivalent yearly rate using the formula: Annualized ROI = (1 + ROI)^(1/n) − 1, where n is the number of years. This lets you fairly compare investments held for different lengths of time."}},{"@type":"Question","name":"What is a good ROI?","acceptedAnswer":{"@type":"Answer","text":"A 'good' ROI depends on the asset class. The S&P 500 historically returns about 10% per year. Real estate often targets 8–12%. Any return above the risk-free rate (Treasury bonds, ~4–5%) that compensates for the risk taken is generally considered good."}},{"@type":"Question","name":"What is the difference between ROI and profit margin?","acceptedAnswer":{"@type":"Answer","text":"ROI measures the return relative to the cost of the investment, while profit margin measures profit relative to revenue. ROI tells you how efficiently your invested capital generates returns; profit margin tells you how much of each dollar of revenue becomes profit."}}]}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Single ROI Calculator -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="space-y-4">
+          <div>
+            <label for="initial" class="block text-sm font-medium text-[#475569] mb-1">Initial Investment</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="initial" type="text" inputmode="decimal" placeholder="10,000" class="roi-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">I know my…</label>
+            <div class="flex gap-2">
+              <button id="mode-final" class="mode-btn active flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all">Final Value</button>
+              <button id="mode-profit" class="mode-btn flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all">Net Profit</button>
+            </div>
+          </div>
+
+          <div id="final-group">
+            <label for="final-value" class="block text-sm font-medium text-[#475569] mb-1">Final Value</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="final-value" type="text" inputmode="decimal" placeholder="15,000" class="roi-input pl-7 w-full">
+            </div>
+          </div>
+
+          <div id="profit-group" class="hidden">
+            <label for="net-profit" class="block text-sm font-medium text-[#475569] mb-1">Net Profit (or Loss)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="net-profit" type="text" inputmode="decimal" placeholder="5,000" class="roi-input pl-7 w-full">
+            </div>
+            <p class="text-xs text-[#94a3b8] mt-1">Use a negative number for a loss (e.g. -2,000)</p>
+          </div>
+
+          <div>
+            <label for="period" class="block text-sm font-medium text-[#475569] mb-1">Investment Period <span class="text-[#94a3b8] font-normal">(optional, for annualized ROI)</span></label>
+            <div class="flex gap-2">
+              <input id="period" type="number" min="0" max="100" step="any" placeholder="3" class="roi-input flex-1">
+              <select id="period-unit" class="roi-input w-28">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button id="calc-btn" class="w-full py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] active:bg-[#1e40af] transition-colors shadow-sm shadow-[#2563eb]/20">
+              Calculate ROI
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">ROI Results</h3>
+
+        <div id="break-even-badge" class="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium">
+          <span id="break-even-icon"></span>
+          <span id="break-even-text"></span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <div class="text-xs text-[#475569]">ROI</div>
+            <div id="out-roi" class="text-2xl font-bold">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Net Profit / Loss</div>
+            <div id="out-profit" class="text-lg font-semibold">—</div>
+          </div>
+          <div>
+            <div class="text-xs text-[#475569]">Final Value</div>
+            <div id="out-final" class="text-lg font-semibold text-[#1e293b]">—</div>
+          </div>
+          <div id="annualized-group" class="hidden">
+            <div class="text-xs text-[#475569]">Annualized ROI</div>
+            <div id="out-annual" class="text-lg font-semibold text-[#2563eb]">—</div>
+          </div>
+        </div>
+
+        <div id="annualized-note" class="mt-4 text-xs text-[#64748b] bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-3 py-2 hidden"></div>
+      </div>
+
+      <!-- Comparison Section -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-semibold text-[#1e293b]">Compare Investments</h3>
+          <span class="text-xs text-[#94a3b8]" id="inv-counter">0 / 5</span>
+        </div>
+        <p class="text-xs text-[#64748b] mb-4">Add up to 5 investments to compare their ROI side by side.</p>
+
+        <div id="comparison-list" class="space-y-3"></div>
+
+        <button id="add-inv-btn" class="mt-4 w-full py-2.5 rounded-lg border-2 border-dashed border-[#e2e8f0] text-sm text-[#64748b] font-medium hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">
+          + Add Investment
+        </button>
+
+        <button id="compare-btn" class="mt-3 w-full py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#1d4ed8] active:bg-[#1e40af] transition-colors shadow-sm shadow-[#2563eb]/20 hidden">
+          Compare ROI
+        </button>
+      </div>
+
+      <!-- Comparison Results -->
+      <div id="compare-results" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
+        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">ROI Comparison</h3>
+        <div id="compare-chart" class="space-y-3 mb-5"></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="border-b border-[#e2e8f0]">
+              <tr class="text-[#475569] text-xs">
+                <th class="px-3 py-2.5 text-left font-medium">Investment</th>
+                <th class="px-3 py-2.5 text-right font-medium">Cost</th>
+                <th class="px-3 py-2.5 text-right font-medium">Final Value</th>
+                <th class="px-3 py-2.5 text-right font-medium">Net Profit</th>
+                <th class="px-3 py-2.5 text-right font-medium">ROI</th>
+                <th class="px-3 py-2.5 text-right font-medium">Annualized</th>
+              </tr>
+            </thead>
+            <tbody id="compare-table" class="text-[#1e293b]"></tbody>
+          </table>
+        </div>
+        <div id="compare-best" class="mt-4 text-xs text-[#64748b] bg-[#f0fdf4] border border-[#bbf7d0] rounded-lg px-3 py-2 hidden"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">ROI Calculator: How to Measure and Compare Investment Returns</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Return on investment (ROI) is one of the most widely used financial metrics for evaluating the profitability of an investment. Whether you are assessing a stock purchase, a marketing campaign, a real estate deal, or a business expansion, ROI gives you a clear percentage that shows how much you gained — or lost — relative to what you put in. This free ROI calculator computes your ROI, net profit or loss, and annualized ROI, and lets you compare up to five investments side by side with a visual bar chart so you can make smarter financial decisions.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The ROI Formula</h3>
+      <p>The basic ROI formula is straightforward:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">ROI = (Net Profit ÷ Initial Investment) × 100</p>
+      <p>Equivalently, if you know the final value of your investment rather than the net profit, the formula becomes <strong class="text-[#1e293b]">(Final Value − Initial Investment) ÷ Initial Investment × 100</strong>. For example, if you invest $20,000 in a rental property and sell it for $28,000, your net profit is $8,000 and your ROI is 40%. The formula works the same way for losses — invest $10,000 and end up with $7,500, and your ROI is −25%.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Annualized ROI: Accounting for Time</h3>
+      <p>A 40% return sounds impressive, but it matters whether that return took one year or ten. Annualized ROI normalizes the total return to a per-year figure using compounding, making it possible to fairly compare investments held for different durations. The formula is:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Annualized ROI = (1 + ROI)<sup>1/n</sup> − 1</p>
+      <p>Here, <strong class="text-[#1e293b]">n</strong> is the number of years the investment was held. A 40% total return over 5 years translates to an annualized ROI of about 7.0% — a much more realistic picture than the headline number. This calculator automatically computes annualized ROI whenever you provide an investment period, and it accepts periods in both years and months for convenience.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases for ROI</h3>
+      <p>ROI is not limited to stocks and bonds. It is used extensively in business, marketing, and personal finance. Marketing teams calculate the ROI of advertising spend by comparing campaign costs against the revenue generated. Business owners evaluate whether purchasing new equipment will pay for itself over time. Real estate investors compare the ROI of different properties to decide where to allocate capital. Even personal decisions — like whether to invest in education or a certification — can be framed as an ROI calculation by comparing the cost against the expected increase in earnings.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Comparing Multiple Investments</h3>
+      <p>One of the most powerful features of this calculator is the ability to compare up to five investments side by side. Enter the details for each investment, and the tool produces a visual bar chart and summary table ranking them by ROI. The comparison uses annualized ROI when periods are provided, so investments of different durations are compared on equal footing. The tool also highlights the best-performing investment automatically, giving you a quick visual answer to the question "where did my money work hardest?"</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">How do you calculate ROI?</strong></p>
+      <p>Divide the net profit by the initial investment and multiply by 100. If you invested $10,000 and earned a net profit of $3,000, your ROI is 30%. You can also calculate it from the final value: ($13,000 − $10,000) ÷ $10,000 × 100 = 30%.</p>
+
+      <p><strong class="text-[#1e293b]">What is a good ROI?</strong></p>
+      <p>It depends on the asset class and the level of risk. The S&amp;P 500 has historically returned about 10% per year on average. Real estate investors often target 8–12% annually. Any return that exceeds the risk-free rate (Treasury bonds at roughly 4–5%) and compensates you for the risk involved is generally considered a good ROI.</p>
+
+      <p><strong class="text-[#1e293b]">What is the difference between ROI and annualized ROI?</strong></p>
+      <p>ROI is the total percentage return over the entire holding period. Annualized ROI converts that total into an equivalent yearly rate using compounding. A 50% total ROI over 5 years equals an annualized ROI of about 8.4%. Annualized ROI is more useful when comparing investments of different durations.</p>
+
+      <p><strong class="text-[#1e293b]">Does ROI include dividends or income?</strong></p>
+      <p>It depends on how you define "final value." If you include all dividends, rental income, or interest received in your final value or net profit figure, then your ROI calculation captures total return. If you only use the sale price, you are measuring capital gains ROI, which excludes income.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for educational purposes only. It does not account for taxes, inflation, fees, or variable returns. Consult a qualified financial advisor for investment decisions specific to your situation.
+      </div>
+
+      <p>This ROI calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you need to evaluate or compare investment performance.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .roi-input {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .roi-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .roi-input::placeholder { color: #94a3b8; }
+
+    .mode-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    .mode-btn:hover { background: #e2e8f0; color: #1e293b; }
+    .mode-btn.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .comp-row {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      position: relative;
+    }
+    .comp-row .comp-remove {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: none;
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 150ms;
+    }
+    .comp-row .comp-remove:hover { background: #fecaca; }
+
+    .bar-track {
+      background: #f1f5f9;
+      border-radius: 6px;
+      height: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 500ms ease;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      min-width: fit-content;
+    }
+
+    .bar-fill.negative {
+      background: #ef4444;
+    }
+
+    #compare-table tr { border-top: 1px solid #e2e8f0; }
+    #compare-table td { padding: 0.5rem 0.75rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    #compare-table td:first-child { text-align: left; font-weight: 500; }
+    #compare-table td:not(:first-child) { text-align: right; }
+
+    .color-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+  </style>
+
+  <script>
+  (function () {
+    const COLORS = ['#2563eb', '#7c3aed', '#0891b2', '#ea580c', '#16a34a'];
+    const fmtC = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtPct = v => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+    const $ = id => document.getElementById(id);
+
+    let mode = 'final';
+    let investments = [];
+    let nextId = 1;
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.\-]/g, '');
+      if (!raw || raw.endsWith('.') || raw === '-') return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      if (num < 0) {
+        el.value = '-' + new Intl.NumberFormat('en-US').format(Math.abs(num));
+      } else {
+        el.value = new Intl.NumberFormat('en-US').format(num);
+      }
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    [$('initial'), $('final-value'), $('net-profit')].forEach(el => {
+      el.addEventListener('input', () => formatInput(el));
+    });
+
+    $('mode-final').addEventListener('click', () => setMode('final'));
+    $('mode-profit').addEventListener('click', () => setMode('profit'));
+
+    function setMode(m) {
+      mode = m;
+      $('mode-final').classList.toggle('active', m === 'final');
+      $('mode-profit').classList.toggle('active', m === 'profit');
+      $('final-group').classList.toggle('hidden', m !== 'final');
+      $('profit-group').classList.toggle('hidden', m !== 'profit');
+    }
+
+    $('calc-btn').addEventListener('click', calculateSingle);
+    [$('initial'), $('final-value'), $('net-profit'), $('period')].forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); calculateSingle(); }
+      });
+    });
+
+    function calculateSingle() {
+      const P = parseNum($('initial'));
+      if (P <= 0) return;
+
+      let finalVal, netProfit;
+
+      if (mode === 'final') {
+        finalVal = parseNum($('final-value'));
+        if (finalVal === 0 && $('final-value').value.trim() === '') return;
+        netProfit = finalVal - P;
+      } else {
+        netProfit = parseNum($('net-profit'));
+        if (netProfit === 0 && $('net-profit').value.trim() === '') return;
+        finalVal = P + netProfit;
+      }
+
+      const roi = (netProfit / P) * 100;
+
+      const periodVal = parseFloat($('period').value) || 0;
+      const periodUnit = $('period-unit').value;
+      const years = periodUnit === 'months' ? periodVal / 12 : periodVal;
+      const hasAnnualized = years > 0;
+
+      let annualizedRoi = null;
+      if (hasAnnualized && finalVal > 0) {
+        annualizedRoi = (Math.pow(finalVal / P, 1 / years) - 1) * 100;
+      }
+
+      $('out-roi').textContent = fmtPct(roi);
+      $('out-roi').className = 'text-2xl font-bold ' + (roi >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]');
+
+      $('out-profit').textContent = (netProfit >= 0 ? '+' : '') + fmtC.format(netProfit);
+      $('out-profit').className = 'text-lg font-semibold ' + (netProfit >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]');
+
+      $('out-final').textContent = fmtC.format(finalVal);
+
+      const badge = $('break-even-badge');
+      const icon = $('break-even-icon');
+      const text = $('break-even-text');
+
+      if (roi > 0) {
+        badge.className = 'mb-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-[#f0fdf4] border border-[#bbf7d0] text-[#16a34a]';
+        icon.textContent = '✓';
+        text.textContent = 'Investment is profitable — you exceeded break-even';
+      } else if (roi === 0) {
+        badge.className = 'mb-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-[#fefce8] border border-[#fef08a] text-[#a16207]';
+        icon.textContent = '—';
+        text.textContent = 'Exactly at break-even — no gain, no loss';
+      } else {
+        badge.className = 'mb-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-[#fef2f2] border border-[#fecaca] text-[#dc2626]';
+        icon.textContent = '✗';
+        text.textContent = 'Below break-even — investment lost money';
+      }
+
+      if (hasAnnualized && annualizedRoi !== null) {
+        $('annualized-group').classList.remove('hidden');
+        $('out-annual').textContent = fmtPct(annualizedRoi);
+        const periodLabel = periodUnit === 'months' ? `${periodVal} month${periodVal !== 1 ? 's' : ''} (${years.toFixed(2)} years)` : `${periodVal} year${periodVal !== 1 ? 's' : ''}`;
+        $('annualized-note').classList.remove('hidden');
+        $('annualized-note').textContent = `A total ROI of ${fmtPct(roi)} over ${periodLabel} equals an annualized return of ${fmtPct(annualizedRoi)} per year, accounting for compounding.`;
+      } else {
+        $('annualized-group').classList.add('hidden');
+        $('annualized-note').classList.add('hidden');
+      }
+
+      $('results-panel').classList.remove('hidden');
+    }
+
+    // --- Comparison ---
+    function renderInvestments() {
+      const list = $('comparison-list');
+      list.innerHTML = '';
+
+      investments.forEach((inv, idx) => {
+        const row = document.createElement('div');
+        row.className = 'comp-row';
+        row.innerHTML = `
+          <button class="comp-remove" data-idx="${idx}" title="Remove">×</button>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="color-dot" style="background:${COLORS[idx % COLORS.length]}"></span>
+            <input type="text" value="${inv.name}" data-field="name" data-idx="${idx}" placeholder="Investment ${idx + 1}" class="roi-input text-sm py-1.5 flex-1 font-medium">
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[10px] text-[#94a3b8] mb-0.5 uppercase tracking-wider">Cost ($)</label>
+              <input type="text" inputmode="decimal" value="${inv.cost || ''}" data-field="cost" data-idx="${idx}" placeholder="10,000" class="roi-input text-sm py-1.5 w-full">
+            </div>
+            <div>
+              <label class="block text-[10px] text-[#94a3b8] mb-0.5 uppercase tracking-wider">Final Value ($)</label>
+              <input type="text" inputmode="decimal" value="${inv.finalVal || ''}" data-field="finalVal" data-idx="${idx}" placeholder="15,000" class="roi-input text-sm py-1.5 w-full">
+            </div>
+            <div>
+              <label class="block text-[10px] text-[#94a3b8] mb-0.5 uppercase tracking-wider">Period (yrs)</label>
+              <input type="number" min="0" max="100" step="any" value="${inv.years || ''}" data-field="years" data-idx="${idx}" placeholder="3" class="roi-input text-sm py-1.5 w-full">
+            </div>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+
+      $('inv-counter').textContent = `${investments.length} / 5`;
+      $('add-inv-btn').classList.toggle('hidden', investments.length >= 5);
+      $('compare-btn').classList.toggle('hidden', investments.length < 2);
+
+      list.querySelectorAll('.comp-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+          investments.splice(parseInt(btn.dataset.idx), 1);
+          renderInvestments();
+        });
+      });
+
+      list.querySelectorAll('input[data-field]').forEach(input => {
+        input.addEventListener('input', () => {
+          const idx = parseInt(input.dataset.idx);
+          const field = input.dataset.field;
+          if (field === 'name') {
+            investments[idx].name = input.value;
+          } else if (field === 'cost' || field === 'finalVal') {
+            investments[idx][field] = input.value;
+            formatInput(input);
+          } else {
+            investments[idx][field] = input.value;
+          }
+        });
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') { e.preventDefault(); compare(); }
+        });
+      });
+    }
+
+    $('add-inv-btn').addEventListener('click', () => {
+      if (investments.length >= 5) return;
+      investments.push({ name: `Investment ${nextId++}`, cost: '', finalVal: '', years: '' });
+      renderInvestments();
+    });
+
+    $('compare-btn').addEventListener('click', compare);
+
+    function compare() {
+      const parsed = investments.map((inv, idx) => {
+        const cost = parseFloat(String(inv.cost).replace(/[^0-9.\-]/g, '')) || 0;
+        const finalVal = parseFloat(String(inv.finalVal).replace(/[^0-9.\-]/g, '')) || 0;
+        const years = parseFloat(inv.years) || 0;
+        const netProfit = finalVal - cost;
+        const roi = cost > 0 ? (netProfit / cost) * 100 : 0;
+        let annualized = null;
+        if (years > 0 && cost > 0 && finalVal > 0) {
+          annualized = (Math.pow(finalVal / cost, 1 / years) - 1) * 100;
+        }
+        return { name: inv.name || `Investment ${idx + 1}`, cost, finalVal, netProfit, roi, annualized, years, color: COLORS[idx % COLORS.length] };
+      }).filter(p => p.cost > 0);
+
+      if (parsed.length < 2) return;
+
+      const maxAbsRoi = Math.max(...parsed.map(p => Math.abs(p.roi)), 1);
+
+      const chart = $('compare-chart');
+      chart.innerHTML = '';
+
+      parsed.forEach(p => {
+        const pct = (Math.abs(p.roi) / maxAbsRoi) * 100;
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-3';
+        row.innerHTML = `
+          <div class="text-xs text-[#475569] w-28 text-right shrink-0 truncate" title="${p.name}">${p.name}</div>
+          <div class="bar-track flex-1">
+            <div class="bar-fill ${p.roi < 0 ? 'negative' : ''}" style="width: ${Math.max(pct, 10)}%; background: ${p.roi >= 0 ? p.color : '#ef4444'};">${fmtPct(p.roi)}</div>
+          </div>
+        `;
+        chart.appendChild(row);
+      });
+
+      const tbody = $('compare-table');
+      tbody.innerHTML = parsed.map(p => `
+        <tr>
+          <td><span class="color-dot" style="background:${p.color}"></span>${p.name}</td>
+          <td>${fmtC.format(p.cost)}</td>
+          <td>${fmtC.format(p.finalVal)}</td>
+          <td class="${p.netProfit >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}">${(p.netProfit >= 0 ? '+' : '') + fmtC.format(p.netProfit)}</td>
+          <td class="font-medium ${p.roi >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}">${fmtPct(p.roi)}</td>
+          <td class="${p.annualized !== null ? (p.annualized >= 0 ? 'text-[#2563eb]' : 'text-[#ef4444]') : 'text-[#94a3b8]'}">${p.annualized !== null ? fmtPct(p.annualized) : '—'}</td>
+        </tr>
+      `).join('');
+
+      const sortKey = parsed.some(p => p.annualized !== null) ? 'annualized' : 'roi';
+      const ranked = [...parsed].sort((a, b) => {
+        const va = sortKey === 'annualized' && a.annualized !== null ? a.annualized : a.roi;
+        const vb = sortKey === 'annualized' && b.annualized !== null ? b.annualized : b.roi;
+        return vb - va;
+      });
+
+      const best = ranked[0];
+      const bestEl = $('compare-best');
+      const label = sortKey === 'annualized' && best.annualized !== null ? `annualized ROI of ${fmtPct(best.annualized)}` : `ROI of ${fmtPct(best.roi)}`;
+      bestEl.classList.remove('hidden');
+      bestEl.innerHTML = `<strong class="text-[#16a34a]">🏆 Best performer:</strong> <strong>${best.name}</strong> with ${label}`;
+
+      $('compare-results').classList.remove('hidden');
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('roi-calculator');
+  </script>
+</body>
+</html>

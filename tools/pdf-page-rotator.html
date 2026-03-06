@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF Page Rotator Online — Rotate PDF Pages Instantly | ClickSolveTools</title>
+  <meta name="description" content="Rotate individual or all pages in a PDF file for free. Fix upside-down scans, correct mixed orientations, and download the result instantly. 100% client-side — your files never leave your device.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/pdf-page-rotator">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free PDF Page Rotator Online — Rotate PDF Pages Instantly | ClickSolveTools">
+  <meta property="og:description" content="Rotate individual or all pages in a PDF file for free. Fix upside-down scans, correct mixed orientations, and download the result instantly. 100% client-side — your files never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/pdf-page-rotator">
+  <meta property="og:site_name" content="ClickSolveTools">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free PDF Page Rotator Online — Rotate PDF Pages Instantly | ClickSolveTools">
+  <meta name="twitter:description" content="Rotate individual or all pages in a PDF file for free. Fix upside-down scans, correct mixed orientations, and download the result instantly.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GA4 placeholder — Consent Mode v2, all denied by default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Page Rotator",
+    "url": "https://clicksolvetools.com/tools/pdf-page-rotator",
+    "description": "Rotate individual or all pages in a PDF file for free. Fix upside-down scans, correct mixed orientations, and download the result instantly. 100% client-side — your files never leave your device.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "ClickSolveTools",
+      "url": "https://clicksolvetools.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is it safe to rotate PDF pages online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does rotating pages reduce PDF quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Rotation modifies page metadata only — the actual content (text, images, fonts, vector graphics) remains identical and is not re-rendered or re-compressed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I rotate individual pages instead of the whole document?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can click any individual page to rotate it independently, or use the bulk buttons to rotate all pages at once."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .page-card { transition: transform 150ms ease, box-shadow 150ms ease; }
+    .page-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .orientation-indicator { transition: transform 300ms ease; }
+  </style>
+</head>
+
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <div id="nav-container"></div>
+
+  <!-- Main -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
+    <article>
+
+      <!-- Widget -->
+      <section id="widget" class="bg-white border border-[#e2e8f0] rounded-2xl p-6 sm:p-8 mb-12">
+
+        <!-- Upload zone -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-[#cbd5e1] rounded-xl p-10 text-center cursor-pointer hover:border-[#2563eb] transition-colors mb-6"
+        >
+          <input type="file" id="file-input" accept="application/pdf" class="hidden">
+          <svg class="mx-auto mb-3 w-10 h-10 text-[#64748b]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+          <p class="text-[#475569] text-base mb-1">Drop a PDF file here or click to browse</p>
+          <p class="text-[#64748b] text-sm">Select a PDF to rotate its pages</p>
+        </div>
+
+        <!-- Controls (hidden until file loaded) -->
+        <div id="controls-wrapper" class="hidden">
+
+          <!-- File info bar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="flex items-center gap-3 min-w-0">
+              <svg class="w-5 h-5 text-[#2563eb] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+              <div class="min-w-0">
+                <p id="file-name" class="text-sm font-medium text-[#1e293b] truncate"></p>
+                <p id="file-info" class="text-xs text-[#94a3b8]"></p>
+              </div>
+            </div>
+            <button id="change-file-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors shrink-0">Change file</button>
+          </div>
+
+          <!-- Bulk rotate buttons -->
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="text-xs font-medium text-[#64748b] self-center mr-1">Rotate All:</span>
+            <button data-rotate-all="90" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-sm font-medium text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 100 12h3"/></svg>
+              90° CW
+            </button>
+            <button data-rotate-all="-90" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-sm font-medium text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:scaleX(-1)"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 100 12h3"/></svg>
+              90° CCW
+            </button>
+            <button data-rotate-all="180" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] text-sm font-medium text-[#475569] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"/></svg>
+              180°
+            </button>
+            <button id="reset-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-red-500 transition-colors ml-auto">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/></svg>
+              Reset All
+            </button>
+          </div>
+
+          <!-- Page hint -->
+          <p class="text-xs text-[#94a3b8] mb-3">Click a page to rotate it 90° clockwise. Right-click for counter-clockwise.</p>
+
+          <!-- Page grid -->
+          <div id="page-grid" class="grid gap-3 grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 mb-6 max-h-[500px] overflow-y-auto pr-1"></div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-3">
+            <button id="save-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+              Save Rotated PDF
+            </button>
+            <button id="clear-btn" class="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-[#94a3b8] hover:text-red-500 text-sm font-medium transition-colors">
+              Clear
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SEO Content -->
+      <section class="max-w-3xl mx-auto px-0">
+        <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Rotate PDF Pages Online — Free, Private, and Instant</h2>
+
+        <div class="space-y-6 text-[#475569] leading-relaxed">
+          <p>Dealing with sideways or upside-down pages in a PDF is one of the most common frustrations in everyday document management. Whether you scanned a stack of mixed-orientation papers, received a contract with a landscape table embedded in a portrait document, or downloaded a form that was saved at the wrong angle, a PDF page rotator is the quickest way to fix the problem without installing desktop software. This free online PDF page rotator lets you upload any PDF, see every page with its current orientation, rotate individual pages or all pages at once, and download the corrected file — all within seconds and entirely inside your browser.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Common Use Cases for PDF Rotation</h3>
+          <p>PDF rotation is needed far more often than most people expect. Office workers frequently encounter scanned documents where pages alternate between portrait and landscape because the physical pages were fed through a scanner in mixed directions. Students scanning handwritten notes often end up with upside-down or sideways pages when the scan order gets confused. Architects, engineers, and designers regularly work with large-format landscape drawings embedded in portrait-oriented specification documents — rotating those pages makes review significantly easier. Legal and financial professionals handling multi-party contracts sometimes receive signed pages that were scanned at 90° or 180° off. Rather than re-scanning, re-printing, or asking the other party to fix the issue, a page rotator corrects the orientation digitally in seconds.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">100% Client-Side — Your Files Stay Private</h3>
+          <p>Unlike most online PDF tools that require uploading your documents to a remote server, this rotator runs entirely inside your web browser. The tool uses <strong class="text-[#1e293b]">pdf-lib</strong>, a robust open-source JavaScript library, to read and modify PDF page rotation metadata without any server involvement. Your sensitive financial records, legal contracts, medical forms, and personal documents never leave your device — not even temporarily. There is no upload, no cloud processing, and no server-side storage. Once you close or refresh the page, all data is gone from memory.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">How It Works</h3>
+          <p>Using the tool is straightforward. Drop your PDF onto the upload area or click to browse your files. The tool immediately reads every page, displays a numbered grid with visual orientation indicators showing whether each page is portrait or landscape, and shows the current rotation angle. To rotate a single page, simply click on it — each click rotates it 90° clockwise (right-click for counter-clockwise). To rotate every page at once, use the "Rotate All" buttons for 90° CW, 90° CCW, or 180° rotation. The visual indicators update in real time so you can verify the result before saving. When you are satisfied, click "Save Rotated PDF" and the corrected file downloads immediately.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Does Rotation Affect Quality?</h3>
+          <p>No. Page rotation in PDF is a metadata operation — it changes how the viewer displays the page without altering the actual content. All text, images, vector graphics, fonts, annotations, and form fields remain at their original quality and resolution. There is no re-rendering, re-compression, or flattening involved. The rotated PDF is byte-for-byte identical in content to the original; only the rotation flag on each page changes. This is fundamentally different from taking a screenshot and rotating the image, which would degrade quality.</p>
+
+          <h3 class="text-lg font-semibold text-[#1e293b] pt-2">Frequently Asked Questions</h3>
+
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Is it safe to rotate PDF pages online?</h4>
+              <p>Yes. This tool processes everything inside your browser using JavaScript. Your PDF files are never uploaded to any server. No data leaves your device, making it safe for confidential and sensitive documents.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Does rotating pages reduce quality?</h4>
+              <p>No. Rotation only changes a metadata flag on each page. The actual content — text, images, fonts, annotations, and vector graphics — remains completely untouched at its original resolution and fidelity.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Can I rotate individual pages instead of the whole document?</h4>
+              <p>Yes. Click any page in the grid to rotate it independently. You can also use the "Rotate All" buttons to apply a uniform rotation to every page, then adjust individual pages as needed.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">What rotation angles are supported?</h4>
+              <p>You can rotate pages by 90° clockwise, 90° counter-clockwise, or 180°. Clicking a page multiple times cycles through all four orientations (0°, 90°, 180°, 270°).</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-[#1e293b]">Do I need to install any software?</h4>
+              <p>No. The tool runs entirely in your web browser. There is nothing to download, install, or configure. It works on Windows, macOS, Linux, iOS, and Android in any modern browser.</p>
+            </div>
+          </div>
+
+          <p><strong class="text-[#1e293b]">All file processing happens entirely in your browser. Your files are never uploaded to any server. No data leaves your device.</strong></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- Related Tools -->
+  <div id="related-tools"></div>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- pdf-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <!-- Shared JS -->
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('pdf-page-rotator');
+  </script>
+
+  <!-- Widget Logic -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { PDFDocument, degrees } = PDFLib;
+
+    const dropZone        = document.getElementById('drop-zone');
+    const fileInput       = document.getElementById('file-input');
+    const controlsWrapper = document.getElementById('controls-wrapper');
+    const fileNameEl      = document.getElementById('file-name');
+    const fileInfoEl      = document.getElementById('file-info');
+    const changeFileBtn   = document.getElementById('change-file-btn');
+    const pageGrid        = document.getElementById('page-grid');
+    const saveBtn         = document.getElementById('save-btn');
+    const clearBtn        = document.getElementById('clear-btn');
+    const resetBtn        = document.getElementById('reset-btn');
+
+    let pdfBuffer = null;
+    let originalFileName = '';
+    let pageCount = 0;
+    let pageRotations = [];
+    let originalRotations = [];
+    let pageDimensions = [];
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 B';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function normalizeAngle(angle) {
+      return ((angle % 360) + 360) % 360;
+    }
+
+    async function loadPdf(file) {
+      pdfBuffer = await file.arrayBuffer();
+      originalFileName = file.name;
+
+      const pdf = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+      pageCount = pdf.getPageCount();
+
+      pageRotations = [];
+      originalRotations = [];
+      pageDimensions = [];
+
+      for (let i = 0; i < pageCount; i++) {
+        const page = pdf.getPage(i);
+        const rot = page.getRotation().angle;
+        const { width, height } = page.getSize();
+        originalRotations.push(rot);
+        pageRotations.push(0);
+        pageDimensions.push({ width, height });
+      }
+
+      fileNameEl.textContent = file.name;
+      fileInfoEl.textContent = `${pageCount} page${pageCount !== 1 ? 's' : ''} · ${formatBytes(file.size)}`;
+
+      dropZone.classList.add('hidden');
+      controlsWrapper.classList.remove('hidden');
+
+      renderPageGrid();
+    }
+
+    function getEffectiveRotation(index) {
+      return normalizeAngle(originalRotations[index] + pageRotations[index]);
+    }
+
+    function isEffectiveLandscape(index) {
+      const { width, height } = pageDimensions[index];
+      const rot = getEffectiveRotation(index);
+      const swapped = (rot === 90 || rot === 270);
+      const effectiveW = swapped ? height : width;
+      const effectiveH = swapped ? width : height;
+      return effectiveW > effectiveH;
+    }
+
+    function renderPageGrid() {
+      pageGrid.innerHTML = '';
+
+      for (let i = 0; i < pageCount; i++) {
+        const applied = normalizeAngle(pageRotations[i]);
+        const effective = getEffectiveRotation(i);
+        const landscape = isEffectiveLandscape(i);
+
+        const card = document.createElement('div');
+        card.className = 'page-card flex flex-col items-center gap-1.5 p-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg cursor-pointer select-none hover:border-[#2563eb]/50';
+        card.dataset.page = i;
+
+        const indicatorW = landscape ? 56 : 40;
+        const indicatorH = landscape ? 40 : 56;
+
+        card.innerHTML = `
+          <div class="orientation-indicator flex items-center justify-center rounded border-2 ${applied !== 0 ? 'border-[#2563eb] bg-[#eff6ff]' : 'border-[#cbd5e1] bg-white'}"
+               style="width:${indicatorW}px; height:${indicatorH}px; transform:rotate(0deg)">
+            <span class="text-[10px] font-bold ${applied !== 0 ? 'text-[#2563eb]' : 'text-[#94a3b8]'}">${effective}°</span>
+          </div>
+          <span class="text-xs font-medium text-[#1e293b]">Page ${i + 1}</span>
+          <span class="text-[10px] text-[#94a3b8]">${landscape ? 'Landscape' : 'Portrait'}${applied !== 0 ? ' · +' + applied + '°' : ''}</span>
+        `;
+
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          pageRotations[i] = normalizeAngle(pageRotations[i] + 90);
+          renderPageGrid();
+        });
+
+        card.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          pageRotations[i] = normalizeAngle(pageRotations[i] - 90);
+          renderPageGrid();
+        });
+
+        pageGrid.appendChild(card);
+      }
+    }
+
+    // Bulk rotation buttons
+    document.querySelectorAll('[data-rotate-all]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const angle = parseInt(btn.dataset.rotateAll);
+        for (let i = 0; i < pageCount; i++) {
+          pageRotations[i] = normalizeAngle(pageRotations[i] + angle);
+        }
+        renderPageGrid();
+      });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      for (let i = 0; i < pageCount; i++) {
+        pageRotations[i] = 0;
+      }
+      renderPageGrid();
+    });
+
+    // Save rotated PDF
+    saveBtn.addEventListener('click', async () => {
+      if (!pdfBuffer) return;
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Processing…';
+
+      try {
+        const pdf = await PDFDocument.load(pdfBuffer, { ignoreEncryption: true });
+
+        for (let i = 0; i < pageCount; i++) {
+          if (pageRotations[i] !== 0) {
+            const page = pdf.getPage(i);
+            const currentRot = page.getRotation().angle;
+            page.setRotation(degrees(normalizeAngle(currentRot + pageRotations[i])));
+          }
+        }
+
+        const bytes = await pdf.save();
+        const blob = new Blob([bytes], { type: 'application/pdf' });
+
+        const baseName = originalFileName.replace(/\.pdf$/i, '');
+        const a = document.createElement('a');
+        a.download = `${baseName}-rotated.pdf`;
+        a.href = URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+      } catch (err) {
+        console.error('Save failed:', err);
+        alert('Failed to save PDF: ' + (err.message || 'Unknown error'));
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = `
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+          Save Rotated PDF
+        `;
+      }
+    });
+
+    function resetAll() {
+      pdfBuffer = null;
+      originalFileName = '';
+      pageCount = 0;
+      pageRotations = [];
+      originalRotations = [];
+      pageDimensions = [];
+      fileInput.value = '';
+      pageGrid.innerHTML = '';
+      controlsWrapper.classList.add('hidden');
+      dropZone.classList.remove('hidden');
+    }
+
+    clearBtn.addEventListener('click', resetAll);
+
+    // Upload handlers
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('dragleave', e => { e.preventDefault(); dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5'); });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]', 'bg-[#2563eb]/5');
+      const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+      if (files.length > 0) loadPdf(files[0]);
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) loadPdf(fileInput.files[0]);
+      fileInput.value = '';
+    });
+
+    changeFileBtn.addEventListener('click', () => {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/pdf';
+      inp.addEventListener('change', () => {
+        if (inp.files.length) {
+          resetAll();
+          loadPdf(inp.files[0]);
+        }
+      });
+      inp.click();
+    });
+  });
+  </script>
+
+</body>
+</html>

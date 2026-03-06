@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Voice Memo Recorder — Record, Rename &amp; Download Memos | ClickSolveTools</title>
+  <meta name="description" content="Record voice memos instantly in your browser. One-tap recording with auto-stop timer, rename labels, mini waveform playback, and bulk download. No signup, no uploads — fully private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/voice-memo-recorder">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Voice Memo Recorder — Record, Rename &amp; Download Memos | ClickSolveTools">
+  <meta property="og:description" content="Record voice memos instantly in your browser. One-tap recording with auto-stop timer, rename labels, mini waveform playback, and bulk download. No signup, no uploads — fully private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/voice-memo-recorder">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Voice Memo Recorder — Record, Rename &amp; Download Memos | ClickSolveTools">
+  <meta name="twitter:description" content="Record voice memos instantly in your browser. One-tap recording with auto-stop timer, rename labels, mini waveform playback, and bulk download.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Voice Memo Recorder","url":"https://clicksolvetools.com/tools/voice-memo-recorder","description":"Record voice memos instantly in your browser with auto-stop, rename, waveform playback, and bulk download. Free, private, no signup required.","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <main class="max-w-2xl mx-auto px-4 py-8 space-y-6">
+
+    <!-- Record Panel -->
+    <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8 flex flex-col items-center gap-5">
+
+      <!-- Timer -->
+      <div id="timer" class="font-mono text-4xl sm:text-5xl font-bold tracking-tight text-[#1e293b] select-none">
+        00:00
+      </div>
+
+      <!-- Record Button -->
+      <button id="btn-record" class="rec-btn group relative w-24 h-24 rounded-full bg-[#2563eb] text-white flex items-center justify-center shadow-lg shadow-[#2563eb]/25 hover:bg-[#1d4ed8] active:scale-95 transition-all focus:outline-none focus:ring-4 focus:ring-[#2563eb]/30" aria-label="Start recording">
+        <svg id="mic-icon" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23" stroke-linecap="round"/><line x1="8" y1="23" x2="16" y2="23" stroke-linecap="round"/></svg>
+        <svg id="stop-icon" class="w-9 h-9 hidden" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+      </button>
+      <p id="rec-label" class="text-sm text-[#64748b]">Tap to record</p>
+
+      <!-- Auto-stop Selector -->
+      <div class="flex items-center gap-2 text-sm">
+        <label for="auto-stop" class="text-[#64748b]">Auto-stop:</label>
+        <select id="auto-stop" class="border border-[#e2e8f0] rounded-lg px-3 py-1.5 text-[#1e293b] bg-white focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 text-sm">
+          <option value="60">1 min</option>
+          <option value="300" selected>5 min</option>
+          <option value="600">10 min</option>
+          <option value="0">No limit</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Recordings List -->
+    <div id="recordings-section" class="hidden space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="font-semibold text-[#1e293b]">Recordings</h2>
+        <button id="btn-download-all" class="text-sm font-medium text-[#2563eb] hover:text-[#1d4ed8] transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+          Download All
+        </button>
+      </div>
+      <div id="recordings-list" class="space-y-3"></div>
+    </div>
+
+  </main>
+
+  <!-- SEO Content -->
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Free Online Voice Memo Recorder — Capture Ideas, Meetings &amp; Lectures Instantly</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Voice memos are one of the fastest ways to capture thoughts, instructions, and spoken information. Whether you need to jot down a fleeting idea during a morning commute, record action items from a team meeting, or preserve key points from a university lecture, a voice memo recorder eliminates the friction of typing and lets you speak naturally. This free browser-based voice memo recorder runs entirely on your device — no app install, no account creation, and no audio data ever leaves your computer or phone.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Voice Memo Recorder Works</h3>
+      <p>Open the page, tap the microphone button, and start speaking. The recorder captures audio from your device's microphone using the Web Audio API and MediaRecorder, storing the data as in-memory blobs that persist for the duration of your session. A large, centered timer counts up so you always know how long you have been recording. When you are finished, tap the button again to stop. Your memo instantly appears in the recordings list below with its timestamp, duration, a mini waveform visualization, and playback controls. You can rename each memo with a custom label, play it back, download it as a WebM audio file, or delete it. If you have recorded several memos in one session, use the "Download All" button to save every file at once.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Auto-Stop Timer</h3>
+      <p>Accidentally leaving a recorder running is a common frustration — you end up with a massive file filled with silence or background noise. This tool includes a configurable auto-stop timer that automatically ends the recording after a set duration. Choose from one minute, five minutes, ten minutes, or no limit at all. The five-minute default strikes a balance between capturing a complete thought and preventing runaway recordings. The timer counts down visually, so you always know how much time remains before the recording stops on its own.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Use Cases for Voice Memos</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Meeting notes</strong> — Record the key decisions and action items from a standup, brainstorm, or client call. Play back later to write a summary you can share with the team.</li>
+        <li><strong class="text-[#1e293b]">Lecture capture</strong> — Students can record a professor's explanation of a difficult concept and replay it while studying. A voice memo is faster and more complete than handwritten notes for complex material.</li>
+        <li><strong class="text-[#1e293b]">Idea capture</strong> — Inspiration strikes at inconvenient times — while walking, cooking, or lying in bed. A one-tap voice memo preserves the idea before it fades, without fumbling with a keyboard.</li>
+        <li><strong class="text-[#1e293b]">To-do lists</strong> — Speak your errands and tasks aloud, download the memo, and play it back when you are ready to act. It is the audio equivalent of a sticky note.</li>
+        <li><strong class="text-[#1e293b]">Language practice</strong> — Record yourself reading passages or practicing pronunciation, then play back to hear how you sound. Comparing recordings over weeks reveals measurable improvement.</li>
+        <li><strong class="text-[#1e293b]">Interview preparation</strong> — Practice answering common interview questions out loud, review your pacing and filler words, and refine your delivery before the real thing.</li>
+        <li><strong class="text-[#1e293b]">Journaling</strong> — An audio journal can feel more natural than writing. Speak freely about your day, your goals, or your reflections and save the recordings for future review.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Better Voice Memos</h3>
+      <p>Getting clear, useful recordings does not require expensive equipment. A few simple habits make a big difference:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Minimize background noise.</strong> Close windows, move away from noisy appliances, and choose a quiet room when possible. Even built-in laptop microphones produce decent results in a calm environment.</li>
+        <li><strong class="text-[#1e293b]">Speak at a steady pace.</strong> Rushing makes playback harder to follow. Pause briefly between topics so you can find specific sections when you listen back.</li>
+        <li><strong class="text-[#1e293b]">State context at the start.</strong> Begin each memo with a short intro — "Meeting with design team, March 5" or "Book idea — chapter three outline." This makes it easy to identify recordings later.</li>
+        <li><strong class="text-[#1e293b]">Rename your memos.</strong> The recorder lets you edit the label of each recording. Replace the default timestamp with a meaningful name so you can scan your list at a glance.</li>
+        <li><strong class="text-[#1e293b]">Download regularly.</strong> Recordings are stored in your browser session. If you close the tab, they are gone. Download any memo you want to keep before navigating away.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Privacy and Security</h3>
+      <p>This recorder processes all audio locally using your browser's built-in MediaRecorder API. No audio data is uploaded to any server. The recorded blobs exist only in your browser's memory for the duration of the session. Once you close or refresh the page, the data is permanently discarded unless you have downloaded the files. There is no backend, no database, and no analytics on your recordings. Your voice stays on your device.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What audio format are recordings saved in?</strong><br>
+      Recordings are saved in WebM format (Opus codec) by default, which is supported by all major browsers. WebM files are compact and play in most media players, including VLC, Chrome, Firefox, and Edge.</p>
+
+      <p><strong class="text-[#1e293b]">Is there a maximum recording length?</strong><br>
+      There is no hard limit. You can set the auto-stop timer to 1, 5, or 10 minutes, or choose "No limit" for unrestricted recording. Longer recordings consume more memory, so very long sessions (over 30 minutes) may use significant RAM on lower-end devices.</p>
+
+      <p><strong class="text-[#1e293b]">Can I record on my phone?</strong><br>
+      Yes. The recorder works on any device with a microphone and a modern browser (Chrome, Firefox, Safari, Edge). On mobile, your browser will ask for microphone permission the first time you tap record.</p>
+
+      <p><strong class="text-[#1e293b]">Will my recordings survive a page refresh?</strong><br>
+      No. Recordings are held in memory only. If you refresh or close the tab, all unsaved recordings are lost. Always download memos you want to keep.</p>
+
+      <p><strong class="text-[#1e293b]">Do I need to install anything?</strong><br>
+      No installation is required. The tool runs entirely in your web browser using standard web APIs. Just open the page and start recording.</p>
+
+      <p>Whether you are capturing a quick thought, documenting a meeting, or practicing a speech, this voice memo recorder gives you a fast, private, and distraction-free way to record audio directly in your browser. Bookmark this page and use it whenever you need to turn spoken words into saved files — no apps, no accounts, no hassle.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+    .rec-btn.recording::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse-ring 1.2s ease-out infinite;
+      z-index: -1;
+    }
+    .rec-btn.recording {
+      background-color: #ef4444 !important;
+      box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.35);
+    }
+    .rec-btn.recording:hover {
+      background-color: #dc2626 !important;
+    }
+
+    .waveform-canvas {
+      display: block;
+      width: 100%;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .memo-label {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #1e293b;
+      transition: border-color 150ms;
+      max-width: 200px;
+      width: 100%;
+    }
+    .memo-label:hover { border-color: #e2e8f0; }
+    .memo-label:focus { outline: none; border-color: #2563eb; background: #f8fafc; }
+
+    .memo-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 150ms;
+      color: #64748b;
+      background: #f1f5f9;
+    }
+    .memo-action:hover { background: #e2e8f0; color: #1e293b; }
+    .memo-action.danger:hover { background: #fee2e2; color: #ef4444; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const btnRecord = $('btn-record');
+    const micIcon = $('mic-icon');
+    const stopIcon = $('stop-icon');
+    const timerEl = $('timer');
+    const recLabel = $('rec-label');
+    const autoStopSel = $('auto-stop');
+    const recSection = $('recordings-section');
+    const recList = $('recordings-list');
+    const btnDownloadAll = $('btn-download-all');
+
+    let mediaRecorder = null;
+    let audioContext = null;
+    let analyser = null;
+    let stream = null;
+    let chunks = [];
+    let recordings = [];
+    let recording = false;
+    let timerStart = 0;
+    let timerRAF = null;
+    let autoStopTimeout = null;
+
+    function fmtTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    function tickTimer() {
+      const elapsed = (Date.now() - timerStart) / 1000;
+      timerEl.textContent = fmtTime(elapsed);
+      timerRAF = requestAnimationFrame(tickTimer);
+    }
+
+    async function startRecording() {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch {
+        recLabel.textContent = 'Microphone access denied';
+        return;
+      }
+
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const source = audioContext.createMediaStreamSource(stream);
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+        ? 'audio/webm;codecs=opus'
+        : MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+
+      mediaRecorder = mimeType
+        ? new MediaRecorder(stream, { mimeType })
+        : new MediaRecorder(stream);
+
+      chunks = [];
+      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+      mediaRecorder.onstop = finalizeRecording;
+      mediaRecorder.start(200);
+
+      recording = true;
+      timerStart = Date.now();
+      tickTimer();
+
+      btnRecord.classList.add('recording');
+      btnRecord.setAttribute('aria-label', 'Stop recording');
+      micIcon.classList.add('hidden');
+      stopIcon.classList.remove('hidden');
+      recLabel.textContent = 'Recording…';
+      autoStopSel.disabled = true;
+
+      const limit = parseInt(autoStopSel.value, 10);
+      if (limit > 0) {
+        autoStopTimeout = setTimeout(() => stopRecording(), limit * 1000);
+      }
+    }
+
+    function stopRecording() {
+      if (!recording) return;
+      recording = false;
+      clearTimeout(autoStopTimeout);
+      cancelAnimationFrame(timerRAF);
+      mediaRecorder.stop();
+      stream.getTracks().forEach(t => t.stop());
+
+      btnRecord.classList.remove('recording');
+      btnRecord.setAttribute('aria-label', 'Start recording');
+      micIcon.classList.remove('hidden');
+      stopIcon.classList.add('hidden');
+      recLabel.textContent = 'Tap to record';
+      autoStopSel.disabled = false;
+    }
+
+    function finalizeRecording() {
+      const blob = new Blob(chunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+      const duration = (Date.now() - timerStart) / 1000;
+      const now = new Date();
+      const ts = now.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      const id = Date.now();
+      recordings.push({ id, blob, duration, timestamp: ts, label: 'Voice Memo ' + (recordings.length + 1) });
+
+      // Compute waveform data from the blob
+      const reader = new FileReader();
+      reader.onload = async function () {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const buffer = await ctx.decodeAudioData(reader.result);
+          const raw = buffer.getChannelData(0);
+          const bars = 80;
+          const step = Math.floor(raw.length / bars);
+          const wave = [];
+          for (let i = 0; i < bars; i++) {
+            let sum = 0;
+            for (let j = 0; j < step; j++) sum += Math.abs(raw[i * step + j]);
+            wave.push(sum / step);
+          }
+          const max = Math.max(...wave, 0.01);
+          const rec = recordings.find(r => r.id === id);
+          if (rec) rec.waveform = wave.map(v => v / max);
+          ctx.close();
+          renderRecordings();
+        } catch {
+          renderRecordings();
+        }
+      };
+      reader.readAsArrayBuffer(blob);
+
+      timerEl.textContent = '00:00';
+      renderRecordings();
+      if (audioContext) { audioContext.close(); audioContext = null; }
+    }
+
+    function renderRecordings() {
+      if (recordings.length === 0) {
+        recSection.classList.add('hidden');
+        return;
+      }
+      recSection.classList.remove('hidden');
+
+      recList.innerHTML = recordings.map((rec, idx) => {
+        const url = URL.createObjectURL(rec.blob);
+        const waveId = 'wave-' + rec.id;
+        return `
+          <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 space-y-3" data-id="${rec.id}">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+              <div class="flex-1 min-w-0">
+                <input type="text" class="memo-label" value="${escHtml(rec.label)}" data-id="${rec.id}" aria-label="Rename recording">
+                <div class="flex items-center gap-3 text-xs text-[#94a3b8] mt-1">
+                  <span>${rec.timestamp}</span>
+                  <span>${fmtTime(rec.duration)}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button class="memo-action" data-action="download" data-id="${rec.id}" title="Download">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+                </button>
+                <button class="memo-action danger" data-action="delete" data-id="${rec.id}" title="Delete">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M8 7V4a1 1 0 011-1h6a1 1 0 011 1v3"/></svg>
+                </button>
+              </div>
+            </div>
+            <canvas id="${waveId}" class="waveform-canvas" height="40"></canvas>
+            <audio controls src="${url}" preload="metadata" class="w-full h-10" style="border-radius:8px;"></audio>
+          </div>
+        `;
+      }).join('');
+
+      recordings.forEach(rec => {
+        if (!rec.waveform) return;
+        const canvas = document.getElementById('wave-' + rec.id);
+        if (!canvas) return;
+        drawWaveform(canvas, rec.waveform);
+      });
+    }
+
+    function drawWaveform(canvas, data) {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const w = rect.width;
+      const h = rect.height;
+      const bars = data.length;
+      const gap = 2;
+      const barW = Math.max(1, (w - gap * (bars - 1)) / bars);
+      const minH = 2;
+
+      ctx.clearRect(0, 0, w, h);
+      data.forEach((v, i) => {
+        const barH = Math.max(minH, v * (h - 4));
+        const x = i * (barW + gap);
+        const y = (h - barH) / 2;
+        ctx.fillStyle = '#2563eb';
+        ctx.globalAlpha = 0.35 + v * 0.65;
+        ctx.beginPath();
+        ctx.roundRect(x, y, barW, barH, 1);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function downloadBlob(blob, filename) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    btnRecord.addEventListener('click', () => {
+      recording ? stopRecording() : startRecording();
+    });
+
+    recList.addEventListener('click', e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = parseInt(btn.dataset.id, 10);
+      const rec = recordings.find(r => r.id === id);
+      if (!rec) return;
+
+      if (btn.dataset.action === 'download') {
+        const ext = rec.blob.type.includes('webm') ? 'webm' : 'ogg';
+        downloadBlob(rec.blob, rec.label.replace(/[^a-zA-Z0-9 _-]/g, '') + '.' + ext);
+      } else if (btn.dataset.action === 'delete') {
+        recordings = recordings.filter(r => r.id !== id);
+        renderRecordings();
+      }
+    });
+
+    recList.addEventListener('input', e => {
+      if (!e.target.classList.contains('memo-label')) return;
+      const id = parseInt(e.target.dataset.id, 10);
+      const rec = recordings.find(r => r.id === id);
+      if (rec) rec.label = e.target.value;
+    });
+
+    btnDownloadAll.addEventListener('click', () => {
+      recordings.forEach(rec => {
+        const ext = rec.blob.type.includes('webm') ? 'webm' : 'ogg';
+        downloadBlob(rec.blob, rec.label.replace(/[^a-zA-Z0-9 _-]/g, '') + '.' + ext);
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        recording ? stopRecording() : startRecording();
+      }
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    initToolPage('voice-memo-recorder');
+  </script>
+</body>
+</html>
