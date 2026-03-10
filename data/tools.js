@@ -1,6 +1,6 @@
 export const tools = [
 
-  // ── 💰 Finance (15) ─────────────────────────────────────────────────
+  // ── 💰 Finance (20) ─────────────────────────────────────────────────
 
   {
     name: "Mortgage Calculator",
@@ -138,7 +138,53 @@ export const tools = [
     built: true
   },
 
-  // ── 💻 Developer (10) ───────────────────────────────────────────────
+  {
+    name: "Net Worth Calculator",
+    slug: "net-worth-calculator",
+    category: "Finance",
+    description: "Add up your assets and liabilities to calculate your total net worth. Dynamic rows, visual bar chart, and instant totals.",
+    icon: "💎",
+    keywords: ["net worth", "assets", "liabilities", "wealth calculator", "financial snapshot"],
+    built: true
+  },
+  {
+    name: "Debt-to-Income Ratio Calculator",
+    slug: "debt-to-income-calculator",
+    category: "Finance",
+    description: "Calculate your DTI ratio to see how lenders evaluate your borrowing capacity. Color-coded gauge shows your risk category.",
+    icon: "📋",
+    keywords: ["debt to income", "DTI ratio", "mortgage qualification", "debt ratio", "lending"],
+    built: true
+  },
+  {
+    name: "Paycheck Calculator",
+    slug: "paycheck-calculator",
+    category: "Finance",
+    description: "Estimate your take-home pay after federal tax, state tax, Social Security, and Medicare. All 50 states supported with 2024 brackets.",
+    icon: "💰",
+    keywords: ["paycheck calculator", "take home pay", "salary after tax", "net pay", "tax withholding"],
+    built: true
+  },
+  {
+    name: "Discount Calculator",
+    slug: "discount-calculator",
+    category: "Finance",
+    description: "Calculate discount savings, reverse-engineer a discount percentage, or see how double discounts really work. Three modes in one tool.",
+    icon: "🏷️",
+    keywords: ["discount calculator", "sale price", "percent off", "double discount", "savings calculator"],
+    built: true
+  },
+  {
+    name: "Currency Exchange Rate Viewer",
+    slug: "currency-exchange-viewer",
+    category: "Finance",
+    description: "Convert between 20 major currencies using approximate reference rates. Includes a full rate table against USD. No API calls needed.",
+    icon: "💱",
+    keywords: ["currency converter", "exchange rate", "forex", "money converter", "USD to EUR"],
+    built: true
+  },
+
+  // ── 💻 Developer (13) ───────────────────────────────────────────────
 
   {
     name: "JSON Formatter & Validator",
@@ -231,7 +277,35 @@ export const tools = [
     built: true
   },
 
-  // ── 📝 Text (5) ─────────────────────────────────────────────────────
+  {
+    name: "JSON to TypeScript Converter",
+    slug: "json-to-typescript",
+    category: "Developer",
+    description: "Paste JSON and get TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and nullable fields.",
+    icon: "🔀",
+    keywords: ["JSON to TypeScript", "TS interfaces", "type generator", "JSON types", "TypeScript converter"],
+    built: true
+  },
+  {
+    name: "CSS Minifier & Beautifier",
+    slug: "css-minifier",
+    category: "Developer",
+    description: "Minify CSS to reduce file size or beautify it for readability. See original vs output size with percentage reduction stats.",
+    icon: "🎨",
+    keywords: ["CSS minifier", "CSS beautifier", "minify CSS", "compress CSS", "CSS formatter"],
+    built: true
+  },
+  {
+    name: "Placeholder Image Generator",
+    slug: "placeholder-image-generator",
+    category: "Developer",
+    description: "Generate placeholder images in PNG or SVG with custom size, colors, and text. Presets for avatars, OG images, heroes, and more.",
+    icon: "🖼️",
+    keywords: ["placeholder image", "dummy image", "image generator", "dev placeholder", "mock image"],
+    built: true
+  },
+
+  // ── 📝 Text (7) ─────────────────────────────────────────────────────
 
   {
     name: "Word & Character Counter",
@@ -279,7 +353,26 @@ export const tools = [
     built: true
   },
 
-  // ── 🔄 Converters (10) ──────────────────────────────────────────────
+  {
+    name: "Text to Slug Converter",
+    slug: "text-to-slug",
+    category: "Text",
+    description: "Convert any text into a URL-friendly slug. Handles accented characters, special symbols, and bulk multi-line conversion.",
+    icon: "🔗",
+    keywords: ["text to slug", "URL slug", "slug generator", "SEO URL", "permalink generator"],
+    built: true
+  },
+  {
+    name: "Markdown to HTML Converter",
+    slug: "markdown-to-html-converter",
+    category: "Text",
+    description: "Convert Markdown to raw HTML code with syntax highlighting. Options for sanitizing and adding CSS framework classes.",
+    icon: "📄",
+    keywords: ["markdown to HTML", "MD converter", "markdown converter", "HTML output", "markup converter"],
+    built: true
+  },
+
+  // ── 🔄 Converters (12) ──────────────────────────────────────────────
 
   {
     name: "Unit Converter",
@@ -372,6 +465,25 @@ export const tools = [
     built: true
   },
 
+  {
+    name: "Epoch Timestamp Batch Converter",
+    slug: "epoch-batch-converter",
+    category: "Converters",
+    description: "Convert a list of Unix timestamps to dates or dates to timestamps in bulk. Auto-detects seconds vs milliseconds. Copy as CSV.",
+    icon: "📋",
+    keywords: ["epoch converter", "batch timestamp", "bulk timestamp", "Unix time", "timestamp list"],
+    built: true
+  },
+  {
+    name: "Temperature Converter",
+    slug: "temperature-converter",
+    category: "Converters",
+    description: "Convert between Fahrenheit, Celsius, and Kelvin instantly. See formulas, a visual thermometer, and a quick reference table.",
+    icon: "🌡️",
+    keywords: ["temperature converter", "Fahrenheit to Celsius", "Celsius to Kelvin", "temp conversion", "thermometer"],
+    built: true
+  },
+
   // ── ⚡ Generators (7) ───────────────────────────────────────────────
 
   {
@@ -438,7 +550,7 @@ export const tools = [
     built: true
   },
 
-  // ── 🔢 Math (6) ─────────────────────────────────────────────────────
+  // ── 🔢 Math (8) ─────────────────────────────────────────────────────
 
   {
     name: "Calculator",
@@ -495,7 +607,26 @@ export const tools = [
     built: true
   },
 
-  // ── ❤️ Health (6) ───────────────────────────────────────────────────
+  {
+    name: "Tip Splitter",
+    slug: "tip-splitter",
+    category: "Math",
+    description: "Split a restaurant bill with tip evenly or unevenly. 'Who ordered what' mode assigns items to individuals with proportional tip and tax.",
+    icon: "🍽️",
+    keywords: ["tip splitter", "bill splitter", "split check", "restaurant bill", "uneven split"],
+    built: true
+  },
+  {
+    name: "Average Calculator",
+    slug: "average-calculator",
+    category: "Math",
+    description: "Calculate mean, median, mode, range, sum, min, and max for any data set. Includes weighted average and running average modes.",
+    icon: "📊",
+    keywords: ["average calculator", "mean median mode", "statistics", "weighted average", "running average"],
+    built: true
+  },
+
+  // ── ❤️ Health (8) ───────────────────────────────────────────────────
 
   {
     name: "BMI Calculator",
@@ -549,6 +680,25 @@ export const tools = [
     description: "Find your ideal weight range using four established formulas: Devine, Robinson, Miller, and Hamwi. Compare results by height and sex.",
     icon: "💪",
     keywords: ["ideal weight", "healthy weight", "weight calculator", "ideal body weight", "target weight"],
+    built: true
+  },
+
+  {
+    name: "Water Intake Calculator",
+    slug: "water-intake-calculator",
+    category: "Health",
+    description: "Calculate your recommended daily water intake based on weight, activity level, and climate. See the breakdown in ounces, liters, and glasses.",
+    icon: "💧",
+    keywords: ["water intake", "hydration calculator", "daily water", "how much water", "water goal"],
+    built: true
+  },
+  {
+    name: "Sleep Calculator",
+    slug: "sleep-calculator",
+    category: "Health",
+    description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Get 4, 5, or 6 full cycles for optimal rest.",
+    icon: "😴",
+    keywords: ["sleep calculator", "sleep cycles", "bedtime calculator", "wake up time", "REM sleep"],
     built: true
   },
 
@@ -636,7 +786,7 @@ export const tools = [
     built: true
   },
 
-  // ── 🖼️ Image (5) ───────────────────────────────────────────────────
+  // ── 🖼️ Image (6) ───────────────────────────────────────────────────
 
   {
     name: "Image Resizer",
@@ -684,7 +834,17 @@ export const tools = [
     built: true
   },
 
-  // ── 🛠️ Utilities (12) ──────────────────────────────────────────────
+  {
+    name: "Screenshot Beautifier",
+    slug: "screenshot-beautifier",
+    category: "Image",
+    description: "Add gradient backgrounds, padding, rounded corners, shadows, and device frames to screenshots. Download a polished PNG for social media or docs.",
+    icon: "✨",
+    keywords: ["screenshot beautifier", "screenshot mockup", "image background", "device frame", "screenshot design"],
+    built: true
+  },
+
+  // ── 🛠️ Utilities (15) ──────────────────────────────────────────────
 
   {
     name: "Stopwatch",
@@ -792,6 +952,33 @@ export const tools = [
     description: "Quick voice memos right in your browser. One tap to record, instant playback and download. No app install needed.",
     icon: "🗣️",
     keywords: ["voice memo", "voice note", "quick recorder", "memo recorder", "voice recorder"],
+    built: true
+  },
+  {
+    name: "Password Strength Checker",
+    slug: "password-strength-checker",
+    category: "Utilities",
+    description: "Check how strong your password is with entropy analysis, crack time estimates, and common pattern detection. 100% browser-based — never sent anywhere.",
+    icon: "🛡️",
+    keywords: ["password strength", "password checker", "password security", "entropy", "crack time"],
+    built: true
+  },
+  {
+    name: "QR Code Reader",
+    slug: "qr-code-reader",
+    category: "Utilities",
+    description: "Scan QR codes from uploaded images or your device camera. Decode URLs, text, vCards, and more. All processing happens in your browser.",
+    icon: "📷",
+    keywords: ["QR code reader", "QR scanner", "scan QR", "decode QR", "QR code camera"],
+    built: true
+  },
+  {
+    name: "Text Diff Merger",
+    slug: "text-diff-merger",
+    category: "Utilities",
+    description: "Compare two texts, see highlighted differences, then accept or reject individual changes to build a merged version. Three-panel workflow.",
+    icon: "🔀",
+    keywords: ["text diff", "diff merger", "text compare", "merge changes", "accept reject diff"],
     built: true
   }
 ];

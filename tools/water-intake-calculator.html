@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Water Intake Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate your recommended daily water intake based on weight, activity level, and climate. See results in ounces and liters with a visual glass breakdown.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/water-intake-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Water Intake Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate your recommended daily water intake based on weight, activity level, and climate. See results in ounces and liters with a visual glass breakdown.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/water-intake-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Water Intake Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your recommended daily water intake based on weight, activity level, and climate. See results in ounces and liters with a visual glass breakdown.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Water Intake Calculator","url":"https://clicksolvetools.com/tools/water-intake-calculator","description":"Calculate your recommended daily water intake based on weight, activity level, and climate. See results in ounces and liters with a visual glass breakdown.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Water Intake Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-6">
+
+      <!-- Disclaimer -->
+      <div class="bg-[#fffbeb] border border-[#fde68a] rounded-lg p-3 text-sm text-[#92400e]">
+        <strong>Disclaimer:</strong> This calculator provides general estimates only and is not medical advice. Individual hydration needs vary. Consult a healthcare provider for personalized guidance.
+      </div>
+
+      <!-- Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-4">
+        <h2 class="text-lg font-semibold text-[#1e293b]">Your Details</h2>
+
+        <div>
+          <label for="weight" class="block text-sm font-medium text-[#475569] mb-1">Body Weight</label>
+          <div class="flex gap-2">
+            <input id="weight" type="number" value="160" min="1" max="999" class="wi-input flex-1">
+            <div class="flex rounded-lg border border-[#e2e8f0] overflow-hidden">
+              <button data-unit="lbs" class="unit-btn unit-btn-active px-3 py-2 text-sm font-medium transition-colors">lbs</button>
+              <button data-unit="kg" class="unit-btn px-3 py-2 text-sm font-medium border-l border-[#e2e8f0] transition-colors">kg</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="activity" class="block text-sm font-medium text-[#475569] mb-1">Activity Level</label>
+          <select id="activity" class="wi-select w-full">
+            <option value="1.0">Sedentary (little or no exercise)</option>
+            <option value="1.1">Lightly Active (1–3 days/week)</option>
+            <option value="1.2" selected>Moderately Active (3–5 days/week)</option>
+            <option value="1.3">Active (6–7 days/week)</option>
+            <option value="1.5">Very Active (intense daily exercise)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="climate" class="block text-sm font-medium text-[#475569] mb-1">Climate</label>
+          <select id="climate" class="wi-select w-full">
+            <option value="0">Cold</option>
+            <option value="0" selected>Moderate / Temperate</option>
+            <option value="16">Hot / Humid</option>
+          </select>
+        </div>
+
+        <button id="calc-btn" class="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium py-2.5 rounded-lg transition-colors text-sm">Calculate</button>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="hidden space-y-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-4">
+          <h2 class="text-lg font-semibold text-[#1e293b]">Your Daily Water Goal</h2>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-[#eff6ff] rounded-lg p-4 text-center">
+              <div id="result-oz" class="text-3xl font-bold text-[#2563eb] tabular-nums">0</div>
+              <div class="text-sm text-[#475569] mt-1">fluid ounces</div>
+            </div>
+            <div class="bg-[#eff6ff] rounded-lg p-4 text-center">
+              <div id="result-l" class="text-3xl font-bold text-[#2563eb] tabular-nums">0</div>
+              <div class="text-sm text-[#475569] mt-1">liters</div>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-[#475569]">Base (weight)</span>
+              <span id="brk-base" class="font-medium text-[#1e293b] tabular-nums">0 oz</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[#475569]">Activity adjustment</span>
+              <span id="brk-activity" class="font-medium text-[#1e293b] tabular-nums">+0 oz</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[#475569]">Climate adjustment</span>
+              <span id="brk-climate" class="font-medium text-[#1e293b] tabular-nums">+0 oz</span>
+            </div>
+            <div class="border-t border-[#e2e8f0] pt-2 flex justify-between font-semibold">
+              <span class="text-[#1e293b]">Total</span>
+              <span id="brk-total" class="text-[#2563eb] tabular-nums">0 oz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Glasses -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+          <h2 class="text-sm font-semibold text-[#475569] mb-3">That's about <span id="glass-count" class="text-[#2563eb]">0</span> glasses (8 oz each)</h2>
+          <div id="glasses" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Much Water Should You Drink Daily?</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <div class="bg-[#fffbeb] border border-[#fde68a] rounded-lg p-3 text-sm text-[#92400e]">
+        <strong>Health Disclaimer:</strong> The information below is for educational purposes only and does not constitute medical advice. Hydration needs vary based on age, health conditions, medications, and other factors. Always consult a qualified healthcare professional for personalized recommendations.
+      </div>
+
+      <p>Water is the most essential nutrient your body needs. It regulates temperature, transports nutrients, cushions joints, and supports every cellular process from digestion to brain function. Despite its importance, studies consistently show that a significant portion of adults are chronically under-hydrated without realizing it. This calculator provides a personalized estimate based on your body weight, how active you are, and the climate you live in.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How the Calculation Works</h3>
+      <p>The baseline formula uses your body weight as the starting point: approximately half your body weight in pounds equals your daily intake in ounces (or about 33 ml per kilogram). This baseline is then adjusted with an activity multiplier — the more you exercise, the more water you lose through sweat and respiration. Finally, a climate factor adds extra intake for hot or humid environments where your body loses additional fluid to stay cool. The three components combined give you a practical daily target.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Signs of Dehydration</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Thirst</strong> — By the time you feel thirsty, you may already be mildly dehydrated. Sipping regularly throughout the day prevents this.</li>
+        <li><strong class="text-[#1e293b]">Dark urine</strong> — Pale straw-colored urine generally indicates good hydration. Dark yellow or amber urine suggests you need more fluids.</li>
+        <li><strong class="text-[#1e293b]">Fatigue and headaches</strong> — Even mild dehydration (1–2% body weight loss) can impair concentration, increase fatigue, and trigger headaches.</li>
+        <li><strong class="text-[#1e293b]">Dry skin and lips</strong> — Chronic under-hydration affects skin elasticity and moisture levels over time.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Drinking More Water</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Carry a water bottle</strong> — Having water visible and accessible is the single most effective habit change. Refillable bottles with volume markings help you track progress.</li>
+        <li><strong class="text-[#1e293b]">Set reminders</strong> — Use phone alarms or hydration apps to prompt you every 1–2 hours until the habit becomes automatic.</li>
+        <li><strong class="text-[#1e293b]">Flavor naturally</strong> — Adding lemon, cucumber, mint, or berries makes water more appealing if you find plain water boring.</li>
+        <li><strong class="text-[#1e293b]">Eat water-rich foods</strong> — Fruits and vegetables like watermelon, cucumber, oranges, and strawberries contribute to your daily fluid intake.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Does coffee or tea count toward my water intake?</strong></p>
+      <p>Yes, to a degree. While caffeine is a mild diuretic, research shows that moderate coffee and tea consumption still contributes a net positive amount of fluid. However, water remains the best primary hydration source because it contains no calories, sugar, or additives.</p>
+
+      <p><strong class="text-[#1e293b]">Can you drink too much water?</strong></p>
+      <p>Yes. Overhydration (hyponatremia) occurs when you drink so much water that sodium levels in your blood become dangerously diluted. This is rare in everyday life but can occur during endurance events. The general guideline is to drink to thirst and not force excessive amounts.</p>
+
+      <p><strong class="text-[#1e293b]">Should I drink more water when I'm sick?</strong></p>
+      <p>Generally yes — fever, vomiting, and diarrhea all increase fluid loss. Your doctor may recommend specific electrolyte solutions in addition to water during illness.</p>
+
+      <p>This water intake calculator is free, runs entirely in your browser, and does not store any personal data. Use it as a starting point and adjust based on how your body feels throughout the day.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .wi-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .wi-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .wi-input::placeholder { color: #94a3b8; }
+
+    .wi-select {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .wi-select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .unit-btn {
+      background: #f8fafc;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+    .unit-btn:hover { color: #475569; }
+    .unit-btn-active {
+      background: #eff6ff !important;
+      color: #2563eb !important;
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    .glass-icon {
+      width: 28px;
+      height: 36px;
+      border: 2px solid #93c5fd;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .glass-icon::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      height: 2px;
+      background: #93c5fd;
+      border-radius: 2px 2px 0 0;
+    }
+    .glass-fill {
+      width: 100%;
+      background: #60a5fa;
+      border-radius: 0 0 4px 4px;
+      transition: height 300ms;
+    }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    let unit = 'lbs';
+
+    document.querySelectorAll('.unit-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('unit-btn-active'));
+        btn.classList.add('unit-btn-active');
+        unit = btn.dataset.unit;
+      });
+    });
+
+    function calculate() {
+      let weight = parseFloat($('weight').value) || 0;
+      if (weight <= 0) return;
+
+      const weightLbs = unit === 'kg' ? weight * 2.20462 : weight;
+
+      const baseOz = weightLbs * 0.5;
+      const activityMul = parseFloat($('activity').value);
+      const climateOz = parseFloat($('climate').value);
+
+      const afterActivity = baseOz * activityMul;
+      const activityAddOz = afterActivity - baseOz;
+      const totalOz = afterActivity + climateOz;
+      const totalL = totalOz * 0.0295735;
+
+      $('results').classList.remove('hidden');
+
+      $('result-oz').textContent = Math.round(totalOz);
+      $('result-l').textContent = totalL.toFixed(1);
+
+      $('brk-base').textContent = Math.round(baseOz) + ' oz';
+      $('brk-activity').textContent = '+' + Math.round(activityAddOz) + ' oz';
+      $('brk-climate').textContent = '+' + Math.round(climateOz) + ' oz';
+      $('brk-total').textContent = Math.round(totalOz) + ' oz';
+
+      const numGlasses = Math.ceil(totalOz / 8);
+      $('glass-count').textContent = numGlasses;
+
+      const container = $('glasses');
+      container.innerHTML = '';
+      for (let i = 0; i < numGlasses; i++) {
+        const remaining = totalOz - (i * 8);
+        const fillPct = Math.min(100, (Math.min(8, remaining) / 8) * 100);
+        const glass = document.createElement('div');
+        glass.className = 'glass-icon';
+        glass.title = `Glass ${i + 1}`;
+        glass.innerHTML = `<div class="glass-fill" style="height:${fillPct}%"></div>`;
+        container.appendChild(glass);
+      }
+    }
+
+    $('calc-btn').addEventListener('click', calculate);
+    $('weight').addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('water-intake-calculator');
+  </script>
+</body>
+</html>

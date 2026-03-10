@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Tip Splitter | ClickSolveTools</title>
+  <meta name="description" content="Split restaurant bills and tips evenly, by custom amounts, or by what each person ordered. Free online tip splitter with per-person breakdowns.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/tip-splitter">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Tip Splitter | ClickSolveTools">
+  <meta property="og:description" content="Split restaurant bills and tips evenly, by custom amounts, or by what each person ordered. Free online tip splitter with per-person breakdowns.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/tip-splitter">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Tip Splitter | ClickSolveTools">
+  <meta name="twitter:description" content="Split restaurant bills and tips evenly, by custom amounts, or by what each person ordered. Free online tip splitter with per-person breakdowns.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tip Splitter","url":"https://clicksolvetools.com/tools/tip-splitter","description":"Split restaurant bills and tips evenly, by custom amounts, or by what each person ordered. Free online tip splitter with per-person breakdowns.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Tip Splitter</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="equal" class="ts-tab ts-tab-active flex-1 py-3 text-sm font-semibold text-center">Equal Split</button>
+          <button data-tab="custom" class="ts-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Custom Split</button>
+          <button data-tab="items" class="ts-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Who Ordered What</button>
+        </div>
+
+        <!-- Equal Split -->
+        <div id="panel-equal" class="ts-panel p-6 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="eq-bill" class="block text-sm font-medium text-[#475569] mb-1">Bill Amount</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="eq-bill" type="text" inputmode="decimal" placeholder="120.00" class="ts-input pl-7 w-full">
+              </div>
+            </div>
+            <div>
+              <label for="eq-tip" class="block text-sm font-medium text-[#475569] mb-1">Tip %</label>
+              <div class="relative">
+                <input id="eq-tip" type="text" inputmode="decimal" placeholder="18" class="ts-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+            <div>
+              <label for="eq-people" class="block text-sm font-medium text-[#475569] mb-1">People</label>
+              <input id="eq-people" type="number" min="1" value="2" class="ts-input w-full">
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="eq-round" class="accent-[#2563eb]">
+            <label for="eq-round" class="text-sm text-[#475569]">Round to nearest dollar</label>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
+            <div class="flex justify-between text-sm"><span class="text-[#475569]">Tip Amount</span><span id="eq-tip-amt" class="font-semibold text-[#22c55e] tabular-nums">$0.00</span></div>
+            <div class="flex justify-between text-sm"><span class="text-[#475569]">Total with Tip</span><span id="eq-total" class="font-medium tabular-nums">$0.00</span></div>
+            <div class="border-t border-[#e2e8f0] pt-2 flex justify-between">
+              <span class="text-[#475569] font-medium">Per Person</span>
+              <span id="eq-pp" class="font-bold text-[#2563eb] text-xl tabular-nums">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Split -->
+        <div id="panel-custom" class="ts-panel p-6 space-y-4 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cs-bill" class="block text-sm font-medium text-[#475569] mb-1">Bill Amount</label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+                <input id="cs-bill" type="text" inputmode="decimal" placeholder="120.00" class="ts-input pl-7 w-full">
+              </div>
+            </div>
+            <div>
+              <label for="cs-tip" class="block text-sm font-medium text-[#475569] mb-1">Tip %</label>
+              <div class="relative">
+                <input id="cs-tip" type="text" inputmode="decimal" placeholder="18" class="ts-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="cs-round" class="accent-[#2563eb]">
+            <label for="cs-round" class="text-sm text-[#475569]">Round to nearest dollar</label>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-[#475569]">People</span>
+            <button id="cs-add" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-3 py-1.5 rounded-lg text-sm">+ Add Person</button>
+          </div>
+          <div id="cs-people" class="space-y-2"></div>
+          <div id="cs-warning" class="text-sm text-red-500 hidden"></div>
+          <div id="cs-results" class="space-y-2"></div>
+        </div>
+
+        <!-- Who Ordered What -->
+        <div id="panel-items" class="ts-panel p-6 space-y-4 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="wo-tip" class="block text-sm font-medium text-[#475569] mb-1">Tip %</label>
+              <div class="relative">
+                <input id="wo-tip" type="text" inputmode="decimal" placeholder="18" class="ts-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+            <div>
+              <label for="wo-tax" class="block text-sm font-medium text-[#475569] mb-1">Tax %</label>
+              <div class="relative">
+                <input id="wo-tax" type="text" inputmode="decimal" placeholder="8" class="ts-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="wo-round" class="accent-[#2563eb]">
+            <label for="wo-round" class="text-sm text-[#475569]">Round to nearest dollar</label>
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-sm font-medium text-[#475569]">People</span>
+            <button id="wo-add-person" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-3 py-1.5 rounded-lg text-sm">+ Add Person</button>
+          </div>
+          <div id="wo-people" class="space-y-3"></div>
+          <div id="wo-results" class="space-y-2 mt-4"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Split a Restaurant Bill Fairly</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Splitting a restaurant bill sounds simple until someone ordered a salad while everyone else ordered steak. Deciding how to divide the check — evenly, proportionally, or by individual orders — is a surprisingly common source of awkwardness among friends, coworkers, and family. This tip splitter handles all three scenarios so you can settle the bill in seconds, not minutes.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Equal Split: The Quick and Easy Method</h3>
+      <p>An equal split divides the total bill, including tip, by the number of people at the table. The formula is straightforward: add the tip to the bill, then divide by the headcount. This method works best when everyone ordered items of roughly the same price, or when the group agrees that simplicity trumps precision. Most friend groups default to this approach because it keeps things fast and avoids any perception of penny-pinching.</p>
+      <p>When using this mode, enter the pre-tip bill total, your desired tip percentage, and the number of people. The calculator instantly shows the tip amount, the total including tip, and each person's share. The round-to-nearest-dollar option makes Venmo requests cleaner.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Custom Split: Proportional Sharing</h3>
+      <p>Sometimes equal doesn't feel equitable. Maybe one person had an appetizer and two cocktails while another person just had a main course. The custom split mode lets you assign a specific dollar amount or percentage share to each person. The calculator takes each person's stated share and distributes the tip and tax proportionally — so the person who spent more also pays a proportionally larger share of the tip. This prevents the common frustration of subsidizing someone else's expensive order.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Who Ordered What: Item-Level Splitting</h3>
+      <p>The most precise method is to track exactly what each person ordered. Add each menu item, assign it to a person, and the calculator computes individual subtotals. Tip and tax are then distributed proportionally based on each person's share of the pre-tip subtotal. This is the gold standard for fairness, especially at work dinners or large group outings where spending varies widely.</p>
+      <p>For example, if the total food bill is $200, Person A ordered $80 worth of food (40% of the total), and the tip is $36, Person A's share of the tip is 40% × $36 = $14.40. Tax works the same way. The result is a precise per-person total that reflects exactly what each individual consumed.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tipping Etiquette and Standard Percentages</h3>
+      <p>In the United States, the standard tip for sit-down restaurant service ranges from 15% to 20% of the pre-tax bill. Many diners default to 18% as a middle ground. For exceptional service, 20% to 25% is common. For counter service or takeout, 10% to 15% is typical but not expected. Remember that tips are a significant portion of a server's income — in most U.S. states, tipped employees earn a lower base wage with the expectation that tips make up the difference.</p>
+      <p>Outside the United States, tipping customs vary dramatically. In Japan, tipping is considered rude. In many European countries, a service charge is included in the bill, and rounding up by a euro or two is sufficient. In Canada, tipping norms mirror the U.S. closely. Always research local customs when traveling abroad.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Splitting Bills Smoothly</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Agree on the method before ordering</strong> — decide upfront whether you're splitting evenly or by item to avoid surprises.</li>
+        <li><strong class="text-[#1e293b]">Use one person as the collector</strong> — have one person pay the full bill on a card and collect shares via payment apps.</li>
+        <li><strong class="text-[#1e293b]">Don't forget tax</strong> — the bill total you see on the receipt usually includes tax, but if you're splitting by items, you need to add tax proportionally.</li>
+        <li><strong class="text-[#1e293b]">Round up, not down</strong> — rounding each person's share up by a dollar or two ensures the server isn't shorted.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+      <p><strong class="text-[#1e293b]">Should I tip on the pre-tax or post-tax amount?</strong></p>
+      <p>Traditionally, tips are calculated on the pre-tax subtotal. However, tipping on the post-tax total has become increasingly common and is perfectly acceptable — the difference is usually small.</p>
+
+      <p><strong class="text-[#1e293b]">What if someone didn't drink but others ordered expensive cocktails?</strong></p>
+      <p>Use the "Who Ordered What" mode to assign drinks to the people who ordered them. This ensures non-drinkers aren't subsidizing a bar tab.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Actual amounts may vary based on restaurant policies, local tax rates, and group agreements. Always verify the final total before paying.
+      </div>
+
+      <p>This tip splitter is completely free, runs entirely in your browser, and stores no data on any server. Bookmark it for your next group dinner.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ts-input{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;color:#1e293b;font-size:.9375rem;outline:none;transition:border-color 150ms,box-shadow 150ms}
+    .ts-input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .ts-input::placeholder{color:#94a3b8}
+    .ts-tab{background:#f8fafc;color:#94a3b8;cursor:pointer;transition:all 150ms}
+    .ts-tab:hover{color:#475569}
+    .ts-tab-active{background:#fff!important;color:#2563eb!important;box-shadow:inset 0 -2px 0 #2563eb}
+    .tabular-nums{font-variant-numeric:tabular-nums}
+  </style>
+
+  <script>
+  (function(){
+    const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2});
+    const $=id=>document.getElementById(id);
+    function parseNum(el){return parseFloat(el.value.replace(/[^0-9.\-]/g,''))||0;}
+    function roundDollar(v,doRound){return doRound?Math.round(v):v;}
+
+    // Tab switching
+    $('tabs').addEventListener('click',e=>{
+      const btn=e.target.closest('.ts-tab');
+      if(!btn)return;
+      document.querySelectorAll('.ts-tab').forEach(b=>b.classList.remove('ts-tab-active'));
+      btn.classList.add('ts-tab-active');
+      document.querySelectorAll('.ts-panel').forEach(p=>p.classList.add('hidden'));
+      $('panel-'+btn.dataset.tab).classList.remove('hidden');
+    });
+
+    // ---- EQUAL SPLIT ----
+    function calcEqual(){
+      const bill=parseNum($('eq-bill'));
+      const tipPct=parseNum($('eq-tip'));
+      const people=Math.max(1,parseInt($('eq-people').value)||1);
+      const doRound=$('eq-round').checked;
+      const tipAmt=bill*(tipPct/100);
+      const total=bill+tipAmt;
+      let pp=total/people;
+      pp=roundDollar(pp,doRound);
+      $('eq-tip-amt').textContent=fmt.format(tipAmt);
+      $('eq-total').textContent=fmt.format(total);
+      $('eq-pp').textContent=fmt.format(pp);
+    }
+    ['eq-bill','eq-tip','eq-people','eq-round'].forEach(id=>{
+      $(id).addEventListener('input',calcEqual);
+      $(id).addEventListener('change',calcEqual);
+    });
+    calcEqual();
+
+    // ---- CUSTOM SPLIT ----
+    let csId=0;
+    const csPeople=[];
+
+    function addCsPerson(name){
+      const id=csId++;
+      const row=document.createElement('div');
+      row.className='flex items-center gap-2';
+      row.dataset.id=id;
+      row.innerHTML=`
+        <input type="text" value="${name}" placeholder="Name" class="ts-input flex-1 text-sm cs-name">
+        <div class="relative w-28">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-sm">$</span>
+          <input type="text" inputmode="decimal" placeholder="0" class="ts-input pl-7 w-full text-sm cs-share">
+        </div>
+        <button class="text-red-400 hover:text-red-600 text-lg font-bold cs-remove px-1">&times;</button>
+      `;
+      $('cs-people').appendChild(row);
+      csPeople.push({id,el:row});
+      row.querySelector('.cs-share').addEventListener('input',calcCustom);
+      row.querySelector('.cs-remove').addEventListener('click',()=>{
+        row.remove();
+        const idx=csPeople.findIndex(p=>p.id===id);
+        if(idx>=0)csPeople.splice(idx,1);
+        calcCustom();
+      });
+      calcCustom();
+    }
+
+    $('cs-add').addEventListener('click',()=>addCsPerson('Person '+(csPeople.length+1)));
+    addCsPerson('Person 1');
+    addCsPerson('Person 2');
+
+    function calcCustom(){
+      const bill=parseNum($('cs-bill'));
+      const tipPct=parseNum($('cs-tip'));
+      const doRound=$('cs-round').checked;
+      const total=bill*(1+tipPct/100);
+
+      let shares=[];
+      let shareSum=0;
+      csPeople.forEach(p=>{
+        const nameEl=p.el.querySelector('.cs-name');
+        const shareEl=p.el.querySelector('.cs-share');
+        const name=nameEl.value||'Person';
+        const share=parseFloat(shareEl.value.replace(/[^0-9.\-]/g,''))||0;
+        shares.push({name,share});
+        shareSum+=share;
+      });
+
+      const warn=$('cs-warning');
+      if(bill>0&&shareSum>0&&Math.abs(shareSum-bill)>0.01){
+        warn.textContent=`Shares total ${fmt.format(shareSum)} but the bill is ${fmt.format(bill)}. Shares will be adjusted proportionally.`;
+        warn.classList.remove('hidden');
+      }else{
+        warn.classList.add('hidden');
+      }
+
+      const results=$('cs-results');
+      if(shareSum===0||bill===0){results.innerHTML='';return;}
+
+      let html='<div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">';
+      html+='<div class="text-sm font-medium text-[#475569] mb-2">Per-Person Breakdown</div>';
+      shares.forEach(s=>{
+        const ratio=s.share/shareSum;
+        let personTotal=total*ratio;
+        personTotal=roundDollar(personTotal,doRound);
+        html+=`<div class="flex justify-between text-sm"><span class="text-[#475569]">${s.name}</span><span class="font-bold text-[#2563eb] tabular-nums">${fmt.format(personTotal)}</span></div>`;
+      });
+      html+='</div>';
+      results.innerHTML=html;
+    }
+    ['cs-bill','cs-tip','cs-round'].forEach(id=>{
+      $(id).addEventListener('input',calcCustom);
+      $(id).addEventListener('change',calcCustom);
+    });
+    calcCustom();
+
+    // ---- WHO ORDERED WHAT ----
+    let woPeople=[];
+    let woPersonId=0;
+
+    function renderWoPeople(){
+      const container=$('wo-people');
+      container.innerHTML='';
+      woPeople.forEach(person=>{
+        const div=document.createElement('div');
+        div.className='bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 space-y-2';
+        let itemsHtml='';
+        person.items.forEach((item,idx)=>{
+          itemsHtml+=`
+            <div class="flex items-center gap-2">
+              <input type="text" value="${item.name}" placeholder="Item name" class="ts-input flex-1 text-xs wo-item-name" data-person="${person.id}" data-idx="${idx}">
+              <div class="relative w-24">
+                <span class="absolute left-2 top-1/2 -translate-y-1/2 text-[#94a3b8] text-xs">$</span>
+                <input type="text" inputmode="decimal" value="${item.price||''}" placeholder="0" class="ts-input pl-6 w-full text-xs wo-item-price" data-person="${person.id}" data-idx="${idx}">
+              </div>
+              <button class="text-red-400 hover:text-red-600 text-sm font-bold wo-remove-item" data-person="${person.id}" data-idx="${idx}">&times;</button>
+            </div>`;
+        });
+        div.innerHTML=`
+          <div class="flex items-center justify-between">
+            <input type="text" value="${person.name}" placeholder="Person name" class="ts-input text-sm font-medium wo-person-name flex-1 mr-2" data-person="${person.id}">
+            <button class="text-red-400 hover:text-red-600 text-xs wo-remove-person" data-person="${person.id}">Remove</button>
+          </div>
+          <div class="space-y-1">${itemsHtml}</div>
+          <button class="text-[#2563eb] hover:text-[#1d4ed8] text-xs font-medium wo-add-item" data-person="${person.id}">+ Add Item</button>
+        `;
+        container.appendChild(div);
+      });
+      bindWoEvents();
+      calcWo();
+    }
+
+    function bindWoEvents(){
+      document.querySelectorAll('.wo-person-name').forEach(el=>el.addEventListener('input',e=>{
+        const p=woPeople.find(p=>p.id===+e.target.dataset.person);
+        if(p)p.name=e.target.value;
+        calcWo();
+      }));
+      document.querySelectorAll('.wo-item-name').forEach(el=>el.addEventListener('input',e=>{
+        const p=woPeople.find(p=>p.id===+e.target.dataset.person);
+        if(p)p.items[+e.target.dataset.idx].name=e.target.value;
+      }));
+      document.querySelectorAll('.wo-item-price').forEach(el=>el.addEventListener('input',e=>{
+        const p=woPeople.find(p=>p.id===+e.target.dataset.person);
+        if(p)p.items[+e.target.dataset.idx].price=e.target.value;
+        calcWo();
+      }));
+      document.querySelectorAll('.wo-add-item').forEach(el=>el.addEventListener('click',e=>{
+        const p=woPeople.find(p=>p.id===+e.target.dataset.person);
+        if(p){p.items.push({name:'',price:''});renderWoPeople();}
+      }));
+      document.querySelectorAll('.wo-remove-item').forEach(el=>el.addEventListener('click',e=>{
+        const p=woPeople.find(p=>p.id===+e.target.dataset.person);
+        if(p&&p.items.length>1){p.items.splice(+e.target.dataset.idx,1);renderWoPeople();}
+      }));
+      document.querySelectorAll('.wo-remove-person').forEach(el=>el.addEventListener('click',e=>{
+        if(woPeople.length<=1)return;
+        woPeople=woPeople.filter(p=>p.id!==+e.target.dataset.person);
+        renderWoPeople();
+      }));
+    }
+
+    function calcWo(){
+      const tipPct=parseNum($('wo-tip'));
+      const taxPct=parseNum($('wo-tax'));
+      const doRound=$('wo-round').checked;
+
+      let grandSubtotal=0;
+      const personSubtotals=woPeople.map(p=>{
+        const sub=p.items.reduce((sum,it)=>sum+(parseFloat((it.price||'').replace(/[^0-9.\-]/g,''))||0),0);
+        grandSubtotal+=sub;
+        return{name:p.name||'Person',subtotal:sub};
+      });
+
+      const results=$('wo-results');
+      if(grandSubtotal===0){results.innerHTML='';return;}
+
+      let html='<div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-3">';
+      html+='<div class="text-sm font-medium text-[#475569] mb-1">Per-Person Breakdown</div>';
+      personSubtotals.forEach(ps=>{
+        const ratio=ps.subtotal/grandSubtotal;
+        const tipShare=grandSubtotal*(tipPct/100)*ratio;
+        const taxShare=grandSubtotal*(taxPct/100)*ratio;
+        let personTotal=ps.subtotal+tipShare+taxShare;
+        personTotal=roundDollar(personTotal,doRound);
+        html+=`<div class="flex justify-between items-center text-sm border-b border-[#e2e8f0] pb-2 last:border-0 last:pb-0">
+          <div><span class="font-medium text-[#1e293b]">${ps.name}</span><span class="text-[#94a3b8] text-xs ml-2">items ${fmt.format(ps.subtotal)} + tip ${fmt.format(tipShare)} + tax ${fmt.format(taxShare)}</span></div>
+          <span class="font-bold text-[#2563eb] tabular-nums text-base">${fmt.format(personTotal)}</span>
+        </div>`;
+      });
+      const grandTotal=grandSubtotal*(1+tipPct/100+taxPct/100);
+      html+=`<div class="border-t border-[#e2e8f0] pt-2 flex justify-between text-sm"><span class="font-medium text-[#475569]">Grand Total</span><span class="font-bold tabular-nums">${fmt.format(grandTotal)}</span></div>`;
+      html+='</div>';
+      results.innerHTML=html;
+    }
+
+    $('wo-add-person').addEventListener('click',()=>{
+      woPeople.push({id:woPersonId++,name:'Person '+(woPeople.length+1),items:[{name:'',price:''}]});
+      renderWoPeople();
+    });
+    ['wo-tip','wo-tax','wo-round'].forEach(id=>{
+      $(id).addEventListener('input',calcWo);
+      $(id).addEventListener('change',calcWo);
+    });
+
+    woPeople.push({id:woPersonId++,name:'Person 1',items:[{name:'',price:''}]});
+    woPeople.push({id:woPersonId++,name:'Person 2',items:[{name:'',price:''}]});
+    renderWoPeople();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('tip-splitter');
+  </script>
+</body>
+</html>

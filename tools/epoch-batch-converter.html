@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Epoch Timestamp Batch Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert Unix timestamps to dates or dates to timestamps in bulk. Auto-detects seconds vs milliseconds, outputs ISO 8601, local time, and relative time.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/epoch-batch-converter">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Epoch Timestamp Batch Converter | ClickSolveTools">
+  <meta property="og:description" content="Convert Unix timestamps to dates or dates to timestamps in bulk. Auto-detects seconds vs milliseconds, outputs ISO 8601, local time, and relative time.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/epoch-batch-converter">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Epoch Timestamp Batch Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Convert Unix timestamps to dates or dates to timestamps in bulk. Auto-detects seconds vs milliseconds, outputs ISO 8601, local time, and relative time.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Epoch Timestamp Batch Converter","url":"https://clicksolvetools.com/tools/epoch-batch-converter","description":"Convert Unix timestamps to dates or dates to timestamps in bulk. Auto-detects seconds vs milliseconds, outputs ISO 8601, local time, and relative time.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Epoch Timestamp Batch Converter</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="ts2date" class="ep-tab ep-tab-active flex-1 py-3 text-sm font-semibold text-center">Timestamps → Dates</button>
+          <button data-tab="date2ts" class="ep-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Dates → Timestamps</button>
+        </div>
+
+        <div id="panel-ts2date" class="ep-panel p-6 space-y-4">
+          <div>
+            <label for="ts-input" class="block text-sm font-medium text-[#475569] mb-1">Unix Timestamps (one per line)</label>
+            <textarea id="ts-input" rows="6" placeholder="1700000000&#10;1700000000000&#10;1609459200" class="ep-input w-full resize-y"></textarea>
+            <p class="text-xs text-[#94a3b8] mt-1">Seconds and milliseconds are auto-detected per line</p>
+          </div>
+          <button id="btn-ts2date" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg transition-colors w-full">Convert to Dates</button>
+        </div>
+
+        <div id="panel-date2ts" class="ep-panel p-6 space-y-4 hidden">
+          <div>
+            <label for="date-input" class="block text-sm font-medium text-[#475569] mb-1">Dates (one per line)</label>
+            <textarea id="date-input" rows="6" placeholder="2024-01-15T12:00:00Z&#10;March 5, 2025&#10;2023-12-25" class="ep-input w-full resize-y"></textarea>
+            <p class="text-xs text-[#94a3b8] mt-1">Supports any format parseable by JavaScript Date</p>
+          </div>
+          <button id="btn-date2ts" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg transition-colors w-full">Convert to Timestamps</button>
+        </div>
+      </div>
+
+      <div id="results-wrap" class="hidden">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-[#475569]">Results</h2>
+          <button id="btn-csv" class="text-xs bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-3 py-1.5 rounded-lg transition-colors">Copy All as CSV</button>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead id="results-head" class="bg-[#f8fafc] text-[#475569]"></thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Unix Timestamps and Epoch Time</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>A Unix timestamp, also called epoch time or POSIX time, is the number of seconds that have elapsed since January 1, 1970, at 00:00:00 Coordinated Universal Time (UTC). This moment is known as the Unix epoch. Nearly every modern operating system, programming language, and database uses this representation internally to store and compare dates without worrying about time zones, daylight saving changes, or locale-specific formatting.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Epoch Time Matters</h3>
+      <p>Storing dates as a single integer makes arithmetic trivial. To find the difference between two events you simply subtract one timestamp from the other. Sorting becomes a straightforward numeric comparison, and there is zero ambiguity about which time zone a value refers to — it is always UTC. APIs, log files, JWT tokens, and event-driven architectures all rely heavily on epoch timestamps because they are compact, unambiguous, and universally understood across tech stacks.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Seconds vs. Milliseconds</h3>
+      <p>The original Unix convention counts in seconds, giving values like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">1700000000</code> (November 14, 2023). However, JavaScript, Java, and many modern systems use milliseconds for extra precision, producing 13-digit values like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">1700000000000</code>. This converter automatically detects which format you are using: if a number exceeds 10<sup>12</sup>, it is treated as milliseconds; otherwise it is treated as seconds. This means you can mix both formats freely when pasting a batch of values.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Batch Conversion Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Log analysis</strong> — Paste a column of timestamps from server logs to quickly see the human-readable dates alongside each entry.</li>
+        <li><strong class="text-[#1e293b]">Database debugging</strong> — Convert <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">created_at</code> or <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">updated_at</code> columns stored as integers into readable dates to verify data correctness.</li>
+        <li><strong class="text-[#1e293b]">API development</strong> — When an API returns epoch values, convert them in bulk to verify response payloads during testing.</li>
+        <li><strong class="text-[#1e293b]">Spreadsheet workflows</strong> — Copy the CSV output directly into a spreadsheet for further analysis and reporting.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Year 2038 Problem</h3>
+      <p>Systems that store Unix time in a signed 32-bit integer will overflow on January 19, 2038, at 03:14:07 UTC. At that moment the counter wraps around to a large negative number, which could be interpreted as a date in December 1901. Most modern systems have already migrated to 64-bit timestamps, which extend the range far beyond the lifespan of our solar system. If you are building new software, always use 64-bit storage for timestamps.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Relative Time</h3>
+      <p>This tool also shows relative time (for example, "3 hours ago" or "in 2 days") to give you an intuitive sense of when each timestamp falls relative to now. Relative time is especially useful when reviewing log entries or debugging event sequences — you can immediately see whether something happened recently or months ago without doing mental date math.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Privacy:</strong> All conversions happen entirely in your browser. No data is sent to any server.
+      </div>
+
+      <p>Bookmark this page for the next time you need to decode a batch of Unix timestamps or convert a list of dates into epoch values. It is free, instant, and works offline once loaded.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ep-input{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;color:#1e293b;font-size:.9375rem;outline:none;transition:border-color 150ms,box-shadow 150ms;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .ep-input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .ep-input::placeholder{color:#94a3b8}
+    .ep-tab{background:#f8fafc;color:#94a3b8;cursor:pointer;transition:all 150ms}
+    .ep-tab:hover{color:#475569}
+    .ep-tab-active{background:#fff!important;color:#2563eb!important;box-shadow:inset 0 -2px 0 #2563eb}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+
+    $('tabs').addEventListener('click',e=>{
+      const btn=e.target.closest('.ep-tab');
+      if(!btn)return;
+      document.querySelectorAll('.ep-tab').forEach(b=>b.classList.remove('ep-tab-active'));
+      btn.classList.add('ep-tab-active');
+      document.querySelectorAll('.ep-panel').forEach(p=>p.classList.add('hidden'));
+      $('panel-'+btn.dataset.tab).classList.remove('hidden');
+      $('results-wrap').classList.add('hidden');
+    });
+
+    function relativeTime(ms){
+      const diff=ms-Date.now();
+      const abs=Math.abs(diff);
+      const sec=abs/1000;
+      if(sec<60)return diff>=0?'just now':'just now';
+      const min=sec/60;
+      if(min<60){const v=Math.floor(min);return diff<0?v+' min ago':'in '+v+' min';}
+      const hr=min/60;
+      if(hr<24){const v=Math.floor(hr);return diff<0?v+' hr ago':'in '+v+' hr';}
+      const d=hr/24;
+      if(d<30){const v=Math.floor(d);return diff<0?v+' day'+(v>1?'s':'')+' ago':'in '+v+' day'+(v>1?'s':'');}
+      const mo=d/30.44;
+      if(mo<12){const v=Math.floor(mo);return diff<0?v+' mo ago':'in '+v+' mo';}
+      const yr=d/365.25;
+      const v=Math.round(yr*10)/10;
+      return diff<0?v+' yr ago':'in '+v+' yr';
+    }
+
+    function copyText(text){navigator.clipboard.writeText(text);}
+
+    let csvData='';
+
+    function renderTable(headers,rows){
+      const wrap=$('results-wrap');
+      const head=$('results-head');
+      const body=$('results-body');
+      head.innerHTML='<tr>'+headers.map(h=>'<th class="px-4 py-2 text-left font-semibold text-xs uppercase tracking-wider">'+h+'</th>').join('')+'<th class="px-4 py-2 w-10"></th></tr>';
+      body.innerHTML='';
+      const csvLines=[headers.join(',')];
+      rows.forEach(r=>{
+        const tr=document.createElement('tr');
+        tr.className='border-t border-[#e2e8f0]';
+        const isInvalid=r._invalid;
+        r.cols.forEach(c=>{
+          const td=document.createElement('td');
+          td.className='px-4 py-2.5 text-sm '+(isInvalid?'text-red-500 font-medium':'text-[#1e293b]');
+          td.textContent=c;
+          tr.appendChild(td);
+        });
+        const td=document.createElement('td');
+        td.className='px-4 py-2.5';
+        if(!isInvalid){
+          const btn=document.createElement('button');
+          btn.className='text-[#94a3b8] hover:text-[#2563eb] transition-colors text-xs';
+          btn.textContent='Copy';
+          btn.addEventListener('click',()=>{copyText(r.cols.join('\t'));btn.textContent='✓';setTimeout(()=>btn.textContent='Copy',1200);});
+          td.appendChild(btn);
+        }
+        tr.appendChild(td);
+        body.appendChild(tr);
+        csvLines.push(r.cols.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(','));
+      });
+      csvData=csvLines.join('\n');
+      wrap.classList.remove('hidden');
+    }
+
+    $('btn-ts2date').addEventListener('click',()=>{
+      const lines=$('ts-input').value.trim().split('\n').filter(l=>l.trim());
+      if(!lines.length)return;
+      const rows=lines.map(line=>{
+        const raw=line.trim();
+        const num=Number(raw);
+        if(isNaN(num)||raw==='')return{cols:[raw,'Invalid','',''],_invalid:true};
+        const ms=num>1e12?num:num*1000;
+        const d=new Date(ms);
+        if(isNaN(d.getTime()))return{cols:[raw,'Invalid','',''],_invalid:true};
+        return{cols:[raw,d.toISOString(),d.toLocaleString(),relativeTime(ms)]};
+      });
+      renderTable(['Input','ISO 8601','Local Time','Relative'],rows);
+    });
+
+    $('btn-date2ts').addEventListener('click',()=>{
+      const lines=$('date-input').value.trim().split('\n').filter(l=>l.trim());
+      if(!lines.length)return;
+      const rows=lines.map(line=>{
+        const raw=line.trim();
+        const d=new Date(raw);
+        if(isNaN(d.getTime()))return{cols:[raw,'Invalid','Invalid'],_invalid:true};
+        return{cols:[raw,Math.floor(d.getTime()/1000),d.getTime()]};
+      });
+      renderTable(['Input','Unix (seconds)','Unix (milliseconds)'],rows);
+    });
+
+    $('btn-csv').addEventListener('click',()=>{
+      copyText(csvData);
+      const btn=$('btn-csv');
+      btn.textContent='Copied!';
+      setTimeout(()=>btn.textContent='Copy All as CSV',1200);
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('epoch-batch-converter');
+  </script>
+</body>
+</html>

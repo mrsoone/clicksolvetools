@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples) | ClickSolveTools Blog</title>
+  <meta name="description" content="A practical regex reference with 20+ ready-to-use patterns for emails, URLs, dates, IPs, and more. Each pattern explained piece by piece with examples.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/blog/regex-cheat-sheet">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples)">
+  <meta property="og:description" content="A practical regex reference with 20+ ready-to-use patterns for emails, URLs, dates, IPs, and more. Each pattern explained piece by piece with examples.">
+  <meta property="og:url" content="https://clicksolvetools.com/blog/regex-cheat-sheet">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta property="article:published_time" content="2025-08-25">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples)">
+  <meta name="twitter:description" content="A practical regex reference with 20+ ready-to-use patterns for emails, URLs, dates, IPs, and more. Each pattern explained piece by piece with examples.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples)","description":"A practical regex reference with 20+ ready-to-use patterns for emails, URLs, dates, IPs, and more. Each pattern explained piece by piece with examples.","url":"https://clicksolvetools.com/blog/regex-cheat-sheet","datePublished":"2025-08-25","publisher":{"@type":"Organization","name":"ClickSolveTools","logo":{"@type":"ImageObject","url":"https://clicksolvetools.com/images/logo.png"}},"author":{"@type":"Organization","name":"ClickSolveTools"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[#94a3b8] mb-8">
+      <a href="/" class="hover:text-[#2563eb]">Home</a>
+      <span class="mx-2">→</span>
+      <a href="/blog" class="hover:text-[#2563eb]">Blog</a>
+      <span class="mx-2">→</span>
+      <span class="text-[#1e293b]">Regex Cheat Sheet</span>
+    </nav>
+
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-xs px-3 py-1 bg-[#eff6ff] text-[#2563eb] rounded-full font-medium">How-To</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">regex</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">regular expressions</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">developer</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">reference</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4 text-[#1e293b]">Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples)</h1>
+      <div class="flex items-center gap-4 text-sm text-[#94a3b8]">
+        <time datetime="2025-08-25">August 25, 2025</time>
+        <span>·</span>
+        <span>10 min read</span>
+      </div>
+    </header>
+
+    <div class="prose max-w-none space-y-6 text-[#475569] leading-relaxed">
+
+      <p>Regular expressions are one of those tools that developers either love or avoid entirely. The syntax looks like line noise at first glance, but once you understand the building blocks, you can validate input, extract data, and perform complex search-and-replace operations in seconds.</p>
+
+      <p>This cheat sheet covers the fundamentals first, then gives you 20 practical, copy-paste-ready patterns with detailed breakdowns. Test any pattern live with our <a href="/tools/regex-tester" class="text-[#2563eb] hover:underline">Regex Tester</a>.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Regex Fundamentals</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Character Classes</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Pattern</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Meaning</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Example Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>.</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Any character except newline</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>a.c</code> → "abc", "a1c", "a-c"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\d</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Any digit [0-9]</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\d{3}</code> → "123", "456"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\D</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Any non-digit</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\D+</code> → "abc", "---"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\w</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Word character [a-zA-Z0-9_]</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\w+</code> → "hello_world"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\W</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Non-word character</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\W</code> → " ", "@", "!"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\s</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Whitespace (space, tab, newline)</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\s+</code> → "   ", "\t\n"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>[abc]</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Any character in the set</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>[aeiou]</code> → "a", "e"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>[^abc]</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Any character NOT in the set</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>[^0-9]</code> → "a", "Z"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>[a-z]</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Character range</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>[A-Fa-f0-9]</code> → hex chars</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Quantifiers</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Pattern</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Meaning</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>*</code></td>
+            <td class="p-3 border border-[#e2e8f0]">0 or more</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>ab*c</code> → "ac", "abc", "abbc"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>+</code></td>
+            <td class="p-3 border border-[#e2e8f0]">1 or more</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>ab+c</code> → "abc", "abbc" (not "ac")</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>?</code></td>
+            <td class="p-3 border border-[#e2e8f0]">0 or 1 (optional)</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>colou?r</code> → "color", "colour"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>{n}</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Exactly n times</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\d{4}</code> → "2025"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>{n,m}</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Between n and m times</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\d{2,4}</code> → "12", "123", "1234"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>{n,}</code></td>
+            <td class="p-3 border border-[#e2e8f0]">n or more times</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>\w{3,}</code> → words with 3+ chars</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>*?</code> <code>+?</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Lazy (match as few as possible)</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>&lt;.+?&gt;</code> → matches one tag, not all</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Anchors and Boundaries</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Pattern</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>^</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Start of string (or line with <code>m</code> flag)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>$</code></td>
+            <td class="p-3 border border-[#e2e8f0]">End of string (or line with <code>m</code> flag)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>\b</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Word boundary (between \w and \W)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Groups and Lookaround</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Pattern</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Capturing group — stores the match</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?:abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Non-capturing group — groups without storing</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?&lt;name&gt;abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Named capturing group</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>a|b</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Alternation — matches a OR b</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?=abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Positive lookahead — must be followed by abc</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?!abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Negative lookahead — must NOT be followed by abc</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?&lt;=abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Positive lookbehind — must be preceded by abc</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>(?&lt;!abc)</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Negative lookbehind — must NOT be preceded by abc</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Flags</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Flag</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Name</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>g</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Global</td>
+            <td class="p-3 border border-[#e2e8f0]">Find all matches, not just the first</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>i</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Case-insensitive</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>/hello/i</code> matches "Hello", "HELLO"</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>m</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Multiline</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>^</code> and <code>$</code> match line boundaries</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>s</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Dotall</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>.</code> matches newline characters too</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">20 Practical Regex Patterns You'll Actually Use</h2>
+
+      <p>Each pattern below includes the regex, a breakdown of what each part does, and example matches. Copy any pattern and test it in our <a href="/tools/regex-tester" class="text-[#2563eb] hover:underline">Regex Tester</a>.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">1. Email Address</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+
+^                     Start of string
+[a-zA-Z0-9._%+-]+    Local part (letters, digits, dots, underscores, etc.)
+@                     Literal @ symbol
+[a-zA-Z0-9.-]+       Domain name
+\.                    Literal dot
+[a-zA-Z]{2,}         TLD (at least 2 letters)
+$                     End of string
+
+✓ user@example.com  ✓ first.last+tag@sub.domain.org  ✗ @missing.com  ✗ user@.com</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">2. URL (HTTP/HTTPS)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
+
+https?             "http" or "https"
+:\/\/              "://"
+(www\.)?           Optional "www."
+[-a-zA-Z0-9...]+   Domain characters
+\.[a-zA-Z0-9()]+   TLD
+\b                 Word boundary
+([-a-zA-Z0-9...]*) Path, query, and fragment
+
+✓ https://example.com/path?q=1  ✓ http://sub.domain.org  ✗ ftp://files.com</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">3. IPv4 Address</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$
+
+25[0-5]       250-255
+2[0-4]\d      200-249
+[01]?\d\d?    0-199
+\.            Dot separator (repeated 3 times)
+
+✓ 192.168.1.1  ✓ 255.255.255.0  ✗ 256.1.1.1  ✗ 192.168.1</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">4. US Phone Number</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^(\+1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$
+
+(\+1[-.\s]?)?    Optional country code "+1"
+\(?\d{3}\)?      Area code, optional parentheses
+[-.\s]?          Optional separator (dash, dot, space)
+\d{3}            Exchange
+\d{4}            Subscriber number
+
+✓ (555) 123-4567  ✓ +1-555-123-4567  ✓ 5551234567  ✗ 123-456</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">5. Date (YYYY-MM-DD)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+
+\d{4}            Four-digit year
+(0[1-9]|1[0-2])  Month 01-12
+(0[1-9]|[12]\d|3[01])  Day 01-31
+
+✓ 2025-08-25  ✓ 2000-01-01  ✗ 2025-13-01  ✗ 2025-00-15</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">6. Hex Color Code</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+
+#                 Literal hash
+[A-Fa-f0-9]{6}   6 hex digits (#FF00AA)
+|                 OR
+[A-Fa-f0-9]{3}   3 hex digits (#F0A shorthand)
+
+✓ #FF5733  ✓ #abc  ✗ #GG0000  ✗ FF5733 (missing #)</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">7. HTML Tag</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">&lt;([a-z][a-z0-9]*)\b[^&gt;]*&gt;(.*?)&lt;\/\1&gt;
+
+&lt;([a-z][a-z0-9]*)   Opening tag name (captured as group 1)
+\b[^&gt;]*&gt;            Attributes and closing &gt;
+(.*?)              Tag content (lazy match)
+&lt;\/\1&gt;              Closing tag matching group 1
+
+✓ &lt;p&gt;text&lt;/p&gt;  ✓ &lt;div class="box"&gt;content&lt;/div&gt;</code>
+
+      <p><strong class="text-[#1e293b]">Warning:</strong> Don't use regex to parse complex HTML. Use a proper HTML parser for production code. Regex is fine for quick searches and simple extractions.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">8. File Extension</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">\.([a-zA-Z0-9]{1,10})$
+
+\.                Literal dot
+([a-zA-Z0-9]+)    Extension (captured)
+$                 End of string
+
+✓ report.pdf → "pdf"  ✓ archive.tar.gz → "gz"  ✓ image.JPEG → "JPEG"</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">9. Strong Password</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$
+
+(?=.*[a-z])       At least one lowercase letter
+(?=.*[A-Z])       At least one uppercase letter
+(?=.*\d)          At least one digit
+(?=.*[@$!%*?&])   At least one special character
+{8,}              Minimum 8 characters total
+
+✓ Pa$$w0rd!  ✓ MyStr0ng@Pass  ✗ password  ✗ 12345678</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">10. UUID v4</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+
+[0-9a-f]{8}       8 hex chars
+4[0-9a-f]{3}      Version 4 indicator
+[89ab][0-9a-f]{3}  Variant bits
+
+✓ 550e8400-e29b-41d4-a716-446655440000</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">11. Positive Integer</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^[1-9]\d*$
+
+✓ 1  ✓ 42  ✓ 100000  ✗ 0  ✗ -5  ✗ 3.14</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">12. Decimal Number (With Optional Negation)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^-?\d+(\.\d+)?$
+
+-?            Optional negative sign
+\d+           Integer part
+(\.\d+)?      Optional decimal part
+
+✓ 42  ✓ -3.14  ✓ 0.5  ✗ .5  ✗ 3.</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">13. Slug (URL-Friendly String)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^[a-z0-9]+(-[a-z0-9]+)*$
+
+✓ my-blog-post  ✓ regex101  ✗ My Blog Post  ✗ --double-dash</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">14. Username (Alphanumeric, 3-16 Characters)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^[a-zA-Z][a-zA-Z0-9_]{2,15}$
+
+[a-zA-Z]           Must start with a letter
+[a-zA-Z0-9_]{2,15}  2-15 more alphanumeric or underscore chars
+
+✓ alice_42  ✓ Bob  ✗ 1user  ✗ ab  ✗ this_is_way_too_long_username</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">15. Credit Card Number (Basic)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})$
+
+4[0-9]{12,15}      Visa (starts with 4)
+5[1-5][0-9]{14}    Mastercard (51-55)
+3[47][0-9]{13}     Amex (34 or 37)
+6011|65[0-9]{14}   Discover
+
+✓ 4111111111111111 (Visa test)  ✓ 5500000000000004 (MC test)</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">16. Time (24-Hour Format)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^([01]\d|2[0-3]):([0-5]\d)$
+
+[01]\d|2[0-3]    Hours 00-23
+[0-5]\d          Minutes 00-59
+
+✓ 09:30  ✓ 23:59  ✗ 24:00  ✗ 9:5</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">17. MAC Address</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+
+✓ 00:1A:2B:3C:4D:5E  ✓ 00-1A-2B-3C-4D-5E  ✗ 00:1A:2B:3C:4D</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">18. ZIP Code (US 5-Digit or 5+4)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^\d{5}(-\d{4})?$
+
+✓ 90210  ✓ 90210-1234  ✗ 9021  ✗ 902101234</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">19. Whitespace Trimmer (for Search-and-Replace)</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">^\s+|\s+$
+
+^\s+    Leading whitespace
+|       OR
+\s+$    Trailing whitespace
+
+Use with replace("") to trim strings:
+"  hello  ".replace(/^\s+|\s+$/g, "") → "hello"</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">20. Duplicate Words</h3>
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">\b(\w+)\s+\1\b
+
+(\w+)    Capture a word
+\s+      Followed by whitespace
+\1       Followed by the same word (backreference)
+
+✓ "the the"  ✓ "is is"  ✗ "the then"</code>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Tips for Writing Better Regex</h2>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Be specific.</strong> Use <code>[a-zA-Z]</code> instead of <code>.</code> when you know you want letters. Overly broad patterns match things you don't intend.</li>
+        <li><strong class="text-[#1e293b]">Anchor your patterns.</strong> Use <code>^</code> and <code>$</code> when validating entire strings. Without anchors, <code>\d{3}</code> will match inside "abc123def".</li>
+        <li><strong class="text-[#1e293b]">Prefer lazy quantifiers for extraction.</strong> Use <code>.*?</code> instead of <code>.*</code> when you want the shortest match (e.g., extracting content between tags).</li>
+        <li><strong class="text-[#1e293b]">Use named groups for readability.</strong> <code>(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})</code> is clearer than <code>(\d{4})-(\d{2})</code> when you're extracting data.</li>
+        <li><strong class="text-[#1e293b]">Test with edge cases.</strong> Always test with empty strings, very long strings, and inputs containing special characters.</li>
+        <li><strong class="text-[#1e293b]">Watch for catastrophic backtracking.</strong> Patterns like <code>(a+)+$</code> can hang your program on certain inputs. Avoid nested quantifiers when possible.</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Frequently Asked Questions</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What's the difference between .* and .*? (greedy vs lazy)?</h3>
+      <p><code>.*</code> is greedy — it matches as many characters as possible. <code>.*?</code> is lazy — it matches as few characters as possible. For example, given the string <code>&lt;b&gt;hello&lt;/b&gt; world &lt;b&gt;foo&lt;/b&gt;</code>, the pattern <code>&lt;b&gt;.*&lt;/b&gt;</code> matches everything from the first <code>&lt;b&gt;</code> to the last <code>&lt;/b&gt;</code>. The lazy version <code>&lt;b&gt;.*?&lt;/b&gt;</code> matches just <code>&lt;b&gt;hello&lt;/b&gt;</code>. Use lazy quantifiers when extracting individual occurrences.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Should I use regex to validate email addresses?</h3>
+      <p>A simple regex like the one in pattern #1 above catches the vast majority of invalid inputs and is fine for client-side form validation. However, the full email spec (RFC 5322) is extremely complex and essentially impossible to capture perfectly in a single regex. For production systems, validate the format with a simple regex, then confirm the email actually exists by sending a verification message.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why does my regex work in JavaScript but not Python?</h3>
+      <p>Different regex engines have slightly different feature sets. JavaScript uses the <code>/pattern/flags</code> syntax, while Python uses raw strings <code>r"pattern"</code>. Some features like lookbehind with variable length are supported in Python but not in all JavaScript engines. Named groups use <code>(?P&lt;name&gt;...)</code> in Python but <code>(?&lt;name&gt;...)</code> in JavaScript. Always test in the target language or use our <a href="/tools/regex-tester" class="text-[#2563eb] hover:underline">Regex Tester</a> to verify.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What is catastrophic backtracking and how do I avoid it?</h3>
+      <p>Catastrophic backtracking occurs when a regex engine explores an exponential number of paths trying to match a pattern. It typically happens with nested quantifiers like <code>(a+)+</code> or overlapping alternations. On a non-matching input, the engine can take minutes or hang indefinitely. Avoid it by keeping patterns simple, avoiding nested repetition, and using atomic groups or possessive quantifiers where available. If your regex runs slowly on valid inputs, it's a sign of backtracking problems.</p>
+
+    </div>
+  </article>
+
+  <div id="related-tool-cards"></div>
+  <div id="more-posts"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { renderBlogNav, renderFooter, renderMorePosts, renderRelatedToolCards } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    renderBlogNav('Regex Cheat Sheet: The Most Useful Regular Expressions (With Examples)');
+    renderFooter();
+    renderMorePosts('regex-cheat-sheet', 'How-To');
+    renderRelatedToolCards(['regex-tester', 'hash-generator', 'text-case-converter']);
+  </script>
+</body>
+</html>

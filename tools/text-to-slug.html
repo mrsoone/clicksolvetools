@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Text to Slug Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert any text into clean, SEO-friendly URL slugs instantly. Supports accented characters, bulk mode, and multiple slug formats — free online tool.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/text-to-slug">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Text to Slug Converter | ClickSolveTools">
+  <meta property="og:description" content="Convert any text into clean, SEO-friendly URL slugs instantly. Supports accented characters, bulk mode, and multiple slug formats — free online tool.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/text-to-slug">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Text to Slug Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Convert any text into clean, SEO-friendly URL slugs instantly. Supports accented characters, bulk mode, and multiple slug formats — free online tool.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text to Slug Converter","url":"https://clicksolvetools.com/tools/text-to-slug","description":"Convert any text into clean, SEO-friendly URL slugs instantly. Supports accented characters, bulk mode, and multiple slug formats.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Text to Slug Converter</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-4">
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label for="slug-input" class="block text-sm font-medium text-[#475569]">Enter text (multiple lines for bulk mode)</label>
+            <span id="input-count" class="text-xs text-[#94a3b8]">0 chars</span>
+          </div>
+          <textarea id="slug-input" rows="4" placeholder="My Cool Blog Post Title&#10;Another Great Article&#10;Héllo Wörld Café" class="slug-input w-full resize-y"></textarea>
+        </div>
+
+        <!-- Single-line outputs -->
+        <div id="single-output" class="space-y-3">
+          <div class="space-y-3">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium text-[#475569]">Standard / WordPress</span>
+                <div class="flex items-center gap-2">
+                  <span id="std-count" class="text-xs text-[#94a3b8]">0 chars</span>
+                  <button class="copy-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium" data-target="std-slug">Copy</button>
+                </div>
+              </div>
+              <div id="std-slug" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-sm text-[#1e293b] min-h-[2.5rem] break-all"></div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium text-[#475569]">GitHub (allows dots)</span>
+                <div class="flex items-center gap-2">
+                  <span id="gh-count" class="text-xs text-[#94a3b8]">0 chars</span>
+                  <button class="copy-btn text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium" data-target="gh-slug">Copy</button>
+                </div>
+              </div>
+              <div id="gh-slug" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-sm text-[#1e293b] min-h-[2.5rem] break-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk output -->
+        <div id="bulk-output" class="hidden space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-[#475569]">Bulk Results</span>
+            <button id="copy-all" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium">Copy All Slugs</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[#e2e8f0]">
+                  <th class="text-left py-2 px-3 text-[#475569] font-medium">Original</th>
+                  <th class="text-left py-2 px-3 text-[#475569] font-medium">Slug</th>
+                </tr>
+              </thead>
+              <tbody id="bulk-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">URL Slugs and Why They Matter for SEO</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>A URL slug is the part of a web address that comes after the domain name and identifies a specific page in human-readable form. For example, in <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">example.com/blog/my-first-post</code>, the slug is <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">my-first-post</code>. Clean, descriptive slugs are a small but important piece of search engine optimization and overall user experience.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Clean URLs Improve SEO</h3>
+      <p>Search engines like Google use URL structure as a ranking signal. A URL that reads <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">/tools/text-to-slug</code> tells both users and crawlers what the page is about, while <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">/page?id=37&cat=5</code> conveys nothing. Google's own documentation recommends using simple, descriptive words in URLs and avoiding unnecessary parameters. Clean slugs also improve click-through rates in search results because users are more likely to click on a link they can understand at a glance.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Anatomy of a Good Slug</h3>
+      <p>An effective URL slug follows a few conventions that have become standard across the web:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Lowercase only</strong> — URLs are case-sensitive on most servers. Using all lowercase prevents duplicate content issues where <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">/My-Page</code> and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">/my-page</code> might be treated as different URLs.</li>
+        <li><strong class="text-[#1e293b]">Hyphens as separators</strong> — Google treats hyphens as word separators but treats underscores as word joiners. The slug <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">my-page-title</code> is read as three words; <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">my_page_title</code> might be read as one.</li>
+        <li><strong class="text-[#1e293b]">No special characters</strong> — Characters like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">?</code>, <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">&</code>, <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">#</code>, and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">%</code> should be removed. They get percent-encoded in URLs and become unreadable.</li>
+        <li><strong class="text-[#1e293b]">Accented characters transliterated</strong> — Characters like é, ñ, ü, and ö should be converted to their ASCII equivalents (e, n, u, o) so the slug works universally without encoding issues.</li>
+        <li><strong class="text-[#1e293b]">Keep it short</strong> — Aim for 3–5 words. Excessively long slugs dilute keyword relevance and get truncated in search results.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Platform Differences</h3>
+      <p>Most content management systems generate slugs automatically, but their rules differ slightly. WordPress strips all special characters and uses only hyphens. GitHub's repository and file naming allows dots in addition to hyphens, which is useful for version numbers like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">release-v2.1.0</code>. This tool shows both formats so you can pick the one that matches your platform.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Bulk Conversion for Large Projects</h3>
+      <p>If you are migrating a website, restructuring your blog, or importing content from a spreadsheet, you might need to generate slugs for dozens or hundreds of titles at once. Paste your titles one per line into this tool, and you will get a complete table mapping each original title to its slug. The "Copy All" button puts every slug on your clipboard, ready to paste into a CSV or migration script.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Mistakes to Avoid</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Stop words</strong> — Words like "a," "the," "and," and "of" add length without adding keyword value. Many SEO experts recommend removing them, though this is not strictly required.</li>
+        <li><strong class="text-[#1e293b]">Changing slugs after publishing</strong> — If a page has already been indexed or linked to, changing its slug creates a broken link. Always set up a 301 redirect from the old URL to the new one.</li>
+        <li><strong class="text-[#1e293b]">Keyword stuffing</strong> — Cramming multiple keywords into a slug like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">best-cheap-seo-tool-free-online</code> looks spammy to both users and search engines.</li>
+      </ul>
+
+      <p>This text-to-slug converter is completely free, runs entirely in your browser, and sends no data to any server. Bookmark it for quick slug generation whenever you publish new content.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .slug-input{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;color:#1e293b;font-size:.9375rem;outline:none;transition:border-color 150ms,box-shadow 150ms}
+    .slug-input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .slug-input::placeholder{color:#94a3b8}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+
+    const ACCENT_MAP={
+      'À':'A','Á':'A','Â':'A','Ã':'A','Ä':'A','Å':'A','Æ':'AE',
+      'Ç':'C','È':'E','É':'E','Ê':'E','Ë':'E','Ì':'I','Í':'I',
+      'Î':'I','Ï':'I','Ð':'D','Ñ':'N','Ò':'O','Ó':'O','Ô':'O',
+      'Õ':'O','Ö':'O','Ø':'O','Ù':'U','Ú':'U','Û':'U','Ü':'U',
+      'Ý':'Y','Þ':'TH','ß':'ss','à':'a','á':'a','â':'a','ã':'a',
+      'ä':'a','å':'a','æ':'ae','ç':'c','è':'e','é':'e','ê':'e',
+      'ë':'e','ì':'i','í':'i','î':'i','ï':'i','ð':'d','ñ':'n',
+      'ò':'o','ó':'o','ô':'o','õ':'o','ö':'o','ø':'o','ù':'u',
+      'ú':'u','û':'u','ü':'u','ý':'y','þ':'th','ÿ':'y','Ł':'L',
+      'ł':'l','Ń':'N','ń':'n','Ś':'S','ś':'s','Ź':'Z','ź':'z',
+      'Ż':'Z','ż':'z','Ă':'A','ă':'a','Đ':'D','đ':'d','Ș':'S',
+      'ș':'s','Ț':'T','ț':'t','Č':'C','č':'c','Ď':'D','ď':'d',
+      'Ě':'E','ě':'e','Ň':'N','ň':'n','Ř':'R','ř':'r','Š':'S',
+      'š':'s','Ť':'T','ť':'t','Ů':'U','ů':'u','Ž':'Z','ž':'z'
+    };
+
+    function replaceAccents(str){
+      return str.replace(/[^\u0000-\u007E]/g,ch=>ACCENT_MAP[ch]||ch);
+    }
+
+    function toSlugStandard(text){
+      return replaceAccents(text)
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g,'')
+        .replace(/[\s]+/g,'-')
+        .replace(/-{2,}/g,'-')
+        .replace(/^-|-$/g,'');
+    }
+
+    function toSlugGitHub(text){
+      return replaceAccents(text)
+        .toLowerCase()
+        .replace(/[^a-z0-9\s\-.]/g,'')
+        .replace(/[\s]+/g,'-')
+        .replace(/-{2,}/g,'-')
+        .replace(/^-|-$/g,'');
+    }
+
+    function copyText(text){
+      navigator.clipboard.writeText(text).then(()=>{});
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const target=$(btn.dataset.target);
+        if(target)copyText(target.textContent);
+        const orig=btn.textContent;
+        btn.textContent='Copied!';
+        setTimeout(()=>btn.textContent=orig,1500);
+      });
+    });
+
+    $('copy-all').addEventListener('click',()=>{
+      const rows=$('bulk-table').querySelectorAll('tr');
+      const slugs=Array.from(rows).map(r=>r.querySelector('td:last-child code')?.textContent||'').join('\n');
+      copyText(slugs);
+      const btn=$('copy-all');
+      const orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(()=>btn.textContent=orig,1500);
+    });
+
+    $('slug-input').addEventListener('input',convert);
+    convert();
+
+    function convert(){
+      const raw=$('slug-input').value;
+      $('input-count').textContent=raw.length+' chars';
+
+      const lines=raw.split('\n').filter(l=>l.trim()!=='');
+      const isBulk=lines.length>1;
+
+      if(isBulk){
+        $('single-output').classList.add('hidden');
+        $('bulk-output').classList.remove('hidden');
+        $('bulk-table').innerHTML=lines.map(line=>{
+          const slug=toSlugStandard(line);
+          return`<tr class="border-b border-[#e2e8f0]"><td class="py-2 px-3 text-[#475569]">${line.replace(/</g,'&lt;')}</td><td class="py-2 px-3 font-mono text-[#1e293b]"><code>${slug}</code></td></tr>`;
+        }).join('');
+      }else{
+        $('single-output').classList.remove('hidden');
+        $('bulk-output').classList.add('hidden');
+        const text=lines[0]||'';
+        const std=toSlugStandard(text);
+        const gh=toSlugGitHub(text);
+        $('std-slug').textContent=std;
+        $('gh-slug').textContent=gh;
+        $('std-count').textContent=std.length+' chars';
+        $('gh-count').textContent=gh.length+' chars';
+      }
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('text-to-slug');
+  </script>
+</body>
+</html>

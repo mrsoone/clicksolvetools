@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /blog/
 Disallow: /admin
 Disallow: /admin.html
+Disallow: /blog/posts.js
+Disallow: /data/
+Disallow: /js/
 
 Sitemap: https://clicksolvetools.com/sitemap.xml

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Markdown to HTML Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert Markdown to clean HTML instantly. Live preview with syntax highlighting, sanitize option, Tailwind/Bootstrap class support, and copy or download.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/markdown-to-html-converter">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Markdown to HTML Converter | ClickSolveTools">
+  <meta property="og:description" content="Convert Markdown to clean HTML instantly. Live preview with syntax highlighting, sanitize option, Tailwind/Bootstrap class support, and copy or download.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/markdown-to-html-converter">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Markdown to HTML Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Convert Markdown to clean HTML instantly. Live preview with syntax highlighting, sanitize option, Tailwind/Bootstrap class support, and copy or download.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Markdown to HTML Converter","url":"https://clicksolvetools.com/tools/markdown-to-html-converter","description":"Convert Markdown to clean HTML instantly with live preview, syntax highlighting, sanitize option, and download.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Markdown to HTML Converter</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="space-y-4">
+
+      <!-- Options bar -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4 flex flex-wrap items-center gap-4">
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" id="sanitize" checked class="accent-[#2563eb]">
+          <span class="text-[#475569]">Sanitize (strip &lt;script&gt;)</span>
+        </label>
+        <div class="flex items-center gap-2 text-sm">
+          <label for="css-class" class="text-[#475569]">CSS Classes:</label>
+          <select id="css-class" class="md-select">
+            <option value="none">None</option>
+            <option value="tailwind">Tailwind prose</option>
+            <option value="bootstrap">Bootstrap</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-4 ml-auto">
+          <span id="input-count" class="text-xs text-[#94a3b8]">0 chars</span>
+          <span id="output-count" class="text-xs text-[#94a3b8]">0 chars</span>
+        </div>
+      </div>
+
+      <!-- Two-panel layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" style="min-height:500px">
+        <!-- Markdown Input -->
+        <div class="flex flex-col bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+          <div class="px-4 py-2 border-b border-[#e2e8f0] bg-[#f8fafc] text-sm font-medium text-[#475569]">Markdown</div>
+          <textarea id="md-input" class="flex-1 p-4 resize-none outline-none text-sm font-mono leading-relaxed" placeholder="# Hello World&#10;&#10;Write your **Markdown** here...&#10;&#10;- Item 1&#10;- Item 2&#10;&#10;```js&#10;console.log('hello');&#10;```"></textarea>
+        </div>
+
+        <!-- HTML Output -->
+        <div class="flex flex-col bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+          <div class="px-4 py-2 border-b border-[#e2e8f0] bg-[#f8fafc] flex items-center justify-between">
+            <span class="text-sm font-medium text-[#475569]">HTML Output</span>
+            <div class="flex gap-2">
+              <button id="copy-html" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium">Copy HTML</button>
+              <button id="download-html" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium">Download .html</button>
+            </div>
+          </div>
+          <pre id="html-output" class="flex-1 p-4 overflow-auto text-sm leading-relaxed m-0" style="white-space:pre-wrap;word-break:break-word;tab-size:2"></pre>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Markdown to HTML Conversion: A Complete Guide</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Markdown is the de facto writing format for developers, technical writers, and content creators who want to focus on content rather than formatting. Created by John Gruber in 2004, Markdown uses a simple plain-text syntax — hash signs for headings, asterisks for emphasis, dashes for lists — that gets converted to HTML for display on the web. This converter takes your Markdown input and produces clean, standards-compliant HTML that you can paste directly into a website, blog, or email template.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Convert Markdown to HTML?</h3>
+      <p>While many platforms like GitHub, Notion, and Reddit render Markdown natively, most websites and email clients require HTML. If you write documentation in Markdown but publish on a custom blog, you need the HTML output. If you draft emails in Markdown for readability but send them through an HTML email service, you need the conversion. This tool bridges that gap instantly.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Supported Markdown Syntax</h3>
+      <p>This converter uses the marked.js library, which supports the full CommonMark specification plus GitHub Flavored Markdown (GFM) extensions:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Headings</strong> — <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm"># H1</code> through <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">###### H6</code></li>
+        <li><strong class="text-[#1e293b]">Emphasis</strong> — <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">*italic*</code> and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">**bold**</code></li>
+        <li><strong class="text-[#1e293b]">Lists</strong> — Ordered (<code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">1.</code>) and unordered (<code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">-</code>)</li>
+        <li><strong class="text-[#1e293b]">Code</strong> — Inline with backticks and fenced code blocks with triple backticks</li>
+        <li><strong class="text-[#1e293b]">Links and images</strong> — <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">[text](url)</code> and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">![alt](url)</code></li>
+        <li><strong class="text-[#1e293b]">Tables</strong> — Pipe-delimited table syntax</li>
+        <li><strong class="text-[#1e293b]">Blockquotes</strong> — Lines starting with <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">&gt;</code></li>
+        <li><strong class="text-[#1e293b]">Task lists</strong> — <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">- [x] Done</code> and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">- [ ] Todo</code></li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Sanitization and Security</h3>
+      <p>By default, the "Sanitize" option is enabled, which strips any <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">&lt;script&gt;</code> tags from the HTML output. This is critical if you are converting user-submitted Markdown, as raw script tags could introduce cross-site scripting (XSS) vulnerabilities. For trusted content where you need full HTML fidelity, you can uncheck this option.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Adding CSS Framework Classes</h3>
+      <p>The "CSS Classes" dropdown lets you wrap the output in framework-specific class structures. Selecting "Tailwind prose" wraps the output in a <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">&lt;article class="prose"&gt;</code> container, which works with Tailwind CSS's Typography plugin to apply beautiful default styling to rendered HTML. The "Bootstrap" option uses Bootstrap's content classes. Select "None" for raw, unstyled HTML.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Syntax Highlighting in the Output</h3>
+      <p>The HTML output panel uses lightweight syntax coloring — tags are highlighted in blue, attributes in green, and string values in orange. This makes the raw HTML easier to read and verify before copying it to your project. It is not a full IDE-grade highlighter, but it is sufficient for quick visual scanning.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Download as a Complete HTML File</h3>
+      <p>The "Download .html" button wraps the converted HTML in a complete document structure with a DOCTYPE declaration, meta viewport tag, and a UTF-8 charset declaration. This gives you a self-contained HTML file that you can open directly in any browser, which is handy for previewing rendered content offline or sharing with non-technical collaborators.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Blog publishing</strong> — Write in Markdown, convert to HTML, and paste into your CMS.</li>
+        <li><strong class="text-[#1e293b]">Email newsletters</strong> — Draft content in Markdown for readability, then convert for email clients that require HTML.</li>
+        <li><strong class="text-[#1e293b]">Documentation</strong> — Maintain docs in Markdown and generate HTML for static site generators.</li>
+        <li><strong class="text-[#1e293b]">Learning HTML</strong> — See how Markdown syntax maps to HTML tags in real time.</li>
+      </ul>
+
+      <p>This Markdown-to-HTML converter is completely free, runs entirely in your browser using the marked.js library, and does not send any data to a server. Bookmark it for quick conversions whenever you need clean HTML from Markdown source.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .md-select{background:#fff;border:1px solid #e2e8f0;border-radius:.375rem;padding:.25rem .5rem;color:#1e293b;font-size:.875rem;outline:none}
+    .md-select:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .hl-tag{color:#2563eb}
+    .hl-attr{color:#16a34a}
+    .hl-str{color:#ea580c}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+
+    function highlightHTML(html){
+      const escaped=html
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;');
+
+      return escaped
+        .replace(/(&lt;\/?)([\w-]+)/g,'$1<span class="hl-tag">$2</span>')
+        .replace(/([\w-]+)(=)/g,'<span class="hl-attr">$1</span>$2')
+        .replace(/(&quot;|")(.*?)(\1)/g,'<span class="hl-str">&quot;$2&quot;</span>')
+        .replace(/=(["'])(.*?)\1/g,'=<span class="hl-str">$1$2$1</span>');
+    }
+
+    function convert(){
+      const md=$('md-input').value;
+      const sanitize=$('sanitize').checked;
+      const cssClass=$('css-class').value;
+
+      $('input-count').textContent=md.length+' input chars';
+
+      let html='';
+      try{
+        html=marked.parse(md);
+      }catch(e){
+        html='<p>Error parsing Markdown</p>';
+      }
+
+      if(sanitize){
+        html=html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,'');
+      }
+
+      if(cssClass==='tailwind'){
+        html='<article class="prose lg:prose-lg">\n'+html+'</article>\n';
+      }else if(cssClass==='bootstrap'){
+        html='<div class="container">\n'+html+'</div>\n';
+      }
+
+      $('output-count').textContent=html.length+' output chars';
+      $('html-output').innerHTML=highlightHTML(html);
+      $('html-output').dataset.raw=html;
+    }
+
+    $('md-input').addEventListener('input',convert);
+    $('sanitize').addEventListener('change',convert);
+    $('css-class').addEventListener('change',convert);
+
+    $('copy-html').addEventListener('click',()=>{
+      const raw=$('html-output').dataset.raw||'';
+      navigator.clipboard.writeText(raw);
+      const btn=$('copy-html');
+      const orig=btn.textContent;
+      btn.textContent='Copied!';
+      setTimeout(()=>btn.textContent=orig,1500);
+    });
+
+    $('download-html').addEventListener('click',()=>{
+      const raw=$('html-output').dataset.raw||'';
+      const doc=`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converted Markdown</title>
+</head>
+<body>
+${raw}
+</body>
+</html>`;
+      const blob=new Blob([doc],{type:'text/html'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download='converted.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    convert();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('markdown-to-html-converter');
+  </script>
+</body>
+</html>

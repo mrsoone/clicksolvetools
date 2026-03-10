@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Discount Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate discounts, final prices, and reverse-engineer discount percentages. Supports double discounts and shows why they are not additive — free tool.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/discount-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Discount Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate discounts, final prices, and reverse-engineer discount percentages. Supports double discounts and shows why they are not additive — free tool.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/discount-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Discount Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate discounts, final prices, and reverse-engineer discount percentages. Supports double discounts and shows why they are not additive — free tool.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Discount Calculator","url":"https://clicksolvetools.com/tools/discount-calculator","description":"Calculate discounts, final prices, and reverse-engineer discount percentages. Supports double discounts and shows why they are not additive.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Discount Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-6">
+
+      <!-- Tabs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="calc" class="dc-tab dc-tab-active flex-1 py-3 text-sm font-semibold text-center">Calculate Discount</button>
+          <button data-tab="reverse" class="dc-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Find % Off</button>
+          <button data-tab="double" class="dc-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Double Discount</button>
+        </div>
+
+        <!-- Mode 1: Calculate Discount -->
+        <div id="panel-calc" class="dc-panel p-6 space-y-4">
+          <div>
+            <label for="m1-price" class="block text-sm font-medium text-[#475569] mb-1">Original Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="m1-price" type="text" inputmode="decimal" placeholder="100.00" class="dc-input pl-7 w-full">
+            </div>
+          </div>
+          <div>
+            <label for="m1-pct" class="block text-sm font-medium text-[#475569] mb-1">Discount %</label>
+            <div class="relative">
+              <input id="m1-pct" type="text" inputmode="decimal" placeholder="25" class="dc-input pr-8 w-full">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+            </div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">You Save</span>
+              <span id="m1-save" class="font-semibold text-[#22c55e] tabular-nums">$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Final Price</span>
+              <span id="m1-final" class="font-bold text-[#2563eb] text-lg tabular-nums">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 2: Reverse -->
+        <div id="panel-reverse" class="dc-panel p-6 space-y-4 hidden">
+          <div>
+            <label for="m2-orig" class="block text-sm font-medium text-[#475569] mb-1">Original Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="m2-orig" type="text" inputmode="decimal" placeholder="100.00" class="dc-input pl-7 w-full">
+            </div>
+          </div>
+          <div>
+            <label for="m2-final" class="block text-sm font-medium text-[#475569] mb-1">Sale Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="m2-final" type="text" inputmode="decimal" placeholder="75.00" class="dc-input pl-7 w-full">
+            </div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Discount Amount</span>
+              <span id="m2-save" class="font-semibold text-[#22c55e] tabular-nums">$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Discount Percentage</span>
+              <span id="m2-pct" class="font-bold text-[#2563eb] text-lg tabular-nums">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 3: Double Discount -->
+        <div id="panel-double" class="dc-panel p-6 space-y-4 hidden">
+          <div>
+            <label for="m3-price" class="block text-sm font-medium text-[#475569] mb-1">Original Price</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input id="m3-price" type="text" inputmode="decimal" placeholder="200.00" class="dc-input pl-7 w-full">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="m3-d1" class="block text-sm font-medium text-[#475569] mb-1">First Discount</label>
+              <div class="relative">
+                <input id="m3-d1" type="text" inputmode="decimal" placeholder="20" class="dc-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+            <div>
+              <label for="m3-d2" class="block text-sm font-medium text-[#475569] mb-1">Second Discount</label>
+              <div class="relative">
+                <input id="m3-d2" type="text" inputmode="decimal" placeholder="10" class="dc-input pr-8 w-full">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-3">
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">After First Discount</span>
+              <span id="m3-after1" class="font-medium text-[#1e293b] tabular-nums">$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">After Second Discount</span>
+              <span id="m3-final" class="font-bold text-[#2563eb] text-lg tabular-nums">$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Total Saved</span>
+              <span id="m3-save" class="font-semibold text-[#22c55e] tabular-nums">$0.00</span>
+            </div>
+            <div class="border-t border-[#e2e8f0] pt-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-[#475569]">Effective Discount</span>
+                <span id="m3-eff" class="font-semibold text-[#1e293b] tabular-nums">0%</span>
+              </div>
+              <div id="m3-note" class="text-xs text-[#94a3b8] mt-2 hidden">
+                Two discounts of <span id="m3-d1-echo"></span>% and <span id="m3-d2-echo"></span>% are <strong class="text-[#475569]">not</strong> the same as a single <span id="m3-sum-echo"></span>% discount.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Discounts Work and Common Pricing Math</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Discounts are everywhere — clearance racks, flash sales, coupon codes, loyalty rewards, and seasonal promotions. While the concept seems simple, the math behind discounts can surprise you, especially when multiple discounts are stacked. This calculator handles three common scenarios: computing a final price from a percentage off, reverse-engineering the percentage when you know the sale price, and calculating the true impact of two sequential discounts.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Basic Discount Formula</h3>
+      <p>A single discount is straightforward:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Final Price = Original Price × (1 − Discount % ÷ 100)</p>
+      <p>For example, a $120 item at 25% off: $120 × (1 − 0.25) = $120 × 0.75 = $90. The discount amount is $30, and the final price is $90. This formula works for any percentage, from a 5% coupon to a 70% clearance markdown.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Reverse Discount: Finding the Percentage</h3>
+      <p>Sometimes you see a sale price tag but want to know what percentage off it represents. The reverse formula is:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Discount % = ((Original − Sale Price) ÷ Original) × 100</p>
+      <p>If a jacket was originally $180 and is now $126, the discount is (180 − 126) ÷ 180 × 100 = 30%. This is useful when stores show dollar-amount reductions instead of percentages, or when comparing deals across different retailers with different pricing strategies.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Double Discounts Are Not Additive</h3>
+      <p>One of the most common pricing misconceptions is that two stacked discounts simply add together. A 20% discount followed by an additional 10% off is not the same as a 30% discount. Here is why: the second discount applies to the already-reduced price, not the original. On a $200 item, 20% off brings it to $160. Then 10% off $160 is $16, making the final price $144. A single 30% discount on $200 would give $140 — four dollars less. The effective combined discount is actually 28%, not 30%. The larger the individual discounts, the bigger the gap between the stacked result and the naive sum.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Uses</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Shopping comparisons</strong> — Quickly calculate which store's deal is actually better when one offers 30% off and another offers $40 off a differently priced item.</li>
+        <li><strong class="text-[#1e293b]">Coupon stacking</strong> — See the true effective discount when a store coupon combines with a manufacturer's coupon or cashback offer.</li>
+        <li><strong class="text-[#1e293b]">Budget planning</strong> — Know the exact final price before you reach the checkout counter so you can stay within your spending target.</li>
+        <li><strong class="text-[#1e293b]">Business pricing</strong> — Retailers and marketers can model different discount strategies to see their impact on revenue and margins.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Does the order of double discounts matter?</strong></p>
+      <p>No. Mathematically, applying 20% then 10% gives the same result as applying 10% then 20%. Multiplication is commutative: 0.80 × 0.90 = 0.90 × 0.80 = 0.72 (a 28% effective discount in both cases).</p>
+
+      <p><strong class="text-[#1e293b]">How do I calculate discount with sales tax?</strong></p>
+      <p>In most U.S. states, sales tax is applied after the discount. So if a $100 item is 20% off and your tax rate is 8%, you pay ($100 × 0.80) × 1.08 = $86.40. Always check local laws, as some jurisdictions may calculate tax differently on promotional items.</p>
+
+      <p><strong class="text-[#1e293b]">What is a "buy one get one 50% off" in terms of percentage?</strong></p>
+      <p>If both items are the same price, you are getting two items for 1.5× the price of one. That is effectively 25% off the combined total. If the items differ in price, the effective percentage depends on which item gets the 50% discount.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. Final prices may vary due to sales tax, shipping costs, and store-specific pricing policies. Always verify the total at checkout.
+      </div>
+
+      <p>This discount calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page for quick calculations the next time you spot a sale.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .dc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .dc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .dc-input::placeholder { color: #94a3b8; }
+
+    .dc-tab {
+      background: #f8fafc;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .dc-tab:hover { color: #475569; }
+    .dc-tab-active {
+      background: #fff !important;
+      color: #2563eb !important;
+      box-shadow: inset 0 -2px 0 #2563eb;
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const $ = id => document.getElementById(id);
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    // Tab switching
+    $('tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.dc-tab');
+      if (!btn) return;
+      document.querySelectorAll('.dc-tab').forEach(b => b.classList.remove('dc-tab-active'));
+      btn.classList.add('dc-tab-active');
+      document.querySelectorAll('.dc-panel').forEach(p => p.classList.add('hidden'));
+      $('panel-' + btn.dataset.tab).classList.remove('hidden');
+    });
+
+    // Mode 1
+    function calcMode1() {
+      const price = parseNum($('m1-price'));
+      const pct = parseNum($('m1-pct'));
+      const savings = price * (pct / 100);
+      const final_ = price - savings;
+      $('m1-save').textContent = fmt.format(savings);
+      $('m1-final').textContent = fmt.format(Math.max(0, final_));
+    }
+    $('m1-price').addEventListener('input', calcMode1);
+    $('m1-pct').addEventListener('input', calcMode1);
+
+    // Mode 2
+    function calcMode2() {
+      const orig = parseNum($('m2-orig'));
+      const final_ = parseNum($('m2-final'));
+      const savings = orig - final_;
+      const pct = orig > 0 ? (savings / orig) * 100 : 0;
+      $('m2-save').textContent = fmt.format(Math.max(0, savings));
+      $('m2-pct').textContent = pct.toFixed(1) + '%';
+    }
+    $('m2-orig').addEventListener('input', calcMode2);
+    $('m2-final').addEventListener('input', calcMode2);
+
+    // Mode 3
+    function calcMode3() {
+      const price = parseNum($('m3-price'));
+      const d1 = parseNum($('m3-d1'));
+      const d2 = parseNum($('m3-d2'));
+
+      const after1 = price * (1 - d1 / 100);
+      const after2 = after1 * (1 - d2 / 100);
+      const totalSaved = price - after2;
+      const effPct = price > 0 ? (totalSaved / price) * 100 : 0;
+
+      $('m3-after1').textContent = fmt.format(Math.max(0, after1));
+      $('m3-final').textContent = fmt.format(Math.max(0, after2));
+      $('m3-save').textContent = fmt.format(Math.max(0, totalSaved));
+      $('m3-eff').textContent = effPct.toFixed(1) + '%';
+
+      if (d1 > 0 && d2 > 0) {
+        $('m3-note').classList.remove('hidden');
+        $('m3-d1-echo').textContent = d1;
+        $('m3-d2-echo').textContent = d2;
+        $('m3-sum-echo').textContent = (d1 + d2).toFixed(0);
+      } else {
+        $('m3-note').classList.add('hidden');
+      }
+    }
+    $('m3-price').addEventListener('input', calcMode3);
+    $('m3-d1').addEventListener('input', calcMode3);
+    $('m3-d2').addEventListener('input', calcMode3);
+
+    calcMode1();
+    calcMode2();
+    calcMode3();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('discount-calculator');
+  </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples) | ClickSolveTools Blog</title>
+  <meta name="description" content="Learn the 5-field cron format, master special characters, and see 15 common cron expressions explained in plain English with scheduling examples.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/blog/cron-expressions-guide">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples)">
+  <meta property="og:description" content="Learn the 5-field cron format, master special characters, and see 15 common cron expressions explained in plain English with scheduling examples.">
+  <meta property="og:url" content="https://clicksolvetools.com/blog/cron-expressions-guide">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta property="article:published_time" content="2025-09-10">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples)">
+  <meta name="twitter:description" content="Learn the 5-field cron format, master special characters, and see 15 common cron expressions explained in plain English with scheduling examples.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples)","description":"Learn the 5-field cron format, master special characters, and see 15 common cron expressions explained in plain English with scheduling examples.","url":"https://clicksolvetools.com/blog/cron-expressions-guide","datePublished":"2025-09-10","publisher":{"@type":"Organization","name":"ClickSolveTools","logo":{"@type":"ImageObject","url":"https://clicksolvetools.com/images/logo.png"}},"author":{"@type":"Organization","name":"ClickSolveTools"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[#94a3b8] mb-8">
+      <a href="/" class="hover:text-[#2563eb]">Home</a>
+      <span class="mx-2">→</span>
+      <a href="/blog" class="hover:text-[#2563eb]">Blog</a>
+      <span class="mx-2">→</span>
+      <span class="text-[#1e293b]">Cron Expressions Guide</span>
+    </nav>
+
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-xs px-3 py-1 bg-[#eff6ff] text-[#2563eb] rounded-full font-medium">How-To</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">cron</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">scheduling</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">linux</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">developer</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4 text-[#1e293b]">Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples)</h1>
+      <div class="flex items-center gap-4 text-sm text-[#94a3b8]">
+        <time datetime="2025-09-10">September 10, 2025</time>
+        <span>·</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+
+    <div class="prose max-w-none space-y-6 text-[#475569] leading-relaxed">
+
+      <p>Cron is the time-based job scheduler built into virtually every Unix-like system. Whether you're rotating logs on a Linux server, triggering a CI pipeline on GitHub Actions, or scheduling a Lambda function on AWS, you'll need to write cron expressions. The syntax is compact and powerful — once you understand the five fields, you can schedule anything.</p>
+
+      <p>This guide covers the standard 5-field format, every special character, 15 practical examples you can copy directly, and the differences between cron implementations across platforms. Test your expressions with our <a href="/tools/cron-expression-parser" class="text-[#2563eb] hover:underline">Cron Expression Parser</a> to see the next run times instantly.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">The 5-Field Cron Format</h2>
+
+      <p>A standard cron expression has five fields separated by spaces:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">┌───────────── minute (0-59)
+│ ┌───────────── hour (0-23)
+│ │ ┌───────────── day of month (1-31)
+│ │ │ ┌───────────── month (1-12 or JAN-DEC)
+│ │ │ │ ┌───────────── day of week (0-7, 0 and 7 = Sunday, or SUN-SAT)
+│ │ │ │ │
+* * * * *</code>
+
+      <p>Each field can contain a single value, a range, a list, or a step value. The combination of all five fields defines when the job runs.</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Field</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Allowed Values</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Allowed Special Characters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Minute</td>
+            <td class="p-3 border border-[#e2e8f0]">0-59</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* , - /</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Hour</td>
+            <td class="p-3 border border-[#e2e8f0]">0-23</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* , - /</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Day of Month</td>
+            <td class="p-3 border border-[#e2e8f0]">1-31</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* , - / L W</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Month</td>
+            <td class="p-3 border border-[#e2e8f0]">1-12 or JAN-DEC</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* , - /</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Day of Week</td>
+            <td class="p-3 border border-[#e2e8f0]">0-7 or SUN-SAT</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* , - / L #</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Special Characters Explained</h2>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Character</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Name</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Meaning</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>*</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Wildcard</td>
+            <td class="p-3 border border-[#e2e8f0]">Matches every value in the field</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* * * * *</code> → every minute</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>,</code></td>
+            <td class="p-3 border border-[#e2e8f0]">List</td>
+            <td class="p-3 border border-[#e2e8f0]">Specifies multiple values</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 8,12,18 * * *</code> → 8am, noon, 6pm</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>-</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Range</td>
+            <td class="p-3 border border-[#e2e8f0]">Specifies a range of values</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 9-17 * * *</code> → every hour 9am-5pm</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>/</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Step</td>
+            <td class="p-3 border border-[#e2e8f0]">Every nth value</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>*/15 * * * *</code> → every 15 minutes</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>L</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Last</td>
+            <td class="p-3 border border-[#e2e8f0]">Last day of month or last X-day of month</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 L * *</code> → last day of every month</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>W</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Weekday</td>
+            <td class="p-3 border border-[#e2e8f0]">Nearest weekday to the given day</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 15W * *</code> → nearest weekday to the 15th</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>#</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Nth occurrence</td>
+            <td class="p-3 border border-[#e2e8f0]">The nth X-day of the month</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 * * 5#3</code> → third Friday of every month</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong class="text-[#1e293b]">Note:</strong> <code>L</code>, <code>W</code>, and <code>#</code> are not part of the POSIX cron standard. They're available in Quartz Scheduler (Java), Spring, and some cloud platforms, but not in standard Linux crontab. Always check your platform's documentation.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">15 Common Cron Expressions (With Plain English)</h2>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">#</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Expression</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Plain English</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">1</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>* * * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every minute</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">2</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>*/5 * * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every 5 minutes</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">3</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 * * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every hour (at minute 0)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">4</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every day at midnight</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">5</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 9 * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every day at 9:00 AM</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">6</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 9 * * 1-5</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every weekday at 9:00 AM</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">7</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 * * 0</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every Sunday at midnight</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">8</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 1 * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">First day of every month at midnight</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">9</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 1 1 *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">January 1st at midnight (yearly)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">10</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>30 4 * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every day at 4:30 AM</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">11</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 */2 * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every 2 hours</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">12</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 9,18 * * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Twice daily at 9:00 AM and 6:00 PM</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">13</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>*/30 9-17 * * 1-5</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every 30 min during business hours (Mon-Fri, 9-5)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">14</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 1,15 * *</code></td>
+            <td class="p-3 border border-[#e2e8f0]">1st and 15th of every month at midnight</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">15</td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 3 * * 6</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Every Saturday at 3:00 AM</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Not sure if your expression is right? Paste it into our <a href="/tools/cron-expression-parser" class="text-[#2563eb] hover:underline">Cron Expression Parser</a> to see the next 10 scheduled run times in a human-readable format.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Cron Across Different Systems</h2>
+
+      <p>While the core syntax is similar, each platform has its own quirks:</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Linux Crontab</h3>
+
+      <p>The classic cron implementation. Edit your crontab with <code>crontab -e</code>:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># Run backup script every day at 2:30 AM
+30 2 * * * /home/user/scripts/backup.sh
+
+# Rotate logs every Sunday at midnight
+0 0 * * 0 /usr/sbin/logrotate /etc/logrotate.conf
+
+# Health check every 5 minutes, log output
+*/5 * * * * curl -s https://myapp.com/health >> /var/log/health.log 2>&1</code>
+
+      <p>Linux crontab also supports shorthand macros:</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Shorthand</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@reboot</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Run once at system startup</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@yearly</code> / <code>@annually</code></td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 1 1 *</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@monthly</code></td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 1 * *</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@weekly</code></td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 * * 0</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@daily</code> / <code>@midnight</code></td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 0 * * *</code></td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>@hourly</code></td>
+            <td class="p-3 border border-[#e2e8f0]"><code>0 * * * *</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">AWS CloudWatch / EventBridge</h3>
+
+      <p>AWS uses a 6-field format that adds a year field and requires a <code>cron()</code> wrapper. It also uses <code>?</code> for "no specific value" in the day-of-month or day-of-week field (you can't use <code>*</code> in both):</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># AWS EventBridge format: min hour dom month dow year
+cron(0 9 ? * MON-FRI *)    # Every weekday at 9:00 AM UTC
+cron(0/15 * ? * * *)       # Every 15 minutes
+cron(0 0 1 * ? *)          # First of every month at midnight
+
+# AWS also supports rate expressions:
+rate(5 minutes)
+rate(1 hour)
+rate(7 days)</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">GitHub Actions</h3>
+
+      <p>GitHub Actions uses standard 5-field cron in the <code>schedule</code> trigger. All times are UTC:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">on:
+  schedule:
+    - cron: '0 9 * * 1-5'   # Weekdays at 9 AM UTC
+    - cron: '0 0 * * 0'     # Sundays at midnight UTC</code>
+
+      <p>GitHub Actions schedules have a minimum granularity of 5 minutes, and scheduled workflows may be delayed during periods of high load.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Kubernetes CronJob</h3>
+
+      <p>Kubernetes uses standard 5-field cron syntax in the <code>schedule</code> field:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+spec:
+  schedule: "30 2 * * *"       # Daily at 2:30 AM
+  concurrencyPolicy: Forbid    # Don't overlap runs
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: postgres:16
+            command: ["pg_dump", "-h", "db", "-U", "app", "mydb"]
+          restartPolicy: OnFailure</code>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Common Pitfalls and How to Avoid Them</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">1. Timezone Confusion</h3>
+
+      <p>The single biggest source of cron bugs. Linux crontab runs in the system's local timezone. AWS EventBridge always uses UTC. GitHub Actions always uses UTC. Kubernetes uses the timezone of the kube-controller-manager (usually UTC, but check).</p>
+
+      <p><strong class="text-[#1e293b]">Fix:</strong> Always document which timezone your cron expression targets. For a job that should run at 9 AM Eastern (UTC-5), use <code>0 14 * * *</code> if your system is UTC. Better yet, set your crontab timezone explicitly:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># Linux crontab — set timezone at the top
+CRON_TZ=America/New_York
+0 9 * * * /scripts/morning-report.sh</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">2. Overlapping Runs</h3>
+
+      <p>If a job takes 10 minutes to run but is scheduled every 5 minutes, multiple instances will overlap. This can cause data corruption, resource exhaustion, or deadlocks.</p>
+
+      <p><strong class="text-[#1e293b]">Fix:</strong> Use a lock file or a concurrency control mechanism:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># Linux — use flock to prevent overlap
+*/5 * * * * /usr/bin/flock -n /tmp/myjob.lock /scripts/long-running-job.sh
+
+# Kubernetes — use concurrencyPolicy
+spec:
+  concurrencyPolicy: Forbid  # Skip if previous run still active</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">3. Day-of-Month AND Day-of-Week</h3>
+
+      <p>In standard cron, if both day-of-month and day-of-week are specified (not <code>*</code>), the job runs when <strong class="text-[#1e293b]">either</strong> condition is true (OR logic), not both. This surprises many people:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># This does NOT mean "run on the 1st if it's a Monday"
+# It means "run on the 1st of every month AND every Monday"
+0 0 1 * 1
+
+# To run only on specific day-of-month AND day-of-week,
+# add a condition in the script:
+0 0 1 * * [ "$(date +\%u)" = "1" ] && /scripts/job.sh</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">4. Missing Output Capture</h3>
+
+      <p>Cron jobs run silently by default. If a job fails, you won't know unless you capture the output:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># BAD — silent failures
+0 2 * * * /scripts/backup.sh
+
+# GOOD — log stdout and stderr
+0 2 * * * /scripts/backup.sh >> /var/log/backup.log 2>&1
+
+# GOOD — email output (if mail is configured)
+MAILTO=admin@example.com
+0 2 * * * /scripts/backup.sh</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">5. Environment Variables</h3>
+
+      <p>Cron jobs run in a minimal environment — your <code>$PATH</code>, environment variables, and shell configuration from <code>.bashrc</code> or <code>.profile</code> are not loaded. This is why scripts work from the terminal but fail in cron.</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># Fix: use absolute paths and set variables in crontab
+PATH=/usr/local/bin:/usr/bin:/bin
+NODE_ENV=production
+
+0 9 * * * /usr/local/bin/node /home/user/app/send-report.js</code>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Frequently Asked Questions</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What's the smallest interval I can schedule with cron?</h3>
+      <p>Standard cron's smallest unit is one minute (<code>* * * * *</code>). You cannot schedule jobs to run every 30 seconds or every 10 seconds using cron alone. For sub-minute scheduling, you can use workarounds like running a sleep loop inside a cron job, or use a dedicated scheduler like systemd timers (which support second-level precision), or a process manager like PM2 or Supervisor.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How do I list and manage existing cron jobs?</h3>
+      <p>On Linux, use <code>crontab -l</code> to list your cron jobs, <code>crontab -e</code> to edit, and <code>crontab -r</code> to remove all jobs (use with caution). To see cron jobs for other users (as root), use <code>crontab -l -u username</code>. System-wide cron jobs live in <code>/etc/crontab</code> and <code>/etc/cron.d/</code>. Many distributions also have <code>/etc/cron.daily/</code>, <code>/etc/cron.weekly/</code>, and <code>/etc/cron.monthly/</code> directories where you can drop scripts.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why does my cron job work manually but fail when scheduled?</h3>
+      <p>Almost always an environment issue. Cron runs with a minimal PATH (usually just <code>/usr/bin:/bin</code>) and doesn't load your shell profile. Solutions: use absolute paths for all commands (e.g., <code>/usr/local/bin/python3</code> instead of <code>python3</code>), set the PATH variable at the top of your crontab, or source your profile at the start of the script. Also check file permissions — cron runs as your user, but the working directory is usually <code>/</code>, not your home directory.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What's the difference between 5-field and 6-field cron?</h3>
+      <p>Standard POSIX cron uses 5 fields (minute, hour, day-of-month, month, day-of-week). Some systems add a 6th field: <strong class="text-[#1e293b]">Quartz Scheduler</strong> (Java) prepends a seconds field, making it 6 or 7 fields. <strong class="text-[#1e293b]">AWS EventBridge</strong> appends a year field. Always check which format your platform expects. Our <a href="/tools/cron-expression-parser" class="text-[#2563eb] hover:underline">Cron Expression Parser</a> supports the standard 5-field format used by Linux, GitHub Actions, and Kubernetes.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How do DST (Daylight Saving Time) changes affect cron jobs?</h3>
+      <p>When clocks spring forward, a job scheduled during the skipped hour will not run that day. When clocks fall back, a job scheduled during the repeated hour may run twice. UTC-based systems are immune to DST issues, which is why most cloud platforms use UTC. If your crontab uses a local timezone that observes DST, schedule critical jobs outside the 1:00–3:00 AM window, or use UTC and convert manually.</p>
+
+    </div>
+  </article>
+
+  <div id="related-tool-cards"></div>
+  <div id="more-posts"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { renderBlogNav, renderFooter, renderMorePosts, renderRelatedToolCards } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    renderBlogNav('Cron Expressions Explained: How to Schedule Tasks (Complete Guide With Examples)');
+    renderFooter();
+    renderMorePosts('cron-expressions-guide', 'How-To');
+    renderRelatedToolCards(['cron-expression-parser', 'timestamp-converter', 'date-difference-calculator']);
+  </script>
+</body>
+</html>

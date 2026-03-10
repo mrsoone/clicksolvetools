@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Average Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate mean, median, mode, range, sum, min, and max from any list of numbers. Supports weighted averages, running averages, and visual bar charts.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/average-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Average Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate mean, median, mode, range, sum, min, and max from any list of numbers. Supports weighted averages, running averages, and visual bar charts.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/average-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Average Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate mean, median, mode, range, sum, min, and max from any list of numbers. Supports weighted averages, running averages, and visual bar charts.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Average Calculator","url":"https://clicksolvetools.com/tools/average-calculator","description":"Calculate mean, median, mode, range, sum, min, and max from any list of numbers. Supports weighted averages, running averages, and visual bar charts.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Average Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="basic" class="ac-tab ac-tab-active flex-1 py-3 text-sm font-semibold text-center">Basic</button>
+          <button data-tab="weighted" class="ac-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Weighted</button>
+          <button data-tab="running" class="ac-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Running</button>
+        </div>
+
+        <!-- Basic -->
+        <div id="panel-basic" class="ac-panel p-6 space-y-4">
+          <div>
+            <label for="b-input" class="block text-sm font-medium text-[#475569] mb-1">Enter numbers (comma-separated or one per line)</label>
+            <textarea id="b-input" rows="4" placeholder="10, 20, 30, 40, 50&#10;or one per line" class="ac-input w-full resize-y"></textarea>
+          </div>
+          <button id="b-calc" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg w-full">Calculate</button>
+          <div id="b-results" class="hidden space-y-4">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="b-cards"></div>
+            <div>
+              <div class="text-sm font-medium text-[#475569] mb-2">Distribution</div>
+              <div id="b-chart" class="flex items-end gap-1 h-32 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weighted -->
+        <div id="panel-weighted" class="ac-panel p-6 space-y-4 hidden">
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Enter numbers and weights</label>
+            <div id="w-rows" class="space-y-2"></div>
+            <button id="w-add" class="text-[#2563eb] hover:text-[#1d4ed8] text-sm font-medium mt-2">+ Add Row</button>
+          </div>
+          <button id="w-calc" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg w-full">Calculate Weighted Average</button>
+          <div id="w-result" class="hidden bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4">
+            <div class="text-sm text-[#475569]">Weighted Average</div>
+            <div id="w-avg" class="text-2xl font-bold text-[#2563eb] tabular-nums">0</div>
+          </div>
+        </div>
+
+        <!-- Running -->
+        <div id="panel-running" class="ac-panel p-6 space-y-4 hidden">
+          <div class="flex gap-2">
+            <input id="r-input" type="text" inputmode="decimal" placeholder="Enter a number" class="ac-input flex-1">
+            <button id="r-add" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg">Add</button>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="text-sm text-[#475569]">Running Average</div>
+            <div id="r-avg" class="text-2xl font-bold text-[#2563eb] tabular-nums">—</div>
+          </div>
+          <div id="r-history" class="space-y-1 max-h-48 overflow-y-auto"></div>
+          <button id="r-clear" class="text-sm text-red-500 hover:text-red-700 hidden">Clear All</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Averages and Basic Statistics</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Averages are one of the most fundamental concepts in mathematics and statistics. Whether you are analyzing test scores, tracking business metrics, budgeting household expenses, or evaluating sports performance, averages give you a single representative number that summarizes an entire data set. This calculator computes the most common statistical measures from any list of numbers, instantly and for free.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Mean: The Arithmetic Average</h3>
+      <p>The mean is what most people think of when they hear "average." It is calculated by adding all the numbers in a data set and dividing by the count. For example, the mean of 10, 20, and 30 is (10 + 20 + 30) / 3 = 20. The mean is sensitive to outliers — one extremely high or low value can skew it significantly. This is why median income is often reported instead of mean income: a handful of billionaires can push the mean far above what most people actually earn.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Median: The Middle Value</h3>
+      <p>The median is the middle value when all numbers are sorted in order. If the data set has an even number of values, the median is the average of the two middle values. The median is more robust against outliers than the mean. For the set 1, 2, 3, 4, 100, the mean is 22 but the median is 3 — a much better representation of the "typical" value.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Mode: The Most Frequent Value</h3>
+      <p>The mode is the value that appears most often in a data set. A set can have one mode (unimodal), multiple modes (multimodal), or no mode at all if all values are unique. Modes are especially useful for categorical data — for example, the most popular shoe size sold in a store.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Range, Min, and Max</h3>
+      <p>The range is the difference between the largest and smallest values, giving a quick sense of data spread. Min and max are the boundary values. While range is easy to calculate, it does not tell you anything about how values are distributed between the extremes — that is where standard deviation comes in (available in our dedicated standard deviation calculator).</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Weighted Averages</h3>
+      <p>A weighted average assigns different importance levels to each value. This is common in academic grading: if homework is worth 30% and the final exam is worth 70%, a homework score of 90 and an exam score of 80 gives a weighted average of (90 × 0.3) + (80 × 0.7) = 83, not the simple average of 85. Weighted averages are also used in portfolio returns, recipe adjustments, and quality scoring systems.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Running Averages</h3>
+      <p>A running (or cumulative) average updates as each new data point arrives. It is widely used in stock market analysis (moving averages), manufacturing quality control, and any scenario where data streams in over time. The running average mode in this calculator lets you add numbers one at a time and watch the average update in real time.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Practical Applications</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Education</strong> — Calculate your GPA or course average to track academic performance.</li>
+        <li><strong class="text-[#1e293b]">Finance</strong> — Determine average monthly spending, average investment returns, or average transaction size.</li>
+        <li><strong class="text-[#1e293b]">Health</strong> — Track average daily steps, heart rate, or calorie intake over a period.</li>
+        <li><strong class="text-[#1e293b]">Business</strong> — Analyze average order value, customer ratings, or employee performance scores.</li>
+      </ul>
+
+      <p>This average calculator is completely free, runs entirely in your browser, and does not store or transmit any data. Bookmark it for quick statistical calculations whenever you need them.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ac-input{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;color:#1e293b;font-size:.9375rem;outline:none;transition:border-color 150ms,box-shadow 150ms}
+    .ac-input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .ac-input::placeholder{color:#94a3b8}
+    .ac-tab{background:#f8fafc;color:#94a3b8;cursor:pointer;transition:all 150ms}
+    .ac-tab:hover{color:#475569}
+    .ac-tab-active{background:#fff!important;color:#2563eb!important;box-shadow:inset 0 -2px 0 #2563eb}
+    .tabular-nums{font-variant-numeric:tabular-nums}
+    .stat-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.75rem;padding:1rem;text-align:center}
+    .stat-card .label{font-size:.75rem;color:#94a3b8;margin-bottom:.25rem}
+    .stat-card .value{font-size:1.125rem;font-weight:700;color:#1e293b;font-variant-numeric:tabular-nums}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+
+    // Tab switching
+    $('tabs').addEventListener('click',e=>{
+      const btn=e.target.closest('.ac-tab');
+      if(!btn)return;
+      document.querySelectorAll('.ac-tab').forEach(b=>b.classList.remove('ac-tab-active'));
+      btn.classList.add('ac-tab-active');
+      document.querySelectorAll('.ac-panel').forEach(p=>p.classList.add('hidden'));
+      $('panel-'+btn.dataset.tab).classList.remove('hidden');
+    });
+
+    function parseNumbers(str){
+      const hasNewlines=str.includes('\n');
+      const sep=hasNewlines?'\n':',';
+      return str.split(sep).map(s=>s.trim()).filter(s=>s!=='').map(Number).filter(n=>!isNaN(n));
+    }
+
+    function calcStats(nums){
+      if(nums.length===0)return null;
+      const sorted=[...nums].sort((a,b)=>a-b);
+      const count=nums.length;
+      const sum=nums.reduce((a,b)=>a+b,0);
+      const mean=sum/count;
+      let median;
+      if(count%2===1)median=sorted[Math.floor(count/2)];
+      else median=(sorted[count/2-1]+sorted[count/2])/2;
+      const freq={};
+      nums.forEach(n=>{freq[n]=(freq[n]||0)+1;});
+      const maxFreq=Math.max(...Object.values(freq));
+      let mode;
+      if(maxFreq===1)mode='No mode';
+      else{
+        const modes=Object.keys(freq).filter(k=>freq[k]===maxFreq).map(Number);
+        mode=modes.join(', ');
+      }
+      const min=sorted[0];
+      const max=sorted[sorted.length-1];
+      const range=max-min;
+      return{mean,median,mode,range,sum,count,min,max};
+    }
+
+    function fmtNum(n){
+      if(typeof n==='string')return n;
+      return Number.isInteger(n)?n.toString():parseFloat(n.toFixed(6)).toString();
+    }
+
+    // ---- BASIC ----
+    $('b-calc').addEventListener('click',()=>{
+      const nums=parseNumbers($('b-input').value);
+      if(nums.length===0)return;
+      const s=calcStats(nums);
+      if(!s)return;
+
+      $('b-results').classList.remove('hidden');
+      $('b-cards').innerHTML=[
+        {label:'Mean',value:fmtNum(s.mean)},
+        {label:'Median',value:fmtNum(s.median)},
+        {label:'Mode',value:s.mode},
+        {label:'Range',value:fmtNum(s.range)},
+        {label:'Sum',value:fmtNum(s.sum)},
+        {label:'Count',value:s.count},
+        {label:'Min',value:fmtNum(s.min)},
+        {label:'Max',value:fmtNum(s.max)}
+      ].map(c=>`<div class="stat-card"><div class="label">${c.label}</div><div class="value">${c.value}</div></div>`).join('');
+
+      const maxVal=Math.max(...nums.map(Math.abs));
+      $('b-chart').innerHTML=nums.map(n=>{
+        const h=maxVal>0?Math.max(4,Math.abs(n)/maxVal*100):4;
+        return`<div class="flex-1 bg-[#2563eb] rounded-t" style="height:${h}%" title="${n}"></div>`;
+      }).join('');
+    });
+
+    // ---- WEIGHTED ----
+    let wRows=[];
+    function addWRow(v,w){
+      const div=document.createElement('div');
+      div.className='flex gap-2 items-center';
+      div.innerHTML=`
+        <input type="text" inputmode="decimal" value="${v}" placeholder="Value" class="ac-input flex-1 text-sm w-val">
+        <input type="text" inputmode="decimal" value="${w}" placeholder="Weight" class="ac-input w-24 text-sm w-weight">
+        <button class="text-red-400 hover:text-red-600 font-bold w-rm">&times;</button>
+      `;
+      $('w-rows').appendChild(div);
+      wRows.push(div);
+      div.querySelector('.w-rm').addEventListener('click',()=>{
+        div.remove();
+        wRows=wRows.filter(r=>r!==div);
+      });
+    }
+    addWRow('','');addWRow('','');addWRow('','');
+    $('w-add').addEventListener('click',()=>addWRow('',''));
+
+    $('w-calc').addEventListener('click',()=>{
+      let sumWV=0,sumW=0;
+      wRows.forEach(r=>{
+        const v=parseFloat(r.querySelector('.w-val').value)||0;
+        const w=parseFloat(r.querySelector('.w-weight').value)||0;
+        sumWV+=v*w;
+        sumW+=w;
+      });
+      const avg=sumW>0?sumWV/sumW:0;
+      $('w-result').classList.remove('hidden');
+      $('w-avg').textContent=fmtNum(avg);
+    });
+
+    // ---- RUNNING ----
+    let rNums=[];
+    function updateRunning(){
+      if(rNums.length===0){$('r-avg').textContent='—';$('r-clear').classList.add('hidden');return;}
+      const sum=rNums.reduce((a,b)=>a+b,0);
+      $('r-avg').textContent=fmtNum(sum/rNums.length);
+      $('r-clear').classList.remove('hidden');
+      $('r-history').innerHTML=rNums.map((n,i)=>{
+        const runAvg=rNums.slice(0,i+1).reduce((a,b)=>a+b,0)/(i+1);
+        return`<div class="flex justify-between text-sm bg-[#f8fafc] border border-[#e2e8f0] rounded px-3 py-1.5"><span class="text-[#475569]">#${i+1}: <strong>${fmtNum(n)}</strong></span><span class="text-[#94a3b8]">avg: ${fmtNum(runAvg)}</span></div>`;
+      }).reverse().join('');
+    }
+    function addRunning(){
+      const v=parseFloat($('r-input').value);
+      if(isNaN(v))return;
+      rNums.push(v);
+      $('r-input').value='';
+      $('r-input').focus();
+      updateRunning();
+    }
+    $('r-add').addEventListener('click',addRunning);
+    $('r-input').addEventListener('keydown',e=>{if(e.key==='Enter')addRunning();});
+    $('r-clear').addEventListener('click',()=>{rNums=[];updateRunning();$('r-history').innerHTML='';});
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('average-calculator');
+  </script>
+</body>
+</html>

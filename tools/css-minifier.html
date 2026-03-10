@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free CSS Minifier &amp; Beautifier | ClickSolveTools</title>
+  <meta name="description" content="Minify CSS to reduce file size or beautify compressed CSS for readability. Shows stats on size reduction — free online tool, no data sent to any server.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/css-minifier">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free CSS Minifier &amp; Beautifier | ClickSolveTools">
+  <meta property="og:description" content="Minify CSS to reduce file size or beautify compressed CSS for readability. Shows stats on size reduction — free online tool, no data sent to any server.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/css-minifier">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free CSS Minifier &amp; Beautifier | ClickSolveTools">
+  <meta name="twitter:description" content="Minify CSS to reduce file size or beautify compressed CSS for readability. Shows stats on size reduction — free online tool, no data sent to any server.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSS Minifier & Beautifier","url":"https://clicksolvetools.com/tools/css-minifier","description":"Minify CSS to reduce file size or beautify compressed CSS for readability. Shows stats on size reduction — free online tool.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">CSS Minifier &amp; Beautifier</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto space-y-4">
+
+      <!-- Controls -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="minify-btn" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-5 py-2 rounded-lg transition-colors text-sm">Minify</button>
+          <button id="beautify-btn" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-5 py-2 rounded-lg transition-colors text-sm">Beautify</button>
+          <button id="clear-btn" class="border border-[#e2e8f0] hover:border-[#94a3b8] text-[#475569] font-medium px-4 py-2 rounded-lg transition-colors text-sm">Clear</button>
+          <button id="copy-btn" class="ml-auto border border-[#e2e8f0] hover:border-[#2563eb] text-[#2563eb] font-medium px-4 py-2 rounded-lg transition-colors text-sm">Copy Output</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats-bar" class="hidden bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex flex-wrap items-center gap-6 text-sm">
+          <div>
+            <span class="text-[#94a3b8]">Original:</span>
+            <span id="stat-orig" class="font-semibold text-[#1e293b] ml-1 tabular-nums">0 B</span>
+          </div>
+          <div>
+            <span class="text-[#94a3b8]">Output:</span>
+            <span id="stat-out" class="font-semibold text-[#1e293b] ml-1 tabular-nums">0 B</span>
+          </div>
+          <div>
+            <span class="text-[#94a3b8]">Change:</span>
+            <span id="stat-pct" class="font-semibold ml-1 tabular-nums">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="px-4 py-2.5 border-b border-[#e2e8f0] bg-[#f8fafc]">
+          <span class="text-sm font-semibold text-[#475569]">CSS Input</span>
+        </div>
+        <textarea id="css-input" class="w-full min-h-[250px] p-4 font-mono text-sm text-[#1e293b] bg-white resize-y outline-none" placeholder="Paste your CSS here..."></textarea>
+      </div>
+
+      <!-- Output -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="px-4 py-2.5 border-b border-[#e2e8f0] bg-[#f8fafc]">
+          <span class="text-sm font-semibold text-[#475569]">Output</span>
+        </div>
+        <textarea id="css-output" class="w-full min-h-[250px] p-4 font-mono text-sm text-[#1e293b] bg-white resize-y outline-none" readonly placeholder="Minified or beautified CSS will appear here..."></textarea>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">CSS Optimization: Minifying and Beautifying Stylesheets</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>CSS files are a critical part of every website's performance story. Browsers must download and parse stylesheets before they can render a page, which means the size and structure of your CSS directly impacts how fast your site loads. This tool gives you two complementary operations: minification to shrink your CSS for production, and beautification to make compressed code readable again during development.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What CSS Minification Does</h3>
+      <p>Minification removes everything from a CSS file that browsers do not need to interpret the styles. This includes comments, extra whitespace, newlines, and the last semicolon before a closing brace (which is optional in CSS). The result is a single compact string that is functionally identical to the original but significantly smaller. On typical stylesheets, minification achieves a 15–40% reduction in file size before gzip compression, and the savings compound when combined with HTTP compression.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Beautification Matters</h3>
+      <p>Minified CSS is unreadable by humans. When you need to debug a production stylesheet, inspect a third-party library's styles, or review code from a minified source, beautification restores the structure. This tool re-adds indentation (two spaces per nesting level), places each property on its own line, and inserts a space after every colon for consistent formatting. The result follows widely accepted style conventions and is much easier to scan and edit.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Performance Impact of Smaller CSS</h3>
+      <p>Every kilobyte matters on mobile connections. A 50 KB stylesheet minified to 35 KB saves 15 KB per page load. Across thousands of daily visitors, that adds up to significant bandwidth savings and faster Time to First Paint metrics. Minification is one of the easiest, lowest-risk optimizations you can make — it changes nothing about how your styles behave, only how much data the browser needs to download.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Best Practices for CSS Optimization</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Minify for production</strong> — Always serve minified CSS in production environments. Most build tools (Webpack, Vite, PostCSS) handle this automatically.</li>
+        <li><strong class="text-[#1e293b]">Keep source files readable</strong> — Write well-formatted, commented CSS in your source code. Minify only at build time.</li>
+        <li><strong class="text-[#1e293b]">Remove unused CSS</strong> — Tools like PurgeCSS can strip selectors that are not used in your HTML, often yielding even larger savings than minification alone.</li>
+        <li><strong class="text-[#1e293b]">Combine with gzip or Brotli</strong> — Server-side compression stacks with minification. The two approaches complement each other because they target different redundancies.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Does minification break my CSS?</strong></p>
+      <p>No. Minification only removes characters that have no effect on rendering: comments, extra whitespace, and optional semicolons. The browser interprets the minified output identically to the original. If something breaks, the issue was already present in the source.</p>
+
+      <p><strong class="text-[#1e293b]">Can I minify CSS that uses custom properties (variables)?</strong></p>
+      <p>Yes. CSS custom properties (e.g., <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">--primary-color: #2563eb</code>) are preserved exactly. Minification only targets whitespace and comments, not values or property names.</p>
+
+      <p><strong class="text-[#1e293b]">Is my CSS sent to a server?</strong></p>
+      <p>No. This tool processes everything in your browser using JavaScript. No CSS data is transmitted, stored, or logged anywhere. It is completely private and works offline once the page is loaded.</p>
+
+      <p>This CSS minifier and beautifier is completely free, requires no sign-up, and runs entirely client-side. Bookmark it for quick stylesheet optimization whenever you need it.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      return (bytes / 1024).toFixed(1) + ' KB';
+    }
+
+    function showStats(origLen, outLen) {
+      $('stats-bar').classList.remove('hidden');
+      $('stat-orig').textContent = formatBytes(origLen);
+      $('stat-out').textContent = formatBytes(outLen);
+      const pct = origLen > 0 ? ((outLen - origLen) / origLen * 100) : 0;
+      const pctEl = $('stat-pct');
+      if (pct < 0) {
+        pctEl.textContent = pct.toFixed(1) + '% smaller';
+        pctEl.className = 'font-semibold ml-1 tabular-nums text-[#22c55e]';
+      } else if (pct > 0) {
+        pctEl.textContent = '+' + pct.toFixed(1) + '% larger';
+        pctEl.className = 'font-semibold ml-1 tabular-nums text-[#f59e0b]';
+      } else {
+        pctEl.textContent = 'No change';
+        pctEl.className = 'font-semibold ml-1 tabular-nums text-[#94a3b8]';
+      }
+    }
+
+    function minifyCSS(css) {
+      let out = css;
+      out = out.replace(/\/\*[\s\S]*?\*\//g, '');
+      out = out.replace(/\s+/g, ' ');
+      out = out.replace(/\s*([{}:;,>~+])\s*/g, '$1');
+      out = out.replace(/;}/g, '}');
+      out = out.trim();
+      return out;
+    }
+
+    function beautifyCSS(css) {
+      let clean = css.replace(/\/\*[\s\S]*?\*\//g, m => '\x00' + m + '\x00');
+
+      const tokens = [];
+      let current = '';
+      for (let i = 0; i < clean.length; i++) {
+        const ch = clean[i];
+        if (ch === '{' || ch === '}' || ch === ';') {
+          if (current.trim()) tokens.push(current.trim());
+          tokens.push(ch);
+          current = '';
+        } else {
+          current += ch;
+        }
+      }
+      if (current.trim()) tokens.push(current.trim());
+
+      let indent = 0;
+      let result = '';
+      const INDENT = '  ';
+
+      for (let i = 0; i < tokens.length; i++) {
+        let token = tokens[i].replace(/\x00/g, '');
+
+        if (token === '}') {
+          indent = Math.max(0, indent - 1);
+          result += INDENT.repeat(indent) + '}\n';
+        } else if (token === '{') {
+          result = result.trimEnd() + ' {\n';
+          indent++;
+        } else if (token === ';') {
+          result = result.trimEnd() + ';\n';
+        } else {
+          token = token.replace(/:\s*/g, ': ').replace(/\s*,\s*/g, ', ');
+          result += INDENT.repeat(indent) + token;
+          if (i + 1 < tokens.length && tokens[i + 1] !== '{' && tokens[i + 1] !== ';' && tokens[i + 1] !== '}') {
+            result += '\n';
+          }
+        }
+      }
+
+      return result.trim();
+    }
+
+    $('minify-btn').addEventListener('click', () => {
+      const input = $('css-input').value;
+      if (!input.trim()) return;
+      const output = minifyCSS(input);
+      $('css-output').value = output;
+      showStats(new Blob([input]).size, new Blob([output]).size);
+    });
+
+    $('beautify-btn').addEventListener('click', () => {
+      const input = $('css-input').value;
+      if (!input.trim()) return;
+      const output = beautifyCSS(input);
+      $('css-output').value = output;
+      showStats(new Blob([input]).size, new Blob([output]).size);
+    });
+
+    $('clear-btn').addEventListener('click', () => {
+      $('css-input').value = '';
+      $('css-output').value = '';
+      $('stats-bar').classList.add('hidden');
+    });
+
+    $('copy-btn').addEventListener('click', () => {
+      const text = $('css-output').value;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = $('copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Output', 1500);
+      });
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('css-minifier');
+  </script>
+</body>
+</html>

@@ -11,3 +11,6 @@
 
 /tools/voice-memo-recorder
   Permissions-Policy: microphone=(self)
+
+/tools/qr-code-reader
+  Permissions-Policy: camera=(self)

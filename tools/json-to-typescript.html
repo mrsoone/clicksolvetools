@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free JSON to TypeScript Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert JSON to TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and optional fields — free online tool for developers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/json-to-typescript">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free JSON to TypeScript Converter | ClickSolveTools">
+  <meta property="og:description" content="Convert JSON to TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and optional fields — free online tool for developers.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/json-to-typescript">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free JSON to TypeScript Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Convert JSON to TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and optional fields — free online tool for developers.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON to TypeScript Converter","url":"https://clicksolvetools.com/tools/json-to-typescript","description":"Convert JSON to TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and optional fields — free online tool for developers.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">JSON to TypeScript Converter</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="space-y-4">
+
+      <!-- Options -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-4">
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex items-center gap-2">
+            <label for="root-name" class="text-sm font-medium text-[#475569]">Root name</label>
+            <input id="root-name" type="text" value="Root" placeholder="Root" class="jt-input w-32">
+          </div>
+          <div class="flex items-center gap-2">
+            <label for="output-type" class="text-sm font-medium text-[#475569]">Output</label>
+            <select id="output-type" class="jt-select">
+              <option value="interface">interface</option>
+              <option value="type">type alias</option>
+            </select>
+          </div>
+          <label class="flex items-center gap-2 text-sm text-[#475569] cursor-pointer">
+            <input id="opt-optional" type="checkbox" class="accent-[#2563eb] w-4 h-4"> Optional props
+          </label>
+          <label class="flex items-center gap-2 text-sm text-[#475569] cursor-pointer">
+            <input id="opt-readonly" type="checkbox" class="accent-[#2563eb] w-4 h-4"> Readonly
+          </label>
+          <button id="convert-btn" class="ml-auto bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-5 py-2 rounded-lg transition-colors text-sm">Convert</button>
+        </div>
+      </div>
+
+      <!-- Editors -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden flex flex-col">
+          <div class="flex items-center justify-between px-4 py-2.5 border-b border-[#e2e8f0] bg-[#f8fafc]">
+            <span class="text-sm font-semibold text-[#475569]">JSON Input</span>
+            <button id="paste-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Paste</button>
+          </div>
+          <textarea id="json-input" class="w-full flex-1 min-h-[400px] p-4 font-mono text-sm text-[#1e293b] bg-white resize-none outline-none" placeholder='Paste your JSON here, e.g.&#10;{&#10;  "name": "John",&#10;  "age": 30,&#10;  "address": {&#10;    "street": "123 Main St",&#10;    "city": "Springfield"&#10;  }&#10;}'></textarea>
+        </div>
+        <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden flex flex-col">
+          <div class="flex items-center justify-between px-4 py-2.5 border-b border-[#e2e8f0] bg-[#f8fafc]">
+            <span class="text-sm font-semibold text-[#475569]">TypeScript Output</span>
+            <button id="copy-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">Copy</button>
+          </div>
+          <textarea id="ts-output" class="w-full flex-1 min-h-[400px] p-4 font-mono text-sm text-[#1e293b] bg-white resize-none outline-none" readonly placeholder="TypeScript interfaces will appear here..."></textarea>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="error-bar" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-700"></div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">JSON to TypeScript Conversion for Developers</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Converting JSON data structures into TypeScript interfaces is one of the most common tasks in modern web development. When you consume a REST API, read a configuration file, or work with any JSON-based data source, having accurate TypeScript types ensures your editor catches mistakes before runtime. This free converter takes raw JSON and generates clean, well-structured TypeScript interfaces or type aliases automatically.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why TypeScript Interfaces Matter</h3>
+      <p>TypeScript's type system exists to help you write safer, more predictable code. Without types, accessing a nested property like <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">user.address.zipCode</code> is a runtime gamble — it might be undefined, misspelled, or an entirely different type than you expected. Interfaces act as contracts that describe the exact shape of your data. Your editor can then autocomplete property names, flag typos instantly, and warn you when you pass the wrong structure to a function.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Converter Works</h3>
+      <p>Paste any valid JSON into the left panel and click Convert. The tool recursively walks the JSON structure and infers types for every field. Primitive values become <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">string</code>, <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">number</code>, or <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">boolean</code>. Null values are typed as <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">null</code>. Nested objects generate separate named interfaces — for example, an <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">address</code> field containing an object produces an <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">Address</code> interface. Arrays are analyzed to determine the element type: an array of objects generates a typed interface for the elements, an array of numbers becomes <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">number[]</code>, and mixed-type arrays fall back to <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">any[]</code>.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Configuration Options</h3>
+      <p>The converter provides several options to tailor the output to your coding style. You can choose between <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">interface</code> and <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">type</code> declarations — both are valid TypeScript, but interfaces are more common for object shapes because they support declaration merging and extension. The optional properties toggle adds a <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">?</code> suffix to every property key, which is useful when you expect partial data. The readonly toggle prepends <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">readonly</code> to each field, enforcing immutability at compile time.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Handling Edge Cases</h3>
+      <p>Real-world JSON is rarely textbook-clean. This tool handles null values by typing them as <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">null</code> — you can later union them with the expected type in your codebase. Empty arrays are typed as <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">any[]</code> since there are no elements to infer from. Arrays containing a mix of different primitive types produce a union type. If the root JSON value is an array rather than an object, the tool wraps it accordingly.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Should I use interface or type alias?</strong></p>
+      <p>For object shapes, interfaces are the convention in most TypeScript codebases. They can be extended and merged, which is useful in large projects. Type aliases are more flexible and support unions and intersections directly, making them better for complex composed types.</p>
+
+      <p><strong class="text-[#1e293b]">Is my JSON sent to a server?</strong></p>
+      <p>No. This tool runs entirely in your browser. Your data never leaves your machine — there are no API calls, no tracking of input content, and nothing stored on any server.</p>
+
+      <p><strong class="text-[#1e293b]">Can I convert TypeScript back to JSON?</strong></p>
+      <p>Not with this tool, since TypeScript types are a compile-time concept and do not contain actual values. However, you can use your interfaces to validate JSON data at runtime with libraries like Zod or io-ts.</p>
+
+      <p>This JSON to TypeScript converter is completely free, processes everything client-side, and requires no sign-up. Bookmark it for the next time you need to type an API response quickly.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .jt-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .jt-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .jt-input::placeholder { color: #94a3b8; }
+
+    .jt-select {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .jt-select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+
+    function pascalCase(str) {
+      return str
+        .replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase())
+        .replace(/^./, c => c.toUpperCase());
+    }
+
+    function inferType(value, name, interfaces, useType, optional, readonly) {
+      if (value === null) return 'null';
+      if (typeof value === 'string') return 'string';
+      if (typeof value === 'number') return 'number';
+      if (typeof value === 'boolean') return 'boolean';
+
+      if (Array.isArray(value)) {
+        if (value.length === 0) return 'any[]';
+        const elementTypes = new Set();
+        let objectInterface = null;
+        for (const item of value) {
+          if (item === null) {
+            elementTypes.add('null');
+          } else if (typeof item === 'object' && !Array.isArray(item)) {
+            const iName = pascalCase(name) + 'Item';
+            if (!objectInterface) {
+              objectInterface = iName;
+              buildInterface(item, iName, interfaces, useType, optional, readonly);
+            }
+            elementTypes.add(iName);
+          } else {
+            elementTypes.add(inferType(item, name, interfaces, useType, optional, readonly));
+          }
+        }
+        const types = [...elementTypes];
+        if (types.length === 1) return types[0] + '[]';
+        return '(' + types.join(' | ') + ')[]';
+      }
+
+      if (typeof value === 'object') {
+        const iName = pascalCase(name);
+        buildInterface(value, iName, interfaces, useType, optional, readonly);
+        return iName;
+      }
+
+      return 'any';
+    }
+
+    function buildInterface(obj, name, interfaces, useType, optional, readonly) {
+      const lines = [];
+      const keys = Object.keys(obj);
+
+      for (const key of keys) {
+        const type = inferType(obj[key], key, interfaces, useType, optional, readonly);
+        const safeName = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : `'${key}'`;
+        const optMark = optional ? '?' : '';
+        const roPrefix = readonly ? 'readonly ' : '';
+        lines.push(`  ${roPrefix}${safeName}${optMark}: ${type};`);
+      }
+
+      if (useType === 'type') {
+        interfaces.push(`type ${name} = {\n${lines.join('\n')}\n};`);
+      } else {
+        interfaces.push(`interface ${name} {\n${lines.join('\n')}\n}`);
+      }
+    }
+
+    function convert() {
+      const errorBar = $('error-bar');
+      const output = $('ts-output');
+      const jsonStr = $('json-input').value.trim();
+
+      errorBar.classList.add('hidden');
+      errorBar.textContent = '';
+      output.value = '';
+
+      if (!jsonStr) return;
+
+      let parsed;
+      try {
+        parsed = JSON.parse(jsonStr);
+      } catch (e) {
+        errorBar.textContent = 'Invalid JSON: ' + e.message;
+        errorBar.classList.remove('hidden');
+        return;
+      }
+
+      const rootName = $('root-name').value.trim() || 'Root';
+      const useType = $('output-type').value;
+      const optional = $('opt-optional').checked;
+      const readonly = $('opt-readonly').checked;
+      const interfaces = [];
+
+      if (Array.isArray(parsed)) {
+        if (parsed.length === 0) {
+          output.value = useType === 'type'
+            ? `type ${pascalCase(rootName)} = any[];`
+            : `type ${pascalCase(rootName)} = any[];`;
+          return;
+        }
+        const first = parsed[0];
+        if (first !== null && typeof first === 'object' && !Array.isArray(first)) {
+          buildInterface(first, pascalCase(rootName), interfaces, useType, optional, readonly);
+          output.value = interfaces.reverse().join('\n\n') + `\n\ntype ${pascalCase(rootName)}List = ${pascalCase(rootName)}[];`;
+        } else {
+          const elType = inferType(parsed, rootName, interfaces, useType, optional, readonly);
+          output.value = interfaces.reverse().join('\n\n') + (interfaces.length ? '\n\n' : '') + `type ${pascalCase(rootName)}List = ${elType};`;
+        }
+      } else if (parsed !== null && typeof parsed === 'object') {
+        buildInterface(parsed, pascalCase(rootName), interfaces, useType, optional, readonly);
+        output.value = interfaces.reverse().join('\n\n');
+      } else {
+        const t = inferType(parsed, rootName, interfaces, useType, optional, readonly);
+        output.value = `type ${pascalCase(rootName)} = ${t};`;
+      }
+    }
+
+    $('convert-btn').addEventListener('click', convert);
+
+    $('json-input').addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        convert();
+      }
+    });
+
+    $('copy-btn').addEventListener('click', () => {
+      const text = $('ts-output').value;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = $('copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+      });
+    });
+
+    $('paste-btn').addEventListener('click', () => {
+      navigator.clipboard.readText().then(text => {
+        $('json-input').value = text;
+        convert();
+      });
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('json-to-typescript');
+  </script>
+</body>
+</html>

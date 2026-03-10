@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Calculate Your Monthly Mortgage Payment (With Formula and Examples) | ClickSolveTools Blog</title>
+  <meta name="description" content="Learn the mortgage payment formula M = P[r(1+r)^n]/[(1+r)^n-1] with worked examples. Compare rates, understand amortization, PMI, and extra payments.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/blog/how-to-calculate-mortgage-payments">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Calculate Your Monthly Mortgage Payment (With Formula and Examples)">
+  <meta property="og:description" content="Learn the mortgage payment formula M = P[r(1+r)^n]/[(1+r)^n-1] with worked examples. Compare rates, understand amortization, PMI, and extra payments.">
+  <meta property="og:url" content="https://clicksolvetools.com/blog/how-to-calculate-mortgage-payments">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta property="article:published_time" content="2025-06-15">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How to Calculate Your Monthly Mortgage Payment (With Formula and Examples)">
+  <meta name="twitter:description" content="Learn the mortgage payment formula M = P[r(1+r)^n]/[(1+r)^n-1] with worked examples. Compare rates, understand amortization, PMI, and extra payments.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Calculate Your Monthly Mortgage Payment (With Formula and Examples)","description":"Learn the mortgage payment formula M = P[r(1+r)^n]/[(1+r)^n-1] with worked examples. Compare rates, understand amortization, PMI, and extra payments.","url":"https://clicksolvetools.com/blog/how-to-calculate-mortgage-payments","datePublished":"2025-06-15","publisher":{"@type":"Organization","name":"ClickSolveTools","logo":{"@type":"ImageObject","url":"https://clicksolvetools.com/images/logo.png"}},"author":{"@type":"Organization","name":"ClickSolveTools"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-[#94a3b8] mb-8">
+      <a href="/" class="hover:text-[#2563eb]">Home</a>
+      <span class="mx-2">→</span>
+      <a href="/blog" class="hover:text-[#2563eb]">Blog</a>
+      <span class="mx-2">→</span>
+      <span class="text-[#1e293b]">Mortgage Payments</span>
+    </nav>
+
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-xs px-3 py-1 bg-[#eff6ff] text-[#2563eb] rounded-full font-medium">Guides</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">mortgage</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">finance</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">calculator</span>
+        <span class="text-xs px-3 py-1 bg-[#f1f5f9] text-[#94a3b8] rounded-full">home buying</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4 text-[#1e293b]">How to Calculate Your Monthly Mortgage Payment (With Formula and Examples)</h1>
+      <div class="flex items-center gap-4 text-sm text-[#94a3b8]">
+        <time datetime="2025-06-15">June 15, 2025</time>
+        <span>·</span>
+        <span>9 min read</span>
+      </div>
+    </header>
+
+    <div class="prose max-w-none space-y-6 text-[#475569] leading-relaxed">
+
+      <p>Buying a home is the biggest financial decision most people will ever make, and yet surprisingly few buyers actually understand how their monthly mortgage payment is calculated. They plug numbers into an online calculator, get a result, and move on. But understanding the math behind that number gives you real power — the power to compare loan offers intelligently, negotiate better terms, and plan for the true cost of homeownership.</p>
+
+      <p>In this guide, we'll break down the exact formula lenders use to calculate your monthly payment, walk through three real-world examples step by step, and cover the additional costs that turn your "monthly payment" into the actual check you write each month. You can follow along with our <a href="/tools/mortgage-calculator" class="text-[#2563eb] hover:underline">Mortgage Calculator</a> to verify the numbers.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">The Mortgage Payment Formula</h2>
+
+      <p>Every fixed-rate mortgage payment is calculated using this formula:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">M = P × [r(1 + r)^n] / [(1 + r)^n − 1]</code>
+
+      <p>Where:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">M</strong> = your monthly payment (principal + interest only)</li>
+        <li><strong class="text-[#1e293b]">P</strong> = the principal loan amount (what you borrow, not the home price)</li>
+        <li><strong class="text-[#1e293b]">r</strong> = your monthly interest rate (annual rate ÷ 12)</li>
+        <li><strong class="text-[#1e293b]">n</strong> = total number of payments (loan term in years × 12)</li>
+      </ul>
+
+      <p>The key detail most people miss: <strong class="text-[#1e293b]">r</strong> is the <em>monthly</em> rate, not the annual rate. A 6% annual rate means r = 0.06 / 12 = 0.005 per month. Get this wrong and every calculation downstream is off.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Example 1: $250,000 at 6% for 30 Years</h2>
+
+      <p>Let's say you're buying a $312,500 home, putting 20% down ($62,500), and borrowing $250,000 at a 6% fixed rate for 30 years.</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li>P = $250,000</li>
+        <li>r = 0.06 / 12 = 0.005</li>
+        <li>n = 30 × 12 = 360</li>
+      </ul>
+
+      <p>Plugging into the formula:</p>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">M = 250,000 × [0.005 × (1.005)^360] / [(1.005)^360 − 1]
+(1.005)^360 = 6.02258
+M = 250,000 × [0.005 × 6.02258] / [6.02258 − 1]
+M = 250,000 × 0.030113 / 5.02258
+M = 250,000 × 0.005996
+M = $1,498.88</code>
+
+      <p>Your principal and interest payment is <strong class="text-[#1e293b]">$1,498.88 per month</strong>. Over 30 years, you'll pay a total of $539,595 — meaning $289,595 goes to interest alone. That's more than the original loan amount.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Example 2: $400,000 at 7% for 30 Years</h2>
+
+      <p>A more expensive home with a higher rate — common in the current market:</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li>P = $400,000</li>
+        <li>r = 0.07 / 12 = 0.005833</li>
+        <li>n = 360</li>
+      </ul>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">M = 400,000 × [0.005833 × (1.005833)^360] / [(1.005833)^360 − 1]
+(1.005833)^360 = 8.11652
+M = 400,000 × [0.005833 × 8.11652] / [8.11652 − 1]
+M = 400,000 × 0.04735 / 7.11652
+M = 400,000 × 0.006653
+M = $2,661.21</code>
+
+      <p>At <strong class="text-[#1e293b]">$2,661.21 per month</strong>, you'll pay $957,636 over the life of the loan — $557,636 in interest. That one percentage point increase from 6% to 7% on $400K adds roughly $265 per month compared to what a 6% rate would cost ($2,398/mo).</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Example 3: $350,000 at 5.5% for 15 Years</h2>
+
+      <p>Shorter terms mean higher monthly payments but dramatically less interest paid:</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li>P = $350,000</li>
+        <li>r = 0.055 / 12 = 0.004583</li>
+        <li>n = 15 × 12 = 180</li>
+      </ul>
+
+      <code class="bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg p-4 font-mono text-sm text-[#1e293b] block overflow-x-auto my-4">M = 350,000 × [0.004583 × (1.004583)^180] / [(1.004583)^180 − 1]
+(1.004583)^180 = 2.28175
+M = 350,000 × [0.004583 × 2.28175] / [2.28175 − 1]
+M = 350,000 × 0.010455 / 1.28175
+M = 350,000 × 0.008158
+M = $2,855.35</code>
+
+      <p>The monthly payment is <strong class="text-[#1e293b]">$2,855.35</strong> — higher than Example 1 despite a lower rate, because you're paying it off in half the time. But the total paid is only $513,963, meaning you pay $163,963 in interest. Compare that to $289,595 in interest from Example 1 on a smaller loan. The 15-year term saves you a staggering amount.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Monthly Payment Comparison Table: $300,000 Loan</h2>
+
+      <p>To see how dramatically interest rates affect your payment, here's a table showing the monthly principal and interest payment for a $300,000 loan at various rates and terms:</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Interest Rate</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">15-Year Monthly</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">30-Year Monthly</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">30-Year Total Interest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">5.0%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,372</td>
+            <td class="p-3 border border-[#e2e8f0]">$1,610</td>
+            <td class="p-3 border border-[#e2e8f0]">$279,767</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">5.5%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,451</td>
+            <td class="p-3 border border-[#e2e8f0]">$1,703</td>
+            <td class="p-3 border border-[#e2e8f0]">$313,212</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">6.0%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,532</td>
+            <td class="p-3 border border-[#e2e8f0]">$1,799</td>
+            <td class="p-3 border border-[#e2e8f0]">$347,515</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">6.5%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,613</td>
+            <td class="p-3 border border-[#e2e8f0]">$1,896</td>
+            <td class="p-3 border border-[#e2e8f0]">$382,633</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">7.0%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,696</td>
+            <td class="p-3 border border-[#e2e8f0]">$1,996</td>
+            <td class="p-3 border border-[#e2e8f0]">$418,527</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">7.5%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,781</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,098</td>
+            <td class="p-3 border border-[#e2e8f0]">$455,157</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">8.0%</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,867</td>
+            <td class="p-3 border border-[#e2e8f0]">$2,201</td>
+            <td class="p-3 border border-[#e2e8f0]">$492,480</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Notice the pattern: going from 5% to 8% on a 30-year loan increases your monthly payment by $591, but the total interest paid nearly doubles from $279,767 to $492,480. This is why even a quarter-point rate reduction is worth negotiating for.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Understanding Amortization: Where Your Money Goes</h2>
+
+      <p>Here's something that surprises most first-time buyers: in the early years of a 30-year mortgage, most of your payment goes to interest, not principal. On a $300,000 loan at 6%, your first payment of $1,799 breaks down as roughly $1,500 in interest and only $299 toward the principal balance. By month 180 (halfway through), you're paying about $993 in interest and $806 in principal. The split doesn't favor principal until roughly year 19.</p>
+
+      <p>This is why selling a home after just a few years can feel financially painful — you've barely made a dent in the loan balance despite making years of payments. It's also why extra payments early in the loan have an outsized impact. An extra $200 per month in year one saves far more in total interest than an extra $200 per month in year 25, because you're eliminating principal that would have accumulated interest for decades.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">What the Formula Doesn't Include: PITI and Beyond</h2>
+
+      <p>The formula above gives you the principal and interest (P&I) portion of your payment. Your actual monthly obligation — what lenders call PITI — includes:</p>
+
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Principal & Interest:</strong> the number from the formula</li>
+        <li><strong class="text-[#1e293b]">Property Taxes:</strong> typically 1%–2% of the home's assessed value per year, divided by 12. On a $350,000 home at 1.2%, that's $350/month.</li>
+        <li><strong class="text-[#1e293b]">Homeowners Insurance:</strong> usually $100–$300/month depending on location and coverage</li>
+        <li><strong class="text-[#1e293b]">PMI (Private Mortgage Insurance):</strong> required if your down payment is less than 20%, typically 0.5%–1% of the loan amount per year. On a $300,000 loan, that's $125–$250/month.</li>
+        <li><strong class="text-[#1e293b]">HOA Fees:</strong> if applicable, often $200–$500/month for condos and planned communities</li>
+      </ul>
+
+      <p>In practice, someone with a $1,799 P&I payment on a $300,000 loan might actually pay $2,500–$2,800/month when all costs are included. Always calculate the full PITI when budgeting.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">PMI: The Cost of a Small Down Payment</h2>
+
+      <p>If you put less than 20% down on a conventional loan, you'll pay Private Mortgage Insurance. PMI protects the lender (not you) in case of default. The rate depends on your credit score and loan-to-value ratio:</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Down Payment</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">LTV Ratio</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Typical PMI Rate</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Monthly Cost ($300K loan)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">3%</td>
+            <td class="p-3 border border-[#e2e8f0]">97%</td>
+            <td class="p-3 border border-[#e2e8f0]">0.85%–1.15%</td>
+            <td class="p-3 border border-[#e2e8f0]">$213–$288</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">5%</td>
+            <td class="p-3 border border-[#e2e8f0]">95%</td>
+            <td class="p-3 border border-[#e2e8f0]">0.70%–1.00%</td>
+            <td class="p-3 border border-[#e2e8f0]">$175–$250</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">10%</td>
+            <td class="p-3 border border-[#e2e8f0]">90%</td>
+            <td class="p-3 border border-[#e2e8f0]">0.40%–0.70%</td>
+            <td class="p-3 border border-[#e2e8f0]">$100–$175</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">15%</td>
+            <td class="p-3 border border-[#e2e8f0]">85%</td>
+            <td class="p-3 border border-[#e2e8f0]">0.30%–0.50%</td>
+            <td class="p-3 border border-[#e2e8f0]">$75–$125</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">20%+</td>
+            <td class="p-3 border border-[#e2e8f0]">≤80%</td>
+            <td class="p-3 border border-[#e2e8f0]">None</td>
+            <td class="p-3 border border-[#e2e8f0]">$0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The good news: PMI isn't permanent. Once you reach 20% equity (through payments or appreciation), you can request its removal. By law, your lender must automatically cancel PMI when you reach 22% equity based on the original purchase price.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">The Power of Extra Payments</h2>
+
+      <p>Making extra payments toward your principal can save you tens of thousands of dollars and years off your loan. Let's look at the impact on our Example 1 ($250,000 at 6%, 30 years, $1,498.88/month):</p>
+
+      <table class="w-full text-sm border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Extra Monthly Payment</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Payoff Time</th>
+            <th class="text-left p-3 bg-[#f1f5f9] border border-[#e2e8f0] font-semibold text-[#1e293b]">Interest Saved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">$0 (minimum only)</td>
+            <td class="p-3 border border-[#e2e8f0]">30 years</td>
+            <td class="p-3 border border-[#e2e8f0]">$0</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">+$100</td>
+            <td class="p-3 border border-[#e2e8f0]">25 years, 3 months</td>
+            <td class="p-3 border border-[#e2e8f0]">$52,039</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">+$250</td>
+            <td class="p-3 border border-[#e2e8f0]">21 years, 6 months</td>
+            <td class="p-3 border border-[#e2e8f0]">$104,682</td>
+          </tr>
+          <tr>
+            <td class="p-3 border border-[#e2e8f0]">+$500</td>
+            <td class="p-3 border border-[#e2e8f0]">17 years, 10 months</td>
+            <td class="p-3 border border-[#e2e8f0]">$157,235</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>An extra $250/month saves you over $104,000 in interest and gets you mortgage-free 8.5 years early. Use our <a href="/tools/loan-payoff-calculator" class="text-[#2563eb] hover:underline">Loan Payoff Calculator</a> to model your own extra payment scenarios.</p>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Fixed-Rate vs. Adjustable-Rate Mortgages (ARM)</h2>
+
+      <p>Everything above assumes a fixed-rate mortgage, where the interest rate stays the same for the entire loan. Adjustable-rate mortgages (ARMs) work differently:</p>
+
+      <p>A <strong class="text-[#1e293b]">5/1 ARM</strong> has a fixed rate for the first 5 years, then adjusts annually based on a benchmark rate (like the Secured Overnight Financing Rate, or SOFR) plus a margin. A typical ARM might start at 5.5% for 5 years, then adjust between 3.5% and 10.5% depending on rate caps.</p>
+
+      <p>ARMs make sense when you're confident you'll sell or refinance within the fixed period. They carry real risk if rates spike and you can't refinance. For most buyers planning to stay long-term, fixed-rate mortgages offer predictability that's worth the slightly higher initial rate.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">When an ARM might make sense:</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>You plan to sell the home within 5–7 years</li>
+        <li>You expect interest rates to decrease (and plan to refinance)</li>
+        <li>The initial rate savings are substantial (1%+ lower than fixed)</li>
+        <li>You have financial flexibility to handle payment increases</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Tips for Getting a Lower Monthly Payment</h2>
+
+      <ol class="list-decimal list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Improve your credit score before applying.</strong> A score of 760+ typically gets the best rates. Going from 680 to 760 can save 0.5%–1% on your rate.</li>
+        <li><strong class="text-[#1e293b]">Shop multiple lenders.</strong> Rates can vary by 0.5% or more between lenders on the same day. Get at least three quotes.</li>
+        <li><strong class="text-[#1e293b]">Consider buying points.</strong> One discount point (1% of the loan amount) typically lowers your rate by 0.25%. On a $300,000 loan, paying $3,000 upfront to go from 6.5% to 6.25% saves $51/month — a break-even point of about 5 years.</li>
+        <li><strong class="text-[#1e293b]">Make a larger down payment.</strong> Beyond avoiding PMI at 20%, a larger down payment means a smaller loan and lower monthly payment.</li>
+        <li><strong class="text-[#1e293b]">Choose a longer term if cash flow is tight.</strong> A 30-year term has lower payments than 15-year, even if you plan to make extra payments when possible.</li>
+      </ol>
+
+      <h2 class="text-2xl font-bold text-[#1e293b] mt-10 mb-4">Frequently Asked Questions</h2>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How much house can I afford on a $75,000 salary?</h3>
+      <p>A common guideline is that your total housing payment (PITI) should not exceed 28% of your gross monthly income. On a $75,000 salary, that's $6,250/month gross, so a maximum of $1,750/month for housing. After taxes, insurance, and PMI, that typically supports a home price of roughly $280,000–$320,000 with 10% down at current rates. However, your actual affordability depends on your other debts, down payment, credit score, and local tax rates.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Is it better to get a 15-year or 30-year mortgage?</h3>
+      <p>A 15-year mortgage has higher monthly payments but saves you a massive amount in interest. If you can comfortably afford the 15-year payment while still saving for retirement and emergencies, it's the better financial move. If the 15-year payment would strain your budget, take the 30-year and make extra payments when you can — you get the lower required payment as a safety net while still paying down the loan faster.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Does making biweekly payments actually save money?</h3>
+      <p>Yes. Paying half your monthly payment every two weeks results in 26 half-payments per year — equivalent to 13 full monthly payments instead of 12. That one extra payment per year can shave about 4–5 years off a 30-year mortgage and save tens of thousands in interest. However, make sure your lender applies biweekly payments correctly; some hold the first half-payment until the second arrives, negating the benefit.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What credit score do I need to get the best mortgage rate?</h3>
+      <p>Most lenders offer their best rates to borrowers with a FICO score of 760 or above. You can still get a mortgage with a score as low as 580 (FHA loans) or 620 (conventional loans), but you'll pay significantly higher rates. A borrower at 660 might pay 0.5%–1.5% more than someone at 760, which on a $300,000 loan translates to $100–$300 more per month.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Should I pay off my mortgage early or invest the extra money?</h3>
+      <p>This depends on your mortgage rate versus expected investment returns. If your mortgage is at 3%, and you expect 8%–10% average stock market returns, investing the extra money mathematically wins. At 7%+ mortgage rates, the guaranteed "return" of paying off your mortgage is very competitive with market returns and carries zero risk. Many people split the difference: make some extra payments for peace of mind while also investing. Use our <a href="/tools/compound-interest-calculator" class="text-[#2563eb] hover:underline">Compound Interest Calculator</a> to compare scenarios.</p>
+
+    </div>
+  </article>
+
+  <div id="related-tool-cards"></div>
+  <div id="more-posts"></div>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { renderBlogNav, renderFooter, renderMorePosts, renderRelatedToolCards } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    renderBlogNav('How to Calculate Your Monthly Mortgage Payment (With Formula and Examples)');
+    renderFooter();
+    renderMorePosts('how-to-calculate-mortgage-payments', 'Guides');
+    renderRelatedToolCards(['mortgage-calculator', 'loan-payoff-calculator', 'compound-interest-calculator']);
+  </script>
+</body>
+</html>

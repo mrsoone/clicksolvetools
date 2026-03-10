@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free QR Code Reader | ClickSolveTools</title>
+  <meta name="description" content="Scan QR codes from uploaded images or your camera — entirely in your browser. No data is sent anywhere. Supports URLs, text, Wi-Fi, and more.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/qr-code-reader">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free QR Code Reader | ClickSolveTools">
+  <meta property="og:description" content="Scan QR codes from uploaded images or your camera — entirely in your browser. No data is sent anywhere.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/qr-code-reader">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free QR Code Reader | ClickSolveTools">
+  <meta name="twitter:description" content="Scan QR codes from uploaded images or your camera — entirely in your browser. No data is sent anywhere.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Reader","url":"https://clicksolvetools.com/tools/qr-code-reader","description":"Scan QR codes from uploaded images or your camera — entirely in your browser. No data is sent anywhere.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">QR Code Reader</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-6">
+
+      <!-- Privacy Banner -->
+      <div class="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl p-4 flex items-start gap-3">
+        <svg class="w-5 h-5 text-[#2563eb] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <p class="text-sm text-[#1e40af] font-medium">Your camera feed and uploaded images are processed entirely in your browser. Nothing is sent anywhere.</p>
+      </div>
+
+      <!-- Mode Tabs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="upload" class="qr-tab qr-tab-active flex-1 py-3 text-sm font-semibold text-center">Upload Image</button>
+          <button data-tab="camera" class="qr-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">Use Camera</button>
+        </div>
+
+        <!-- Upload Panel -->
+        <div id="panel-upload" class="qr-panel p-6 space-y-4">
+          <div id="drop-zone" class="border-2 border-dashed border-[#e2e8f0] rounded-xl p-8 text-center cursor-pointer hover:border-[#2563eb] hover:bg-[#f8fafc] transition-all">
+            <svg class="w-10 h-10 text-[#94a3b8] mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            <p class="text-sm text-[#475569] font-medium">Drag & drop an image here</p>
+            <p class="text-xs text-[#94a3b8] mt-1">or click to select a file</p>
+            <input id="file-input" type="file" accept="image/*" class="hidden">
+          </div>
+          <canvas id="upload-canvas" class="hidden"></canvas>
+        </div>
+
+        <!-- Camera Panel -->
+        <div id="panel-camera" class="qr-panel p-6 space-y-4 hidden">
+          <div class="relative rounded-xl overflow-hidden bg-black aspect-[4/3]">
+            <video id="cam-video" autoplay playsinline muted class="w-full h-full object-cover"></video>
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div class="w-48 h-48 border-2 border-white/60 rounded-2xl"></div>
+            </div>
+          </div>
+          <canvas id="cam-canvas" class="hidden"></canvas>
+          <div class="flex gap-3">
+            <button id="btn-start-cam" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg transition-colors flex-1">Start Camera</button>
+            <button id="btn-stop-cam" class="bg-[#ef4444] hover:bg-[#dc2626] text-white font-medium px-4 py-2 rounded-lg transition-colors flex-1 hidden">Stop Camera</button>
+          </div>
+          <p id="cam-status" class="text-xs text-[#94a3b8] text-center"></p>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div id="result-box" class="bg-white border border-[#e2e8f0] rounded-xl p-5 space-y-3 hidden">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-[#475569]">QR Code Content</h2>
+          <button id="btn-copy" class="text-xs bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-3 py-1.5 rounded-lg transition-colors">Copy</button>
+        </div>
+        <div id="result-content" class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-3 text-sm text-[#1e293b] break-all font-mono"></div>
+        <div id="result-link" class="hidden">
+          <a id="result-url" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm">
+            Open Link
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="error-box" class="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700 hidden"></div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How QR Codes Work and How to Read Them</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>QR codes (Quick Response codes) are two-dimensional barcodes invented in 1994 by Denso Wave, a subsidiary of Toyota, to track automotive parts during manufacturing. Unlike traditional one-dimensional barcodes that store data in horizontal lines, QR codes encode information in a grid of black and white squares — allowing them to hold significantly more data. A single QR code can store up to 4,296 alphanumeric characters or 7,089 numeric digits, far exceeding the capacity of a standard barcode.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">What Can QR Codes Contain?</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">URLs</strong> — The most common use. Scanning opens a website link in your browser.</li>
+        <li><strong class="text-[#1e293b]">Plain text</strong> — Notes, serial numbers, or any arbitrary string.</li>
+        <li><strong class="text-[#1e293b]">Contact cards (vCard)</strong> — Name, phone number, email, and address bundled together.</li>
+        <li><strong class="text-[#1e293b]">Wi-Fi credentials</strong> — SSID, password, and encryption type for one-tap connection on mobile devices.</li>
+        <li><strong class="text-[#1e293b]">Email and SMS</strong> — Pre-filled recipient, subject, and body for quick messaging.</li>
+        <li><strong class="text-[#1e293b]">Cryptocurrency addresses</strong> — Wallet address and optional amount for payment requests.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Reader Works</h3>
+      <p>This tool uses <strong class="text-[#1e293b]">jsQR</strong>, an open-source JavaScript QR code decoding library that runs entirely in your browser. When you upload an image, the tool draws it onto an HTML5 canvas, extracts the raw pixel data, and passes it to jsQR for analysis. For camera mode, each video frame is captured and scanned in a continuous loop using <code class="bg-[#f1f5f9] px-1.5 py-0.5 rounded text-[#2563eb] text-sm">requestAnimationFrame</code> until a QR code is detected.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Privacy and Security</h3>
+      <p>Because all processing happens locally in your browser, your images and camera feed are never uploaded to any server. This makes the tool safe for scanning QR codes that contain sensitive information like Wi-Fi passwords or private URLs. No data is logged, stored, or transmitted.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Tips for Best Results</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Good lighting</strong> — Ensure the QR code is well-lit and not obscured by glare or shadows.</li>
+        <li><strong class="text-[#1e293b]">Flat surface</strong> — A wrinkled or curved QR code may distort the grid and prevent decoding.</li>
+        <li><strong class="text-[#1e293b]">Sufficient contrast</strong> — The code should have clear black-on-white (or dark-on-light) contrast.</li>
+        <li><strong class="text-[#1e293b]">Resolution</strong> — For image uploads, a minimum of 200×200 pixels is recommended.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+      <p><strong class="text-[#1e293b]">What if the camera cannot be accessed?</strong></p>
+      <p>Camera access requires a secure context (HTTPS) and user permission. If you see an error, check that your browser has camera permissions enabled for this site, or try the image upload mode instead.</p>
+
+      <p><strong class="text-[#1e293b]">Can this read barcodes?</strong></p>
+      <p>This tool is specifically designed for QR codes (2D square codes). It does not decode traditional 1D barcodes like UPC or EAN. If you need barcode scanning, look for a dedicated barcode reader.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> Always exercise caution when opening URLs from unknown QR codes. Malicious QR codes can link to phishing sites or malware downloads.
+      </div>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .qr-tab{background:#f8fafc;color:#94a3b8;cursor:pointer;transition:all 150ms}
+    .qr-tab:hover{color:#475569}
+    .qr-tab-active{background:#fff!important;color:#2563eb!important;box-shadow:inset 0 -2px 0 #2563eb}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+    let stream=null,animId=null;
+
+    // Tab switching
+    $('tabs').addEventListener('click',e=>{
+      const btn=e.target.closest('.qr-tab');
+      if(!btn)return;
+      document.querySelectorAll('.qr-tab').forEach(b=>b.classList.remove('qr-tab-active'));
+      btn.classList.add('qr-tab-active');
+      document.querySelectorAll('.qr-panel').forEach(p=>p.classList.add('hidden'));
+      $('panel-'+btn.dataset.tab).classList.remove('hidden');
+      if(btn.dataset.tab!=='camera')stopCamera();
+    });
+
+    function showResult(text){
+      $('result-box').classList.remove('hidden');
+      $('error-box').classList.add('hidden');
+      $('result-content').textContent=text;
+      try{
+        const url=new URL(text);
+        if(url.protocol==='http:'||url.protocol==='https:'){
+          $('result-link').classList.remove('hidden');
+          $('result-url').href=text;
+        }else{
+          $('result-link').classList.add('hidden');
+        }
+      }catch{
+        $('result-link').classList.add('hidden');
+      }
+    }
+
+    function showError(msg){
+      $('error-box').textContent=msg;
+      $('error-box').classList.remove('hidden');
+      $('result-box').classList.add('hidden');
+    }
+
+    function hideMessages(){
+      $('error-box').classList.add('hidden');
+      $('result-box').classList.add('hidden');
+    }
+
+    // Copy
+    $('btn-copy').addEventListener('click',()=>{
+      navigator.clipboard.writeText($('result-content').textContent);
+      $('btn-copy').textContent='Copied!';
+      setTimeout(()=>$('btn-copy').textContent='Copy',1200);
+    });
+
+    // ---- UPLOAD MODE ----
+    const dropZone=$('drop-zone');
+    const fileInput=$('file-input');
+    const uploadCanvas=$('upload-canvas');
+
+    dropZone.addEventListener('click',()=>fileInput.click());
+    dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('border-[#2563eb]','bg-[#eff6ff]');});
+    dropZone.addEventListener('dragleave',()=>{dropZone.classList.remove('border-[#2563eb]','bg-[#eff6ff]');});
+    dropZone.addEventListener('drop',e=>{
+      e.preventDefault();
+      dropZone.classList.remove('border-[#2563eb]','bg-[#eff6ff]');
+      if(e.dataTransfer.files.length)processFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change',()=>{if(fileInput.files.length)processFile(fileInput.files[0]);});
+
+    function processFile(file){
+      if(!file.type.startsWith('image/')){showError('Please select a valid image file.');return;}
+      hideMessages();
+      const img=new Image();
+      img.onload=()=>{
+        const ctx=uploadCanvas.getContext('2d');
+        uploadCanvas.width=img.width;
+        uploadCanvas.height=img.height;
+        ctx.drawImage(img,0,0);
+        const imageData=ctx.getImageData(0,0,img.width,img.height);
+        const code=jsQR(imageData.data,img.width,img.height);
+        if(code)showResult(code.data);
+        else showError('No QR code found in this image. Make sure the QR code is clearly visible and well-lit.');
+      };
+      img.onerror=()=>showError('Could not load the image. Try a different file.');
+      img.src=URL.createObjectURL(file);
+    }
+
+    // ---- CAMERA MODE ----
+    function stopCamera(){
+      if(animId){cancelAnimationFrame(animId);animId=null;}
+      if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+      $('cam-video').srcObject=null;
+      $('btn-start-cam').classList.remove('hidden');
+      $('btn-stop-cam').classList.add('hidden');
+      $('cam-status').textContent='';
+    }
+
+    $('btn-start-cam').addEventListener('click',async()=>{
+      hideMessages();
+      $('cam-status').textContent='Requesting camera access…';
+      try{
+        stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+        $('cam-video').srcObject=stream;
+        $('btn-start-cam').classList.add('hidden');
+        $('btn-stop-cam').classList.remove('hidden');
+        $('cam-status').textContent='Scanning… point at a QR code';
+        scanFrame();
+      }catch(err){
+        $('cam-status').textContent='';
+        if(err.name==='NotAllowedError')showError('Camera access was denied. Please allow camera permissions in your browser settings.');
+        else if(err.name==='NotFoundError')showError('No camera found on this device. Try the image upload mode.');
+        else showError('Could not access camera: '+err.message);
+      }
+    });
+
+    $('btn-stop-cam').addEventListener('click',stopCamera);
+
+    function scanFrame(){
+      if(!stream)return;
+      const video=$('cam-video');
+      const canvas=$('cam-canvas');
+      if(video.readyState===video.HAVE_ENOUGH_DATA){
+        canvas.width=video.videoWidth;
+        canvas.height=video.videoHeight;
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(video,0,0,canvas.width,canvas.height);
+        const imageData=ctx.getImageData(0,0,canvas.width,canvas.height);
+        const code=jsQR(imageData.data,canvas.width,canvas.height);
+        if(code){
+          showResult(code.data);
+          stopCamera();
+          return;
+        }
+      }
+      animId=requestAnimationFrame(scanFrame);
+    }
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('qr-code-reader');
+  </script>
+</body>
+</html>

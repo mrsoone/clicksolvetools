@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Placeholder Image Generator | ClickSolveTools</title>
+  <meta name="description" content="Generate placeholder images as PNG or SVG with custom dimensions, colors, and text. Download or copy as data URI — free tool for web developers and designers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/placeholder-image-generator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Placeholder Image Generator | ClickSolveTools">
+  <meta property="og:description" content="Generate placeholder images as PNG or SVG with custom dimensions, colors, and text. Download or copy as data URI — free tool for web developers and designers.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/placeholder-image-generator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Placeholder Image Generator | ClickSolveTools">
+  <meta name="twitter:description" content="Generate placeholder images as PNG or SVG with custom dimensions, colors, and text. Download or copy as data URI — free tool for web developers and designers.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Placeholder Image Generator","url":"https://clicksolvetools.com/tools/placeholder-image-generator","description":"Generate placeholder images as PNG or SVG with custom dimensions, colors, and text. Download or copy as data URI — free tool for web developers and designers.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Placeholder Image Generator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6">
+
+      <!-- Controls -->
+      <div class="space-y-4">
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 space-y-4">
+          <h2 class="text-lg font-semibold text-[#1e293b]">Settings</h2>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="img-w" class="block text-sm font-medium text-[#475569] mb-1">Width (px)</label>
+              <input id="img-w" type="number" value="600" min="1" max="4096" class="ph-input w-full">
+            </div>
+            <div>
+              <label for="img-h" class="block text-sm font-medium text-[#475569] mb-1">Height (px)</label>
+              <input id="img-h" type="number" value="400" min="1" max="4096" class="ph-input w-full">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="bg-color" class="block text-sm font-medium text-[#475569] mb-1">Background</label>
+              <div class="flex items-center gap-2">
+                <input id="bg-color" type="color" value="#e2e8f0" class="w-10 h-10 rounded border border-[#e2e8f0] cursor-pointer">
+                <input id="bg-hex" type="text" value="#e2e8f0" maxlength="7" class="ph-input flex-1 font-mono text-xs">
+              </div>
+            </div>
+            <div>
+              <label for="txt-color" class="block text-sm font-medium text-[#475569] mb-1">Text</label>
+              <div class="flex items-center gap-2">
+                <input id="txt-color" type="color" value="#94a3b8" class="w-10 h-10 rounded border border-[#e2e8f0] cursor-pointer">
+                <input id="txt-hex" type="text" value="#94a3b8" maxlength="7" class="ph-input flex-1 font-mono text-xs">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="custom-text" class="block text-sm font-medium text-[#475569] mb-1">Custom Text <span class="text-[#94a3b8] font-normal">(blank = WxH)</span></label>
+            <input id="custom-text" type="text" placeholder="600×400" class="ph-input w-full">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Format</label>
+            <div class="flex gap-2">
+              <button data-fmt="png" class="fmt-btn fmt-btn-active flex-1 py-2 text-sm font-medium rounded-lg border transition-colors">PNG</button>
+              <button data-fmt="svg" class="fmt-btn flex-1 py-2 text-sm font-medium rounded-lg border transition-colors">SVG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 space-y-3">
+          <h2 class="text-sm font-semibold text-[#475569]">Presets</h2>
+          <div class="grid grid-cols-2 gap-2" id="presets">
+            <button data-w="150" data-h="150" class="preset-btn text-xs py-2 px-3 rounded-lg border border-[#e2e8f0] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">150×150 Avatar</button>
+            <button data-w="1200" data-h="630" class="preset-btn text-xs py-2 px-3 rounded-lg border border-[#e2e8f0] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">1200×630 OG</button>
+            <button data-w="800" data-h="600" class="preset-btn text-xs py-2 px-3 rounded-lg border border-[#e2e8f0] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">800×600 Blog</button>
+            <button data-w="1920" data-h="1080" class="preset-btn text-xs py-2 px-3 rounded-lg border border-[#e2e8f0] hover:border-[#2563eb] hover:text-[#2563eb] transition-colors">1920×1080 Hero</button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3">
+          <button id="download-btn" class="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium py-2.5 rounded-lg transition-colors text-sm">Download</button>
+          <button id="copy-uri-btn" class="flex-1 border border-[#2563eb] text-[#2563eb] hover:bg-[#eff6ff] font-medium py-2.5 rounded-lg transition-colors text-sm">Copy Data URI</button>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 flex flex-col">
+        <h2 class="text-sm font-semibold text-[#475569] mb-3">Preview</h2>
+        <div class="flex-1 flex items-center justify-center overflow-auto bg-[#f8fafc] rounded-lg border border-[#e2e8f0] min-h-[300px] p-4">
+          <canvas id="canvas" class="max-w-full max-h-[500px] shadow-sm rounded"></canvas>
+        </div>
+        <p id="size-label" class="text-xs text-[#94a3b8] mt-2 text-center tabular-nums"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Placeholder Images in Web Development</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Placeholder images are a fundamental part of the web development workflow. During the design and prototyping phase, you need images that fill the right amount of space without waiting for final assets from photographers, illustrators, or content teams. This tool lets you generate custom placeholder images directly in your browser, with full control over dimensions, colors, text, and output format.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Use Placeholder Images?</h3>
+      <p>Placeholder images serve several purposes in development. They help you test responsive layouts by filling image containers with the correct aspect ratio. They make design mockups and prototypes look more complete when presenting to stakeholders. They help front-end developers verify that image loading, lazy loading, and error states work correctly before real content is ready. Unlike external placeholder services, this tool generates images locally — no network requests, no dependency on a third-party API, and no risk of the service going down mid-project.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">PNG vs SVG Format</h3>
+      <p>This tool supports two output formats. PNG is a raster format that produces pixel-perfect images at the exact dimensions you specify — ideal when you need to test actual image loading behavior, check file size impacts, or use the image in contexts that do not support SVG (like certain email clients). SVG is a vector format that produces an infinitely scalable image described in XML. SVG placeholders are extremely lightweight (typically under 500 bytes) and scale perfectly at any resolution, making them great for responsive design testing and data URI embedding directly in HTML or CSS.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Preset Sizes</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">150×150 Avatar</strong> — Standard profile picture size used across social platforms and user interfaces.</li>
+        <li><strong class="text-[#1e293b]">1200×630 OG Image</strong> — The recommended Open Graph image size for social media link previews on Facebook, LinkedIn, and Twitter.</li>
+        <li><strong class="text-[#1e293b]">800×600 Blog</strong> — A versatile size for blog post featured images and content thumbnails.</li>
+        <li><strong class="text-[#1e293b]">1920×1080 Hero</strong> — Full HD resolution for hero banners and full-width header images.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Using Data URIs</h3>
+      <p>The "Copy Data URI" feature encodes the generated image as a base64 string that you can embed directly in your HTML or CSS without an additional HTTP request. This is useful for small placeholder images where avoiding a network roundtrip matters. For larger images, downloading the file and serving it normally is more efficient since base64 encoding increases the data size by approximately 33%.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">What is the maximum image size I can generate?</strong></p>
+      <p>The tool supports dimensions up to 4096×4096 pixels. Canvas rendering happens in your browser, so very large images may take a moment on lower-powered devices. SVG output has no practical size limit since it is vector-based.</p>
+
+      <p><strong class="text-[#1e293b]">Can I use these images in commercial projects?</strong></p>
+      <p>Yes. The images are generated entirely by your browser and are not subject to any license or copyright. You own whatever you create with this tool.</p>
+
+      <p><strong class="text-[#1e293b]">Is my data sent anywhere?</strong></p>
+      <p>No. Everything runs client-side. No images, colors, or text are transmitted to any server. The tool works fully offline once the page has loaded.</p>
+
+      <p>This placeholder image generator is completely free, private, and requires no account. Bookmark it for instant access during your next design or development project.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .ph-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .ph-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .ph-input::placeholder { color: #94a3b8; }
+
+    .fmt-btn {
+      border-color: #e2e8f0;
+      color: #94a3b8;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+    .fmt-btn:hover { border-color: #cbd5e1; color: #475569; }
+    .fmt-btn-active {
+      background: #eff6ff !important;
+      border-color: #2563eb !important;
+      color: #2563eb !important;
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    input[type="color"] {
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 2px;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+    input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const canvas = $('canvas');
+    const ctx = canvas.getContext('2d');
+    let format = 'png';
+
+    function getW() { return Math.max(1, Math.min(4096, parseInt($('img-w').value) || 600)); }
+    function getH() { return Math.max(1, Math.min(4096, parseInt($('img-h').value) || 400)); }
+    function getBg() { return $('bg-hex').value || '#e2e8f0'; }
+    function getTxtColor() { return $('txt-hex').value || '#94a3b8'; }
+    function getText() {
+      const custom = $('custom-text').value.trim();
+      return custom || (getW() + '×' + getH());
+    }
+
+    function draw() {
+      const w = getW();
+      const h = getH();
+      canvas.width = w;
+      canvas.height = h;
+
+      ctx.fillStyle = getBg();
+      ctx.fillRect(0, 0, w, h);
+
+      const text = getText();
+      const fontSize = Math.max(12, Math.min(w, h) / 8);
+      ctx.fillStyle = getTxtColor();
+      ctx.font = `600 ${fontSize}px -apple-system, "Segoe UI", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, w / 2, h / 2);
+
+      $('size-label').textContent = `${w} × ${h} px`;
+    }
+
+    function getSVGString() {
+      const w = getW();
+      const h = getH();
+      const bg = getBg();
+      const tc = getTxtColor();
+      const text = getText().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const fontSize = Math.max(12, Math.min(w, h) / 8);
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect fill="${bg}" width="${w}" height="${h}"/><text fill="${tc}" font-family="-apple-system,Segoe UI,sans-serif" font-size="${fontSize}" font-weight="600" x="50%" y="50%" dominant-baseline="central" text-anchor="middle">${text}</text></svg>`;
+    }
+
+    function getDataURI() {
+      if (format === 'svg') {
+        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(getSVGString());
+      }
+      return canvas.toDataURL('image/png');
+    }
+
+    // Sync color pickers with hex inputs
+    $('bg-color').addEventListener('input', e => { $('bg-hex').value = e.target.value; draw(); });
+    $('bg-hex').addEventListener('input', e => { if (/^#[0-9a-f]{6}$/i.test(e.target.value)) { $('bg-color').value = e.target.value; draw(); } });
+    $('txt-color').addEventListener('input', e => { $('txt-hex').value = e.target.value; draw(); });
+    $('txt-hex').addEventListener('input', e => { if (/^#[0-9a-f]{6}$/i.test(e.target.value)) { $('txt-color').value = e.target.value; draw(); } });
+
+    ['img-w', 'img-h', 'custom-text'].forEach(id => $(id).addEventListener('input', draw));
+
+    // Format toggle
+    document.querySelectorAll('.fmt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fmt-btn').forEach(b => b.classList.remove('fmt-btn-active'));
+        btn.classList.add('fmt-btn-active');
+        format = btn.dataset.fmt;
+      });
+    });
+
+    // Presets
+    $('presets').addEventListener('click', e => {
+      const btn = e.target.closest('.preset-btn');
+      if (!btn) return;
+      $('img-w').value = btn.dataset.w;
+      $('img-h').value = btn.dataset.h;
+      $('custom-text').value = '';
+      draw();
+    });
+
+    // Download
+    $('download-btn').addEventListener('click', () => {
+      const a = document.createElement('a');
+      if (format === 'svg') {
+        const blob = new Blob([getSVGString()], { type: 'image/svg+xml' });
+        a.href = URL.createObjectURL(blob);
+        a.download = `placeholder-${getW()}x${getH()}.svg`;
+      } else {
+        a.href = canvas.toDataURL('image/png');
+        a.download = `placeholder-${getW()}x${getH()}.png`;
+      }
+      a.click();
+      if (a.href.startsWith('blob:')) URL.revokeObjectURL(a.href);
+    });
+
+    // Copy Data URI
+    $('copy-uri-btn').addEventListener('click', () => {
+      navigator.clipboard.writeText(getDataURI()).then(() => {
+        const btn = $('copy-uri-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Data URI', 1500);
+      });
+    });
+
+    draw();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('placeholder-image-generator');
+  </script>
+</body>
+</html>

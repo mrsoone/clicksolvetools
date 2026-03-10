@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Sleep Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate the best times to sleep or wake up based on 90-minute sleep cycles. Optimize your rest and wake up feeling refreshed — free, private, no sign-up.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/sleep-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Sleep Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate the best times to sleep or wake up based on 90-minute sleep cycles. Optimize your rest and wake up feeling refreshed — free, private, no sign-up.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/sleep-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Sleep Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate the best times to sleep or wake up based on 90-minute sleep cycles. Optimize your rest and wake up feeling refreshed — free, private, no sign-up.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sleep Calculator","url":"https://clicksolvetools.com/tools/sleep-calculator","description":"Calculate the best times to sleep or wake up based on 90-minute sleep cycles. Optimize your rest and wake up feeling refreshed — free, private, no sign-up.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Sleep Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-6">
+
+      <!-- Disclaimer -->
+      <div class="bg-[#fffbeb] border border-[#fde68a] rounded-lg p-3 text-sm text-[#92400e]">
+        <strong>Disclaimer:</strong> This calculator provides general guidance based on average sleep cycle durations. Individual sleep needs vary. Consult a healthcare professional for sleep-related concerns.
+      </div>
+
+      <!-- Tabs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+        <div class="flex border-b border-[#e2e8f0]" id="tabs">
+          <button data-tab="wake" class="sc-tab sc-tab-active flex-1 py-3 text-sm font-semibold text-center">I need to wake up at…</button>
+          <button data-tab="bed" class="sc-tab flex-1 py-3 text-sm font-semibold text-center border-l border-[#e2e8f0]">I'm going to bed at…</button>
+        </div>
+
+        <!-- Mode 1: Wake up time -->
+        <div id="panel-wake" class="sc-panel p-6 space-y-4">
+          <div>
+            <label for="wake-time" class="block text-sm font-medium text-[#475569] mb-1">Wake-up time</label>
+            <input id="wake-time" type="time" value="07:00" class="sc-input w-full text-lg">
+          </div>
+          <button id="calc-wake" class="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium py-2.5 rounded-lg transition-colors text-sm">Calculate Bedtimes</button>
+        </div>
+
+        <!-- Mode 2: Bedtime -->
+        <div id="panel-bed" class="sc-panel p-6 space-y-4 hidden">
+          <div>
+            <label for="bed-time" class="block text-sm font-medium text-[#475569] mb-1">Bedtime</label>
+            <input id="bed-time" type="time" value="23:00" class="sc-input w-full text-lg">
+          </div>
+          <button id="calc-bed" class="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium py-2.5 rounded-lg transition-colors text-sm">Calculate Wake Times</button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="hidden space-y-3">
+        <h2 class="text-sm font-semibold text-[#475569]" id="results-heading">Recommended times</h2>
+        <div id="results-grid" class="grid grid-cols-1 gap-3"></div>
+        <p class="text-xs text-[#94a3b8]">Includes ~15 minutes to fall asleep. A full sleep cycle is approximately 90 minutes.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Sleep Cycles and How to Wake Up Refreshed</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <div class="bg-[#fffbeb] border border-[#fde68a] rounded-lg p-3 text-sm text-[#92400e]">
+        <strong>Health Disclaimer:</strong> The content below is for informational and educational purposes only. It is not a substitute for professional medical advice. If you have chronic sleep problems, consult a sleep specialist or healthcare provider.
+      </div>
+
+      <p>Sleep is not a uniform state — your brain cycles through distinct stages throughout the night, each serving a different biological purpose. Understanding these cycles is the key to waking up feeling alert rather than groggy. This calculator uses the science of sleep architecture to suggest optimal bedtimes and wake times based on completing full 90-minute sleep cycles.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Anatomy of a Sleep Cycle</h3>
+      <p>A single sleep cycle lasts approximately 90 minutes and consists of four stages. Stage 1 (N1) is the lightest sleep, lasting just a few minutes as you transition from wakefulness. Stage 2 (N2) is a deeper state where heart rate slows and body temperature drops — this makes up about half of total sleep time. Stage 3 (N3) is deep slow-wave sleep, the most physically restorative phase when growth hormone is released and tissue repair occurs. Finally, REM (Rapid Eye Movement) sleep is when most vivid dreaming happens and the brain consolidates memories and processes emotions.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Waking Mid-Cycle Feels Terrible</h3>
+      <p>Sleep inertia — that heavy, disoriented feeling when your alarm goes off — is worst when you are pulled out of deep N3 or REM sleep. Waking at the end of a complete cycle, when you naturally return to lighter sleep, dramatically reduces this grogginess. That is why someone who sleeps 6 hours (4 full cycles) may feel more alert than someone who sleeps 7 hours but wakes in the middle of their fifth cycle. The total time matters, but so does the timing.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Calculator Works</h3>
+      <p>The calculator adds approximately 15 minutes of fall-asleep time to your target, then counts backward or forward in 90-minute increments. If you need to wake up at 7:00 AM, it subtracts 15 minutes plus 4, 5, or 6 complete cycles to suggest bedtimes of 11:45 PM (5 cycles / 7.5 hours), 10:15 PM (6 cycles / 9 hours), and 1:15 AM (4 cycles / 6 hours). The green-highlighted options represent the 5–6 cycle range (7.5–9 hours), which aligns with recommended adult sleep duration.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Sleep Hygiene Best Practices</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Consistent schedule</strong> — Go to bed and wake up at the same time every day, including weekends. Irregular schedules confuse your circadian rhythm.</li>
+        <li><strong class="text-[#1e293b]">Cool, dark environment</strong> — The ideal bedroom temperature is 60–67°F (15–19°C). Use blackout curtains or an eye mask to block light.</li>
+        <li><strong class="text-[#1e293b]">Limit screens before bed</strong> — Blue light from phones and laptops suppresses melatonin production. Stop screen use 30–60 minutes before sleep, or use a blue light filter.</li>
+        <li><strong class="text-[#1e293b]">Avoid caffeine after 2 PM</strong> — Caffeine has a half-life of 5–6 hours. An afternoon coffee can still be affecting your brain chemistry at midnight.</li>
+        <li><strong class="text-[#1e293b]">Wind-down routine</strong> — Reading, gentle stretching, or a warm shower signals to your body that it is time to transition to sleep.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Is 6 hours of sleep enough?</strong></p>
+      <p>For most adults, 6 hours (4 cycles) is below the recommended 7–9 hours. While some people function adequately on less sleep, research consistently links chronic short sleep to increased risks of obesity, diabetes, cardiovascular disease, and impaired cognitive performance. Use 6 hours as a minimum, not a target.</p>
+
+      <p><strong class="text-[#1e293b]">Do sleep cycles change with age?</strong></p>
+      <p>Yes. Infants spend nearly 50% of sleep in REM, while adults spend about 20–25%. Older adults tend to have lighter sleep with less deep N3 time, which is why they may wake more frequently during the night. The 90-minute average is a useful guideline for most adults but varies slightly between individuals.</p>
+
+      <p><strong class="text-[#1e293b]">What if I take longer than 15 minutes to fall asleep?</strong></p>
+      <p>Adjust mentally by going to bed a bit earlier than the suggested time. If you consistently take more than 20–30 minutes to fall asleep, consider evaluating your sleep hygiene habits or speaking with a healthcare provider about potential insomnia.</p>
+
+      <p>This sleep calculator is free, runs entirely in your browser, and stores no personal data. Bookmark it to quickly check your ideal bedtime or wake-up time whenever your schedule changes.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .sc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .sc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .sc-tab {
+      background: #f8fafc;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+    .sc-tab:hover { color: #475569; }
+    .sc-tab-active {
+      background: #fff !important;
+      color: #2563eb !important;
+      box-shadow: inset 0 -2px 0 #2563eb;
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const CYCLE_MIN = 90;
+    const FALL_ASLEEP_MIN = 15;
+
+    function formatTime(date) {
+      let h = date.getHours();
+      const m = date.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return h + ':' + String(m).padStart(2, '0') + ' ' + ampm;
+    }
+
+    function parseTimeInput(id) {
+      const val = $(id).value;
+      const [h, m] = val.split(':').map(Number);
+      const d = new Date();
+      d.setHours(h, m, 0, 0);
+      return d;
+    }
+
+    function renderResults(times, heading) {
+      $('results').classList.remove('hidden');
+      $('results-heading').textContent = heading;
+      const grid = $('results-grid');
+      grid.innerHTML = '';
+
+      times.forEach(item => {
+        const isGood = item.cycles >= 5;
+        const borderClass = isGood ? 'border-[#22c55e]/40 bg-[#f0fdf4]' : 'border-[#fde68a] bg-[#fffbeb]';
+        const badgeClass = isGood ? 'bg-[#22c55e] text-white' : 'bg-[#fbbf24] text-[#92400e]';
+        const label = isGood ? 'Optimal' : 'Minimal';
+
+        const card = document.createElement('div');
+        card.className = `border rounded-xl p-4 flex items-center justify-between ${borderClass}`;
+        card.innerHTML = `
+          <div>
+            <div class="text-2xl font-bold text-[#1e293b] tabular-nums">${formatTime(item.time)}</div>
+            <div class="text-sm text-[#475569] mt-1">${item.hours}h ${item.mins}m of sleep &middot; ${item.cycles} full cycle${item.cycles !== 1 ? 's' : ''}</div>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${badgeClass}">${label}</span>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Tab switching
+    $('tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.sc-tab');
+      if (!btn) return;
+      document.querySelectorAll('.sc-tab').forEach(b => b.classList.remove('sc-tab-active'));
+      btn.classList.add('sc-tab-active');
+      document.querySelectorAll('.sc-panel').forEach(p => p.classList.add('hidden'));
+      $('panel-' + btn.dataset.tab).classList.remove('hidden');
+      $('results').classList.add('hidden');
+    });
+
+    // Mode 1: calculate bedtimes from wake-up time
+    $('calc-wake').addEventListener('click', () => {
+      const wake = parseTimeInput('wake-time');
+      const results = [];
+
+      [6, 5, 4].forEach(cycles => {
+        const totalMin = cycles * CYCLE_MIN + FALL_ASLEEP_MIN;
+        const bedtime = new Date(wake.getTime() - totalMin * 60000);
+        const sleepMin = cycles * CYCLE_MIN;
+        results.push({
+          time: bedtime,
+          cycles,
+          hours: Math.floor(sleepMin / 60),
+          mins: sleepMin % 60
+        });
+      });
+
+      renderResults(results, 'Go to bed at one of these times:');
+    });
+
+    // Mode 2: calculate wake times from bedtime
+    $('calc-bed').addEventListener('click', () => {
+      const bed = parseTimeInput('bed-time');
+      const results = [];
+
+      [4, 5, 6].forEach(cycles => {
+        const totalMin = cycles * CYCLE_MIN + FALL_ASLEEP_MIN;
+        const wakeTime = new Date(bed.getTime() + totalMin * 60000);
+        const sleepMin = cycles * CYCLE_MIN;
+        results.push({
+          time: wakeTime,
+          cycles,
+          hours: Math.floor(sleepMin / 60),
+          mins: sleepMin % 60
+        });
+      });
+
+      renderResults(results, 'Set your alarm for one of these times:');
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('sleep-calculator');
+  </script>
+</body>
+</html>

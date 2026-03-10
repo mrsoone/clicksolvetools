@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Free Tool Guides, Tips & Tutorials | ClickSolveTools</title>
+  <meta name="description" content="Guides, tutorials, and tips on using free online tools for finance, development, health, and productivity. Learn how to get more done with browser-based tools.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/blog">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <link rel="alternate" type="application/rss+xml" title="ClickSolveTools Blog" href="/blog/rss.xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog — Free Tool Guides, Tips & Tutorials | ClickSolveTools">
+  <meta property="og:description" content="Guides, tutorials, and tips on using free online tools for finance, development, health, and productivity.">
+  <meta property="og:url" content="https://clicksolvetools.com/blog">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Blog — Free Tool Guides, Tips & Tutorials | ClickSolveTools">
+  <meta name="twitter:description" content="Guides, tutorials, and tips on using free online tools for finance, development, health, and productivity.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"ClickSolveTools Blog","url":"https://clicksolvetools.com/blog","description":"Guides, tutorials, and tips on free online tools for finance, development, health, images, and productivity.","publisher":{"@type":"Organization","name":"ClickSolveTools","logo":{"@type":"ImageObject","url":"https://clicksolvetools.com/images/logo.png"}}}</script>
+  <style>
+    .post-card { transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+    .post-card:hover { transform: translateY(-3px); }
+    .fade-in { animation: fadeIn 400ms ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+  <div id="nav-container"></div>
+
+  <header class="bg-gradient-to-br from-[#eff6ff] via-[#f8fafc] to-[#faf5ff]">
+    <div class="max-w-4xl mx-auto px-4 pt-20 pb-14 text-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1e293b] mb-4">ClickSolveTools Blog</h1>
+      <p class="text-[#475569] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">Guides, tips, and deep dives on the tools you use every day.</p>
+      <div class="max-w-md mx-auto mt-8 relative">
+        <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-[#94a3b8]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
+        </div>
+        <input id="search" type="text" placeholder="Search articles…" autocomplete="off" class="w-full pl-12 pr-4 py-3 bg-white border border-[#e2e8f0] rounded-xl text-[#1e293b] placeholder-[#94a3b8] focus:outline-none focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 shadow-sm text-base">
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16 -mt-2">
+
+    <!-- Featured Posts -->
+    <section id="featured-section" class="mb-12 pt-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-[#94a3b8] mb-4">Featured</h2>
+      <div id="featured-grid" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- Category Filter -->
+    <div id="category-filters" class="flex flex-wrap gap-2 mb-8 justify-center" role="tablist">
+      <button data-category="all" role="tab" aria-selected="true" class="cat-pill active px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#2563eb] text-white shadow-sm shadow-[#2563eb]/20">All</button>
+    </div>
+
+    <div class="flex items-center justify-between mb-6">
+      <p id="result-count" class="text-[#94a3b8] text-sm"></p>
+    </div>
+
+    <!-- Post Grid -->
+    <div id="post-grid" class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+    <div id="no-results" class="hidden text-center py-20">
+      <div class="text-5xl mb-4">📝</div>
+      <p class="text-[#475569] text-lg mb-2">No articles found</p>
+      <p class="text-[#94a3b8] text-sm">Try a different search term or category</p>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { posts } from '/blog/posts.js';
+    import { renderBlogNav, renderFooter } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+
+    renderBlogNav();
+    renderFooter();
+
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function fmtDate(iso) {
+      const d = new Date(iso + 'T00:00:00');
+      return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    }
+
+    function postCard(p, i, large) {
+      return `
+        <a href="/blog/${p.slug}"
+           class="post-card fade-in block bg-white border border-[#e2e8f0] rounded-xl ${large ? 'p-6' : 'p-5'} shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all duration-200"
+           style="animation-delay: ${Math.min(i * 40, 600)}ms">
+          <div class="flex flex-wrap gap-2 mb-3">
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-[#2563eb] px-2 py-0.5 rounded-full bg-[#eff6ff]">${p.category}</span>
+            ${p.tags.slice(0, 2).map(t => `<span class="text-[10px] px-2 py-0.5 rounded-full bg-[#f1f5f9] text-[#94a3b8]">${t}</span>`).join('')}
+          </div>
+          <h3 class="font-semibold text-[#1e293b] ${large ? 'text-base' : 'text-sm'} mb-2 leading-snug line-clamp-2">${p.title}</h3>
+          <p class="text-[#64748b] text-xs leading-relaxed line-clamp-2 mb-3">${p.description}</p>
+          <div class="flex items-center gap-2 text-xs text-[#94a3b8]">
+            <time datetime="${p.date}">${fmtDate(p.date)}</time>
+            <span>·</span>
+            <span>${p.readTime}</span>
+          </div>
+        </a>`;
+    }
+
+    const featured = posts.filter(p => p.featured);
+    const featuredGrid = document.getElementById('featured-grid');
+    featuredGrid.innerHTML = featured.map((p, i) => postCard(p, i, true)).join('');
+
+    const cats = ['Guides', 'Comparisons', 'Tips', 'How-To', 'Lists'];
+    const filterBar = document.getElementById('category-filters');
+    cats.forEach(c => {
+      const count = posts.filter(p => p.category === c).length;
+      if (count === 0) return;
+      const btn = document.createElement('button');
+      btn.dataset.category = c;
+      btn.role = 'tab';
+      btn.ariaSelected = 'false';
+      btn.className = 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b]';
+      btn.textContent = `${c} (${count})`;
+      filterBar.appendChild(btn);
+    });
+
+    let activeCategory = 'all';
+
+    filterBar.addEventListener('click', e => {
+      const btn = e.target.closest('.cat-pill');
+      if (!btn) return;
+      activeCategory = btn.dataset.category;
+      filterBar.querySelectorAll('.cat-pill').forEach(b => {
+        const cur = b.dataset.category === activeCategory;
+        b.ariaSelected = cur ? 'true' : 'false';
+        b.className = cur
+          ? 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#2563eb] text-white shadow-sm shadow-[#2563eb]/20'
+          : 'cat-pill px-4 py-2 rounded-full text-sm font-medium transition-all bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0] hover:text-[#1e293b]';
+      });
+      render();
+    });
+
+    const searchInput = document.getElementById('search');
+    const grid = document.getElementById('post-grid');
+    const resultCount = document.getElementById('result-count');
+    const noResults = document.getElementById('no-results');
+    const featuredSection = document.getElementById('featured-section');
+
+    function render() {
+      const query = searchInput.value.toLowerCase().trim();
+      let filtered = posts;
+
+      if (activeCategory !== 'all') filtered = filtered.filter(p => p.category === activeCategory);
+      if (query) filtered = filtered.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.tags.some(t => t.toLowerCase().includes(query))
+      );
+
+      featuredSection.classList.toggle('hidden', query !== '' || activeCategory !== 'all');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        noResults.classList.remove('hidden');
+        resultCount.textContent = 'No articles found';
+        return;
+      }
+
+      noResults.classList.add('hidden');
+      resultCount.textContent = `${filtered.length} article${filtered.length !== 1 ? 's' : ''}`;
+      grid.innerHTML = filtered.map((p, i) => postCard(p, i, false)).join('');
+    }
+
+    searchInput.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>

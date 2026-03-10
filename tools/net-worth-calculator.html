@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Net Worth Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate your net worth instantly by adding up assets and liabilities. Track home equity, investments, savings, and debts — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/net-worth-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Net Worth Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate your net worth instantly by adding up assets and liabilities. Track home equity, investments, savings, and debts — free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/net-worth-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Net Worth Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your net worth instantly by adding up assets and liabilities. Track home equity, investments, savings, and debts — free and private.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Net Worth Calculator","url":"https://clicksolvetools.com/tools/net-worth-calculator","description":"Calculate your net worth instantly by adding up assets and liabilities. Track home equity, investments, savings, and debts — free and private.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Net Worth Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto space-y-6">
+
+      <!-- Assets Section -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-[#1e293b]">Assets</h2>
+          <span id="assets-total" class="text-lg font-bold text-[#22c55e] tabular-nums">$0</span>
+        </div>
+
+        <div id="asset-rows" class="space-y-3">
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Home / Real Estate" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Cars / Vehicles" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Savings / Cash" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Investments" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Retirement Accounts" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Other Assets" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-asset pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+        </div>
+
+        <button id="add-asset" class="mt-3 text-sm text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">+ Add Asset</button>
+      </div>
+
+      <!-- Liabilities Section -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-[#1e293b]">Liabilities</h2>
+          <span id="liabilities-total" class="text-lg font-bold text-[#ef4444] tabular-nums">$0</span>
+        </div>
+
+        <div id="liability-rows" class="space-y-3">
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Mortgage" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-liability pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Car Loans" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-liability pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Student Loans" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-liability pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Credit Cards" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-liability pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+          <div class="nw-row flex items-center gap-2">
+            <input type="text" value="Other Debts" class="nw-label flex-1" placeholder="Label">
+            <div class="relative w-40">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+              <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-liability pl-7 w-full">
+            </div>
+            <button class="nw-remove" aria-label="Remove row">&times;</button>
+          </div>
+        </div>
+
+        <button id="add-liability" class="mt-3 text-sm text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">+ Add Liability</button>
+      </div>
+
+      <!-- Visual Bar -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-[#22c55e]">Assets</span>
+          <span class="text-sm font-medium text-[#ef4444]">Liabilities</span>
+        </div>
+        <div class="relative h-8 bg-[#f1f5f9] rounded-full overflow-hidden">
+          <div id="bar-assets" class="absolute left-0 top-0 h-full bg-[#22c55e] rounded-l-full transition-all duration-300" style="width:50%"></div>
+          <div id="bar-liabilities" class="absolute right-0 top-0 h-full bg-[#ef4444] rounded-r-full transition-all duration-300" style="width:50%"></div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-xs text-[#94a3b8] tabular-nums">
+          <span id="bar-assets-label">$0</span>
+          <span id="bar-liabilities-label">$0</span>
+        </div>
+      </div>
+
+      <!-- Net Worth Result -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 text-center">
+        <div class="text-sm text-[#475569] mb-1">Your Net Worth</div>
+        <div id="net-worth" class="text-4xl font-bold tabular-nums text-[#1e293b]">$0</div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">Understanding Net Worth and Why It Matters</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Net worth is the single most comprehensive snapshot of your financial health. It is calculated by subtracting everything you owe (your liabilities) from everything you own (your assets). The resulting number — positive or negative — tells you where you stand financially at a given moment. Tracking net worth over time reveals whether your wealth is growing, shrinking, or staying flat, regardless of how much income you earn.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">The Net Worth Formula</h3>
+      <p>The calculation is straightforward:</p>
+      <p class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3 font-mono text-[#2563eb] text-center">Net Worth = Total Assets − Total Liabilities</p>
+      <p>Assets include anything of value you own: real estate, vehicles, bank balances, investment portfolios, retirement accounts, and personal property. Liabilities cover every debt obligation: mortgages, car loans, student loans, credit card balances, medical bills, and personal loans. The calculator above lets you add as many custom rows as you need to capture your full financial picture.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Asset Categories</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Real estate</strong> — The current market value of your home or any rental properties you own. Use a recent appraisal or comparable sales data for accuracy.</li>
+        <li><strong class="text-[#1e293b]">Vehicles</strong> — Cars, trucks, motorcycles, boats. Use fair market value, not what you paid.</li>
+        <li><strong class="text-[#1e293b]">Cash and savings</strong> — Checking accounts, savings accounts, money market funds, and certificates of deposit.</li>
+        <li><strong class="text-[#1e293b]">Investments</strong> — Brokerage accounts, stocks, bonds, mutual funds, ETFs, cryptocurrency, and business interests.</li>
+        <li><strong class="text-[#1e293b]">Retirement accounts</strong> — 401(k), IRA, Roth IRA, 403(b), pension values, and other tax-advantaged accounts.</li>
+        <li><strong class="text-[#1e293b]">Other</strong> — Jewelry, art, collectibles, life insurance cash value, or any other valuable property.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Common Liability Categories</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Mortgage</strong> — The remaining principal balance on your home loan, not the original loan amount.</li>
+        <li><strong class="text-[#1e293b]">Auto loans</strong> — Outstanding balance on car financing or leases.</li>
+        <li><strong class="text-[#1e293b]">Student loans</strong> — Federal and private education debt still owed.</li>
+        <li><strong class="text-[#1e293b]">Credit cards</strong> — Total revolving balances across all cards.</li>
+        <li><strong class="text-[#1e293b]">Other debts</strong> — Personal loans, medical debt, buy-now-pay-later balances, and tax obligations.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How to Increase Your Net Worth</h3>
+      <p>There are only two levers: grow assets or reduce liabilities. In practice, the most effective strategies combine both. Paying down high-interest debt eliminates liabilities while freeing up cash to save and invest. Building an emergency fund prevents you from adding new debt during unexpected events. Contributing consistently to retirement accounts harnesses compound growth over decades. And keeping lifestyle inflation in check ensures that raises and bonuses translate into wealth rather than just bigger expenses.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Is a negative net worth bad?</strong></p>
+      <p>A negative net worth means your debts exceed your assets. It is common for young adults who carry student loans or recent homebuyers with large mortgages. The key metric is the direction — if your net worth is trending upward over time, you are on the right track even if the number is currently negative.</p>
+
+      <p><strong class="text-[#1e293b]">How often should I calculate my net worth?</strong></p>
+      <p>Quarterly or twice a year is sufficient for most people. Checking too frequently can cause anxiety over normal market fluctuations, while checking too rarely means you might miss negative trends that could be corrected early.</p>
+
+      <p><strong class="text-[#1e293b]">Should I include my home as an asset?</strong></p>
+      <p>Yes — include the current market value of your home as an asset and the remaining mortgage balance as a liability. The difference is your home equity. Some financial planners also track a "liquid net worth" that excludes the home since it is not easily converted to cash.</p>
+
+      <div class="mt-8 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial advice. Consult a qualified financial advisor for decisions about your specific situation. Asset values are self-reported and may differ from actual market values.
+      </div>
+
+      <p>This net worth calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to revisit it whenever you want to take a snapshot of your financial health.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .nw-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .nw-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .nw-input::placeholder { color: #94a3b8; }
+
+    .nw-label {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 150ms;
+    }
+    .nw-label:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .nw-remove {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #94a3b8;
+      font-size: 1.125rem;
+      cursor: pointer;
+      transition: all 150ms;
+      flex-shrink: 0;
+    }
+    .nw-remove:hover { border-color: #ef4444; color: #ef4444; }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const $ = id => document.getElementById(id);
+
+    function createRow(type, label) {
+      const div = document.createElement('div');
+      div.className = 'nw-row flex items-center gap-2';
+      div.innerHTML = `
+        <input type="text" value="${label}" class="nw-label flex-1" placeholder="Label">
+        <div class="relative w-40">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+          <input type="text" inputmode="decimal" placeholder="0" class="nw-input nw-${type} pl-7 w-full">
+        </div>
+        <button class="nw-remove" aria-label="Remove row">&times;</button>
+      `;
+      return div;
+    }
+
+    $('add-asset').addEventListener('click', () => {
+      $('asset-rows').appendChild(createRow('asset', ''));
+      bindInputs();
+    });
+
+    $('add-liability').addEventListener('click', () => {
+      $('liability-rows').appendChild(createRow('liability', ''));
+      bindInputs();
+    });
+
+    function sumInputs(className) {
+      let total = 0;
+      document.querySelectorAll('.' + className).forEach(el => {
+        total += parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+      });
+      return total;
+    }
+
+    function formatInputValue(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    function calculate() {
+      const assets = sumInputs('nw-asset');
+      const liabilities = sumInputs('nw-liability');
+      const netWorth = assets - liabilities;
+
+      $('assets-total').textContent = fmt.format(assets);
+      $('liabilities-total').textContent = fmt.format(liabilities);
+      $('net-worth').textContent = fmt.format(netWorth);
+
+      if (netWorth >= 0) {
+        $('net-worth').className = 'text-4xl font-bold tabular-nums text-[#22c55e]';
+      } else {
+        $('net-worth').className = 'text-4xl font-bold tabular-nums text-[#ef4444]';
+      }
+
+      const max = Math.max(assets + liabilities, 1);
+      const assetPct = (assets / max) * 100;
+      const liabPct = (liabilities / max) * 100;
+      $('bar-assets').style.width = assetPct + '%';
+      $('bar-liabilities').style.width = liabPct + '%';
+      $('bar-assets-label').textContent = fmt.format(assets);
+      $('bar-liabilities-label').textContent = fmt.format(liabilities);
+    }
+
+    function bindInputs() {
+      document.querySelectorAll('.nw-asset, .nw-liability').forEach(el => {
+        el.onblur = () => formatInputValue(el);
+        el.oninput = calculate;
+      });
+      document.querySelectorAll('.nw-remove').forEach(btn => {
+        btn.onclick = () => {
+          const row = btn.closest('.nw-row');
+          const container = row.parentElement;
+          if (container.querySelectorAll('.nw-row').length > 1) {
+            row.remove();
+            calculate();
+          }
+        };
+      });
+    }
+
+    bindInputs();
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('net-worth-calculator');
+  </script>
+</body>
+</html>

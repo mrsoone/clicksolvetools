@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Screenshot Beautifier | ClickSolveTools</title>
+  <meta name="description" content="Add beautiful gradient backgrounds, rounded corners, shadows, and device frames to your screenshots. Download as PNG — free online tool, no upload needed.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/screenshot-beautifier">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Screenshot Beautifier | ClickSolveTools">
+  <meta property="og:description" content="Add beautiful gradient backgrounds, rounded corners, shadows, and device frames to your screenshots. Download as PNG — free online tool, no upload needed.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/screenshot-beautifier">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Screenshot Beautifier | ClickSolveTools">
+  <meta name="twitter:description" content="Add beautiful gradient backgrounds, rounded corners, shadows, and device frames to your screenshots. Download as PNG — free online tool, no upload needed.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Screenshot Beautifier","url":"https://clicksolvetools.com/tools/screenshot-beautifier","description":"Add beautiful gradient backgrounds, rounded corners, shadows, and device frames to your screenshots. Download as PNG.","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Screenshot Beautifier</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="space-y-6">
+
+      <!-- Upload Area -->
+      <div id="drop-zone" class="bg-white border-2 border-dashed border-[#e2e8f0] rounded-xl p-12 text-center cursor-pointer hover:border-[#2563eb] transition-colors">
+        <div class="text-4xl mb-3">📷</div>
+        <p class="text-[#475569] font-medium">Drag & drop a screenshot here, or click to upload</p>
+        <p class="text-[#94a3b8] text-sm mt-1">Supports PNG, JPG, WebP, GIF</p>
+        <input type="file" id="file-input" accept="image/*" class="hidden">
+      </div>
+
+      <!-- Controls + Preview -->
+      <div id="editor" class="hidden grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
+
+        <!-- Controls Panel -->
+        <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 space-y-5 h-fit">
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Background</label>
+            <div id="presets" class="grid grid-cols-4 gap-2 mb-3"></div>
+            <div class="flex gap-2 items-center">
+              <label class="text-xs text-[#94a3b8]">Custom:</label>
+              <input type="color" id="grad-start" value="#667eea" class="w-8 h-8 rounded border border-[#e2e8f0] cursor-pointer">
+              <span class="text-xs text-[#94a3b8]">→</span>
+              <input type="color" id="grad-end" value="#764ba2" class="w-8 h-8 rounded border border-[#e2e8f0] cursor-pointer">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Padding: <span id="pad-val">48</span>px</label>
+            <input type="range" id="padding" min="16" max="128" value="48" class="w-full accent-[#2563eb]">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-1">Corner Radius: <span id="rad-val">12</span>px</label>
+            <input type="range" id="radius" min="0" max="32" value="12" class="w-full accent-[#2563eb]">
+          </div>
+          <div>
+            <label for="shadow" class="block text-sm font-medium text-[#475569] mb-1">Shadow</label>
+            <select id="shadow" class="sb-select w-full">
+              <option value="none">None</option>
+              <option value="small">Small</option>
+              <option value="medium" selected>Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </div>
+          <div>
+            <label for="frame" class="block text-sm font-medium text-[#475569] mb-1">Device Frame</label>
+            <select id="frame" class="sb-select w-full">
+              <option value="none">None</option>
+              <option value="browser">Browser Window</option>
+              <option value="phone">Phone Frame</option>
+            </select>
+          </div>
+          <button id="download" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-medium px-4 py-2 rounded-lg w-full">Download PNG</button>
+          <button id="change-img" class="text-sm text-[#94a3b8] hover:text-[#475569] w-full text-center">Change Image</button>
+        </div>
+
+        <!-- Preview -->
+        <div class="flex items-start justify-center">
+          <canvas id="canvas" class="max-w-full rounded-lg shadow-sm" style="max-height:80vh"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How to Make Your Screenshots Look Professional</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Raw screenshots are functional but rarely pretty. A plain, cropped screen capture with a flat background and sharp edges looks fine in a bug report, but it does not make a great impression in a blog post, product landing page, social media announcement, or investor pitch deck. Screenshot beautifiers solve this by wrapping your image in a polished presentation layer — gradient backgrounds, soft shadows, rounded corners, and optional device frames that mimic a browser window or smartphone.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Why Presentation Matters</h3>
+      <p>First impressions are visual. Studies in web design consistently show that users form opinions about a page within 50 milliseconds, and the quality of imagery is a major factor. A screenshot that looks like it was carefully composed signals professionalism and attention to detail. This applies whether you are a developer showcasing an open-source project on GitHub, a designer presenting mockups to a client, a marketer creating ad creatives, or a blogger illustrating a how-to article.</p>
+      <p>Social media platforms like Twitter, LinkedIn, and Product Hunt are especially visual. Posts with high-quality images get significantly more engagement than text-only posts. A beautified screenshot of your app's dashboard, wrapped in a clean gradient with a subtle shadow, can be the difference between a scroll-past and a click.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">How This Tool Works</h3>
+      <p>This screenshot beautifier runs entirely in your browser using the HTML5 Canvas API. When you upload an image, it is loaded into an off-screen image element and then drawn onto a canvas with your chosen settings. The gradient background is rendered first at a size equal to the image plus padding on all sides. A shadow is applied using the Canvas shadow properties (shadowBlur, shadowColor, shadowOffsetY). The image is then drawn with a clipping path that creates rounded corners. If you select a device frame, additional elements like a browser title bar with traffic-light dots or a phone border with a notch are drawn on top.</p>
+      <p>Because everything happens locally in your browser, no image data is uploaded to any server. Your screenshots stay completely private. The final result is exported as a PNG file using canvas.toBlob(), which preserves transparency and detail.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Choosing the Right Settings</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">Background gradient</strong> — Choose a preset that complements your screenshot's color scheme, or define a custom gradient. Cooler tones (blue-purple, teal-green) work well for tech and SaaS products. Warmer tones (pink-orange, red-yellow) suit creative and consumer apps.</li>
+        <li><strong class="text-[#1e293b]">Padding</strong> — More padding makes the screenshot feel lighter and more spacious. Less padding keeps it compact. 48–64px is a good default for most use cases.</li>
+        <li><strong class="text-[#1e293b]">Corner radius</strong> — Rounded corners soften the image and make it look more modern. 8–16px is the sweet spot. Set to 0 for a sharp, technical look.</li>
+        <li><strong class="text-[#1e293b]">Shadow</strong> — A medium shadow adds depth and separates the screenshot from the background. Large shadows create a dramatic floating effect. Skip the shadow for a flat, minimalist style.</li>
+        <li><strong class="text-[#1e293b]">Device frame</strong> — The browser window frame adds a gray title bar with three colored dots, mimicking macOS Chrome. The phone frame wraps the image in a rounded rectangle with a notch, suggesting a mobile device.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Use Cases</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[#1e293b]">README files and documentation</strong> — Make your GitHub project stand out with polished demo screenshots.</li>
+        <li><strong class="text-[#1e293b]">Blog posts and tutorials</strong> — Illustrate steps with professional-looking images instead of raw screen grabs.</li>
+        <li><strong class="text-[#1e293b]">Social media and Product Hunt</strong> — Create eye-catching launch images without opening a design tool.</li>
+        <li><strong class="text-[#1e293b]">Presentations</strong> — Drop beautified screenshots into slide decks for a cleaner look.</li>
+      </ul>
+
+      <p>This screenshot beautifier is completely free, processes everything locally in your browser, and never uploads your images anywhere. Bookmark it for the next time you need a quick, polished screenshot.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .sb-select{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.5rem .75rem;color:#1e293b;font-size:.875rem;outline:none;transition:border-color 150ms,box-shadow 150ms;appearance:auto}
+    .sb-select:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+    .preset-btn{width:100%;aspect-ratio:1;border-radius:.5rem;border:2px solid transparent;cursor:pointer;transition:border-color 150ms}
+    .preset-btn:hover,.preset-btn.active{border-color:#2563eb}
+  </style>
+
+  <script>
+  (function(){
+    const $=id=>document.getElementById(id);
+    const canvas=$('canvas');
+    const ctx=canvas.getContext('2d');
+    let img=null;
+
+    const PRESETS=[
+      {name:'Blue-Purple',start:'#667eea',end:'#764ba2'},
+      {name:'Pink-Orange',start:'#f093fb',end:'#f5576c'},
+      {name:'Green-Teal',start:'#11998e',end:'#38ef7d'},
+      {name:'Orange-Red',start:'#ff9a9e',end:'#fecfef'},
+      {name:'Dark',start:'#0f0c29',end:'#302b63'},
+      {name:'Light',start:'#e0e0e0',end:'#f5f5f5'},
+      {name:'Sunset',start:'#fa709a',end:'#fee140'},
+      {name:'Ocean',start:'#2193b0',end:'#6dd5ed'}
+    ];
+
+    const presetsEl=$('presets');
+    PRESETS.forEach((p,i)=>{
+      const btn=document.createElement('button');
+      btn.className='preset-btn'+(i===0?' active':'');
+      btn.style.background=`linear-gradient(135deg,${p.start},${p.end})`;
+      btn.title=p.name;
+      btn.addEventListener('click',()=>{
+        presetsEl.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        $('grad-start').value=p.start;
+        $('grad-end').value=p.end;
+        render();
+      });
+      presetsEl.appendChild(btn);
+    });
+
+    function getSettings(){
+      return{
+        padding:+$('padding').value,
+        radius:+$('radius').value,
+        shadow:$('shadow').value,
+        frame:$('frame').value,
+        gradStart:$('grad-start').value,
+        gradEnd:$('grad-end').value
+      };
+    }
+
+    const SHADOW_MAP={
+      none:{blur:0,offset:0,alpha:0},
+      small:{blur:10,offset:4,alpha:0.15},
+      medium:{blur:24,offset:8,alpha:0.25},
+      large:{blur:48,offset:16,alpha:0.35}
+    };
+
+    function roundRect(ctx,x,y,w,h,r){
+      r=Math.min(r,w/2,h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+r,y);
+      ctx.lineTo(x+w-r,y);
+      ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+      ctx.lineTo(x+w,y+h-r);
+      ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      ctx.lineTo(x+r,y+h);
+      ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+      ctx.lineTo(x,y+r);
+      ctx.quadraticCurveTo(x,y,x+r,y);
+      ctx.closePath();
+    }
+
+    function render(){
+      if(!img)return;
+      const s=getSettings();
+      const frameBarH=s.frame==='browser'?36:s.frame==='phone'?28:0;
+      const phoneExtraPad=s.frame==='phone'?12:0;
+
+      const imgW=img.naturalWidth;
+      const imgH=img.naturalHeight;
+      const contentW=imgW+phoneExtraPad*2;
+      const contentH=imgH+frameBarH+phoneExtraPad*2;
+
+      const cw=contentW+s.padding*2;
+      const ch=contentH+s.padding*2;
+
+      canvas.width=cw;
+      canvas.height=ch;
+
+      const grad=ctx.createLinearGradient(0,0,cw,ch);
+      grad.addColorStop(0,s.gradStart);
+      grad.addColorStop(1,s.gradEnd);
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,0,cw,ch);
+
+      const shadow=SHADOW_MAP[s.shadow]||SHADOW_MAP.none;
+      const fx=s.padding+phoneExtraPad;
+      const fy=s.padding+phoneExtraPad;
+
+      ctx.save();
+      if(shadow.blur>0){
+        ctx.shadowColor=`rgba(0,0,0,${shadow.alpha})`;
+        ctx.shadowBlur=shadow.blur;
+        ctx.shadowOffsetX=0;
+        ctx.shadowOffsetY=shadow.offset;
+      }
+
+      const totalR=s.frame==='phone'?Math.max(s.radius,20):s.radius;
+      roundRect(ctx,fx,fy,contentW-phoneExtraPad*2+phoneExtraPad*2,contentH-phoneExtraPad*2+phoneExtraPad*2,totalR);
+      ctx.fillStyle='#fff';
+      ctx.fill();
+      ctx.restore();
+
+      if(s.frame==='browser'){
+        const barX=fx;
+        const barY=fy;
+        const barW=contentW;
+
+        ctx.save();
+        roundRect(ctx,barX,barY,barW,frameBarH,Math.min(s.radius,totalR));
+        ctx.clip();
+        ctx.fillStyle='#e5e7eb';
+        ctx.fillRect(barX,barY,barW,frameBarH);
+        ctx.restore();
+
+        ctx.fillStyle='#e5e7eb';
+        ctx.fillRect(barX,barY+frameBarH-1,barW,1);
+
+        const dotColors=['#ef4444','#eab308','#22c55e'];
+        dotColors.forEach((c,i)=>{
+          ctx.beginPath();
+          ctx.arc(barX+16+i*20,barY+frameBarH/2,5,0,Math.PI*2);
+          ctx.fillStyle=c;
+          ctx.fill();
+        });
+
+        ctx.save();
+        roundRect(ctx,barX,barY+frameBarH,barW,imgH,0);
+        roundRect(ctx,barX,barY,barW,contentH,totalR);
+        ctx.clip();
+        ctx.drawImage(img,barX,barY+frameBarH,imgW,imgH);
+        ctx.restore();
+      }else if(s.frame==='phone'){
+        const phoneX=fx;
+        const phoneY=fy;
+        const phoneW=contentW;
+        const phoneH=contentH;
+
+        ctx.save();
+        roundRect(ctx,phoneX,phoneY,phoneW,phoneH,totalR);
+        ctx.clip();
+        ctx.fillStyle='#1e293b';
+        ctx.fillRect(phoneX,phoneY,phoneW,phoneH);
+
+        const innerPad=phoneExtraPad;
+        const innerR=Math.max(0,totalR-4);
+        roundRect(ctx,phoneX+innerPad,phoneY+frameBarH+innerPad,imgW,imgH,innerR);
+        ctx.clip();
+        ctx.drawImage(img,phoneX+innerPad,phoneY+frameBarH+innerPad,imgW,imgH);
+        ctx.restore();
+
+        const notchW=80;
+        const notchH=6;
+        const notchX=phoneX+phoneW/2-notchW/2;
+        const notchY=phoneY+10;
+        ctx.fillStyle='#475569';
+        roundRect(ctx,notchX,notchY,notchW,notchH,3);
+        ctx.fill();
+      }else{
+        ctx.save();
+        roundRect(ctx,fx,fy,imgW,imgH,s.radius);
+        ctx.clip();
+        ctx.drawImage(img,fx,fy,imgW,imgH);
+        ctx.restore();
+      }
+    }
+
+    function loadImage(file){
+      const reader=new FileReader();
+      reader.onload=e=>{
+        const image=new Image();
+        image.onload=()=>{
+          img=image;
+          $('editor').classList.remove('hidden');
+          $('drop-zone').classList.add('hidden');
+          render();
+        };
+        image.src=e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    const dropZone=$('drop-zone');
+    dropZone.addEventListener('click',()=>$('file-input').click());
+    dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('border-[#2563eb]');});
+    dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('border-[#2563eb]'));
+    dropZone.addEventListener('drop',e=>{
+      e.preventDefault();dropZone.classList.remove('border-[#2563eb]');
+      if(e.dataTransfer.files[0])loadImage(e.dataTransfer.files[0]);
+    });
+    $('file-input').addEventListener('change',e=>{if(e.target.files[0])loadImage(e.target.files[0]);});
+
+    $('change-img').addEventListener('click',()=>{
+      img=null;
+      $('editor').classList.add('hidden');
+      $('drop-zone').classList.remove('hidden');
+      $('file-input').value='';
+    });
+
+    ['padding','radius','shadow','frame','grad-start','grad-end'].forEach(id=>{
+      $(id).addEventListener('input',()=>{
+        if(id==='padding')$('pad-val').textContent=$(id).value;
+        if(id==='radius')$('rad-val').textContent=$(id).value;
+        if(id==='grad-start'||id==='grad-end'){
+          presetsEl.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+        }
+        render();
+      });
+      $(id).addEventListener('change',render);
+    });
+
+    $('download').addEventListener('click',()=>{
+      if(!img)return;
+      canvas.toBlob(blob=>{
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;
+        a.download='screenshot-beautified.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      },'image/png');
+    });
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('screenshot-beautifier');
+  </script>
+</body>
+</html>

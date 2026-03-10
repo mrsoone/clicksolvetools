@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Paycheck Calculator | ClickSolveTools</title>
+  <meta name="description" content="Estimate your take-home pay after federal tax, state tax, Social Security, and Medicare. Uses 2024 tax brackets for all 50 states — free and private.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clicksolvetools.com/tools/paycheck-calculator">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Paycheck Calculator | ClickSolveTools">
+  <meta property="og:description" content="Estimate your take-home pay after federal tax, state tax, Social Security, and Medicare. Uses 2024 tax brackets for all 50 states — free and private.">
+  <meta property="og:url" content="https://clicksolvetools.com/tools/paycheck-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
+  <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Paycheck Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Estimate your take-home pay after federal tax, state tax, Social Security, and Medicare. Uses 2024 tax brackets for all 50 states — free and private.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Paycheck Calculator","url":"https://clicksolvetools.com/tools/paycheck-calculator","description":"Estimate your take-home pay after federal tax, state tax, Social Security, and Medicare. Uses 2024 tax brackets for all 50 states.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+  <div id="nav-container"></div>
+  <h1 class="sr-only">Paycheck Calculator</h1>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto space-y-6">
+
+      <!-- Inputs -->
+      <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 space-y-4">
+        <div>
+          <label for="gross-pay" class="block text-sm font-medium text-[#475569] mb-1">Gross Pay (per period)</label>
+          <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]">$</span>
+            <input id="gross-pay" type="text" inputmode="decimal" placeholder="3,000" class="pc-input pl-7 w-full text-lg font-semibold" autofocus>
+          </div>
+        </div>
+
+        <div>
+          <label for="pay-freq" class="block text-sm font-medium text-[#475569] mb-1">Pay Frequency</label>
+          <select id="pay-freq" class="pc-select w-full">
+            <option value="52">Weekly</option>
+            <option value="26" selected>Bi-Weekly</option>
+            <option value="24">Semi-Monthly</option>
+            <option value="12">Monthly</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filing" class="block text-sm font-medium text-[#475569] mb-1">Filing Status</label>
+          <select id="filing" class="pc-select w-full">
+            <option value="single">Single</option>
+            <option value="married">Married Filing Jointly</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="state" class="block text-sm font-medium text-[#475569] mb-1">State</label>
+          <select id="state" class="pc-select w-full"></select>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="bg-white border border-[#e2e8f0] rounded-xl p-6">
+        <h2 class="text-sm font-semibold text-[#475569] mb-4 uppercase tracking-wider">Paycheck Breakdown</h2>
+        <div class="space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-[#475569]">Gross Pay</span>
+            <span id="out-gross" class="font-medium text-[#1e293b] tabular-nums">$0.00</span>
+          </div>
+          <div class="border-t border-[#e2e8f0] pt-3 space-y-2">
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Federal Income Tax</span>
+              <span id="out-federal" class="font-medium text-[#ef4444] tabular-nums">−$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">State Income Tax</span>
+              <span id="out-state" class="font-medium text-[#ef4444] tabular-nums">−$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Social Security (6.2%)</span>
+              <span id="out-ss" class="font-medium text-[#ef4444] tabular-nums">−$0.00</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-[#475569]">Medicare (1.45%)</span>
+              <span id="out-medicare" class="font-medium text-[#ef4444] tabular-nums">−$0.00</span>
+            </div>
+          </div>
+          <div class="border-t border-[#e2e8f0] pt-3 flex justify-between items-end">
+            <span class="text-sm font-medium text-[#475569]">Take-Home Pay</span>
+            <span id="out-net" class="text-2xl font-bold text-[#2563eb] tabular-nums">$0.00</span>
+          </div>
+        </div>
+
+        <!-- Annual summary -->
+        <div class="mt-4 pt-4 border-t border-[#e2e8f0] grid grid-cols-2 gap-3 text-xs text-[#94a3b8]">
+          <div>Annual Gross: <span id="out-annual-gross" class="text-[#1e293b] font-medium">$0</span></div>
+          <div>Annual Net: <span id="out-annual-net" class="text-[#1e293b] font-medium">$0</span></div>
+          <div>Effective Tax Rate: <span id="out-eff-rate" class="text-[#1e293b] font-medium">0%</span></div>
+          <div>Total Deductions: <span id="out-total-ded" class="text-[#1e293b] font-medium">$0</span></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-[#1e293b] mb-6">How Your Paycheck Is Calculated and What Gets Deducted</h2>
+    <div class="space-y-4 text-[#475569] leading-relaxed">
+      <p>Every paycheck you receive has already had several deductions taken out before the money hits your bank account. Understanding what those deductions are — and how they are calculated — helps you budget accurately, set realistic savings goals, and avoid surprises at tax time. This paycheck calculator estimates your take-home pay by applying current federal tax brackets, state income tax rates, Social Security, and Medicare withholding to your gross pay.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Federal Income Tax</h3>
+      <p>The United States uses a progressive tax system, meaning your income is taxed at increasing rates as it passes through defined brackets. For tax year 2024, a single filer pays 10% on the first $11,600 of taxable income, 12% on income from $11,601 to $47,150, 22% on income from $47,151 to $100,525, and so on through the 37% bracket for income over $609,350. Married filers have wider brackets — for example, the 10% bracket extends to $23,200. Before applying these rates, your employer subtracts the standard deduction ($14,600 for single filers, $29,200 for married filing jointly) to arrive at your taxable income. The result is then divided across pay periods to determine the federal tax withheld from each check.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">State Income Tax</h3>
+      <p>Most states impose their own income tax on top of federal tax. Rates vary widely — from 0% in states like Texas, Florida, and Nevada to over 13% in California for high earners. This calculator uses a simplified flat effective rate for each state. Some states use progressive brackets similar to the federal system, while others apply a single flat rate to all income. Nine states have no state income tax at all, which means residents keep more of each paycheck but may face higher sales or property taxes to compensate.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">FICA: Social Security and Medicare</h3>
+      <p>FICA stands for the Federal Insurance Contributions Act, and it funds two programs. Social Security tax is 6.2% of your gross pay, up to the annual wage base limit ($168,600 in 2024). Medicare tax is 1.45% on all earnings with no cap. If you earn over $200,000 ($250,000 married), an additional 0.9% Medicare surtax applies. Your employer matches these contributions, so the combined FICA rate is actually 15.3%, but only half comes from your paycheck.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Pay Frequency Matters</h3>
+      <p>Your pay frequency affects the per-check deduction amounts but not your total annual tax burden. If you are paid weekly (52 paychecks per year), each check is smaller and each deduction is smaller. If you are paid monthly (12 paychecks per year), each check and each deduction is proportionally larger. The annual totals remain the same regardless of frequency. Understanding this prevents the common misconception that switching from bi-weekly to monthly pay somehow changes your tax situation.</p>
+
+      <h3 class="text-xl font-semibold text-[#1e293b] mt-8 mb-3">Frequently Asked Questions</h3>
+
+      <p><strong class="text-[#1e293b]">Why is my actual paycheck different from this estimate?</strong></p>
+      <p>This calculator provides a simplified estimate. Your actual paycheck may also include pre-tax deductions for health insurance, 401(k) contributions, HSA contributions, and other benefits that reduce your taxable income. Those are not included here because they vary by employer.</p>
+
+      <p><strong class="text-[#1e293b]">What is the standard deduction?</strong></p>
+      <p>The standard deduction is an amount the IRS allows you to subtract from your gross income before calculating federal tax. For 2024, it is $14,600 for single filers and $29,200 for married filing jointly. Most taxpayers take the standard deduction rather than itemizing individual deductions.</p>
+
+      <div class="mt-8 p-4 bg-[#fef2f2] border border-[#fecaca] rounded-lg text-sm text-[#b91c1c]">
+        <strong>Important:</strong> This calculator provides rough estimates only. It does not account for pre-tax deductions, additional income, tax credits, or state-specific exemptions. Do not use these results for tax filing. Consult a certified tax professional or use official IRS tools for accurate withholding calculations.
+      </div>
+
+      <div class="mt-4 p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#94a3b8]">
+        <strong class="text-[#475569]">Disclaimer:</strong> This calculator provides estimates for informational purposes only. It is not financial or tax advice. Results may vary based on individual circumstances, pre-tax deductions, credits, and other factors not included in this tool.
+      </div>
+
+      <p>This paycheck calculator is completely free, runs entirely in your browser, and stores nothing on a server. Bookmark this page to quickly estimate your take-home pay whenever you receive a raise, change jobs, or move to a new state.</p>
+    </div>
+  </article>
+
+  <div id="related-tools"></div>
+  <div id="footer-container"></div>
+
+  <style>
+    .pc-input {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .pc-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .pc-input::placeholder { color: #94a3b8; }
+
+    .pc-select {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.625rem 0.75rem;
+      color: #1e293b;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms;
+      cursor: pointer;
+    }
+    .pc-select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+  </style>
+
+  <script>
+  (function () {
+    const fmt2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmt0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const $ = id => document.getElementById(id);
+
+    const states = [
+      { abbr:'AL', name:'Alabama', rate:0.05 },
+      { abbr:'AK', name:'Alaska', rate:0 },
+      { abbr:'AZ', name:'Arizona', rate:0.025 },
+      { abbr:'AR', name:'Arkansas', rate:0.044 },
+      { abbr:'CA', name:'California', rate:0.0725 },
+      { abbr:'CO', name:'Colorado', rate:0.044 },
+      { abbr:'CT', name:'Connecticut', rate:0.05 },
+      { abbr:'DE', name:'Delaware', rate:0.055 },
+      { abbr:'FL', name:'Florida', rate:0 },
+      { abbr:'GA', name:'Georgia', rate:0.0549 },
+      { abbr:'HI', name:'Hawaii', rate:0.064 },
+      { abbr:'ID', name:'Idaho', rate:0.058 },
+      { abbr:'IL', name:'Illinois', rate:0.0495 },
+      { abbr:'IN', name:'Indiana', rate:0.0305 },
+      { abbr:'IA', name:'Iowa', rate:0.044 },
+      { abbr:'KS', name:'Kansas', rate:0.046 },
+      { abbr:'KY', name:'Kentucky', rate:0.04 },
+      { abbr:'LA', name:'Louisiana', rate:0.0425 },
+      { abbr:'ME', name:'Maine', rate:0.0575 },
+      { abbr:'MD', name:'Maryland', rate:0.0475 },
+      { abbr:'MA', name:'Massachusetts', rate:0.05 },
+      { abbr:'MI', name:'Michigan', rate:0.0425 },
+      { abbr:'MN', name:'Minnesota', rate:0.0535 },
+      { abbr:'MS', name:'Mississippi', rate:0.047 },
+      { abbr:'MO', name:'Missouri', rate:0.048 },
+      { abbr:'MT', name:'Montana', rate:0.059 },
+      { abbr:'NE', name:'Nebraska', rate:0.0507 },
+      { abbr:'NV', name:'Nevada', rate:0 },
+      { abbr:'NH', name:'New Hampshire', rate:0 },
+      { abbr:'NJ', name:'New Jersey', rate:0.0525 },
+      { abbr:'NM', name:'New Mexico', rate:0.049 },
+      { abbr:'NY', name:'New York', rate:0.0597 },
+      { abbr:'NC', name:'North Carolina', rate:0.045 },
+      { abbr:'ND', name:'North Dakota', rate:0.0195 },
+      { abbr:'OH', name:'Ohio', rate:0.035 },
+      { abbr:'OK', name:'Oklahoma', rate:0.0475 },
+      { abbr:'OR', name:'Oregon', rate:0.0875 },
+      { abbr:'PA', name:'Pennsylvania', rate:0.0307 },
+      { abbr:'RI', name:'Rhode Island', rate:0.0475 },
+      { abbr:'SC', name:'South Carolina', rate:0.064 },
+      { abbr:'SD', name:'South Dakota', rate:0 },
+      { abbr:'TN', name:'Tennessee', rate:0 },
+      { abbr:'TX', name:'Texas', rate:0 },
+      { abbr:'UT', name:'Utah', rate:0.0465 },
+      { abbr:'VT', name:'Vermont', rate:0.055 },
+      { abbr:'VA', name:'Virginia', rate:0.0575 },
+      { abbr:'WA', name:'Washington', rate:0 },
+      { abbr:'WV', name:'West Virginia', rate:0.052 },
+      { abbr:'WI', name:'Wisconsin', rate:0.0527 },
+      { abbr:'WY', name:'Wyoming', rate:0 },
+      { abbr:'DC', name:'District of Columbia', rate:0.065 }
+    ];
+
+    const stateSelect = $('state');
+    states.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.abbr;
+      opt.textContent = s.rate === 0 ? `${s.name} (no income tax)` : `${s.name} (~${(s.rate * 100).toFixed(1)}%)`;
+      stateSelect.appendChild(opt);
+    });
+
+    const singleBrackets = [
+      { min: 0, max: 11600, rate: 0.10 },
+      { min: 11600, max: 47150, rate: 0.12 },
+      { min: 47150, max: 100525, rate: 0.22 },
+      { min: 100525, max: 191950, rate: 0.24 },
+      { min: 191950, max: 243725, rate: 0.32 },
+      { min: 243725, max: 609350, rate: 0.35 },
+      { min: 609350, max: Infinity, rate: 0.37 }
+    ];
+
+    const marriedBrackets = [
+      { min: 0, max: 23200, rate: 0.10 },
+      { min: 23200, max: 94300, rate: 0.12 },
+      { min: 94300, max: 201050, rate: 0.22 },
+      { min: 201050, max: 383900, rate: 0.24 },
+      { min: 383900, max: 487450, rate: 0.32 },
+      { min: 487450, max: 731200, rate: 0.35 },
+      { min: 731200, max: Infinity, rate: 0.37 }
+    ];
+
+    function calcFederalTax(annualTaxable, brackets) {
+      if (annualTaxable <= 0) return 0;
+      let tax = 0;
+      for (const b of brackets) {
+        if (annualTaxable <= b.min) break;
+        const taxableInBracket = Math.min(annualTaxable, b.max) - b.min;
+        tax += taxableInBracket * b.rate;
+      }
+      return tax;
+    }
+
+    function parseNum(el) {
+      return parseFloat(el.value.replace(/[^0-9.\-]/g, '')) || 0;
+    }
+
+    function formatInput(el) {
+      const raw = el.value.replace(/[^0-9.]/g, '');
+      if (!raw || raw.endsWith('.')) return;
+      const num = parseFloat(raw);
+      if (isNaN(num)) return;
+      const cursor = el.selectionStart;
+      const oldLen = el.value.length;
+      el.value = new Intl.NumberFormat('en-US').format(num);
+      const diff = el.value.length - oldLen;
+      el.setSelectionRange(cursor + diff, cursor + diff);
+    }
+
+    function calculate() {
+      const grossPay = parseNum($('gross-pay'));
+      const periodsPerYear = parseInt($('pay-freq').value);
+      const filing = $('filing').value;
+      const stateAbbr = $('state').value;
+      const stateObj = states.find(s => s.abbr === stateAbbr);
+      const stateRate = stateObj ? stateObj.rate : 0;
+
+      const annualGross = grossPay * periodsPerYear;
+      const standardDeduction = filing === 'married' ? 29200 : 14600;
+      const annualTaxable = Math.max(0, annualGross - standardDeduction);
+      const brackets = filing === 'married' ? marriedBrackets : singleBrackets;
+
+      const annualFederal = calcFederalTax(annualTaxable, brackets);
+      const federalPerPeriod = annualFederal / periodsPerYear;
+
+      const annualStateTax = annualTaxable * stateRate;
+      const statePerPeriod = annualStateTax / periodsPerYear;
+
+      const ssPerPeriod = grossPay * 0.062;
+      const medicarePerPeriod = grossPay * 0.0145;
+
+      const totalDeductions = federalPerPeriod + statePerPeriod + ssPerPeriod + medicarePerPeriod;
+      const netPay = grossPay - totalDeductions;
+
+      $('out-gross').textContent = fmt2.format(grossPay);
+      $('out-federal').textContent = '−' + fmt2.format(federalPerPeriod);
+      $('out-state').textContent = '−' + fmt2.format(statePerPeriod);
+      $('out-ss').textContent = '−' + fmt2.format(ssPerPeriod);
+      $('out-medicare').textContent = '−' + fmt2.format(medicarePerPeriod);
+      $('out-net').textContent = fmt2.format(Math.max(0, netPay));
+
+      const annualNet = Math.max(0, netPay) * periodsPerYear;
+      $('out-annual-gross').textContent = fmt0.format(annualGross);
+      $('out-annual-net').textContent = fmt0.format(annualNet);
+      $('out-total-ded').textContent = fmt2.format(totalDeductions);
+
+      const effRate = annualGross > 0 ? ((totalDeductions * periodsPerYear) / annualGross * 100).toFixed(1) : '0';
+      $('out-eff-rate').textContent = effRate + '%';
+    }
+
+    $('gross-pay').addEventListener('input', () => { formatInput($('gross-pay')); calculate(); });
+    $('pay-freq').addEventListener('change', calculate);
+    $('filing').addEventListener('change', calculate);
+    $('state').addEventListener('change', calculate);
+
+    calculate();
+  })();
+  </script>
+
+  <script type="module">
+    import { initToolPage } from '/js/shared.js';
+    import { initConsent } from '/js/consent.js'; initConsent();
+    initToolPage('paycheck-calculator');
+  </script>
+</body>
+</html>
