@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools</title>
-  <meta name="description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100% client-side — your images never leave your device.">
+  <title>Free Image to PDF Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100%.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/image-to-pdf">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools">
-  <meta property="og:description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100% client-side — your images never leave your device.">
+  <meta property="og:title" content="Free Image to PDF Converter | ClickSolveTools">
+  <meta property="og:description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF. 100%.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clicksolvetools.com/tools/image-to-pdf">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Image to PDF Converter Online — JPG, PNG, WebP to PDF | ClickSolveTools">
+  <meta name="twitter:title" content="Free Image to PDF Converter | ClickSolveTools">
   <meta name="twitter:description" content="Convert images to PDF for free. Upload JPG, PNG, or WebP files, reorder pages, choose page size and orientation, and download a polished PDF.">
 
   <!-- Tailwind CSS -->
@@ -98,6 +100,7 @@
 
   <!-- Nav -->
   <div id="nav-container"></div>
+  <h1 class="sr-only">Image to PDF Converter</h1>
 
   <!-- Main -->
   <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
@@ -120,7 +123,7 @@
         <!-- Image list & options -->
         <div id="image-list-wrapper" class="hidden">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-medium text-[#475569]">Images <span id="image-count" class="text-[#94a3b8]">(0)</span></h3>
+            <p class="text-sm font-medium text-[#475569]">Images <span id="image-count" class="text-[#94a3b8]">(0)</span></p>
             <button id="add-more-btn" class="text-xs text-[#2563eb] hover:text-[#1d4ed8] font-medium transition-colors">+ Add more images</button>
           </div>
 
@@ -338,7 +341,7 @@
 
         li.innerHTML = `
           <span class="text-[#94a3b8] text-xs font-mono w-5 text-right select-none">${idx + 1}</span>
-          <img src="${entry.url}" alt="" class="w-12 h-12 object-cover rounded border border-[#e2e8f0] shrink-0 bg-[#f1f5f9]">
+          <img src="${entry.url}" alt="Page thumbnail" class="w-12 h-12 object-cover rounded border border-[#e2e8f0] shrink-0 bg-[#f1f5f9]">
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-[#1e293b] truncate">${entry.name}</p>
             <p class="text-xs text-[#94a3b8]">${entry.width}×${entry.height} · ${formatBytes(entry.size)}</p>

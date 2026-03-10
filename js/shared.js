@@ -15,7 +15,7 @@ export function renderNav(toolName, toolIcon) {
       </a>
       <div class="flex items-center gap-2">
         <span class="text-lg">${toolIcon}</span>
-        <h1 class="text-[#1e293b] font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">${toolName}</h1>
+        <span class="text-[#1e293b] font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">${toolName}</span>
       </div>
       <div class="w-[72px]"></div>
     </div>

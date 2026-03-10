@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools</title>
-  <meta name="description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert multiple files, adjust quality, preview results, and download — no uploads, completely free.">
+  <title>Free Image Format Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert multiple files, adjust quality, preview results, and.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/image-format-converter">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools">
+  <meta property="og:title" content="Free Image Format Converter | ClickSolveTools">
   <meta property="og:description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch convert, adjust quality, and download.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clicksolvetools.com/tools/image-format-converter">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Image Format Converter Online — PNG, JPEG, WebP, BMP | ClickSolveTools">
+  <meta name="twitter:title" content="Free Image Format Converter | ClickSolveTools">
   <meta name="twitter:description" content="Convert images between PNG, JPEG, WebP, and BMP formats instantly in your browser. Batch mode, quality control, side-by-side preview.">
 
   <!-- Tailwind CSS -->
@@ -103,6 +105,7 @@
 
   <!-- Nav -->
   <div id="nav-container"></div>
+  <h1 class="sr-only">Image Format Converter</h1>
 
   <!-- Main -->
   <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
@@ -131,7 +134,7 @@
           <!-- Original info -->
           <div id="original-info" class="hidden mb-6">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="text-sm font-medium text-[#475569]">Original Image</h3>
+              <p class="text-sm font-medium text-[#475569]">Original Image</p>
               <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
             </div>
             <div class="flex flex-col sm:flex-row gap-4 items-start">
@@ -168,14 +171,14 @@
             <!-- Preview comparison -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
               <div>
-                <h3 class="text-sm font-medium text-[#475569] mb-2">Original</h3>
+                <p class="text-sm font-medium text-[#475569] mb-2">Original</p>
                 <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
                   <img id="compare-original" class="max-h-56 rounded object-contain" alt="Original">
                 </div>
                 <p class="text-xs text-[#94a3b8] mt-2">Size: <span id="compare-orig-size" class="text-[#475569]"></span></p>
               </div>
               <div>
-                <h3 class="text-sm font-medium text-[#475569] mb-2">Converted</h3>
+                <p class="text-sm font-medium text-[#475569] mb-2">Converted</p>
                 <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
                   <img id="compare-converted" class="max-h-56 rounded object-contain" alt="Converted">
                 </div>
@@ -595,7 +598,7 @@
 
         return `
           <div class="flex items-center gap-3 p-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg">
-            <img src="${item.thumbUrl}" class="w-10 h-10 rounded object-cover border border-[#e2e8f0] shrink-0" alt="">
+            <img src="${item.thumbUrl}" class="w-10 h-10 rounded object-cover border border-[#e2e8f0] shrink-0" alt="Uploaded image thumbnail">
             <div class="flex-1 min-w-0">
               <p class="text-sm text-[#1e293b] font-medium truncate">${item.file.name}</p>
               <p class="text-xs text-[#94a3b8]">${detectFormat(item.file)} · ${formatBytes(item.file.size)}</p>

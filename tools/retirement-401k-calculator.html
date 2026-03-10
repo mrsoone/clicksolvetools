@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free 401(k) Retirement Calculator — Projected Balance, Employer Match &amp; Growth | ClickSolveTools</title>
-  <meta name="description" content="Calculate your projected 401(k) balance at retirement. See employer match contributions, year-by-year growth, contribution limits, and estimated monthly retirement income using the 4% rule.">
+  <title>Free 401(k) Retirement Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate your projected 401(k) balance at retirement. See employer match contributions, year-by-year growth, contribution limits, and estimated monthly.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/retirement-401k-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -17,12 +18,17 @@
   <meta property="og:title" content="Free 401(k) Retirement Calculator | ClickSolveTools">
   <meta property="og:description" content="Calculate your projected 401(k) balance at retirement. See employer match, year-by-year growth, and estimated monthly retirement income.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/retirement-401k-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free 401(k) Retirement Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate your projected 401(k) balance at retirement. See employer match contributions, year-by-year growth, contribution limits, and estimated monthly retirement income using the 4% rule.">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"401(k) Retirement Calculator","url":"https://clicksolvetools.com/tools/retirement-401k-calculator","description":"Calculate your projected 401(k) balance at retirement with employer match, contribution limits, year-by-year growth, and estimated monthly retirement income using the 4% rule.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much should I contribute to my 401(k)?","acceptedAnswer":{"@type":"Answer","text":"Financial advisors generally recommend contributing at least enough to capture your full employer match, which is essentially free money. Beyond that, aim for 10–15% of your gross salary. The 2025 contribution limit is $23,500 per year, with an additional $7,500 catch-up contribution for those aged 50 and older."}},{"@type":"Question","name":"What is an employer 401(k) match?","acceptedAnswer":{"@type":"Answer","text":"An employer match is when your company contributes additional money to your 401(k) based on your own contributions. A common structure is a 50% match on the first 6% of salary you contribute — meaning if you put in 6%, your employer adds another 3%. This is essentially free money and one of the best returns on investment available."}},{"@type":"Question","name":"What is the 4% rule for retirement?","acceptedAnswer":{"@type":"Answer","text":"The 4% rule is a widely used retirement planning guideline suggesting you can withdraw 4% of your portfolio in the first year of retirement, then adjust for inflation each subsequent year, with a high probability of your savings lasting at least 30 years. It was derived from the Trinity Study analyzing historical market returns."}},{"@type":"Question","name":"What are the 2025 401(k) contribution limits?","acceptedAnswer":{"@type":"Answer","text":"For 2025, the annual employee contribution limit is $23,500. Workers aged 50 and older can make an additional catch-up contribution of $7,500, bringing their total to $31,000. These limits apply to employee elective deferrals only and do not include employer matching contributions."}}]}</script>
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">401(k) Retirement Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -112,7 +118,7 @@
 
       <!-- Results -->
       <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Projected 401(k) at Retirement</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">Projected 401(k) at Retirement</p>
         <div class="grid grid-cols-2 gap-4 mb-4">
           <div class="sm:col-span-2">
             <div class="text-xs text-[#475569]">Projected Balance at Retirement</div>
@@ -140,7 +146,7 @@
 
       <!-- Growth Chart -->
       <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-1">401(k) Growth Over Time</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-1">401(k) Growth Over Time</p>
         <div class="flex items-center gap-4 text-xs text-[#475569] mb-4">
           <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#2563eb]"></span>Your Contributions</span>
           <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#7c3aed]"></span>Employer Match</span>

@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Investment Return Calculator — ROI, CAGR &amp; Growth Analysis | ClickSolveTools</title>
-  <meta name="description" content="Calculate investment returns including total ROI, annualized return (CAGR), and average annual return. Compare your results against S&P 500, bonds, and savings benchmarks with a year-by-year growth chart.">
+  <title>Free Investment Return Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate investment returns including total ROI, annualized return (CAGR), and average annual return. Compare your results against S&P 500, bonds, and.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/investment-return-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Investment Return Calculator — ROI, CAGR & Growth | ClickSolveTools">
+  <meta property="og:title" content="Free Investment Return Calculator | ClickSolveTools">
   <meta property="og:description" content="Calculate investment returns including total ROI, annualized return (CAGR), and average annual return. Compare against S&P 500, bonds, and savings benchmarks.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/investment-return-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Investment Return Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate investment returns including total ROI, annualized return (CAGR), and average annual return. Compare your results against S&P 500, bonds, and savings benchmarks with a year-by-year growth ch">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Investment Return Calculator","url":"https://clicksolvetools.com/tools/investment-return-calculator","description":"Calculate investment returns including total ROI, annualized return (CAGR), and average annual return. Compare your results against S&P 500, bonds, and savings benchmarks.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between ROI and CAGR?","acceptedAnswer":{"@type":"Answer","text":"ROI (Return on Investment) measures the total percentage gain or loss over the entire period. CAGR (Compound Annual Growth Rate) expresses that total return as an equivalent annual growth rate, smoothing out year-to-year volatility into a single annualized figure."}},{"@type":"Question","name":"What is a good annual return on investment?","acceptedAnswer":{"@type":"Answer","text":"It depends on the asset class and risk level. The S&P 500 has historically averaged about 10% annually before inflation. Bonds typically return 4–6%, and high-yield savings accounts offer 4–5%. A 'good' return is one that exceeds inflation and meets your financial goals for the risk you're taking."}},{"@type":"Question","name":"Why is CAGR different from average annual return?","acceptedAnswer":{"@type":"Answer","text":"Average annual return is the arithmetic mean of yearly returns, while CAGR accounts for compounding. CAGR reflects the actual growth rate that would produce the same final value, making it more accurate for evaluating investment performance over time."}},{"@type":"Question","name":"How do I calculate ROI?","acceptedAnswer":{"@type":"Answer","text":"ROI is calculated as (Final Value − Initial Investment) ÷ Initial Investment × 100. For example, investing $10,000 that grows to $15,000 gives an ROI of 50%."}}]}</script>
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">Investment Return Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -77,7 +83,7 @@
 
       <!-- Results -->
       <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Investment Results</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">Investment Results</p>
         <div class="grid grid-cols-2 gap-4 mb-4">
           <div>
             <div class="text-xs text-[#475569]">Final Value</div>
@@ -113,7 +119,7 @@
 
       <!-- Benchmark Comparison -->
       <div id="benchmark-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">What If You'd Invested In…</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">What If You'd Invested In…</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
           <div class="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-4">
             <div class="text-xs text-[#2563eb] mb-0.5">S&amp;P 500 Avg (10%/yr)</div>
@@ -138,7 +144,7 @@
 
       <!-- Growth Chart -->
       <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-1">Year-by-Year Growth</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-1">Year-by-Year Growth</p>
         <div class="flex items-center gap-4 text-xs text-[#475569] mb-4">
           <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#2563eb]"></span>Principal</span>
           <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-[#22c55e]"></span>Returns</span>

@@ -3,29 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Auto Loan Calculator — Monthly Payment, Interest &amp; Amortization | ClickSolveTools</title>
-  <meta name="description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your car purchase.">
+  <title>Free Auto Loan Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/auto-loan-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Auto Loan Calculator Online | ClickSolveTools">
-  <meta property="og:description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your car purchase.">
+  <meta property="og:title" content="Free Auto Loan Calculator | ClickSolveTools">
+  <meta property="og:description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms, see principal vs interest breakdown, and plan your.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/auto-loan-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Auto Loan Calculator Online | ClickSolveTools">
+  <meta name="twitter:title" content="Free Auto Loan Calculator | ClickSolveTools">
   <meta name="twitter:description" content="Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare terms and plan your car purchase.">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Auto Loan Calculator","url":"https://clicksolvetools.com/tools/auto-loan-calculator","description":"Calculate your auto loan monthly payment, total interest, and amortization schedule. Compare loan terms and plan your car purchase.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the monthly payment on an auto loan calculated?","acceptedAnswer":{"@type":"Answer","text":"The monthly payment uses the standard amortization formula: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate, and n is the total number of payments."}},{"@type":"Question","name":"Should I choose a shorter or longer auto loan term?","acceptedAnswer":{"@type":"Answer","text":"A shorter term means higher monthly payments but less total interest. A longer term lowers the monthly payment but costs more overall. Most financial advisors recommend keeping auto loans to 48 or 60 months to avoid going upside-down on the loan."}},{"@type":"Question","name":"Does a trade-in reduce sales tax?","acceptedAnswer":{"@type":"Answer","text":"In most U.S. states, the trade-in value reduces the taxable price of the vehicle. This calculator applies sales tax to the vehicle price minus the trade-in value."}}]}</script>
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">Auto Loan Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -118,7 +121,7 @@
 
       <!-- Pie Chart -->
       <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Cost Breakdown</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">Cost Breakdown</p>
         <div class="flex flex-col sm:flex-row items-center gap-6">
           <div id="pie-chart" class="w-44 h-44 rounded-full flex-shrink-0" style="background: conic-gradient(#e2e8f0 0deg 360deg);"></div>
           <div class="flex flex-col gap-2 text-sm">
@@ -140,7 +143,7 @@
 
       <!-- Term Comparison Table -->
       <div id="comparison-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Loan Term Comparison</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">Loan Term Comparison</p>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead>

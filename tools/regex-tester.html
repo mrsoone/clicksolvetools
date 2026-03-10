@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools</title>
+  <title>Free Regex Tester | ClickSolveTools</title>
   <meta name="description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices. Includes preset patterns and a cheat sheet." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://clicksolvetools.com/tools/regex-tester" />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools" />
+  <meta property="og:title" content="Free Regex Tester | ClickSolveTools" />
   <meta property="og:description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices. Includes preset patterns and a cheat sheet." />
   <meta property="og:url" content="https://clicksolvetools.com/tools/regex-tester" />
   <meta property="og:site_name" content="ClickSolveTools" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Free Regex Tester Online — Real-Time Match Highlighting | ClickSolveTools" />
+  <meta name="twitter:title" content="Free Regex Tester | ClickSolveTools" />
   <meta name="twitter:description" content="Test regular expressions in real time with match highlighting, capture groups, and match indices." />
 
   <script type="application/ld+json">
@@ -60,6 +61,7 @@
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
     .mirror-box { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
   </style>
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
@@ -143,7 +145,7 @@
         <div class="px-4 sm:px-6 pb-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-sm">
           <!-- Character Classes -->
           <div>
-            <h3 class="font-semibold text-sky-400 mb-2">Character Classes</h3>
+            <p class="font-semibold text-sky-400 mb-2">Character Classes</p>
             <table class="w-full text-left">
               <tbody class="divide-y divide-[#334155]">
                 <tr><td class="mono py-1 pr-3 text-sky-300">.</td><td class="text-gray-400">Any character (except newline)</td></tr>
@@ -161,7 +163,7 @@
           </div>
           <!-- Quantifiers -->
           <div>
-            <h3 class="font-semibold text-sky-400 mb-2">Quantifiers</h3>
+            <p class="font-semibold text-sky-400 mb-2">Quantifiers</p>
             <table class="w-full text-left">
               <tbody class="divide-y divide-[#334155]">
                 <tr><td class="mono py-1 pr-3 text-sky-300">*</td><td class="text-gray-400">0 or more</td></tr>
@@ -177,7 +179,7 @@
           </div>
           <!-- Anchors & Groups -->
           <div>
-            <h3 class="font-semibold text-sky-400 mb-2">Anchors</h3>
+            <p class="font-semibold text-sky-400 mb-2">Anchors</p>
             <table class="w-full text-left mb-4">
               <tbody class="divide-y divide-[#334155]">
                 <tr><td class="mono py-1 pr-3 text-sky-300">^</td><td class="text-gray-400">Start of string / line</td></tr>
@@ -186,7 +188,7 @@
                 <tr><td class="mono py-1 pr-3 text-sky-300">\B</td><td class="text-gray-400">Non-word boundary</td></tr>
               </tbody>
             </table>
-            <h3 class="font-semibold text-sky-400 mb-2">Groups & Lookaround</h3>
+            <p class="font-semibold text-sky-400 mb-2">Groups & Lookaround</p>
             <table class="w-full text-left">
               <tbody class="divide-y divide-[#334155]">
                 <tr><td class="mono py-1 pr-3 text-sky-300">(abc)</td><td class="text-gray-400">Capturing group</td></tr>
@@ -258,11 +260,11 @@
             <h3 class="font-semibold text-white mb-1">JSON Formatter</h3>
             <p class="text-sm text-gray-400">Pretty-print and validate JSON data instantly.</p>
           </a>
-          <a href="/tools/base64-encoder" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
+          <a href="/tools/base64-encoder-decoder" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
             <h3 class="font-semibold text-white mb-1">Base64 Encoder / Decoder</h3>
             <p class="text-sm text-gray-400">Encode and decode Base64 strings online.</p>
           </a>
-          <a href="/tools/text-diff" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
+          <a href="/tools/diff-checker" class="block bg-white border border-[#e2e8f0] rounded-xl p-4 hover:border-sky-500 transition">
             <h3 class="font-semibold text-white mb-1">Text Diff Checker</h3>
             <p class="text-sm text-gray-400">Compare two blocks of text side by side.</p>
           </a>
@@ -279,7 +281,7 @@
       <div class="flex gap-4">
         <a href="/privacy" class="hover:text-gray-300 transition">Privacy</a>
         <a href="/terms" class="hover:text-gray-300 transition">Terms</a>
-        <a href="/contact" class="hover:text-gray-300 transition">Contact</a>
+        <a href="/about" class="hover:text-gray-300 transition">Contact</a>
       </div>
     </div>
   </footer>

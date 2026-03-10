@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free ROI Calculator — Return on Investment, Annualized ROI &amp; Comparison | ClickSolveTools</title>
-  <meta name="description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts. Free, private, no signup.">
+  <title>Free ROI Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts. Free, private.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/roi-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free ROI Calculator — Return on Investment & Comparison | ClickSolveTools">
+  <meta property="og:title" content="Free ROI Calculator | ClickSolveTools">
   <meta property="og:description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual charts.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/roi-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free ROI Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts. Free, private, no signup.">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ROI Calculator","url":"https://clicksolvetools.com/tools/roi-calculator","description":"Calculate return on investment (ROI), net profit/loss, and annualized ROI. Compare up to 5 investments side by side with visual bar charts.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you calculate ROI?","acceptedAnswer":{"@type":"Answer","text":"ROI is calculated as (Net Profit ÷ Initial Investment) × 100, or equivalently (Final Value − Initial Investment) ÷ Initial Investment × 100. For example, investing $10,000 that grows to $13,000 gives an ROI of 30%."}},{"@type":"Question","name":"What is annualized ROI?","acceptedAnswer":{"@type":"Answer","text":"Annualized ROI converts a total return into the equivalent yearly rate using the formula: Annualized ROI = (1 + ROI)^(1/n) − 1, where n is the number of years. This lets you fairly compare investments held for different lengths of time."}},{"@type":"Question","name":"What is a good ROI?","acceptedAnswer":{"@type":"Answer","text":"A 'good' ROI depends on the asset class. The S&P 500 historically returns about 10% per year. Real estate often targets 8–12%. Any return above the risk-free rate (Treasury bonds, ~4–5%) that compensates for the risk taken is generally considered good."}},{"@type":"Question","name":"What is the difference between ROI and profit margin?","acceptedAnswer":{"@type":"Answer","text":"ROI measures the return relative to the cost of the investment, while profit margin measures profit relative to revenue. ROI tells you how efficiently your invested capital generates returns; profit margin tells you how much of each dollar of revenue becomes profit."}}]}</script>
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">ROI Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -84,7 +90,7 @@
 
       <!-- Results -->
       <div id="results-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">ROI Results</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">ROI Results</p>
 
         <div id="break-even-badge" class="mb-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium">
           <span id="break-even-icon"></span>
@@ -116,7 +122,7 @@
       <!-- Comparison Section -->
       <div class="bg-white border border-[#e2e8f0] rounded-xl p-6">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-sm font-semibold text-[#1e293b]">Compare Investments</h3>
+          <p class="text-sm font-semibold text-[#1e293b]">Compare Investments</p>
           <span class="text-xs text-[#94a3b8]" id="inv-counter">0 / 5</span>
         </div>
         <p class="text-xs text-[#64748b] mb-4">Add up to 5 investments to compare their ROI side by side.</p>
@@ -134,7 +140,7 @@
 
       <!-- Comparison Results -->
       <div id="compare-results" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">ROI Comparison</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">ROI Comparison</p>
         <div id="compare-chart" class="space-y-3 mb-5"></div>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">

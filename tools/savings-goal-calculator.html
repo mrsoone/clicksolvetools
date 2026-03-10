@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Savings Goal Calculator — Monthly Savings, Timeline &amp; Milestones | ClickSolveTools</title>
-  <meta name="description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.">
+  <title>Free Savings Goal Calculator | ClickSolveTools</title>
+  <meta name="description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/savings-goal-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Free Savings Goal Calculator | ClickSolveTools">
-  <meta property="og:description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.">
+  <meta property="og:description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/savings-goal-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Savings Goal Calculator | ClickSolveTools">
+  <meta name="twitter:description" content="Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Savings Goal Calculator","url":"https://clicksolvetools.com/tools/savings-goal-calculator","description":"Plan your savings goal with this free calculator. Find out how much to save monthly or when you'll reach your target. See milestones, progress bars, and growth timelines.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much should I save each month?","acceptedAnswer":{"@type":"Answer","text":"A common guideline is the 50/30/20 rule: allocate 50% of after-tax income to needs, 30% to wants, and 20% to savings and debt repayment. The exact amount depends on your income, expenses, and financial goals."}},{"@type":"Question","name":"What is a high-yield savings account?","acceptedAnswer":{"@type":"Answer","text":"A high-yield savings account offers an interest rate significantly higher than a traditional savings account — often 10 to 25 times the national average. They are typically offered by online banks and are FDIC-insured up to $250,000."}},{"@type":"Question","name":"How much should I have in an emergency fund?","acceptedAnswer":{"@type":"Answer","text":"Most financial advisors recommend saving 3 to 6 months of essential living expenses in an easily accessible emergency fund. If you have variable income or are self-employed, aim for 6 to 12 months."}},{"@type":"Question","name":"Does compound interest help my savings goal?","acceptedAnswer":{"@type":"Answer","text":"Yes. When your savings earn interest and that interest earns additional interest, your money grows faster than with simple interest alone. A high-yield savings account or investment vehicle that compounds monthly or daily accelerates progress toward your goal."}}]}</script>
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">Savings Goal Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -124,7 +130,7 @@
 
       <!-- Progress Bar -->
       <div id="progress-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-3">Progress Toward Goal</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-3">Progress Toward Goal</p>
         <div class="flex items-center justify-between text-xs text-[#475569] mb-2">
           <span id="prog-current">$0</span>
           <span id="prog-goal">$0</span>
@@ -141,7 +147,7 @@
 
       <!-- Milestones -->
       <div id="milestone-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">Goal Milestones</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">Goal Milestones</p>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="milestones"></div>
       </div>
 

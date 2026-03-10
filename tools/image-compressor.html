@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools</title>
+  <title>Free Image Compressor | ClickSolveTools</title>
   <meta name="description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/image-compressor">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools">
+  <meta property="og:title" content="Free Image Compressor | ClickSolveTools">
   <meta property="og:description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clicksolvetools.com/tools/image-compressor">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Image Compressor Online — Reduce File Size Instantly | ClickSolveTools">
+  <meta name="twitter:title" content="Free Image Compressor | ClickSolveTools">
   <meta name="twitter:description" content="Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.">
 
   <!-- Tailwind CSS -->
@@ -63,6 +65,7 @@
 
   <!-- Nav -->
   <div id="nav-container"></div>
+  <h1 class="sr-only">Image Compressor</h1>
 
   <!-- Main -->
   <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
@@ -87,7 +90,7 @@
         <!-- Original info (hidden until upload) -->
         <div id="original-info" class="hidden mb-6">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-medium text-[#475569]">Uploaded image</h3>
+            <p class="text-sm font-medium text-[#475569]">Uploaded image</p>
             <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove image</button>
           </div>
           <div class="flex flex-col sm:flex-row gap-4 items-start">
@@ -125,7 +128,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <!-- Original -->
               <div>
-                <h3 class="text-sm font-medium text-[#475569] mb-2">Original</h3>
+                <p class="text-sm font-medium text-[#475569] mb-2">Original</p>
                 <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
                   <img id="compare-original" class="max-h-56 rounded object-contain" alt="Original">
                 </div>
@@ -133,7 +136,7 @@
               </div>
               <!-- Compressed -->
               <div>
-                <h3 class="text-sm font-medium text-[#475569] mb-2">Compressed</h3>
+                <p class="text-sm font-medium text-[#475569] mb-2">Compressed</p>
                 <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-2 flex items-center justify-center min-h-[10rem]">
                   <img id="compare-compressed" class="max-h-56 rounded object-contain" alt="Compressed">
                 </div>

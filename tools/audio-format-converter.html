@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools</title>
-  <meta name="description" content="Convert audio files between WAV, MP3, OGG, FLAC, AAC, M4A, and WebM formats in your browser. Adjust sample rate and channels, preview audio, and download — no uploads, completely free.">
+  <title>Free Audio Format Converter | ClickSolveTools</title>
+  <meta name="description" content="Convert audio files between WAV, MP3, OGG, FLAC, AAC, M4A, and WebM formats in your browser. Adjust sample rate and channels, preview audio, and download.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/audio-format-converter">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools">
+  <meta property="og:title" content="Free Audio Format Converter | ClickSolveTools">
   <meta property="og:description" content="Convert audio between WAV, MP3, OGG, and more in your browser. Adjust sample rate and channels, preview, and download instantly.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clicksolvetools.com/tools/audio-format-converter">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Audio Format Converter Online — MP3, WAV, OGG, FLAC, AAC | ClickSolveTools">
+  <meta name="twitter:title" content="Free Audio Format Converter | ClickSolveTools">
   <meta name="twitter:description" content="Convert audio between WAV, MP3, OGG, and more formats entirely in your browser. No uploads, no signup.">
 
   <!-- Tailwind CSS -->
@@ -103,6 +105,7 @@
 
   <!-- Nav -->
   <div id="nav-container"></div>
+  <h1 class="sr-only">Audio Format Converter</h1>
 
   <!-- Main -->
   <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
@@ -122,7 +125,7 @@
         <!-- File info -->
         <div id="file-info" class="hidden mb-6">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-sm font-medium text-[#475569]">Source Audio</h3>
+            <p class="text-sm font-medium text-[#475569]">Source Audio</p>
             <button id="clear-btn" class="text-xs text-red-400 hover:text-red-600 transition-colors">Remove</button>
           </div>
           <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 space-y-2">
@@ -135,7 +138,7 @@
 
         <!-- Audio preview player -->
         <div id="player-section" class="hidden mb-6">
-          <h3 class="text-sm font-medium text-[#475569] mb-2">Preview</h3>
+          <p class="text-sm font-medium text-[#475569] mb-2">Preview</p>
           <audio id="audio-player" controls class="w-full rounded-lg"></audio>
         </div>
 
@@ -209,7 +212,7 @@
               <p class="text-sm text-[#475569]">Sample rate: <span id="out-rate" class="text-[#1e293b] font-semibold"></span></p>
               <p class="text-sm text-[#475569]">Channels: <span id="out-channels" class="text-[#1e293b] font-semibold"></span></p>
             </div>
-            <h3 class="text-sm font-medium text-[#475569]">Converted Audio Preview</h3>
+            <p class="text-sm font-medium text-[#475569]">Converted Audio Preview</p>
             <audio id="output-player" controls class="w-full rounded-lg"></audio>
             <button id="download-btn" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#2563eb] text-white font-semibold text-sm hover:bg-[#3b82f6] transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>

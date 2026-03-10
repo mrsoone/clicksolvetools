@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Inflation Calculator — Purchasing Power, CPI &amp; Future Value | ClickSolveTools</title>
-  <meta name="description" content="Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons using any inflation rate.">
+  <title>Free Inflation Calculator | ClickSolveTools</title>
+  <meta name="description" content="Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons using.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/inflation-calculator">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});gtag('config','G-XXXXXXXXXX');</script>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Inflation Calculator — Purchasing Power &amp; Future Value | ClickSolveTools">
+  <meta property="og:title" content="Free Inflation Calculator | ClickSolveTools">
   <meta property="og:description" content="Calculate how inflation erodes purchasing power over time. See future or past dollar values, year-by-year breakdown, and cost-of-living comparisons.">
   <meta property="og:url" content="https://clicksolvetools.com/tools/inflation-calculator">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Free Inflation Calculator | ClickSolveTools">
@@ -26,6 +28,7 @@
 </head>
 <body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
   <div id="nav-container"></div>
+  <h1 class="sr-only">Inflation Calculator</h1>
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="max-w-2xl mx-auto space-y-6">
@@ -102,14 +105,14 @@
 
       <!-- Purchasing Power Erosion Chart -->
       <div id="chart-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-1">Purchasing Power Erosion</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-1">Purchasing Power Erosion</p>
         <p class="text-xs text-[#64748b] mb-4">How the value of your money declines year by year</p>
         <div id="erosion-chart" class="space-y-1.5"></div>
       </div>
 
       <!-- Cost of Living Comparison -->
       <div id="col-panel" class="bg-white border border-[#e2e8f0] rounded-xl p-6 hidden">
-        <h3 class="text-sm font-semibold text-[#1e293b] mb-4">$100 Today — Cost of Living Over Time</h3>
+        <p class="text-sm font-semibold text-[#1e293b] mb-4">$100 Today — Cost of Living Over Time</p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
           <div class="bg-[#fef2f2] border border-[#fecaca] rounded-lg p-4">
             <div class="text-xs text-[#ef4444] mb-1">In 10 Years</div>

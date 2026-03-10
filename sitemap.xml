@@ -1,115 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Pages -->
-  <url><loc>https://clicksolvetools.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://clicksolvetools.com/about</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://clicksolvetools.com/privacy</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://clicksolvetools.com/licenses</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://clicksolvetools.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://clicksolvetools.com/cookies</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://clicksolvetools.com/</loc><lastmod>2026-03-09</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://clicksolvetools.com/about</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/privacy</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://clicksolvetools.com/licenses</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://clicksolvetools.com/terms</loc><lastmod>2026-03-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://clicksolvetools.com/cookies</loc><lastmod>2026-03-09</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
   <!-- Finance (15) -->
-  <url><loc>https://clicksolvetools.com/tools/mortgage-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/hourly-to-salary-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/compound-interest-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/tip-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/loan-payoff-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/sales-tax-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/investment-return-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/credit-card-payoff-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/profit-margin-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/roi-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/auto-loan-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/inflation-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/rent-vs-buy-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/retirement-401k-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/savings-goal-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/mortgage-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/hourly-to-salary-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/compound-interest-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/tip-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/loan-payoff-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/sales-tax-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/investment-return-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/credit-card-payoff-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/profit-margin-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/roi-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/auto-loan-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/inflation-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/rent-vs-buy-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/retirement-401k-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/savings-goal-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Developer (10) -->
-  <url><loc>https://clicksolvetools.com/tools/json-formatter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/diff-checker</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/regex-tester</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/markdown-preview</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/jwt-decoder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/hash-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/cron-expression-parser</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/sql-formatter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/url-encoder-decoder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/html-entity-encoder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/json-formatter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/diff-checker</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/regex-tester</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/markdown-preview</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/jwt-decoder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/hash-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/cron-expression-parser</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/sql-formatter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/url-encoder-decoder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/html-entity-encoder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Text (5) -->
-  <url><loc>https://clicksolvetools.com/tools/word-counter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/text-case-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/lorem-ipsum-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/duplicate-line-remover</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/word-frequency-counter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/word-counter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/text-case-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/lorem-ipsum-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/duplicate-line-remover</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/word-frequency-counter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Converters (10) -->
-  <url><loc>https://clicksolvetools.com/tools/unit-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/timestamp-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/binary-text-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/base64-encoder-decoder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/color-picker</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/number-base-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/csv-json-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-format-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/audio-format-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/text-to-speech-preview</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/unit-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/timestamp-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/binary-text-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/base64-encoder-decoder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/color-picker</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/number-base-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/csv-json-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-format-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/audio-format-converter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/text-to-speech-preview</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Generators (7) -->
-  <url><loc>https://clicksolvetools.com/tools/qr-code-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/barcode-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/password-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/uuid-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/gradient-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/box-shadow-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/meta-tag-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/qr-code-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/barcode-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/password-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/uuid-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/gradient-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/box-shadow-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/meta-tag-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Math (6) -->
-  <url><loc>https://clicksolvetools.com/tools/calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/percentage-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/gpa-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/fraction-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/standard-deviation-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/aspect-ratio-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/percentage-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/gpa-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/fraction-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/standard-deviation-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/aspect-ratio-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Health (6) -->
-  <url><loc>https://clicksolvetools.com/tools/bmi-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/calorie-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/body-fat-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/macro-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pregnancy-due-date-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/ideal-weight-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/bmi-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/calorie-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/body-fat-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/macro-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pregnancy-due-date-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/ideal-weight-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Documents (9) -->
-  <url><loc>https://clicksolvetools.com/tools/pdf-merger</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pdf-splitter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pdf-to-text</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pdf-page-rotator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pdf-watermark</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/docx-to-html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/invoice-generator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pdf-compressor</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-merger</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-splitter</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-to-text</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-to-pdf</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-page-rotator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-watermark</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/docx-to-html</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/invoice-generator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pdf-compressor</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Image (5) -->
-  <url><loc>https://clicksolvetools.com/tools/image-resizer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-compressor</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-cropper</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-color-adjuster</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/image-to-base64</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-resizer</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-compressor</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-cropper</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-color-adjuster</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/image-to-base64</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Utilities (12) -->
-  <url><loc>https://clicksolvetools.com/tools/stopwatch</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/ruler</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/number-randomizer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/age-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/date-difference-calculator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/countdown-timer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/pomodoro-timer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/screen-resolution-checker</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/typing-speed-test</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/reading-time-estimator</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/audio-recorder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://clicksolvetools.com/tools/voice-memo-recorder</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/stopwatch</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/ruler</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/number-randomizer</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/age-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/date-difference-calculator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/countdown-timer</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/pomodoro-timer</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/screen-resolution-checker</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/typing-speed-test</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/reading-time-estimator</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/audio-recorder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://clicksolvetools.com/tools/voice-memo-recorder</loc><lastmod>2026-03-09</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

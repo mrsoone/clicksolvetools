@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Color Picker &amp; Converter Online — HEX, RGB, HSL | ClickSolveTools</title>
-  <meta name="description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations. Free, no signup, runs in your browser.">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-180.png">
+  <title>Free Color Picker & Converter | ClickSolveTools</title>
+  <meta name="description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations. Free, no signup.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clicksolvetools.com/tools/color-picker">
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Color Picker & Converter Online — HEX, RGB, HSL | ClickSolveTools">
+  <meta property="og:title" content="Free Color Picker & Converter | ClickSolveTools">
   <meta property="og:description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clicksolvetools.com/tools/color-picker">
+  <meta property="og:image" content="https://clicksolvetools.com/images/logo.png">
   <meta property="og:site_name" content="ClickSolveTools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Color Picker & Converter | ClickSolveTools">
+  <meta name="twitter:description" content="Pick any color and instantly convert between HEX, RGB, and HSL. View complementary, analogous, and triadic palettes plus shade variations. Free, no signup, runs in your browser.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -62,6 +69,7 @@
 
   <!-- Nav -->
   <div id="nav-container"></div>
+  <h1 class="sr-only">Color Picker & Converter</h1>
 
   <!-- Main -->
   <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-10">
@@ -123,22 +131,22 @@
         <!-- Color Palettes -->
         <div class="space-y-6 mb-8">
           <div>
-            <h3 class="text-sm font-medium text-[#475569] mb-3">Complementary</h3>
+            <p class="text-sm font-medium text-[#475569] mb-3">Complementary</p>
             <div id="palette-complementary" class="flex gap-2"></div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-[#475569] mb-3">Analogous</h3>
+            <p class="text-sm font-medium text-[#475569] mb-3">Analogous</p>
             <div id="palette-analogous" class="flex gap-2"></div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-[#475569] mb-3">Triadic</h3>
+            <p class="text-sm font-medium text-[#475569] mb-3">Triadic</p>
             <div id="palette-triadic" class="flex gap-2"></div>
           </div>
         </div>
 
         <!-- Shade Variations -->
         <div>
-          <h3 class="text-sm font-medium text-[#475569] mb-3">Shades &amp; Tints</h3>
+          <p class="text-sm font-medium text-[#475569] mb-3">Shades &amp; Tints</p>
           <div id="shade-bar" class="flex gap-1.5 overflow-x-auto pb-1"></div>
         </div>
 
