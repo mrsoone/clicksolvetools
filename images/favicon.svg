@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="gear-clip">
+      <!-- Gear outer shape -->
+      <path d="M50 4 L58 4 L61 16 Q67 18 72 22 L84 17 L89 24 L80 33 Q83 38 84 44 L96 47 L96 55 L84 58 Q83 63 80 68 L89 78 L84 84 L72 79 Q67 83 61 85 L58 97 L50 97 L47 85 Q41 83 36 79 L24 84 L19 78 L28 68 Q25 63 24 58 L12 55 L12 47 L24 44 Q25 38 28 33 L19 24 L24 17 L36 22 Q41 18 47 16 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Gear body -->
+  <path d="M50 4 L58 4 L61 16 Q67 18 72 22 L84 17 L89 24 L80 33 Q83 38 84 44 L96 47 L96 55 L84 58 Q83 63 80 68 L89 78 L84 84 L72 79 Q67 83 61 85 L58 97 L50 97 L47 85 Q41 83 36 79 L24 84 L19 78 L28 68 Q25 63 24 58 L12 55 L12 47 L24 44 Q25 38 28 33 L19 24 L24 17 L36 22 Q41 18 47 16 Z" fill="#2563eb"/>
+  <!-- Inner circle cutout -->
+  <circle cx="54" cy="51" r="22" fill="#2563eb"/>
+  <!-- Wrench - white with blue outline -->
+  <g transform="rotate(-35, 42, 52)">
+    <!-- Wrench handle -->
+    <rect x="24" y="46" width="36" height="10" rx="5" fill="white" stroke="#2563eb" stroke-width="2"/>
+    <!-- Wrench head -->
+    <path d="M22 42 Q15 48 18 56 L14 58 Q8 50 14 40 Z" fill="white" stroke="#2563eb" stroke-width="2"/>
+  </g>
+  <!-- Cursor pointer - white with blue outline -->
+  <g transform="translate(48, 32)">
+    <path d="M2 0 L2 32 L10 24 L18 36 L24 32 L16 20 L26 20 Z" fill="white" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+</svg>
