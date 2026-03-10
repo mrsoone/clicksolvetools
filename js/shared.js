@@ -62,7 +62,7 @@ const FOOTER_HTML = `
       <div class="flex items-center justify-center gap-2 mb-4">
         <img src="/images/logo-white-nav.png" alt="ClickSolveTools" class="h-8">
       </div>
-      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
+      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2026 ClickSolveTools. All rights reserved.</p>
       <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
       <div class="flex flex-wrap items-center justify-center gap-4 text-xs">
         <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
@@ -120,6 +120,7 @@ export async function renderMorePosts(currentSlug, category) {
               <time>${fmtDate(p.date)}</time>
               <span>·</span>
               <span>${p.readTime}</span>
+              ${p.author ? `<span>·</span><span>${p.author}</span>` : ''}
             </div>
           </a>
         `).join('')}

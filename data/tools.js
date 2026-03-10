@@ -9,6 +9,7 @@ export const tools = [
     description: "Estimate monthly mortgage payments, total interest, and amortization schedule. Compare loan terms and see how extra payments save money.",
     icon: "🏠",
     keywords: ["mortgage", "home loan", "monthly payment", "amortization", "housing"],
+    badge: "Popular",
     built: true
   },
   {
@@ -72,6 +73,7 @@ export const tools = [
     description: "See how long it takes to pay off credit card debt and how much interest you'll pay. Compare payoff strategies side by side.",
     icon: "💳",
     keywords: ["credit card payoff", "debt payoff", "minimum payment", "APR", "credit card debt"],
+    badge: "Trending",
     built: true
   },
   {
@@ -193,6 +195,7 @@ export const tools = [
     description: "Format, validate, and beautify JSON with syntax highlighting and error detection. Paste your JSON and instantly see if it's valid.",
     icon: "{ }",
     keywords: ["JSON formatter", "JSON validator", "beautify JSON", "JSON lint", "pretty print"],
+    badge: "Popular",
     built: true
   },
   {
@@ -211,6 +214,7 @@ export const tools = [
     description: "Test regular expressions in real time with match highlighting, capture groups, and match indices. Includes preset patterns and a cheat sheet.",
     icon: "🔍",
     keywords: ["regex tester", "regular expression", "regex match", "pattern tester", "regex debugger"],
+    badge: "Trending",
     built: true
   },
   {
@@ -284,6 +288,7 @@ export const tools = [
     description: "Paste JSON and get TypeScript interfaces or type aliases instantly. Handles nested objects, arrays, and nullable fields.",
     icon: "🔀",
     keywords: ["JSON to TypeScript", "TS interfaces", "type generator", "JSON types", "TypeScript converter"],
+    badge: "New",
     built: true
   },
   {
@@ -493,6 +498,7 @@ export const tools = [
     description: "Generate QR codes from any text or URL with custom size and colors. Download as PNG or SVG with real-time preview as you type.",
     icon: "📱",
     keywords: ["QR code generator", "QR code maker", "QR code", "barcode", "scan code"],
+    badge: "Trending",
     built: true
   },
   {
@@ -511,6 +517,7 @@ export const tools = [
     description: "Generate strong, cryptographically secure passwords with customizable length and character sets. Includes passphrase mode and entropy-based strength meter.",
     icon: "🔑",
     keywords: ["password generator", "random password", "strong password", "secure password", "passphrase"],
+    badge: "Popular",
     built: true
   },
   {
@@ -635,6 +642,7 @@ export const tools = [
     description: "Calculate your Body Mass Index with imperial or metric units. See your BMI category on a visual scale. A screening tool, not a diagnosis.",
     icon: "⚖️",
     keywords: ["BMI calculator", "body mass index", "weight calculator", "BMI chart", "healthy weight"],
+    badge: "Popular",
     built: true
   },
   {
@@ -644,6 +652,7 @@ export const tools = [
     description: "Estimate your daily calorie needs using the Mifflin-St Jeor equation. See BMR, TDEE, and targets for weight loss, maintenance, or gain.",
     icon: "🔥",
     keywords: ["calorie calculator", "TDEE calculator", "BMR", "daily calories", "calorie needs"],
+    badge: "Trending",
     built: true
   },
   {
@@ -699,6 +708,7 @@ export const tools = [
     description: "Find the best bedtime or wake-up time based on 90-minute sleep cycles. Get 4, 5, or 6 full cycles for optimal rest.",
     icon: "😴",
     keywords: ["sleep calculator", "sleep cycles", "bedtime calculator", "wake up time", "REM sleep"],
+    badge: "New",
     built: true
   },
 
@@ -711,6 +721,7 @@ export const tools = [
     description: "Combine multiple PDF files into one document. Drag to reorder pages before merging. 100% browser-based — your files never leave your device.",
     icon: "📎",
     keywords: ["PDF merger", "combine PDF", "merge PDF", "join PDF", "PDF combiner"],
+    badge: "Popular",
     built: true
   },
   {
@@ -804,6 +815,7 @@ export const tools = [
     description: "Compress images by adjusting quality while preserving visual clarity. Side-by-side preview with file size comparison. Runs entirely in your browser.",
     icon: "🗜️",
     keywords: ["image compressor", "compress image", "reduce image size", "image optimizer", "JPEG compressor"],
+    badge: "Popular",
     built: true
   },
   {
@@ -841,6 +853,7 @@ export const tools = [
     description: "Add gradient backgrounds, padding, rounded corners, shadows, and device frames to screenshots. Download a polished PNG for social media or docs.",
     icon: "✨",
     keywords: ["screenshot beautifier", "screenshot mockup", "image background", "device frame", "screenshot design"],
+    badge: "New",
     built: true
   },
 
@@ -979,6 +992,7 @@ export const tools = [
     description: "Compare two texts, see highlighted differences, then accept or reject individual changes to build a merged version. Three-panel workflow.",
     icon: "🔀",
     keywords: ["text diff", "diff merger", "text compare", "merge changes", "accept reject diff"],
+    badge: "New",
     built: true
   }
 ];

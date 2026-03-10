@@ -107,6 +107,7 @@
             <time datetime="${p.date}">${fmtDate(p.date)}</time>
             <span>·</span>
             <span>${p.readTime}</span>
+            ${p.author ? `<span>·</span><span>${p.author}</span>` : ''}
           </div>
         </a>`;
     }

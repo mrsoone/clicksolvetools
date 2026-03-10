@@ -72,6 +72,10 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .hero-gradient { background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 40%, #faf5ff 100%); }
     .accent-text { background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .badge { font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 9999px; line-height: 1; white-space: nowrap; }
+    .badge-popular { background: #fef3c7; color: #92400e; }
+    .badge-trending { background: #fee2e2; color: #991b1b; }
+    .badge-new { background: #d1fae5; color: #065f46; }
   </style>
 </head>
 
@@ -122,6 +126,15 @@
 
   <!-- ─── Main Content ─── -->
   <main class="max-w-7xl mx-auto px-4 pb-16 -mt-2">
+
+    <!-- Featured Tools (weekly rotation) -->
+    <section id="featured-tools" class="pt-8 pb-4">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-sm font-semibold uppercase tracking-wider text-[#94a3b8]">Featured This Week</span>
+        <span class="badge badge-popular">Staff Picks</span>
+      </div>
+      <div id="featured-grid" class="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"></div>
+    </section>
 
     <!-- Category Filter Pills -->
     <div id="category-filters" class="flex flex-wrap gap-2 mb-8 justify-center pt-6" role="tablist">
@@ -204,7 +217,7 @@
       <div class="flex items-center justify-center gap-2 mb-4">
         <img src="/images/logo-white-nav.png" alt="ClickSolveTools" class="h-8">
       </div>
-      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2025 ClickSolveTools. All rights reserved.</p>
+      <p class="text-[#94a3b8] text-sm mb-2">&copy; 2026 ClickSolveTools. All rights reserved.</p>
       <p class="text-[#64748b] text-xs mb-5">All tools run entirely in your browser. No data is sent to any server.</p>
       <div class="flex flex-wrap items-center justify-center gap-4 text-xs">
         <a href="/sitemap.xml" class="text-[#94a3b8] hover:text-white transition-colors">Sitemap</a>
@@ -240,6 +253,38 @@
     const clearFiltersBtn = document.getElementById('clear-filters');
 
     let activeCategory = 'all';
+
+    // Weekly rotation for Featured Tools
+    const BADGE_CLASSES = { Popular: 'badge-popular', Trending: 'badge-trending', New: 'badge-new' };
+    function getWeekNumber() {
+      const d = new Date();
+      const start = new Date(d.getFullYear(), 0, 1);
+      return Math.floor(((d - start) / 86400000 + start.getDay() + 1) / 7);
+    }
+    function seededShuffle(arr, seed) {
+      const a = [...arr];
+      let s = seed;
+      for (let i = a.length - 1; i > 0; i--) {
+        s = (s * 16807 + 0) % 2147483647;
+        const j = s % (i + 1);
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    const featuredGrid = document.getElementById('featured-grid');
+    const featuredTools = seededShuffle(tools.filter(t => t.built), getWeekNumber()).slice(0, 6);
+    featuredGrid.innerHTML = featuredTools.map(t => `
+      <a href="/tools/${t.slug}" class="tool-card block bg-white border border-[#e2e8f0] rounded-xl p-4 shadow-sm hover:border-[#2563eb]/40 hover:shadow-lg hover:shadow-[#2563eb]/10 transition-all duration-200 text-center">
+        <div class="text-2xl mb-2">${t.icon}</div>
+        <div class="font-semibold text-[#1e293b] text-xs leading-tight">${t.name}</div>
+      </a>
+    `).join('');
+
+    function badgeHTML(tool) {
+      if (!tool.badge) return '';
+      const cls = BADGE_CLASSES[tool.badge] || 'badge-popular';
+      return `<span class="badge ${cls}">${tool.badge}</span>`;
+    }
 
     const categoryCounts = {};
     tools.forEach(t => { categoryCounts[t.category] = (categoryCounts[t.category] || 0) + 1; });
@@ -285,9 +330,12 @@
       render();
     });
 
+    const featuredSection = document.getElementById('featured-tools');
+
     function render() {
       const query = searchInput.value.toLowerCase().trim();
       clearFiltersBtn.classList.toggle('hidden', activeCategory === 'all' && query === '');
+      featuredSection.classList.toggle('hidden', query !== '' || activeCategory !== 'all');
 
       let filtered = tools;
 
@@ -324,6 +372,7 @@
           >
             <div class="flex items-start justify-between mb-3">
               <span class="text-2xl leading-none">${tool.icon}</span>
+              ${badgeHTML(tool)}
             </div>
             <h2 class="font-semibold text-[#1e293b] text-sm mb-1.5">${tool.name}</h2>
             <p class="text-[#64748b] text-xs leading-relaxed line-clamp-2">${tool.description}</p>
